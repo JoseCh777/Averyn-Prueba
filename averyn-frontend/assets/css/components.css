@@ -250,7 +250,6 @@
   background: var(--av-blue);
   color: var(--av-white);
   opacity: 1;
-  box-shadow: 0 4px 14px rgba(20, 95, 238, 0.25);
 }
 
 /* Acciones a la derecha del navbar: búsqueda, notificaciones, tenant, avatar */
