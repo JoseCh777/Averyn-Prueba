@@ -37,6 +37,43 @@ const DOCUMENTOS_MOCK = [
 ];
 
 /**
+ * Genera una etiqueta de tiempo relativo a partir de una fecha "dd/mm/aaaa"
+ * del mock. Los documentos se cargan en el mismo mes, así que el cálculo de
+ * días contra hoy es suficiente para una etiqueta legible y trazable.
+ * @param {string} fecha - Fecha en formato dd/mm/aaaa.
+ * @returns {string} Etiqueta relativa ("hoy", "ayer", "hace N días", texto original).
+ */
+function fechaRelativaDocumento(fecha) {
+  const partes = String(fecha).split('/');
+  if (partes.length !== 3) return fecha;
+  const [dia, mes, anio] = partes.map(Number);
+  const fechaDoc = new Date(anio, mes - 1, dia);
+  const hoy = new Date();
+  hoy.setHours(0, 0, 0, 0);
+  fechaDoc.setHours(0, 0, 0, 0);
+  const diffDias = Math.round((hoy - fechaDoc) / 86400000);
+
+  if (diffDias === 0) return 'hoy';
+  if (diffDias === 1) return 'ayer';
+  if (diffDias > 1) return `hace ${diffDias} días`;
+  return fecha;
+}
+
+/**
+ * Cuenta los documentos por estado para alimentar los KPI del módulo.
+ * @param {Array<Object>} documentos
+ * @returns {{total: number, procesados: number, enProceso: number, error: number}}
+ */
+function contarDocumentosPorEstado(documentos) {
+  return {
+    total: documentos.length,
+    procesados: documentos.filter((d) => d.estado === 'procesado').length,
+    enProceso: documentos.filter((d) => d.estado === 'en_proceso').length,
+    error: documentos.filter((d) => d.estado === 'error').length,
+  };
+}
+
+/**
  * Devuelve la clase de badge y el texto visible para un estado de documento.
  * @param {'procesado'|'en_proceso'|'error'} estado
  * @returns {{clase: string, texto: string}}
@@ -104,7 +141,7 @@ function renderizarFilaDocumento(documento) {
           </div>
         </div>
       </td>
-      <td>${documento.fecha}</td>
+      <td>${documento.fecha}<span class="av-table__sub" style="display:block;margin-top:2px">${fechaRelativaDocumento(documento.fecha)}</span></td>
       <td>
         <span class="av-chip ${clase}"><i class="bi ${icono}" aria-hidden="true"></i>${texto}</span>
         ${nota}
@@ -115,8 +152,9 @@ function renderizarFilaDocumento(documento) {
 }
 
 /**
- * Pinta el arreglo de documentos en el tbody de la tabla y conecta
- * el clic de cada fila procesada con la apertura del modal OCR.
+ * Pinta el arreglo de documentos en el tbody de la tabla, actualiza los KPI
+ * del módulo y conecta el clic de cada fila procesada con la apertura del
+ * modal OCR. Si no hay documentos, muestra un empty state en la tabla.
  * @param {Array<Object>} documentos
  * @returns {void}
  */
@@ -127,6 +165,30 @@ function renderizarTablaDocumentos(documentos) {
   const info = document.getElementById('tabla-documentos-info');
   if (info) {
     info.textContent = `${documentos.length} documento${documentos.length === 1 ? '' : 's'}`;
+  }
+
+  const conteo = contarDocumentosPorEstado(documentos);
+  const spanTotal = document.getElementById('kpi-doc-total');
+  const spanProcesados = document.getElementById('kpi-doc-procesados');
+  const spanEnProceso = document.getElementById('kpi-doc-en-proceso');
+  const spanError = document.getElementById('kpi-doc-error');
+  if (spanTotal) spanTotal.textContent = String(conteo.total);
+  if (spanProcesados) spanProcesados.textContent = String(conteo.procesados);
+  if (spanEnProceso) spanEnProceso.textContent = String(conteo.enProceso);
+  if (spanError) spanError.textContent = String(conteo.error);
+
+  if (documentos.length === 0) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="4">
+          <div class="av-empty-state">
+            <span class="av-tint-circle av-tint-circle--slate" aria-hidden="true"><i class="bi bi-file-earmark-text"></i></span>
+            <span class="av-empty-state__title">Aún no hay documentos</span>
+            <span class="av-empty-state__desc">Los documentos que proceses con OCR aparecerán en este historial.</span>
+          </div>
+        </td>
+      </tr>`;
+    return;
   }
 
   tbody.innerHTML = documentos.map(renderizarFilaDocumento).join('');

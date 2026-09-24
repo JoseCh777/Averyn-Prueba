@@ -16,17 +16,48 @@
 const USUARIO_DEMO = { nombre: 'Usuario Demo', rol: 'Administrador' };
 
 /**
- * Indicadores del panel. Cada valor es un conteo del mock; el delta es la
- * variación contra el período anterior. En producción, estos conteos vendrían
- * agregados por la API a partir de las tablas de cada módulo.
- * @type {Array<{id: string, label: string, icono: string, tono: string, variante: string, valor: string, delta: string, direccion: 'up'|'down', nota: string}>}
+ * Construye los indicadores del panel en tiempo real desde las fuentes de
+ * datos reales de la demo: el catálogo de personas (averyn_personas), el
+ * resumen biométrico (averyn.biometria.*) y los procesos electorales
+ * (averyn_procesos_electorales). Cada valor es trazable: no hay cifras
+ * inventadas.
+ * @returns {Array<{id: string, label: string, icono: string, tono: string, variante: string, valor: string, delta: string, direccion: 'up'|'down', nota: string}>}
  */
-const KPI_MOCK = [
-  { id: 'personas', label: 'Personas registradas', icono: 'bi-people', tono: 'blue', variante: 'av-kpi--blue', valor: '248', delta: '+12%', direccion: 'up', nota: 'vs. mes anterior' },
-  { id: 'verificaciones', label: 'Verificaciones del mes', icono: 'bi-patch-check-fill', tono: 'success', variante: 'av-kpi--success', valor: '1.284', delta: '+8%', direccion: 'up', nota: '72 con biometría' },
-  { id: 'electoral', label: 'Procesos electorales activos', icono: 'bi-check2-square', tono: 'violet', variante: 'av-kpi--violet', valor: '3', delta: '−1', direccion: 'down', nota: 'cerró 1 convocatoria' },
-  { id: 'accesos', label: 'Accesos registrados (24 h)', icono: 'bi-door-open', tono: 'indigo', variante: 'av-kpi--indigo', valor: '186', delta: '+16%', direccion: 'up', nota: 'vs. día anterior' },
-];
+function construirKpis() {
+  const personas = listarPersonasCatalogo();
+  const totalPersonas = personas.length;
+  const verificadas = personas.filter((p) => p.estado === 'verificado').length;
+  const pendientes = totalPersonas - verificadas;
+
+  const resumen = resumenBiometria();
+  const dispositivos = listarDispositivosBiometricos();
+  const procesos = obtenerProcesos();
+
+  return [
+    {
+      id: 'personas', label: 'Personas registradas', icono: 'bi-people', tono: 'blue', variante: 'av-kpi--blue',
+      valor: String(totalPersonas), delta: `${verificadas} verificadas`, direccion: 'up',
+      nota: `${pendientes} pendientes · catálogo averyn_personas`,
+    },
+    {
+      id: 'verificaciones', label: 'Verificaciones registradas', icono: 'bi-patch-check-fill', tono: 'success', variante: 'av-kpi--success',
+      valor: String(resumen.verificaciones), delta: `${resumen.exitosas} exitosas`, direccion: 'up',
+      nota: `${resumen.rechazadas} rechazadas · log biométrico`,
+    },
+    {
+      id: 'electoral', label: 'Procesos electorales', icono: 'bi-check2-square', tono: 'violet', variante: 'av-kpi--violet',
+      valor: String(procesos.filter((p) => p.estado === 'OPEN' || p.estado === 'DRAFT').length),
+      delta: `${procesos.length} totales`, direccion: 'up',
+      nota: 'guardados en averyn_procesos_electorales',
+    },
+    {
+      id: 'accesos', label: 'Dispositivos conectados', icono: 'bi-broadcast', tono: 'indigo', variante: 'av-kpi--indigo',
+      valor: String(resumen.dispositivosConectados),
+      delta: `${dispositivos.length - resumen.dispositivosConectados} desconectados`, direccion: 'up',
+      nota: `de ${dispositivos.length} dispositivos de biometría`,
+    },
+  ];
+}
 
 /**
  * Atajos a los módulos. Son enlaces: no tienen lógica asociada.
@@ -46,16 +77,26 @@ const TONO_POR_TIPO_EVENTO = { usuario: 'success', biometria: 'blue', electoral:
 const ICONO_POR_TIPO_EVENTO = { usuario: 'bi-person-plus', biometria: 'bi-fingerprint', electoral: 'bi-check2-square', acceso: 'bi-door-open', dispositivo: 'bi-broadcast' };
 
 /**
- * Últimas acciones registradas en el sistema (log). Es una lista corta de
- * eventos recientes, no una agregación estadística.
- * @type {Array<{tipo: string, titulo: string, desc: string, meta: string}>}
+ * Construye la actividad reciente desde el log biométrico real
+ * (averyn.biometria.eventos): se muestran los 4 eventos más recientes con
+ * nombre de persona, método, resultado y fecha.
+ * @returns {Array<{tipo: string, titulo: string, desc: string, meta: string}>}
  */
-const ACTIVIDAD_RECIENTE_MOCK = [
-  { tipo: 'usuario', titulo: 'Nuevo usuario creado', desc: 'María Gómez · cuenta con rol Administrativo', meta: 'hace 2h · Sede Central' },
-  { tipo: 'biometria', titulo: 'Verificación biométrica', desc: 'Ana Torres · rostro verificado', meta: 'hace 3h · Puesto 2' },
-  { tipo: 'electoral', titulo: 'Inicio de votación', desc: 'Elecciones de representantes 2026', meta: 'hace 5h · Sede Central' },
-  { tipo: 'acceso', titulo: 'Acceso registrado', desc: 'Carlos Ruiz · Puerta principal', meta: 'hace 7h · Campus Norte' },
-];
+function construirActividadReciente() {
+  return listarEventosBiometricos().slice(0, 4).map((evento) => {
+    const persona = obtenerPersonaCatalogo(evento.personaId);
+    const nombre = persona ? persona.nombre : `Persona #${evento.personaId}`;
+    const operacion = textoOperacionBiometrica(evento.tipoOperacion);
+    const metodo = textoMetodoBiometrico(evento.metodo);
+    const info = infoResultadoBiometrico(evento.resultado, evento.tipoOperacion);
+    return {
+      tipo: 'biometria',
+      titulo: `${operacion} biométrica`,
+      desc: `${nombre} · ${metodo} ${info.texto.toLowerCase()}`,
+      meta: `${formatearFechaBiometria(evento.fecha)} · ${evento.dispositivo}`,
+    };
+  });
+}
 
 /**
  * Pinta el nombre del usuario en el bloque de bienvenida.
@@ -64,6 +105,16 @@ const ACTIVIDAD_RECIENTE_MOCK = [
 function renderizarBienvenida() {
   const nombre = document.getElementById('nombre-usuario');
   if (nombre) nombre.textContent = USUARIO_DEMO.nombre;
+
+  let nombreSesion = '';
+  try {
+    const crudo = localStorage.getItem('averyn.session');
+    if (crudo) {
+      const sesion = JSON.parse(crudo);
+      nombreSesion = sesion.email || '';
+    }
+  } catch (error) { /* sin sesión */ }
+  if (nombreSesion && nombre) nombre.textContent = nombreSesion.split('@')[0];
 }
 
 /**
@@ -74,7 +125,7 @@ function renderizarKpis() {
   const grid = document.getElementById('kpi-grid');
   if (!grid) return;
 
-  grid.innerHTML = KPI_MOCK.map((kpi) => {
+  grid.innerHTML = construirKpis().map((kpi) => {
     const claseDelta = kpi.direccion === 'up' ? 'av-kpi__delta--up' : 'av-kpi__delta--down';
     const iconoDelta = kpi.direccion === 'up'
       ? '<i class="bi bi-arrow-up-short" aria-hidden="true"></i>'
@@ -115,7 +166,20 @@ function renderizarFeedActividad() {
   const lista = document.getElementById('feed-actividad');
   if (!lista) return;
 
-  lista.innerHTML = ACTIVIDAD_RECIENTE_MOCK.map((evento) => {
+  const actividad = construirActividadReciente();
+  if (actividad.length === 0) {
+    lista.innerHTML = `
+      <li class="av-feed__item">
+        <span class="av-tint-circle av-tint-circle--sm av-tint-circle--slate" aria-hidden="true"><i class="bi bi-collection"></i></span>
+        <div class="av-feed__body">
+          <span class="av-feed__title">Sin actividad reciente</span>
+          <span class="av-feed__desc">Aún no hay eventos en el log biométrico.</span>
+        </div>
+      </li>`;
+    return;
+  }
+
+  lista.innerHTML = actividad.map((evento) => {
     const tono = TONO_POR_TIPO_EVENTO[evento.tipo] || 'slate';
     const icono = ICONO_POR_TIPO_EVENTO[evento.tipo] || 'bi-circle';
     return `

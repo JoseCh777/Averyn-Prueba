@@ -497,6 +497,7 @@ function mostrarToast(mensaje) {
  * @returns {void}
  */
 function crearProcesoElectoral() {
+  procesoEnCreacion.id = generarId();
   procesoEnCreacion.estado = 'DRAFT';
   guardarProceso(procesoEnCreacion);
 
