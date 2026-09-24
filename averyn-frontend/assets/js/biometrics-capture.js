@@ -22,6 +22,13 @@ const CAPTURA_PROBABILIDAD_FALLO = 0.15;
 /** Contexto de la operación, leído de la URL. */
 const capturaContexto = { modo: 'registro', persona: null, modalidad: 'rostro' };
 
+/** Indica si la captura en curso es de huella (sin cámara).
+ * @returns {boolean}
+ */
+function esCapturaHuella() {
+  return capturaContexto.modalidad === 'huella';
+}
+
 /** Estado de la captura. */
 const capturaEstado = { fase: 'esperando', stream: null, temporizador: null };
 
@@ -52,6 +59,8 @@ function leerContextoCaptura() {
 function renderizarContextoCaptura() {
   const { modo, persona, modalidad } = capturaContexto;
   const esRegistro = modo === 'registro';
+  const esHuella = esCapturaHuella();
+  const etiquetaMetodo = esHuella ? 'la huella' : 'el rostro';
 
   const titulo = document.getElementById('captura-titulo');
   const desc = document.getElementById('captura-desc');
@@ -59,15 +68,31 @@ function renderizarContextoCaptura() {
   const personaTexto = document.getElementById('captura-persona');
   const filaPresencia = document.getElementById('fila-presencia');
   const btnCancelar = document.getElementById('btn-captura-cancelar');
+  const btnCapturar = document.getElementById('btn-capturar-rostro');
+  const etiquetaChecklist = document.getElementById('rostro-etiqueta');
+  const iconoEspera = document.getElementById('rostro-espera-icon');
+  const textoOverlay = document.getElementById('rostro-overlay-texto');
 
   if (titulo) titulo.textContent = esRegistro ? 'Registro biométrico' : 'Verificación de identidad';
-  if (desc) desc.textContent = esRegistro
+  if (desc) desc.textContent = esRegistro && !esHuella
     ? 'Captura el rostro para asociar el perfil biométrico a la persona.'
-    : 'Captura el rostro para compararlo con el registro biométrico de la persona.';
+    : esRegistro && esHuella
+      ? 'Captura la huella para asociar el perfil biométrico a la persona.'
+      : !esRegistro && !esHuella
+        ? 'Captura el rostro para compararlo con el registro biométrico de la persona.'
+        : 'Captura la huella para compararla con el registro biométrico de la persona.';
   if (migaja) migaja.textContent = esRegistro ? 'Registrar biometría' : 'Verificar identidad';
-  if (personaTexto) personaTexto.textContent = `${persona.nombre} · Cédula ${persona.documento} · ${persona.afiliacion} · Método: ${modalidad === 'huella' ? 'Huella' : 'Rostro'}`;
+  if (personaTexto) personaTexto.textContent = `${persona.nombre} · Cédula ${persona.documento} · ${persona.afiliacion} · Método: ${esHuella ? 'Huella' : 'Rostro'}`;
   if (filaPresencia) filaPresencia.hidden = esRegistro;
   if (btnCancelar) btnCancelar.setAttribute('href', esRegistro ? '../enrollment/index.html' : '../verification/index.html');
+  if (btnCapturar) btnCapturar.innerHTML = esHuella
+    ? '<i class="bi bi-fingerprint" aria-hidden="true"></i> Capturar huella'
+    : '<i class="bi bi-camera-fill" aria-hidden="true"></i> Capturar rostro';
+  if (etiquetaChecklist) etiquetaChecklist.textContent = esHuella ? 'Huella' : 'Rostro';
+  if (iconoEspera) iconoEspera.className = esHuella ? 'bi bi-fingerprint' : 'bi bi-person-bounding-box';
+  if (textoOverlay) textoOverlay.textContent = esHuella
+    ? 'Mantén el dedo apoyado en el lector'
+    : 'Mantén tu rostro dentro del marco';
 }
 
 /* Cámara */
@@ -95,10 +120,15 @@ function detenerCamara() {
 
 /**
  * Prepara la cámara (o el panel de reemplazo) para el paso de captura.
+ * La huella NO usa cámara: se captura con el lector (panel de reemplazo).
  * @returns {Promise<void>}
  */
 async function prepararCamara() {
   const video = document.getElementById('video-rostro');
+  if (esCapturaHuella()) {
+    actualizarVistaCaptura();
+    return;
+  }
   if (!video) return;
   if (!capturaEstado.stream) capturaEstado.stream = await solicitarCamara();
   if (capturaEstado.stream) video.srcObject = capturaEstado.stream;
@@ -167,6 +197,7 @@ function actualizarDiagnostico(fase, progreso) {
  */
 function actualizarVistaCaptura() {
   const fase = capturaEstado.fase;
+  const esHuella = esCapturaHuella();
   const video = document.getElementById('video-rostro');
   const overlay = document.getElementById('rostro-overlay');
   const miniatura = document.getElementById('rostro-miniatura');
@@ -201,18 +232,26 @@ function actualizarVistaCaptura() {
   }
   if (espera) espera.hidden = mostrarVideo || hayFoto;
   if (esperaTexto && !mostrarVideo && !hayFoto) {
-    esperaTexto.textContent = fase === 'error'
-      ? 'Sin señal de cámara'
-      : fase === 'capturado'
-        ? 'Captura simulada validada'
-        : 'Vista previa de la cámara';
+    if (esHuella) {
+      esperaTexto.textContent = fase === 'error'
+        ? 'No se pudo leer la huella'
+        : fase === 'capturado'
+          ? 'Huella capturada y validada'
+          : 'Apoya el dedo en el lector';
+    } else {
+      esperaTexto.textContent = fase === 'error'
+        ? 'Sin señal de cámara'
+        : fase === 'capturado'
+          ? 'Captura simulada validada'
+          : 'Vista previa de la cámara';
+    }
   }
   if (enVivo) enVivo.hidden = !hayCamara || hayFoto;
 
   const TEXTOS = {
-    esperando: 'Presiona "Capturar rostro" para comenzar.',
-    capturando: 'Analizando rostro… mantén la posición.',
-    capturado: 'Captura validada. Puedes continuar.',
+    esperando: esHuella ? 'Presiona "Capturar huella" para comenzar.' : 'Presiona "Capturar rostro" para comenzar.',
+    capturando: esHuella ? 'Capturando huella… mantén el dedo apoyado.' : 'Analizando rostro… mantén la posición.',
+    capturado: esHuella ? 'Huella validada. Puedes continuar.' : 'Captura validada. Puedes continuar.',
     error: '',
   };
   if (mensaje) mensaje.textContent = TEXTOS[fase];
@@ -253,13 +292,24 @@ function iniciarProgresoCaptura() {
 
 /** Decide el desenlace de la captura. @returns {void} */
 function finalizarCaptura() {
+  const esHuella = esCapturaHuella();
+  const alertaTitulo = document.getElementById('rostro-alerta-titulo');
+  const alertaDesc = document.getElementById('rostro-alerta-desc');
+
   if (Math.random() < CAPTURA_PROBABILIDAD_FALLO) {
     capturaEstado.fase = 'error';
     capturaEstado.rostro = null;
+    if (esHuella) {
+      if (alertaTitulo) alertaTitulo.textContent = 'Huella no legible';
+      if (alertaDesc) alertaDesc.textContent = 'Limpia el lector y vuelve a apoyar el dedo antes de repetir.';
+    } else {
+      if (alertaTitulo) alertaTitulo.textContent = 'Iluminación insuficiente';
+      if (alertaDesc) alertaDesc.textContent = 'Acércate a una fuente de luz antes de repetir la captura.';
+    }
     actualizarDiagnostico('error', 100);
   } else {
     capturaEstado.fase = 'capturado';
-    capturaEstado.rostro = { dataUrl: tomarFotograma() };
+    capturaEstado.rostro = esHuella ? null : { dataUrl: tomarFotograma() };
     detenerCamara();
     actualizarDiagnostico('capturado', 100);
   }

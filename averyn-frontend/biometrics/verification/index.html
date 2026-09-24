@@ -128,22 +128,22 @@
             <fieldset style="border: 0; padding: 0; margin: 0">
               <legend class="av-filter-label" style="margin-bottom: var(--av-space-3)">Método biométrico</legend>
 
-              <label class="av-card" style="display: block; cursor: pointer; margin-bottom: var(--av-space-3)">
+              <label class="av-card" data-metodo-card="rostro" style="display: block; cursor: pointer; margin-bottom: var(--av-space-3)">
                 <span class="av-radio">
                   <input type="radio" name="metodo" value="rostro" checked>
                   <span>
                     <span class="av-card__section-title" style="display: block">Rostro</span>
-                    <span class="av-table__sub">Disponible · Cámara CAM-001</span>
+                    <span class="av-table__sub" id="verificacion-sub-rostro">Cámara CAM-001</span>
                   </span>
                 </span>
               </label>
 
-              <label class="av-card" style="display: block; cursor: not-allowed; opacity: 0.65">
+              <label class="av-card" data-metodo-card="huella" style="display: block; cursor: not-allowed; opacity: 0.55">
                 <span class="av-radio">
-                  <input type="radio" name="metodo" value="huella" disabled>
+                  <input type="radio" name="metodo" value="huella">
                   <span>
                     <span class="av-card__section-title" style="display: block">Huella</span>
-                    <span class="av-table__sub"><i class="bi bi-plug" aria-hidden="true"></i> Dispositivo no conectado</span>
+                    <span class="av-table__sub" id="verificacion-sub-huella"><i class="bi bi-plug" aria-hidden="true"></i> No registrado para esta persona</span>
                   </span>
                 </span>
               </label>
@@ -152,7 +152,7 @@
             <div class="av-alert av-alert--warning" id="verificacion-sin-registro" role="alert" hidden style="margin-top: var(--av-space-4)">
               <span class="av-alert__icon"><i class="bi bi-exclamation-lg" aria-hidden="true"></i></span>
               <div class="av-alert__content">
-                <span class="av-alert__title">Esta persona no tiene rostro registrado</span>
+                <span class="av-alert__title" id="verificacion-sin-registro-titulo">Esta persona no tiene este método registrado</span>
                 <p class="av-alert__description" id="verificacion-sin-registro-texto">Primero registra su biometría para poder verificarla.</p>
                 <a href="../enrollment/index.html" class="av-link" style="margin-top: var(--av-space-2)">Registrar biometría <i class="bi bi-arrow-right" aria-hidden="true"></i></a>
               </div>
@@ -197,6 +197,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
   <script src="../../assets/js/dashboard-shell.js"></script>
+  <script src="../../assets/js/common/personas-catalogo.js"></script>
   <script src="../../assets/js/common/biometric-store.js"></script>
   <script src="../../assets/js/common/biometric-person-picker.js"></script>
   <script src="../../assets/js/biometrics-verification.js"></script>

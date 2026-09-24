@@ -102,14 +102,14 @@
               <video id="video-rostro" class="av-capture__media" autoplay playsinline muted aria-label="Vista previa de la cámara" style="display: none"></video>
 
               <div class="av-capture__preview" id="rostro-espera">
-                <i class="bi bi-person-bounding-box" aria-hidden="true"></i>
+                <i class="bi bi-person-bounding-box" aria-hidden="true" id="rostro-espera-icon"></i>
                 <p id="rostro-espera-texto" style="margin: 0">Vista previa de la cámara</p>
               </div>
 
               <img id="rostro-miniatura" class="av-capture__media" alt="Captura de rostro" hidden>
 
               <div id="rostro-overlay" class="av-capture__overlay" hidden>
-                <p style="margin: 0; font-weight: 600">Mantén tu rostro dentro del marco</p>
+                <p style="margin: 0; font-weight: 600" id="rostro-overlay-texto">Mantén tu rostro dentro del marco</p>
                 <div class="av-progress av-progress--on-dark" style="width: min(240px, 80%)">
                   <div id="rostro-progreso" class="av-progress__fill"></div>
                 </div>
@@ -120,7 +120,7 @@
             </div>
 
             <dl class="av-detail" id="captura-checklist">
-              <div class="av-detail__row"><dt>Rostro</dt><dd id="diag-rostro">En espera</dd></div>
+              <div class="av-detail__row"><dt id="rostro-etiqueta">Rostro</dt><dd id="diag-rostro">En espera</dd></div>
               <div class="av-detail__row"><dt>Posición</dt><dd id="diag-posicion">En espera</dd></div>
               <div class="av-detail__row"><dt>Calidad</dt><dd id="diag-calidad">En espera</dd></div>
               <div class="av-detail__row" id="fila-presencia"><dt>Presencia</dt><dd id="diag-presencia">En espera</dd></div>
@@ -139,8 +139,8 @@
           <div class="av-alert av-alert--error" id="rostro-alerta" role="alert" hidden style="margin-top: var(--av-space-4)">
             <span class="av-alert__icon"><i class="bi bi-exclamation-lg" aria-hidden="true"></i></span>
             <div class="av-alert__content">
-              <span class="av-alert__title">Iluminación insuficiente</span>
-              <p class="av-alert__description">Acércate a una fuente de luz antes de repetir la captura.</p>
+              <span class="av-alert__title" id="rostro-alerta-titulo">Iluminación insuficiente</span>
+              <p class="av-alert__description" id="rostro-alerta-desc">Acércate a una fuente de luz antes de repetir la captura.</p>
             </div>
           </div>
         </div>
@@ -151,6 +151,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
   <script src="../../assets/js/dashboard-shell.js"></script>
+  <script src="../../assets/js/common/personas-catalogo.js"></script>
   <script src="../../assets/js/common/biometric-store.js"></script>
   <script src="../../assets/js/biometrics-capture.js"></script>
 </body>

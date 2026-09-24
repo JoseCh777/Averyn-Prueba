@@ -24,20 +24,11 @@ const BIOMETRIA_CLAVE_EVENTOS = `${BIOMETRIA_PREFIJO}eventos`;
 /* Catálogo de personas (mock de Identity) */
 
 /**
- * Personas disponibles para operar biometría. Mismos nombres de campo que
- * Identity (id, nombre, documento, afiliacion, estado).
+ * El catálogo de personas vive en common/personas-catalogo.js (clave
+ * `averyn_personas`). Biometría NO mantiene su propia lista: delega en él
+ * para que personas creadas en Identidad/OCR aparezcan en todas las vistas.
  * @type {Array<{id: number, nombre: string, documento: string, afiliacion: string, estado: 'verificado'|'pendiente'}>}
  */
-const BIOMETRIA_PERSONAS = [
-  { id: 1, nombre: 'Ana Torres', documento: '10234567', afiliacion: 'Estudiante', estado: 'verificado' },
-  { id: 2, nombre: 'Luis Pérez', documento: '10345678', afiliacion: 'Docente', estado: 'pendiente' },
-  { id: 3, nombre: 'María Gómez', documento: '10456789', afiliacion: 'Administrativo', estado: 'verificado' },
-  { id: 4, nombre: 'Carlos Ruiz', documento: '10567890', afiliacion: 'Estudiante', estado: 'pendiente' },
-  { id: 5, nombre: 'Laura Díaz', documento: '10678901', afiliacion: 'Visitante', estado: 'verificado' },
-  { id: 6, nombre: 'Jorge Ramírez', documento: '10789012', afiliacion: 'Docente', estado: 'verificado' },
-  { id: 7, nombre: 'Paula Herrera', documento: '10890123', afiliacion: 'Estudiante', estado: 'pendiente' },
-  { id: 8, nombre: 'Andrés Molina', documento: '10901234', afiliacion: 'Administrativo', estado: 'verificado' },
-];
 
 /* Perfiles biométricos (semilla) */
 
@@ -110,29 +101,27 @@ function biometriaEscribir(clave, valor) {
 
 /* API de personas */
 
-/** @returns {Array<object>} Todas las personas del catálogo. */
+/** @returns {Array<object>} Todas las personas del catálogo compartido. */
 function listarPersonasBiometria() {
-  return BIOMETRIA_PERSONAS.slice();
+  return listarPersonasCatalogo();
 }
 
 /**
- * Busca personas por nombre o documento.
+ * Busca personas por nombre o documento (delega en el catálogo).
  * @param {string} texto
  * @returns {Array<object>}
  */
 function buscarPersonasBiometria(texto) {
-  const filtro = String(texto || '').trim().toLowerCase();
-  if (!filtro) return listarPersonasBiometria();
-  return BIOMETRIA_PERSONAS.filter((persona) => `${persona.nombre} ${persona.documento}`.toLowerCase().includes(filtro));
+  return buscarPersonasCatalogo(texto);
 }
 
 /**
- * Obtiene una persona por id.
+ * Obtiene una persona por id (delega en el catálogo).
  * @param {number|string} id
  * @returns {object|undefined}
  */
 function obtenerPersonaBiometria(id) {
-  return BIOMETRIA_PERSONAS.find((persona) => persona.id === Number(id));
+  return obtenerPersonaCatalogo(id);
 }
 
 /* API de perfiles biométricos */

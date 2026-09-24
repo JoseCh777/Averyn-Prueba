@@ -59,34 +59,29 @@ function existeProcesoConNombre(nombre) {
 }
 
 /**
- * Catálogo simulado de personas con documentación para participar en un
- * proceso electoral (stand-in del padrón hasta conectar el backend).
- * @type {Array<{id: number, nombre: string, documento: string, afiliacion: string, estado: 'verificado'|'pendiente'}>}
+ * Padrón de participantes del proceso electoral. Se toma del catálogo único
+ * de personas (common/personas-catalogo.js) para que el padrón refleje las
+ * personas de Identidad/Biometría sin duplicar datos.
+ * @returns {Array<{id: number, nombre: string, documento: string, afiliacion: string, estado: 'verificado'|'pendiente'}>}
  */
-const PARTICIPANTES_CATALOGO = [
-  { id: 1, nombre: 'Ana Torres', documento: '10234567', afiliacion: 'Estudiante', estado: 'verificado' },
-  { id: 2, nombre: 'Luis Pérez', documento: '10345678', afiliacion: 'Docente', estado: 'verificado' },
-  { id: 3, nombre: 'María Gómez', documento: '10456789', afiliacion: 'Administrativo', estado: 'verificado' },
-  { id: 4, nombre: 'Carlos Ruiz', documento: '10567890', afiliacion: 'Estudiante', estado: 'pendiente' },
-  { id: 5, nombre: 'Laura Díaz', documento: '10678901', afiliacion: 'Visitante', estado: 'verificado' },
-  { id: 6, nombre: 'Jorge Ramírez', documento: '10789012', afiliacion: 'Docente', estado: 'verificado' },
-  { id: 7, nombre: 'Paula Herrera', documento: '10890123', afiliacion: 'Estudiante', estado: 'pendiente' },
-  { id: 8, nombre: 'Andrés Molina', documento: '10901234', afiliacion: 'Administrativo', estado: 'verificado' }
-];
+function listarPadronElectoral() {
+  return listarPersonasCatalogo();
+}
 
 /**
- * Filtra el catálogo de participantes por texto (nombre o documento) y por
- * afiliación. Un filtro vacío no descarta participantes.
+ * Filtra el padrón por texto (nombre o documento) y por afiliación.
+ * Un filtro vacío no descarta participantes.
  * @param {string} texto - Texto de búsqueda para nombre o documento.
  * @param {string} afiliacion - Afiliación a filtrar ('' = todas).
  * @returns {Array<object>} Participantes que cumplen ambos criterios.
  */
 function filtrarParticipantes(texto, afiliacion) {
   const termino = texto.trim().toLowerCase();
+  const padron = listarPadronElectoral();
   const resultado = [];
 
-  for (let i = 0; i < PARTICIPANTES_CATALOGO.length; i++) {
-    const participante = PARTICIPANTES_CATALOGO[i];
+  for (let i = 0; i < padron.length; i++) {
+    const participante = padron[i];
 
     const coincideTexto =
       termino === '' ||

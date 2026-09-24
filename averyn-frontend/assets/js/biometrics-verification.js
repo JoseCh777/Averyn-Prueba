@@ -184,6 +184,43 @@ function activarPanelVerificacion(paso) {
 }
 
 /**
+ * Sincroniza los métodos biométricos del paso 2 con el perfil de la persona:
+ * cada modalidad se habilita solo si la persona la tiene registrada, y el
+ * texto del subtítulo informa qué dispositivo la atiende. Si la modalidad
+ * marcada quedó deshabilitada, se salta al primer método disponible.
+ * @returns {void}
+ */
+function sincronizarMetodosVerificacion() {
+  const persona = verificacionEstado.persona;
+
+  document.querySelectorAll('input[name="metodo"]').forEach((radio) => {
+    const metodo = radio.value;
+    const perfil = obtenerPerfilBiometrico(persona ? persona.id : 0);
+    const disponible = Boolean(persona && perfil[metodo]);
+    const card = radio.closest('[data-metodo-card]');
+
+    radio.disabled = !disponible;
+    if (card) {
+      card.style.opacity = disponible ? '1' : '0.55';
+      card.style.cursor = disponible ? 'pointer' : 'not-allowed';
+    }
+
+    const sub = document.getElementById(`verificacion-sub-${metodo}`);
+    if (sub) {
+      sub.innerHTML = disponible
+        ? (metodo === 'rostro' ? 'Cámara CAM-001' : 'Lector BIO-001')
+        : `<i class="bi bi-plug" aria-hidden="true"></i> ${persona ? 'No registrado para esta persona' : 'Selecciona una persona'}`;
+    }
+  });
+
+  const marcada = document.querySelector('input[name="metodo"]:checked');
+  if (marcada && marcada.disabled) {
+    const primerDisponible = document.querySelector('input[name="metodo"]:not(:disabled)');
+    if (primerDisponible) primerDisponible.checked = true;
+  }
+}
+
+/**
  * Sincroniza el footer del asistente.
  * @returns {void}
  */
@@ -193,10 +230,18 @@ function actualizarFooterVerificacion() {
   if (!btnAtras || !btnContinuar) return;
 
   btnAtras.disabled = verificacionEstado.paso === 1;
-  const tienePerfil = verificacionEstado.persona && tieneModalidadBiometrica(verificacionEstado.persona.id, 'rostro');
-  btnContinuar.disabled = verificacionEstado.paso === 1
-    ? !verificacionEstado.persona
-    : !tienePerfil;
+
+  let habilitadoContinuar = false;
+  if (verificacionEstado.paso === 1) {
+    habilitadoContinuar = Boolean(verificacionEstado.persona);
+  } else {
+    const seleccion = document.querySelector('input[name="metodo"]:checked');
+    habilitadoContinuar = Boolean(
+      verificacionEstado.persona && seleccion &&
+      tieneModalidadBiometrica(verificacionEstado.persona.id, seleccion.value)
+    );
+  }
+  btnContinuar.disabled = !habilitadoContinuar;
 }
 
 /**
@@ -212,22 +257,35 @@ function irAPasoVerificacion(paso) {
 }
 
 /**
- * Muestra el resumen de la persona y la alerta si no tiene rostro registrado.
+ * Muestra el resumen de la persona y, por modalidad, si la modalidad marcada
+ * está registrada (o si ninguna lo está) muestra la alerta correspondiente.
  * @returns {void}
  */
 function renderizarResumenVerificacion() {
   const persona = verificacionEstado.persona;
   const resumen = document.getElementById('verificacion-persona-resumen');
   const alerta = document.getElementById('verificacion-sin-registro');
+  const alertaTitulo = document.getElementById('verificacion-sin-registro-titulo');
   const alertaTexto = document.getElementById('verificacion-sin-registro-texto');
   if (!persona) return;
 
   if (resumen) resumen.textContent = `Persona: ${persona.nombre} · Cédula ${persona.documento} · ${persona.afiliacion}`;
 
-  const tieneRostro = tieneModalidadBiometrica(persona.id, 'rostro');
-  if (alerta) alerta.hidden = tieneRostro;
-  if (alertaTexto && !tieneRostro) {
-    alertaTexto.textContent = `${persona.nombre} no tiene rostro registrado. Primero registra su biometría para poder verificarla.`;
+  sincronizarMetodosVerificacion();
+  actualizarFooterVerificacion();
+
+  const seleccion = document.querySelector('input[name="metodo"]:checked');
+  const metodo = seleccion ? seleccion.value : null;
+  const tieneMetodo = metodo && tieneModalidadBiometrica(persona.id, metodo);
+
+  if (!alerta) return;
+  alerta.hidden = Boolean(tieneMetodo);
+  if (!tieneMetodo) {
+    const metodoTexto = metodo === 'huella' ? 'huella' : 'rostro';
+    if (alertaTitulo) alertaTitulo.textContent = `Esta persona no tiene ${metodoTexto} registrado`;
+    if (alertaTexto) {
+      alertaTexto.textContent = `${persona.nombre} no tiene ${metodoTexto} registrado. Primero registra su biometría para poder verificarla.`;
+    }
   }
 }
 
@@ -256,7 +314,7 @@ function continuarVerificacion() {
   const persona = verificacionEstado.persona;
   const seleccion = document.querySelector('input[name="metodo"]:checked');
   if (!persona || !seleccion) return;
-  if (!tieneModalidadBiometrica(persona.id, 'rostro')) return;
+  if (!tieneModalidadBiometrica(persona.id, seleccion.value)) return;
 
   window.location.href = rutaCapturaVerificacion(persona, seleccion.value);
 }
@@ -312,6 +370,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.getElementById('btn-verificacion-atras').addEventListener('click', retrocederVerificacion);
   document.getElementById('btn-verificacion-continuar').addEventListener('click', continuarVerificacion);
+
+  document.querySelectorAll('input[name="metodo"]').forEach((radio) => {
+    radio.addEventListener('change', renderizarResumenVerificacion);
+  });
 
   activarPanelVerificacion(1);
   actualizarFooterVerificacion();

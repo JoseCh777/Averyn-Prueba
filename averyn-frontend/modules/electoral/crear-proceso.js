@@ -346,7 +346,7 @@ function mostrarResumenParticipantes() {
   const afiliacion = document.getElementById('filtro-afiliacion').value;
   const coincidencias = filtrarParticipantes(texto, afiliacion).length;
 
-  document.getElementById('resumen-padron').textContent = PARTICIPANTES_CATALOGO.length;
+  document.getElementById('resumen-padron').textContent = listarPadronElectoral().length;
   document.getElementById('resumen-filtro').textContent = coincidencias;
 }
 
@@ -361,7 +361,7 @@ function capturarParticipantes() {
 
   procesoEnCreacion.participantes = {
     tipo: 'Padrón de participantes',
-    total: PARTICIPANTES_CATALOGO.length,
+    total: listarPadronElectoral().length,
     filtroTexto: texto,
     filtroAfiliacion: afiliacion
   };

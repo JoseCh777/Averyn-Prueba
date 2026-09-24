@@ -1,28 +1,15 @@
 /**
- * Datos por defecto de personas registradas en Averyn.
+ * Lista de personas registradas. La fuente de verdad es el catálogo único
+ * compartido (common/personas-catalogo.js): Identidad NO guarda su propia
+ * copia, sino que trabaja sobre la lista que devuelve el catálogo.
  */
-const PERSONAS_MOCK_DEFAULT = [
-  { id: 1, nombre: 'Ana Torres', documento: '10234567', afiliacion: 'Estudiante', estado: 'verificado' },
-  { id: 2, nombre: 'Luis Pérez', documento: '10345678', afiliacion: 'Docente', estado: 'pendiente' },
-  { id: 3, nombre: 'María Gómez', documento: '10456789', afiliacion: 'Administrativo', estado: 'verificado' },
-  { id: 4, nombre: 'Carlos Ruiz', documento: '10567890', afiliacion: 'Estudiante', estado: 'pendiente' },
-  { id: 5, nombre: 'Laura Díaz', documento: '10678901', afiliacion: 'Visitante', estado: 'verificado' },
-  { id: 6, nombre: 'Jorge Ramírez', documento: '10789012', afiliacion: 'Docente', estado: 'verificado' },
-  { id: 7, nombre: 'Paula Herrera', documento: '10890123', afiliacion: 'Estudiante', estado: 'pendiente' },
-  { id: 8, nombre: 'Andrés Molina', documento: '10901234', afiliacion: 'Administrativo', estado: 'verificado' },
-];
+let PERSONAS_MOCK = listarPersonasCatalogo();
 
 /**
- * Cargar datos de localStorage o usar los predeterminados.
- * Esto evita que los datos se pierdan al cambiar de página HTML.
- */
-const PERSONAS_MOCK = JSON.parse(localStorage.getItem('averyn_personas')) || PERSONAS_MOCK_DEFAULT;
-
-/**
- * Guarda el estado actual en localStorage para que persista entre páginas.
+ * Persiste el estado actual en el catálogo compartido.
  */
 function guardarPersonasEnStorage() {
-  localStorage.setItem('averyn_personas', JSON.stringify(PERSONAS_MOCK));
+  guardarPersonasCatalogo(PERSONAS_MOCK);
 }
 
 /**
@@ -191,37 +178,26 @@ function filtrarPersonas() {
 }
 
 /**
- * Calcula el siguiente id disponible.
- */
-function generarSiguienteIdPersona() {
-  if (PERSONAS_MOCK.length === 0) return 1;
-  return Math.max(...PERSONAS_MOCK.map((p) => p.id)) + 1;
-}
-
-/**
- * Crea una nueva persona, la agrega al mock y GUARDA EN LOCALSTORAGE.
+ * Crea una nueva persona en el catálogo compartido y actualiza la lista local.
  */
 function crearPersona(datos) {
-  const nuevaPersona = {
-    id: generarSiguienteIdPersona(),
+  const nuevaPersona = crearPersonaCatalogo({
     nombre: datos.nombre,
     documento: datos.documento,
     afiliacion: datos.afiliacion,
-    estado: 'pendiente',
-  };
+  });
   PERSONAS_MOCK.push(nuevaPersona);
-  guardarPersonasEnStorage(); // <-- Persistencia
   return nuevaPersona;
 }
 
 /**
- * Elimina del mock la persona y GUARDA EN LOCALSTORAGE.
+ * Elimina del catálogo la persona y actualiza la lista local.
  */
 function eliminarPersona(id) {
   const indice = PERSONAS_MOCK.findIndex((p) => p.id === id);
   if (indice !== -1) {
     PERSONAS_MOCK.splice(indice, 1);
-    guardarPersonasEnStorage(); // <-- Persistencia
+    eliminarPersonaCatalogo(id);
   }
 }
 

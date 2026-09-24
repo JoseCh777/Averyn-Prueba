@@ -111,9 +111,10 @@ function inicializarNuevoEscaneo() {
 }
 
 /**
- * Conecta el botón "Continuar a captura de rostro": por ahora navega
- * al siguiente paso del wizard. Actualizar la ruta cuando el bloque de
- * Biometría (Daniel) tenga lista la vista de captura de rostro.
+ * Conecta el botón "Continuar a captura de rostro": toma los datos leídos
+ * por OCR, crea (o reutiliza) la persona en el catálogo compartido y navega
+ * a la captura biométrica con `?modo=registro&persona=<id>` para que el paso
+ * de captura tenga contexto válido.
  * @returns {void}
  */
 function inicializarContinuarWizard() {
@@ -121,7 +122,23 @@ function inicializarContinuarWizard() {
   if (!btnContinuar) return;
 
   btnContinuar.addEventListener('click', () => {
-    window.location.href = '../../biometrics/capture/index.html';
+    const valor = (id) => {
+      const campo = document.getElementById(id);
+      return campo ? campo.value.trim() : '';
+    };
+
+    const nombre = [valor('ocr-pnombre'), valor('ocr-snombre'), valor('ocr-papellido'), valor('ocr-sapellido')]
+      .filter(Boolean)
+      .join(' ')
+      .trim() || 'Persona sin nombre registrado';
+    const documento = valor('ocr-identificacion');
+
+    let persona = documento ? buscarPersonasCatalogo(documento)[0] : undefined;
+    if (!persona) {
+      persona = crearPersonaCatalogo({ nombre, documento: documento || 'Sin documento', afiliacion: 'Visitante' });
+    }
+
+    window.location.href = `../../biometrics/capture/index.html?modo=registro&persona=${persona.id}&modalidad=rostro`;
   });
 }
 

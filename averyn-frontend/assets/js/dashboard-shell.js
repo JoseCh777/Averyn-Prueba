@@ -38,11 +38,44 @@ function marcarItemActivoDelDock() {
 }
 
 /**
- * Redirige al login simulando el cierre de sesion del usuario.
+ * Calcula la ruta relativa a login.html desde la vista actual, subiendo
+ * tantos niveles de carpeta como profundidad tenga la página dentro de
+ * averyn-frontend (funciona con cualquier profundidad).
+ * @returns {string}
+ */
+function rutaLoginRelativa() {
+  const segmentos = window.location.pathname.split('/').filter(Boolean);
+  const indice = segmentos.indexOf('averyn-frontend');
+  const base = indice >= 0 ? segmentos.slice(indice + 1) : segmentos;
+  const niveles = Math.max(base.length - 1, 0);
+  return `${'../'.repeat(niveles)}login.html`;
+}
+
+/**
+ * Indica si existe una sesión activa guardada por el login.
+ * @returns {boolean}
+ */
+function tieneSesionActiva() {
+  try {
+    const crudo = localStorage.getItem('averyn.session');
+    return Boolean(crudo && JSON.parse(crudo).email);
+  } catch (error) {
+    return false;
+  }
+}
+
+/**
+ * Redirige al login simulando el cierre de sesión del usuario: limpia la
+ * sesión guardada y navega a login.html relativo a la vista actual.
  * @returns {void}
  */
 function cerrarSesion() {
-  window.location.href = '../login.html';
+  try {
+    localStorage.removeItem('averyn.session');
+  } catch (error) {
+    /* localStorage no disponible */
+  }
+  window.location.href = rutaLoginRelativa();
 }
 
 /**
@@ -147,6 +180,12 @@ function inicializarAlturaNavbar() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Guard de sesión: sin sesión activa, la vista redirige al login.
+  if (!tieneSesionActiva()) {
+    window.location.replace(rutaLoginRelativa());
+    return;
+  }
+
   marcarItemActivoDelDock();
   inicializarBuscador();
   inicializarMenuUsuario();
