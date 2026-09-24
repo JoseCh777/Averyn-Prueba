@@ -41,8 +41,23 @@ El repositorio es un **monolito modular** con dos partes: `averyn-frontend/`
 | **Biometría** | Completo | Módulo completo: dashboard, **registro biométrico**, **captura facial con cámara real**, **verificación 1:1**, historial y estado de dispositivos. |
 | **IA** | En desarrollo | Placeholder "en desarrollo"; el dock no apunta a una ruta rota. |
 | **Electoral** | Completo | Listado de procesos con su estado y creación de proceso. |
+| **Accesos** | Pendiente | Carpeta de módulo reservada (`.gitkeep`); el dock aún apunta a un 404. |
+| **Administración** | Pendiente | Carpeta de módulo reservada (`.gitkeep`); el dock aún apunta a un 404. |
 
-**Próximos pasos:** módulos de Accesos y Administración.
+---
+
+## Auditoría Sprint 1 (F1–F4)
+
+Antes de estabilizar la rama se aplicaron correcciones de auditoría sobre el árbol portado:
+
+| Fase | Commit | Qué se corrigió |
+|---|---|---|
+| **F1 — Datos y flujos** | `31d42d0` | Catálogo único de personas (`personas-catalogo.js`, clave `averyn_personas`) como fuente de verdad para Identidad, Biometría y Electoral; verificación por modalidad seleccionada (gate + panel de huella sin cámara); logout dinámico con guard de sesión (`averyn.session`); el wizard OCR crea/reutiliza la persona y navega a captura con `?modo=registro&persona=<id>`. |
+| **F2 — Consistencia visual** | `b20f9c6` | Favicon AVIF en todas las páginas internas; spine de cabecera en Electoral; tipografía de encabezados a *Space Grotesk*; dock sin glow de color (elevación neutra); deduplicación de tokens (`:root` solo en `design-system.css`); landing y login con CDN cdnjs (Bootstrap 5.3.3 + icons 1.11.3) y carga del Design System. |
+| **F3 — Trazabilidad** | `737de5c` | KPIs y actividad reciente construidos desde los datos reales de la demo (`averyn_personas`, `averyn.biometria.*`, `averyn_procesos_electorales`) en vez de cifras inventadas; fechas relativas en el historial de documentos; copy del login neutro. |
+| **F4 — Robustez** | `737de5c` | Empty state en la tabla de documentos; `procesoEnCreacion.id = generarId()` antes de guardar el proceso electoral; KPIs del módulo de documentos calculados desde la fuente de datos. |
+
+**Próximos pendientes:** módulos de Accesos y Administración (hoy enlaces a 404) y la migración a React (ver *Hoja de ruta*).
 
 ---
 
@@ -88,7 +103,7 @@ averyn/
 │   │   └── images/                 # Logos y recursos de marca
 │   ├── dashboard/                  # Shell, dashboard, identidad y documentos
 │   ├── biometrics/                 # Dashboard, registro, captura, verificación e historial
-│   └── modules/                    # IA y Electoral
+│   └── modules/                    # IA, Electoral, Accesos y Admin (IA+Electoral activos)
 ├── averyn-backend/                 # Reservado (sin implementar)
 ├── docs/                           # Documentación del proyecto
 │   ├── style-guide.html            # Catálogo visual del Design System
@@ -122,18 +137,38 @@ Los módulos consumen estas clases (`.av-*`) en vez de crear estilos propios.
 ### Enfoque de datos
 
 Se priorizó un panel con **datos simples y trazables** sobre visualizaciones
-complejas: cada número del dashboard es un conteo del mock (en producción, una
-consulta agregada por módulo) y la "actividad reciente" es un log de acciones.
-Por esa razón no hay gráficos estadísticos sin una fuente de datos real detrás.
+complejas: cada número del dashboard es un conteo de la capa de datos simulada
+(alojada en `localStorage`: `averyn_personas`, `averyn.biometria.*` y
+`averyn_procesos_electorales`), no una cifra inventada. La "actividad reciente"
+es un log de eventos biométricos. Por esa razón no hay gráficos estadísticos
+sin una fuente de datos real detrás.
+
+---
+
+## Hoja de ruta
+
+1. **Pulido de diseño** — completar pendientes visuales: placeholders de los
+   módulos de Accesos y Administración, revisión de estados vacíos/error y
+   pasadas de accesibilidad (contraste, foco, etiquetas).
+2. **Migración a React** — reescribir el frontend sobre **Vite + React** (SPA con
+   routing). La migración reutiliza intacto el Design System: los tokens siguen
+   siendo variables CSS en `design-system.css` y cada componente `.av-*` se
+   porta a un componente React con la misma hoja de estilos, garantizando
+   paridad visual. La capa de datos pasa a un store (Contexto o Zustand) que
+   mantiene las mismas claves de `localStorage`.
+3. **Backend** — implementar `averyn-backend/` (reservado) y conectar los
+   módulos a una API real, reemplazando la capa de datos simulada.
 
 ---
 
 ## Convenciones de trabajo
 
-- **Ramas:** `feature/<actividad>-<descripcion>` desde la rama de integración.
+- **Ramas:** `feature/<actividad>-<descripcion>` desde `dev` y `fix/<auditoria>-<detalle>`
+  desde `main` para correcciones. `dev` es la rama de integración.
 - **Commits:** `<tipo>(<alcance>): <descripción>` — `feat`, `fix`, `style`, `docs`, `refactor`.
-- **Integración:** los cambios llegan por Pull Request; ninguna rama de trabajo se
-  fusiona directamente a la rama estable.
+- **Integración:** los cambios llegan por Pull Request a `dev` y desde `dev` a
+  `main`; las correcciones directas (`fix/*`) se fusionan a `main` tras revisión
+  y verificación (`node --check` + revisión de referencias).
 
 ---
 
