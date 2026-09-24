@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nuevo proceso electoral — Averyn</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <link href="../../assets/css/design-system.css" rel="stylesheet">
+  <link href="../../assets/css/dashboard-shell.css" rel="stylesheet">
+  <link rel="icon" href="data:,">
+</head>
+<body>
+  <header class="av-navbar">
+    <a href="../../dashboard/index.html" class="av-navbar__brand" aria-label="Averyn — Inicio">
+      <img src="../../assets/images/averyn-logo-font-blue.avif" alt="" class="av-navbar__isotipo">
+    </a>
+
+    <nav class="av-dock-container" aria-label="Navegación principal">
+      <ul class="av-dock" role="menubar">
+        <li role="none"><a href="../../dashboard/index.html" class="av-dock__item" role="menuitem"><i class="bi bi-grid-1x2" aria-hidden="true"></i><span>Dashboard</span></a></li>
+        <li role="none"><a href="../../dashboard/identity/index.html" class="av-dock__item" role="menuitem"><i class="bi bi-person-vcard" aria-hidden="true"></i><span>Identidad</span></a></li>
+        <li role="none"><a href="../../biometrics/index.html" class="av-dock__item" role="menuitem" data-modulo="biometria"><i class="bi bi-fingerprint" aria-hidden="true"></i><span>Biometría</span></a></li>
+        <li role="none"><a href="../../dashboard/documents/index.html" class="av-dock__item" role="menuitem"><i class="bi bi-camera" aria-hidden="true"></i><span>OCR</span></a></li>
+        <li role="none"><a href="../../modules/ia/index.html" class="av-dock__item" role="menuitem"><i class="bi bi-cpu" aria-hidden="true"></i><span>IA</span></a></li>
+        <li role="none"><a href="index.html" class="av-dock__item is-active" role="menuitem"><i class="bi bi-check2-square" aria-hidden="true"></i><span>Electoral</span></a></li>
+        <li role="none"><a href="../../modules/access/index.html" class="av-dock__item" role="menuitem"><i class="bi bi-door-open" aria-hidden="true"></i><span>Accesos</span></a></li>
+        <li role="none"><a href="../../modules/admin/index.html" class="av-dock__item" role="menuitem"><i class="bi bi-gear" aria-hidden="true"></i><span>Administración</span></a></li>
+      </ul>
+    </nav>
+
+    <div class="av-navbar__actions">
+      <div class="av-search" id="av-search">
+        <button type="button" class="av-icon-btn" id="btn-search" aria-label="Buscar" aria-expanded="false" aria-controls="input-search">
+          <i class="bi bi-search" aria-hidden="true"></i>
+        </button>
+        <input type="search" id="input-search" class="av-search__input" placeholder="Buscar..." aria-label="Buscar en Averyn" hidden>
+      </div>
+
+      <button type="button" class="av-icon-btn" aria-label="Notificaciones, 3 sin leer">
+        <i class="bi bi-bell" aria-hidden="true"></i>
+        <span class="av-icon-btn__badge" aria-hidden="true">3</span>
+      </button>
+
+      <div class="av-user" id="av-user">
+        <button type="button" class="av-avatar-btn" id="btn-user" aria-haspopup="menu" aria-expanded="false" aria-controls="menu-user">
+          <span class="av-avatar-btn__circle" aria-hidden="true">UD</span>
+          <span class="av-avatar-btn__info">
+            <span class="av-avatar-btn__name">Usuario Demo</span>
+            <span class="av-avatar-btn__role">Administrador</span>
+          </span>
+          <i class="bi bi-chevron-down av-avatar-btn__chevron" aria-hidden="true"></i>
+        </button>
+        <ul class="av-menu" id="menu-user" role="menu" aria-label="Menú de usuario" hidden>
+          <li role="none"><button type="button" class="av-menu__item" id="btn-logout" role="menuitem"><i class="bi bi-box-arrow-right" aria-hidden="true"></i> Cerrar sesión</button></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="av-main-content" aria-label="Nuevo proceso electoral">
+    <div class="av-page">
+
+      <div class="av-page-header">
+        <div class="av-page-header__lead">
+          <span class="av-page-header__icon" aria-hidden="true"><i class="bi bi-check2-square"></i></span>
+          <div class="av-page-header__text">
+            <nav class="av-breadcrumb" style="margin-bottom: 4px"><a href="../../dashboard/index.html">Dashboard</a> &gt; <a href="index.html">Procesos electorales</a> &gt; <span class="is-current">Nuevo proceso</span></nav>
+            <h2 class="av-page-header__title">Nuevo proceso electoral</h2>
+            <p class="av-page-header__desc">Crea y configura una convocatoria electoral.</p>
+          </div>
+        </div>
+        <div class="av-page-header__actions">
+          <a href="index.html" class="av-btn av-btn-secondary"><i class="bi bi-arrow-left" aria-hidden="true"></i> Volver a Procesos electorales</a>
+        </div>
+      </div>
+
+      <div class="av-wizard">
+        <aside class="av-wizard__side">
+          <div class="av-card" style="padding: var(--av-space-4)">
+            <ol class="av-stepper" aria-label="Progreso del proceso electoral" style="list-style:none; margin:0; padding:0">
+              <li class="av-stepper__step av-stepper__step--current" id="stepper-paso-1" data-icono="bi-info-circle">
+                <span class="av-stepper__marker" aria-hidden="true"><i class="bi bi-info-circle"></i></span>
+                <span class="av-stepper__info">
+                  <span class="av-stepper__title">Información general</span>
+                  <span class="av-stepper__status">En curso</span>
+                </span>
+              </li>
+              <li class="av-stepper__step av-stepper__step--locked" id="stepper-paso-2" data-icono="bi-sliders">
+                <span class="av-stepper__marker" aria-hidden="true"><i class="bi bi-sliders"></i></span>
+                <span class="av-stepper__info">
+                  <span class="av-stepper__title">Configuración</span>
+                  <span class="av-stepper__status">Bloqueado</span>
+                </span>
+              </li>
+              <li class="av-stepper__step av-stepper__step--locked" id="stepper-paso-3" data-icono="bi-people">
+                <span class="av-stepper__marker" aria-hidden="true"><i class="bi bi-people"></i></span>
+                <span class="av-stepper__info">
+                  <span class="av-stepper__title">Participantes</span>
+                  <span class="av-stepper__status">Bloqueado</span>
+                </span>
+              </li>
+              <li class="av-stepper__step av-stepper__step--locked" id="stepper-paso-4" data-icono="bi-clipboard-check">
+                <span class="av-stepper__marker" aria-hidden="true"><i class="bi bi-clipboard-check"></i></span>
+                <span class="av-stepper__info">
+                  <span class="av-stepper__title">Revisión</span>
+                  <span class="av-stepper__status">Bloqueado</span>
+                </span>
+              </li>
+            </ol>
+          </div>
+        </aside>
+
+        <section class="av-wizard__body">
+
+          <div class="av-card" id="paso-1" data-paso="1">
+            <h3 class="av-card__section-title">Información general</h3>
+            <div class="av-form-grid">
+              <div class="av-field">
+                <label class="av-label" for="campo-nombre">Nombre del proceso</label>
+                <input class="av-input" id="campo-nombre" type="text" autocomplete="off">
+                <p class="av-help-text is-error" id="error-nombre" hidden>Completa este campo para continuar.</p>
+              </div>
+              <div class="av-field">
+                <label class="av-label" for="campo-institucion">Institución</label>
+                <select class="av-select" id="campo-institucion">
+                  <option value="">Selecciona una institución</option>
+                  <option value="universidad">Universidad</option>
+                  <option value="colegio">Colegio</option>
+                  <option value="fundacion">Fundación</option>
+                  <option value="empresa">Empresa</option>
+                </select>
+                <p class="av-help-text is-error" id="error-institucion" hidden>Completa este campo para continuar.</p>
+              </div>
+              <div class="av-field">
+                <label class="av-label" for="campo-tipo-proceso">Tipo de proceso</label>
+                <select class="av-select" id="campo-tipo-proceso">
+                  <option value="">Selecciona un tipo de proceso</option>
+                  <option value="consejo">Elección de consejo</option>
+                  <option value="representantes">Elección de representantes</option>
+                  <option value="consulta">Consulta institucional</option>
+                  <option value="votacion">Votación general</option>
+                </select>
+                <p class="av-help-text is-error" id="error-tipo-proceso" hidden>Completa este campo para continuar.</p>
+              </div>
+              <div class="av-field">
+                <label class="av-label" for="campo-fecha-inicio">Fecha de inicio</label>
+                <input class="av-input" id="campo-fecha-inicio" type="date">
+                <p class="av-help-text is-error" id="error-fecha-inicio" hidden>Completa este campo para continuar.</p>
+              </div>
+              <div class="av-field">
+                <label class="av-label" for="campo-fecha-fin">Fecha de finalización</label>
+                <input class="av-input" id="campo-fecha-fin" type="date">
+                <p class="av-help-text is-error" id="error-fecha-fin" hidden>Completa este campo para continuar.</p>
+              </div>
+              <div class="av-field av-field--span">
+                <label class="av-label" for="campo-descripcion">Descripción</label>
+                <input class="av-input" id="campo-descripcion" type="text" autocomplete="off">
+                <p class="av-help-text is-error" id="error-descripcion" hidden>Completa este campo para continuar.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="av-card" id="paso-2" data-paso="2" hidden>
+            <h3 class="av-card__section-title">Configuración</h3>
+            <div class="av-form-grid">
+              <div class="av-field">
+                <label class="av-label" for="campo-tipo-votacion">Tipo de votación</label>
+                <select class="av-select" id="campo-tipo-votacion">
+                  <option value="">Selecciona un tipo de votación</option>
+                  <option value="unico">Voto único</option>
+                  <option value="acumulativo">Voto acumulativo</option>
+                  <option value="ponderado">Voto ponderado</option>
+                </select>
+                <p class="av-help-text is-error" id="error-tipo-votacion" hidden>Completa este campo para continuar.</p>
+              </div>
+              <div class="av-field">
+                <label class="av-label" for="campo-opciones-voto">Número de opciones por voto</label>
+                <select class="av-select" id="campo-opciones-voto">
+                  <option value="1">1 opción</option>
+                  <option value="2">2 opciones</option>
+                  <option value="3">3 opciones</option>
+                  <option value="4">4 opciones</option>
+                  <option value="5">5 opciones</option>
+                </select>
+                <p class="av-help-text is-error" id="error-opciones-voto" hidden>Selecciona al menos una opción.</p>
+              </div>
+            </div>
+            <div class="av-field av-field--span">
+              <span class="av-label" id="label-modalidad">Modalidad</span>
+              <div class="av-seg" role="group" aria-labelledby="label-modalidad" id="grupo-modalidad" style="gap: var(--av-space-6)">
+                <button type="button" class="av-seg__btn is-active" id="btn-modalidad-en-linea">En línea</button>
+                <button type="button" class="av-seg__btn" id="btn-modalidad-presencial">Presencial</button>
+              </div>
+              <p class="av-help-text is-error" id="error-modalidad" hidden>Selecciona una modalidad.</p>
+            </div>
+            <h3 class="av-card__section-title">Opciones de votación</h3>
+            <div class="av-form-grid" style="row-gap: var(--av-space-4)">
+              <label class="av-switch">
+                <input type="checkbox" id="campo-votacion-anonima" checked>
+                <span class="av-switch__track" aria-hidden="true"></span>
+                <span>Votación anónima</span>
+              </label>
+              <label class="av-switch">
+                <input type="checkbox" id="campo-voto-en-blanco">
+                <span class="av-switch__track" aria-hidden="true"></span>
+                <span>Permitir voto en blanco</span>
+              </label>
+              <label class="av-switch">
+                <input type="checkbox" id="campo-mostrar-resultados" checked>
+                <span class="av-switch__track" aria-hidden="true"></span>
+                <span>Mostrar resultados</span>
+              </label>
+              <label class="av-switch">
+                <input type="checkbox" id="campo-permitir-modificacion">
+                <span class="av-switch__track" aria-hidden="true"></span>
+                <span>Permitir modificación del voto</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Participantes -->
+          <div class="av-card" id="paso-3" data-paso="3" hidden>
+            <h3 class="av-card__section-title">Participantes</h3>
+
+            <div class="av-toolbar">
+              <div class="av-toolbar__group">
+                <div class="av-field--inline">
+                  <label class="av-filter-label" for="buscar-participantes">Buscar</label>
+                  <div class="av-search-field">
+                    <i class="bi bi-search av-search-field__icon" aria-hidden="true"></i>
+                    <input class="av-input" id="buscar-participantes" type="search" placeholder="Nombre o documento" autocomplete="off">
+                  </div>
+                </div>
+                <div class="av-field--inline">
+                  <label class="av-filter-label" for="filtro-afiliacion">Afiliación</label>
+                  <select class="av-select" id="filtro-afiliacion" style="width: 200px">
+                    <option value="">Todas las afiliaciones</option>
+                    <option value="Estudiante">Estudiante</option>
+                    <option value="Docente">Docente</option>
+                    <option value="Administrativo">Administrativo</option>
+                    <option value="Visitante">Visitante</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="av-table-wrap">
+              <table class="av-table" id="tabla-participantes">
+                <thead>
+                  <tr>
+                    <th>Participante</th>
+                    <th>Afiliación</th>
+                    <th>Estado</th>
+                  </tr>
+                </thead>
+                <tbody id="tabla-participantes-body">
+                  <!-- Filas generadas por JS a partir del catálogo de participantes -->
+                </tbody>
+              </table>
+            </div>
+
+            <dl class="av-detail" style="margin-top: var(--av-space-4)" aria-live="polite">
+              <div class="av-detail__row">
+                <dt>Participantes en el padrón</dt>
+                <dd><strong id="resumen-padron">0</strong></dd>
+              </div>
+              <div class="av-detail__row">
+                <dt>Coincidencias con el filtro actual</dt>
+                <dd><strong id="resumen-filtro">0</strong></dd>
+              </div>
+            </dl>
+          </div>
+
+          <!-- Revisión -->
+          <div id="paso-4" data-paso="4" hidden>
+            <div class="av-card">
+              <h3 class="av-card__section-title">Información general</h3>
+              <dl class="av-detail" id="revision-informacion">
+                <!-- Rellenado por JS a partir del proceso en memoria -->
+              </dl>
+            </div>
+            <div class="av-card">
+              <h3 class="av-card__section-title">Configuración</h3>
+              <dl class="av-detail" id="revision-configuracion">
+                <!-- Rellenado por JS a partir del proceso en memoria -->
+              </dl>
+            </div>
+            <div class="av-card">
+              <h3 class="av-card__section-title">Participantes</h3>
+              <dl class="av-detail" id="revision-participantes">
+                <!-- Rellenado por JS a partir del proceso en memoria -->
+              </dl>
+            </div>
+          </div>
+
+          <div class="av-wizard__footer">
+            <button type="button" class="av-btn av-btn-secondary" id="btn-atras"><i class="bi bi-arrow-left" aria-hidden="true"></i> Atrás</button>
+            <button type="button" class="av-btn av-btn-primary" id="btn-continuar">Continuar <i class="bi bi-arrow-right" aria-hidden="true"></i></button>
+          </div>
+
+          <div class="av-techbar">
+            <span class="av-techbar__item">Proceso: <strong style="color: var(--av-gray-600); font-weight: 600">Nuevo</strong></span>
+            <span class="av-techbar__item"><span class="av-techbar__dot" aria-hidden="true"></span> Estado: Borrador</span>
+            <span class="av-techbar__item" style="margin-left: auto">v0.1.0</span>
+          </div>
+        </section>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+  <script src="../../assets/js/dashboard-shell.js"></script>
+  <script src="electoral-data.js"></script>
+  <script src="crear-proceso.js"></script>
+
+  <div class="av-toast-container" id="contenedor-toast" aria-live="polite"></div>
+</body>
+</html>

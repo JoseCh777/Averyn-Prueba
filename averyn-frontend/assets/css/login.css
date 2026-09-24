@@ -1,0 +1,164 @@
+/* 1. VARIABLES (TOKENS)
+   Fuente: Averyn — Guía de Diseño v1, Anexo 12 */
+:root {
+  /* Color de marca */
+  --av-blue: #145fee;
+  --av-navy: #000c24;
+  --av-cyan: #00acd2;
+  --av-white: #ffffff;
+
+  /* Escala de grises (extensión UI) */
+  --av-gray-50: #f4f6fa;
+  --av-gray-100: #e7ebf3;
+  --av-gray-200: #cbd3e1;
+  --av-gray-300: #a9b4c7;
+  --av-gray-400: #7c89a3;
+  --av-gray-500: #56637f;
+  --av-gray-600: #3b4664;
+  --av-gray-700: #26304a;
+  --av-gray-900: #000c24;
+
+  /* Semánticos */
+  --av-success: #12b76a;
+  --av-warning: #f79009;
+  --av-error: #f04438;
+  --av-info: #00acd2;
+
+  /* Tipografía */
+  --av-font-heading: 'Space Grotesk', sans-serif;
+  --av-font-body: 'Inter', sans-serif;
+  --av-text-h1: 2.5rem;
+  --av-text-h2: 2rem;
+  --av-text-h3: 1.5rem;
+  --av-text-body-lg: 1.125rem;
+  --av-text-body: 1rem;
+  --av-text-sm: 0.875rem;
+  --av-text-xs: 0.75rem;
+
+  /* Espaciado (base 8px) */
+  --av-space-1: 4px;
+  --av-space-2: 8px;
+  --av-space-3: 12px;
+  --av-space-4: 16px;
+  --av-space-6: 24px;
+  --av-space-8: 32px;
+  --av-space-12: 48px;
+  --av-space-16: 64px;
+
+  /* Radios */
+  --av-radius-sm: 6px;
+  --av-radius-md: 10px;
+  --av-radius-lg: 16px;
+  --av-radius-full: 9999px;
+
+  /* Sombras */
+  --av-shadow-sm: 0 1px 2px rgba(0, 12, 36, 0.06);
+  --av-shadow-md: 0 4px 12px rgba(0, 12, 36, 0.1);
+  --av-shadow-lg: 0 12px 32px rgba(0, 12, 36, 0.16);
+}
+
+/* 2. RESET / NORMALIZACIÓN MÍNIMA */
+* { box-sizing: border-box; }
+body { margin: 0; color: var(--av-navy); background: var(--av-white); font-family: var(--av-font-body); }
+
+/* 3. TIPOGRAFÍA BASE */
+h1, h2, h3, h4, .av-heading { font-family: var(--av-font-heading); }
+a { color: inherit; }
+button, a, input { outline-offset: 3px; }
+button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid var(--av-blue); }
+
+/* 4. UTILIDADES */
+.av-muted { color: var(--av-gray-500); }
+
+/* 5. COMPONENTES */
+
+/* 5.1 Botones */
+.av-btn-primary {
+  --bs-btn-color: #fff; --bs-btn-bg: var(--av-blue); --bs-btn-border-color: var(--av-blue);
+  --bs-btn-hover-color: #fff; --bs-btn-hover-bg: #0d51d4; --bs-btn-hover-border-color: #0d51d4;
+  --bs-btn-active-bg: #0a48bd; --bs-btn-active-border-color: #0a48bd;
+  border-radius: var(--av-radius-md); min-height: 44px; font-weight: 700;
+  padding: .65rem 1.15rem; box-shadow: 0 8px 18px rgba(20, 95, 238, .2);
+  transition: transform .16s ease, box-shadow .16s ease, background-color .16s ease, border-color .16s ease;
+}
+.av-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 24px rgba(20, 95, 238, .28); }
+.av-btn-primary:active { transform: scale(.97); }
+.av-btn-primary:disabled { background: var(--av-gray-200); border-color: var(--av-gray-200); color: var(--av-gray-400); box-shadow: none; transform: none; }
+
+/* 5.2 Inputs y formularios */
+.av-input--error { border-color: var(--av-error); }
+.av-input--error:focus { border-color: var(--av-error); box-shadow: 0 0 0 .22rem rgba(240, 68, 56, .13); }
+.av-input-help { display: block; margin-top: var(--av-space-1); font-size: var(--av-text-sm); color: var(--av-gray-500); }
+.av-input-help--error { color: var(--av-error); }
+
+/* 5.3 Alertas */
+.av-alert { display: flex; align-items: flex-start; gap: var(--av-space-2); padding: var(--av-space-3) var(--av-space-4); border: 1px solid transparent; border-radius: var(--av-radius-sm); font-size: var(--av-text-sm); line-height: 1.5; }
+.av-alert i { margin-top: .1rem; }
+.av-alert--success { background: rgba(18, 183, 106, .1); border-color: rgba(18, 183, 106, .4); color: #0d7a4a; }
+.av-alert--error { background: rgba(240, 68, 56, .1); border-color: rgba(240, 68, 56, .4); color: #b42318; }
+.av-alert--info { background: rgba(0, 172, 210, .1); border-color: rgba(0, 172, 210, .4); color: #0a7588; }
+
+/* 6. AUTENTICACIÓN (Inicio de sesión) */
+.av-login-page { position: relative; min-height: 100vh; display: flex; align-items: center; background: radial-gradient(circle at 15% 15%, rgba(0, 172, 210, .2), transparent 28%), linear-gradient(135deg, #f6f9ff, #fff 58%, #eaf2ff); }
+.av-logo-login { width: 150px; }
+.av-logo { width: 126px; height: auto; object-fit: contain; }
+
+.av-auth { position: relative; max-width: 920px; margin-inline: auto; height: 660px; display: grid; grid-template-columns: 1fr 1fr; background: #fff; border: 1px solid var(--av-gray-100); border-radius: 26px; box-shadow: var(--av-shadow-lg); overflow: hidden; }
+
+.av-auth-logo { width: 132px; }
+.av-auth-logo img { display: block; width: 100%; height: auto; }
+
+.av-auth-side { position: relative; z-index: 2; display: flex; flex-direction: column; justify-content: space-between; gap: 1.5rem; padding: 2.6rem 2.3rem 2.1rem; color: #fff; background: var(--av-navy); }
+.av-auth-side > * { position: relative; z-index: 1; }
+.av-auth-side-text { color: rgba(255, 255, 255, .62); line-height: 1.65; }
+
+.av-auth-back {
+  align-self: flex-start;
+  color: rgba(255, 255, 255, .78);
+  transition: color .16s ease;
+}
+.av-auth-back:hover { color: var(--av-cyan); }
+
+.av-auth-panel { display: flex; flex-direction: column; justify-content: flex-start; padding: 1.6rem 2.4rem; }
+
+.av-auth-form { display: flex; flex-direction: column; justify-content: center; flex: 1; min-height: 0; overflow-y: auto; }
+.av-auth-form .mb-4 { margin-bottom: .8rem; }
+.av-auth-form .mb-3 { margin-bottom: .5rem; }
+.av-auth-form .mt-3 { margin-top: .5rem; }
+.av-auth-panel .display-6 { font-size: 1.6rem; }
+.av-auth-panel .form-label { font-size: .82rem; margin-bottom: .3rem; }
+.av-auth-form { scrollbar-width: thin; scrollbar-color: var(--av-gray-200) transparent; }
+.av-auth-form::-webkit-scrollbar { width: 8px; }
+.av-auth-form::-webkit-scrollbar-track { background: transparent; }
+.av-auth-form::-webkit-scrollbar-thumb { background: var(--av-gray-200); border-radius: 999px; }
+.av-auth-form::-webkit-scrollbar-thumb:hover { background: var(--av-blue); }
+
+.av-login-input { min-height: 44px; border-radius: var(--av-radius-sm); border-color: var(--av-gray-200); }
+.av-login-input:focus { border-color: var(--av-blue); box-shadow: 0 0 0 .22rem rgba(20, 95, 238, .13); }
+
+/* 7. OVERRIDES PUNTUALES DE BOOTSTRAP */
+.form-label { font-weight: 600; }
+
+/* MEDIA QUERIES */
+@media (max-width: 991px) {
+  .av-auth { height: 620px; }
+  .av-auth-side { padding: 2.4rem 2rem 2rem; }
+  .av-auth-panel { padding: 1.6rem 2rem; }
+}
+
+@media (max-width: 575px) {
+  .av-auth { height: 720px; grid-template-columns: 38% 62%; border-radius: 20px; }
+  .av-auth-side { padding: 1.6rem 1rem 1.2rem; gap: 1.2rem; }
+  .av-auth-logo { width: 96px; }
+  .av-auth-side .display-5 { font-size: 1.2rem; letter-spacing: -.02em; margin-top: .5rem; }
+  .av-auth-side-text { font-size: .78rem; }
+  .av-auth-side-foot small { font-size: .72rem; }
+  .av-auth-panel { padding: 1.6rem 1rem; }
+  .av-auth-panel .display-6 { font-size: 1.5rem; }
+  .av-auth-panel .form-label { font-size: .78rem; }
+  .av-login-input { min-height: 42px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}

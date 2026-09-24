@@ -1,0 +1,127 @@
+/* 1. VARIABLES (TOKENS) — ver docs/design-system.md (tokens y breakpoints) */
+:root {
+  /* Color de marca */
+  --av-blue: #145FEE;
+  --av-navy: #000C24;
+  --av-cyan: #00ACD2;
+  --av-white: #FFFFFF;
+
+  /* Escala de grises (extensión UI) */
+  --av-gray-50: #F4F6FA;
+  --av-gray-100: #E7EBF3;
+  --av-gray-200: #CBD3E1;
+  --av-gray-300: #A9B4C7;
+  --av-gray-400: #7C89A3;
+  --av-gray-500: #56637F;
+  --av-gray-600: #3B4664;
+  --av-gray-700: #26304A;
+  --av-gray-900: #000C24;
+
+  /* Semánticos */
+  --av-success: #12B76A;
+  --av-success-bg: #E8F8F0;
+  --av-warning: #F79009;
+  --av-warning-bg: #FEF3E2;
+  --av-error: #F04438;
+  --av-error-bg: #FDECEA;
+  --av-info: #00ACD2;
+  --av-info-bg: #E3F6FA;
+
+  /* Estados de color primario */
+  --av-blue-hover: #0F4BC7;
+  --av-blue-active: #0C3B9E;
+  --av-blue-tint: #EAF0FE;
+
+  /* Tipografía */
+  --av-font-heading: 'Plus Jakarta Sans', sans-serif;
+  --av-font-body: 'Inter', sans-serif;
+  --av-text-h1: 2.5rem;
+  --av-text-h2: 2rem;
+  --av-text-h3: 1.5rem;
+  --av-text-body-lg: 1.125rem;
+  --av-text-body: 1rem;
+  --av-text-sm: 0.875rem;
+  --av-text-xs: 0.75rem;
+
+  /* Espaciado (base 8px) */
+  --av-space-1: 4px;
+  --av-space-2: 8px;
+  --av-space-3: 12px;
+  --av-space-4: 16px;
+  --av-space-6: 24px;
+  --av-space-8: 32px;
+  --av-space-12: 48px;
+  --av-space-16: 64px;
+
+  /* Radios */
+  --av-radius-sm: 6px;
+  --av-radius-md: 10px;
+  --av-radius-lg: 16px;
+  --av-radius-full: 9999px;
+
+  /* Sombras */
+  --av-shadow-sm: 0 1px 2px rgba(0, 12, 36, 0.06);
+  --av-shadow-md: 0 4px 12px rgba(0, 12, 36, 0.10);
+  --av-shadow-lg: 0 12px 32px rgba(0, 12, 36, 0.16);
+
+  /* Transiciones */
+  --av-transition-fast: 150ms ease;
+
+  /* EXTENSIÓN MÓDULOS (registro civil digital)
+     Dirección visual del contenido de módulos (Identity / OCR y siguientes).
+     El navbar/dock NO usa estos tokens: se mantiene intacto. */
+
+  /* Tipografía display: títulos de página y cifras KPI */
+  --av-font-display: 'Space Grotesk', sans-serif;
+  --av-text-page-title: 1.75rem;
+  --av-text-kpi: 1.875rem;
+
+  /* Espaciado / radio extra */
+  --av-radius-xl: 20px;
+
+  /* Paleta de avatares (asignada por persona / registro) */
+  --av-avatar-blue: #145FEE;   --av-avatar-blue-tint: #EAF0FE;
+  --av-avatar-violet: #6C5CE7; --av-avatar-violet-tint: #F0EDFE;
+  --av-avatar-teal: #0E9384;   --av-avatar-teal-tint: #E5F7F5;
+  --av-avatar-amber: #E67E22;  --av-avatar-amber-tint: #FEF3E2;
+  --av-avatar-rose: #E4578A;   --av-avatar-rose-tint: #FDEBF2;
+  --av-avatar-slate: #56637F;  --av-avatar-slate-tint: #EDF0F6;
+
+  /* Metadatos (afiliación / rol): neutro gris-azul único. NO usar color por categoría. */
+  --av-meta-bg: #EEF1F6;
+  --av-meta-text: #475569;
+  --av-meta-icon: #64748B;
+
+  /* Chips de estado (sello editorial): texto 700-series sobre fondo 50-series.
+     Sin sombra. Contraste WCAG AA verificado en docs/design-system.md. */
+  --av-chip-success-bg: #ECFDF5;  --av-chip-success-text: #047857; --av-chip-success-border: #A7F3D0;
+  --av-chip-warning-bg: #FFFBEB;  --av-chip-warning-text: #B45309; --av-chip-warning-border: #FDE68A;
+  --av-chip-error-bg:   #FEF2F2;  --av-chip-error-text:   #B91C1C; --av-chip-error-border:   #FECACA;
+  --av-chip-info-bg:    #F0F9FF;  --av-chip-info-text:    #0369A1; --av-chip-info-border:    #BAE6FD;
+  --av-chip-neutral-bg: #F1F5F9;  --av-chip-neutral-text: #475569; --av-chip-neutral-border:#E2E8F0;
+
+  /* Variante de input "detectado por OCR" (fondo verde suave, editable) */
+  --av-ocr-bg: #ECFDF5;
+  --av-ocr-border: #A7F3D0;
+  --av-ocr-text: #047857;
+
+  /* Proporción del preview de documento en el wizard de captura */
+  --av-ratio-doc: 16 / 10;
+
+  /* EXTENSIÓN DASHBOARD — categorías de módulo (pantalla principal)
+     Índigo es la única adición cromática (categoría "Accesos"); el resto
+     reutiliza la paleta existente. Ver docs/design-system.md § 8. */
+  --av-indigo: #4F46E5;
+  --av-indigo-tint: #EEF0FE;
+  --av-cyan-tint: #DFF4FA;       /* tint suave del celeste de marca (dispositivos) */
+  --av-text-welcome: clamp(1.75rem, 1.15rem + 1.5vw, 2.375rem);
+}
+
+/* Breakpoints — ver docs/design-system.md
+   CSS no permite var() dentro de @media, así que estos valores son fijos
+   y deben copiarse tal cual en cualquier @media nuevo. No inventar otros anchos.
+   --bp-sm: 576px   (móvil grande)
+   --bp-md: 768px   (tablet)
+   --bp-lg: 1024px  (laptop)
+   --bp-xl: 1280px  (desktop) */
+

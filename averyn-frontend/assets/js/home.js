@@ -1,23 +1,7 @@
 (function () {
   'use strict';
 
-  var peek = document.querySelector('.av-header-peek');
   var backToTop = document.querySelector('.av-back-to-top');
-
-  var revealScheduled = false;
-  var revealFromTop = function (event) {
-    if (revealScheduled) return;
-    revealScheduled = true;
-    requestAnimationFrame(function () {
-      revealScheduled = false;
-      if (peek) peek.classList.toggle('is-visible', event.clientY <= 96);
-    });
-  };
-  window.addEventListener('mousemove', revealFromTop);
-  if (peek) {
-    peek.addEventListener('mouseenter', function () { peek.classList.add('is-visible'); });
-    peek.addEventListener('mouseleave', function () { peek.classList.remove('is-visible'); });
-  }
 
   var updateBackToTop = function () {
     if (backToTop) {

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Identidad — Averyn</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <link href="../../assets/css/design-system.css" rel="stylesheet">
+  <link href="../../assets/css/dashboard-shell.css" rel="stylesheet">
+  <link rel="icon" href="data:,">
+</head>
+<body>
+  <header class="av-navbar">
+    <a href="../index.html" class="av-navbar__brand" aria-label="Averyn — Inicio">
+      <img src="../../assets/images/averyn-logo-font-blue.avif" alt="" class="av-navbar__isotipo">
+    </a>
+
+    <nav class="av-dock-container" aria-label="Navegación principal">
+      <ul class="av-dock" role="menubar">
+        <li role="none"><a href="../index.html" class="av-dock__item" role="menuitem"><i class="bi bi-grid-1x2" aria-hidden="true"></i><span>Dashboard</span></a></li>
+        <li role="none"><a href="index.html" class="av-dock__item is-active" role="menuitem"><i class="bi bi-person-vcard" aria-hidden="true"></i><span>Identidad</span></a></li>
+        <li role="none"><a href="../../biometrics/index.html" class="av-dock__item" role="menuitem" data-modulo="biometria"><i class="bi bi-fingerprint" aria-hidden="true"></i><span>Biometría</span></a></li>
+        <li role="none"><a href="../documents/index.html" class="av-dock__item" role="menuitem"><i class="bi bi-camera" aria-hidden="true"></i><span>OCR</span></a></li>
+        <li role="none"><a href="../../modules/ia/index.html" class="av-dock__item" role="menuitem"><i class="bi bi-cpu" aria-hidden="true"></i><span>IA</span></a></li>
+        <li role="none"><a href="../../modules/electoral/index.html" class="av-dock__item" role="menuitem"><i class="bi bi-check2-square" aria-hidden="true"></i><span>Electoral</span></a></li>
+        <li role="none"><a href="../../modules/access/index.html" class="av-dock__item" role="menuitem"><i class="bi bi-door-open" aria-hidden="true"></i><span>Accesos</span></a></li>
+        <li role="none"><a href="../../modules/admin/index.html" class="av-dock__item" role="menuitem"><i class="bi bi-gear" aria-hidden="true"></i><span>Administración</span></a></li>
+      </ul>
+    </nav>
+
+    <div class="av-navbar__actions">
+      <div class="av-search" id="av-search">
+        <button type="button" class="av-icon-btn" id="btn-search" aria-label="Buscar" aria-expanded="false" aria-controls="input-search">
+          <i class="bi bi-search" aria-hidden="true"></i>
+        </button>
+        <input type="search" id="input-search" class="av-search__input" placeholder="Buscar..." aria-label="Buscar en Averyn" hidden>
+      </div>
+
+      <button type="button" class="av-icon-btn" aria-label="Notificaciones, 3 sin leer">
+        <i class="bi bi-bell" aria-hidden="true"></i>
+        <span class="av-icon-btn__badge" aria-hidden="true">3</span>
+      </button>
+
+      <div class="av-user" id="av-user">
+        <button type="button" class="av-avatar-btn" id="btn-user" aria-haspopup="menu" aria-expanded="false" aria-controls="menu-user">
+          <span class="av-avatar-btn__circle" aria-hidden="true">UD</span>
+          <span class="av-avatar-btn__info">
+            <span class="av-avatar-btn__name">Usuario Demo</span>
+            <span class="av-avatar-btn__role">Administrador</span>
+          </span>
+          <i class="bi bi-chevron-down av-avatar-btn__chevron" aria-hidden="true"></i>
+        </button>
+        <ul class="av-menu" id="menu-user" role="menu" aria-label="Menú de usuario" hidden>
+          <li role="none"><button type="button" class="av-menu__item" id="btn-logout" role="menuitem"><i class="bi bi-box-arrow-right" aria-hidden="true"></i> Cerrar sesión</button></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="av-main-content" aria-label="Contenido de Identidad">
+    <div class="av-page">
+
+      <div class="av-page-header">
+        <div class="av-page-header__lead">
+          <span class="av-page-header__spine" aria-hidden="true"></span>
+          <span class="av-page-header__icon" aria-hidden="true"><i class="bi bi-person-vcard"></i></span>
+          <div class="av-page-header__text">
+            <nav class="av-breadcrumb" style="margin-bottom: 4px"><a href="../index.html">Dashboard</a> &gt; <span class="is-current">Identidad</span></nav>
+            <h2 class="av-page-header__title">Personas verificadas</h2>
+            <p class="av-page-header__desc">Registro de personas con identidad confirmada y su estado de verificación.</p>
+          </div>
+        </div>
+        <div class="av-page-header__actions">
+          <button class="av-btn av-btn-secondary" type="button"><i class="bi bi-download" aria-hidden="true"></i> Exportar</button>
+          <button class="av-btn av-btn-primary" type="button" id="btn-nueva-persona"><i class="bi bi-plus-lg" aria-hidden="true"></i> Nueva persona</button>
+        </div>
+      </div>
+
+      <div class="av-kpi-grid">
+        <div class="av-kpi av-kpi--blue">
+          <span class="av-kpi__label"><i class="bi bi-people" aria-hidden="true"></i> Total de personas</span>
+          <span class="av-kpi__value" id="kpi-total">8</span>
+          <span class="av-kpi__note">registros en el sistema</span>
+        </div>
+        <div class="av-kpi av-kpi--success">
+          <span class="av-kpi__label"><i class="bi bi-patch-check-fill" aria-hidden="true"></i> Verificadas</span>
+          <span class="av-kpi__value" id="kpi-verificadas">5</span>
+          <span class="av-kpi__note">identidad confirmada</span>
+        </div>
+        <div class="av-kpi av-kpi--warning">
+          <span class="av-kpi__label"><i class="bi bi-hourglass-split" aria-hidden="true"></i> Pendientes</span>
+          <span class="av-kpi__value" id="kpi-pendientes">3</span>
+          <span class="av-kpi__note">en revisión</span>
+        </div>
+        <div class="av-kpi av-kpi--info">
+          <span class="av-kpi__label"><i class="bi bi-graph-up-arrow" aria-hidden="true"></i> Tasa de verificación</span>
+          <span class="av-kpi__value" id="kpi-tasa">63%</span>
+          <span class="av-kpi__note" id="kpi-tasa-nota">5 de 8 personas</span>
+        </div>
+      </div>
+
+      <div class="av-card av-card--flush">
+        <div class="av-toolbar">
+          <div class="av-toolbar__group">
+            <div class="av-field--inline">
+              <label class="av-filter-label" for="input-buscar-persona">Buscar</label>
+              <div class="av-search-field">
+                <i class="bi bi-search av-search-field__icon" aria-hidden="true"></i>
+                <input class="av-input" id="input-buscar-persona" type="search" placeholder="Nombre o documento" autocomplete="off">
+                <span class="av-search-field__kbd" aria-hidden="true">Ctrl K</span>
+              </div>
+            </div>
+            <div class="av-field--inline">
+              <label class="av-filter-label" for="select-estado-persona">Estado</label>
+              <select class="av-select" id="select-estado-persona" style="width: 180px">
+                <option value="todos">Todos los estados</option>
+                <option value="verificado">Verificado</option>
+                <option value="pendiente">Pendiente</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="av-table-wrap">
+          <table class="av-table" id="tabla-personas">
+            <thead>
+              <tr>
+                <th>Persona</th>
+                <th>Afiliación</th>
+                <th>Estado</th>
+                <th class="av-table__actions">Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-personas-body">
+              <!-- Filas generadas por JS a partir del array de datos mock -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="av-pagination">
+          <span class="av-pagination__info" id="tabla-personas-info">Mostrando 8 de 8</span>
+          <div class="av-pagination__controls" aria-label="Paginación">
+            <button type="button" class="av-pagination__btn" disabled aria-label="Página anterior"><i class="bi bi-chevron-left" aria-hidden="true"></i></button>
+            <button type="button" class="av-pagination__btn is-active" aria-current="page">1</button>
+            <button type="button" class="av-pagination__btn" disabled aria-label="Página siguiente"><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Modal: Nueva persona (patrón propio Averyn: .av-modal-overlay + [hidden], sin depender de Bootstrap JS) -->
+  <div class="av-modal-overlay" id="modal-nueva-persona" hidden>
+    <div class="av-modal" role="dialog" aria-modal="true" aria-labelledby="modal-nueva-persona-titulo">
+      <form id="form-nueva-persona" novalidate>
+        <div class="av-modal__header">
+          <h3 class="av-modal__title" id="modal-nueva-persona-titulo" style="margin: 0; font-size: 1.25rem">Nueva persona</h3>
+          <button type="button" class="av-modal__close" id="btn-cerrar-modal-persona" aria-label="Cerrar">
+            <i class="bi bi-x-lg" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div class="av-modal__body">
+          <div class="av-field">
+            <label class="av-label" for="input-nombre-persona">Nombre completo</label>
+            <input class="av-input" id="input-nombre-persona" type="text" required>
+          </div>
+          <div class="av-field">
+            <label class="av-label" for="input-documento-persona">Documento</label>
+            <input class="av-input" id="input-documento-persona" type="text" required>
+          </div>
+          <div class="av-field">
+            <label class="av-label" for="select-afiliacion-crear">Afiliación</label>
+            <select class="av-select" id="select-afiliacion-crear" required>
+              <option value="Estudiante">Estudiante</option>
+              <option value="Docente">Docente</option>
+              <option value="Administrativo">Administrativo</option>
+              <option value="Visitante">Visitante</option>
+            </select>
+          </div>
+          <p class="av-help-text">La persona se crea con estado <strong>Pendiente</strong> hasta que se verifique.</p>
+        </div>
+        <div class="av-modal__footer">
+          <button type="button" class="av-btn av-btn-secondary" id="btn-cancelar-nueva-persona">Cancelar</button>
+          <button type="submit" class="av-btn av-btn-primary"><i class="bi bi-check-lg" aria-hidden="true"></i> Crear persona</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+  <script src="../../assets/js/dashboard-shell.js"></script>
+  <script src="../../assets/js/dashboard-identity.js"></script>
+</body>
+</html>

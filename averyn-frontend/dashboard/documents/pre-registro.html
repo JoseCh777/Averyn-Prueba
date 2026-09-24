@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nuevo registro — Averyn</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <link href="../../assets/css/design-system.css" rel="stylesheet">
+  <link href="../../assets/css/dashboard-shell.css" rel="stylesheet">
+  <link rel="icon" href="data:,">
+</head>
+<body>
+  <header class="av-navbar">
+    <a href="../index.html" class="av-navbar__brand" aria-label="Averyn — Inicio">
+      <img src="../../assets/images/averyn-logo-font-blue.avif" alt="" class="av-navbar__isotipo">
+    </a>
+
+    <nav class="av-dock-container" aria-label="Navegación principal">
+      <ul class="av-dock" role="menubar">
+        <li role="none"><a href="../index.html" class="av-dock__item" role="menuitem"><i class="bi bi-grid-1x2" aria-hidden="true"></i><span>Dashboard</span></a></li>
+        <li role="none"><a href="../identity/index.html" class="av-dock__item" role="menuitem"><i class="bi bi-person-vcard" aria-hidden="true"></i><span>Identidad</span></a></li>
+        <li role="none"><a href="../../biometrics/index.html" class="av-dock__item" role="menuitem" data-modulo="biometria"><i class="bi bi-fingerprint" aria-hidden="true"></i><span>Biometría</span></a></li>
+        <li role="none"><a href="index.html" class="av-dock__item" role="menuitem"><i class="bi bi-camera" aria-hidden="true"></i><span>OCR</span></a></li>
+        <li role="none"><a href="../../modules/ia/index.html" class="av-dock__item" role="menuitem"><i class="bi bi-cpu" aria-hidden="true"></i><span>IA</span></a></li>
+        <li role="none"><a href="../../modules/electoral/index.html" class="av-dock__item" role="menuitem"><i class="bi bi-check2-square" aria-hidden="true"></i><span>Electoral</span></a></li>
+        <li role="none"><a href="../../modules/access/index.html" class="av-dock__item" role="menuitem"><i class="bi bi-door-open" aria-hidden="true"></i><span>Accesos</span></a></li>
+        <li role="none"><a href="../../modules/admin/index.html" class="av-dock__item" role="menuitem"><i class="bi bi-gear" aria-hidden="true"></i><span>Administración</span></a></li>
+      </ul>
+    </nav>
+
+    <div class="av-navbar__actions">
+      <div class="av-search" id="av-search">
+        <button type="button" class="av-icon-btn" id="btn-search" aria-label="Buscar" aria-expanded="false" aria-controls="input-search">
+          <i class="bi bi-search" aria-hidden="true"></i>
+        </button>
+        <input type="search" id="input-search" class="av-search__input" placeholder="Buscar..." aria-label="Buscar en Averyn" hidden>
+      </div>
+
+      <button type="button" class="av-icon-btn" aria-label="Notificaciones, 3 sin leer">
+        <i class="bi bi-bell" aria-hidden="true"></i>
+        <span class="av-icon-btn__badge" aria-hidden="true">3</span>
+      </button>
+
+      <div class="av-user" id="av-user">
+        <button type="button" class="av-avatar-btn" id="btn-user" aria-haspopup="menu" aria-expanded="false" aria-controls="menu-user">
+          <span class="av-avatar-btn__circle" aria-hidden="true">UD</span>
+          <span class="av-avatar-btn__info">
+            <span class="av-avatar-btn__name">Usuario Demo</span>
+            <span class="av-avatar-btn__role">Administrador</span>
+          </span>
+          <i class="bi bi-chevron-down av-avatar-btn__chevron" aria-hidden="true"></i>
+        </button>
+        <ul class="av-menu" id="menu-user" role="menu" aria-label="Menú de usuario" hidden>
+          <li role="none"><button type="button" class="av-menu__item" id="btn-logout" role="menuitem"><i class="bi bi-box-arrow-right" aria-hidden="true"></i> Cerrar sesión</button></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="av-main-content" aria-label="Nuevo registro — Pre-registro OCR">
+    <div class="av-page">
+
+      <div class="av-page-header">
+        <div class="av-page-header__lead">
+          <span class="av-page-header__spine" aria-hidden="true"></span>
+          <span class="av-page-header__icon" aria-hidden="true"><i class="bi bi-person-plus"></i></span>
+          <div class="av-page-header__text">
+            <nav class="av-breadcrumb" style="margin-bottom: 4px"><a href="../index.html">Dashboard</a> &gt; <a href="index.html">Documentos</a> &gt; <span class="is-current">Nuevo registro</span></nav>
+            <h2 class="av-page-header__title">Nuevo registro</h2>
+            <p class="av-page-header__desc">Captura del documento y verificación de los datos extraídos por OCR.</p>
+          </div>
+        </div>
+        <div class="av-page-header__actions">
+          <a href="index.html" class="av-btn av-btn-secondary"><i class="bi bi-arrow-left" aria-hidden="true"></i> Volver a Documentos</a>
+        </div>
+      </div>
+
+      <div class="av-wizard">
+        <aside class="av-wizard__side">
+          <div class="av-card" style="padding: var(--av-space-4)">
+            <ol class="av-stepper" aria-label="Progreso del registro" style="list-style:none; margin:0; padding:0">
+              <li class="av-stepper__step av-stepper__step--done">
+                <span class="av-stepper__marker" aria-hidden="true"><i class="bi bi-check-lg"></i></span>
+                <span class="av-stepper__info">
+                  <span class="av-stepper__title">Consentimiento</span>
+                  <span class="av-stepper__status">Completado</span>
+                </span>
+              </li>
+              <li class="av-stepper__step av-stepper__step--current">
+                <span class="av-stepper__marker" aria-hidden="true"><i class="bi bi-file-earmark-text"></i></span>
+                <span class="av-stepper__info">
+                  <span class="av-stepper__title">Pre-Registro</span>
+                  <span class="av-stepper__status">En curso</span>
+                </span>
+              </li>
+              <li class="av-stepper__step av-stepper__step--locked">
+                <span class="av-stepper__marker" aria-hidden="true"><i class="bi bi-lock-fill"></i></span>
+                <span class="av-stepper__info">
+                  <span class="av-stepper__title">Captura de rostro</span>
+                  <span class="av-stepper__status">Bloqueado</span>
+                </span>
+              </li>
+              <li class="av-stepper__step av-stepper__step--locked">
+                <span class="av-stepper__marker" aria-hidden="true"><i class="bi bi-lock-fill"></i></span>
+                <span class="av-stepper__info">
+                  <span class="av-stepper__title">Huella dactilar</span>
+                  <span class="av-stepper__status">Bloqueado</span>
+                </span>
+              </li>
+              <li class="av-stepper__step av-stepper__step--locked">
+                <span class="av-stepper__marker" aria-hidden="true"><i class="bi bi-lock-fill"></i></span>
+                <span class="av-stepper__info">
+                  <span class="av-stepper__title">Verificación</span>
+                  <span class="av-stepper__status">Bloqueado</span>
+                </span>
+              </li>
+            </ol>
+          </div>
+        </aside>
+
+        <section class="av-wizard__body">
+          <div class="av-banner av-banner--success">
+            <i class="bi bi-check-circle-fill av-banner__icon" aria-hidden="true"></i>
+            <span class="av-banner__text">Datos extraídos correctamente</span>
+            <span class="av-banner__badge"><span class="av-chip av-chip--success"><i class="bi bi-check-circle" aria-hidden="true"></i>Datos extraídos</span></span>
+          </div>
+
+          <div class="av-card">
+            <div class="av-field--inline" style="margin-bottom: var(--av-space-4)">
+              <label class="av-filter-label" id="label-doc-tipo">Tipo de documento</label>
+              <div class="av-seg" role="group" aria-labelledby="label-doc-tipo">
+                <button type="button" class="av-seg__btn is-active">C.C.</button>
+                <button type="button" class="av-seg__btn">C.E.</button>
+                <button type="button" class="av-seg__btn">T.I.</button>
+                <button type="button" class="av-seg__btn">Pasaporte</button>
+              </div>
+            </div>
+
+            <div class="av-wizard__grid">
+              <div class="av-capture">
+                <div class="av-capture__stage">
+                  <span class="av-capture__ready"><i class="bi bi-broadcast" aria-hidden="true"></i> Scanner ready</span>
+                  <div class="av-capture__preview">
+                    <i class="bi bi-file-earmark-image" aria-hidden="true"></i>
+                    <p style="margin: 0">Vista previa del documento</p>
+                  </div>
+                </div>
+                <div class="av-capture__actions">
+                  <button type="button" class="av-btn av-btn-secondary" id="btn-registro-subir-archivo"><i class="bi bi-upload" aria-hidden="true"></i> Subir archivo</button>
+                  <button type="button" class="av-btn av-btn-secondary" id="btn-registro-camara"><i class="bi bi-camera" aria-hidden="true"></i> Cámara</button>
+                  <button type="button" class="av-btn av-btn-secondary" id="btn-registro-camara-ip"><i class="bi bi-camera-video" aria-hidden="true"></i> Cámara IP</button>
+                </div>
+                <p class="av-capture__note">Formatos: JPG, PNG o PDF — máx. 10MB.</p>
+                <div class="av-capture__qr">
+                  <i class="bi bi-qr-code" aria-hidden="true"></i>
+                  <div class="av-capture__qr-info">
+                    <span style="font-weight: 600; color: var(--av-navy); font-size: var(--av-text-sm)">Contingencia por QR</span>
+                    <span class="av-table__sub">Escanea para capturar desde tu dispositivo</span>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h3 class="av-card__section-title">Datos detectados por OCR</h3>
+                <div class="av-form-grid">
+                  <div class="av-field">
+                    <label class="av-label" for="ocr-pnombre">Primer nombre</label>
+                    <div class="av-input-wrap--ocr">
+                      <input class="av-input" id="ocr-pnombre" type="text" value="Ana">
+                      <i class="bi bi-check-circle-fill av-input-wrap__check" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                  <div class="av-field">
+                    <label class="av-label" for="ocr-snombre">Segundo nombre</label>
+                    <input class="av-input" id="ocr-snombre" type="text" placeholder="—">
+                  </div>
+                  <div class="av-field">
+                    <label class="av-label" for="ocr-papellido">Primer apellido</label>
+                    <div class="av-input-wrap--ocr">
+                      <input class="av-input" id="ocr-papellido" type="text" value="Torres">
+                      <i class="bi bi-check-circle-fill av-input-wrap__check" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                  <div class="av-field">
+                    <label class="av-label" for="ocr-sapellido">Segundo apellido</label>
+                    <input class="av-input" id="ocr-sapellido" type="text" placeholder="—">
+                  </div>
+                  <div class="av-field">
+                    <label class="av-label" for="ocr-identificacion">Número de identificación</label>
+                    <div class="av-input-wrap--ocr">
+                      <input class="av-input" id="ocr-identificacion" type="text" value="10234567">
+                      <i class="bi bi-check-circle-fill av-input-wrap__check" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                  <div class="av-field">
+                    <label class="av-label" for="ocr-nacimiento">Fecha de nacimiento</label>
+                    <div class="av-input-wrap--ocr">
+                      <input class="av-input" id="ocr-nacimiento" type="text" value="15/03/1999">
+                      <i class="bi bi-check-circle-fill av-input-wrap__check" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                </div>
+
+                <h3 class="av-card__section-title" style="margin-top: var(--av-space-6)">Datos complementarios</h3>
+                <div class="av-form-grid">
+                  <div class="av-field">
+                    <label class="av-label" for="comp-correo">Correo</label>
+                    <input class="av-input" id="comp-correo" type="email" placeholder="correo@ejemplo.com">
+                  </div>
+                  <div class="av-field">
+                    <label class="av-label" for="comp-rol">Rol del votante</label>
+                    <input class="av-input" id="comp-rol" type="text" placeholder="—">
+                  </div>
+                  <div class="av-field av-field--span">
+                    <label class="av-label" for="comp-puesto">Puesto de votación</label>
+                    <input class="av-input" id="comp-puesto" type="text" placeholder="—">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="av-wizard__footer">
+            <button type="button" class="av-btn av-btn-secondary" id="btn-registro-nuevo-escaneo"><i class="bi bi-arrow-clockwise" aria-hidden="true"></i> Nuevo escaneo</button>
+            <button type="button" class="av-btn av-btn-primary" id="btn-registro-continuar">Continuar a captura de rostro <i class="bi bi-arrow-right" aria-hidden="true"></i></button>
+          </div>
+
+          <div class="av-techbar">
+            <span class="av-techbar__item">Integridad: <strong style="color: var(--av-gray-600); font-weight: 600">—</strong></span>
+            <span class="av-techbar__item"><span class="av-techbar__dot" aria-hidden="true"></span> Estado: Listo</span>
+            <span class="av-techbar__item" style="margin-left: auto">v0.1.0</span>
+          </div>
+        </section>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+  <script src="../../assets/js/dashboard-shell.js"></script>
+  <script src="../../assets/js/dashboard-documents-registro.js"></script>
+</body>
+</html>
