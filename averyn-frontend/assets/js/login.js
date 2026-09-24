@@ -1,53 +1,36 @@
 (function () {
   'use strict';
 
-  var MOCK = { email: 'admin@averyn.test', password: 'Averyn2026' };
+  var MOCK = { email: 'admin@averyn.test', password: 'Averyn2026', rol: 'Administrador' };
+  var SESSION_KEY = 'averyn.session';
 
-  var authCard = document.getElementById('auth-card');
+  var saveSession = function (email) {
+    try {
+      localStorage.setItem(SESSION_KEY, JSON.stringify({
+        email: email,
+        rol: MOCK.rol,
+        loggedAt: new Date().toISOString()
+      }));
+    } catch (e) { /* localStorage no disponible */ }
+  };
 
-  /* ---------- Modos (slide entre login y registro) ---------- */
+  var hasSession = function () {
+    try {
+      var raw = localStorage.getItem(SESSION_KEY);
+      return Boolean(raw && JSON.parse(raw).email);
+    } catch (e) { return false; }
+  };
+
+  if (hasSession()) {
+    try {
+      fetch('dashboard/index.html', { method: 'HEAD', cache: 'no-store' })
+        .then(function (res) { if (res.ok) { window.location.replace('dashboard/index.html'); } })
+        .catch(function () {});
+    } catch (e) { /* file:// o CORS: se muestra el login */ }
+  }
+
   var hide = function (el) { el.hidden = true; };
 
-  var loginAlertIds = ['alert-error', 'alert-success', 'alert-info'];
-  var regAlertIds = ['reg-alert-error', 'reg-alert-success'];
-
-  var copies = document.querySelectorAll('.av-auth-copy');
-  var forms = document.querySelectorAll('.av-auth-form');
-
-  var resetAlerts = function () {
-    loginAlertIds.concat(regAlertIds).forEach(function (id) {
-      hide(document.getElementById(id));
-    });
-  };
-
-  var showMode = function (mode) {
-    Array.prototype.forEach.call(copies, function (el) {
-      el.classList.toggle('is-active', el.getAttribute('data-mode') === mode);
-    });
-    Array.prototype.forEach.call(forms, function (el) {
-      el.classList.toggle('is-active', el.getAttribute('data-mode') === mode);
-    });
-  };
-
-  var setMode = function (mode) {
-    var register = mode === 'register';
-    authCard.classList.toggle('is-signed-up', register);
-    resetAlerts();
-    window.setTimeout(function () {
-      showMode(mode);
-      var target = document.getElementById(register ? 'reg-name' : 'email');
-      if (target) { target.focus(); }
-    }, 280);
-  };
-
-  document.getElementById('switch-to-register').addEventListener('click', function () {
-    setMode('register');
-  });
-  document.getElementById('switch-to-login').addEventListener('click', function () {
-    setMode('login');
-  });
-
-  /* ---------- Inicio de sesión ---------- */
   var form = document.getElementById('login-form');
   var emailInput = document.getElementById('email');
   var passwordInput = document.getElementById('password');
@@ -60,6 +43,7 @@
   var alertError = document.getElementById('alert-error');
   var alertSuccess = document.getElementById('alert-success');
   var alertInfo = document.getElementById('alert-info');
+  var alertIds = ['alert-error', 'alert-success', 'alert-info'];
 
   var show = function (el, msg) {
     el.querySelector('span').textContent = msg || '';
@@ -80,9 +64,7 @@
   };
 
   var resetState = function () {
-    hide(alertError);
-    hide(alertSuccess);
-    hide(alertInfo);
+    alertIds.forEach(function (id) { hide(document.getElementById(id)); });
     setErrorState('');
   };
 
@@ -119,6 +101,7 @@
       setLoading(false);
       if (email.toLowerCase() === MOCK.email && password === MOCK.password) {
         setErrorState('');
+        saveSession(email.toLowerCase());
         show(alertSuccess, 'Autenticación exitosa. Redirigiendo al panel de control...');
         window.setTimeout(function () {
           window.location.href = 'dashboard/index.html';
@@ -126,136 +109,6 @@
       } else {
         setErrorState('Credenciales inválidas. Verifica tu correo y contraseña e inténtalo nuevamente.');
       }
-    }, 850);
-  });
-
-  /* ---------- Registro: fortaleza de contraseña ---------- */
-  var regForm = document.getElementById('register-form');
-  var regName = document.getElementById('reg-name');
-  var regEmail = document.getElementById('reg-email');
-  var regPassword = document.getElementById('reg-password');
-  var regConfirm = document.getElementById('reg-confirm');
-  var regTogglePassword = document.getElementById('toggle-reg-password');
-  var regToggleConfirm = document.getElementById('toggle-reg-confirm');
-  var regBar = document.getElementById('pw-bar');
-  var regLabel = document.getElementById('pw-label');
-  var regSubmit = document.getElementById('reg-submit-btn');
-  var regSubmitIdle = document.getElementById('reg-submit-idle');
-  var regSubmitLoading = document.getElementById('reg-submit-loading');
-  var regAlertError = document.getElementById('reg-alert-error');
-  var regAlertSuccess = document.getElementById('reg-alert-success');
-  var regConfirmHelp = document.getElementById('reg-confirm-help');
-
-  var SYMBOL_RE = (function () {
-    try { return new RegExp('[^\\p{L}\\p{N}_]', 'u'); } catch (e) { return /[^A-Za-z0-9_]/; }
-  })();
-
-  var RULES = [
-    { key: 'length', test: function (v) { return v.length >= 8; } },
-    { key: 'case', test: function (v) { return /[a-z]/.test(v) && /[A-Z]/.test(v); } },
-    { key: 'number', test: function (v) { return /\d/.test(v); } },
-    { key: 'symbol', test: function (v) { return SYMBOL_RE.test(v); } }
-  ];
-
-  RULES.forEach(function (rule) {
-    rule.elm = document.querySelector('.av-pw-item[data-rule="' + rule.key + '"]');
-  });
-
-  var passwordScore = function () {
-    var value = regPassword.value;
-    return RULES.filter(function (rule) { return rule.test(value); }).length;
-  };
-
-  var refreshStrength = function () {
-    var value = regPassword.value;
-    var score = passwordScore();
-
-    RULES.forEach(function (rule) {
-      rule.elm.classList.toggle('is-met', rule.test(value));
-    });
-
-    regBar.classList.remove('is-weak', 'is-medium', 'is-strong');
-    regLabel.classList.remove('is-weak', 'is-medium', 'is-strong');
-    regBar.style.width = value ? (score * 25) + '%' : '0';
-
-    if (score === 0) {
-      regLabel.textContent = '';
-    } else if (score <= 1) {
-      regBar.classList.add('is-weak');
-      regLabel.classList.add('is-weak');
-      regLabel.textContent = 'Débil';
-    } else if (score <= 3) {
-      regBar.classList.add('is-medium');
-      regLabel.classList.add('is-medium');
-      regLabel.textContent = 'Media';
-    } else {
-      regBar.classList.add('is-strong');
-      regLabel.classList.add('is-strong');
-      regLabel.textContent = 'Muy fuerte';
-    }
-
-    regSubmit.disabled = score < 4;
-  };
-
-  regPassword.addEventListener('input', refreshStrength);
-  refreshStrength();
-
-  var bindEyeToggle = function (toggle, input) {
-    toggle.addEventListener('click', function () {
-      var showing = input.type === 'text';
-      input.type = showing ? 'password' : 'text';
-      toggle.setAttribute('aria-label', showing ? 'Mostrar contraseña' : 'Ocultar contraseña');
-      toggle.querySelector('i').className = showing ? 'bi bi-eye' : 'bi bi-eye-slash';
-    });
-  };
-  bindEyeToggle(regTogglePassword, regPassword);
-  bindEyeToggle(regToggleConfirm, regConfirm);
-
-  regConfirm.addEventListener('input', function () {
-    regConfirmHelp.textContent = regConfirm.value && regConfirm.value !== regPassword.value
-      ? 'Las contraseñas no coinciden.'
-      : '';
-  });
-
-  var setRegLoading = function (loading) {
-    regSubmit.disabled = loading;
-    regSubmitIdle.hidden = loading;
-    regSubmitLoading.hidden = !loading;
-  };
-
-  var showRegError = function (msg) {
-    hide(regAlertSuccess);
-    show(regAlertError, msg);
-  };
-
-  regForm.addEventListener('submit', function (event) {
-    event.preventDefault();
-    hide(regAlertError);
-    hide(regAlertSuccess);
-    regConfirmHelp.textContent = '';
-
-    var name = regName.value.trim();
-    var email = regEmail.value.trim();
-    var password = regPassword.value;
-    var confirm = regConfirm.value;
-
-    if (!name) { return showRegError('Completa tu nombre completo para continuar.'); }
-    if (!/^\S+@\S+\.\S+$/.test(email)) { return showRegError('Ingresa un correo electrónico válido.'); }
-    if (passwordScore() < 4) { return showRegError('Aún no se cumplen todos los requisitos de la contraseña.'); }
-    if (password !== confirm) {
-      regConfirmHelp.textContent = 'Las contraseñas no coinciden.';
-      return showRegError('Las contraseñas no coinciden. Revísalas e inténtalo nuevamente.');
-    }
-
-    setRegLoading(true);
-    window.setTimeout(function () {
-      setRegLoading(false);
-      refreshStrength();
-      show(regAlertSuccess, 'Cuenta creada con éxito. Ahora puedes iniciar sesión.');
-      window.setTimeout(function () {
-        setMode('login');
-        show(alertSuccess, 'Cuenta creada con éxito. Bienvenido a Averyn.');
-      }, 1000);
     }, 850);
   });
 })();

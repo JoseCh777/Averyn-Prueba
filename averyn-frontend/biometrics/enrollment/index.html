@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registrar biometría — Averyn</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <link href="../../assets/css/design-system.css" rel="stylesheet">
+  <link href="../../assets/css/dashboard-shell.css" rel="stylesheet">
+  <link rel="icon" href="../../assets/images/averyn-logo-blue.avif">
+</head>
+<body data-modulo="biometria">
+  <header class="av-navbar">
+    <a href="../../dashboard/index.html" class="av-navbar__brand" aria-label="Averyn — Inicio">
+      <img src="../../assets/images/averyn-logo-font-blue.avif" alt="" class="av-navbar__isotipo">
+    </a>
+
+    <nav class="av-dock-container" aria-label="Navegación principal">
+      <ul class="av-dock" role="menubar">
+        <li role="none"><a href="../../dashboard/index.html" class="av-dock__item" role="menuitem"><i class="bi bi-grid-1x2" aria-hidden="true"></i><span>Dashboard</span></a></li>
+        <li role="none"><a href="../../dashboard/identity/index.html" class="av-dock__item" role="menuitem"><i class="bi bi-person-vcard" aria-hidden="true"></i><span>Identidad</span></a></li>
+        <li role="none"><a href="../../biometrics/index.html" class="av-dock__item" role="menuitem" data-modulo="biometria"><i class="bi bi-fingerprint" aria-hidden="true"></i><span>Biometría</span></a></li>
+        <li role="none"><a href="../../dashboard/documents/index.html" class="av-dock__item" role="menuitem"><i class="bi bi-camera" aria-hidden="true"></i><span>OCR</span></a></li>
+        <li role="none"><a href="../../modules/ia/index.html" class="av-dock__item" role="menuitem"><i class="bi bi-cpu" aria-hidden="true"></i><span>IA</span></a></li>
+        <li role="none"><a href="../../modules/electoral/index.html" class="av-dock__item" role="menuitem"><i class="bi bi-check2-square" aria-hidden="true"></i><span>Electoral</span></a></li>
+        <li role="none"><a href="../../modules/access/index.html" class="av-dock__item" role="menuitem"><i class="bi bi-door-open" aria-hidden="true"></i><span>Accesos</span></a></li>
+        <li role="none"><a href="../../modules/admin/index.html" class="av-dock__item" role="menuitem"><i class="bi bi-gear" aria-hidden="true"></i><span>Administración</span></a></li>
+      </ul>
+    </nav>
+
+    <div class="av-navbar__actions">
+      <div class="av-search" id="av-search">
+        <button type="button" class="av-icon-btn" id="btn-search" aria-label="Buscar" aria-expanded="false" aria-controls="input-search">
+          <i class="bi bi-search" aria-hidden="true"></i>
+        </button>
+        <input type="search" id="input-search" class="av-search__input" placeholder="Buscar..." aria-label="Buscar en Averyn" hidden>
+      </div>
+
+      <button type="button" class="av-icon-btn" aria-label="Notificaciones, 3 sin leer">
+        <i class="bi bi-bell" aria-hidden="true"></i>
+        <span class="av-icon-btn__badge" aria-hidden="true">3</span>
+      </button>
+
+      <div class="av-user" id="av-user">
+        <button type="button" class="av-avatar-btn" id="btn-user" aria-haspopup="menu" aria-expanded="false" aria-controls="menu-user">
+          <span class="av-avatar-btn__circle" aria-hidden="true">UD</span>
+          <span class="av-avatar-btn__info">
+            <span class="av-avatar-btn__name">Usuario Demo</span>
+            <span class="av-avatar-btn__role">Administrador</span>
+          </span>
+          <i class="bi bi-chevron-down av-avatar-btn__chevron" aria-hidden="true"></i>
+        </button>
+        <ul class="av-menu" id="menu-user" role="menu" aria-label="Menú de usuario" hidden>
+          <li role="none"><button type="button" class="av-menu__item" id="btn-logout" role="menuitem"><i class="bi bi-box-arrow-right" aria-hidden="true"></i> Cerrar sesión</button></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="av-main-content" aria-label="Registrar biometría">
+    <div class="av-page" style="max-width: 900px; margin: 0 auto;">
+
+      <div class="av-page-header">
+        <div class="av-page-header__lead">
+          <span class="av-page-header__spine" aria-hidden="true"></span>
+          <span class="av-page-header__icon" aria-hidden="true"><i class="bi bi-person-plus"></i></span>
+          <div class="av-page-header__text">
+            <nav class="av-breadcrumb" style="margin-bottom: 4px"><a href="../../dashboard/index.html">Dashboard</a> &gt; <a href="../index.html">Biometría</a> &gt; <span class="is-current">Registrar biometría</span></nav>
+            <h2 class="av-page-header__title">Registrar biometría</h2>
+            <p class="av-page-header__desc">Asocia un perfil biométrico a una persona ya registrada en la institución.</p>
+          </div>
+        </div>
+        <div class="av-page-header__actions">
+          <a href="../index.html" class="av-btn av-btn-secondary"><i class="bi bi-arrow-left" aria-hidden="true"></i> Volver a Biometría</a>
+        </div>
+      </div>
+
+      <!-- Flujo de registro -->
+      <div class="av-card" id="registro-flujo">
+        <div class="av-tabs" role="tablist" aria-label="Pasos del registro biométrico">
+          <button type="button" class="av-tabs__item is-active" id="tab-persona" role="tab" aria-selected="true" aria-controls="panel-persona" data-paso="1">1. Persona</button>
+          <button type="button" class="av-tabs__item" id="tab-modalidad" role="tab" aria-selected="false" aria-controls="panel-modalidad" data-paso="2" tabindex="-1">2. Modalidad</button>
+        </div>
+
+        <p class="av-text-sm av-text-muted" id="registro-aviso" aria-live="polite" style="margin: var(--av-space-3) 0 0; min-height: 1.4em"></p>
+
+        <!-- Paso 1 -->
+        <section id="panel-persona" role="tabpanel" aria-labelledby="tab-persona" tabindex="0" style="margin-top: var(--av-space-4)">
+          <div class="av-toolbar" style="padding: 0 0 var(--av-space-4)">
+            <div class="av-toolbar__group">
+              <div class="av-field--inline">
+                <label class="av-filter-label" for="input-buscar-persona-registro">Buscar persona</label>
+                <div class="av-search-field">
+                  <i class="bi bi-search av-search-field__icon" aria-hidden="true"></i>
+                  <input class="av-input" id="input-buscar-persona-registro" type="search" placeholder="Nombre o documento" autocomplete="off">
+                </div>
+              </div>
+            </div>
+            <div class="av-toolbar__spacer"></div>
+            <span class="av-pagination__info" id="contador-personas-registro"></span>
+          </div>
+
+          <div class="av-table-wrap">
+            <table class="av-table">
+              <thead>
+                <tr>
+                  <th>Persona</th>
+                  <th>Afiliación</th>
+                  <th>Biometría registrada</th>
+                  <th class="av-table__actions">Seleccionar</th>
+                </tr>
+              </thead>
+              <tbody id="tabla-personas-registro"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Paso 2 -->
+        <section id="panel-modalidad" role="tabpanel" aria-labelledby="tab-modalidad" tabindex="0" hidden style="margin-top: var(--av-space-4)">
+          <p class="av-text-sm av-text-muted" style="margin: 0 0 var(--av-space-4)" id="registro-persona-resumen"></p>
+
+          <fieldset style="border: 0; padding: 0; margin: 0">
+            <legend class="av-filter-label" style="margin-bottom: var(--av-space-3)">¿Qué biometría deseas registrar?</legend>
+
+            <label class="av-card" style="display: block; cursor: pointer; margin-bottom: var(--av-space-3)">
+              <span class="av-radio">
+                <input type="radio" name="modalidad" value="rostro" checked>
+                <span>
+                  <span class="av-card__section-title" style="display: block">Rostro</span>
+                  <span class="av-table__sub">Disponible · Cámara CAM-001</span>
+                </span>
+              </span>
+            </label>
+
+            <label class="av-card" style="display: block; cursor: not-allowed; opacity: 0.65">
+              <span class="av-radio">
+                <input type="radio" name="modalidad" value="huella" disabled>
+                <span>
+                  <span class="av-card__section-title" style="display: block">Huella</span>
+                  <span class="av-table__sub"><i class="bi bi-plug" aria-hidden="true"></i> Dispositivo no conectado</span>
+                </span>
+              </span>
+            </label>
+          </fieldset>
+
+          <div class="av-alert av-alert--info" id="registro-aviso-existentes" hidden style="margin-top: var(--av-space-4)">
+            <span class="av-alert__icon"><i class="bi bi-info-lg" aria-hidden="true"></i></span>
+            <div class="av-alert__content">
+              <span class="av-alert__title">Ya tiene biometría registrada</span>
+              <p class="av-alert__description" id="registro-aviso-existentes-texto">Al continuar se actualizará su perfil biométrico.</p>
+            </div>
+          </div>
+        </section>
+
+        <div class="av-modal__footer">
+          <button type="button" class="av-btn av-btn-secondary" id="btn-registro-atras" disabled><i class="bi bi-arrow-left" aria-hidden="true"></i> Atrás</button>
+          <button type="button" class="av-btn av-btn-primary" id="btn-registro-continuar" disabled>Continuar a captura <i class="bi bi-arrow-right" aria-hidden="true"></i></button>
+        </div>
+      </div>
+
+      <!-- Acta de registro (se muestra al volver de la captura) -->
+      <div class="av-card" id="registro-acta" hidden></div>
+
+    </div>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+  <script src="../../assets/js/dashboard-shell.js"></script>
+  <script src="../../assets/js/common/personas-catalogo.js"></script>
+  <script src="../../assets/js/common/biometric-store.js"></script>
+  <script src="../../assets/js/common/biometric-person-picker.js"></script>
+  <script src="../../assets/js/biometrics-enrollment.js"></script>
+</body>
+</html>

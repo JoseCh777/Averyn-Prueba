@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Averyn — Catálogo de componentes (DS-002)</title>
+
+<!-- Fuentes de marca -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- Bootstrap (stack obligatorio del sprint) -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Bootstrap Icons — librería de iconografía recomendada en la sección 6 de la Guía de Diseño -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+<!-- Design System — fuente única: averyn-frontend/assets/css/design-system.css.
+     No duplicar CSS aquí. Este catálogo siempre refleja lo que usa el producto. -->
+<link rel="stylesheet" href="../averyn-frontend/assets/css/design-system.css">
+
+<style>
+  /* Estilos SOLO de esta página de catálogo — no son parte del design system */
+  .demo-block { padding: var(--av-space-8) 0; border-bottom: 1px solid var(--av-gray-200); }
+  .demo-block:last-child { border-bottom: none; }
+  .demo-row { display: flex; flex-wrap: wrap; gap: var(--av-space-4); align-items: flex-start; margin-top: var(--av-space-4); }
+  .demo-label { display: block; font-size: var(--av-text-xs); color: var(--av-gray-500); margin-bottom: var(--av-space-1); text-transform: none; }
+  .demo-nav { position: sticky; top: 0; background: var(--av-white); border-bottom: 1px solid var(--av-gray-200); z-index: 10; }
+  .demo-nav a { color: var(--av-gray-600); text-decoration: none; font-size: var(--av-text-sm); }
+  .demo-nav a:hover { color: var(--av-blue); }
+  .swatch { width: 100%; height: 56px; border-radius: var(--av-radius-sm); border: 1px solid var(--av-gray-200); }
+
+  /* Bloques Do/Don't — SOLO documentación, no son parte del design system */
+  .dodont { border-radius: var(--av-radius-lg); padding: var(--av-space-4); border: 2px solid; }
+  .dodont--do { border-color: var(--av-success); background: var(--av-success-bg); }
+  .dodont--dont { border-color: var(--av-error); background: var(--av-error-bg); }
+  .dodont__tag { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: var(--av-text-xs); text-transform: uppercase; letter-spacing: .04em; margin-bottom: var(--av-space-3); }
+  .dodont--do .dodont__tag { color: #067647; }
+  .dodont--dont .dodont__tag { color: #B42318; }
+  .dodont__preview { background: var(--av-white); border-radius: var(--av-radius-md); padding: var(--av-space-4); margin-bottom: var(--av-space-2); min-height: 64px; display: flex; align-items: center; gap: var(--av-space-2); flex-wrap: wrap; }
+  .dodont__caption { font-size: var(--av-text-sm); margin: 0; }
+  .dodont--do .dodont__caption { color: #067647; }
+  .dodont--dont .dodont__caption { color: #B42318; }
+
+  /* Marco de "pantalla" para las plantillas completas */
+  .device-frame { border: 1px solid var(--av-gray-200); border-radius: var(--av-radius-lg); overflow: hidden; box-shadow: var(--av-shadow-md); background: var(--av-gray-50); }
+  .device-frame__bar { background: var(--av-gray-100); padding: 6px var(--av-space-3); font-size: var(--av-text-xs); color: var(--av-gray-500); border-bottom: 1px solid var(--av-gray-200); }
+
+  .section-flag { background: var(--av-blue-tint); border-left: 4px solid var(--av-blue); padding: var(--av-space-1) var(--av-space-3); font-size: var(--av-text-xs); color: var(--av-blue-active); font-weight: 600; display: inline-block; margin-bottom: var(--av-space-3); border-radius: 0 var(--av-radius-sm) var(--av-radius-sm) 0; }
+</style>
+</head>
+<body>
+
+<!-- Navegación interna de esta página de catálogo -->
+<nav class="demo-nav py-2 px-4 d-flex gap-4 av-text-sm flex-wrap">
+  <a href="#reglas">⚑ Reglas de uso</a>
+  <a href="#colores">Colores</a>
+  <a href="#tipografia">Tipografía</a>
+  <a href="#botones">1. Botones</a>
+  <a href="#inputs">2. Inputs</a>
+  <a href="#cards">3. Cards</a>
+  <a href="#alertas">4. Alertas</a>
+  <a href="#modal">5. Modal</a>
+  <a href="#tabla">6. Tabla</a>
+  <a href="#navbar">7. Navbar superior</a>
+  <a href="#badges">8. Badges</a>
+  <a href="#selects">9. Selects</a>
+  <a href="#checks">10. Checks/Switch</a>
+  <a href="#tabs">11. Tabs</a>
+  <a href="#tooltips">12. Tooltips</a>
+  <a href="#toasts">13. Toasts</a>
+  <a href="#carga">14–15. Carga/Vacío</a>
+  <a href="#dropzone">16. Dropzone</a>
+  <a href="#paginacion">17. Paginación</a>
+  <a href="#plantillas">⚑ Plantillas</a>
+  <a href="#gobernanza">⚑ Gobernanza</a>
+  <a href="#accesibilidad">⚑ Accesibilidad</a>
+  <a href="#microcopy">⚑ Microcopy</a>
+</nav>
+
+<div class="container py-5">
+
+  <header class="mb-5">
+    <span class="av-badge av-badge--info mb-3">DS-002 · Catálogo de componentes</span>
+    <h1>Design System — Averyn</h1>
+    <p class="av-text-muted av-text-body-lg">
+      Esta página no se despliega. Es el catálogo de piezas que José, Jorge y Mateo deben copiar
+      para sus bloques (A, B, C, D) — no se reescribe ningún componente desde cero en cada bloque.
+    </p>
+    <div class="av-alert av-alert--info">
+      <div class="av-alert__content">
+        <span class="av-alert__title">Importante: Consenso de equipo</span>
+        <p class="av-alert__description">Cualquier decisión de diseño debe ser discutida y acordada con los demás miembros del equipo antes de implementarse.</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- REGLAS DE USO -->
+  <section id="reglas" class="demo-block">
+    <span class="section-flag">Leer antes de construir cualquier pantalla</span>
+    <h2>Reglas de uso — qué sí y qué no</h2>
+    <p class="av-text-muted">Tener el componente correcto no sirve si se combina mal. Estas son las reglas que más se rompen.</p>
+
+    <h3 class="mt-4">Jerarquía de botones</h3>
+    <div class="row g-4 mt-1">
+      <div class="col-md-6">
+        <div class="dodont dodont--do">
+          <span class="dodont__tag"><i class="bi bi-check-circle-fill"></i> Sí</span>
+          <div class="dodont__preview">
+            <button class="av-btn av-btn-secondary">Cancelar</button>
+            <button class="av-btn av-btn-primary">Guardar cambios</button>
+          </div>
+          <p class="dodont__caption">Un solo <code>av-btn-primary</code> por pantalla/modal: la acción principal. El resto son secondary o ghost.</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="dodont dodont--dont">
+          <span class="dodont__tag"><i class="bi bi-x-circle-fill"></i> No</span>
+          <div class="dodont__preview">
+            <button class="av-btn av-btn-primary">Cancelar</button>
+            <button class="av-btn av-btn-primary">Guardar cambios</button>
+          </div>
+          <p class="dodont__caption">Dos primary juntos compiten por la atención — el usuario no sabe cuál es la acción esperada.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="mt-5">Uso de color semántico</h3>
+    <div class="row g-4 mt-1">
+      <div class="col-md-6">
+        <div class="dodont dodont--do">
+          <span class="dodont__tag"><i class="bi bi-check-circle-fill"></i> Sí</span>
+          <div class="dodont__preview">
+            <button class="av-btn av-btn-danger">Eliminar cuenta</button>
+          </div>
+          <p class="dodont__caption"><code>av-btn-danger</code> solo para acciones destructivas e irreversibles.</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="dodont dodont--dont">
+          <span class="dodont__tag"><i class="bi bi-x-circle-fill"></i> No</span>
+          <div class="dodont__preview">
+            <button class="av-btn av-btn-danger">Cancelar</button>
+          </div>
+          <p class="dodont__caption">Rojo en "Cancelar" asusta al usuario por una acción que no destruye nada. Eso es un ghost o secondary.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="mt-5">Alertas vs. Toasts</h3>
+    <div class="row g-4 mt-1">
+      <div class="col-md-6">
+        <div class="dodont dodont--do">
+          <span class="dodont__tag"><i class="bi bi-check-circle-fill"></i> Sí</span>
+          <p class="dodont__caption" style="margin-bottom:8px"><strong>av-alert</strong>: estado permanente de la pantalla (ej. "documento rechazado").<br><strong>av-toast</strong>: confirmación pasajera de una acción (ej. "cambios guardados").</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="dodont dodont--dont">
+          <span class="dodont__tag"><i class="bi bi-x-circle-fill"></i> No</span>
+          <p class="dodont__caption">Usar un av-alert que desaparece solo a los 3 segundos, o un toast que se queda fijo explicando un estado del formulario. Cada uno tiene un solo trabajo.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="mt-5">Espaciado y color libre</h3>
+    <div class="row g-4 mt-1">
+      <div class="col-md-6">
+        <div class="dodont dodont--do">
+          <span class="dodont__tag"><i class="bi bi-check-circle-fill"></i> Sí</span>
+          <p class="dodont__caption">Usar siempre variables: <code>var(--av-space-4)</code>, <code>var(--av-blue)</code>, <code>var(--av-radius-md)</code>.</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="dodont dodont--dont">
+          <span class="dodont__tag"><i class="bi bi-x-circle-fill"></i> No</span>
+          <p class="dodont__caption">Escribir valores sueltos como <code>margin: 18px</code> o <code>color: #1560ef</code>. Si el token que necesitas no existe, se propone (ver Gobernanza), no se inventa en el momento.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="av-alert av-alert--warning mt-4">
+      <span class="av-alert__icon"><i class="bi bi-exclamation-lg"></i></span>
+      <div class="av-alert__content">
+        <span class="av-alert__title">Regla general</span>
+        <p class="av-alert__description">Si tu pantalla necesita un componente, variante o color que no está en este catálogo, no lo crees por tu cuenta: revisa la sección Gobernanza al final de esta página.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLORES -->
+  <section id="colores" class="demo-block">
+    <h2>Paleta de color</h2>
+    <div class="row row-cols-2 row-cols-md-4 g-3 mt-2">
+      <div class="col"><div class="swatch" style="background:var(--av-blue)"></div><span class="demo-label">--av-blue #145FEE</span></div>
+      <div class="col"><div class="swatch" style="background:var(--av-navy)"></div><span class="demo-label">--av-navy #000C24</span></div>
+      <div class="col"><div class="swatch" style="background:var(--av-cyan)"></div><span class="demo-label">--av-cyan #00ACD2</span></div>
+      <div class="col"><div class="swatch" style="background:var(--av-gray-200)"></div><span class="demo-label">--av-gray-200</span></div>
+      <div class="col"><div class="swatch" style="background:var(--av-success)"></div><span class="demo-label">--av-success</span></div>
+      <div class="col"><div class="swatch" style="background:var(--av-warning)"></div><span class="demo-label">--av-warning</span></div>
+      <div class="col"><div class="swatch" style="background:var(--av-error)"></div><span class="demo-label">--av-error</span></div>
+      <div class="col"><div class="swatch" style="background:var(--av-info)"></div><span class="demo-label">--av-info</span></div>
+    </div>
+  </section>
+
+  <!-- TIPOGRAFÍA -->
+  <section id="tipografia" class="demo-block">
+    <h2>Tipografía</h2>
+    <h1>H1 — Plus Jakarta Sans 700 / 40px</h1>
+    <h2>H2 — Plus Jakarta Sans 700 / 32px</h2>
+    <h3>H3 — Plus Jakarta Sans 600 / 24px</h3>
+    <p class="av-text-body-lg">Body large — Inter 400 / 18px. Para intros y texto destacado.</p>
+    <p>Body — Inter 400 / 16px. Texto general de párrafos y formularios, con un máximo de ~65 caracteres por línea para que no se estire en pantallas grandes.</p>
+    <p class="av-text-sm av-text-muted">Text small — Inter 400 / 14px, para ayudas de formulario y metadatos.</p>
+  </section>
+
+  <!-- 1. BOTONES -->
+  <section id="botones" class="demo-block">
+    <h2>1. Botones</h2>
+    <p class="av-text-muted">Altura fija 44px (área táctil). Estados: default, hover, focus, active, disabled, loading.</p>
+    <div class="demo-row">
+      <div><span class="demo-label">Primary</span><button class="av-btn av-btn-primary">Guardar cambios</button></div>
+      <div><span class="demo-label">Secondary</span><button class="av-btn av-btn-secondary">Cancelar</button></div>
+      <div><span class="demo-label">Ghost</span><button class="av-btn av-btn-ghost">Ver detalle</button></div>
+      <div><span class="demo-label">Danger</span><button class="av-btn av-btn-danger">Eliminar</button></div>
+      <div><span class="demo-label">Disabled</span><button class="av-btn av-btn-primary" disabled>Guardar cambios</button></div>
+      <div><span class="demo-label">Loading</span><button class="av-btn av-btn-primary is-loading">Guardar cambios</button></div>
+    </div>
+    <p class="av-text-sm av-text-muted mt-3">Prueba de teclado: presiona <kbd>Tab</kbd> para navegar entre estos botones y verifica el anillo de foco azul.</p>
+  </section>
+
+  <!-- 2. INPUTS -->
+  <section id="inputs" class="demo-block">
+    <h2>2. Inputs y formularios</h2>
+    <div class="row g-4 mt-2">
+      <div class="col-md-3">
+        <div class="av-field">
+          <label class="av-label" for="i1">Correo electrónico</label>
+          <input class="av-input" id="i1" type="email" placeholder="tu@averyn.test">
+          <span class="av-help-text">Usa tu correo institucional.</span>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="av-field">
+          <label class="av-label" for="i2">Contraseña (focus)</label>
+          <input class="av-input" id="i2" type="password" value="Averyn2026" autofocus>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="av-field has-error">
+          <label class="av-label" for="i3">Documento</label>
+          <input class="av-input" id="i3" type="text" value="12A45">
+          <span class="av-help-text is-error">El documento debe ser numérico.</span>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="av-field">
+          <label class="av-label" for="i4">Disabled</label>
+          <input class="av-input" id="i4" type="text" value="No editable" disabled>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. CARDS -->
+  <section id="cards" class="demo-block">
+    <h2>3. Cards</h2>
+    <div class="row g-4 mt-2">
+      <div class="col-md-4">
+        <div class="av-card">
+          <h3 class="av-card__title">Card en reposo</h3>
+          <p class="av-card__meta">Sombra --av-shadow-sm</p>
+          <p>Contenido de ejemplo de una tarjeta estática, sin interacción.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="av-card av-card--interactive">
+          <h3 class="av-card__title">Card interactiva</h3>
+          <p class="av-card__meta">Pasa el mouse — sombra --av-shadow-md</p>
+          <p>Usar esta variante solo cuando la card completa es clicable.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="av-card">
+          <span class="av-badge av-badge--success mb-2">Verificado</span>
+          <h3 class="av-card__title">Con badge de estado</h3>
+          <p class="av-card__meta">Ej. perfil de persona en Identity (Bloque B)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. ALERTAS -->
+  <section id="alertas" class="demo-block">
+    <h2>4. Alertas</h2>
+    <p class="av-text-muted">Card blanca + badge circular de color + título/descripción — no la franja de color genérica.</p>
+    <div class="av-stack mt-2">
+      <div class="av-alert av-alert--success">
+        <span class="av-alert__icon"><i class="bi bi-check-lg"></i></span>
+        <div class="av-alert__content">
+          <span class="av-alert__title">Identidad verificada</span>
+          <p class="av-alert__description">La verificación biométrica coincide con el registro de Ana Torres.</p>
+        </div>
+        <button class="av-alert__close" aria-label="Cerrar"><i class="bi bi-x-lg"></i></button>
+      </div>
+      <div class="av-alert av-alert--error">
+        <span class="av-alert__icon"><i class="bi bi-x-lg"></i></span>
+        <div class="av-alert__content">
+          <span class="av-alert__title">No se pudo verificar la identidad</span>
+          <p class="av-alert__description">El rostro capturado no coincide con ningún registro. Vuelve a intentar la captura.</p>
+        </div>
+        <button class="av-alert__close" aria-label="Cerrar"><i class="bi bi-x-lg"></i></button>
+      </div>
+      <div class="av-alert av-alert--warning">
+        <span class="av-alert__icon"><i class="bi bi-exclamation-lg"></i></span>
+        <div class="av-alert__content">
+          <span class="av-alert__title">Iluminación insuficiente</span>
+          <p class="av-alert__description">Acércate a una fuente de luz antes de repetir la captura.</p>
+        </div>
+      </div>
+      <div class="av-alert av-alert--info">
+        <span class="av-alert__icon"><i class="bi bi-info-lg"></i></span>
+        <div class="av-alert__content">
+          <span class="av-alert__title">Tu sesión está por vencer</span>
+          <p class="av-alert__description">Se cerrará en 5 minutos por inactividad.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. MODAL -->
+  <section id="modal" class="demo-block">
+    <h2>5. Modal</h2>
+    <p class="av-text-muted">Se cierra con X, tecla <kbd>Esc</kbd> o clic fuera del recuadro.</p>
+    <button class="av-btn av-btn-primary mt-2" onclick="document.getElementById('demoModal').classList.add('is-open')">
+      Abrir modal de ejemplo
+    </button>
+
+    <div class="av-modal-backdrop" id="demoModal" onclick="if(event.target===this) this.classList.remove('is-open')">
+      <div class="av-modal">
+        <div class="av-modal__header">
+          <h3 style="margin:0">Resultado OCR</h3>
+          <button class="av-modal__close" aria-label="Cerrar" onclick="document.getElementById('demoModal').classList.remove('is-open')"><i class="bi bi-x-lg"></i></button>
+        </div>
+        <p>Texto extraído de ejemplo: "Documento de identidad válido, expedido en Valledupar."</p>
+        <div class="av-modal__footer">
+          <button class="av-btn av-btn-secondary" onclick="document.getElementById('demoModal').classList.remove('is-open')">Cerrar</button>
+          <button class="av-btn av-btn-primary">Confirmar</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. TABLA -->
+  <section id="tabla" class="demo-block">
+    <h2>6. Tabla</h2>
+    <table class="av-table mt-2">
+      <thead>
+        <tr><th>Nombre</th><th>Documento</th><th>Estado</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Ana Torres</td><td>10234567</td><td><span class="av-badge av-badge--success">Verificado</span></td></tr>
+        <tr><td>Luis Pérez</td><td>10345678</td><td><span class="av-badge av-badge--warning">Pendiente</span></td></tr>
+        <tr><td>Marta Ríos</td><td>10456789</td><td><span class="av-badge av-badge--error">Rechazado</span></td></tr>
+      </tbody>
+    </table>
+    <p class="av-text-sm av-text-muted mt-2">Estado vacío (ej. filtro sin resultados):</p>
+    <table class="av-table">
+      <thead><tr><th>Nombre</th><th>Documento</th><th>Estado</th></tr></thead>
+      <tbody><tr><td colspan="3" class="av-table__empty">No hay personas registradas.</td></tr></tbody>
+    </table>
+  </section>
+
+  <!-- 7. NAVBAR SUPERIOR -->
+  <section id="navbar" class="demo-block">
+    <h2>7. Navbar pública (Landing/Login)</h2>
+    <p class="av-text-sm av-text-muted">Nota: Este componente será diseñado por el desarrollador José Chinchía.</p>
+    <div class="av-navbar border rounded">
+      <a href="#" class="av-navbar__brand">Averyn</a>
+      <ul class="av-navbar__links">
+        <li><a href="#" class="is-active">Inicio</a></li>
+        <li><a href="#">Módulos</a></li>
+        <li><a href="#">Contacto</a></li>
+      </ul>
+      <button class="av-btn av-btn-primary">Ingresar</button>
+    </div>
+
+    <h2 class="mt-5">Navbar del dashboard — Dock (.av-dock)</h2>
+    <p class="av-text-muted">Dock flotante para la navegación principal, centrado y con estilo glassmorphism. En código nuevo usar siempre <code>.av-dock*</code>.</p>
+    
+    <div class="position-relative border rounded mt-2" style="height: 150px; background: var(--av-gray-50); display: flex; align-items: center; justify-content: center;">
+      <nav class="av-dock-container">
+        <ul class="av-dock" role="menubar">
+          <li role="none"><a href="#" class="av-dock__item is-active" role="menuitem"><i class="bi bi-grid-1x2"></i><span>Dashboard</span></a></li>
+          <li role="none"><a href="#" class="av-dock__item" role="menuitem"><i class="bi bi-person-vcard"></i><span>Identidad</span></a></li>
+          <li role="none"><a href="#" class="av-dock__item" role="menuitem"><i class="bi bi-fingerprint"></i><span>Biometría</span></a></li>
+          <li role="none"><a href="#" class="av-dock__item" role="menuitem"><i class="bi bi-camera"></i><span>OCR</span></a></li>
+          <li role="none"><a href="#" class="av-dock__item" role="menuitem"><i class="bi bi-cpu"></i><span>IA</span></a></li>
+          <li role="none"><a href="#" class="av-dock__item" role="menuitem"><i class="bi bi-check2-square"></i><span>Electoral</span></a></li>
+          <li role="none"><a href="#" class="av-dock__item" role="menuitem"><i class="bi bi-door-open"></i><span>Accesos</span></a></li>
+          <li role="none"><a href="#" class="av-dock__item" role="menuitem"><i class="bi bi-gear"></i><span>Administración</span></a></li>
+        </ul>
+      </nav>
+    </div>
+
+      <!-- Encabezado de página, va justo debajo del navbar en cada pantalla interna -->
+      <div class="av-page-header" style="padding-inline: var(--av-space-6); background: var(--av-gray-50);">
+        <div>
+          <nav class="av-breadcrumb"><a href="#">Dashboard</a> &gt; <span class="is-current">Resumen</span></nav>
+          <p class="av-page-header__greeting">¡Hola, Diego!</p>
+          <h2 class="av-page-header__title">Bienvenido a Averyn</h2>
+          <p class="av-text-muted av-text-sm" style="margin:0">Resumen general de la actividad y métricas clave de verificación de identidad.</p>
+        </div>
+        <div class="av-page-header__actions">
+          <button class="av-btn av-btn-secondary">Exportar reporte</button>
+          <button class="av-btn av-btn-primary">Nueva verificación</button>
+        </div>
+      </div>
+    <p class="av-text-sm av-text-muted mt-2">En móvil, los módulos hacen scroll horizontal dentro del mismo navbar.</p>
+  </section>
+
+  <!-- 8. BADGES -->
+  <section id="badges" class="demo-block">
+    <h2>8. Badges</h2>
+    <p class="av-text-muted">Patrón "tag con contorno": sin relleno de color, esquina suave (<code>--av-radius-sm</code>), mismo tono en borde y texto. Reemplaza la pastilla pastel — se lee más como etiqueta de sistema y menos como badge genérico de UI kit.</p>
+    <div class="demo-row">
+      <div><span class="demo-label">Success</span><span class="av-badge av-badge--success">Verificado</span></div>
+      <div><span class="demo-label">Warning</span><span class="av-badge av-badge--warning">Pendiente</span></div>
+      <div><span class="demo-label">Error</span><span class="av-badge av-badge--error">Rechazado</span></div>
+      <div><span class="demo-label">Info</span><span class="av-badge av-badge--info">Informativo</span></div>
+      <div><span class="demo-label">Neutral</span><span class="av-badge av-badge--neutral">Administrador</span></div>
+    </div>
+  </section>
+
+  <!-- 9. SELECTS -->
+  <section id="selects" class="demo-block">
+    <h2>9. Selects</h2>
+    <p class="av-text-muted">Misma caja que el input (altura 44px, radio, focus) para que convivan en un mismo formulario.</p>
+    <div class="row g-4 mt-2">
+      <div class="col-md-3">
+        <div class="av-field">
+          <label class="av-label" for="s1">Departamento</label>
+          <select class="av-select" id="s1">
+            <option>Cesar</option>
+            <option>Atlántico</option>
+            <option>Magdalena</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="av-field">
+          <label class="av-label" for="s2">Disabled</label>
+          <select class="av-select" id="s2" disabled><option>No editable</option></select>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. CHECKBOX / RADIO / SWITCH -->
+  <section id="checks" class="demo-block">
+    <h2>10. Checkbox, Radio y Switch</h2>
+    <p class="av-text-muted">Checkbox: selección múltiple. Radio: selección única visible. Switch: on/off inmediato (no requiere botón "Guardar").</p>
+    <div class="demo-row">
+      <label class="av-checkbox"><input type="checkbox" checked><span>Acepto los términos</span></label>
+      <label class="av-radio"><input type="radio" name="r1" checked><span>Persona natural</span></label>
+      <label class="av-radio"><input type="radio" name="r1"><span>Persona jurídica</span></label>
+      <label class="av-switch"><input type="checkbox" checked><span class="av-switch__track"></span><span>Notificaciones</span></label>
+    </div>
+  </section>
+
+  <!-- 11. TABS -->
+  <section id="tabs" class="demo-block">
+    <h2>11. Tabs</h2>
+    <p class="av-text-muted">Para cambiar de vista dentro de una misma pantalla, no para navegar entre módulos (eso es el navbar).</p>
+    <div class="av-tabs mt-2">
+      <button class="av-tabs__item is-active">Datos personales</button>
+      <button class="av-tabs__item">Documentos</button>
+      <button class="av-tabs__item">Historial</button>
+    </div>
+  </section>
+
+  <!-- 12. TOOLTIPS -->
+  <section id="tooltips" class="demo-block">
+    <h2>12. Tooltips</h2>
+    <p class="av-text-muted">Solo texto de apoyo de una línea. Nunca contenido interactivo dentro.</p>
+    <div class="demo-row">
+      <span class="av-tooltip">
+        <button class="av-icon-btn"><i class="bi bi-question-circle"></i></button>
+        <span class="av-tooltip__bubble">Documento vigente requerido</span>
+      </span>
+    </div>
+  </section>
+
+  <!-- 13. TOASTS -->
+  <section id="toasts" class="demo-block">
+    <h2>13. Toasts</h2>
+    <p class="av-text-muted">Confirmación pasajera de una acción. Distinto de <code>.av-alert</code> (ver Reglas de uso).</p>
+    <div class="demo-row">
+      <div class="av-toast av-toast--success"><i class="bi bi-check-circle-fill av-toast__icon"></i> Cambios guardados correctamente</div>
+      <div class="av-toast av-toast--error"><i class="bi bi-x-circle-fill av-toast__icon"></i> No se pudo guardar. Intenta de nuevo</div>
+    </div>
+  </section>
+
+  <!-- 14-15. CARGA / VACÍO -->
+  <section id="carga" class="demo-block">
+    <h2>14. Estado de carga (skeleton)</h2>
+    <p class="av-text-muted">Obligatorio en cualquier card, tabla o panel que dependa de datos async (biometría, OCR, listados). Nunca dejar blanco mientras carga.</p>
+    <div class="av-card mt-2" style="max-width:320px">
+      <div class="av-skeleton" style="height:20px;width:60%;margin-bottom:12px"></div>
+      <div class="av-skeleton" style="height:14px;width:100%;margin-bottom:8px"></div>
+      <div class="av-skeleton" style="height:14px;width:80%"></div>
+    </div>
+
+    <h2 class="mt-5">15. Estado vacío</h2>
+    <p class="av-text-muted">Para cualquier listado/tabla/panel sin resultados.</p>
+    <div class="av-card mt-2">
+      <div class="av-empty-state">
+        <i class="bi bi-inbox av-empty-state__icon"></i>
+        <span class="av-empty-state__title">No hay verificaciones registradas</span>
+        <p class="av-text-sm" style="margin:0">Cuando se realice una captura, aparecerá aquí.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 16. DROPZONE -->
+  <section id="dropzone" class="demo-block">
+    <h2>16. Carga de archivo (dropzone)</h2>
+    <p class="av-text-muted">Único patrón para capturar documento o foto en Identidad, Biometría y OCR.</p>
+    <div class="av-dropzone mt-2">
+      <i class="bi bi-cloud-arrow-up av-dropzone__icon"></i>
+      <span style="font-weight:600;color:var(--av-navy)">Arrastra tu documento o haz clic para subirlo</span>
+      <span class="av-text-sm">JPG, PNG o PDF — máx. 10MB</span>
+    </div>
+  </section>
+
+  <!-- 17. PAGINACIÓN -->
+  <section id="paginacion" class="demo-block">
+    <h2>17. Paginación</h2>
+    <div class="av-pagination mt-2">
+      <span class="av-pagination__info">Mostrando 1–10 de 48</span>
+      <div class="av-pagination__controls">
+        <button class="av-pagination__btn" disabled><i class="bi bi-chevron-left"></i></button>
+        <button class="av-pagination__btn is-active">1</button>
+        <button class="av-pagination__btn">2</button>
+        <button class="av-pagination__btn">3</button>
+        <button class="av-pagination__btn"><i class="bi bi-chevron-right"></i></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANTILLAS COMPLETAS -->
+  <section id="plantillas" class="demo-block">
+    <span class="section-flag">Copiar la estructura completa, no solo las piezas</span>
+    <h2>Plantillas de página</h2>
+    <p class="av-text-muted">Estos tres layouts cubren la mayoría de pantallas del sistema. Antes de armar una pantalla desde cero, revisa si encaja en una de estas.</p>
+
+    <h3 class="mt-4">A. Login / acceso</h3>
+    <div class="device-frame mt-2">
+      <div class="device-frame__bar">averyn.app/login</div>
+      <div style="padding:48px; display:flex; justify-content:center; background:var(--av-gray-50)">
+        <div class="av-card" style="width:100%; max-width:380px">
+          <h2 style="font-size:1.5rem">Iniciar sesión</h2>
+          <p class="av-text-sm av-text-muted mb-3">Ingresa con tu correo institucional</p>
+          <div class="av-field">
+            <label class="av-label" for="tpl-email">Correo electrónico</label>
+            <input class="av-input" id="tpl-email" type="email" placeholder="tu@averyn.test">
+          </div>
+          <div class="av-field">
+            <label class="av-label" for="tpl-pass">Contraseña</label>
+            <input class="av-input" id="tpl-pass" type="password" placeholder="••••••••">
+          </div>
+          <button class="av-btn av-btn-primary" style="width:100%; margin-top:8px">Ingresar</button>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="mt-5">B. Listado con filtros + tabla</h3>
+    <div class="device-frame mt-2">
+      <div class="device-frame__bar">averyn.app/identidad</div>
+      <div style="padding:32px">
+        <div class="av-page-header" style="padding-block:0 24px">
+          <div>
+            <nav class="av-breadcrumb"><a href="#">Dashboard</a> &gt; <span class="is-current">Identidad</span></nav>
+            <h2 class="av-page-header__title" style="font-size:1.5rem">Personas verificadas</h2>
+          </div>
+          <div class="av-page-header__actions">
+            <button class="av-btn av-btn-secondary">Exportar</button>
+            <button class="av-btn av-btn-primary">Nueva verificación</button>
+          </div>
+        </div>
+        <div class="av-card">
+          <div class="demo-row" style="margin-top:0; margin-bottom:16px">
+            <input class="av-input" style="width:220px" placeholder="Buscar por nombre o documento">
+            <select class="av-select" style="width:180px"><option>Todos los estados</option><option>Verificado</option><option>Pendiente</option></select>
+          </div>
+          <table class="av-table">
+            <thead><tr><th>Nombre</th><th>Documento</th><th>Estado</th></tr></thead>
+            <tbody>
+              <tr><td>Ana Torres</td><td>10234567</td><td><span class="av-badge av-badge--success">Verificado</span></td></tr>
+              <tr><td>Luis Pérez</td><td>10345678</td><td><span class="av-badge av-badge--warning">Pendiente</span></td></tr>
+            </tbody>
+          </table>
+          <div class="av-pagination">
+            <span class="av-pagination__info">Mostrando 1–2 de 2</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="mt-5">C. Formulario de verificación (captura)</h3>
+    <div class="device-frame mt-2">
+      <div class="device-frame__bar">averyn.app/biometria/captura</div>
+      <div style="padding:32px; display:flex; justify-content:center">
+        <div class="av-card" style="width:100%; max-width:480px">
+          <div class="av-tabs mb-4">
+            <button class="av-tabs__item is-active">1. Documento</button>
+            <button class="av-tabs__item">2. Rostro</button>
+            <button class="av-tabs__item">3. Confirmación</button>
+          </div>
+          <div class="av-dropzone">
+            <i class="bi bi-cloud-arrow-up av-dropzone__icon"></i>
+            <span style="font-weight:600;color:var(--av-navy)">Sube la foto de tu documento</span>
+            <span class="av-text-sm">JPG, PNG o PDF — máx. 10MB</span>
+          </div>
+          <div class="av-modal__footer" style="margin-top:24px">
+            <button class="av-btn av-btn-secondary">Atrás</button>
+            <button class="av-btn av-btn-primary">Continuar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GOBERNANZA -->
+  <section id="gobernanza" class="demo-block">
+    <span class="section-flag">Cómo se agregan cosas nuevas a este catálogo</span>
+    <h2>Gobernanza — proceso de cambios</h2>
+    <p>Este documento es la única fuente de verdad de diseño de Averyn. Ninguna pantalla del producto debería tener un componente, color o espaciado que no esté aquí.</p>
+    <div class="av-card mt-3">
+      <ol style="padding-left:20px; margin:0">
+        <li class="mb-2">Si necesitas un componente, variante o color que <strong>no existe</strong> en este catálogo, no lo crees directamente en tu bloque (A, B, C o D).</li>
+        <li class="mb-2">Propón el componente al equipo (mensaje o reunión corta) mostrando el problema que resuelve.</li>
+        <li class="mb-2">Se agrega a <code>design-system.css</code> y a este catálogo con su número de sección correspondiente.</li>
+        <li class="mb-2">Solo después de estar aquí, se usa en el producto.</li>
+        <li>Antes de la sustentación: cada integrante revisa su bloque contra este documento y confirma que no hay clases ni estilos inline que no estén catalogados.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ACCESIBILIDAD -->
+  <section id="accesibilidad" class="demo-block">
+    <h2>Accesibilidad — checklist mínimo</h2>
+    <p class="av-text-muted">Aplica a cualquier pantalla nueva, sin excepción.</p>
+    <div class="av-card mt-2">
+      <ul style="padding-left:20px; margin:0">
+        <li class="mb-2">Todo elemento interactivo es alcanzable con <kbd>Tab</kbd> y muestra el anillo de foco azul (nunca se remueve <code>:focus-visible</code> sin reemplazo).</li>
+        <li class="mb-2">Iconos que son la única pista de una acción (cerrar, alerta) llevan <code>aria-label</code>.</li>
+        <li class="mb-2">El modal se cierra con <kbd>Esc</kbd>, clic fuera, y el foco vuelve al botón que lo abrió.</li>
+        <li class="mb-2">Contraste mínimo AA: texto normal 4.5:1, texto grande/íconos 3:1 — los colores semánticos de este catálogo ya cumplen, no se aclaran ni oscurecen "a ojo".</li>
+        <li>Los estados vacíos y de carga siempre llevan texto, nunca solo un ícono o spinner suelto.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- MICROCOPY -->
+  <section id="microcopy" class="demo-block">
+    <span class="section-flag">Contenido para copiar, no reglas para interpretar</span>
+    <h2>Microcopy — el lenguaje de Averyn</h2>
+    <p class="av-text-muted">Para que un error de OCR y un error de Electoral se lean como del mismo sistema, cada quien copia el texto de aquí — no redacta el suyo desde una regla general.</p>
+
+    <h3 class="mt-4">Voz de marca</h3>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:var(--av-space-4); margin-top:var(--av-space-2)">
+        <div class="av-card" style="padding:var(--av-space-4)">
+          <p class="mb-1" style="font-weight:600;color:var(--av-navy)">Institucional</p>
+          <p class="av-text-sm av-text-muted mb-0">no frío</p>
+        </div>
+        <div class="av-card" style="padding:var(--av-space-4)">
+          <p class="mb-1" style="font-weight:600;color:var(--av-navy)">Preciso</p>
+          <p class="av-text-sm av-text-muted mb-0">no técnico</p>
+        </div>
+        <div class="av-card" style="padding:var(--av-space-4)">
+          <p class="mb-1" style="font-weight:600;color:var(--av-navy)">Tranquilizador</p>
+          <p class="av-text-sm av-text-muted mb-0">no infantil</p>
+        </div>
+        <div class="av-card" style="padding:var(--av-space-4)">
+          <p class="mb-1" style="font-weight:600;color:var(--av-navy)">Directo</p>
+          <p class="av-text-sm av-text-muted mb-0">no cortante</p>
+        </div>
+    </div>
+    <p class="av-text-sm av-text-muted mt-2">Averyn maneja documentos e identidad de personas reales — el tono nunca es casual ni de app de consumo, pero tampoco suena a formulario gubernamental.</p>
+
+    <h3 class="mt-5">Librería de mensajes de error</h3>
+    <p class="av-text-muted">El texto exacto para cada escenario. Se copia tal cual — no se parafrasea por módulo.</p>
+    <table class="av-table mt-2">
+      <thead><tr><th style="width:30%">Escenario</th><th>Texto aprobado</th></tr></thead>
+      <tbody>
+        <tr><td>Documento no legible</td><td>No pudimos leer el documento. Verifica que la imagen esté completa y sin reflejos.</td></tr>
+        <tr><td>Rostro no coincide</td><td>No pudimos verificar tu identidad. Vuelve a intentar la captura.</td></tr>
+        <tr><td>Iluminación insuficiente</td><td>Iluminación insuficiente. Acércate a una fuente de luz antes de repetir la captura.</td></tr>
+        <tr><td>Documento vencido</td><td>Este documento está vencido. Sube un documento vigente para continuar.</td></tr>
+        <tr><td>Sesión expirada</td><td>Tu sesión expiró por inactividad. Inicia sesión de nuevo.</td></tr>
+        <tr><td>Sin conexión</td><td>Sin conexión a internet. Revisa tu red e intenta de nuevo.</td></tr>
+        <tr><td>Permiso denegado</td><td>No tienes permiso para acceder a este módulo. Contacta a un administrador.</td></tr>
+        <tr><td>Error inesperado (fallback)</td><td>Algo salió mal de nuestro lado. Intenta de nuevo en unos minutos.</td></tr>
+      </tbody>
+    </table>
+    <p class="av-text-sm av-text-muted mt-2">¿Escenario nuevo que no está aquí? Se propone y se agrega a esta tabla — no se improvisa en el modal de captura (ver Gobernanza).</p>
+
+    <h3 class="mt-5">Jerga técnica — nunca mostrar al usuario</h3>
+    <table class="av-table mt-2">
+      <thead><tr><th style="width:35%">Nunca en pantalla</th><th>En su lugar</th></tr></thead>
+      <tbody>
+        <tr><td><code>Error 403: face_match_failed</code></td><td>"No pudimos verificar tu identidad."</td></tr>
+        <tr><td><code>confidence_score: 0.42</code></td><td>"Coincidencia baja. Vuelve a intentar." (nunca el número crudo)</td></tr>
+        <tr><td><code>liveness_check failed</code></td><td>"No pudimos confirmar que la captura sea en vivo. Mira a la cámara e intenta de nuevo."</td></tr>
+        <tr><td><code>hash mismatch</code></td><td>"El documento no coincide con nuestros registros."</td></tr>
+        <tr><td>Códigos HTTP, stack traces, <code>null</code>/<code>undefined</code></td><td>El estado vacío o de error correspondiente (ver secciones 4 y 15) — nunca visibles al usuario, solo en logs.</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="mt-5">Glosario — una palabra por concepto</h3>
+    <table class="av-table mt-2">
+      <thead><tr><th>Concepto</th><th>Se dice</th><th>Se evita</th></tr></thead>
+      <tbody>
+        <tr><td>Documento de identidad</td><td><span class="av-badge av-badge--neutral">Documento</span></td><td class="av-text-muted">"cédula" (el sistema acepta más de un tipo)</td></tr>
+        <tr><td>Tomar foto/rostro</td><td><span class="av-badge av-badge--neutral">Captura</span></td><td class="av-text-muted">"foto", "toma"</td></tr>
+        <tr><td>Comparar identidad</td><td><span class="av-badge av-badge--neutral">Verificación</span></td><td class="av-text-muted">"chequeo", "validación"</td></tr>
+        <tr><td>Resultado positivo</td><td><span class="av-badge av-badge--success">Verificado</span></td><td class="av-text-muted">"aprobado", "válido"</td></tr>
+        <tr><td>Resultado negativo</td><td><span class="av-badge av-badge--error">Rechazado</span></td><td class="av-text-muted">"denegado", "inválido"</td></tr>
+        <tr><td>Persona con acceso al sistema</td><td><span class="av-badge av-badge--neutral">Usuario</span></td><td class="av-text-muted">"cliente" (es un sistema interno)</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="mt-5">Formato de datos</h3>
+    <table class="av-table mt-2">
+      <tbody>
+        <tr><td style="width:30%">Fecha</td><td><code>DD/MM/AAAA</code> en toda la interfaz, sin excepción.</td></tr>
+        <tr><td>Documento</td><td>Tal cual lo ingresó el usuario, sin puntos ni guiones añadidos.</td></tr>
+        <tr><td>Confianza biométrica</td><td>Nunca el número crudo (ej. <code>87.3421%</code>). Redondear a entero o usar etiqueta cualitativa ("Alta coincidencia").</td></tr>
+        <tr><td>Nombres</td><td>Tal cual vienen del documento oficial — nunca forzar mayúsculas.</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="mt-5">Referencia rápida</h3>
+    <ul style="padding-left:20px">
+      <li class="mb-1">Botones: verbo corto ("Guardar cambios", "Ingresar") — nunca "OK" o "Enviar" a secas.</li>
+      <li class="mb-1">Tuteo siempre, nunca "usted".</li>
+      <li>Todo mensaje nuevo que no esté en las tablas de arriba se propone antes de usarse (ver Gobernanza).</li>
+    </ul>
+
+    <!-- Ejemplos aplicados — mismo texto de las tablas de arriba, en el componente real donde vive -->
+    <h3 class="mt-5">Ejemplos aplicados</h3>
+    <p class="av-text-muted">El mismo texto aprobado, dentro del componente donde realmente aparece — no solo como fila de tabla.</p>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:var(--av-space-4); margin-top:var(--av-space-2)">
+
+      <!-- Caso: alerta de error -->
+      <div>
+        <span class="demo-label">Alerta — rostro no coincide</span>
+        <div class="av-alert av-alert--error">
+          <span class="av-alert__icon"><i class="bi bi-x-lg"></i></span>
+          <div class="av-alert__content">
+            <span class="av-alert__title">No se pudo verificar la identidad</span>
+            <p class="av-alert__description">No pudimos verificar tu identidad. Vuelve a intentar la captura.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Caso: toast de confirmación -->
+      <div>
+        <span class="demo-label">Toast — acción completada</span>
+        <div class="av-toast av-toast--success" style="position:static">
+          <i class="bi bi-check-circle-fill av-toast__icon"></i> Cambios guardados
+        </div>
+      </div>
+
+      <!-- Caso: campo con error -->
+      <div>
+        <span class="demo-label">Campo — documento vencido</span>
+        <div class="av-field has-error">
+          <label class="av-label" for="ex-doc">Documento</label>
+          <input class="av-input" id="ex-doc" type="text" value="12345678">
+          <span class="av-help-text is-error">Este documento está vencido. Sube un documento vigente para continuar.</span>
+        </div>
+      </div>
+
+      <!-- Caso: estado vacío -->
+      <div>
+        <span class="demo-label">Estado vacío — listado sin resultados</span>
+        <div class="av-card" style="padding:0">
+          <div class="av-empty-state">
+            <i class="bi bi-inbox av-empty-state__icon"></i>
+            <span class="av-empty-state__title">No hay verificaciones registradas</span>
+            <p class="av-text-sm" style="margin:0">Cuando se realice una captura, aparecerá aquí.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Caso: botón con verbo corto -->
+      <div>
+        <span class="demo-label">Botón — acción principal</span>
+        <button class="av-btn av-btn-primary">Guardar cambios</button>
+      </div>
+
+      <!-- Caso: dropzone con error de captura -->
+      <div>
+        <span class="demo-label">Dropzone — documento no legible</span>
+        <div class="av-dropzone" style="border-color:var(--av-error); background:var(--av-error-bg); color:var(--av-error)">
+          <i class="bi bi-exclamation-triangle av-dropzone__icon"></i>
+          <span style="font-weight:600">No pudimos leer el documento</span>
+          <span class="av-text-sm">Verifica que la imagen esté completa y sin reflejos</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="py-4 av-text-sm av-text-muted">
+    Averyn © 2026 — Catálogo interno de componentes, no es una pantalla del producto.
+  </footer>
+
+</div>
+
+<script>
+  // Cerrar el modal con Esc (accesibilidad — sección 7.5 de la Guía de Diseño)
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      document.getElementById('demoModal').classList.remove('is-open');
+    }
+  });
+</script>
+
+</body>
+</html>

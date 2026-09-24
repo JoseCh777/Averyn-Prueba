@@ -1,0 +1,34 @@
+/* 2. RESET / NORMALIZACIÓN MÍNIMA */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--av-font-body);
+  font-size: var(--av-text-body);
+  color: var(--av-navy);
+  background: var(--av-gray-50);
+}
+
+button { font-family: inherit; }
+
+/* Foco visible obligatorio (ver docs/design-system.md accesibilidad) — nunca se quita sin reemplazo */
+:focus-visible {
+  outline: 2px solid var(--av-blue);
+  outline-offset: 2px;
+}
+
+/* 3. TIPOGRAFÍA BASE */
+h1, h2, h3 { font-family: var(--av-font-heading); color: var(--av-navy); margin: 0 0 var(--av-space-3); }
+h1 { font-size: var(--av-text-h1); font-weight: 700; line-height: 1.2; }
+h2 { font-size: var(--av-text-h2); font-weight: 700; line-height: 1.25; }
+h3 { font-size: var(--av-text-h3); font-weight: 500; line-height: 1.3; }
+p  { line-height: 1.5; max-width: 65ch; }
+.av-text-body-lg { font-size: var(--av-text-body-lg); }
+.av-text-sm { font-size: var(--av-text-sm); }
+.av-text-xs { font-size: var(--av-text-xs); }
+.av-text-muted { color: var(--av-gray-500); }
+
+/* 4. UTILIDADES PROPIAS (solo lo que Bootstrap no cubre) */
+.av-section { padding-block: var(--av-space-8); }
+.av-stack > * + * { margin-top: var(--av-space-4); }
+

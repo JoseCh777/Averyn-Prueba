@@ -3,179 +3,355 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Averyn: plataforma de identidad, biometría, inteligencia artificial y procesos institucionales seguros." />
+    <meta name="description" content="Averyn: plataforma institucional de identidad, biometría, inteligencia artificial y seguridad para automatizar procesos institucionales críticos." />
     <title>Averyn — Identidad inteligente para procesos institucionales</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
     <link href="assets/css/design-system.css" rel="stylesheet" />
+    <link href="assets/css/landing.css" rel="stylesheet" />
   </head>
   <body>
-    <div class="av-header-peek">
-      <nav class="navbar navbar-expand-lg av-navbar py-3">
+    <header class="av-header-peek">
+      <nav class="navbar navbar-expand-lg av-navbar py-3" aria-label="Navegación principal">
         <div class="container">
           <a class="navbar-brand" href="#inicio"><img class="av-logo" src="assets/img/logo-azul.png" alt="Averyn" /></a>
           <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-label="Abrir navegación"><i class="bi bi-list fs-4"></i></button>
           <div class="collapse navbar-collapse" id="mainNav">
-            <div class="navbar-nav ms-auto align-items-lg-center gap-lg-4 gap-2 mt-3 mt-lg-0">
+            <div class="navbar-nav ms-auto align-items-lg-center gap-lg-3 gap-2 mt-3 mt-lg-0">
+              <a class="av-nav-link" href="#que-es">Qué es Averyn</a>
               <a class="av-nav-link" href="#capacidades">Capacidades</a>
-              <a class="av-nav-link" href="#proceso">Cómo funciona</a>
+              <a class="av-nav-link" href="#soluciones">Soluciones</a>
+              <a class="av-nav-link" href="#tecnologia">Tecnología</a>
+              <a class="av-nav-link" href="#proceso">Proceso</a>
+              <a class="av-nav-link" href="#arquitectura">Arquitectura</a>
+              <a class="av-nav-link" href="#seguridad">Seguridad</a>
+              <a class="av-nav-link" href="#equipo">Equipo</a>
+              <a class="av-nav-link" href="#contacto">Contacto</a>
               <a class="btn av-btn-primary ms-lg-2" href="login.html">Iniciar sesión <i class="bi bi-arrow-right ms-1"></i></a>
             </div>
           </div>
         </div>
       </nav>
-    </div>
+    </header>
 
-    <main>
+    <main aria-label="Contenido principal">
       <section id="inicio" class="av-hero av-hero-liquid">
-        <img class="av-hero-logo-mark" src="assets/img/logo-negro.png" alt="Averyn" />
+        <img class="av-hero-logo-mark" src="assets/img/logo-negro.png" alt="" aria-hidden="true" />
         <div class="av-ballot-image" role="img" aria-label="Persona depositando una papeleta en una urna electoral"></div>
         <div class="av-liquid-copy">
-          <h1 class="av-hero-item av-hero-item-1 av-display mb-3">Cada elección merece <em>claridad y control.</em></h1>
-          <p class="av-hero-item av-hero-item-2 av-lead mb-4 mx-auto">Averyn integra biometría, OCR y gestión electoral en una plataforma diseñada para operar procesos seguros, automatizados y trazables.</p>
-          <a class="av-hero-item av-hero-item-3 btn av-btn-primary btn-lg" href="login.html">Empezar <i class="bi bi-arrow-right ms-2"></i></a>
+          <h1 class="av-hero-item av-hero-item-1 av-display mb-3">Identidad inteligente para <em>procesos institucionales.</em></h1>
+          <p class="av-hero-item av-hero-item-2 av-lead mb-4 mx-auto">Plataforma de identidad, biometría, inteligencia artificial y seguridad diseñada para automatizar procesos institucionales críticos.</p>
+          <div class="av-hero-item av-hero-item-3 d-flex flex-wrap gap-3 justify-content-center">
+            <a class="btn av-btn-primary btn-lg" href="#que-es">Conocer Averyn <i class="bi bi-arrow-down ms-2"></i></a>
+            <a class="btn av-btn-secondary btn-lg" href="login.html">Ingresar al sistema</a>
+          </div>
         </div>
       </section>
 
-      <section id="capacidades" class="av-section av-section-capabilities av-reveal">
+      <section id="que-es" class="av-section av-section-soft av-reveal" aria-labelledby="que-es-title">
         <div class="container">
           <div class="row mb-5 align-items-end">
-            <div class="col-lg-7"><h2 class="av-section-title mb-3">Diseñada para operar con claridad.</h2></div>
-            <div class="col-lg-4 ms-auto"><p class="av-muted mb-0">Desde el pre-registro y la validación documental hasta la verificación del votante, el tarjetón y la consolidación de resultados, Averyn mantiene cada operación conectada y bajo control.</p></div>
+            <div class="col-lg-7"><h2 id="que-es-title" class="av-section-title mb-3">Una plataforma institucional, no un simple sistema de votación.</h2></div>
+            <div class="col-lg-4 ms-auto"><p class="av-muted mb-0">Averyn centraliza la identificación, la autenticación y la automatización de procesos institucionales mediante biometría, inteligencia artificial, OCR y mecanismos de seguridad.</p></div>
           </div>
           <div class="row g-4">
             <div class="col-md-4">
-              <div class="av-feature-card">
-                <div class="av-feature-icon mb-4"><i class="bi bi-layers fs-4"></i></div>
-                <h3 class="h4 mb-3">Gestión completa</h3>
-                <p class="av-muted mb-0">Administra convocatorias, participantes, jornadas, mesas y resultados desde una experiencia unificada.</p>
-              </div>
+              <article class="av-tech-card h-100">
+                <div class="av-feature-icon mb-3"><i class="bi bi-buildings fs-4"></i></div>
+                <h3 class="h5 mb-2">Multi-institucional</h3>
+                <p class="av-muted small mb-0">Cada institución opera como un tenant lógico aislado: universidades, colegios, empresas y entidades públicas.</p>
+              </article>
             </div>
             <div class="col-md-4">
-              <div class="av-feature-card">
-                <div class="av-feature-icon mb-4"><i class="bi bi-diagram-3 fs-4"></i></div>
-                <h3 class="h4 mb-3">Automatización</h3>
-                <p class="av-muted mb-0">Convierte tareas repetitivas en flujos claros, con estados y alertas para cada equipo.</p>
-              </div>
+              <article class="av-tech-card h-100">
+                <div class="av-feature-icon mb-3"><i class="bi bi-person-badge fs-4"></i></div>
+                <h3 class="h5 mb-2">Identidad propia</h3>
+                <p class="av-muted small mb-0">Averyn gestiona su propio modelo de identidad, independiente de bases de datos institucionales.</p>
+              </article>
             </div>
             <div class="col-md-4">
-              <div class="av-feature-card">
-                <div class="av-feature-icon mb-4"><i class="bi bi-diagram-2 fs-4"></i></div>
-                <h3 class="h4 mb-3">Arquitectura conectada</h3>
-                <p class="av-muted mb-0">Integra módulos y fuentes de información para que tu operación crezca sin perder contexto.</p>
-              </div>
+              <article class="av-tech-card h-100">
+                <div class="av-feature-icon mb-3"><i class="bi bi-diagram-3 fs-4"></i></div>
+                <h3 class="h5 mb-2">Núcleo + módulos</h3>
+                <p class="av-muted small mb-0">Un núcleo común de identidad, biometría, OCR, IA y seguridad sobre el que se construyen módulos de negocio.</p>
+              </article>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="proceso" class="av-section av-section-soft av-section-process av-reveal">
+      <section id="capacidades" class="av-section av-section-capabilities av-reveal" aria-labelledby="capacidades-title">
         <div class="container">
-          <div class="row mb-5"><div class="col-lg-7"><h2 class="av-section-title mb-3">De la planeación al resultado.</h2></div></div>
+          <div class="row mb-5 align-items-end">
+            <div class="col-lg-7"><h2 id="capacidades-title" class="av-section-title mb-3">Capacidades para operar con claridad.</h2></div>
+            <div class="col-lg-4 ms-auto"><p class="av-muted mb-0">Desde la gestión de identidad y la biometría hasta el procesamiento documental y la auditoría, cada capacidad está conectada para automatizar procesos reales.</p></div>
+          </div>
           <div class="row g-4">
-            <div class="col-md-4">
+            <div class="col-md-6 col-lg-4">
+              <article class="av-feature-card">
+                <div class="av-feature-icon mb-4"><i class="bi bi-person-badge fs-4"></i></div>
+                <h3 class="h4 mb-3">Identidad</h3>
+                <p class="av-muted mb-0">Personas con identificadores propios de Averyn, documentos múltiples y afiliaciones por institución.</p>
+              </article>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <article class="av-feature-card">
+                <div class="av-feature-icon mb-4"><i class="bi bi-fingerprint fs-4"></i></div>
+                <h3 class="h4 mb-3">Biometría</h3>
+                <p class="av-muted mb-0">Enrolamiento y verificación por huella y rostro, con liveness y plantillas protegidas.</p>
+              </article>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <article class="av-feature-card">
+                <div class="av-feature-icon mb-4"><i class="bi bi-file-earmark-text fs-4"></i></div>
+                <h3 class="h4 mb-3">OCR</h3>
+                <p class="av-muted mb-0">Procesamiento documental con validación antes de asociar datos a una persona.</p>
+              </article>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <article class="av-feature-card">
+                <div class="av-feature-icon mb-4"><i class="bi bi-cpu fs-4"></i></div>
+                <h3 class="h4 mb-3">Inteligencia artificial</h3>
+                <p class="av-muted mb-0">Modelos versionados y trazables para detección facial, liveness, clasificación y OCR.</p>
+              </article>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <article class="av-feature-card">
+                <div class="av-feature-icon mb-4"><i class="bi bi-shield-check fs-4"></i></div>
+                <h3 class="h4 mb-3">Seguridad</h3>
+                <p class="av-muted mb-0">Roles, permisos, cifrado y aislamiento de tenants como dominios de primera clase.</p>
+              </article>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <article class="av-feature-card">
+                <div class="av-feature-icon mb-4"><i class="bi bi-journal-check fs-4"></i></div>
+                <h3 class="h4 mb-3">Auditoría</h3>
+                <p class="av-muted mb-0">Registro trazable de operaciones críticas para investigación y control institucional.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="soluciones" class="av-section av-section-soft av-reveal" aria-labelledby="soluciones-title">
+        <div class="container">
+          <div class="row mb-5 align-items-end">
+            <div class="col-lg-7"><h2 id="soluciones-title" class="av-section-title mb-3">Soluciones para cada institución.</h2></div>
+            <div class="col-lg-4 ms-auto"><p class="av-muted mb-0">Elecciones deja de ser el centro absoluto del producto: el núcleo común respalda múltiples módulos de negocio.</p></div>
+          </div>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+              <article class="av-tech-card h-100">
+                <div class="av-feature-icon mb-3"><i class="bi bi-check2-square fs-4"></i></div>
+                <h3 class="h5 mb-2">Gestión electoral</h3>
+                <p class="av-muted small mb-0">Procesos electorales institucionales seguros, automatizados y trazables.</p>
+              </article>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <article class="av-tech-card h-100">
+                <div class="av-feature-icon mb-3"><i class="bi bi-door-open fs-4"></i></div>
+                <h3 class="h5 mb-2">Control de acceso</h3>
+                <p class="av-muted small mb-0">Zonas, puntos, políticas y eventos para el acceso autorizado a espacios.</p>
+              </article>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <article class="av-tech-card h-100">
+                <div class="av-feature-icon mb-3"><i class="bi bi-person-check fs-4"></i></div>
+                <h3 class="h5 mb-2">Verificación de identidad</h3>
+                <p class="av-muted small mb-0">Autenticación biométrica y documental para onboarding y procesos sensibles.</p>
+              </article>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <article class="av-tech-card h-100">
+                <div class="av-feature-icon mb-3"><i class="bi bi-gear fs-4"></i></div>
+                <h3 class="h5 mb-2">Procesos institucionales</h3>
+                <p class="av-muted small mb-0">Automatización de operaciones que requieren identidad y autorización.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="tecnologia" class="av-section av-reveal" aria-labelledby="tecnologia-title">
+        <div class="container">
+          <div class="row mb-5">
+            <div class="col-lg-7"><h2 id="tecnologia-title" class="av-section-title mb-3">Tecnología detrás de la plataforma.</h2><p class="av-muted mb-0">Soluciones abiertas e interoperables, elegidas por necesidad concreta y no por acumular tecnologías.</p></div>
+          </div>
+          <ul class="row g-3 list-unstyled mb-0">
+            <li class="col-6 col-md-4 col-lg"><article class="av-tech-card h-100 text-center"><div class="av-feature-icon mx-auto mb-2"><i class="bi bi-fingerprint fs-4 d-block"></i></div><h3 class="small fw-semibold mb-0">Huella</h3></article></li>
+            <li class="col-6 col-md-4 col-lg"><article class="av-tech-card h-100 text-center"><div class="av-feature-icon mx-auto mb-2"><i class="bi bi-person-bounding-box fs-4 d-block"></i></div><h3 class="small fw-semibold mb-0">Rostro</h3></article></li>
+            <li class="col-6 col-md-4 col-lg"><article class="av-tech-card h-100 text-center"><div class="av-feature-icon mx-auto mb-2"><i class="bi bi-eye fs-4 d-block"></i></div><h3 class="small fw-semibold mb-0">Liveness</h3></article></li>
+            <li class="col-6 col-md-4 col-lg"><article class="av-tech-card h-100 text-center"><div class="av-feature-icon mx-auto mb-2"><i class="bi bi-file-earmark-text fs-4 d-block"></i></div><h3 class="small fw-semibold mb-0">OCR</h3></article></li>
+            <li class="col-6 col-md-4 col-lg"><article class="av-tech-card h-100 text-center"><div class="av-feature-icon mx-auto mb-2"><i class="bi bi-cpu fs-4 d-block"></i></div><h3 class="small fw-semibold mb-0">IA</h3></article></li>
+            <li class="col-6 col-md-4 col-lg"><article class="av-tech-card h-100 text-center"><div class="av-feature-icon mx-auto mb-2"><i class="bi bi-plug fs-4 d-block"></i></div><h3 class="small fw-semibold mb-0">APIs</h3></article></li>
+            <li class="col-6 col-md-4 col-lg"><article class="av-tech-card h-100 text-center"><div class="av-feature-icon mx-auto mb-2"><i class="bi bi-diagram-2 fs-4 d-block"></i></div><h3 class="small fw-semibold mb-0">MCP</h3></article></li>
+            <li class="col-6 col-md-4 col-lg"><article class="av-tech-card h-100 text-center"><div class="av-feature-icon mx-auto mb-2"><i class="bi bi-person-lock fs-4 d-block"></i></div><h3 class="small fw-semibold mb-0">RBAC</h3></article></li>
+            <li class="col-6 col-md-4 col-lg"><article class="av-tech-card h-100 text-center"><div class="av-feature-icon mx-auto mb-2"><i class="bi bi-journal-check fs-4 d-block"></i></div><h3 class="small fw-semibold mb-0">Auditoría</h3></article></li>
+            <li class="col-6 col-md-4 col-lg"><article class="av-tech-card h-100 text-center"><div class="av-feature-icon mx-auto mb-2"><i class="bi bi-lock fs-4 d-block"></i></div><h3 class="small fw-semibold mb-0">Cifrado</h3></article></li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="proceso" class="av-section av-section-soft av-section-process av-reveal" aria-labelledby="proceso-title">
+        <div class="container">
+          <div class="row mb-5"><div class="col-lg-7"><h2 id="proceso-title" class="av-section-title mb-3">Cómo funciona.</h2></div></div>
+          <ol class="row g-4 list-unstyled mb-0">
+            <li class="col-md-4">
               <div class="d-flex gap-3">
-                <div class="av-step-num">01</div>
+                <div class="av-step-num" aria-hidden="true">01</div>
                 <div>
-                  <div class="text-primary mb-3"><i class="bi bi-clipboard-check fs-4"></i></div>
-                  <h3 class="h4">Planifica</h3>
-                  <p class="av-muted mb-0">Define el alcance, reglas, equipos y calendario de cada elección.</p>
+                  <div class="text-primary mb-3"><i class="bi bi-buildings fs-4"></i></div>
+                  <h3 class="h4">Conecta</h3>
+                  <p class="av-muted mb-0">Tu institución se integra mediante APIs, importaciones o conectores sin depender de bases de datos externas.</p>
                 </div>
               </div>
-            </div>
-            <div class="col-md-4">
+            </li>
+            <li class="col-md-4">
               <div class="d-flex gap-3">
-                <div class="av-step-num">02</div>
+                <div class="av-step-num" aria-hidden="true">02</div>
                 <div>
                   <div class="text-primary mb-3"><i class="bi bi-fingerprint fs-4"></i></div>
                   <h3 class="h4">Verifica</h3>
-                  <p class="av-muted mb-0">Protege la participación con procesos de validación consistentes.</p>
+                  <p class="av-muted mb-0">La identidad se valida con OCR y biometría, incluyendo liveness, antes de cualquier operación.</p>
                 </div>
               </div>
-            </div>
-            <div class="col-md-4">
+            </li>
+            <li class="col-md-4">
               <div class="d-flex gap-3">
-                <div class="av-step-num">03</div>
+                <div class="av-step-num" aria-hidden="true">03</div>
                 <div>
-                  <div class="text-primary mb-3"><i class="bi bi-database fs-4"></i></div>
-                  <h3 class="h4">Consolida</h3>
-                  <p class="av-muted mb-0">Centraliza la información y obtén una lectura confiable de los resultados.</p>
+                  <div class="text-primary mb-3"><i class="bi bi-diagram-3 fs-4"></i></div>
+                  <h3 class="h4">Automatiza</h3>
+                  <p class="av-muted mb-0">Los procesos operan con roles, permisos y auditoría de cada operación crítica.</p>
                 </div>
               </div>
-            </div>
-          </div>
+            </li>
+          </ol>
         </div>
       </section>
 
       <div class="av-section-divider" aria-hidden="true"><span><i class="bi bi-arrow-down"></i></span></div>
 
-      <section id="arquitectura" class="av-section av-section-soft av-section-architecture av-reveal">
+      <section id="arquitectura" class="av-section av-section-soft av-section-architecture av-reveal" aria-labelledby="arquitectura-title">
         <div class="container">
           <div class="row mb-5 align-items-end">
-            <div class="col-lg-7"><h2 class="av-section-title mb-3">Una arquitectura pensada para elecciones reales.</h2></div>
-            <div class="col-lg-4 ms-auto"><p class="av-muted mb-0">El sistema separa responsabilidades en servicios especializados para facilitar la integración, el mantenimiento y el crecimiento de la plataforma.</p></div>
+            <div class="col-lg-7"><h2 id="arquitectura-title" class="av-section-title mb-3">Arquitectura orientada a dominio.</h2></div>
+            <div class="col-lg-4 ms-auto"><p class="av-muted mb-0">Un monolito modular que separa responsabilidades del núcleo (identidad, biometría, IA, seguridad) de los módulos de negocio.</p></div>
           </div>
           <div class="row g-4 mb-5">
             <div class="col-md-6 col-xl-3">
-              <div class="av-tech-card">
+              <article class="av-tech-card">
+                <div class="av-feature-icon mb-3"><i class="bi bi-person-badge"></i></div>
+                <h3 class="h5 mb-2">Identidad</h3>
+                <p class="av-muted small mb-0">Núcleo de identidad multi-tenant con documentos y afiliaciones por persona.</p>
+              </article>
+            </div>
+            <div class="col-md-6 col-xl-3">
+              <article class="av-tech-card">
                 <div class="av-feature-icon mb-3"><i class="bi bi-fingerprint"></i></div>
-                <h3 class="h5 mb-2">Identidad y biometría</h3>
-                <p class="av-muted small mb-0">Enrolamiento y verificación mediante huella dactilar, con templates protegidos y control de integridad.</p>
-              </div>
+                <h3 class="h5 mb-2">Biometría</h3>
+                <p class="av-muted small mb-0">Enrolamiento, verificación y liveness con abstracción de proveedores.</p>
+              </article>
             </div>
             <div class="col-md-6 col-xl-3">
-              <div class="av-tech-card">
-                <div class="av-feature-icon mb-3"><i class="bi bi-file-earmark-text"></i></div>
-                <h3 class="h5 mb-2">OCR documental</h3>
-                <p class="av-muted small mb-0">Procesamiento de documentos colombianos para extraer y validar los datos del votante antes de registrarlos.</p>
-              </div>
+              <article class="av-tech-card">
+                <div class="av-feature-icon mb-3"><i class="bi bi-cpu"></i></div>
+                <h3 class="h5 mb-2">IA y OCR</h3>
+                <p class="av-muted small mb-0">Modelos versionados y trazables para lectura documental y verificación facial.</p>
+              </article>
             </div>
             <div class="col-md-6 col-xl-3">
-              <div class="av-tech-card">
-                <div class="av-feature-icon mb-3"><i class="bi bi-diagram-3"></i></div>
-                <h3 class="h5 mb-2">Servicios desacoplados</h3>
-                <p class="av-muted small mb-0">Microservicios comunicados mediante HTTP/REST para que cada capacidad evolucione de forma independiente.</p>
-              </div>
-            </div>
-            <div class="col-md-6 col-xl-3">
-              <div class="av-tech-card">
-                <div class="av-feature-icon mb-3"><i class="bi bi-database"></i></div>
-                <h3 class="h5 mb-2">Persistencia transaccional</h3>
-                <p class="av-muted small mb-0">Oracle XE centraliza la información electoral, los estados de participación y el registro de operaciones.</p>
-              </div>
+              <article class="av-tech-card">
+                <div class="av-feature-icon mb-3"><i class="bi bi-shield-check"></i></div>
+                <h3 class="h5 mb-2">Seguridad y auditoría</h3>
+                <p class="av-muted small mb-0">Roles, permisos, cifrado, aislamiento de tenants y trazabilidad de operaciones.</p>
+              </article>
             </div>
           </div>
           <div class="av-tech-flow p-4 p-lg-5">
             <div class="row align-items-center g-3 text-center">
               <div class="col"><div class="av-flow-node"><i class="bi bi-window d-block fs-4 mb-2"></i><span>Interfaz web</span></div></div>
-              <div class="col-auto text-primary"><i class="bi bi-arrow-right fs-4"></i></div>
-              <div class="col"><div class="av-flow-node"><i class="bi bi-cpu d-block fs-4 mb-2"></i><span>Java / Javalin</span></div></div>
-              <div class="col-auto text-primary"><i class="bi bi-arrow-right fs-4"></i></div>
-              <div class="col"><div class="av-flow-node"><i class="bi bi-braces d-block fs-4 mb-2"></i><span>FastAPI · Bio · OCR</span></div></div>
-              <div class="col-auto text-primary"><i class="bi bi-arrow-right fs-4"></i></div>
-              <div class="col"><div class="av-flow-node"><i class="bi bi-database-check d-block fs-4 mb-2"></i><span>Oracle XE</span></div></div>
+              <div class="col-auto text-primary" aria-hidden="true"><i class="bi bi-arrow-right fs-4"></i></div>
+              <div class="col"><div class="av-flow-node"><i class="bi bi-shield-lock d-block fs-4 mb-2"></i><span>Autenticación</span></div></div>
+              <div class="col-auto text-primary" aria-hidden="true"><i class="bi bi-arrow-right fs-4"></i></div>
+              <div class="col"><div class="av-flow-node"><i class="bi bi-diagram-3 d-block fs-4 mb-2"></i><span>Identidad · Biometría · IA</span></div></div>
+              <div class="col-auto text-primary" aria-hidden="true"><i class="bi bi-arrow-right fs-4"></i></div>
+              <div class="col"><div class="av-flow-node"><i class="bi bi-box-seam d-block fs-4 mb-2"></i><span>Módulos de negocio</span></div></div>
             </div>
             <p class="text-center av-muted small mt-4 mb-0">Flujo de integración de alto nivel de Averyn</p>
           </div>
         </div>
       </section>
 
-      <section id="equipo" class="av-section">
+      <section id="seguridad" class="av-section av-reveal" aria-labelledby="seguridad-title">
+        <div class="container">
+          <div class="row mb-5 align-items-end">
+            <div class="col-lg-7"><h2 id="seguridad-title" class="av-section-title mb-3">Seguridad por diseño.</h2></div>
+            <div class="col-lg-4 ms-auto"><p class="av-muted mb-0">La seguridad es un dominio de primera clase: cada operación crítica genera auditoría y cada tenant permanece aislado.</p></div>
+          </div>
+          <div class="row g-4">
+            <div class="col-sm-6 col-lg-4">
+              <article class="av-tech-card h-100">
+                <div class="av-feature-icon mb-3"><i class="bi bi-person-lock fs-4"></i></div>
+                <h3 class="h5 mb-2">Roles</h3>
+                <p class="av-muted small mb-0">Modelo usuario → rol → permiso → recurso.</p>
+              </article>
+            </div>
+            <div class="col-sm-6 col-lg-4">
+              <article class="av-tech-card h-100">
+                <div class="av-feature-icon mb-3"><i class="bi bi-key fs-4"></i></div>
+                <h3 class="h5 mb-2">Permisos</h3>
+                <p class="av-muted small mb-0">Autorización granular por capacidad y módulo.</p>
+              </article>
+            </div>
+            <div class="col-sm-6 col-lg-4">
+              <article class="av-tech-card h-100">
+                <div class="av-feature-icon mb-3"><i class="bi bi-shield-lock fs-4"></i></div>
+                <h3 class="h5 mb-2">MFA</h3>
+                <p class="av-muted small mb-0">Autenticación reforzada para operaciones críticas.</p>
+              </article>
+            </div>
+            <div class="col-sm-6 col-lg-4">
+              <article class="av-tech-card h-100">
+                <div class="av-feature-icon mb-3"><i class="bi bi-journal-check fs-4"></i></div>
+                <h3 class="h5 mb-2">Auditoría</h3>
+                <p class="av-muted small mb-0">Registro de login, roles, biometría y procesos sensibles.</p>
+              </article>
+            </div>
+            <div class="col-sm-6 col-lg-4">
+              <article class="av-tech-card h-100">
+                <div class="av-feature-icon mb-3"><i class="bi bi-lock fs-4"></i></div>
+                <h3 class="h5 mb-2">Cifrado</h3>
+                <p class="av-muted small mb-0">Protección de datos altamente sensibles como plantillas biométricas.</p>
+              </article>
+            </div>
+            <div class="col-sm-6 col-lg-4">
+              <article class="av-tech-card h-100">
+                <div class="av-feature-icon mb-3"><i class="bi bi-clock-history fs-4"></i></div>
+                <h3 class="h5 mb-2">Trazabilidad</h3>
+                <p class="av-muted small mb-0">Cada ejecución de IA y operación queda registrada con su resultado.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="equipo" class="av-section av-section-soft" aria-labelledby="equipo-title">
         <div class="container">
           <div class="row mb-5">
             <div class="col-lg-7">
-              <h2 class="av-section-title mb-3">Construido desde la ingeniería y la investigación.</h2>
-              <p class="av-muted mb-0">Averyn nace como una propuesta académica para modernizar los procesos electorales institucionales mediante software, biometría y arquitecturas distribuidas.</p>
+              <h2 id="equipo-title" class="av-section-title mb-3">Construido desde la ingeniería y la investigación.</h2>
+              <p class="av-muted mb-0">Averyn nace como una propuesta académica para modernizar los procesos institucionales mediante software, biometría y arquitecturas distribuidas.</p>
             </div>
           </div>
           <div class="row g-3">
             <div class="col-sm-6 col-lg-3">
               <div class="av-author-wrap">
                 <a class="av-author-card" href="https://github.com/ing-jorgehg" target="_blank" rel="noreferrer" aria-label="Abrir perfil de GitHub de Jorge Ivan Herrera Garcia">
-                  <div class="av-author-avatar">JI</div>
+                  <span class="av-author-avatar">JI</span>
                   <div class="flex-grow-1"><strong>Jorge Ivan Herrera Garcia</strong><small class="d-block av-muted mt-1">Integrante</small></div>
                   <i class="bi bi-github av-author-github" aria-hidden="true"></i>
                 </a>
@@ -188,7 +364,7 @@
             <div class="col-sm-6 col-lg-3">
               <div class="av-author-wrap">
                 <a class="av-author-card" href="https://github.com/ddturizo-eng" target="_blank" rel="noreferrer" aria-label="Abrir perfil de GitHub de Daniel David Turizo Chacon">
-                  <div class="av-author-avatar">DD</div>
+                  <span class="av-author-avatar">DD</span>
                   <div class="flex-grow-1"><strong>Daniel David Turizo Chacon</strong><small class="d-block av-muted mt-1">Integrante</small></div>
                   <i class="bi bi-github av-author-github" aria-hidden="true"></i>
                 </a>
@@ -201,20 +377,20 @@
             <div class="col-sm-6 col-lg-3">
               <div class="av-author-wrap">
                 <a class="av-author-card" href="https://github.com/JoseCh777" target="_blank" rel="noreferrer" aria-label="Abrir perfil de GitHub de Jose Antonio Chinchia Gutierrez">
-                  <div class="av-author-avatar">JC</div>
+                  <span class="av-author-avatar">JC</span>
                   <div class="flex-grow-1"><strong>Jose Antonio Chinchia Gutierrez</strong><small class="d-block av-muted mt-1">Integrante</small></div>
                   <i class="bi bi-github av-author-github" aria-hidden="true"></i>
                 </a>
                 <div class="av-github-popover" role="tooltip">
                   <img src="https://github.com/JoseCh777.png?size=96" alt="Avatar de Jose Antonio Chinchia Gutierrez" />
-                  <div><strong>Jose Antonio Chinchia Gutierrez</strong><small>@JoseCh777</small><p>Construcción de interfaces y componentes para procesos electorales claros.</p><span><i class="bi bi-github me-1"></i> Ver perfil</span></div>
+                  <div><strong>Jose Antonio Chinchia Gutierrez</strong><small>@JoseCh777</small><p>Construcción de interfaces y componentes para procesos institucionales claros.</p><span><i class="bi bi-github me-1"></i> Ver perfil</span></div>
                 </div>
               </div>
             </div>
             <div class="col-sm-6 col-lg-3">
               <div class="av-author-wrap">
                 <a class="av-author-card" href="https://github.com/mcalderona" target="_blank" rel="noreferrer" aria-label="Abrir perfil de GitHub de Mateo Calderon Araujo">
-                  <div class="av-author-avatar">MC</div>
+                  <span class="av-author-avatar">MC</span>
                   <div class="flex-grow-1"><strong>Mateo Calderon Araujo</strong><small class="d-block av-muted mt-1">Integrante</small></div>
                   <i class="bi bi-github av-author-github" aria-hidden="true"></i>
                 </a>
@@ -228,32 +404,32 @@
         </div>
       </section>
 
-      <section class="av-section av-section-soft av-section-cta">
+      <section id="cta" class="av-section av-section-cta" aria-labelledby="cta-title">
         <div class="container text-center">
-          <h2 class="av-section-title mb-3">Tu próxima elección merece una mejor arquitectura.</h2>
-          <p class="av-muted mx-auto mb-4" style="max-width: 570px">Explora la plataforma y descubre una forma más clara de gestionar cada etapa del proceso electoral.</p>
-          <a class="btn av-btn-primary btn-lg" href="login.html">Ingresar a Averyn <i class="bi bi-arrow-right ms-2"></i></a>
+          <h2 id="cta-title" class="av-section-title mb-3">Automatiza procesos institucionales críticos con seguridad.</h2>
+          <p class="av-muted mx-auto mb-4" style="max-width: 570px">Explora la plataforma y descubre una forma más clara y segura de gestionar la identidad de tu institución.</p>
+          <a class="btn av-btn-primary btn-lg" href="login.html">Ingresar al sistema <i class="bi bi-arrow-right ms-2"></i></a>
         </div>
       </section>
     </main>
 
-    <footer class="av-footer py-5">
+    <footer class="av-footer py-5" aria-label="Pie de página">
       <div class="container">
         <div class="row g-4">
           <div class="col-lg-5">
             <img class="av-footer-logo" src="assets/img/logo-blanco.png" alt="Averyn" />
-            <p class="small mt-3 mb-0">Gestión electoral segura, automatizada y trazable.</p>
+            <p class="small mt-3 mb-0">Identidad inteligente para procesos institucionales seguros.</p>
           </div>
           <div class="col-sm-6 col-lg-3">
-            <div class="av-footer-label mb-3">Proyecto</div>
+            <h3 class="av-footer-label mb-3">Proyecto</h3>
             <a class="av-footer-repo" href="https://github.com/ddturizo-eng/averyn" target="_blank" rel="noreferrer"><i class="bi bi-github me-2"></i>Repositorio de Averyn <i class="bi bi-arrow-up-right ms-1"></i></a>
             <a class="btn btn-link p-0 mt-3 text-white text-decoration-none d-block" href="login.html">Iniciar sesión</a>
           </div>
-          <div class="col-sm-6 col-lg-4">
-            <div class="av-footer-label mb-3">Contacto Averyn</div>
+          <address id="contacto" class="col-sm-6 col-lg-4 mb-0">
+            <h3 class="av-footer-label mb-3">Contacto Averyn</h3>
             <p class="small mb-3">Espacio reservado para el correo y los canales oficiales del proyecto.</p>
             <a class="av-contact-placeholder" href="#contacto"><i class="bi bi-envelope me-2"></i>Próximamente</a>
-          </div>
+          </address>
         </div>
         <div class="av-footer-bottom mt-5 pt-4 small">© 2026 Averyn. Todos los derechos reservados.</div>
       </div>
@@ -261,7 +437,7 @@
 
     <button class="av-back-to-top" aria-label="Volver arriba" aria-hidden="true" tabindex="-1"><i class="bi bi-arrow-up"></i></button>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/home.js"></script>
   </body>
 </html>
