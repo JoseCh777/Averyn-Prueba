@@ -273,12 +273,12 @@ function iniciarProgresoCaptura() {
   const incremento = (CAPTURA_INTERVALO_MS / CAPTURA_DURACION_MS) * 100;
   let progreso = 0;
 
-  if (barra) barra.style.width = '0%';
+  if (barra) barra.style.transform = 'scaleX(0)';
   if (porcentaje) porcentaje.textContent = '0%';
 
   capturaEstado.temporizador = window.setInterval(() => {
     progreso = Math.min(progreso + incremento, 100);
-    if (barra) barra.style.width = `${progreso}%`;
+    if (barra) barra.style.transform = `scaleX(${progreso / 100})`;
     if (porcentaje) porcentaje.textContent = `${Math.round(progreso)}%`;
     actualizarDiagnostico('capturando', progreso);
 

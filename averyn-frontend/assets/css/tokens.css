@@ -65,7 +65,7 @@
   --av-shadow-lg: 0 12px 32px rgba(0, 12, 36, 0.16);
 
   /* Transiciones */
-  --av-transition-fast: 150ms ease;
+  --av-transition-fast: 150ms cubic-bezier(.23, 1, .32, 1); /* ease-out fuerte: respuesta inmediata */
 
   /* EXTENSIÓN MÓDULOS (registro civil digital)
      Dirección visual del contenido de módulos (Identity / OCR y siguientes).
