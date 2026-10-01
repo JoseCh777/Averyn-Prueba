@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Acceso institucional a Averyn — Dirección 03 Editorial." />
+  <title>Acceso institucional — Averyn Editorial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="css/components.css" rel="stylesheet" />
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al formulario</a>
+
+  <main class="login-grid" aria-label="Acceso a Averyn">
+    <!-- ================= COLUMNA EDITORIAL ================= -->
+    <aside class="login-aside">
+      <div>
+        <a class="nameplate" href="index.html">Averyn</a>
+        <p class="nameplate__strap" style="text-align:left">Identidad verificada · Procesos auditables</p>
+      </div>
+
+      <div>
+        <span class="section-label">Acceso institucional · Edición N.º 03</span>
+        <p class="login-aside__statement">Cada acceso queda registrado.</p>
+        <p class="login-aside__note">
+          La sesión, el rol y la hora de ingreso se escriben en la bitácora de auditoría. Las cuentas se
+          emiten por institución y se pueden revocar sin afectar el expediente de las personas.
+        </p>
+        <ul class="login-aside__links">
+          <li><a href="index.html">Portada</a></li>
+          <li><a href="dashboard.html">Panel de operación</a></li>
+        </ul>
+      </div>
+
+      <p class="login-aside__colophon">
+        © 2026 Averyn · Compuesto en Fraunces e Inter · Dirección 03 — Editorial / Magazine
+      </p>
+    </aside>
+
+    <!-- ================= FORMULARIO ================= -->
+    <div class="login-panel" id="contenido" tabindex="-1">
+      <form class="login-form" id="login-form" novalidate>
+        <span class="section-label">Formulario de acceso</span>
+        <h1>Bienvenido de nuevo</h1>
+        <p class="lede" style="font-size:var(--text-sm)">
+          Ingrese con el correo asignado por su institución para continuar en el panel de operación.
+        </p>
+
+        <div class="alert alert--error" id="form-error" role="alert" hidden style="margin-top:var(--space-5)">
+          <span class="alert__glyph" aria-hidden="true">✕</span>
+          <span>
+            <strong id="form-error-title">No se pudo iniciar la sesión</strong>
+            <span id="form-error-text">Verifique los datos ingresados.</span>
+          </span>
+        </div>
+
+        <div style="margin-top:var(--space-5)">
+          <div class="field">
+            <label class="label" for="email">Correo institucional</label>
+            <input class="input" type="email" id="email" name="email" autocomplete="username"
+                   placeholder="usuario@institucion.edu" required aria-describedby="email-help" />
+            <span class="help" id="email-help">Usa el correo corporativo con el que fue habilitada su cuenta.</span>
+            <span class="help help--error" id="email-error" hidden></span>
+          </div>
+
+          <div class="field">
+            <label class="label" for="password">Contraseña</label>
+            <input class="input" type="password" id="password" name="password" autocomplete="current-password"
+                   placeholder="Mínimo 8 caracteres" required minlength="8" aria-describedby="password-help" />
+            <span class="help" id="password-help">Mínimo 8 caracteres. Se guardan solo la sesión, no la clave.</span>
+            <span class="help help--error" id="password-error" hidden></span>
+          </div>
+
+          <div class="row-wrap" style="justify-content:space-between;margin-bottom:var(--space-5)">
+            <label class="check"><input type="checkbox" id="remember" checked /> Mantener la sesión abierta</label>
+            <span class="help">¿Olvidó la clave? Solicítela al administrador de su entidad.</span>
+          </div>
+
+          <button class="btn btn--accent btn--lg btn--block" type="submit" id="btn-submit">Ingresar</button>
+        </div>
+
+        <div class="login-form__demo">
+          <p class="help" style="margin:0 0 var(--space-2)">
+            <span class="section-label" style="color:var(--color-text-muted);margin-bottom:4px">Credenciales de demostración</span>
+          </p>
+          <p class="help" style="margin:0">
+            Correo <span class="mono">admin@averyn.test</span> · Contraseña <span class="mono">Averyn2026</span>
+          </p>
+          <p class="help" style="margin-top:var(--space-3)">
+            <a href="index.html" style="color:var(--color-accent);font-weight:600">← Volver a la portada</a>
+          </p>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <script src="../shared/app.js"></script>
+  <script>
+    (function () {
+      var form = document.getElementById('login-form');
+      var errorBox = document.getElementById('form-error');
+      var errorText = document.getElementById('form-error-text');
+      var btn = document.getElementById('btn-submit');
+
+      var email = document.getElementById('email');
+      var pass = document.getElementById('password');
+      var emailHelp = document.getElementById('email-help');
+      var emailError = document.getElementById('email-error');
+      var passHelp = document.getElementById('password-help');
+      var passError = document.getElementById('password-error');
+
+      function limpiarCampo(input, ayuda, error) {
+        input.removeAttribute('aria-invalid');
+        error.hidden = true;
+        error.textContent = '';
+        input.setAttribute('aria-describedby', ayuda.id);
+        input.closest('.field').classList.remove('field--error');
+      }
+
+      function marcarCampo(input, ayuda, error, mensaje) {
+        input.setAttribute('aria-invalid', 'true');
+        error.textContent = mensaje;
+        error.hidden = false;
+        input.setAttribute('aria-describedby', ayuda.id + ' ' + error.id);
+        input.closest('.field').classList.add('field--error');
+      }
+
+      function mostrarAlerta(mensaje) {
+        errorText.textContent = mensaje;
+        errorBox.hidden = false;
+      }
+
+      function ocultarAlerta() {
+        errorBox.hidden = true;
+        errorText.textContent = '';
+      }
+
+      function terminarCarga() {
+        btn.classList.remove('is-loading');
+        btn.disabled = false;
+        btn.textContent = 'Ingresar';
+      }
+
+      email.addEventListener('input', function () {
+        if (email.getAttribute('aria-invalid') === 'true') { limpiarCampo(email, emailHelp, emailError); }
+        if (!errorBox.hidden) { ocultarAlerta(); }
+      });
+      pass.addEventListener('input', function () {
+        if (pass.getAttribute('aria-invalid') === 'true') { limpiarCampo(pass, passHelp, passError); }
+        if (!errorBox.hidden) { ocultarAlerta(); }
+      });
+
+      form.addEventListener('submit', function (ev) {
+        ev.preventDefault();
+        ocultarAlerta();
+        limpiarCampo(email, emailHelp, emailError);
+        limpiarCampo(pass, passHelp, passError);
+
+        var valorEmail = email.value.trim();
+        var valorPass = pass.value;
+
+        if (!valorEmail || !email.checkValidity()) {
+          marcarCampo(email, emailHelp, emailError, 'Ingrese un correo institucional válido.');
+          mostrarAlerta('El correo ingresado no tiene un formato válido.');
+          email.focus();
+          return;
+        }
+        if (!valorPass) {
+          marcarCampo(pass, passHelp, passError, 'Ingrese su contraseña.');
+          mostrarAlerta('La contraseña es obligatoria.');
+          pass.focus();
+          return;
+        }
+        if (valorPass.length < 8) {
+          marcarCampo(pass, passHelp, passError, 'La contraseña debe tener al menos 8 caracteres.');
+          mostrarAlerta('La contraseña debe tener al menos 8 caracteres.');
+          pass.focus();
+          return;
+        }
+
+        btn.classList.add('is-loading');
+        btn.disabled = true;
+        btn.textContent = 'Verificando';
+
+        window.setTimeout(function () {
+          if (valorEmail === 'admin@averyn.test' && valorPass === 'Averyn2026') {
+            try {
+              AVERYN.guardarSesion(valorEmail);
+            } catch (err) { /* continúa hacia el panel */ }
+            window.location.href = 'dashboard.html';
+            return;
+          }
+          terminarCarga();
+          marcarCampo(email, emailHelp, emailError, 'Revise el correo institucional.');
+          marcarCampo(pass, passHelp, passError, 'La contraseña no coincide con la cuenta.');
+          mostrarAlerta('Correo o contraseña incorrectos. Use las credenciales de demostración.');
+          pass.focus();
+        }, 800);
+      });
+    })();
+  </script>
+</body>
+</html>

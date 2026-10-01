@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Panel de operación de Averyn — Dirección 03 Editorial: cifras biométricas, eventos, procesos y estados del sistema." />
+  <title>Panel de operación — Averyn Editorial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="css/components.css" rel="stylesheet" />
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <!-- ================= MASTHEAD DEL PANEL ================= -->
+  <header class="masthead masthead--compact masthead--sticky">
+    <div class="container">
+      <div class="masthead__nameplate-row">
+        <a class="nameplate nameplate--sm" href="index.html">Averyn</a>
+        <span class="masthead__tag">Panel de operación · Edición N.º 03</span>
+        <div class="masthead__actions">
+          <a class="btn btn--sm" href="index.html">Portada</a>
+          <a class="btn btn--sm btn--ghost" href="login.html">Acceso</a>
+          <button class="icon-btn masthead__toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="section-nav" aria-label="Abrir el menú de secciones">
+            <span aria-hidden="true">☰</span>
+          </button>
+        </div>
+      </div>
+
+      <nav class="sections" aria-label="Secciones del panel">
+        <ul class="sections__list" id="section-nav">
+          <li><a class="sections__link is-active" href="#resumen" aria-current="page">Resumen</a></li>
+          <li><a class="sections__link" href="#eventos">Eventos</a></li>
+          <li><a class="sections__link" href="#procesos">Procesos</a></li>
+          <li><a class="sections__link" href="#estados">Estados</a></li>
+          <li><a class="sections__link" href="#inteligencia">Inteligencia</a></li>
+          <li><a class="sections__link" href="#cola">Revisión</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ================= FRANJA DE FECHA (DATELINE) ================= -->
+  <div class="container">
+    <div class="dateline">
+      <span id="dateline-fecha">Jueves 1 de octubre de 2026</span>
+      <span>Turno mañana · Ventanilla principal</span>
+      <span>Sesión: <strong id="dateline-sesion">Invitado</strong></span>
+      <button class="btn btn--sm" type="button" id="btn-cerrar">Cerrar sesión</button>
+    </div>
+  </div>
+
+  <main id="contenido" class="container" tabindex="-1">
+    <div class="page-head">
+      <div>
+        <span class="section-label">Sumario de la edición</span>
+        <h1>Resumen operativo</h1>
+        <p class="lede" style="margin-top:var(--space-3)">
+          Cifras del motor biométrico, actividad de las últimas jornadas, procesos electorales en curso
+          y estado del parque instalado.
+        </p>
+      </div>
+      <div class="page-head__actions">
+        <button class="btn" type="button" id="btn-exportar">Exportar acta</button>
+        <button class="btn btn--accent" type="button" id="btn-nueva">Nueva verificación</button>
+      </div>
+    </div>
+    <p class="sr-only" role="status" id="accion-estado"></p>
+
+    <div class="alert alert--warning" role="status">
+      <span class="alert__glyph" aria-hidden="true">!</span>
+      <span><strong>Mantenimiento programado</strong>FaceCam Lite se actualizará el sábado 3 de octubre a las 02:00; la sucursal norte quedará sin verificación facial durante 40 minutos.</span>
+    </div>
+
+    <!-- ================= CIFRAS ================= -->
+    <section class="section section--tight" id="resumen" aria-labelledby="resumen-title">
+      <div class="section-head">
+        <div>
+          <span class="section-label">Cifras · Motor biométrico</span>
+          <h2 id="resumen-title" style="margin-top:var(--space-3)">Lo que dice la primera página.</h2>
+        </div>
+        <p class="mono muted" style="font-size:var(--text-xs);margin:0">Fuente: almacén de demostración</p>
+      </div>
+
+      <div class="kpi-grid">
+        <article class="kpi">
+          <span class="kpi__label">Personas registradas</span>
+          <span class="kpi__value" id="kpi-personas">—</span>
+          <span class="kpi__note">Catálogo maestro de identidad</span>
+        </article>
+        <article class="kpi">
+          <span class="kpi__label">Verificaciones</span>
+          <span class="kpi__value" id="kpi-verificaciones">—</span>
+          <span class="kpi__note">Operaciones de comparación · rostro y huella</span>
+        </article>
+        <article class="kpi">
+          <span class="kpi__label">Eventos exitosos</span>
+          <span class="kpi__value" id="kpi-exitosas">—</span>
+          <span class="kpi__delta up" id="kpi-exitosas-delta">—</span>
+          <span class="kpi__note">Enrolamientos y verificaciones aceptados</span>
+        </article>
+        <article class="kpi">
+          <span class="kpi__label">Rechazos</span>
+          <span class="kpi__value" id="kpi-rechazos">—</span>
+          <span class="kpi__delta down">Requieren revisión</span>
+          <span class="kpi__note">Coincidencia bajo umbral</span>
+        </article>
+        <article class="kpi">
+          <span class="kpi__label">Dispositivos en línea</span>
+          <span class="kpi__value" id="kpi-dispositivos">—</span>
+          <span class="kpi__note" id="kpi-dispositivos-note">De 4 instalados</span>
+        </article>
+      </div>
+    </section>
+
+    <hr class="rule rule--double" />
+
+    <!-- ================= REJILLA ASIMÉTRICA ================= -->
+    <div class="layout-asym" style="margin-top:var(--space-8)">
+      <div class="layout-asym__main">
+        <!-- Actividad biométrica -->
+        <section id="eventos" aria-labelledby="eventos-title">
+          <div class="section-head">
+            <div>
+              <span class="section-label">Crónica · Actividad</span>
+              <h2 id="eventos-title" style="margin-top:var(--space-3);font-size:var(--text-h3)">Eventos biométricos recientes</h2>
+            </div>
+            <span class="mono muted" id="tabla-cont" style="font-size:var(--text-xs);margin:0">—</span>
+          </div>
+
+          <div class="tabs" role="group" aria-label="Filtrar por tipo de operación">
+            <button class="tab is-active" type="button" aria-pressed="true" data-tipo="todos">Todas</button>
+            <button class="tab" type="button" aria-pressed="false" data-tipo="verificacion">Verificaciones</button>
+            <button class="tab" type="button" aria-pressed="false" data-tipo="enrolamiento">Enrolamientos</button>
+          </div>
+
+          <div class="toolbar">
+            <label class="search">
+              <span class="search__glyph" aria-hidden="true">⌕</span>
+              <span class="sr-only">Buscar en los eventos biométricos</span>
+              <input type="search" id="buscar" placeholder="Persona, documento, dispositivo o método…" autocomplete="off" />
+            </label>
+            <label class="check"><input type="checkbox" id="solo-rechazos" /> Solo rechazos</label>
+          </div>
+
+          <div class="table-wrap">
+            <table class="table">
+              <caption class="sr-only">Eventos biométricos recientes con fecha, persona, operación, método, dispositivo y resultado</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Fecha</th>
+                  <th scope="col">Persona</th>
+                  <th scope="col">Operación</th>
+                  <th scope="col">Método</th>
+                  <th scope="col">Dispositivo</th>
+                  <th scope="col">Resultado</th>
+                </tr>
+              </thead>
+              <tbody id="tabla-eventos"></tbody>
+            </table>
+          </div>
+          <p class="help" style="margin-top:var(--space-2)">
+            Los datos provienen del almacén de demostración; en producción los sustituye la API del motor biométrico.
+          </p>
+        </section>
+
+        <!-- Procesos -->
+        <section id="procesos" aria-labelledby="procesos-title">
+          <div class="section-head">
+            <div>
+              <span class="section-label">Agenda · Procesos</span>
+              <h2 id="procesos-title" style="margin-top:var(--space-3);font-size:var(--text-h3)">Procesos electorales</h2>
+            </div>
+            <span class="mono muted" style="font-size:var(--text-xs);margin:0" id="procesos-cont">—</span>
+          </div>
+          <div class="card card--flush">
+            <ul class="list-ruled" id="lista-procesos" style="padding:var(--space-2) var(--space-5)"></ul>
+          </div>
+        </section>
+      </div>
+
+      <!-- ================= LATERAL ================= -->
+      <aside class="layout-asym__side" aria-label="Sumario y estados">
+        <nav class="dock" aria-label="Sumario del panel">
+          <p class="dock__group-title">Sumario</p>
+          <ul class="dock__list">
+            <li><a class="dock__item is-active" href="#resumen" aria-current="true"><span class="dock__glyph" aria-hidden="true">§</span>Cifras</a></li>
+            <li><a class="dock__item" href="#eventos"><span class="dock__glyph" aria-hidden="true">¶</span>Actividad</a></li>
+            <li><a class="dock__item" href="#procesos"><span class="dock__glyph" aria-hidden="true">✎</span>Procesos</a></li>
+            <li><a class="dock__item" href="#estados"><span class="dock__glyph" aria-hidden="true">◉</span>Estados</a></li>
+            <li><a class="dock__item" href="#inteligencia"><span class="dock__glyph" aria-hidden="true">✦</span>Inteligencia</a></li>
+            <li><a class="dock__item" href="#cola"><span class="dock__glyph" aria-hidden="true">▤</span>Revisión</a></li>
+          </ul>
+        </nav>
+
+        <section class="card" id="estados" aria-labelledby="estados-title">
+          <div class="card__head">
+            <h2 class="card__title" id="estados-title">Estados del sistema</h2>
+            <span class="card__meta">4 servicios</span>
+          </div>
+          <ul class="list-ruled">
+            <li>
+              <span class="list-ruled__main"><span class="list-ruled__title">Servicio de identidad</span><span class="list-ruled__meta">Catálogo y expedientes</span></span>
+              <span class="badge badge--success"><span class="dot" aria-hidden="true"></span>Operativo</span>
+            </li>
+            <li>
+              <span class="list-ruled__main"><span class="list-ruled__title">Motor biométrico</span><span class="list-ruled__meta">Comparación rostro y huella</span></span>
+              <span class="badge badge--success"><span class="dot" aria-hidden="true"></span>Operativo</span>
+            </li>
+            <li>
+              <span class="list-ruled__main"><span class="list-ruled__title">OCR de documentos</span><span class="list-ruled__meta">Extracción de campos</span></span>
+              <span class="badge badge--warning"><span class="dot" aria-hidden="true"></span>Degradado</span>
+            </li>
+            <li>
+              <span class="list-ruled__main"><span class="list-ruled__title">Sincronización de sucursales</span><span class="list-ruled__meta">Réplica de eventos</span></span>
+              <span class="badge badge--danger"><span class="dot" aria-hidden="true"></span>Detenida</span>
+            </li>
+          </ul>
+        </section>
+
+        <section class="card" aria-labelledby="dispositivos-title">
+          <div class="card__head">
+            <h2 class="card__title" id="dispositivos-title">Dispositivos instalados</h2>
+            <span class="card__meta" id="dispositivos-cont">—</span>
+          </div>
+          <ul class="list-ruled" id="lista-dispositivos"></ul>
+        </section>
+
+        <section class="card card--paper" id="inteligencia" aria-labelledby="ia-title">
+          <div class="card__head">
+            <h2 class="card__title" id="ia-title">Hallazgos de inteligencia</h2>
+            <span class="badge badge--info">Asistida</span>
+          </div>
+          <ul class="list-ruled">
+            <li>
+              <span class="list-ruled__main">
+                <span class="list-ruled__title">Concentración de rechazos</span>
+                <span class="list-ruled__meta">FaceCam Pro explica la mitad de los rechazos del período. Revisar iluminación del recibidor.</span>
+              </span>
+            </li>
+            <li>
+              <span class="list-ruled__main">
+                <span class="list-ruled__title">Enrolamientos duplicados</span>
+                <span class="list-ruled__meta">Dos registros de rostro podrían corresponder a la misma persona. Pendiente de validación humana.</span>
+              </span>
+            </li>
+            <li>
+              <span class="list-ruled__main">
+                <span class="list-ruled__title">Pico de actividad</span>
+                <span class="list-ruled__meta">El 68 % de las verificaciones se concentra entre 08:00 y 10:00. Considere una segunda ventanilla.</span>
+              </span>
+            </li>
+          </ul>
+        </section>
+
+        <section id="cola" aria-labelledby="cola-title">
+          <div class="section-head" style="margin-bottom:var(--space-4)">
+            <h2 id="cola-title" style="font-size:var(--text-h3)">Cola de revisión humana</h2>
+          </div>
+          <div class="empty">
+            <span class="empty__glyph" aria-hidden="true">▤</span>
+            <h3 class="empty__title">Sin documentos pendientes</h3>
+            <p class="empty__desc">
+              Cuando el OCR detecta baja confianza, los casos aparecen aquí para validación antes de
+              confirmar el registro.
+            </p>
+            <a class="btn btn--sm" href="#eventos">Ver la actividad</a>
+          </div>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <!-- ================= COLOFÓN ================= -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <p class="footer__title">Secciones</p>
+          <ul class="footer__list">
+            <li><a class="footer__link" href="#resumen">Cifras</a></li>
+            <li><a class="footer__link" href="#eventos">Actividad</a></li>
+            <li><a class="footer__link" href="#procesos">Procesos</a></li>
+            <li><a class="footer__link" href="#estados">Estados</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__title">Edición</p>
+          <ul class="footer__list">
+            <li><a class="footer__link" href="index.html">Portada</a></li>
+            <li><a class="footer__link" href="login.html">Acceso institucional</a></li>
+            <li>Dirección 03 · Editorial</li>
+            <li>N.º 03 · 1 de octubre de 2026</li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__title">Colofón</p>
+          <p class="colophon">
+            Compuesto en Fraunces e Inter sobre papel #F6F3EC; tinta #1A1614 y rojo ladrillo #C1341F
+            para los avisos del sistema.
+          </p>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© 2026 Averyn — Identidad para procesos institucionales</span>
+        <span>Dirección 03 · Editorial / Magazine</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../shared/app.js"></script>
+  <script>
+    (function () {
+      var MAPA = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
+      function esc(valor) {
+        return String(valor).replace(/[&<>"']/g, function (c) { return MAPA[c]; });
+      }
+
+      // ---------- Menú de secciones ----------
+      var toggle = document.getElementById('nav-toggle');
+      var navLinks = document.getElementById('section-nav');
+      if (toggle && navLinks) {
+        toggle.addEventListener('click', function () {
+          var abierto = navLinks.classList.toggle('is-open');
+          toggle.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+          toggle.setAttribute('aria-label', abierto ? 'Cerrar el menú de secciones' : 'Abrir el menú de secciones');
+        });
+        navLinks.addEventListener('click', function (ev) {
+          if (ev.target && ev.target.tagName === 'A') {
+            navLinks.classList.remove('is-open');
+            toggle.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }
+
+      // ---------- Dateline ----------
+      var fechaEl = document.getElementById('dateline-fecha');
+      if (fechaEl) {
+        try {
+          fechaEl.textContent = new Date().toLocaleDateString('es-CO', {
+            weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+          });
+        } catch (err) { /* se conserva la fecha estática */ }
+      }
+      var sesionEl = document.getElementById('dateline-sesion');
+      var sesion = null;
+      try { sesion = AVERYN.obtenerSesion(); } catch (err) { sesion = null; }
+      if (sesionEl && sesion && sesion.email) {
+        sesionEl.textContent = sesion.email + ' · ' + (sesion.rol || 'Administrador');
+      }
+      var btnCerrar = document.getElementById('btn-cerrar');
+      if (btnCerrar) {
+        btnCerrar.addEventListener('click', function () {
+          try { AVERYN.cerrarSesion(); } catch (err) { /* sin sesión activa */ }
+          window.location.href = 'login.html';
+        });
+      }
+
+      // ---------- KPIs ----------
+      var personas = AVERYN.listarPersonas();
+      var eventos = AVERYN.listarEventos();
+      var dispositivos = AVERYN.listarDispositivos();
+      var resumen = AVERYN.resumenBiometria();
+
+      document.getElementById('kpi-personas').textContent = personas.length;
+      document.getElementById('kpi-verificaciones').textContent = resumen.verificaciones;
+      document.getElementById('kpi-exitosas').textContent = resumen.exitosas;
+      var pctExitosas = eventos.length ? Math.round((resumen.exitosas / eventos.length) * 100) : 0;
+      document.getElementById('kpi-exitosas-delta').textContent = '▲ ' + pctExitosas + ' % de los eventos';
+      document.getElementById('kpi-rechazos').textContent = resumen.rechazadas;
+      document.getElementById('kpi-dispositivos').textContent = resumen.dispositivosConectados;
+      document.getElementById('kpi-dispositivos-note').textContent = 'De ' + dispositivos.length + ' instalados';
+
+      // ---------- Tabla de eventos ----------
+      var tbody = document.getElementById('tabla-eventos');
+      var campoBusqueda = document.getElementById('buscar');
+      var soloRechazos = document.getElementById('solo-rechazos');
+      var contador = document.getElementById('tabla-cont');
+      var tipoOperacion = 'todos';
+      var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab[data-tipo]'));
+
+      function pintarEventos() {
+        var q = (campoBusqueda.value || '').trim().toLowerCase();
+        var filtrados = eventos.filter(function (e) {
+          var persona = AVERYN.obtenerPersona(e.personaId) || { nombre: '', documento: '' };
+          var coincide = !q ||
+            persona.nombre.toLowerCase().indexOf(q) > -1 ||
+            (persona.documento || '').toLowerCase().indexOf(q) > -1 ||
+            e.dispositivo.toLowerCase().indexOf(q) > -1 ||
+            AVERYN.textoMetodo(e.metodo).toLowerCase().indexOf(q) > -1 ||
+            AVERYN.textoOperacion(e.tipoOperacion).toLowerCase().indexOf(q) > -1;
+          var pasaRechazo = !soloRechazos.checked || e.resultado === 'rechazado';
+          var pasaTipo = tipoOperacion === 'todos' || e.tipoOperacion === tipoOperacion;
+          return coincide && pasaRechazo && pasaTipo;
+        });
+
+        if (!filtrados.length) {
+          tbody.innerHTML = '<tr><td colspan="6" class="table__empty">' +
+            'Ningún evento coincide con el filtro.<br>' +
+            '<button class="btn btn--sm" type="button" id="btn-limpiar">Limpiar filtros</button>' +
+            '</td></tr>';
+          var limpiar = document.getElementById('btn-limpiar');
+          if (limpiar) { limpiar.addEventListener('click', limpiarFiltros); }
+        } else {
+          tbody.innerHTML = filtrados.map(function (e) {
+            var persona = AVERYN.obtenerPersona(e.personaId) || { nombre: '—', documento: '' };
+            var clase = AVERYN.claseResultado(e.resultado);
+            return '<tr>' +
+              '<td class="mono" style="white-space:nowrap">' + esc(AVERYN.formatearFechaHora(e.fecha)) + '</td>' +
+              '<td>' + esc(persona.nombre) + '<br><span class="muted" style="font-size:0.75rem">' + esc(persona.documento) + '</span></td>' +
+              '<td>' + esc(AVERYN.textoOperacion(e.tipoOperacion)) + '</td>' +
+              '<td>' + esc(AVERYN.textoMetodo(e.metodo)) + '</td>' +
+              '<td class="muted">' + esc(e.dispositivo) + '</td>' +
+              '<td><span class="badge badge--' + clase + '"><span class="dot" aria-hidden="true"></span>' + esc(AVERYN.textoResultado(e.resultado)) + '</span></td>' +
+              '</tr>';
+          }).join('');
+        }
+
+        contador.textContent = filtrados.length + ' de ' + eventos.length + ' eventos';
+      }
+
+      function limpiarFiltros() {
+        campoBusqueda.value = '';
+        soloRechazos.checked = false;
+        tipoOperacion = 'todos';
+        tabs.forEach(function (tab) {
+          var activo = tab.getAttribute('data-tipo') === 'todos';
+          tab.classList.toggle('is-active', activo);
+          tab.setAttribute('aria-pressed', activo ? 'true' : 'false');
+        });
+        pintarEventos();
+        campoBusqueda.focus();
+      }
+
+      tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          tipoOperacion = tab.getAttribute('data-tipo');
+          tabs.forEach(function (otro) {
+            var activo = otro === tab;
+            otro.classList.toggle('is-active', activo);
+            otro.setAttribute('aria-pressed', activo ? 'true' : 'false');
+          });
+          pintarEventos();
+        });
+      });
+
+      campoBusqueda.addEventListener('input', pintarEventos);
+      soloRechazos.addEventListener('change', pintarEventos);
+      pintarEventos();
+
+      // ---------- Procesos ----------
+      var procesos = AVERYN.listarProcesos();
+      document.getElementById('lista-procesos').innerHTML = procesos.map(function (p) {
+        var abierto = p.estado === 'OPEN';
+        var badge = abierto ? 'badge--success' : 'badge--neutral';
+        var texto = abierto ? 'Abierto' : 'Borrador';
+        return '<li>' +
+          '<span class="list-ruled__main">' +
+          '<span class="list-ruled__title">' + esc(p.nombre) + '</span>' +
+          '<span class="list-ruled__meta">' + esc(p.institucion) + ' · ' + esc(AVERYN.formatearFecha(p.fechaInicio)) + ' – ' + esc(AVERYN.formatearFecha(p.fechaFin)) + '</span>' +
+          '</span>' +
+          '<span class="badge ' + badge + '"><span class="dot" aria-hidden="true"></span>' + texto + '</span>' +
+          '</li>';
+      }).join('');
+      document.getElementById('procesos-cont').textContent = procesos.length + ' en curso';
+
+      // ---------- Dispositivos ----------
+      document.getElementById('lista-dispositivos').innerHTML = dispositivos.map(function (d) {
+        var enLinea = d.estado === 'conectado';
+        var badge = enLinea ? 'badge--success' : 'badge--danger';
+        var texto = enLinea ? 'En línea' : 'Sin conexión';
+        return '<li>' +
+          '<span class="list-ruled__main">' +
+          '<span class="list-ruled__title">' + esc(d.nombre) + '</span>' +
+          '<span class="list-ruled__meta">' + esc(d.ubicacion) + ' · ' + esc(d.tipo) + '</span>' +
+          '</span>' +
+          '<span class="badge ' + badge + '"><span class="dot" aria-hidden="true"></span>' + texto + '</span>' +
+          '</li>';
+      }).join('');
+      document.getElementById('dispositivos-cont').textContent = resumen.dispositivosConectados + ' de ' + dispositivos.length + ' en línea';
+
+      // ---------- Botones con estado de carga ----------
+      var estadoAccion = document.getElementById('accion-estado');
+      var btnNueva = document.getElementById('btn-nueva');
+      var btnExportar = document.getElementById('btn-exportar');
+
+      btnNueva.addEventListener('click', function () {
+        btnNueva.classList.add('is-loading');
+        btnNueva.disabled = true;
+        btnNueva.textContent = 'Procesando';
+        estadoAccion.textContent = 'Procesando la nueva verificación…';
+        window.setTimeout(function () {
+          btnNueva.classList.remove('is-loading');
+          btnNueva.disabled = false;
+          btnNueva.textContent = 'Nueva verificación';
+          estadoAccion.textContent = 'Ventanilla lista: la verificación quedó registrada en la actividad.';
+        }, 1500);
+      });
+
+      btnExportar.addEventListener('click', function () {
+        btnExportar.classList.add('is-loading');
+        btnExportar.disabled = true;
+        estadoAccion.textContent = 'Generando el acta de la jornada…';
+        window.setTimeout(function () {
+          btnExportar.classList.remove('is-loading');
+          btnExportar.disabled = false;
+          estadoAccion.textContent = 'Acta generada con ' + eventos.length + ' eventos.';
+        }, 1200);
+      });
+
+      // ---------- Actividad del sumario lateral ----------
+      var dockItems = document.querySelectorAll('.dock__item');
+      dockItems.forEach(function (item) {
+        item.addEventListener('click', function () {
+          dockItems.forEach(function (otro) {
+            otro.classList.remove('is-active');
+            otro.removeAttribute('aria-current');
+          });
+          item.classList.add('is-active');
+          item.setAttribute('aria-current', 'true');
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
