@@ -14,12 +14,13 @@
   font-weight: 600;
   border: 1px solid transparent;
   cursor: pointer;
-  transition: background-color var(--av-transition-fast), border-color var(--av-transition-fast), color var(--av-transition-fast);
+  transition: background-color var(--av-transition-fast), border-color var(--av-transition-fast), color var(--av-transition-fast), transform var(--av-transition-fast);
 }
 
 .av-btn-primary { background: var(--av-blue); color: var(--av-white); }
 .av-btn-primary:hover  { background: var(--av-blue-hover); }
 .av-btn-primary:active { background: var(--av-blue-active); }
+.av-btn:active:not(:disabled):not([disabled]) { transform: scale(.97); }
 .av-btn-primary:disabled,
 .av-btn-primary[disabled] {
   background: var(--av-gray-200);

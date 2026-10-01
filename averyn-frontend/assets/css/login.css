@@ -96,11 +96,11 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
   .av-auth-side { padding: 1.6rem 1rem 1.2rem; gap: 1.2rem; }
   .av-auth-logo { width: 96px; }
   .av-auth-side .display-5 { font-size: 1.2rem; letter-spacing: -.02em; margin-top: .5rem; }
-  .av-auth-side-text { font-size: .78rem; }
-  .av-auth-side-foot small { font-size: .72rem; }
+  .av-auth-side-text { font-size: .8125rem; }
+  .av-auth-side-foot small { font-size: .8125rem; }
   .av-auth-panel { padding: 1.6rem 1rem; }
   .av-auth-panel .display-6 { font-size: 1.5rem; }
-  .av-auth-panel .form-label { font-size: .78rem; }
+  .av-auth-panel .form-label { font-size: .8125rem; }
   .av-login-input { min-height: 42px; }
 }
 
