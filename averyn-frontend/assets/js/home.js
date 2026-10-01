@@ -1,11 +1,45 @@
 (function () {
   'use strict';
 
+  var root = document.documentElement;
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* Hero guiado por scroll: tres fases (0 a 1) con easing suave.
+     t1: la A negra y la palabra "Averyn" se revelan.
+     t2: el logo se reduce y sube.
+     t3: aparece la figura abstracta, la bajada y los botones. */
+  var stage = document.getElementById('inicio');
+  var clamp = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
+  var ease = function (t) { return t * t * (3 - 2 * t); };
+  var phase = function (p, from, to) { return ease(clamp((p - from) / (to - from))); };
+
+  var setVars = function (t1, t2, t3) {
+    root.style.setProperty('--t1', t1.toFixed(4));
+    root.style.setProperty('--t2', t2.toFixed(4));
+    root.style.setProperty('--t3', t3.toFixed(4));
+  };
+
+  if (stage && !reduceMotion) {
+    var ticking = false;
+    var update = function () {
+      ticking = false;
+      var span = stage.offsetHeight - window.innerHeight;
+      var p = span > 0 ? clamp(-stage.getBoundingClientRect().top / span) : 1;
+      setVars(phase(p, 0.06, 0.42), phase(p, 0.42, 0.66), phase(p, 0.62, 0.92));
+    };
+    var request = function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    };
+    window.addEventListener('scroll', request, { passive: true });
+    window.addEventListener('resize', request);
+    update();
+  } else {
+    setVars(1, 1, 1);
+  }
+
   /* Menú móvil */
-  var burger = document.querySelector('.lp-burger');
-  var nav = document.getElementById('lp-nav');
+  var burger = document.querySelector('.mn-burger');
+  var nav = document.getElementById('mn-nav');
   if (burger && nav) {
     var setOpen = function (open) {
       nav.classList.toggle('is-open', open);
@@ -18,10 +52,10 @@
   }
 
   /* Volver arriba */
-  var backToTop = document.querySelector('.lp-top');
+  var backToTop = document.querySelector('.mn-top');
   var updateBackToTop = function () {
     if (!backToTop) return;
-    var visible = window.scrollY > 520;
+    var visible = window.scrollY > window.innerHeight * 1.5;
     backToTop.classList.toggle('is-visible', visible);
     backToTop.setAttribute('aria-hidden', String(!visible));
     backToTop.tabIndex = visible ? 0 : -1;
@@ -35,7 +69,7 @@
   }
 
   /* Revelado al hacer scroll */
-  var revealTargets = document.querySelectorAll('.lp-reveal');
+  var revealTargets = document.querySelectorAll('.mn-reveal');
   if ('IntersectionObserver' in window && revealTargets.length > 0) {
     var revealObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
@@ -44,34 +78,9 @@
           revealObserver.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.08 });
+    }, { threshold: 0.06 });
     revealTargets.forEach(function (el) { revealObserver.observe(el); });
   } else {
     revealTargets.forEach(function (el) { el.classList.add('is-visible'); });
-  }
-
-  /* Isotipo del hero: las capas se desplazan con el cursor y el scroll */
-  var hero = document.getElementById('inicio');
-  if (hero && !reduceMotion) {
-    var ticking = false;
-    var setVars = function (mx, sy) {
-      hero.style.setProperty('--mx', mx.toFixed(3));
-      hero.style.setProperty('--sy', sy.toFixed(1));
-    };
-    var mx = 0;
-    hero.addEventListener('pointermove', function (e) {
-      var r = hero.getBoundingClientRect();
-      mx = ((e.clientX - r.left) / r.width) * 2 - 1;
-      if (!ticking) {
-        ticking = true;
-        requestAnimationFrame(function () { setVars(mx, window.scrollY); ticking = false; });
-      }
-    });
-    window.addEventListener('scroll', function () {
-      if (!ticking && window.scrollY < window.innerHeight * 1.2) {
-        ticking = true;
-        requestAnimationFrame(function () { setVars(mx, window.scrollY); ticking = false; });
-      }
-    }, { passive: true });
   }
 })();
