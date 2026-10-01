@@ -11,14 +11,13 @@
     <link href="assets/css/design-system.css" rel="stylesheet" />
     <link href="assets/css/landing.css" rel="stylesheet" />
   </head>
-  <body class="lp">
-    <a class="lp-skip" href="#que-es">Saltar al contenido</a>
+  <body class="mn">
+    <a class="mn-skip" href="#que-es">Saltar al contenido</a>
 
-    <header class="lp-header">
-      <div class="lp-wrap">
-        <a href="#inicio" aria-label="Averyn, inicio"><img class="lp-logo" src="assets/images/averyn-logo-font-white.avif" alt="Averyn" /></a>
-        <button class="lp-burger" type="button" aria-expanded="false" aria-controls="lp-nav">MENÚ</button>
-        <nav class="lp-nav lp-mono" id="lp-nav" aria-label="Navegación principal">
+    <header class="mn-header">
+      <div class="mn-wrap mn-header__grid">
+        <a class="mn-brand" href="#inicio" aria-label="Averyn, inicio"><img src="assets/images/averyn-logo-font-black.avif" alt="Averyn" /></a>
+        <nav class="mn-pill mn-mono" id="mn-nav" aria-label="Navegación principal">
           <a href="#que-es">Qué es</a>
           <a href="#capacidades">Capacidades</a>
           <a href="#soluciones">Soluciones</a>
@@ -27,265 +26,232 @@
           <a href="#arquitectura">Arquitectura</a>
           <a href="#seguridad">Seguridad</a>
           <a href="#equipo">Equipo</a>
-          <a href="#contacto">Contacto</a>
-          <a class="lp-nav__cta" href="login.html">Iniciar sesión →</a>
+          <span class="mn-pill__mobile"><a href="login.html">Iniciar sesión</a></span>
         </nav>
+        <div class="mn-actions mn-mono">
+          <a href="login.html">Iniciar sesión</a>
+          <a class="mn-btn mn-btn--dark" href="login.html">Ingresar</a>
+        </div>
+        <button class="mn-burger" type="button" aria-expanded="false" aria-controls="mn-nav">MENÚ</button>
       </div>
     </header>
 
     <main aria-label="Contenido principal">
-      <section id="inicio" class="lp-hero" aria-labelledby="hero-title">
-        <div class="lp-hero__grid" aria-hidden="true"></div>
+      <!-- Hero: la A negra, luego la palabra completa y por último la figura abstracta (guiado por scroll) -->
+      <section id="inicio" class="mn-stage" aria-label="Averyn">
+        <div class="mn-sticky">
+          <div class="mn-lockup">
+            <img class="mn-lockup__iso" src="assets/images/averyn-logo-black.avif" alt="" />
+            <img class="mn-lockup__word" src="assets/images/averyn-logo-font-black.avif" alt="Averyn" />
+          </div>
 
-        <div class="lp-hero__fig" aria-hidden="true">
-          <svg viewBox="0 0 800 800" focusable="false">
-            <defs>
-              <path id="lp-chev" d="M90 740 L335 70 L465 70 L710 740 L572 740 L400 258 L228 740 Z" />
-              <path id="lp-bar" d="M250 560 H550 V646 H250 Z" />
-              <clipPath id="lp-c1"><rect x="0" y="0" width="800" height="230" /></clipPath>
-              <clipPath id="lp-c2"><rect x="0" y="230" width="800" height="170" /></clipPath>
-              <clipPath id="lp-c3"><rect x="0" y="400" width="800" height="160" /></clipPath>
-              <clipPath id="lp-c4"><rect x="0" y="560" width="800" height="240" /></clipPath>
-            </defs>
-            <g class="lp-slab" style="--d:-26">
-              <use href="#lp-chev" fill="none" stroke="#00ACD2" stroke-width="2" transform="translate(46 -34)" />
-            </g>
-            <g clip-path="url(#lp-c1)"><g class="lp-slab" style="--ox:-34; --d:34"><use href="#lp-chev" fill="#145FEE" /></g></g>
-            <g clip-path="url(#lp-c2)"><g class="lp-slab" style="--ox:26; --d:-22"><use href="#lp-chev" fill="#EEF0F5" /></g></g>
-            <g clip-path="url(#lp-c3)"><g class="lp-slab" style="--ox:-12; --d:46"><use href="#lp-chev" fill="#145FEE" /></g></g>
-            <g clip-path="url(#lp-c4)"><g class="lp-slab" style="--ox:38; --d:-40"><use href="#lp-chev" fill="#00ACD2" /></g></g>
-            <g class="lp-slab" style="--ox:6; --d:60"><use href="#lp-bar" fill="#000C24" stroke="#EEF0F5" stroke-width="3" /></g>
-          </svg>
-        </div>
+          <div class="mn-fig" aria-hidden="true">
+            <svg viewBox="0 0 640 300" focusable="false">
+              <path d="M0 290 H640" pathLength="1" stroke="#E7EBF3" stroke-width="1" />
+              <path d="M30 290 C110 60 330 40 450 290" pathLength="1" stroke="#000C24" stroke-width="1.5" />
+              <path d="M90 290 C150 110 300 95 390 290" pathLength="1" stroke="#145FEE" stroke-width="1.5" />
+              <path d="M150 290 C190 170 270 160 330 290" pathLength="1" stroke="#000C24" stroke-width="1" />
+              <path d="M300 8 L545 290" pathLength="1" stroke="#00ACD2" stroke-width="2" />
+            </svg>
+          </div>
 
-        <div class="lp-wrap lp-hero__meta lp-mono">
-          <span>Averyn / Identidad institucional</span>
-        </div>
-
-        <div class="lp-wrap lp-hero__body">
-          <h1 class="lp-hero__title" id="hero-title">
-            <span><i>Verifica.</i></span>
-            <span><i>Autoriza.</i></span>
-            <span><i>Audita.</i></span>
-          </h1>
-          <div class="lp-hero__row">
-            <p class="lp-hero__lead">Plataforma de identidad, biometría, inteligencia artificial y seguridad diseñada para automatizar procesos institucionales críticos.</p>
-            <div class="lp-hero__cta">
-              <a class="lp-btn lp-btn--blue" href="#que-es">Conocer Averyn ↓</a>
-              <a class="lp-btn" href="login.html">Ingresar al sistema →</a>
+          <div class="mn-copy">
+            <p>Plataforma de identidad, biometría, inteligencia artificial y seguridad diseñada para automatizar procesos institucionales críticos.</p>
+            <div class="mn-copy__cta">
+              <a class="mn-btn mn-btn--dark" href="login.html">Ingresar al sistema →</a>
+              <a class="mn-btn mn-btn--ghost" href="#que-es">Conocer Averyn ↓</a>
             </div>
           </div>
-        </div>
 
-        <div class="lp-ticker lp-mono" aria-hidden="true">
-          <div class="lp-ticker__track">
-            <span>Identidad</span><span>●</span><span>Biometría</span><span>●</span><span>OCR</span><span>●</span><span>Inteligencia artificial</span><span>●</span><span>Seguridad</span><span>●</span><span>Auditoría</span><span>●</span>
-            <span>Identidad</span><span>●</span><span>Biometría</span><span>●</span><span>OCR</span><span>●</span><span>Inteligencia artificial</span><span>●</span><span>Seguridad</span><span>●</span><span>Auditoría</span><span>●</span>
+          <div class="mn-cue mn-mono" aria-hidden="true">Desplaza<i></i></div>
+        </div>
+      </section>
+
+      <section id="que-es" class="mn-section mn-que" aria-labelledby="que-es-title">
+        <div class="mn-wrap mn-grid mn-reveal">
+          <h2 class="mn-title" id="que-es-title">Una plataforma institucional, no un simple sistema de votación.</h2>
+          <p class="mn-lead">Averyn centraliza la identificación, la autenticación y la automatización de procesos institucionales mediante biometría, inteligencia artificial, OCR y mecanismos de seguridad.</p>
+          <!-- Espacio para imagen o video: agrega un <img> o <video> dentro y se ajusta solo -->
+          <div class="mn-media mn-que__media"><span class="mn-media__hint mn-mono">Imagen · 4:5</span></div>
+          <div class="mn-que__list">
+            <article class="mn-item"><h3>Multi-institucional</h3><p>Cada institución opera como un tenant lógico aislado: universidades, colegios, empresas y entidades públicas.</p></article>
+            <article class="mn-item"><h3>Identidad propia</h3><p>Averyn gestiona su propio modelo de identidad, independiente de bases de datos institucionales.</p></article>
+            <article class="mn-item"><h3>Núcleo + módulos</h3><p>Un núcleo común de identidad, biometría, OCR, IA y seguridad sobre el que se construyen módulos de negocio.</p></article>
           </div>
         </div>
       </section>
 
-      <section id="que-es" class="lp-section" aria-labelledby="que-es-title">
-        <div class="lp-wrap lp-reveal">
-          <div class="lp-head">
-            <div>
-              <span class="lp-idx lp-mono">01 / Qué es</span>
-              <h2 class="lp-title" id="que-es-title">Una plataforma institucional, <em>no un simple sistema de votación.</em></h2>
-            </div>
-            <p class="lp-intro">Averyn centraliza la identificación, la autenticación y la automatización de procesos institucionales mediante biometría, inteligencia artificial, OCR y mecanismos de seguridad.</p>
+      <section id="capacidades" class="mn-section mn-soft" aria-labelledby="capacidades-title">
+        <div class="mn-wrap mn-grid mn-reveal">
+          <div class="mn-cap__side">
+            <span class="mn-label mn-mono">Capacidades</span>
+            <h2 class="mn-title" id="capacidades-title">Capacidades para operar con claridad.</h2>
+            <p class="mn-lead">Desde la gestión de identidad y la biometría hasta el procesamiento documental y la auditoría, cada capacidad está conectada para automatizar procesos reales.</p>
           </div>
-          <div class="lp-cells" style="--cols:3">
-            <article class="lp-cell"><span class="lp-cell__n lp-mono">A.1</span><h3>Multi-institucional</h3><p>Cada institución opera como un tenant lógico aislado: universidades, colegios, empresas y entidades públicas.</p></article>
-            <article class="lp-cell"><span class="lp-cell__n lp-mono">A.2</span><h3>Identidad propia</h3><p>Averyn gestiona su propio modelo de identidad, independiente de bases de datos institucionales.</p></article>
-            <article class="lp-cell"><span class="lp-cell__n lp-mono">A.3</span><h3>Núcleo + módulos</h3><p>Un núcleo común de identidad, biometría, OCR, IA y seguridad sobre el que se construyen módulos de negocio.</p></article>
-          </div>
-        </div>
-      </section>
-
-      <section id="capacidades" class="lp-section lp-white" aria-labelledby="capacidades-title">
-        <div class="lp-wrap lp-reveal">
-          <div class="lp-head">
-            <div>
-              <span class="lp-idx lp-mono">02 / Capacidades</span>
-              <h2 class="lp-title" id="capacidades-title">Capacidades para <em>operar con claridad.</em></h2>
-            </div>
-            <p class="lp-intro">Desde la gestión de identidad y la biometría hasta el procesamiento documental y la auditoría, cada capacidad está conectada para automatizar procesos reales.</p>
-          </div>
-          <div class="lp-cells" style="--cols:3">
-            <article class="lp-cell"><span class="lp-cell__n lp-mono">B.01</span><h3>Identidad</h3><p>Personas con identificadores propios de Averyn, documentos múltiples y afiliaciones por institución.</p></article>
-            <article class="lp-cell"><span class="lp-cell__n lp-mono">B.02</span><h3>Biometría</h3><p>Enrolamiento y verificación por huella y rostro, con liveness y plantillas protegidas.</p></article>
-            <article class="lp-cell"><span class="lp-cell__n lp-mono">B.03</span><h3>OCR</h3><p>Procesamiento documental con validación antes de asociar datos a una persona.</p></article>
-            <article class="lp-cell"><span class="lp-cell__n lp-mono">B.04</span><h3>Inteligencia artificial</h3><p>Modelos versionados y trazables para detección facial, liveness, clasificación y OCR.</p></article>
-            <article class="lp-cell"><span class="lp-cell__n lp-mono">B.05</span><h3>Seguridad</h3><p>Roles, permisos, cifrado y aislamiento de tenants como dominios de primera clase.</p></article>
-            <article class="lp-cell"><span class="lp-cell__n lp-mono">B.06</span><h3>Auditoría</h3><p>Registro trazable de operaciones críticas para investigación y control institucional.</p></article>
+          <div class="mn-cap__list">
+            <article class="mn-row"><span class="mn-mono">01</span><div><h3>Identidad</h3><p>Personas con identificadores propios de Averyn, documentos múltiples y afiliaciones por institución.</p></div></article>
+            <article class="mn-row"><span class="mn-mono">02</span><div><h3>Biometría</h3><p>Enrolamiento y verificación por huella y rostro, con liveness y plantillas protegidas.</p></div></article>
+            <article class="mn-row"><span class="mn-mono">03</span><div><h3>OCR</h3><p>Procesamiento documental con validación antes de asociar datos a una persona.</p></div></article>
+            <article class="mn-row"><span class="mn-mono">04</span><div><h3>Inteligencia artificial</h3><p>Modelos versionados y trazables para detección facial, liveness, clasificación y OCR.</p></div></article>
+            <article class="mn-row"><span class="mn-mono">05</span><div><h3>Seguridad</h3><p>Roles, permisos, cifrado y aislamiento de tenants como dominios de primera clase.</p></div></article>
+            <article class="mn-row"><span class="mn-mono">06</span><div><h3>Auditoría</h3><p>Registro trazable de operaciones críticas para investigación y control institucional.</p></div></article>
           </div>
         </div>
       </section>
 
-      <section id="soluciones" class="lp-section lp-dark" aria-labelledby="soluciones-title">
-        <div class="lp-wrap lp-reveal">
-          <div class="lp-head">
-            <div>
-              <span class="lp-idx lp-mono">03 / Soluciones</span>
-              <h2 class="lp-title" id="soluciones-title">Soluciones para <em>cada institución.</em></h2>
-            </div>
-            <p class="lp-intro">Elecciones deja de ser el centro absoluto del producto: el núcleo común respalda múltiples módulos de negocio.</p>
+      <section id="soluciones" class="mn-section" aria-labelledby="soluciones-title">
+        <div class="mn-wrap mn-grid mn-reveal">
+          <div class="mn-sol__head">
+            <span class="mn-label mn-mono">Soluciones</span>
+            <h2 class="mn-title" id="soluciones-title">Soluciones para cada institución.</h2>
           </div>
-          <ul class="lp-rows">
-            <li class="lp-row"><span class="lp-mono">C.1</span><h3>Gestión electoral</h3><p>Procesos electorales institucionales seguros, automatizados y trazables.</p><span class="lp-row__arrow" aria-hidden="true">→</span></li>
-            <li class="lp-row"><span class="lp-mono">C.2</span><h3>Control de acceso</h3><p>Zonas, puntos, políticas y eventos para el acceso autorizado a espacios.</p><span class="lp-row__arrow" aria-hidden="true">→</span></li>
-            <li class="lp-row"><span class="lp-mono">C.3</span><h3>Verificación de identidad</h3><p>Autenticación biométrica y documental para onboarding y procesos sensibles.</p><span class="lp-row__arrow" aria-hidden="true">→</span></li>
-            <li class="lp-row"><span class="lp-mono">C.4</span><h3>Procesos institucionales</h3><p>Automatización de operaciones que requieren identidad y autorización.</p><span class="lp-row__arrow" aria-hidden="true">→</span></li>
+          <p class="mn-lead mn-sol__intro">Elecciones deja de ser el centro absoluto del producto: el núcleo común respalda múltiples módulos de negocio.</p>
+          <div class="mn-sol__items">
+            <article class="mn-sol"><h3>Gestión electoral</h3><p>Procesos electorales institucionales seguros, automatizados y trazables.</p></article>
+            <article class="mn-sol"><h3>Control de acceso</h3><p>Zonas, puntos, políticas y eventos para el acceso autorizado a espacios.</p></article>
+            <article class="mn-sol"><h3>Verificación de identidad</h3><p>Autenticación biométrica y documental para onboarding y procesos sensibles.</p></article>
+            <article class="mn-sol"><h3>Procesos institucionales</h3><p>Automatización de operaciones que requieren identidad y autorización.</p></article>
+          </div>
+          <div class="mn-media mn-sol__media"><span class="mn-media__hint mn-mono">Imagen o video · 21:9</span></div>
+        </div>
+      </section>
+
+      <section id="tecnologia" class="mn-section mn-soft" aria-labelledby="tecnologia-title">
+        <div class="mn-wrap mn-grid mn-reveal">
+          <div class="mn-tec__head">
+            <span class="mn-label mn-mono">Tecnología</span>
+            <h2 class="mn-title" id="tecnologia-title">Tecnología detrás de la plataforma.</h2>
+            <p class="mn-lead" style="margin-top:1.4rem">Soluciones abiertas e interoperables, elegidas por necesidad concreta y no por acumular tecnologías.</p>
+          </div>
+          <ul class="mn-tec__words">
+            <li>Huella</li><li>Rostro</li><li>Liveness</li><li>OCR</li><li>IA</li><li>APIs</li><li>MCP</li><li>RBAC</li><li>Auditoría</li><li>Cifrado</li>
           </ul>
         </div>
       </section>
 
-      <section id="tecnologia" class="lp-section" aria-labelledby="tecnologia-title">
-        <div class="lp-wrap lp-reveal">
-          <div class="lp-head">
-            <div>
-              <span class="lp-idx lp-mono">04 / Tecnología</span>
-              <h2 class="lp-title" id="tecnologia-title">Tecnología detrás de <em>la plataforma.</em></h2>
-            </div>
-            <p class="lp-intro">Soluciones abiertas e interoperables, elegidas por necesidad concreta y no por acumular tecnologías.</p>
+      <section id="proceso" class="mn-section" aria-labelledby="proceso-title">
+        <div class="mn-wrap mn-grid mn-reveal">
+          <div class="mn-proc__head">
+            <span class="mn-label mn-mono">Proceso</span>
+            <h2 class="mn-title" id="proceso-title">Cómo funciona.</h2>
           </div>
-          <ul class="lp-tags">
-            <li class="lp-tag"><small>01</small>Huella</li>
-            <li class="lp-tag"><small>02</small>Rostro</li>
-            <li class="lp-tag"><small>03</small>Liveness</li>
-            <li class="lp-tag"><small>04</small>OCR</li>
-            <li class="lp-tag"><small>05</small>IA</li>
-            <li class="lp-tag"><small>06</small>APIs</li>
-            <li class="lp-tag"><small>07</small>MCP</li>
-            <li class="lp-tag"><small>08</small>RBAC</li>
-            <li class="lp-tag"><small>09</small>Auditoría</li>
-            <li class="lp-tag"><small>10</small>Cifrado</li>
+          <article class="mn-step"><div class="mn-step__n" aria-hidden="true">01</div><h3>Conecta</h3><p>Tu institución se integra mediante APIs, importaciones o conectores sin depender de bases de datos externas.</p></article>
+          <article class="mn-step"><div class="mn-step__n" aria-hidden="true">02</div><h3>Verifica</h3><p>La identidad se valida con OCR y biometría, incluyendo liveness, antes de cualquier operación.</p></article>
+          <article class="mn-step"><div class="mn-step__n" aria-hidden="true">03</div><h3>Automatiza</h3><p>Los procesos operan con roles, permisos y auditoría de cada operación crítica.</p></article>
+        </div>
+      </section>
+
+      <section id="arquitectura" class="mn-section mn-soft" aria-labelledby="arquitectura-title">
+        <div class="mn-wrap mn-grid mn-reveal">
+          <div class="mn-arq__head">
+            <span class="mn-label mn-mono">Arquitectura</span>
+            <h2 class="mn-title" id="arquitectura-title">Arquitectura orientada a dominio.</h2>
+          </div>
+          <p class="mn-lead mn-arq__intro">Un monolito modular que separa responsabilidades del núcleo (identidad, biometría, IA, seguridad) de los módulos de negocio.</p>
+          <div class="mn-arq__list">
+            <article class="mn-item"><h3>Identidad</h3><p>Núcleo de identidad multi-tenant con documentos y afiliaciones por persona.</p></article>
+            <article class="mn-item"><h3>Biometría</h3><p>Enrolamiento, verificación y liveness con abstracción de proveedores.</p></article>
+            <article class="mn-item"><h3>IA y OCR</h3><p>Modelos versionados y trazables para lectura documental y verificación facial.</p></article>
+            <article class="mn-item"><h3>Seguridad y auditoría</h3><p>Roles, permisos, cifrado, aislamiento de tenants y trazabilidad de operaciones.</p></article>
+          </div>
+          <div class="mn-media mn-arq__media"><span class="mn-media__hint mn-mono">Video · 16:9</span></div>
+          <div class="mn-flow" role="group" aria-label="Flujo de integración de alto nivel de Averyn">
+            <span>Interfaz web</span><i aria-hidden="true"></i>
+            <span>Autenticación</span><i aria-hidden="true"></i>
+            <span class="is-core">Identidad · Biometría · IA</span><i aria-hidden="true"></i>
+            <span>Módulos de negocio</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="seguridad" class="mn-section" aria-labelledby="seguridad-title">
+        <div class="mn-wrap mn-grid mn-reveal">
+          <div class="mn-seg__side">
+            <span class="mn-label mn-mono">Seguridad</span>
+            <h2 class="mn-title" id="seguridad-title">Seguridad por diseño.</h2>
+            <p class="mn-lead">La seguridad es un dominio de primera clase: cada operación crítica genera auditoría y cada tenant permanece aislado.</p>
+          </div>
+          <ul class="mn-seg__grid">
+            <li><h3>Roles</h3><p>Modelo usuario → rol → permiso → recurso.</p></li>
+            <li><h3>Permisos</h3><p>Autorización granular por capacidad y módulo.</p></li>
+            <li><h3>MFA</h3><p>Autenticación reforzada para operaciones críticas.</p></li>
+            <li><h3>Auditoría</h3><p>Registro de login, roles, biometría y procesos sensibles.</p></li>
+            <li><h3>Cifrado</h3><p>Protección de datos altamente sensibles como plantillas biométricas.</p></li>
+            <li><h3>Trazabilidad</h3><p>Cada ejecución de IA y operación queda registrada con su resultado.</p></li>
           </ul>
         </div>
       </section>
 
-      <section id="proceso" class="lp-section lp-blue" aria-labelledby="proceso-title">
-        <div class="lp-wrap lp-reveal">
-          <div class="lp-head">
-            <div>
-              <span class="lp-idx lp-mono">05 / Proceso</span>
-              <h2 class="lp-title" id="proceso-title">Cómo <em>funciona.</em></h2>
+      <section id="equipo" class="mn-section mn-soft" aria-labelledby="equipo-title">
+        <div class="mn-wrap mn-grid mn-reveal">
+          <div class="mn-eq__head">
+            <span class="mn-label mn-mono">Equipo</span>
+            <h2 class="mn-title" id="equipo-title">Construido desde la ingeniería y la investigación.</h2>
+          </div>
+          <p class="mn-lead mn-eq__intro">Averyn nace como una propuesta académica para modernizar los procesos institucionales mediante software, biometría y arquitecturas distribuidas.</p>
+          <div class="mn-team">
+            <div class="mn-person-wrap">
+              <a class="mn-person" href="https://github.com/ing-jorgehg" target="_blank" rel="noreferrer" aria-label="Abrir perfil de GitHub de Jorge Ivan Herrera Garcia">
+                <span class="mn-person__ini" aria-hidden="true">JI</span><strong>Jorge Ivan Herrera Garcia</strong><small>Integrante</small><span class="mn-mono">@ing-jorgehg ↗</span>
+              </a>
+              <div class="mn-pop" role="tooltip"><img src="https://github.com/ing-jorgehg.png?size=96" alt="Avatar de Jorge Ivan Herrera Garcia" loading="lazy" /><div><strong>Jorge Ivan Herrera Garcia</strong><small>@ing-jorgehg</small><p>Ingeniería de software, frontend y arquitectura de experiencias digitales.</p></div></div>
             </div>
-          </div>
-          <ol class="lp-steps">
-            <li class="lp-step"><div class="lp-step__num" aria-hidden="true">01</div><h3>Conecta</h3><p>Tu institución se integra mediante APIs, importaciones o conectores sin depender de bases de datos externas.</p></li>
-            <li class="lp-step"><div class="lp-step__num" aria-hidden="true">02</div><h3>Verifica</h3><p>La identidad se valida con OCR y biometría, incluyendo liveness, antes de cualquier operación.</p></li>
-            <li class="lp-step"><div class="lp-step__num" aria-hidden="true">03</div><h3>Automatiza</h3><p>Los procesos operan con roles, permisos y auditoría de cada operación crítica.</p></li>
-          </ol>
-        </div>
-      </section>
-
-      <section id="arquitectura" class="lp-section lp-white" aria-labelledby="arquitectura-title">
-        <div class="lp-wrap lp-reveal">
-          <div class="lp-head">
-            <div>
-              <span class="lp-idx lp-mono">06 / Arquitectura</span>
-              <h2 class="lp-title" id="arquitectura-title">Arquitectura <em>orientada a dominio.</em></h2>
+            <div class="mn-person-wrap">
+              <a class="mn-person" href="https://github.com/ddturizo-eng" target="_blank" rel="noreferrer" aria-label="Abrir perfil de GitHub de Daniel David Turizo Chacon">
+                <span class="mn-person__ini" aria-hidden="true">DD</span><strong>Daniel David Turizo Chacon</strong><small>Integrante</small><span class="mn-mono">@ddturizo-eng ↗</span>
+              </a>
+              <div class="mn-pop" role="tooltip"><img src="https://github.com/ddturizo-eng.png?size=96" alt="Avatar de Daniel David Turizo Chacon" loading="lazy" /><div><strong>Daniel David Turizo Chacon</strong><small>@ddturizo-eng</small><p>Desarrollo de soluciones web y coordinación técnica del proyecto Averyn.</p></div></div>
             </div>
-            <p class="lp-intro">Un monolito modular que separa responsabilidades del núcleo (identidad, biometría, IA, seguridad) de los módulos de negocio.</p>
-          </div>
-          <div class="lp-cells" style="--cols:4">
-            <article class="lp-cell"><span class="lp-cell__n lp-mono">D.1</span><h3>Identidad</h3><p>Núcleo de identidad multi-tenant con documentos y afiliaciones por persona.</p></article>
-            <article class="lp-cell"><span class="lp-cell__n lp-mono">D.2</span><h3>Biometría</h3><p>Enrolamiento, verificación y liveness con abstracción de proveedores.</p></article>
-            <article class="lp-cell"><span class="lp-cell__n lp-mono">D.3</span><h3>IA y OCR</h3><p>Modelos versionados y trazables para lectura documental y verificación facial.</p></article>
-            <article class="lp-cell"><span class="lp-cell__n lp-mono">D.4</span><h3>Seguridad y auditoría</h3><p>Roles, permisos, cifrado, aislamiento de tenants y trazabilidad de operaciones.</p></article>
-          </div>
-          <div class="lp-flow" role="group" aria-label="Flujo de integración de alto nivel de Averyn">
-            <div><span class="lp-mono">Paso 1</span><strong>Interfaz web</strong></div>
-            <div class="lp-flow__arrow" aria-hidden="true">→</div>
-            <div><span class="lp-mono">Paso 2</span><strong>Autenticación</strong></div>
-            <div class="lp-flow__arrow" aria-hidden="true">→</div>
-            <div class="lp-flow__core"><span class="lp-mono">Núcleo</span><strong>Identidad · Biometría · IA</strong></div>
-            <div class="lp-flow__arrow" aria-hidden="true">→</div>
-            <div><span class="lp-mono">Paso 4</span><strong>Módulos de negocio</strong></div>
+            <div class="mn-person-wrap">
+              <a class="mn-person" href="https://github.com/JoseCh777" target="_blank" rel="noreferrer" aria-label="Abrir perfil de GitHub de Jose Antonio Chinchia Gutierrez">
+                <span class="mn-person__ini" aria-hidden="true">JC</span><strong>Jose Antonio Chinchia Gutierrez</strong><small>Integrante</small><span class="mn-mono">@JoseCh777 ↗</span>
+              </a>
+              <div class="mn-pop" role="tooltip"><img src="https://github.com/JoseCh777.png?size=96" alt="Avatar de Jose Antonio Chinchia Gutierrez" loading="lazy" /><div><strong>Jose Antonio Chinchia Gutierrez</strong><small>@JoseCh777</small><p>Construcción de interfaces y componentes para procesos institucionales claros.</p></div></div>
+            </div>
+            <div class="mn-person-wrap">
+              <a class="mn-person" href="https://github.com/mcalderona" target="_blank" rel="noreferrer" aria-label="Abrir perfil de GitHub de Mateo Calderon Araujo">
+                <span class="mn-person__ini" aria-hidden="true">MC</span><strong>Mateo Calderon Araujo</strong><small>Integrante</small><span class="mn-mono">@mcalderona ↗</span>
+              </a>
+              <div class="mn-pop" role="tooltip"><img src="https://github.com/mcalderona.png?size=96" alt="Avatar de Mateo Calderon Araujo" loading="lazy" /><div><strong>Mateo Calderon Araujo</strong><small>@mcalderona</small><p>Desarrollo de software y exploración de tecnologías para la plataforma.</p></div></div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section id="seguridad" class="lp-section lp-dark" aria-labelledby="seguridad-title">
-        <div class="lp-wrap lp-reveal">
-          <div class="lp-head">
-            <div>
-              <span class="lp-idx lp-mono">07 / Seguridad</span>
-              <h2 class="lp-title" id="seguridad-title">Seguridad <em>por diseño.</em></h2>
-            </div>
-            <p class="lp-intro">La seguridad es un dominio de primera clase: cada operación crítica genera auditoría y cada tenant permanece aislado.</p>
+      <section id="cta" class="mn-section mn-cta" aria-labelledby="cta-title">
+        <div class="mn-wrap mn-grid mn-reveal">
+          <h2 class="mn-title" id="cta-title">Automatiza procesos institucionales críticos con seguridad.</h2>
+          <div class="mn-cta__side">
+            <p>Explora la plataforma y descubre una forma más clara y segura de gestionar la identidad de tu institución.</p>
+            <a class="mn-btn mn-btn--dark" href="login.html">Ingresar al sistema →</a>
           </div>
-          <div class="lp-cells" style="--cols:3">
-            <article class="lp-cell"><span class="lp-cell__n lp-mono">S.01</span><h3>Roles</h3><p>Modelo usuario → rol → permiso → recurso.</p></article>
-            <article class="lp-cell"><span class="lp-cell__n lp-mono">S.02</span><h3>Permisos</h3><p>Autorización granular por capacidad y módulo.</p></article>
-            <article class="lp-cell"><span class="lp-cell__n lp-mono">S.03</span><h3>MFA</h3><p>Autenticación reforzada para operaciones críticas.</p></article>
-            <article class="lp-cell"><span class="lp-cell__n lp-mono">S.04</span><h3>Auditoría</h3><p>Registro de login, roles, biometría y procesos sensibles.</p></article>
-            <article class="lp-cell"><span class="lp-cell__n lp-mono">S.05</span><h3>Cifrado</h3><p>Protección de datos altamente sensibles como plantillas biométricas.</p></article>
-            <article class="lp-cell"><span class="lp-cell__n lp-mono">S.06</span><h3>Trazabilidad</h3><p>Cada ejecución de IA y operación queda registrada con su resultado.</p></article>
-          </div>
-        </div>
-      </section>
-
-      <section id="equipo" class="lp-section" aria-labelledby="equipo-title">
-        <div class="lp-wrap lp-reveal">
-          <div class="lp-head">
-            <div>
-              <span class="lp-idx lp-mono">08 / Equipo</span>
-              <h2 class="lp-title" id="equipo-title">Construido desde la <em>ingeniería y la investigación.</em></h2>
-            </div>
-            <p class="lp-intro">Averyn nace como una propuesta académica para modernizar los procesos institucionales mediante software, biometría y arquitecturas distribuidas.</p>
-          </div>
-          <div class="lp-team">
-            <a class="lp-person" href="https://github.com/ing-jorgehg" target="_blank" rel="noreferrer" aria-label="Abrir perfil de GitHub de Jorge Ivan Herrera Garcia">
-              <span class="lp-person__ini" aria-hidden="true">JI</span><strong>Jorge Ivan Herrera Garcia</strong><span class="lp-mono">@ing-jorgehg ↗</span>
-            </a>
-            <a class="lp-person" href="https://github.com/ddturizo-eng" target="_blank" rel="noreferrer" aria-label="Abrir perfil de GitHub de Daniel David Turizo Chacon">
-              <span class="lp-person__ini" aria-hidden="true">DD</span><strong>Daniel David Turizo Chacon</strong><span class="lp-mono">@ddturizo-eng ↗</span>
-            </a>
-            <a class="lp-person" href="https://github.com/JoseCh777" target="_blank" rel="noreferrer" aria-label="Abrir perfil de GitHub de Jose Antonio Chinchia Gutierrez">
-              <span class="lp-person__ini" aria-hidden="true">JC</span><strong>Jose Antonio Chinchia Gutierrez</strong><span class="lp-mono">@JoseCh777 ↗</span>
-            </a>
-            <a class="lp-person" href="https://github.com/mcalderona" target="_blank" rel="noreferrer" aria-label="Abrir perfil de GitHub de Mateo Calderon Araujo">
-              <span class="lp-person__ini" aria-hidden="true">MC</span><strong>Mateo Calderon Araujo</strong><span class="lp-mono">@mcalderona ↗</span>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <section id="cta" class="lp-section lp-blue lp-cta" aria-labelledby="cta-title">
-        <div class="lp-wrap lp-reveal">
-          <span class="lp-idx lp-mono">09 / Acceso</span>
-          <h2 class="lp-title" id="cta-title">Ingresa. <em>Automatiza.</em></h2>
-          <p>Automatiza procesos institucionales críticos con seguridad. Explora la plataforma y descubre una forma más clara de gestionar la identidad de tu institución.</p>
-          <a class="lp-btn lp-btn--cyan" href="login.html">Ingresar al sistema →</a>
         </div>
       </section>
     </main>
 
-    <footer class="lp-footer" aria-label="Pie de página">
-      <div class="lp-wrap">
-        <div class="lp-footer__grid">
+    <footer class="mn-footer" aria-label="Pie de página">
+      <div class="mn-wrap">
+        <div class="mn-footer__grid">
           <div>
-            <img class="lp-footer__logo" src="assets/images/averyn-logo-lockup-white.avif" alt="Averyn" />
+            <img class="mn-footer__logo" src="assets/images/averyn-logo-font-black.avif" alt="Averyn" />
             <p>Identidad inteligente para procesos institucionales seguros.</p>
           </div>
           <div>
-            <h3 class="lp-mono">Proyecto</h3>
+            <h3>Proyecto</h3>
             <a href="https://github.com/ddturizo-eng/averyn" target="_blank" rel="noreferrer">Repositorio de Averyn ↗</a><br />
             <a href="login.html">Iniciar sesión →</a>
           </div>
           <address id="contacto">
-            <h3 class="lp-mono">Contacto Averyn</h3>
+            <h3>Contacto Averyn</h3>
             <p>Espacio reservado para el correo y los canales oficiales del proyecto.</p>
-            <span class="lp-mono">Próximamente</span>
+            <span class="mn-mono">Próximamente</span>
           </address>
         </div>
-        <div class="lp-footer__bottom lp-mono">© 2026 Averyn. Todos los derechos reservados.</div>
+        <div class="mn-footer__bottom mn-mono">© 2026 Averyn. Todos los derechos reservados.</div>
       </div>
     </footer>
 
-    <button class="lp-top" type="button" aria-label="Volver arriba" aria-hidden="true" tabindex="-1">↑</button>
+    <button class="mn-top" type="button" aria-label="Volver arriba" aria-hidden="true" tabindex="-1">↑</button>
 
     <script src="assets/js/home.js"></script>
   </body>
