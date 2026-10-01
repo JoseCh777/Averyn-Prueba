@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Averyn — identidad, biometría, documentos y procesos electorales en una sola plataforma con trazabilidad. Dirección 06: terminal / developer tool." />
+  <title>Averyn — Identidad verificada desde tu terminal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="css/components.css" rel="stylesheet" />
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <div class="shell">
+    <!-- ============ TOPBAR ============ -->
+    <header class="topbar">
+      <button class="icon-btn shell__toggle" type="button" id="drawer-toggle" aria-expanded="false" aria-controls="sidebar" aria-label="Abrir el árbol de archivos">
+        <span aria-hidden="true">≡</span>
+      </button>
+      <a class="brand" href="index.html">
+        <span class="brand__caret" aria-hidden="true">▸</span><span class="brand__mark" aria-hidden="true"></span>averyn
+      </a>
+      <nav class="tabbar" aria-label="Archivos abiertos">
+        <a class="tabfile is-active" href="index.html" aria-current="page"><span class="tabfile__ico" aria-hidden="true">▣</span>README.md<span class="tabfile__x" aria-hidden="true">×</span></a>
+        <a class="tabfile" href="#quickstart"><span class="tabfile__ico" aria-hidden="true">▣</span>quickstart.sh<span class="tabfile__x" aria-hidden="true">×</span></a>
+        <a class="tabfile" href="#api"><span class="tabfile__ico" aria-hidden="true">▣</span>endpoints.api<span class="tabfile__x" aria-hidden="true">×</span></a>
+        <a class="tabfile" href="dashboard.html"><span class="tabfile__ico" aria-hidden="true">▣</span>panel.html<span class="tabfile__x" aria-hidden="true">×</span></a>
+        <a class="tabfile" href="login.html"><span class="tabfile__ico" aria-hidden="true">▣</span>login.html<span class="tabfile__x" aria-hidden="true">×</span></a>
+      </nav>
+      <div class="topbar__actions">
+        <a class="btn btn--sm btn--ghost hide-xs" href="dashboard.html">panel</a>
+        <a class="btn btn--sm btn--primary" href="login.html">login</a>
+      </div>
+    </header>
+
+    <!-- ============ SIDEBAR / ÁRBOL ============ -->
+    <aside class="sidebar" id="sidebar" aria-label="Árbol de archivos de la documentación">
+      <div class="sidebar__head">
+        <span class="sidebar__root">~/averyn</span>
+        <span class="sidebar__meta">docs</span>
+      </div>
+      <nav class="tree" aria-label="Documentación">
+        <ul>
+          <li>
+            <a class="tree__file is-active" href="index.html" aria-current="page"><span class="tree__glyph" aria-hidden="true">▸</span>README.md</a>
+          </li>
+          <li>
+            <p class="tree__dir"><span class="tree__glyph" aria-hidden="true">▾</span> identidad/</p>
+            <ul>
+              <li><a class="tree__file" href="#capacidades"><span class="tree__glyph" aria-hidden="true">·</span>capacidades.md</a></li>
+              <li><a class="tree__file" href="#acceso"><span class="tree__glyph" aria-hidden="true">·</span>accesos.md</a></li>
+            </ul>
+          </li>
+          <li>
+            <p class="tree__dir"><span class="tree__glyph" aria-hidden="true">▾</span> biometria/</p>
+            <ul>
+              <li><a class="tree__file" href="#quickstart"><span class="tree__glyph" aria-hidden="true">·</span>quickstart.sh</a></li>
+              <li><a class="tree__file" href="#api"><span class="tree__glyph" aria-hidden="true">·</span>endpoints.api</a></li>
+            </ul>
+          </li>
+          <li>
+            <p class="tree__dir"><span class="tree__glyph" aria-hidden="true">▾</span> documentos/</p>
+            <ul>
+              <li><a class="tree__file" href="#estados"><span class="tree__glyph" aria-hidden="true">·</span>alertas.txt</a></li>
+              <li><a class="tree__file" href="#capacidades"><span class="tree__glyph" aria-hidden="true">·</span>flujo.md</a></li>
+            </ul>
+          </li>
+          <li>
+            <p class="tree__dir"><span class="tree__glyph" aria-hidden="true">▾</span> electoral/</p>
+            <ul>
+              <li><a class="tree__file" href="#api"><span class="tree__glyph" aria-hidden="true">·</span>procesos.api</a></li>
+              <li><a class="tree__file" href="#estados"><span class="tree__glyph" aria-hidden="true">·</span>estados.txt</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <div class="sidebar__foot">
+        <span class="sidebar__session"><span class="dot dot--neutral" aria-hidden="true"></span><span id="sesion-estado">sin sesión</span></span>
+        <a class="btn btn--sm btn--primary btn--block" href="login.html">abrir sesión</a>
+        <a class="btn btn--sm btn--block" href="dashboard.html">ir al panel</a>
+      </div>
+    </aside>
+
+    <button class="backdrop" type="button" id="drawer-backdrop" aria-label="Cerrar el árbol de archivos"></button>
+
+    <!-- ============ CONTENIDO ============ -->
+    <main class="content" id="contenido">
+      <!-- HERO -->
+      <section class="section section--tight" id="inicio" aria-labelledby="hero-title">
+        <div class="hero">
+          <div class="hero__copy">
+            <span class="eyebrow">plataforma institucional · v1.4.0 · es-CO</span>
+            <h1 class="display mt-3" id="hero-title">Identidad verificada desde tu terminal.</h1>
+            <p class="lede mt-4">
+              Averyn reúne enrolamiento biométrico, OCR documental y trazabilidad de procesos
+              electorales en una sola API. Cada operación queda firmada con persona, dispositivo,
+              operador y resultado: nada ocurre fuera de la bitácora.
+            </p>
+            <div class="hero__actions">
+              <a class="btn btn--primary btn--lg" href="dashboard.html">abrir el panel</a>
+              <a class="btn btn--lg" href="#quickstart">leer el quickstart</a>
+            </div>
+            <div class="hero__stats">
+              <span>
+                <span class="hero__stat-label">precisión facial</span>
+                <span class="hero__stat-value">99,4 %</span>
+                <span class="hero__stat-note">FAR ≤ 0,001 % · pruebas internas</span>
+              </span>
+              <span>
+                <span class="hero__stat-label">latencia p95</span>
+                <span class="hero__stat-value">310 ms</span>
+                <span class="hero__stat-note">verificación en dispositivo local</span>
+              </span>
+              <span>
+                <span class="hero__stat-label">eventos auditados</span>
+                <span class="hero__stat-value">1 248</span>
+                <span class="hero__stat-note">trazabilidad por evento</span>
+              </span>
+              <span>
+                <span class="hero__stat-label">dispositivos</span>
+                <span class="hero__stat-value">12</span>
+                <span class="hero__stat-note">cámaras y lectores certificados</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- Mock de terminal (decorativo) -->
+          <div class="term" aria-hidden="true">
+            <div class="term__bar">
+              <span class="win-dots"><span></span><span></span><span></span></span>
+              <span>averyn@estacion-01 — zsh — 80×24</span>
+              <span class="panel__bar-meta">utf-8</span>
+            </div>
+            <div class="term__body">
+              <span class="term__line" style="--chars:27; --dur:650ms; --delay:150ms"><span class="term__prompt">$</span> averyn init <span class="term__flag">--region=co</span></span>
+              <span class="term__line term__out" style="--chars:27; --dur:650ms; --delay:850ms">  <span class="term__ok">✓</span> api en línea · v1.4.0</span>
+              <span class="term__line" style="--chars:36; --dur:700ms; --delay:1550ms"><span class="term__prompt">$</span> averyn verificar <span class="term__flag">--metodo</span> rostro</span>
+              <span class="term__line term__out" style="--chars:46; --dur:700ms; --delay:2300ms">  <span class="term__ok">→</span> 310 ms · score 0.994 · <span class="term__ok">ACCESO CONCEDIDO</span></span>
+              <span class="term__line" style="--chars:5; --dur:300ms; --delay:3050ms"><span class="term__prompt">$</span> <span class="term__caret">▌</span></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr class="rule rule--strong" />
+
+      <!-- QUICKSTART -->
+      <section class="section section--tight" id="quickstart" aria-labelledby="quickstart-title">
+        <p class="section__path">~/biometria/<b>quickstart.sh</b></p>
+        <h2 class="h2" id="quickstart-title">Del cero a la primera verificación en tres comandos</h2>
+        <p class="lede mt-3 mb-4">
+          La CLI de Averyn crea el entorno, carga el padrón y ejecuta la primera verificación
+          contra el enrolamiento. Todo lo que ocurre aquí es legible después en el panel operativo.
+        </p>
+
+        <div class="code">
+          <div class="code__bar">
+            <span>~/averyn/quickstart.sh</span>
+            <button class="btn btn--sm" type="button" id="copy-btn" aria-describedby="copy-live">copiar</button>
+          </div>
+<pre id="quickstart-code"><code><span class="tok-com"># 1 · instalar la CLI de Averyn</span>
+<span class="tok-cmd">curl</span> -fsSL https://averyn.test/instalar.sh | <span class="tok-cmd">sh</span>
+
+<span class="tok-com"># 2 · inicializar el entorno y cargar el padrón</span>
+<span class="tok-cmd">averyn</span> init <span class="tok-flag">--region</span>=co <span class="tok-flag">--entorno</span>=produccion
+<span class="tok-cmd">averyn</span> personas importar <span class="tok-str">./padron.csv</span>
+
+<span class="tok-com"># 3 · verificar una identidad contra el enrolamiento</span>
+<span class="tok-cmd">averyn</span> verificar <span class="tok-flag">--doc</span> <span class="tok-str">"CC 1.023.456.789"</span> <span class="tok-flag">--metodo</span> rostro</code></pre>
+          <span class="sr-only" id="copy-live" role="status"></span>
+        </div>
+
+        <div class="grid grid--3 mt-4">
+          <div class="alert alert--success" role="status">
+            <span class="alert__icon" aria-hidden="true">✓</span>
+            <span><strong>salida esperada</strong>verificación exitosa en 310 ms · score 0.994</span>
+          </div>
+          <div class="alert alert--info" role="status">
+            <span class="alert__icon" aria-hidden="true">i</span>
+            <span><strong>auditoría</strong>el evento queda firmado en /api/v1/eventos</span>
+          </div>
+          <div class="alert alert--warning" role="status">
+            <span class="alert__icon" aria-hidden="true">!</span>
+            <span><strong>requisito</strong>una cámara FaceCam o lector de huella en línea</span>
+          </div>
+        </div>
+      </section>
+
+      <hr class="rule" />
+
+      <!-- CAPACIDADES -->
+      <section class="section section--tight" id="capacidades" aria-labelledby="cap-title">
+        <p class="section__path">~/identidad/<b>capacidades.md</b></p>
+        <h2 class="h2" id="cap-title">Cuatro módulos, una sola verdad</h2>
+        <p class="lede mt-3 mb-4">
+          Cada módulo escribe en la misma bitácora: no hay estados paralelos ni planillas
+          sueltas que reconciliar.
+        </p>
+
+        <div class="grid grid--2">
+          <article class="panel feature">
+            <div class="panel__bar">
+              <span class="win-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+              <span class="panel__bar-title">~/identidad/README.md</span>
+            </div>
+            <div class="panel__body">
+              <span class="feature__num">01 · identidad</span>
+              <h3 class="h3 mt-2">Catálogo maestro de personas</h3>
+              <p class="feature__desc mt-2">
+                Altas con documento, afiliación y estado de verificación; cada cambio queda
+                asociado al operador que lo hizo.
+              </p>
+              <ul class="feature__list">
+                <li>estados: verificado y pendiente</li>
+                <li>búsqueda por nombre o número de documento</li>
+                <li>detalle trazable por individuo</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="panel feature">
+            <div class="panel__bar">
+              <span class="win-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+              <span class="panel__bar-title">~/biometria/README.md</span>
+            </div>
+            <div class="panel__body">
+              <span class="feature__num">02 · biometría</span>
+              <h3 class="h3 mt-2">Enrolamiento y verificación</h3>
+              <p class="feature__desc mt-2">
+                Rostro y huella con control de calidad de muestra: si la captura no alcanza el
+                umbral, se repite antes de comparar.
+              </p>
+              <ul class="feature__list">
+                <li>latencia p95 de 310 ms en dispositivo local</li>
+                <li>dispositivos con estado en línea / desconectado</li>
+                <li>resultado explícito: exitoso o rechazado</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="panel feature">
+            <div class="panel__bar">
+              <span class="win-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+              <span class="panel__bar-title">~/documentos/README.md</span>
+            </div>
+            <div class="panel__body">
+              <span class="feature__num">03 · documentos</span>
+              <h3 class="h3 mt-2">OCR con revisión humana</h3>
+              <p class="feature__desc mt-2">
+                El pre-registro extrae campos del documento y, cuando la confianza del OCR es
+                baja, el caso entra a una cola de validación.
+              </p>
+              <ul class="feature__list">
+                <li>extracción de campos con nivel de confianza</li>
+                <li>cola de revisión humana antes de confirmar</li>
+                <li>rechazos y alertas visibles en el panel</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="panel feature">
+            <div class="panel__bar">
+              <span class="win-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+              <span class="panel__bar-title">~/electoral/README.md</span>
+            </div>
+            <div class="panel__body">
+              <span class="feature__num">04 · electoral</span>
+              <h3 class="h3 mt-2">Procesos con períodos y mesas</h3>
+              <p class="feature__desc mt-2">
+                Crea el proceso, define fechas de votación y habilita la verificación de
+                votantes por mesa, con cierre y exportación de resultados.
+              </p>
+              <ul class="feature__list">
+                <li>estados: abierto o borrador</li>
+                <li>institución y período por proceso</li>
+                <li>bitácora completa durante la jornada</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <hr class="rule" />
+
+      <!-- API -->
+      <section class="section section--tight" id="api" aria-labelledby="api-title">
+        <p class="section__path">~/biometria/<b>endpoints.api</b></p>
+        <h2 class="h2" id="api-title">Endpoints principales</h2>
+        <p class="lede mt-3 mb-4">
+          La misma superficie que usa el panel: REST sobre JSON, autenticación por token de
+          sesión y respuesta con identificador de evento para auditoría.
+        </p>
+        <ul class="endpoints">
+          <li>
+            <span class="ep__method ep__get">GET</span>
+            <span class="ep__path">/api/v1/personas</span>
+            <span class="ep__desc">Catálogo maestro con estado de verificación y afiliación</span>
+          </li>
+          <li>
+            <span class="ep__method ep__post">POST</span>
+            <span class="ep__path">/api/v1/personas</span>
+            <span class="ep__desc">Alta de persona con documento y afiliación</span>
+          </li>
+          <li>
+            <span class="ep__method ep__post">POST</span>
+            <span class="ep__path">/api/v1/biometria/enrolamiento</span>
+            <span class="ep__desc">Captura de rostro o huella con control de calidad de muestra</span>
+          </li>
+          <li>
+            <span class="ep__method ep__post">POST</span>
+            <span class="ep__path">/api/v1/biometria/verificacion</span>
+            <span class="ep__desc">Comparación contra el enrolamiento · 310 ms p95</span>
+          </li>
+          <li>
+            <span class="ep__method ep__get">GET</span>
+            <span class="ep__path">/api/v1/eventos</span>
+            <span class="ep__desc">Bitácora filtrable de operaciones biométricas</span>
+          </li>
+          <li>
+            <span class="ep__method ep__get">GET</span>
+            <span class="ep__path">/api/v1/dispositivos</span>
+            <span class="ep__desc">Estado de cámaras y lectores instalados</span>
+          </li>
+          <li>
+            <span class="ep__method ep__post">POST</span>
+            <span class="ep__path">/api/v1/electoral/procesos</span>
+            <span class="ep__desc">Alta de proceso electoral con institución y período</span>
+          </li>
+          <li>
+            <span class="ep__method ep__delete">DELETE</span>
+            <span class="ep__path">/api/v1/sesiones/{id}</span>
+            <span class="ep__desc">Revocación inmediata de una sesión abierta</span>
+          </li>
+        </ul>
+      </section>
+
+      <hr class="rule" />
+
+      <!-- ESTADOS -->
+      <section class="section section--tight" id="estados" aria-labelledby="estados-title">
+        <p class="section__path">~/documentos/<b>alertas.txt</b></p>
+        <h2 class="h2" id="estados-title">Estados que verás en operación</h2>
+        <p class="lede mt-3 mb-4">
+          Los mismos mensajes que emite la plataforma en el panel y en la CLI, con su nivel
+          de severidad.
+        </p>
+        <div class="grid grid--2">
+          <div class="alert alert--success" role="status">
+            <span class="alert__icon" aria-hidden="true">✓</span>
+            <span><strong>Verificación exitosa</strong>Ana Torres · CC 1.023.456.789 · FaceCam Pro · 310 ms</span>
+          </div>
+          <div class="alert alert--info" role="status">
+            <span class="alert__icon" aria-hidden="true">i</span>
+            <span><strong>Sesión iniciada</strong>admin@averyn.test · 192.168.1.24 · rol Administrador</span>
+          </div>
+          <div class="alert alert--warning" role="status">
+            <span class="alert__icon" aria-hidden="true">!</span>
+            <span><strong>Muestra de baja calidad</strong>Repita la captura con mejor iluminación antes de comparar.</span>
+          </div>
+          <div class="alert alert--error" role="alert">
+            <span class="alert__icon" aria-hidden="true">✕</span>
+            <span><strong>Dispositivo desconectado</strong>FaceCam Lite · sucursal norte · sin eventos desde las 07:40</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="section section--tight" id="acceso" aria-labelledby="cta-title">
+        <div class="cta">
+          <div>
+            <span class="eyebrow">siguiente paso</span>
+            <h2 class="h2 mt-2" id="cta-title">Entra al panel operativo con datos de demostración</h2>
+            <p class="lede mt-2 mb-0">
+              Usa las credenciales de prueba y explora eventos biométricos, dispositivos,
+              procesos electorales y la cola de revisión.
+            </p>
+          </div>
+          <div class="cta__actions">
+            <a class="btn btn--primary btn--lg" href="login.html">iniciar sesión</a>
+            <a class="btn btn--lg" href="dashboard.html">ver el panel</a>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div class="footer__inner">
+          <span>© 2026 Averyn — identidad para procesos institucionales</span>
+          <nav class="footer__links" aria-label="Enlaces del pie">
+            <a href="index.html">docs</a>
+            <a href="dashboard.html">panel</a>
+            <a href="login.html">login</a>
+          </nav>
+          <span class="dim">dirección 06 · terminal / developer tool</span>
+        </div>
+      </footer>
+    </main>
+
+    <!-- ============ STATUS BAR ============ -->
+    <div class="statusbar" role="group" aria-label="Barra de estado">
+      <span class="statusbar__group" role="status"><span class="dot dot--success" aria-hidden="true"></span>conectado</span>
+      <span class="statusbar__group statusbar__optional"><span class="statusbar__label">sesión:</span> <span id="status-sesion">invitado</span></span>
+      <span class="statusbar__group statusbar__optional"><span class="statusbar__label">rol:</span> <span id="status-rol">—</span></span>
+      <span class="statusbar__right">
+        <span class="statusbar__optional">v1.4.0</span>
+        <span class="statusbar__optional">rama main</span>
+        <span class="statusbar__accent" id="clock">--:--:--</span>
+      </span>
+    </div>
+  </div>
+
+  <script src="../shared/app.js"></script>
+  <script>
+    (function () {
+      /* ---- Reloj de la status bar ---- */
+      function tic() {
+        var el = document.getElementById('clock');
+        if (el) el.textContent = new Date().toLocaleTimeString('es-CO', { hour12: false });
+      }
+      tic();
+      setInterval(tic, 1000);
+
+      /* ---- Sesión en la status bar / sidebar ---- */
+      try {
+        var sesion = window.AVERYN && AVERYN.obtenerSesion ? AVERYN.obtenerSesion() : null;
+        if (sesion && sesion.email) {
+          document.getElementById('status-sesion').textContent = sesion.email;
+          document.getElementById('status-rol').textContent = sesion.rol || 'Administrador';
+          var estado = document.getElementById('sesion-estado');
+          if (estado) {
+            estado.textContent = sesion.email;
+            var punto = estado.previousElementSibling;
+            if (punto) { punto.className = 'dot dot--success'; }
+          }
+        }
+      } catch (e) { /* almacenamiento no disponible */ }
+
+      /* ---- Cajón lateral (árbol) ---- */
+      var toggle = document.getElementById('drawer-toggle');
+      var sidebar = document.getElementById('sidebar');
+      var backdrop = document.getElementById('drawer-backdrop');
+
+      function setDrawer(open) {
+        sidebar.classList.toggle('is-open', open);
+        backdrop.classList.toggle('is-on', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        toggle.setAttribute('aria-label', open ? 'Cerrar el árbol de archivos' : 'Abrir el árbol de archivos');
+      }
+      function isMobile() { return window.matchMedia('(max-width: 1023px)').matches; }
+
+      if (toggle && sidebar && backdrop) {
+        toggle.addEventListener('click', function () {
+          setDrawer(!sidebar.classList.contains('is-open'));
+        });
+        backdrop.addEventListener('click', function () {
+          setDrawer(false);
+          toggle.focus();
+        });
+        document.addEventListener('keydown', function (ev) {
+          if (ev.key === 'Escape' && sidebar.classList.contains('is-open')) {
+            setDrawer(false);
+            toggle.focus();
+          }
+        });
+        sidebar.addEventListener('click', function (ev) {
+          if (ev.target.closest('a') && isMobile()) setDrawer(false);
+        });
+        window.addEventListener('resize', function () {
+          if (!isMobile()) setDrawer(false);
+        });
+      }
+
+      /* ---- Copiar quickstart ---- */
+      var copyBtn = document.getElementById('copy-btn');
+      var codeEl = document.getElementById('quickstart-code');
+      var live = document.getElementById('copy-live');
+
+      function feedback(ok) {
+        copyBtn.textContent = ok ? '✓ copiado' : 'error';
+        live.textContent = ok ? 'Código copiado al portapapeles.' : 'No se pudo copiar el código.';
+        setTimeout(function () {
+          copyBtn.textContent = 'copiar';
+          live.textContent = '';
+        }, 1800);
+      }
+
+      function fallbackCopy(text) {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'absolute';
+        ta.style.left = '-9999px';
+        document.body.appendChild(ta);
+        ta.select();
+        var ok = false;
+        try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+        document.body.removeChild(ta);
+        feedback(ok);
+      }
+
+      if (copyBtn && codeEl) {
+        copyBtn.addEventListener('click', function () {
+          var text = codeEl.textContent;
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(function () {
+              feedback(true);
+            }).catch(function () {
+              fallbackCopy(text);
+            });
+          } else {
+            fallbackCopy(text);
+          }
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Acceso a Averyn — sesión de terminal con validación y auditoría de accesos." />
+  <title>Iniciar sesión — Averyn Terminal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="css/components.css" rel="stylesheet" />
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <div class="shell shell--bare">
+    <!-- ============ TOPBAR ============ -->
+    <header class="topbar">
+      <a class="brand" href="index.html">
+        <span class="brand__caret" aria-hidden="true">▸</span><span class="brand__mark" aria-hidden="true"></span>averyn
+      </a>
+      <nav class="tabbar" aria-label="Archivos abiertos">
+        <a class="tabfile is-active" href="login.html" aria-current="page"><span class="tabfile__ico" aria-hidden="true">▣</span>login.sh<span class="tabfile__x" aria-hidden="true">×</span></a>
+        <a class="tabfile" href="index.html"><span class="tabfile__ico" aria-hidden="true">▣</span>README.md<span class="tabfile__x" aria-hidden="true">×</span></a>
+        <a class="tabfile" href="dashboard.html"><span class="tabfile__ico" aria-hidden="true">▣</span>panel.html<span class="tabfile__x" aria-hidden="true">×</span></a>
+      </nav>
+      <div class="topbar__actions">
+        <a class="btn btn--sm btn--ghost hide-xs" href="index.html">docs</a>
+        <a class="btn btn--sm" href="dashboard.html">panel</a>
+      </div>
+    </header>
+
+    <!-- ============ CONTENIDO ============ -->
+    <main class="content" id="contenido">
+      <div class="login-grid">
+        <!-- Columna informativa -->
+        <div class="login-side">
+          <span class="eyebrow">sesión · averyn id</span>
+          <h1 class="mt-3">Iniciar sesión</h1>
+          <p class="lede mt-3">
+            Cada acceso queda registrado en la bitácora: correo, rol, dispositivo y hora.
+            Las credenciales de demostración abren el panel con la muestra completa de
+            eventos biométricos, dispositivos y procesos electorales.
+          </p>
+
+          <ul class="status-list mt-6">
+            <li>
+              <span class="status-list__name">servicio de identidad<span class="status-list__meta">auth.averyn.test · tls 1.3</span></span>
+              <span class="badge badge--success"><span class="dot" aria-hidden="true"></span>operativo</span>
+            </li>
+            <li>
+              <span class="status-list__name">motor biométrico<span class="status-list__meta">rostro + huella · 310 ms p95</span></span>
+              <span class="badge badge--success"><span class="dot" aria-hidden="true"></span>operativo</span>
+            </li>
+            <li>
+              <span class="status-list__name">bitácora de auditoría<span class="status-list__meta">escritura continua · sin pérdidas</span></span>
+              <span class="badge badge--success"><span class="dot" aria-hidden="true"></span>activa</span>
+            </li>
+          </ul>
+
+          <div class="login-hint mt-6">
+            <p class="mb-2"><b>credenciales de demostración</b></p>
+            <p class="mb-2">correo &nbsp;&nbsp;: <b>admin@averyn.test</b></p>
+            <p class="mb-0">clave &nbsp;&nbsp;&nbsp;: <b>Averyn2026</b></p>
+          </div>
+
+          <p class="help mt-4">
+            <a class="link" href="index.html">← volver a la documentación</a>
+          </p>
+        </div>
+
+        <!-- Terminal de acceso -->
+        <div class="term term--login">
+          <div class="term__bar">
+            <span class="win-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+            <span>averyn@sesion — login</span>
+            <span class="panel__bar-meta">80×24</span>
+          </div>
+          <div class="term__body">
+            <p class="prompt-line"><span class="prompt-line__user">user@averyn</span>:<span class="prompt-line__path">~</span>$ <span class="prompt-line__cmd">averyn login</span></p>
+            <p class="prompt-line"><span class="prompt-line__out">Autenticando contra el servicio de identidad…</span></p>
+
+            <div class="alert alert--error mb-4" id="login-error" role="alert" hidden>
+              <span class="alert__icon" aria-hidden="true">✕</span>
+              <span id="login-error-text"></span>
+            </div>
+
+            <form class="login-form" id="login-form" novalidate>
+              <div class="field">
+                <label class="label label--term" for="email">correo institucional</label>
+                <input class="input" type="email" id="email" name="email"
+                       autocomplete="username" placeholder="admin@averyn.test"
+                       required aria-describedby="email-help login-error-text" />
+                <span class="help" id="email-help">usa el correo asignado por tu institución.</span>
+              </div>
+
+              <div class="field">
+                <label class="label label--term" for="password">contraseña</label>
+                <div class="input-group">
+                  <input class="input" type="password" id="password" name="password"
+                         autocomplete="current-password" placeholder="••••••••"
+                         required minlength="8" aria-describedby="pass-help login-error-text" />
+                  <button class="icon-btn" type="button" id="btn-ver" aria-pressed="false" aria-label="Mostrar contraseña">
+                    <span aria-hidden="true">◉</span>
+                  </button>
+                </div>
+                <span class="help" id="pass-help">mínimo 8 caracteres.</span>
+              </div>
+
+              <label class="check mb-4"><input type="checkbox" id="recordar" /> mantener sesión abierta en este equipo</label>
+
+              <button class="btn btn--primary btn--lg btn--block" type="submit" id="btn-submit">autenticar</button>
+            </form>
+
+            <p class="prompt-line mt-4"><span class="prompt-line__out">¿Sin credenciales?</span> <a class="link" href="index.html#acceso">solicita acceso demo</a></p>
+            <p class="prompt-line mb-0"><span class="prompt-line__user">user@averyn</span>:<span class="prompt-line__path">~</span>$ <span class="term__caret" aria-hidden="true">▌</span></p>
+          </div>
+        </div>
+      </div>
+
+      <footer class="footer mt-8">
+        <div class="footer__inner">
+          <span>© 2026 Averyn — identidad para procesos institucionales</span>
+          <nav class="footer__links" aria-label="Enlaces del pie">
+            <a href="index.html">docs</a>
+            <a href="dashboard.html">panel</a>
+            <a href="login.html">login</a>
+          </nav>
+          <span class="dim">dirección 06 · terminal / developer tool</span>
+        </div>
+      </footer>
+    </main>
+
+    <!-- ============ STATUS BAR ============ -->
+    <div class="statusbar" role="group" aria-label="Barra de estado">
+      <span class="statusbar__group" role="status"><span class="dot dot--success" aria-hidden="true"></span>conectado · tls 1.3</span>
+      <span class="statusbar__group statusbar__optional"><span class="statusbar__label">sesión:</span> <span id="status-sesion">invitado</span></span>
+      <span class="statusbar__group statusbar__optional"><span class="statusbar__label">rol:</span> <span id="status-rol">—</span></span>
+      <span class="statusbar__right">
+        <span class="statusbar__optional">v1.4.0</span>
+        <span class="statusbar__optional">auditoría activa</span>
+        <span class="statusbar__accent" id="clock">--:--:--</span>
+      </span>
+    </div>
+  </div>
+
+  <script src="../shared/app.js"></script>
+  <script>
+    (function () {
+      /* ---- Reloj ---- */
+      function tic() {
+        var el = document.getElementById('clock');
+        if (el) el.textContent = new Date().toLocaleTimeString('es-CO', { hour12: false });
+      }
+      tic();
+      setInterval(tic, 1000);
+
+      /* ---- Sesión existente en la status bar ---- */
+      try {
+        var actual = window.AVERYN && AVERYN.obtenerSesion ? AVERYN.obtenerSesion() : null;
+        if (actual && actual.email) {
+          document.getElementById('status-sesion').textContent = actual.email;
+          document.getElementById('status-rol').textContent = actual.rol || 'Administrador';
+        }
+      } catch (e) { /* almacenamiento no disponible */ }
+
+      /* ---- Mostrar / ocultar contraseña ---- */
+      var pass = document.getElementById('password');
+      var btnVer = document.getElementById('btn-ver');
+      btnVer.addEventListener('click', function () {
+        var visible = pass.type === 'password';
+        pass.type = visible ? 'text' : 'password';
+        btnVer.setAttribute('aria-pressed', visible ? 'true' : 'false');
+        btnVer.setAttribute('aria-label', visible ? 'Ocultar contraseña' : 'Mostrar contraseña');
+        pass.focus();
+      });
+
+      /* ---- Validación y envío ---- */
+      var form = document.getElementById('login-form');
+      var email = document.getElementById('email');
+      var errorBox = document.getElementById('login-error');
+      var errorText = document.getElementById('login-error-text');
+      var btn = document.getElementById('btn-submit');
+
+      function fallar(campo, mensaje) {
+        campo.setAttribute('aria-invalid', 'true');
+        errorText.textContent = mensaje;
+        errorBox.hidden = false;
+        campo.focus();
+      }
+
+      function limpiarErrores() {
+        errorBox.hidden = true;
+        errorText.textContent = '';
+        email.removeAttribute('aria-invalid');
+        pass.removeAttribute('aria-invalid');
+      }
+
+      form.addEventListener('submit', function (ev) {
+        ev.preventDefault();
+        limpiarErrores();
+
+        var correo = email.value.trim();
+        if (!correo || correo.indexOf('@') < 1 || correo.indexOf('.') < 0) {
+          fallar(email, 'Correo inválido. Ejemplo: admin@averyn.test');
+          return;
+        }
+        if (!pass.value) {
+          fallar(pass, 'Introduce tu contraseña.');
+          return;
+        }
+        if (pass.value.length < 8) {
+          fallar(pass, 'La contraseña debe tener al menos 8 caracteres.');
+          return;
+        }
+
+        btn.classList.add('is-loading');
+        btn.setAttribute('aria-busy', 'true');
+        btn.disabled = true;
+        btn.textContent = 'verificando…';
+
+        setTimeout(function () {
+          if (correo === 'admin@averyn.test' && pass.value === 'Averyn2026') {
+            if (window.AVERYN && AVERYN.guardarSesion) AVERYN.guardarSesion(correo);
+            btn.textContent = 'sesión iniciada ✓';
+            window.location.href = 'dashboard.html';
+            return;
+          }
+          btn.classList.remove('is-loading');
+          btn.removeAttribute('aria-busy');
+          btn.disabled = false;
+          btn.textContent = 'autenticar';
+          fallar(pass, 'Credenciales incorrectas. Revisa el correo o la contraseña.');
+        }, 700);
+      });
+    })();
+  </script>
+</body>
+</html>
