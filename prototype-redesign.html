@@ -1,0 +1,1014 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Averyn — Prototipo Redesign (Identidad Digital / Data-Flow)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+<style>
+/* ============================================================
+   AVERYN DESIGN SYSTEM v2 — "Identidad Digital / Data-Flow"
+   Prototipo standalone. Light + Dark.
+   ============================================================ */
+:root {
+  /* Marca */
+  --blue: #145FEE;
+  --blue-hover: #0F4BC7;
+  --blue-active: #0C3B9E;
+  --blue-tint: #EAF0FE;
+  --navy: #000C24;
+  --cyan: #00ACD2;
+  --violet: #6C5CE7;
+  --violet-tint: #F0EDFE;
+  --white: #FFFFFF;
+
+  /* Grises */
+  --gray-50: #F4F6FA;
+  --gray-100: #E7EBF3;
+  --gray-200: #CBD3E1;
+  --gray-300: #A9B4C7;
+  --gray-400: #7C89A3;
+  --gray-500: #56637F;
+  --gray-600: #3B4664;
+  --gray-700: #26304A;
+
+  /* Semánticos */
+  --success: #12B76A;
+  --success-tint: #E8F8F0;
+  --warning: #F79009;
+  --warning-tint: #FEF3E2;
+  --error: #F04438;
+  --error-tint: #FDECEA;
+  --info-tint: #E3F6FA;
+
+  /* Superficies (tema) */
+  --bg: var(--white);
+  --bg-soft: var(--gray-50);
+  --bg-card: var(--white);
+  --border: var(--gray-100);
+  --border-strong: var(--gray-200);
+  --text: var(--navy);
+  --text-muted: var(--gray-500);
+
+  /* Data-flow */
+  --graph-edge: rgba(20, 95, 238, 0.16);
+  --graph-node: var(--blue);
+  --graph-glow: rgba(20, 95, 238, 0.35);
+
+  /* Tipografía */
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* Espaciado */
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px;
+  --sp-6: 24px; --sp-8: 32px; --sp-12: 48px; --sp-16: 64px;
+  --sp-20: 80px; --sp-24: 96px;
+
+  /* Radios */
+  --r-sm: 8px; --r-md: 12px; --r-lg: 16px; --r-xl: 24px; --r-full: 999px;
+
+  /* Sombras */
+  --sh-xs: 0 1px 2px rgba(0,12,36,.04);
+  --sh-sm: 0 2px 8px rgba(0,12,36,.06);
+  --sh-md: 0 8px 24px rgba(0,12,36,.08);
+  --sh-lg: 0 16px 48px rgba(0,12,36,.10);
+
+  --ease: cubic-bezier(.23,1,.32,1);
+}
+
+[data-theme="dark"] {
+  --bg: #060B18;
+  --bg-soft: #0A1020;
+  --bg-card: #0E1526;
+  --border: rgba(255,255,255,.07);
+  --border-strong: rgba(255,255,255,.13);
+  --text: #E8ECF6;
+  --text-muted: #8494B3;
+  --blue-tint: rgba(20,95,238,.16);
+  --violet-tint: rgba(108,92,231,.16);
+  --graph-edge: rgba(113,204,255,.14);
+  --graph-node: #71CCFF;
+  --graph-glow: rgba(113,204,255,.35);
+  --success-tint: rgba(18,183,106,.14);
+  --warning-tint: rgba(247,144,9,.14);
+  --error-tint: rgba(240,68,56,.14);
+  --info-tint: rgba(0,172,210,.14);
+  --sh-xs: 0 1px 2px rgba(0,0,0,.3);
+  --sh-sm: 0 2px 8px rgba(0,0,0,.35);
+  --sh-md: 0 8px 24px rgba(0,0,0,.4);
+  --sh-lg: 0 16px 48px rgba(0,0,0,.5);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color .3s var(--ease), color .3s var(--ease);
+}
+h1,h2,h3,h4 { font-family: var(--font-heading); line-height: 1.1; margin: 0; letter-spacing: -.02em; }
+p { margin: 0; }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+button { font-family: inherit; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 4px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+
+/* ---------- Controles del prototipo ---------- */
+.proto-bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 16px;
+  background: color-mix(in srgb, var(--bg-card) 88%, transparent);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+.proto-bar__label { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); margin-right: 4px; }
+.proto-bar__spacer { flex: 1; }
+.proto-chip {
+  padding: 6px 14px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-full);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 600;
+  transition: all .18s var(--ease);
+}
+.proto-chip:hover { border-color: var(--blue); color: var(--blue); }
+.proto-chip.is-active { background: var(--blue); border-color: var(--blue); color: #fff; }
+.proto-icon-btn {
+  width: 34px; height: 34px;
+  display: grid; place-items: center;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-full);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 15px;
+  transition: all .18s var(--ease);
+}
+.proto-icon-btn:hover { border-color: var(--blue); color: var(--blue); }
+
+.proto-view { display: none; padding-top: 54px; }
+.proto-view.is-active { display: block; }
+
+/* ---------- Botones ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 46px; padding: 0 22px;
+  border: 1px solid transparent;
+  border-radius: var(--r-md);
+  font-size: 15px; font-weight: 600;
+  transition: transform .18s var(--ease), box-shadow .18s var(--ease), background-color .18s var(--ease), border-color .18s var(--ease), color .18s var(--ease);
+}
+.btn-primary { background: var(--blue); color: #fff; box-shadow: 0 8px 18px rgba(20,95,238,.22); }
+.btn-primary:hover { background: var(--blue-hover); transform: translateY(-2px); box-shadow: 0 12px 26px rgba(20,95,238,.3); }
+.btn-primary:active { transform: scale(.98); }
+.btn-ghost { background: transparent; color: var(--text); border-color: var(--border-strong); }
+.btn-ghost:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-tint); }
+.btn-lg { min-height: 52px; padding: 0 30px; font-size: 16px; }
+.btn-white { background: #fff; color: var(--navy); }
+.btn-white:hover { transform: translateY(-2px); box-shadow: 0 12px 26px rgba(0,12,36,.25); }
+
+/* ---------- Landing ---------- */
+.nav {
+  position: sticky; top: 54px; z-index: 90;
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+.nav__inner { max-width: 1180px; margin: 0 auto; display: flex; align-items: center; gap: 28px; padding: 14px 24px; }
+.brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-heading); font-weight: 700; font-size: 20px; color: var(--text); }
+.brand__mark {
+  width: 32px; height: 32px; border-radius: 9px;
+  background: linear-gradient(135deg, var(--blue), var(--cyan));
+  display: grid; place-items: center; color: #fff; font-size: 15px;
+  box-shadow: 0 6px 16px rgba(20,95,238,.3);
+}
+.nav__links { display: flex; gap: 24px; margin-left: auto; list-style: none; padding: 0; }
+.nav__links a { font-size: 14px; font-weight: 600; color: var(--text-muted); transition: color .18s var(--ease); }
+.nav__links a:hover { color: var(--blue); }
+@media (max-width: 900px) { .nav__links { display: none; } }
+
+/* Hero */
+.hero { position: relative; overflow: hidden; padding: var(--sp-24) 0 var(--sp-20); }
+.hero__canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+.hero__inner { position: relative; z-index: 1; max-width: 1180px; margin: 0 auto; padding: 0 24px; text-align: center; }
+.hero__pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 7px 16px; margin-bottom: 26px;
+  background: var(--blue-tint); border: 1px solid rgba(20,95,238,.2);
+  border-radius: var(--r-full);
+  font-size: 13px; font-weight: 600; color: var(--blue);
+}
+.hero__pill .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--success); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
+.hero h1 { font-size: clamp(2.4rem, 5.5vw, 4.4rem); font-weight: 700; letter-spacing: -.035em; max-width: 900px; margin: 0 auto 22px; }
+.hero h1 em { font-style: normal; background: linear-gradient(120deg, var(--blue), var(--cyan)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero__sub { max-width: 640px; margin: 0 auto 34px; font-size: 18px; color: var(--text-muted); line-height: 1.7; }
+.hero__cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+/* Reveal anim */
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+.reveal.is-in { opacity: 1; transform: none; }
+
+/* Secciones */
+.section { padding: var(--sp-20) 0; }
+.section--soft { background: var(--bg-soft); }
+.container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+.section__head { max-width: 640px; margin-bottom: 48px; }
+.section__eyebrow { font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--blue); margin-bottom: 12px; }
+.section__title { font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 700; letter-spacing: -.03em; margin-bottom: 14px; }
+.section__desc { font-size: 17px; color: var(--text-muted); }
+
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+@media (max-width: 960px) { .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 620px) { .grid-3, .grid-4 { grid-template-columns: 1fr; } }
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 28px;
+  transition: transform .22s var(--ease), box-shadow .22s var(--ease), border-color .22s var(--ease);
+}
+.card:hover { transform: translateY(-4px); box-shadow: var(--sh-md); border-color: rgba(20,95,238,.3); }
+.card__icon {
+  width: 46px; height: 46px;
+  display: grid; place-items: center;
+  border-radius: var(--r-md);
+  background: var(--blue-tint); color: var(--blue);
+  font-size: 20px; margin-bottom: 18px;
+  transition: background .22s var(--ease), color .22s var(--ease), transform .22s var(--ease);
+}
+.card:hover .card__icon { background: var(--blue); color: #fff; transform: rotate(-5deg) scale(1.06); }
+.card--violet .card__icon { background: var(--violet-tint); color: var(--violet); }
+.card--violet:hover .card__icon { background: var(--violet); }
+.card h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+.card p { font-size: 14.5px; color: var(--text-muted); }
+
+/* Equipo */
+.team-card {
+  display: flex; flex-direction: column; gap: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 26px 24px;
+  transition: transform .22s var(--ease), box-shadow .22s var(--ease), border-color .22s var(--ease);
+}
+.team-card:hover { transform: translateY(-4px); box-shadow: var(--sh-md); border-color: rgba(20,95,238,.3); }
+.team-card__avatar {
+  width: 56px; height: 56px;
+  border-radius: var(--r-md);
+  display: grid; place-items: center;
+  font-family: var(--font-heading); font-weight: 700; font-size: 18px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--blue), var(--cyan));
+  box-shadow: 0 8px 20px rgba(20,95,238,.28);
+}
+.team-card__avatar--v2 { background: linear-gradient(135deg, var(--violet), var(--blue)); }
+.team-card__avatar--v3 { background: linear-gradient(135deg, var(--cyan), var(--success)); }
+.team-card__avatar--v4 { background: linear-gradient(135deg, var(--warning), var(--error)); }
+.team-card__name { font-family: var(--font-heading); font-weight: 700; font-size: 17px; }
+.team-card__role { font-size: 13px; font-weight: 600; color: var(--blue); margin-top: 3px; }
+.team-card__resp { font-size: 13.5px; color: var(--text-muted); line-height: 1.55; }
+.team-card__link {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: auto; padding-top: 14px;
+  border-top: 1px dashed var(--border-strong);
+  font-size: 13px; font-weight: 600; color: var(--text-muted);
+  transition: color .18s var(--ease);
+}
+.team-card:hover .team-card__link { color: var(--blue); }
+
+/* Footer */
+.footer { background: var(--navy); color: #8B9BC0; padding: var(--sp-16) 0 var(--sp-8); }
+[data-theme="dark"] .footer { background: #04070F; border-top: 1px solid var(--border); }
+.footer__grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+@media (max-width: 780px) { .footer__grid { grid-template-columns: 1fr; } }
+.footer h4 { color: #fff; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 16px; }
+.footer a { display: block; font-size: 14px; color: #8B9BC0; padding: 5px 0; transition: color .18s var(--ease); }
+.footer a:hover { color: #fff; }
+.footer__bottom { max-width: 1180px; margin: 44px auto 0; padding: 22px 24px 0; border-top: 1px solid rgba(255,255,255,.1); font-size: 13px; }
+
+/* ---------- Login ---------- */
+.login-wrap { min-height: calc(100vh - 54px); display: grid; grid-template-columns: 1fr 1fr; }
+@media (max-width: 900px) { .login-wrap { grid-template-columns: 1fr; } }
+.login-side {
+  position: relative; overflow: hidden;
+  background: var(--navy);
+  color: #fff;
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 56px 48px;
+}
+[data-theme="dark"] .login-side { background: #04070F; border-right: 1px solid var(--border); }
+.login-side__glow {
+  position: absolute; width: 420px; height: 420px;
+  border-radius: 50%; filter: blur(90px); opacity: .5;
+  background: var(--blue); right: -120px; top: -120px;
+}
+.login-side__glow--2 { background: var(--violet); left: -140px; bottom: -140px; top: auto; right: auto; opacity: .35; }
+.login-side__content { position: relative; z-index: 1; }
+.login-side h2 { font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 700; margin-bottom: 16px; letter-spacing: -.03em; }
+.login-side h2 span { background: linear-gradient(120deg, #71CCFF, var(--cyan)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.login-side p { color: rgba(255,255,255,.6); font-size: 15.5px; max-width: 420px; }
+.login-side__feats { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 14px; }
+.login-feat { display: flex; align-items: center; gap: 12px; font-size: 14px; color: rgba(255,255,255,.78); }
+.login-feat i { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 10px; background: rgba(255,255,255,.08); color: #71CCFF; }
+.login-side__foot { position: relative; z-index: 1; font-size: 13px; color: rgba(255,255,255,.4); }
+
+.login-panel { display: flex; align-items: center; justify-content: center; padding: 48px 32px; background: var(--bg); }
+.login-box { width: 100%; max-width: 400px; }
+.login-box__logo { display: flex; align-items: center; gap: 10px; font-family: var(--font-heading); font-weight: 700; font-size: 22px; margin-bottom: 34px; }
+.login-box h1 { font-size: 26px; margin-bottom: 8px; letter-spacing: -.03em; }
+.login-box__sub { color: var(--text-muted); font-size: 15px; margin-bottom: 30px; }
+.field { margin-bottom: 18px; }
+.field label { display: block; font-size: 13.5px; font-weight: 600; margin-bottom: 7px; }
+.field input {
+  width: 100%; height: 48px;
+  padding: 0 16px;
+  border: 1.5px solid var(--border-strong);
+  border-radius: var(--r-md);
+  background: var(--bg-card);
+  color: var(--text);
+  font-size: 15px; font-family: inherit;
+  transition: border-color .18s var(--ease), box-shadow .18s var(--ease);
+}
+.field input::placeholder { color: var(--text-muted); }
+.field input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 4px var(--blue-tint); }
+.login-box .btn { width: 100%; margin-top: 8px; }
+.login-box__alt { margin-top: 22px; text-align: center; font-size: 14px; color: var(--text-muted); }
+.login-box__alt a { color: var(--blue); font-weight: 600; }
+.login-hint {
+  display: flex; align-items: center; gap: 8px;
+  margin-top: 24px; padding: 12px 14px;
+  background: var(--info-tint); border: 1px solid rgba(0,172,210,.3);
+  border-radius: var(--r-md);
+  font-size: 13px; color: var(--text-muted);
+}
+.login-hint i { color: var(--cyan); }
+
+/* ---------- Dashboard ---------- */
+.dash-navbar {
+  position: sticky; top: 54px; z-index: 80;
+  display: flex; align-items: center; gap: 18px;
+  padding: 10px 24px;
+  background: color-mix(in srgb, var(--bg-card) 88%, transparent);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+.dock {
+  display: flex; align-items: center; gap: 3px;
+  margin: 0 auto;
+  padding: 5px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-full);
+  box-shadow: var(--sh-sm);
+  list-style: none;
+}
+.dock__item {
+  display: inline-flex; align-items: center; gap: 7px;
+  height: 38px; padding: 0 15px;
+  border-radius: var(--r-full);
+  font-family: var(--font-heading); font-size: 13.5px; font-weight: 600;
+  color: var(--text-muted);
+  transition: background .18s var(--ease), color .18s var(--ease);
+}
+.dock__item i { font-size: 15px; }
+.dock__item:hover { background: var(--blue-tint); color: var(--blue); }
+.dock__item.is-active { background: var(--blue); color: #fff; box-shadow: 0 4px 12px rgba(20,95,238,.3); }
+@media (max-width: 1100px) { .dock__item span { display: none; } .dock__item { padding: 0 12px; } }
+@media (max-width: 760px) { .dock { overflow-x: auto; max-width: 100%; } }
+
+.nav-actions { display: flex; align-items: center; gap: 10px; }
+.icon-btn {
+  position: relative;
+  width: 38px; height: 38px;
+  display: grid; place-items: center;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  background: var(--bg-card); color: var(--text-muted);
+  font-size: 16px;
+  transition: all .18s var(--ease);
+}
+.icon-btn:hover { border-color: var(--blue); color: var(--blue); }
+.icon-btn__badge {
+  position: absolute; top: -5px; right: -5px;
+  min-width: 17px; height: 17px; padding: 0 4px;
+  background: var(--error); color: #fff;
+  font-size: 10px; font-weight: 700; line-height: 17px;
+  border-radius: var(--r-full);
+  border: 2px solid var(--bg-card);
+}
+.avatar-btn { display: flex; align-items: center; gap: 9px; padding: 5px 12px 5px 5px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-full); transition: border-color .18s var(--ease); }
+.avatar-btn:hover { border-color: var(--blue); }
+.avatar-btn__pic {
+  width: 32px; height: 32px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--blue), var(--cyan));
+  color: #fff; font-size: 12px; font-weight: 700;
+}
+.avatar-btn__name { font-size: 13px; font-weight: 600; line-height: 1.2; }
+.avatar-btn__role { font-size: 11px; color: var(--text-muted); }
+@media (max-width: 640px) { .avatar-btn__info { display: none; } }
+
+.dash-main { max-width: 1180px; margin: 0 auto; padding: 34px 24px 72px; }
+
+/* Welcome */
+.welcome { margin-bottom: 32px; }
+.welcome__eyebrow { font-size: 14px; font-weight: 600; color: var(--text-muted); margin-bottom: 6px; }
+.welcome__eyebrow b { color: var(--blue); }
+.welcome h1 { font-size: clamp(1.7rem, 3vw, 2.3rem); font-weight: 700; letter-spacing: -.03em; }
+.welcome p { max-width: 560px; margin-top: 10px; color: var(--text-muted); font-size: 15.5px; }
+
+/* KPIs */
+.kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-bottom: 32px; }
+@media (max-width: 960px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .kpi-grid { grid-template-columns: 1fr; } }
+.kpi {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 22px;
+  transition: transform .22s var(--ease), box-shadow .22s var(--ease), border-color .22s var(--ease);
+}
+.kpi:hover { transform: translateY(-3px); box-shadow: var(--sh-sm); border-color: rgba(20,95,238,.3); }
+.kpi__top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.kpi__icon { width: 40px; height: 40px; display: grid; place-items: center; border-radius: var(--r-md); background: var(--blue-tint); color: var(--blue); font-size: 17px; }
+.kpi--v2 .kpi__icon { background: var(--success-tint); color: var(--success); }
+.kpi--v3 .kpi__icon { background: var(--violet-tint); color: var(--violet); }
+.kpi--v4 .kpi__icon { background: var(--warning-tint); color: var(--warning); }
+.kpi__delta { font-size: 12px; font-weight: 700; color: var(--success); display: inline-flex; align-items: center; gap: 3px; }
+.kpi__value { font-family: var(--font-heading); font-size: 32px; font-weight: 700; letter-spacing: -.03em; line-height: 1; }
+.kpi__label { font-size: 13.5px; color: var(--text-muted); margin-top: 7px; }
+
+/* Bottom grid */
+.bottom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+@media (max-width: 860px) { .bottom-grid { grid-template-columns: 1fr; } }
+.panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 24px;
+}
+.panel__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+.panel__title { font-family: var(--font-heading); font-size: 16px; font-weight: 700; }
+.panel__link { font-size: 13px; font-weight: 600; color: var(--blue); }
+
+.quick-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.quick {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  transition: all .2s var(--ease);
+}
+.quick:hover { border-color: var(--blue); background: var(--blue-tint); transform: translateY(-2px); }
+.quick__icon { width: 40px; height: 40px; flex-shrink: 0; display: grid; place-items: center; border-radius: 10px; background: var(--blue-tint); color: var(--blue); font-size: 17px; }
+.quick:hover .quick__icon { background: var(--blue); color: #fff; }
+.quick__t { font-size: 14px; font-weight: 600; line-height: 1.25; }
+.quick__d { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+.feed { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.feed__item { display: flex; gap: 14px; padding: 13px 0; border-bottom: 1px dashed var(--border); }
+.feed__item:last-child { border-bottom: none; padding-bottom: 0; }
+.feed__icon { width: 36px; height: 36px; flex-shrink: 0; display: grid; place-items: center; border-radius: 50%; font-size: 14px; }
+.feed__icon--blue { background: var(--blue-tint); color: var(--blue); }
+.feed__icon--green { background: var(--success-tint); color: var(--success); }
+.feed__icon--violet { background: var(--violet-tint); color: var(--violet); }
+.feed__body { flex: 1; min-width: 0; }
+.feed__title { font-size: 14px; font-weight: 600; }
+.feed__desc { font-size: 13px; color: var(--text-muted); margin-top: 1px; }
+.feed__time { font-size: 12px; color: var(--text-muted); white-space: nowrap; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== Barra de control del prototipo ===== -->
+<div class="proto-bar" role="toolbar" aria-label="Controles del prototipo">
+  <span class="proto-bar__label">Prototipo</span>
+  <button class="proto-chip is-active" data-view="landing">Landing</button>
+  <button class="proto-chip" data-view="login">Login</button>
+  <button class="proto-chip" data-view="dashboard">Dashboard</button>
+  <span class="proto-bar__spacer"></span>
+  <button class="proto-icon-btn" id="theme-toggle" aria-label="Alternar tema claro/oscuro" title="Tema claro/oscuro">
+    <i class="bi bi-moon-stars" aria-hidden="true"></i>
+  </button>
+</div>
+
+<!-- ================================================================
+     1 · LANDING
+     ================================================================ -->
+<div class="proto-view is-active" id="view-landing">
+
+  <nav class="nav" aria-label="Navegación principal">
+    <div class="nav__inner">
+      <a class="brand" href="#inicio"><span class="brand__mark" aria-hidden="true">A</span> Averyn</a>
+      <ul class="nav__links">
+        <li><a href="#capacidades">Capacidades</a></li>
+        <li><a href="#arquitectura">Arquitectura</a></li>
+        <li><a href="#seguridad">Seguridad</a></li>
+        <li><a href="#equipo">Equipo</a></li>
+      </ul>
+      <a class="btn btn-primary" href="#" data-goto="login" style="min-height:40px;padding:0 18px;font-size:14px">Ingresar <i class="bi bi-arrow-right" aria-hidden="true"></i></a>
+    </div>
+  </nav>
+
+  <main id="inicio">
+    <!-- HERO con grafo data-flow -->
+    <section class="hero">
+      <canvas class="hero__canvas" id="graph-canvas" aria-hidden="true"></canvas>
+      <div class="hero__inner">
+        <span class="hero__pill"><span class="dot" aria-hidden="true"></span> Preselección ExpoSoftware · Sprint 2</span>
+        <h1>Identidad digital para <em>procesos institucionales.</em></h1>
+        <p class="hero__sub">Averyn conecta identidad, biometría, OCR e inteligencia artificial en una plataforma multi-tenant segura, trazable y auditable.</p>
+        <div class="hero__cta">
+          <a class="btn btn-primary btn-lg" href="#" data-goto="login">Ingresar al sistema <i class="bi bi-arrow-right" aria-hidden="true"></i></a>
+          <a class="btn btn-ghost btn-lg" href="#capacidades">Ver capacidades</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Capacidades -->
+    <section class="section section--soft" id="capacidades" aria-labelledby="cap-t">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="section__eyebrow">Capacidades</p>
+          <h2 class="section__title" id="cap-t">Un núcleo común, módulos a la carta.</h2>
+          <p class="section__desc">Cada capacidad está conectada a la identidad: desde el enrolamiento biométrico hasta la auditoría de operaciones críticas.</p>
+        </div>
+        <div class="grid-3">
+          <article class="card reveal"><div class="card__icon"><i class="bi bi-person-badge" aria-hidden="true"></i></div><h3>Identidad</h3><p>Personas con identificadores propios, documentos múltiples y afiliaciones por institución multi-tenant.</p></article>
+          <article class="card reveal"><div class="card__icon"><i class="bi bi-fingerprint" aria-hidden="true"></i></div><h3>Biometría</h3><p>Enrolamiento y verificación de rostro y huella con liveness, calidad y plantillas protegidas.</p></article>
+          <article class="card reveal"><div class="card__icon"><i class="bi bi-file-earmark-text" aria-hidden="true"></i></div><h3>OCR documental</h3><p>Extracción y validación de datos de documento antes de asociarlos a una persona.</p></article>
+          <article class="card card--violet reveal"><div class="card__icon"><i class="bi bi-cpu" aria-hidden="true"></i></div><h3>Inteligencia artificial</h3><p>Modelos versionados y trazables para detección facial, liveness y clasificación.</p></article>
+          <article class="card card--violet reveal"><div class="card__icon"><i class="bi bi-shield-check" aria-hidden="true"></i></div><h3>Seguridad</h3><p>Roles, permisos, cifrado y aislamiento de tenants como dominios de primera clase.</p></article>
+          <article class="card card--violet reveal"><div class="card__icon"><i class="bi bi-journal-check" aria-hidden="true"></i></div><h3>Auditoría</h3><p>Registro trazable de cada operación crítica: LOGIN, PERSON_CREATED, BIOMETRIC_VERIFIED.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Arquitectura -->
+    <section class="section" id="arquitectura" aria-labelledby="arq-t">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="section__eyebrow">Arquitectura</p>
+          <h2 class="section__title" id="arq-t">Monolito modular orientado a dominio.</h2>
+          <p class="section__desc">Core (NestJS + PostgreSQL/Prisma) con servicios independientes de Face, Fingerprint y OCR, todos tras un contrato estable.</p>
+        </div>
+        <div class="grid-4">
+          <article class="card reveal"><div class="card__icon"><i class="bi bi-window" aria-hidden="true"></i></div><h3>Frontend</h3><p>Next.js · App Shell · Design System con tokens compartidos.</p></article>
+          <article class="card reveal"><div class="card__icon"><i class="bi bi-diagram-3" aria-hidden="true"></i></div><h3>Core API</h3><p>NestJS · REST /api/v1 · Tenant context · validación de DTO.</p></article>
+          <article class="card reveal"><div class="card__icon"><i class="bi bi-database" aria-hidden="true"></i></div><h3>PostgreSQL</h3><p>Prisma ORM · migraciones · integridad referencial multi-tenant.</p></article>
+          <article class="card reveal"><div class="card__icon"><i class="bi bi-box-seam" aria-hidden="true"></i></div><h3>Servicios</h3><p>Face (ArcFace), Fingerprint (DigitalPersona) y OCR desacoplados.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seguridad -->
+    <section class="section section--soft" id="seguridad" aria-labelledby="seg-t">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="section__eyebrow">Seguridad</p>
+          <h2 class="section__title" id="seg-t">Seguridad por diseño, no por capa.</h2>
+        </div>
+        <div class="grid-3">
+          <article class="card reveal"><div class="card__icon"><i class="bi bi-person-lock" aria-hidden="true"></i></div><h3>RBAC</h3><p>Modelo usuario → rol → permiso → recurso con autorización granular.</p></article>
+          <article class="card reveal"><div class="card__icon"><i class="bi bi-key" aria-hidden="true"></i></div><h3>MFA</h3><p>Autenticación reforzada para operaciones críticas del dominio.</p></article>
+          <article class="card reveal"><div class="card__icon"><i class="bi bi-clock-history" aria-hidden="true"></i></div><h3>Auditoría</h3><p>Cada login, enrolamiento y voto queda registrado con actor, tiempo y resultado.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Equipo -->
+    <section class="section" id="equipo" aria-labelledby="eq-t">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="section__eyebrow">Equipo</p>
+          <h2 class="section__title" id="eq-t">Construido desde la ingeniería.</h2>
+          <p class="section__desc">Proyecto académico dirigido por el docente Sadainer Hernández — preselección ExpoSoftware.</p>
+        </div>
+        <div class="grid-4">
+          <article class="team-card reveal">
+            <span class="team-card__avatar" aria-hidden="true">DD</span>
+            <div><div class="team-card__name">Daniel Turizo</div><div class="team-card__role">Core · Arquitectura · Integraciones</div></div>
+            <p class="team-card__resp">PostgreSQL/Prisma, Tenant context, dominios Person y BiometricEnrollment, integración Face, Docker e integration testing.</p>
+            <a class="team-card__link" href="https://github.com/ddturizo-eng" target="_blank" rel="noreferrer"><i class="bi bi-github" aria-hidden="true"></i> @ddturizo-eng <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
+          </article>
+          <article class="team-card reveal">
+            <span class="team-card__avatar team-card__avatar--v2" aria-hidden="true">JC</span>
+            <div><div class="team-card__name">José Chinchía</div><div class="team-card__role">Frontend · Auth · Fingerprint</div></div>
+            <p class="team-card__resp">App Shell, Design System, Login UI, Auth API, flujos biométricos (Face/Fingerprint), estados y responsive.</p>
+            <a class="team-card__link" href="https://github.com/JoseCh777" target="_blank" rel="noreferrer"><i class="bi bi-github" aria-hidden="true"></i> @JoseCh777 <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
+          </article>
+          <article class="team-card reveal">
+            <span class="team-card__avatar team-card__avatar--v3" aria-hidden="true">JH</span>
+            <div><div class="team-card__name">Jorge Herrera</div><div class="team-card__role">Identidad · Auditoría</div></div>
+            <p class="team-card__resp">Person API y frontend, Document API/UI, Audit UI, revisión activa de PRs del flujo facial.</p>
+            <a class="team-card__link" href="https://github.com/ing-jorgehg" target="_blank" rel="noreferrer"><i class="bi bi-github" aria-hidden="true"></i> @ing-jorgehg <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
+          </article>
+          <article class="team-card reveal">
+            <span class="team-card__avatar team-card__avatar--v4" aria-hidden="true">MC</span>
+            <div><div class="team-card__name">Mateo Calderón</div><div class="team-card__role">Elecciones · OCR</div></div>
+            <p class="team-card__resp">Contrato e integración de OCR, dominios Election/Candidate/Eligibility, Election UI y flujo de voto.</p>
+            <a class="team-card__link" href="https://github.com/mcalderona" target="_blank" rel="noreferrer"><i class="bi bi-github" aria-hidden="true"></i> @mcalderona <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__grid">
+      <div>
+        <div class="brand" style="color:#fff;margin-bottom:14px"><span class="brand__mark" aria-hidden="true">A</span> Averyn</div>
+        <p style="font-size:14px;max-width:340px">Identidad inteligente para procesos institucionales seguros. Plataforma multi-tenant con biometría, OCR y auditoría.</p>
+      </div>
+      <div>
+        <h4>Producto</h4>
+        <a href="#capacidades">Capacidades</a>
+        <a href="#arquitectura">Arquitectura</a>
+        <a href="#seguridad">Seguridad</a>
+      </div>
+      <div>
+        <h4>Proyecto</h4>
+        <a href="https://github.com/JoseCh777/averyn-platform" target="_blank" rel="noreferrer">Repositorio</a>
+        <a href="#" data-goto="login">Iniciar sesión</a>
+      </div>
+    </div>
+    <div class="footer__bottom">© 2026 Averyn · Universidad del Cesar · Preselección ExpoSoftware</div>
+  </footer>
+</div>
+
+<!-- ================================================================
+     2 · LOGIN
+     ================================================================ -->
+<div class="proto-view" id="view-login">
+  <div class="login-wrap">
+    <aside class="login-side" aria-label="Información de Averyn">
+      <div class="login-side__glow" aria-hidden="true"></div>
+      <div class="login-side__glow login-side__glow--2" aria-hidden="true"></div>
+      <div class="login-side__content">
+        <div class="brand" style="color:#fff;margin-bottom:36px"><span class="brand__mark" aria-hidden="true">A</span> Averyn</div>
+        <h2>Tu identidad,<br><span>verificada en segundos.</span></h2>
+        <p>Enrolamiento facial, verificación 1:1, huella dactilar y OCR documental — todo desde un panel unificado.</p>
+      </div>
+      <div class="login-side__feats">
+        <div class="login-feat"><i class="bi bi-fingerprint" aria-hidden="true"></i> Biometría con liveness y quality checks</div>
+        <div class="login-feat"><i class="bi bi-shield-lock" aria-hidden="true"></i> Aislamiento multi-tenant y auditoría total</div>
+        <div class="login-feat"><i class="bi bi-cpu" aria-hidden="true"></i> Modelos versionados y trazables</div>
+      </div>
+      <div class="login-side__foot">Averyn · Identidad, biometría y procesos institucionales</div>
+    </aside>
+
+    <section class="login-panel" aria-labelledby="login-t">
+      <div class="login-box">
+        <div class="login-box__logo"><span class="brand__mark" aria-hidden="true">A</span> Averyn</div>
+        <h1 id="login-t">Bienvenido de nuevo.</h1>
+        <p class="login-box__sub">Ingresa tus credenciales para continuar.</p>
+        <form id="demo-login" novalidate>
+          <div class="field">
+            <label for="lg-email">Correo electrónico</label>
+            <input id="lg-email" type="email" placeholder="nombre@organizacion.com" autocomplete="email" value="admin@averyn.test" />
+          </div>
+          <div class="field">
+            <label for="lg-pass">Contraseña</label>
+            <input id="lg-pass" type="password" placeholder="Tu contraseña" autocomplete="current-password" value="Averyn2026" />
+          </div>
+          <button class="btn btn-primary btn-lg" type="submit"><i class="bi bi-lock" aria-hidden="true"></i> Ingresar de forma segura</button>
+        </form>
+        <div class="login-hint"><i class="bi bi-info-circle" aria-hidden="true"></i> Credenciales precargadas para la demo: <b>admin@averyn.test</b> / <b>Averyn2026</b></div>
+        <p class="login-box__alt">¿No tienes cuenta? <a href="#">Solicita acceso institucional</a></p>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- ================================================================
+     3 · DASHBOARD
+     ================================================================ -->
+<div class="proto-view" id="view-dashboard">
+  <header class="dash-navbar">
+    <a class="brand" href="#" data-goto="dashboard" aria-label="Averyn — Inicio"><span class="brand__mark" aria-hidden="true">A</span></a>
+
+    <nav aria-label="Navegación principal">
+      <ul class="dock" role="menubar">
+        <li><a class="dock__item is-active" href="#" role="menuitem"><i class="bi bi-grid-1x2" aria-hidden="true"></i><span>Dashboard</span></a></li>
+        <li><a class="dock__item" href="#" role="menuitem"><i class="bi bi-person-vcard" aria-hidden="true"></i><span>Identidad</span></a></li>
+        <li><a class="dock__item" href="#" role="menuitem"><i class="bi bi-fingerprint" aria-hidden="true"></i><span>Biometría</span></a></li>
+        <li><a class="dock__item" href="#" role="menuitem"><i class="bi bi-camera" aria-hidden="true"></i><span>OCR</span></a></li>
+        <li><a class="dock__item" href="#" role="menuitem"><i class="bi bi-cpu" aria-hidden="true"></i><span>IA</span></a></li>
+        <li><a class="dock__item" href="#" role="menuitem"><i class="bi bi-check2-square" aria-hidden="true"></i><span>Electoral</span></a></li>
+        <li><a class="dock__item" href="#" role="menuitem"><i class="bi bi-door-open" aria-hidden="true"></i><span>Accesos</span></a></li>
+        <li><a class="dock__item" href="#" role="menuitem"><i class="bi bi-gear" aria-hidden="true"></i><span>Admin</span></a></li>
+      </ul>
+    </nav>
+
+    <div class="nav-actions">
+      <button class="icon-btn" aria-label="Buscar"><i class="bi bi-search" aria-hidden="true"></i></button>
+      <button class="icon-btn" aria-label="Notificaciones, 3 sin leer"><i class="bi bi-bell" aria-hidden="true"></i><span class="icon-btn__badge" aria-hidden="true">3</span></button>
+      <button class="avatar-btn" aria-haspopup="menu">
+        <span class="avatar-btn__pic" aria-hidden="true">UD</span>
+        <span class="avatar-btn__info">
+          <span class="avatar-btn__name" style="display:block">Usuario Demo</span>
+          <span class="avatar-btn__role" style="display:block">Administrador</span>
+        </span>
+        <i class="bi bi-chevron-down" aria-hidden="true" style="font-size:12px;color:var(--text-muted)"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="dash-main" aria-label="Contenido del dashboard">
+    <section class="welcome" aria-labelledby="w-t">
+      <p class="welcome__eyebrow">Bienvenido, <b>Usuario Demo</b> · jueves 1 de octubre</p>
+      <h1 id="w-t">Todo en un solo lugar</h1>
+      <p>Gestiona identidad, documentos, biometría e inteligencia artificial desde un mismo panel, con visibilidad completa de la operación institucional.</p>
+    </section>
+
+    <section aria-label="Indicadores principales">
+      <div class="kpi-grid">
+        <article class="kpi">
+          <div class="kpi__top"><span class="kpi__icon"><i class="bi bi-people" aria-hidden="true"></i></span><span class="kpi__delta"><i class="bi bi-arrow-up" aria-hidden="true"></i> 4 verificadas</span></div>
+          <div class="kpi__value">8</div>
+          <div class="kpi__label">Personas registradas · catálogo averyn_personas</div>
+        </article>
+        <article class="kpi kpi--v2">
+          <div class="kpi__top"><span class="kpi__icon"><i class="bi bi-patch-check-fill" aria-hidden="true"></i></span><span class="kpi__delta"><i class="bi bi-arrow-up" aria-hidden="true"></i> 6 exitosas</span></div>
+          <div class="kpi__value">7</div>
+          <div class="kpi__label">Verificaciones · log biométrico</div>
+        </article>
+        <article class="kpi kpi--v3">
+          <div class="kpi__top"><span class="kpi__icon"><i class="bi bi-check2-square" aria-hidden="true"></i></span><span class="kpi__delta"><i class="bi bi-arrow-up" aria-hidden="true"></i> 2 totales</span></div>
+          <div class="kpi__value">1</div>
+          <div class="kpi__label">Procesos electorales activos</div>
+        </article>
+        <article class="kpi kpi--v4">
+          <div class="kpi__top"><span class="kpi__icon"><i class="bi bi-broadcast" aria-hidden="true"></i></span><span class="kpi__delta"><i class="bi bi-arrow-up" aria-hidden="true"></i> de 4</span></div>
+          <div class="kpi__value">3</div>
+          <div class="kpi__label">Dispositivos biométricos conectados</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="bottom-grid" aria-label="Accesos rápidos y actividad">
+      <div class="panel">
+        <div class="panel__head"><span class="panel__title">Accesos rápidos</span></div>
+        <div class="quick-grid">
+          <a class="quick" href="#"><span class="quick__icon"><i class="bi bi-person-plus" aria-hidden="true"></i></span><span><span class="quick__t" style="display:block">Registrar persona</span><span class="quick__d" style="display:block">Alta en el catálogo</span></span></a>
+          <a class="quick" href="#"><span class="quick__icon"><i class="bi bi-camera" aria-hidden="true"></i></span><span><span class="quick__t" style="display:block">Capturar documento</span><span class="quick__d" style="display:block">OCR con validación</span></span></a>
+          <a class="quick" href="#"><span class="quick__icon"><i class="bi bi-person-check" aria-hidden="true"></i></span><span><span class="quick__t" style="display:block">Verificar identidad</span><span class="quick__d" style="display:block">Verificación 1:1</span></span></a>
+          <a class="quick" href="#"><span class="quick__icon"><i class="bi bi-plus-lg" aria-hidden="true"></i></span><span><span class="quick__t" style="display:block">Nuevo proceso</span><span class="quick__d" style="display:block">Convocatoria electoral</span></span></a>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel__head"><span class="panel__title">Actividad reciente</span><a class="panel__link" href="#">Ver historial <i class="bi bi-arrow-right" aria-hidden="true"></i></a></div>
+        <ul class="feed">
+          <li class="feed__item">
+            <span class="feed__icon feed__icon--green"><i class="bi bi-shield-check" aria-hidden="true"></i></span>
+            <span class="feed__body"><span class="feed__title" style="display:block">Verificación facial exitosa</span><span class="feed__desc" style="display:block">Ana Torres · Rostro · similarity 0.91</span></span>
+            <span class="feed__time">hace 12 min</span>
+          </li>
+          <li class="feed__item">
+            <span class="feed__icon feed__icon--blue"><i class="bi bi-person-plus" aria-hidden="true"></i></span>
+            <span class="feed__body"><span class="feed__title" style="display:block">Persona creada desde OCR</span><span class="feed__desc" style="display:block">Carlos Méndez · afiliación Visitante</span></span>
+            <span class="feed__time">hace 1 h</span>
+          </li>
+          <li class="feed__item">
+            <span class="feed__icon feed__icon--violet"><i class="bi bi-fingerprint" aria-hidden="true"></i></span>
+            <span class="feed__body"><span class="feed__title" style="display:block">Enrolamiento de huella</span><span class="feed__desc" style="display:block">Lucía Rojas · DigitalPersona · OK</span></span>
+            <span class="feed__time">ayer</span>
+          </li>
+          <li class="feed__item">
+            <span class="feed__icon feed__icon--blue"><i class="bi bi-file-earmark-text" aria-hidden="true"></i></span>
+            <span class="feed__body"><span class="feed__title" style="display:block">Documento procesado</span><span class="feed__desc" style="display:block">CC 1.023.456.789 · extracción completa</span></span>
+            <span class="feed__time">ayer</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+/* ============================================================
+   Switch de vistas del prototipo
+   ============================================================ */
+(function () {
+  var chips = document.querySelectorAll('[data-view]');
+  var views = document.querySelectorAll('.proto-view');
+  function show(id) {
+    views.forEach(function (v) { v.classList.toggle('is-active', v.id === 'view-' + id); });
+    chips.forEach(function (c) { c.classList.toggle('is-active', c.dataset.view === id); });
+    window.scrollTo(0, 0);
+    if (id === 'landing') revealInit();
+    if (id === 'dashboard') document.querySelector('#view-dashboard').focus();
+  }
+  chips.forEach(function (c) { c.addEventListener('click', function () { show(c.dataset.view); }); });
+  document.querySelectorAll('[data-goto]').forEach(function (a) {
+    a.addEventListener('click', function (e) { e.preventDefault(); show(a.dataset.goto); });
+  });
+  /* Login demo → dashboard */
+  var form = document.getElementById('demo-login');
+  if (form) form.addEventListener('submit', function (e) { e.preventDefault(); show('dashboard'); });
+  document.getElementById('view-dashboard').setAttribute('tabindex', '-1');
+})();
+
+/* ============================================================
+   Tema claro / oscuro
+   ============================================================ */
+(function () {
+  var btn = document.getElementById('theme-toggle');
+  var icon = btn.querySelector('i');
+  function apply(t) {
+    document.documentElement.setAttribute('data-theme', t);
+    icon.className = t === 'dark' ? 'bi bi-sun' : 'bi bi-moon-stars';
+    try { localStorage.setItem('av-theme', t); } catch (e) {}
+  }
+  var saved = null;
+  try { saved = localStorage.getItem('av-theme'); } catch (e) {}
+  apply(saved === 'dark' ? 'dark' : 'light');
+  btn.addEventListener('click', function () {
+    var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    apply(next);
+  });
+})();
+
+/* ============================================================
+   Reveal on scroll
+   ============================================================ */
+function revealInit() {
+  var els = document.querySelectorAll('#view-landing .reveal:not(.is-in)');
+  if (!('IntersectionObserver' in window)) { els.forEach(function (el) { el.classList.add('is-in'); }); return; }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function (el) { io.observe(el); });
+}
+revealInit();
+
+/* ============================================================
+   Grafo data-flow (Canvas) — nodos + aristas + pulsos de datos
+   ============================================================ */
+(function () {
+  var canvas = document.getElementById('graph-canvas');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var nodes = [], edges = [], pulses = [];
+  var W = 0, H = 0, DPR = Math.min(window.devicePixelRatio || 1, 2);
+
+  function cssVar(name, fallback) {
+    var v = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    return v || fallback;
+  }
+
+  function resize() {
+    var r = canvas.parentElement.getBoundingClientRect();
+    W = r.width; H = r.height;
+    canvas.width = W * DPR; canvas.height = H * DPR;
+    canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    build();
+  }
+
+  function build() {
+    nodes = []; edges = []; pulses = [];
+    var count = Math.max(18, Math.min(34, Math.floor(W / 46)));
+    /* Nodos en 3 "capas": identidad (izq), núcleo (centro), módulos (der) */
+    var layers = [Math.round(count * 0.34), Math.round(count * 0.3), 0];
+    layers[2] = count - layers[0] - layers[1];
+    var marginX = W * 0.08, marginY = H * 0.14;
+    var cols = 3;
+    var colW = (W - marginX * 2) / (cols - 1);
+    var idx = 0;
+    for (var c = 0; c < cols; c++) {
+      var n = layers[c];
+      for (var i = 0; i < n; i++) {
+        var y = marginY + (H - marginY * 2) * ((i + 0.5) / n);
+        var jitterX = (Math.sin(idx * 12.9898) * 0.5) * colW * 0.36;
+        var jitterY = (Math.cos(idx * 78.233) * 0.5) * ((H / n) * 0.4);
+        nodes.push({
+          x: marginX + colW * c + jitterX,
+          y: y + jitterY,
+          r: c === 1 ? 5 : 3.4,
+          layer: c,
+          ph: Math.random() * Math.PI * 2
+        });
+        idx++;
+      }
+    }
+    /* Aristas: cada nodo se conecta con 1-2 del contiguo */
+    for (var a = 0; a < nodes.length; a++) {
+      var na = nodes[a];
+      var targetLayer = na.layer < 2 ? na.layer + 1 : 1;
+      var candidates = [];
+      for (var b = 0; b < nodes.length; b++) {
+        if (b === a) continue;
+        var nb = nodes[b];
+        if (na.layer === 2 && nb.layer !== 1) continue;
+        if (na.layer < 2 && nb.layer !== targetLayer) continue;
+        candidates.push({ b: b, d: Math.hypot(nb.x - na.x, nb.y - na.y) });
+      }
+      candidates.sort(function (p, q) { return p.d - q.d; });
+      var take = 1 + (a % 2);
+      for (var k = 0; k < Math.min(take, candidates.length); k++) {
+        edges.push({ a: a, b: candidates[k].b });
+      }
+    }
+    /* Pulses iniciales */
+    for (var p = 0; p < 7; p++) spawnPulse(Math.random());
+  }
+
+  function spawnPulse(t) {
+    if (!edges.length) return;
+    var e = edges[Math.floor(Math.random() * edges.length)];
+    pulses.push({ e: e, t: t || 0, speed: 0.004 + Math.random() * 0.004 });
+  }
+
+  var lastSpawn = 0;
+  function draw(time) {
+    var edgeColor = cssVar('--graph-edge', 'rgba(20,95,238,.16)');
+    var nodeColor = cssVar('--graph-node', '#145FEE');
+    var glowColor = cssVar('--graph-glow', 'rgba(20,95,238,.35)');
+    ctx.clearRect(0, 0, W, H);
+
+    /* Aristas */
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = edgeColor;
+    ctx.beginPath();
+    for (var i = 0; i < edges.length; i++) {
+      var na = nodes[edges[i].a], nb = nodes[edges[i].b];
+      ctx.moveTo(na.x, na.y);
+      ctx.lineTo(nb.x, nb.y);
+    }
+    ctx.stroke();
+
+    /* Nodos (respiración suave) */
+    for (var n = 0; n < nodes.length; n++) {
+      var nd = nodes[n];
+      var breathe = reduce ? 1 : 1 + Math.sin(time * 0.001 + nd.ph) * 0.18;
+      var r = nd.r * breathe;
+      ctx.beginPath();
+      ctx.arc(nd.x, nd.y, r, 0, Math.PI * 2);
+      ctx.fillStyle = nodeColor;
+      ctx.globalAlpha = nd.layer === 1 ? 0.9 : 0.55;
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+
+    /* Pulses de datos viajando por las aristas */
+    if (!reduce) {
+      if (time - lastSpawn > 650 && pulses.length < 12) { spawnPulse(0); lastSpawn = time; }
+      for (var p = pulses.length - 1; p >= 0; p--) {
+        var pu = pulses[p];
+        pu.t += pu.speed;
+        if (pu.t >= 1) { pulses.splice(p, 1); continue; }
+        var pa = nodes[pu.e.a], pb = nodes[pu.e.b];
+        var px = pa.x + (pb.x - pa.x) * pu.t;
+        var py = pa.y + (pb.y - pa.y) * pu.t;
+        ctx.beginPath();
+        ctx.arc(px, py, 3.2, 0, Math.PI * 2);
+        ctx.fillStyle = glowColor;
+        ctx.fill();
+        /* estela */
+        var tx = pa.x + (pb.x - pa.x) * Math.max(0, pu.t - 0.12);
+        var ty = pa.y + (pb.y - pa.y) * Math.max(0, pu.t - 0.12);
+        ctx.beginPath();
+        ctx.moveTo(tx, ty);
+        ctx.lineTo(px, py);
+        ctx.strokeStyle = glowColor;
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      }
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+  requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>
