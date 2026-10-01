@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Panel Averyn — resumen operativo, eventos biométricos, procesos electorales y estados del sistema. Dirección 04 Bento / Modular." />
+  <title>Panel operativo — Averyn Bento</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="css/components.css" rel="stylesheet" />
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <!-- Barra superior flotante: sin dock lateral, el panel es un lienzo bento -->
+  <header class="topbar">
+    <div class="topbar__inner">
+      <a class="brand" href="index.html"><span class="brand__mark" aria-hidden="true"></span>Averyn</a>
+
+      <form class="search topbar__search topbar__search--desktop js-site-search" role="search" id="buscador-panel">
+        <svg class="search__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.6-3.6"></path></svg>
+        <label class="sr-only" for="buscar-topbar">Buscar en los eventos biométricos</label>
+        <input type="search" id="buscar-topbar" name="q" placeholder="Buscar persona o dispositivo…" autocomplete="off" data-evento-busqueda />
+      </form>
+
+      <nav class="topbar__nav" id="topbar-nav" aria-label="Principal">
+        <ul class="topbar__list">
+          <li><a class="topbar__link" href="index.html">Inicio</a></li>
+          <li><a class="topbar__link" href="index.html#modulos">Módulos</a></li>
+          <li><a class="topbar__link is-active" href="dashboard.html" aria-current="page">Panel</a></li>
+          <li class="only-mobile"><a class="btn btn--ghost" href="login.html">Cambiar de usuario</a></li>
+        </ul>
+        <form class="search topbar__search topbar__search--mobile js-site-search" role="search" id="buscador-panel-movil">
+          <svg class="search__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.6-3.6"></path></svg>
+          <label class="sr-only" for="buscar-topbar-movil">Buscar en los eventos biométricos</label>
+          <input type="search" id="buscar-topbar-movil" name="q" placeholder="Buscar persona o dispositivo…" autocomplete="off" data-evento-busqueda />
+        </form>
+      </nav>
+
+      <div class="topbar__actions">
+        <span class="avatar" id="sesion-avatar-top" aria-hidden="true">··</span>
+        <button class="icon-btn" type="button" id="btn-salir-top" aria-label="Cerrar sesión" title="Cerrar sesión">
+          <span aria-hidden="true">⏻</span>
+        </button>
+        <button class="icon-btn topbar__toggle" type="button" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="topbar-nav">
+          <span class="menu-icon" aria-hidden="true">☰</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container canvas" id="contenido">
+    <div class="bento">
+
+      <!-- Encabezado del panel -->
+      <section class="tile tile--8x1" aria-labelledby="panel-title">
+        <span class="eyebrow">Panel general · 01/10/2026</span>
+        <h1 id="panel-title">Resumen operativo</h1>
+        <p class="lede">Todo lo que ocurrió en identidad, biometría y procesos, ordenado en un solo lienzo. Los datos se cargan del almacén de demostración.</p>
+        <div class="btn-row">
+          <button class="btn btn--primary" type="button" id="btn-nueva">Nueva verificación</button>
+        </div>
+        <p class="help" id="verificacion-status" role="status">Listo para capturar en FaceCam Pro y DigitalPersona 4500.</p>
+      </section>
+
+      <!-- Sesión -->
+      <section class="tile tile--4x1 tile--muted" aria-labelledby="sesion-title">
+        <div class="tile__top">
+          <span class="eyebrow" id="sesion-title">Sesión</span>
+          <span class="badge badge--neutral" id="sesion-badge"><span class="dot" aria-hidden="true"></span><span id="sesion-badge-texto">Comprobando</span></span>
+        </div>
+        <div class="tile__top">
+          <span class="avatar avatar--soft avatar--lg" id="sesion-avatar" aria-hidden="true">··</span>
+        </div>
+        <p class="mono" id="sesion-email">—</p>
+        <p class="feature__desc" id="sesion-rol">—</p>
+        <div class="btn-row">
+          <button class="btn btn--sm btn--danger" type="button" id="btn-salir">Cerrar sesión</button>
+        </div>
+      </section>
+
+      <!-- KPIs -->
+      <article class="tile tile--3x1 tile--blue kpi">
+        <div class="tile__top">
+          <span class="kpi__label">Personas registradas</span>
+          <span class="tile__glyph" aria-hidden="true">◉</span>
+        </div>
+        <span class="kpi__value" id="kpi-personas">—</span>
+        <span class="kpi__note" id="kpi-personas-nota">Catálogo maestro de identidad</span>
+      </article>
+
+      <article class="tile tile--3x1 tile--green kpi">
+        <div class="tile__top">
+          <span class="kpi__label">Verificaciones exitosas</span>
+          <span class="tile__glyph" aria-hidden="true">✓</span>
+        </div>
+        <span class="kpi__value" id="kpi-exitosas">—</span>
+        <span class="kpi__note" id="kpi-exitosas-nota">Rostro y huella combinados</span>
+      </article>
+
+      <article class="tile tile--3x1 tile--rose kpi">
+        <div class="tile__top">
+          <span class="kpi__label">Rechazos</span>
+          <span class="tile__glyph" aria-hidden="true">✕</span>
+        </div>
+        <span class="kpi__value" id="kpi-rechazos">—</span>
+        <span class="kpi__note" id="kpi-rechazos-nota">Coincidencia bajo umbral</span>
+      </article>
+
+      <article class="tile tile--3x1 tile--violet kpi">
+        <div class="tile__top">
+          <span class="kpi__label">Dispositivos en línea</span>
+          <span class="tile__glyph" aria-hidden="true">▣</span>
+        </div>
+        <span class="kpi__value" id="kpi-dispositivos">—</span>
+        <span class="kpi__note" id="kpi-dispositivos-nota">De los instalados en sucursales</span>
+      </article>
+
+      <!-- Eventos biométricos -->
+      <section class="tile tile--8x3" aria-labelledby="eventos-title">
+        <div class="tile__head">
+          <div>
+            <span class="eyebrow">Biometría</span>
+            <h2 class="tile__title" id="eventos-title">Eventos biométricos recientes</h2>
+          </div>
+          <span class="badge badge--neutral" id="eventos-contador" aria-live="polite">—</span>
+        </div>
+
+        <div class="tabs" role="tablist" aria-label="Filtrar por tipo de operación">
+          <button class="tab is-active" type="button" role="tab" id="tab-todos" aria-selected="true" aria-controls="panel-eventos" data-tipo="">Todos</button>
+          <button class="tab" type="button" role="tab" id="tab-verificacion" aria-selected="false" aria-controls="panel-eventos" tabindex="-1" data-tipo="verificacion">Verificaciones</button>
+          <button class="tab" type="button" role="tab" id="tab-enrolamiento" aria-selected="false" aria-controls="panel-eventos" tabindex="-1" data-tipo="enrolamiento">Enrolamientos</button>
+        </div>
+
+        <div class="toolbar">
+          <label class="search">
+            <svg class="search__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.6-3.6"></path></svg>
+            <span class="sr-only">Buscar por persona, dispositivo, método u operación</span>
+            <input type="search" id="buscar-eventos" placeholder="Buscar persona o dispositivo…" autocomplete="off" data-evento-busqueda />
+          </label>
+          <label class="check"><input type="checkbox" id="solo-rechazos" /> Solo rechazos</label>
+        </div>
+
+        <div class="table-wrap" id="panel-eventos" role="tabpanel" tabindex="0" aria-labelledby="tab-todos">
+          <table class="table">
+            <caption class="sr-only">Eventos biométricos recientes con fecha, persona, operación, método, dispositivo y resultado</caption>
+            <thead>
+              <tr>
+                <th scope="col">Fecha</th>
+                <th scope="col">Persona</th>
+                <th scope="col">Operación</th>
+                <th scope="col">Método</th>
+                <th scope="col">Dispositivo</th>
+                <th scope="col">Resultado</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-eventos"></tbody>
+          </table>
+        </div>
+        <p class="help">Los filtros combinan búsqueda, tipo de operación y la casilla «solo rechazos». Desplaza la tabla horizontalmente en pantallas pequeñas.</p>
+      </section>
+
+      <!-- Procesos electorales -->
+      <section class="tile tile--4x2 tile--amber" aria-labelledby="procesos-title">
+        <div class="tile__head">
+          <div>
+            <span class="eyebrow">Módulo electoral</span>
+            <h2 class="tile__title" id="procesos-title">Procesos electorales</h2>
+          </div>
+          <span class="tile__glyph" aria-hidden="true">✓</span>
+        </div>
+        <ul id="lista-procesos"></ul>
+        <div class="btn-row">
+          <a class="btn btn--sm" href="index.html#modulos">Ver el módulo</a>
+        </div>
+      </section>
+
+      <!-- Estados del sistema -->
+      <section class="tile tile--4x1" aria-labelledby="estados-title">
+        <div class="tile__head">
+          <h2 class="tile__title" id="estados-title">Estados del sistema</h2>
+          <span class="badge badge--info"><span class="dot" aria-hidden="true"></span>En vivo</span>
+        </div>
+        <ul>
+          <li class="list-row">
+            <span class="list-row__main"><strong>Servicio de identidad</strong><span class="list-row__sub">Catálogo y sesiones</span></span>
+            <span class="badge badge--success"><span class="dot" aria-hidden="true"></span>Operativo</span>
+          </li>
+          <li class="list-row">
+            <span class="list-row__main"><strong>Motor biométrico</strong><span class="list-row__sub">Comparación rostro y huella</span></span>
+            <span class="badge badge--success"><span class="dot" aria-hidden="true"></span>Operativo</span>
+          </li>
+          <li class="list-row">
+            <span class="list-row__main"><strong>OCR de documentos</strong><span class="list-row__sub">Extracción de campos</span></span>
+            <span class="badge badge--warning"><span class="dot" aria-hidden="true"></span>Degradado</span>
+          </li>
+          <li class="list-row">
+            <span class="list-row__main"><strong>Sincronización de sucursales</strong><span class="list-row__sub">Cola de eventos externos</span></span>
+            <span class="badge badge--danger"><span class="dot" aria-hidden="true"></span>Detenida</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Dispositivos -->
+      <section class="tile tile--4x1 tile--blue" aria-labelledby="dispositivos-title">
+        <div class="tile__head">
+          <div>
+            <span class="eyebrow">Hardware</span>
+            <h2 class="tile__title" id="dispositivos-title">Dispositivos</h2>
+          </div>
+          <span class="tile__glyph" aria-hidden="true">▣</span>
+        </div>
+        <ul id="lista-dispositivos"></ul>
+      </section>
+
+      <!-- Estado vacío: cola de revisión -->
+      <section class="tile tile--4x1" aria-labelledby="cola-title">
+        <span class="eyebrow">Documentos</span>
+        <div class="empty">
+          <span class="empty__glyph" aria-hidden="true">▦</span>
+          <h2 class="empty__title" id="cola-title">Sin documentos pendientes</h2>
+          <p class="empty__desc">Cuando el OCR detecte baja confianza, los casos aparecerán aquí para validación humana.</p>
+          <a class="btn btn--sm" href="index.html#modulos">Ver módulo de documentos</a>
+        </div>
+      </section>
+
+      <!-- Inteligencia -->
+      <section class="tile tile--4x1 tile--rose" aria-labelledby="ia-title">
+        <div class="tile__top">
+          <span class="eyebrow">Inteligencia</span>
+          <span class="tile__glyph" aria-hidden="true">✦</span>
+        </div>
+        <h2 class="tile__title" id="ia-title">Detección de anomalías</h2>
+        <p class="feature__desc">Revisa los eventos recientes y marca accesos fuera de horario, intentos repetidos y sucursales sin dispositivo.</p>
+        <ul>
+          <li class="list-row">
+            <span class="list-row__main"><strong>Rechazos por umbral</strong><span class="list-row__sub">Coincidencia insuficiente</span></span>
+            <span class="badge badge--danger"><span class="dot" aria-hidden="true"></span><span id="ia-rechazos">—</span></span>
+          </li>
+          <li class="list-row">
+            <span class="list-row__main"><strong>Accesos fuera de horario</strong><span class="list-row__sub">Últimas 24 horas</span></span>
+            <span class="badge badge--success"><span class="dot" aria-hidden="true"></span>Ninguno</span>
+          </li>
+          <li class="list-row">
+            <span class="list-row__main"><strong>Sucursales sin dispositivo</strong><span class="list-row__sub">Requiere soporte in situ</span></span>
+            <span class="badge badge--warning"><span class="dot" aria-hidden="true"></span>1</span>
+          </li>
+        </ul>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p class="footer__legal">© 2026 Averyn · Dirección 04 — Bento / Modular · Panel de demostración con datos de ejemplo almacenados en el navegador.</p>
+    </div>
+  </footer>
+
+  <script src="../shared/app.js"></script>
+  <script>
+    (function () {
+      // Menú móvil redondeado
+      var toggle = document.getElementById('menu-toggle');
+      var nav = document.getElementById('topbar-nav');
+      if (toggle && nav) {
+        var icono = toggle.querySelector('.menu-icon');
+        var cerrar = function (devolverFoco) {
+          nav.classList.remove('is-open');
+          toggle.setAttribute('aria-expanded', 'false');
+          toggle.setAttribute('aria-label', 'Abrir menú');
+          if (icono) icono.textContent = '☰';
+          if (devolverFoco) toggle.focus();
+        };
+        toggle.addEventListener('click', function () {
+          var abierto = nav.classList.toggle('is-open');
+          toggle.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+          toggle.setAttribute('aria-label', abierto ? 'Cerrar menú' : 'Abrir menú');
+          if (icono) icono.textContent = abierto ? '✕' : '☰';
+        });
+        nav.addEventListener('click', function (ev) {
+          if (ev.target.closest('a')) cerrar(false);
+        });
+        document.addEventListener('keydown', function (ev) {
+          if (ev.key === 'Escape' && nav.classList.contains('is-open')) cerrar(true);
+        });
+      }
+
+      // Prevenir envío del buscador (filtra en vivo, no navega)
+      Array.prototype.slice.call(document.querySelectorAll('.js-site-search')).forEach(function (form) {
+        form.addEventListener('submit', function (ev) { ev.preventDefault(); });
+      });
+    })();
+
+    (function () {
+      if (!window.AVERYN) return;
+      var A = window.AVERYN;
+
+      function setText(id, texto) {
+        var el = document.getElementById(id);
+        if (el) el.textContent = texto;
+      }
+
+      // ----- Datos reales del almacén de demostración -----
+      var personas = A.listarPersonas();
+      var eventos = A.listarEventos();
+      var dispositivos = A.listarDispositivos();
+      var resumen = A.resumenBiometria();
+      var pendientes = personas.filter(function (p) { return p.estado === 'pendiente'; }).length;
+
+      setText('kpi-personas', String(personas.length));
+      setText('kpi-personas-nota', pendientes + (pendientes === 1 ? ' persona pendiente de verificación' : ' personas pendientes de verificación'));
+      setText('kpi-exitosas', String(resumen.exitosas));
+      setText('kpi-exitosas-nota', 'de ' + eventos.length + ' eventos biométricos registrados');
+      setText('kpi-rechazos', String(resumen.rechazadas));
+      setText('kpi-rechazos-nota', resumen.rechazadas === 0 ? 'Sin casos abiertos en la cola' : 'Coincidencia bajo umbral, en revisión');
+      setText('kpi-dispositivos', String(resumen.dispositivosConectados));
+      setText('kpi-dispositivos-nota', 'de ' + dispositivos.length + ' instalados en las sucursales');
+      setText('ia-rechazos', String(resumen.rechazadas));
+
+      // ----- Tabla filtrable -----
+      var estado = { q: '', soloRechazos: false, tipo: '' };
+      var tbody = document.getElementById('tabla-eventos');
+      var contador = document.getElementById('eventos-contador');
+      var campos = Array.prototype.slice.call(document.querySelectorAll('[data-evento-busqueda]'));
+
+      function pintar() {
+        var filtrados = eventos.filter(function (e) {
+          var persona = A.obtenerPersona(e.personaId) || { nombre: '' };
+          var texto = (persona.nombre + ' ' + e.dispositivo + ' ' + A.textoOperacion(e.tipoOperacion) + ' ' + A.textoMetodo(e.metodo)).toLowerCase();
+          if (estado.q && texto.indexOf(estado.q) === -1) return false;
+          if (estado.soloRechazos && e.resultado !== 'rechazado') return false;
+          if (estado.tipo && e.tipoOperacion !== estado.tipo) return false;
+          return true;
+        });
+
+        setText('eventos-contador', filtrados.length + (filtrados.length === 1 ? ' evento' : ' eventos'));
+        if (!tbody) return;
+
+        if (!filtrados.length) {
+          tbody.innerHTML = '<tr><td colspan="6" class="table__empty">Sin eventos que coincidan con los filtros. Ajusta la búsqueda o desmarca «solo rechazos».</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = filtrados.map(function (e) {
+          var persona = A.obtenerPersona(e.personaId) || { nombre: '—' };
+          var clase = A.claseResultado(e.resultado);
+          return '<tr tabindex="0">' +
+            '<td class="mono">' + A.formatearFechaHora(e.fecha) + '</td>' +
+            '<td>' + persona.nombre + '</td>' +
+            '<td>' + A.textoOperacion(e.tipoOperacion) + '</td>' +
+            '<td>' + A.textoMetodo(e.metodo) + '</td>' +
+            '<td class="muted">' + e.dispositivo + '</td>' +
+            '<td><span class="badge badge--' + clase + '"><span class="dot" aria-hidden="true"></span>' + A.textoResultado(e.resultado) + '</span></td>' +
+            '</tr>';
+        }).join('');
+      }
+
+      campos.forEach(function (campo) {
+        campo.addEventListener('input', function () {
+          estado.q = (campo.value || '').toLowerCase().trim();
+          campos.forEach(function (otro) { if (otro !== campo) otro.value = campo.value; });
+          pintar();
+        });
+      });
+
+      var checkRechazos = document.getElementById('solo-rechazos');
+      if (checkRechazos) {
+        checkRechazos.addEventListener('change', function () {
+          estado.soloRechazos = checkRechazos.checked;
+          pintar();
+        });
+      }
+
+      // ----- Tabs accesibles -----
+      var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
+      var panel = document.getElementById('panel-eventos');
+
+      function activarTab(tab) {
+        tabs.forEach(function (t) {
+          var seleccionada = t === tab;
+          t.setAttribute('aria-selected', seleccionada ? 'true' : 'false');
+          t.classList.toggle('is-active', seleccionada);
+          t.tabIndex = seleccionada ? 0 : -1;
+        });
+        if (panel) panel.setAttribute('aria-labelledby', tab.id);
+        estado.tipo = tab.getAttribute('data-tipo') || '';
+        pintar();
+      }
+
+      tabs.forEach(function (tab, i) {
+        tab.addEventListener('click', function () { activarTab(tab); });
+        tab.addEventListener('keydown', function (ev) {
+          var destino = -1;
+          if (ev.key === 'ArrowRight') destino = (i + 1) % tabs.length;
+          else if (ev.key === 'ArrowLeft') destino = (i - 1 + tabs.length) % tabs.length;
+          else if (ev.key === 'Home') destino = 0;
+          else if (ev.key === 'End') destino = tabs.length - 1;
+          if (destino > -1) {
+            ev.preventDefault();
+            tabs[destino].focus();
+            activarTab(tabs[destino]);
+          }
+        });
+      });
+
+      pintar();
+
+      // ----- Procesos electorales -----
+      var listaProcesos = document.getElementById('lista-procesos');
+      if (listaProcesos) {
+        listaProcesos.innerHTML = A.listarProcesos().map(function (p) {
+          var abierto = p.estado === 'OPEN';
+          var clase = abierto ? 'badge--success' : 'badge--neutral';
+          var texto = abierto ? 'Abierto' : 'Borrador';
+          return '<li class="list-row">' +
+            '<span class="list-row__main"><strong>' + p.nombre + '</strong>' +
+            '<span class="list-row__sub">' + p.institucion + ' · ' + A.formatearFecha(p.fechaInicio) + ' – ' + A.formatearFecha(p.fechaFin) + '</span></span>' +
+            '<span class="badge ' + clase + '"><span class="dot" aria-hidden="true"></span>' + texto + '</span></li>';
+        }).join('');
+      }
+
+      // ----- Dispositivos -----
+      var listaDispositivos = document.getElementById('lista-dispositivos');
+      if (listaDispositivos) {
+        listaDispositivos.innerHTML = dispositivos.map(function (d) {
+          var enLinea = d.estado === 'conectado';
+          var clase = enLinea ? 'badge--success' : 'badge--danger';
+          var texto = enLinea ? 'En línea' : 'Sin conexión';
+          return '<li class="list-row">' +
+            '<span class="list-row__main"><strong>' + d.nombre + '</strong><span class="list-row__sub">' + d.ubicacion + '</span></span>' +
+            '<span class="badge ' + clase + '"><span class="dot" aria-hidden="true"></span>' + texto + '</span></li>';
+        }).join('');
+      }
+
+      // ----- Sesión -----
+      var activa = A.tieneSesion();
+      var sesion = activa ? A.obtenerSesion() : null;
+      var badge = document.getElementById('sesion-badge');
+
+      if (sesion && sesion.email) {
+        var iniciales = sesion.email.substring(0, 2).toUpperCase();
+        setText('sesion-avatar', iniciales);
+        setText('sesion-avatar-top', iniciales);
+        setText('sesion-email', sesion.email);
+        setText('sesion-rol', 'Rol ' + (sesion.rol || 'Administrador') + ' · sesión iniciada el ' + A.formatearFechaHora(sesion.loggedAt));
+        setText('sesion-badge-texto', 'Sesión activa');
+        if (badge) badge.className = 'badge badge--success';
+      } else {
+        setText('sesion-avatar', 'DM');
+        setText('sesion-avatar-top', 'DM');
+        setText('sesion-email', 'Modo demostración');
+        setText('sesion-rol', 'Sin sesión iniciada: el panel muestra los datos en modo lectura.');
+        setText('sesion-badge-texto', 'Demo');
+        if (badge) badge.className = 'badge badge--warning';
+      }
+
+      var botonesSalir = [document.getElementById('btn-salir'), document.getElementById('btn-salir-top')];
+      botonesSalir.forEach(function (btn) {
+        if (!btn) return;
+        btn.addEventListener('click', function () {
+          if (activa) {
+            A.cerrarSesion();
+            window.location.href = 'index.html';
+          } else {
+            window.location.href = 'login.html';
+          }
+        });
+      });
+
+      // ----- Botón con estado de carga -----
+      var btnNueva = document.getElementById('btn-nueva');
+      if (btnNueva) {
+        var textoOriginal = btnNueva.textContent;
+        btnNueva.addEventListener('click', function () {
+          btnNueva.classList.add('is-loading');
+          btnNueva.setAttribute('aria-busy', 'true');
+          btnNueva.disabled = true;
+          btnNueva.textContent = 'Iniciando captura…';
+          setText('verificacion-status', 'Conectando con FaceCam Pro…');
+          window.setTimeout(function () {
+            btnNueva.classList.remove('is-loading');
+            btnNueva.removeAttribute('aria-busy');
+            btnNueva.disabled = false;
+            btnNueva.textContent = textoOriginal;
+            var hora = new Date().toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit' });
+            setText('verificacion-status', 'Captura enviada a FaceCam Pro a las ' + hora + '. El evento aparecerá en la tabla al confirmarse.');
+          }, 1400);
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
