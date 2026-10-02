@@ -192,6 +192,15 @@ Geometría contenida: 8 px en botones y campos, 10 px en píldoras del header, 2
 ### Espacio para media
 - Marco con `aspect-ratio` configurable (`--ratio`), fondo papel azul, borde de 1 px y etiqueta mono "Imagen · 16:9". Al insertar un `<img>` o `<video>` rellena el marco con `object-fit: cover` y la etiqueta se oculta.
 
+### Gráficos (v1.2, documentados en `docs/ds/graficos.html`)
+- Tarjeta plana de 1 px (radio 16): etiqueta mono, cifra grande en Space Grotesk, chip de variación (flecha = dirección, color = bueno/malo, texto = cuánto) y pie "Datos de ejemplo". Estados: cargando (esqueleto), vacío y error.
+- Paleta categórica validada con `validate_palette.js`, en orden fijo: `#145FEE`, `#C77500`, `#0092B5`, `#8A5CF6`, `#C2457A` (+ gris "Otros"); hasta 3 series sin ayudas, 4–5 solo con etiquetas directas. Secuencial azul de 6 pasos; divergente ámbar ↔ azul con gris neutro. Verde/ámbar/rojo de estado nunca son series.
+- Barras "píldora suave" (24–32 px, degradado azul→casi blanco, máx. 12) como excepción de marca a la guía de 4 px; la variante recta se usa en series densas. Cuadrícula sólida de línea fina, sin doble eje, sin número en cada marca.
+- Todo gráfico incluye tooltip, navegación con flechas, vista en tabla y descarga CSV; el contrato de datos es una propuesta, no un endpoint.
+
+### Páginas de error (v1.2)
+- 404, 403, 500, sin conexión y mantenimiento comparten `error.css`/`error.js`: horizonte cielo→navy, figura de arcos que se dibuja y se parte, número decorativo (`aria-hidden`), un solo `<h1>`, ruta pedida escapada y siempre una salida. Los módulos pendientes muestran "Próximamente", no un error.
+
 ## Do's and Don'ts
 
 ### Do:
