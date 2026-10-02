@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Averyn — Design System Horizonte v1.4 · Calidad y gobernanza</title>
+<meta name="description" content="Design system de Averyn: principios, tokens, componentes y reglas de uso del estilo Horizonte.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link rel="icon" href="../../averyn-frontend/assets/images/averyn-logo-blue.avif">
+<link href="./ds.css" rel="stylesheet">
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<div class="ds-shell">
+  <aside class="ds-side" aria-label="Índice del design system">
+    <a class="ds-side__brand" href="../design-system.html" aria-label="Averyn, inicio del design system"><img src="../../averyn-frontend/assets/images/averyn-logo-font-black.avif" alt="Averyn"></a>
+    <p class="ds-side__ver mono">Design System · v1.4 Horizonte</p>
+    <nav>
+      <span class="grp mono">Sistema</span>
+      <a class="ds-page" href="fundamentos.html">Fundamentos</a>
+      <a class="ds-page" href="../design-system.html">Componentes base</a>
+      <a class="ds-page" href="graficos.html">Gráficos</a>
+      <a class="ds-page" href="componentes.html">Componentes que faltaban</a>
+      <span class="grp mono">Aplicación</span>
+      <a class="ds-page" href="patrones.html">Patrones de Averyn</a>
+      <a class="ds-page" href="plantillas.html">Plantillas</a>
+      <a class="ds-page" href="sistema.html">Estados del sistema</a>
+      <span class="grp mono">Marca y calidad</span>
+      <a class="ds-page" href="marca.html">Marca y entregables</a>
+      <a class="ds-page" href="calidad.html" aria-current="page">Calidad y gobernanza</a>
+      <div class="ds-subnav">
+        <span class="grp sub mono">Contenido</span>
+        <a href="#microcopy">Microcopy</a>
+        <span class="grp sub mono">Calidad</span>
+        <a href="#accesibilidad">Accesibilidad</a>
+        <span class="grp sub mono">Gobernanza</span>
+        <a href="#gobernanza">Gobernanza y novedades</a>
+        <a href="#consumo">Consumo e implementación</a>
+      </div>
+    </nav>
+  </aside>
+
+  <div class="ds-main" id="top">
+    <header class="ds-cover ds-cover--page"><div class="ds-wrap"><span class="mono" style="color:#fff;opacity:.85">Calidad y gobernanza</span><h1>Cómo se mantiene bien.</h1><p>Microcopy, accesibilidad, gobernanza (versiones, novedades y deuda) y cómo usar el sistema en una pantalla nueva.</p></div></header>
+
+    <main id="contenido">
+
+    <!-- MICROCOPY -->
+    <section class="ds-sec" id="microcopy" aria-labelledby="h-micro" data-nav="Microcopy" data-grp="Contenido"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Calidad y gobernanza · Contenido</span>
+      <h2 id="h-micro">Microcopy</h2>
+      <p class="ds-lead">La voz de Averyn es serena, directa e institucional: habla de tú, en frases cortas, sin exclamaciones y sin jerga. Cada mensaje dice qué pasó y qué hacer.</p>
+
+      <h3 class="ds-sub">Tono</h3>
+      <div class="ds-grid ds-grid--3">
+        <div class="stage"><span class="stage__label mono">Claro</span><p>"Ingresa tus credenciales para continuar."</p><p class="ds-note">Un verbo y un objeto. Sin rodeos.</p></div>
+        <div class="stage"><span class="stage__label mono">Tranquilo</span><p>"Credenciales inválidas. Verifica tu correo y contraseña e inténtalo nuevamente."</p><p class="ds-note">Sin culpar al usuario ni dramatizar.</p></div>
+        <div class="stage"><span class="stage__label mono">Honesto</span><p>"La recuperación aún no está disponible; contacta a tu administrador."</p><p class="ds-note">No prometas lo que no ocurre.</p></div>
+      </div>
+
+      <h3 class="ds-sub">Glosario <small>una palabra por concepto</small></h3>
+      <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Concepto</th><th>Decimos</th><th>No decimos</th></tr></thead><tbody>
+        <tr><td>Quien existe en el sistema</td><td><b>Persona</b></td><td>Usuario, votante, registro (salvo en Electoral: "votante")</td></tr>
+        <tr><td>Quien inicia sesión</td><td><b>Cuenta</b> / usuario del panel</td><td>Persona</td></tr>
+        <tr><td>Alta de rasgos biométricos</td><td><b>Registro biométrico</b></td><td>Enrolamiento, enrollment</td></tr>
+        <tr><td>Comparar contra lo registrado</td><td><b>Verificación</b></td><td>Matching, autenticación facial</td></tr>
+        <tr><td>Prueba de que es una persona real</td><td><b>Prueba de vida</b></td><td>Liveness, anti-spoofing</td></tr>
+        <tr><td>Organización cliente</td><td><b>Institución</b></td><td>Tenant, cliente, inquilino</td></tr>
+        <tr><td>Equipo de captura</td><td><b>Dispositivo</b> (cámara, lector de huella)</td><td>Hardware, endpoint</td></tr>
+        <tr><td>Lectura de un documento</td><td><b>Procesar documento</b> (OCR entre paréntesis la primera vez)</td><td>Parsear, scraping</td></tr>
+      </tbody></table></div>
+      <p class="ds-note"><b>Jerga que nunca va en pantalla:</b> tenant, monolito, MCP, RBAC, liveness, template, embedding, UUID, claves de almacenamiento (<code>averyn_personas</code>). En la landing, los términos técnicos se explican por su beneficio o se reservan a una sección técnica aparte.</p>
+
+      <h3 class="ds-sub">Formato de datos</h3>
+      <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Dato</th><th>Formato</th><th>Ejemplo</th></tr></thead><tbody>
+        <tr><td>Fecha y hora</td><td><code>dd/mm/aaaa, hh:mm</code> (24 h)</td><td class="num">13/09/2026, 20:42</td></tr>
+        <tr><td>Documento</td><td>Solo dígitos, sin puntos, en mono</td><td><code>10234567</code></td></tr>
+        <tr><td>Dispositivo</td><td>Código en mono</td><td><code>CAM-001</code> · <code>LEC-003</code></td></tr>
+        <tr><td>Conteos</td><td>Número + sustantivo concordado</td><td>1 desconectado · 3 desconectados</td></tr>
+        <tr><td>Porcentajes</td><td>Entero + <code>%</code></td><td>50 %</td></tr>
+      </tbody></table></div>
+
+      <h3 class="ds-sub">Librería de mensajes</h3>
+      <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Situación</th><th>Mensaje aprobado</th></tr></thead><tbody>
+        <tr><td>Campos vacíos</td><td>Completa tu correo electrónico y contraseña para continuar.</td></tr>
+        <tr><td>Correo inválido</td><td>Ingresa un correo electrónico válido, por ejemplo nombre@organizacion.com.</td></tr>
+        <tr><td>Credenciales inválidas</td><td>Credenciales inválidas. Verifica tu correo y contraseña e inténtalo nuevamente.</td></tr>
+        <tr><td>Sesión caducada</td><td>Tu sesión terminó por inactividad. Ingresa de nuevo para continuar.</td></tr>
+        <tr><td>Sin conexión</td><td>No pudimos conectar. Revisa tu conexión e inténtalo de nuevo.</td></tr>
+        <tr><td>Sin permiso</td><td>No tienes permiso para esta acción. Pídelo a tu administrador.</td></tr>
+        <tr><td>Documento ilegible</td><td>No pudimos leer el documento. Sube una foto nítida, sin reflejos y con las cuatro esquinas visibles.</td></tr>
+        <tr><td>Rostro no detectado</td><td>No detectamos un rostro. Colócate de frente, con buena luz, y vuelve a intentarlo.</td></tr>
+        <tr><td>Calidad insuficiente</td><td>La captura no tiene calidad suficiente. Acércate a la cámara y evita el contraluz.</td></tr>
+        <tr><td>Dispositivo desconectado</td><td>El dispositivo CAM-002 no responde. Revisa la conexión y reintenta.</td></tr>
+        <tr><td>Verificación rechazada</td><td>La verificación no coincidió. Puedes reintentar o validar con otro método.</td></tr>
+        <tr><td>Estado vacío (lista)</td><td>Aún no hay personas registradas. Registra la primera para empezar.</td></tr>
+        <tr><td>Módulo pendiente</td><td>Próximamente. Estamos trabajando en este módulo.</td></tr>
+        <tr><td>Recuperar contraseña (sin servicio)</td><td>La recuperación aún no está disponible; contacta a tu administrador.</td></tr>
+      </tbody></table></div>
+      <div class="ds-grid ds-grid--2 ds-gap-top">
+        <div class="dd dd--do"><strong>Hacer</strong><ul><li>Botones con verbo y flecha cuando avanzan: "Ingresar →".</li><li>Un único nombre por acción: "Ingresar" en navbar, hero, cierre, footer y login (en v1.1 se unificó el footer).</li><li>Explica la causa y el siguiente paso en la misma frase.</li></ul></div>
+        <div class="dd dd--dont"><strong>No hacer</strong><ul><li>"Todo listo para continuar" antes de que el usuario haga algo (reemplazado por "Ingresa a tu panel.").</li><li>"Conexión segura y protegida" como adorno: el login solo la muestra si la página va por HTTPS.</li><li>"Te enviaremos instrucciones…" si no existe el envío.</li></ul></div>
+      </div>
+    </div></section>
+    <!-- ACCESIBILIDAD -->
+    <section class="ds-sec ds-sec--tint" id="accesibilidad" aria-labelledby="h-a11y" data-nav="Accesibilidad" data-grp="Calidad"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Calidad y gobernanza · Calidad</span>
+      <h2 id="h-a11y">Accesibilidad</h2>
+      <p class="ds-lead">Objetivo: WCAG 2.2 AA. Estos mínimos salen de las mediciones reales sobre landing, login y dashboard, incluidos los fallos que encontramos.</p>
+
+      <h3 class="ds-sub">Anillo de foco según la superficie</h3>
+      <p class="ds-note">El anillo nunca tiene el color de la superficie que lo rodea. Se elige por el fondo <b>adyacente</b> (el espacio de 3 px entre el elemento y el anillo).</p>
+      <div class="ds-grid ds-grid--4">
+        <div class="stage" style="text-align:center"><button class="hz-btn hz-btn--ghost" type="button" style="outline:2px solid var(--av-blue);outline-offset:3px">Claro</button><p class="ds-note"><b>Azul #145FEE</b><br>5.38:1 sobre blanco</p></div>
+        <div class="stage stage--blue" style="text-align:center"><button class="hz-btn hz-btn--light" type="button" style="outline:2px solid #fff;outline-offset:3px">Sobre azul</button><p class="ds-note" style="color:#F0F5FF"><b>Blanco</b><br>5.38:1 sobre #145FEE</p></div>
+        <div class="stage stage--night" style="text-align:center"><button class="hz-btn hz-btn--ghost-inv" type="button" style="outline:2px solid var(--av-cyan-glow);outline-offset:3px">Sobre navy</button><p class="ds-note" style="color:var(--av-night-text)"><b>Cian-glow</b><br>10.29:1 sobre #071A36</p></div>
+        <div class="stage stage--tint" style="text-align:center"><span class="hz-tile hz-tile--signal" style="min-height:0;padding:.7rem 1rem;outline:3px solid var(--av-navy);outline-offset:3px;display:inline-block">Tile azul</span><p class="ds-note"><b>Navy 3 px</b><br>17:1 sobre la página</p></div>
+      </div>
+      <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Área</th><th>Requisito</th><th>Cómo se verifica</th></tr></thead><tbody>
+        <tr><td>Contraste</td><td>Texto ≥ 4.5:1 (≥ 3:1 si es grande: 24 px, o 19 px en negrita). Componentes y bordes de campo ≥ 3:1.</td><td>Tabla de pares aprobados; medir sobre el píxel real, no sobre el primer color de un degradado.</td></tr>
+        <tr><td>Foco visible</td><td>Anillo de 2–3 px, offset 3 px, color según superficie. Nunca <code>outline: none</code> sin reemplazo.</td><td>Tab por toda la página; capturar sobre cada fondo.</td></tr>
+        <tr><td>Teclado</td><td>Orden = orden visual. Nada con <code>opacity: 0</code> recibe foco: usar <code>visibility: hidden</code> o <code>inert</code>. Escape cierra menús y devuelve el foco al disparador.</td><td>Recorrer sin ratón; el menú móvil va justo después de su botón en el DOM.</td></tr>
+        <tr><td>Objetivos</td><td>≥ 44 × 44 px (mínimo absoluto 24 px). Enlaces de texto en línea exentos.</td><td>Medir a 390 px: marca, "Volver", "¿Olvidaste…?" y enlaces de footer deben cumplir.</td></tr>
+        <tr><td>Estructura</td><td>Un <code>&lt;h1&gt;</code> por página (visible o <code>sr-only</code>), jerarquía sin saltos, landmarks (<code>header</code>, <code>nav</code>, <code>main</code>, <code>footer</code>), skip link, <code>lang="es"</code>.</td><td>Revisar el esquema de encabezados.</td></tr>
+        <tr><td>Formularios</td><td><code>&lt;label for&gt;</code> visible, <code>aria-invalid</code> + <code>aria-describedby</code> en error, errores con <code>role="alert"</code>, foco al primer inválido.</td><td>Probar vacío, inválido y correcto con lector de pantalla.</td></tr>
+        <tr><td>Movimiento</td><td><code>prefers-reduced-motion</code>: sin sticky, sin dibujo, sin deslizamientos; el contenido nunca depende de JS para verse.</td><td>Emular reduced-motion; probar con JS desactivado.</td></tr>
+        <tr><td>Color</td><td>Nunca único canal. Estados con texto; gráficos con valor en texto.</td><td>Ver en escala de grises.</td></tr>
+        <tr><td>Estados</td><td>Los módulos pendientes usan <code>aria-disabled="true"</code> y no son enlaces. Los iconos decorativos <code>aria-hidden</code>; los solos con <code>aria-label</code>.</td><td>Revisar el árbol de accesibilidad.</td></tr>
+        <tr><td>Zoom y reflujo</td><td>Usable a 200 % y a 320 px de ancho sin scroll horizontal.</td><td>Probar 1440, 820 y 390 px.</td></tr>
+      </tbody></table></div>
+    </div></section>
+    <!-- GOBERNANZA Y NOVEDADES -->
+    <section class="ds-sec" id="gobernanza" aria-labelledby="h-gob" data-nav="Gobernanza y novedades" data-grp="Gobernanza"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Calidad y gobernanza · Gobernanza</span>
+      <h2 id="h-gob">Gobernanza</h2>
+      <p class="ds-lead">El sistema vive en el repositorio. Los tokens son la fuente de verdad; este documento y <code>DESIGN.md</code> los explican.</p>
+      <div class="ds-grid ds-grid--3 ds-gap-top">
+        <div class="stage"><span class="stage__label mono">Fuentes de verdad</span><p class="ds-note" style="margin-top:0">1. <code>tokens.css</code> (valores)<br>2. <code>DESIGN.md</code> (principios y reglas)<br>3. Este documento (catálogo)<br>Si hay conflicto, gana el número del token.</p></div>
+        <div class="stage"><span class="stage__label mono">Versionado</span><p class="ds-note" style="margin-top:0"><b>Mayor</b>: cambia un principio o un token de marca.<br><b>Menor</b>: componente nuevo.<br><b>Parche</b>: corrección de valor o de texto.</p></div>
+        <div class="stage"><span class="stage__label mono">Proponer un cambio</span><p class="ds-note" style="margin-top:0">Issue con captura → prototipo en rama → revisión (nadie valida lo suyo) → actualizar token, <code>DESIGN.md</code> y este documento → merge a <code>dev</code>.</p></div>
+      </div>
+      <h3 class="ds-sub">Un componente está terminado cuando…</h3>
+      <div class="doc-wrap"><table class="doc-table"><tbody>
+        <tr><td>✓ Usa solo tokens (sin hex sueltos salvo los documentados)</td><td>✓ Estados: reposo, hover, foco, activo, deshabilitado, carga, error</td></tr>
+        <tr><td>✓ Contraste y foco verificados sobre cada superficie donde aparece</td><td>✓ Responsive: 1440, 820 y 390 px sin scroll horizontal</td></tr>
+        <tr><td>✓ <code>prefers-reduced-motion</code> y teclado probados</td><td>✓ Documentado aquí con un ejemplo vivo y su regla de uso</td></tr>
+      </tbody></table></div>
+      <h3 class="ds-sub">Registro de decisiones</h3>
+      <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Decisión</th><th>Motivo</th></tr></thead><tbody>
+        <tr><td>Estilo "Horizonte" (cielo a navy, arcos, mono en acciones)</td><td>Identidad propia y reconocible; la A del logo es la firma.</td></tr>
+        <tr><td>Descartado el estilo brutalista</td><td>Perdía la identidad de marca; se concentra el impacto solo en el hero.</td></tr>
+        <tr><td>Plano por defecto: líneas de 1 px, no tarjetas</td><td>Menos ruido; la profundidad la da el tono.</td></tr>
+        <tr><td>Un solo panel navy por pantalla</td><td>Marca el cambio de información sin romper el ritmo.</td></tr>
+        <tr><td>Shell en píldora (landing y dashboard)</td><td>Coherencia con el dock anterior y con la navegación pública.</td></tr>
+        <tr><td>Wordmark: maquetar grande y reducir</td><td>Ampliarlo (o <code>will-change</code>) lo rasterizaba borroso.</td></tr>
+        <tr><td>Módulos sin pantalla: "Próximamente", sin enlace</td><td>Honestidad del estado; evita los 404.</td></tr>
+        <tr><td>Sin Bootstrap en landing, login y dashboard</td><td>Menos peso y estilos propios; Bootstrap Icons se conserva.</td></tr>
+      </tbody></table></div>
+      <h3 class="ds-sub">Changelog</h3>
+      <div class="doc-wrap"><table class="doc-table"><tbody>
+        <tr><td><b>v1.4</b> · oct 2026</td><td><b>Auditoría del líder.</b> <i>Estados unificados:</i> una sola tabla Estado → color (verde éxito, ámbar reintento, rojo rechazo, gris pendiente, azul info; el cian queda solo como resalte) en fondo claro y sobre navy, con tokens nuevos <code>-strong</code> y <code>-on-navy</code>. <i>Píldoras de estado</i> en 3 variantes (suave por defecto en tablas, contorno y sólida), sin punto y con icono opcional; contraste ≥ 5:1. <i>Alertas</i> con insignia circular de icono en lugar de franja lateral. <i>Panel de actividad</i> y franja de indicadores generados desde un solo conjunto de 6 eventos (las partes suman el total). Gráficos de resultado con colores de estado. Correcciones de contenido: IDs de dispositivo (LEC-/CAM-), concordancia ("Huella rechazada"), "Sin verificar", fechas, tooltip con icono de ayuda y demo de toast con acciones. Nueva sección "Implementación recomendada" (librerías, solo documentada).</td></tr>
+        <tr><td><b>v1.3</b> · oct 2026</td><td><b>Cobertura completa.</b> <i>Patrones de Averyn:</i> captura facial y de huella, resultado de verificación frente al umbral 0.68, documento y OCR con revisión de datos, papeleta y comprobante sin vincular persona↔voto, dispositivos y consentimiento biométrico. <i>Componentes:</i> selector de fechas, menú de acciones, combobox, acordeón, stepper, popover, drawer, paleta de comandos Ctrl+K y tabla avanzada, todos con teclado completo. <i>Plantillas:</i> bitácora, configuración, detalle de persona, asistente electoral, notificaciones y perfil, con estados y vista a pantalla completa. <i>Marca y entregables:</i> kit de ilustración con arcos y estados vacíos, favicons e imagen social, tres correos transaccionales, <code>print.css</code> para actas y exportación de tokens W3C (<code>tokens.json</code>). Nuevo: <b>HTML único</b> compartible (<code>docs/averyn-design-system-horizonte.html</code>).</td></tr>
+        <tr><td><b>v1.2</b> · oct 2026</td><td>Design system multipágina (<code>design-system.html</code>, <code>ds/graficos.html</code>, <code>ds/sistema.html</code>) con <code>ds.css</code> y <code>ds.js</code> compartidos. <b>Estados del sistema:</b> páginas 404, 403, 500, sin conexión y mantenimiento (concepto "arcos rotos sobre el horizonte"), ruta pedida escapada, <code>&lt;base&gt;</code> para rutas anidadas, banners y modal de sesión. <b>Biblioteca de gráficos:</b> paleta categórica validada (azul, ámbar, cian de gráfico, violeta, magenta), tarjeta de gráfico con estados, área, barras de píldora y rectas, ranking, apiladas, anillo, bullet, KPI con sparkline, mapa de calor, embudo, histograma con umbral 0.68 y tabla "breakdown"; tooltip, teclado y vista en tabla en todos; contrato de datos propuesto.</td></tr>
+        <tr><td><b>v1.1</b> · oct 2026</td><td>Accesibilidad y teclado en landing y login. Landing: hero de 220 vh con <code>&lt;h1&gt;</code> real, <code>inert</code> en lo invisible, figura anclada al texto, anillo de foco por superficie (blanco sobre azul, cian sobre navy), menú móvil con botón antes del nav y Escape que devuelve el foco, contrastes corregidos, objetivos ≥ 44 px, contenido visible sin JS. Login: errores por campo con <code>aria-invalid</code>, foco al primer inválido y a la contraseña tras credenciales inválidas, sin salto de layout, botón bloqueado durante la redirección, "Mostrar/Ocultar" sin contradicción de nombre, nota de seguridad solo en HTTPS. Tokens nuevos aplicados a <code>tokens.css</code>.</td></tr>
+        <tr><td><b>v1.0</b> · oct 2026</td><td>Primera versión del sistema Horizonte: fundamentos, 20 componentes, patrones y plantillas. Tokens nuevos: <code>--av-field-border</code> (#6E86B0) y <code>--av-placeholder</code> (#667390), variantes <code>-text</code> de estado, reglas de foco por superficie.</td></tr>
+      </tbody></table></div>
+      <h3 class="ds-sub">Deuda conocida <small>v1.4</small></h3>
+      <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Tema</th><th>Qué falta</th></tr></thead><tbody>
+        <tr><td>Prefijos</td><td>El código usa <code>mn-</code>, <code>lg-</code> y <code>dh-</code>; consolidar en <code>hz-</code> o <code>av-</code>.</td></tr>
+        <tr><td>CSS</td><td>~50 KB de <code>components.css</code>, <code>modules.css</code> y <code>dashboard.css</code> se cargan sin usarse en landing y login.</td></tr>
+        <tr><td>Módulos</td><td>Identidad, Documentos, Biometría, Electoral e IA siguen con el estilo anterior y con Bootstrap.</td></tr>
+        <tr><td>Píldoras y alertas en el frontend</td><td>Las píldoras de 3 variantes y las alertas con insignia están en el design system; el frontend (<code>lg-alert</code>, <code>dh-</code>) aún usa los estilos anteriores.</td></tr>
+        <tr><td>Librerías de componentes</td><td>La recomendación React / shadcn / Sonner / TanStack está documentada, pendiente de decisión del equipo.</td></tr>
+        <tr><td>Modo nocturno</td><td>Fuera de alcance por ahora: faltaría validar la paleta de gráficos y los tokens contra una superficie oscura.</td></tr>
+        <tr><td>Patrones, componentes y plantillas</td><td>Están documentados como simulaciones; no existen aún en <code>averyn-frontend/</code>. Hay que implementarlos con datos reales y revisar con quien opere cámara, lector y padrón.</td></tr>
+        <tr><td>Consentimiento biométrico</td><td>Plazos de conservación, canal de revocación y texto legal pendientes de definir con el área jurídica.</td></tr>
+        <tr><td>Correos</td><td>Probar en clientes reales (Gmail, Outlook, Apple Mail) y alojar el logo en un dominio público para <code>{{logo_url}}</code>.</td></tr>
+        <tr><td>Shell de navegación</td><td>La unificación del shell del dashboard con el resto de páginas espera la señal del equipo.</td></tr>
+      </tbody></table></div>
+    </div></section>
+    <!-- CONSUMO E IMPLEMENTACIÓN -->
+    <section class="ds-sec ds-sec--night" id="consumo" aria-labelledby="h-consumo" data-nav="Consumo e implementación" data-grp="Gobernanza"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Calidad y gobernanza · Gobernanza</span>
+      <h2 id="h-consumo">Consumo</h2>
+      <p class="ds-lead">Cómo usar el sistema en una pantalla nueva y en qué estado está cada una.</p>
+
+      <h3 class="ds-sub">Empezar una pantalla</h3>
+      <div class="codeblock"><pre id="code-start">&lt;link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"&gt;
+&lt;link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"&gt;
+&lt;link href="../assets/css/design-system.css" rel="stylesheet"&gt;   <b>&lt;!-- tokens.css --&gt;</b>
+&lt;link href="../assets/css/mi-pantalla.css" rel="stylesheet"&gt;    <b>&lt;!-- solo lo propio, acotado a body.av-mi-pantalla --&gt;</b>
+
+body.av-mi-pantalla { background: #fff; color: var(--av-navy); font-family: var(--av-font-body); }
+.av-mi-pantalla :focus-visible { outline: 2px solid var(--av-blue); outline-offset: 3px; }</pre><button class="copy" type="button" data-copy="#code-start">Copiar</button></div>
+      <h3 class="ds-sub">Equivalencias con el código</h3>
+      <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Componente (este documento)</th><th>Landing</th><th>Login</th><th>Dashboard</th></tr></thead><tbody>
+        <tr><td><code>hz-btn--primary / ghost</code></td><td><code>mn-btn--blue / --ghost</code></td><td><code>lg-submit</code></td><td>—</td></tr>
+        <tr><td><code>hz-input · hz-field</code></td><td>—</td><td><code>lg-input · lg-field</code></td><td>—</td></tr>
+        <tr><td><code>hz-alert</code></td><td>—</td><td><code>lg-alert</code></td><td>—</td></tr>
+        <tr><td><code>hz-tile</code></td><td>—</td><td>—</td><td><code>dh-tile</code> / <code>dh-cell</code></td></tr>
+        <tr><td><code>hz-kpis</code></td><td>—</td><td>—</td><td><code>dh-kpis</code></td></tr>
+        <tr><td><code>hz-panel · hz-bars · hz-feed</code></td><td>—</td><td>—</td><td><code>dh-panel · dh-bars · dh-feed</code></td></tr>
+        <tr><td><code>hz-pill · hz-brandchip</code></td><td><code>mn-pill · mn-brand</code></td><td><code>lg-brand</code></td><td><code>av-navbar__brand</code> (acotado)</td></tr>
+        <tr><td><code>hz-dock</code></td><td>—</td><td>—</td><td><code>av-dock</code> (acotado a <code>body.av-dash</code>)</td></tr>
+        <tr><td><code>hz-line · hz-media · hz-person</code></td><td><code>mn-row · mn-media · mn-person</code></td><td>—</td><td>—</td></tr>
+      </tbody></table></div>
+      <h3 class="ds-sub">Estado de adopción</h3>
+      <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Pantalla</th><th>Estado</th><th>Archivos</th></tr></thead><tbody>
+        <tr><td>Landing</td><td class="pass">Horizonte v1.1</td><td><code>index.html</code> · <code>landing.css</code> · <code>home.js</code></td></tr>
+        <tr><td>Login</td><td class="pass">Horizonte v1.1</td><td><code>login.html</code> · <code>login.css</code> · <code>login.js</code></td></tr>
+        <tr><td>Dashboard</td><td class="pass">Horizonte v1.0 (shell acotado)</td><td><code>dashboard/index.html</code> · <code>dashboard-page.css</code> · <code>dashboard.js</code></td></tr>
+        <tr><td>Shell global (dock en las demás pantallas)</td><td class="fail">Pendiente: lo decide el equipo</td><td><code>dashboard-shell.css</code> · <code>components.css</code></td></tr>
+        <tr><td>Identidad, Documentos, Biometría, Electoral, IA</td><td class="fail">Estilo anterior</td><td><code>modules.css</code> y páginas de cada módulo</td></tr>
+      </tbody></table></div>
+      <h3 class="ds-sub">Migrar un módulo</h3>
+      <ol class="ds-note" style="color:var(--av-night-text);padding-left:1.2rem"><li>Acota los estilos a una clase de body (<code>body.av-identidad</code>) y crea su CSS propio.</li><li>Cambia el contenedor a la rejilla de 12 columnas y aplica el ritmo de sección.</li><li>Sustituye tarjetas con sombra por líneas de 1 px; usa un panel navy solo si hay un cambio de información.</li><li>Pasa botones, campos y chips a los componentes de este documento.</li><li>Define carga, vacío y error; revisa foco, contraste y reduced-motion.</li><li>Quita Bootstrap de la página si ya no se usa (se conservan los iconos).</li></ol>
+    
+      <h3 class="ds-sub">Implementación recomendada <small>informe de auditoría v1.3</small></h3>
+      <p class="ds-note" style="color:var(--av-night-text)">Es una <b>recomendación documentada</b>, no una migración: el frontend actual es HTML, CSS y JavaScript estático. Si el equipo pasa a React / Next.js, esta es la propuesta. Verificar versiones, compatibilidad con Next.js y licencias antes de adoptar cualquiera.</p>
+      <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Componente</th><th>Librería recomendada</th><th>Por qué</th></tr></thead><tbody>
+        <tr><td>Botones, campos, modal, popover, tooltip, menú, combobox, drawer</td><td>shadcn/ui sobre Radix UI</td><td>Foco, teclado y ARIA resueltos; el código vive en el repositorio y se tematiza con los tokens.</td></tr>
+        <tr><td>Alertas</td><td><code>Alert</code> de shadcn/ui</td><td>Estructura icono + título + descripción, sin franja lateral.</td></tr>
+        <tr><td>Toasts</td><td>Sonner</td><td>Apilado, pausa al pasar el cursor, <code>aria-live</code> y animación listos.</td></tr>
+        <tr><td>Tabla avanzada</td><td>TanStack Table + tabla de shadcn/ui</td><td>Orden, filtro, selección y paginación robustos; el aspecto sigue siendo "líneas, no cajas".</td></tr>
+        <tr><td>Píldoras de estado</td><td><code>Badge</code> de shadcn/ui con variantes</td><td>Una sola definición de las 3 variantes y los tonos, consumida en toda la app.</td></tr>
+        <tr><td>Gráficos y panel de actividad</td><td>Recharts o Tremor</td><td>Barras, líneas y KPIs con la paleta <code>--viz-*</code> y los colores de estado.</td></tr>
+        <tr><td>Selector de fechas</td><td><code>Calendar</code> + <code>Popover</code> (react-day-picker)</td><td>Navegación por teclado incluida.</td></tr>
+        <tr><td>Iconos</td><td>lucide-react, o Bootstrap Icons para continuidad</td><td>—</td></tr>
+      </tbody></table></div>
+      <p class="ds-note" style="color:var(--av-night-text)"><b>Para que no se vea genérico:</b> (1) los tokens de <code>tokens.css</code> son la fuente de verdad —variables CSS o configuración de Tailwind—, nunca el tema por defecto de la librería; (2) se conservan las reglas propias (señal única, acción en mono, plano por defecto, el color nunca es el único canal); (3) la librería aporta mecánica, no estética; (4) una sola tabla de estados consumida por píldoras, panel, toasts y gráficos. Alternativa de kit completo: Mantine o HeroUI, también con su tema sobrescrito con los tokens.</p>
+      </div></section>
+    </main>
+
+    <footer class="ds-sec" style="padding-block:2.4rem;border-top:1px solid var(--av-hairline)"><div class="ds-wrap"><div class="row" style="justify-content:space-between"><span class="mono" style="color:var(--av-gray-500)">Averyn · Design System v1.4 Horizonte</span><span class="mono" style="color:var(--av-gray-500)">Fuente: DESIGN.md · tokens.css</span></div></div></footer>
+  </div>
+</div>
+<div class="hz-toasts" id="toasts" role="region" aria-label="Notificaciones" aria-live="polite"></div>
+<script src="./ds.js"></script>
+<script src="./foundations.js"></script>
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Averyn — Design System Horizonte v1.4 · Fundamentos</title>
+<meta name="description" content="Design system de Averyn: principios, tokens, componentes y reglas de uso del estilo Horizonte.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link rel="icon" href="../../averyn-frontend/assets/images/averyn-logo-blue.avif">
+<link href="./ds.css" rel="stylesheet">
+<link href="./fundamentos.css" rel="stylesheet">
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<div class="ds-shell">
+  <aside class="ds-side" aria-label="Índice del design system">
+    <a class="ds-side__brand" href="../design-system.html" aria-label="Averyn, inicio del design system"><img src="../../averyn-frontend/assets/images/averyn-logo-font-black.avif" alt="Averyn"></a>
+    <p class="ds-side__ver mono">Design System · v1.4 Horizonte</p>
+    <nav>
+      <span class="grp mono">Sistema</span>
+      <a class="ds-page" href="fundamentos.html" aria-current="page">Fundamentos</a>
+      <div class="ds-subnav">
+        <span class="grp sub mono">Identidad</span>
+        <a href="#principios">Principios</a>
+        <a href="#marca">Marca y figura</a>
+        <span class="grp sub mono">Sistema visual</span>
+        <a href="#colores">Color</a>
+        <a href="#tipografia">Tipografía</a>
+        <a href="#espacio">Espacio, forma y movimiento</a>
+        <a href="#iconografia">Iconografía</a>
+        <span class="grp sub mono">Tokens</span>
+        <a href="#tokens">Tokens y exportación</a>
+      </div>
+      <a class="ds-page" href="../design-system.html">Componentes base</a>
+      <a class="ds-page" href="graficos.html">Gráficos</a>
+      <a class="ds-page" href="componentes.html">Componentes que faltaban</a>
+      <span class="grp mono">Aplicación</span>
+      <a class="ds-page" href="patrones.html">Patrones de Averyn</a>
+      <a class="ds-page" href="plantillas.html">Plantillas</a>
+      <a class="ds-page" href="sistema.html">Estados del sistema</a>
+      <span class="grp mono">Marca y calidad</span>
+      <a class="ds-page" href="marca.html">Marca y entregables</a>
+      <a class="ds-page" href="calidad.html">Calidad y gobernanza</a>
+    </nav>
+  </aside>
+
+  <div class="ds-main" id="top">
+    <header class="ds-cover ds-cover--page"><div class="ds-wrap"><span class="mono" style="color:#fff;opacity:.85">Fundamentos</span><h1>Lo que no cambia.</h1><p>Principios, marca y figura de arcos, color, tipografía, espacio, iconografía y los tokens que los hacen exportables.</p></div></header>
+
+    <main id="contenido">
+
+    <!-- PRINCIPIOS -->
+    <section class="ds-sec" id="principios" aria-labelledby="h-principios" data-nav="Principios" data-grp="Identidad"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Fundamentos · Identidad</span>
+      <h2 id="h-principios">Principios del sistema</h2>
+      <p class="ds-lead"><b>North Star: "El horizonte que se oscurece".</b> Averyn abre con un cielo claro y, a medida que se avanza, el fondo cae hacia un navy profundo: la claridad de la plataforma se convierte en seguridad. Sobre ese horizonte, un trazo fino de arcos —eco del arco de la A del logo— hace de firma. Sereno e institucional, con la precisión de un instrumento.</p>
+      <div class="ds-gap-top">
+        <div class="hz-line"><span class="n mono">R1</span><div><h4>La regla de la señal única</h4><p>El azul de señal #145FEE es el único color que invita a actuar: botones, enlaces y un cierre a pantalla completa. El cian es trazo o resalte; nunca superficie.</p></div></div>
+        <div class="hz-line"><span class="n mono">R2</span><div><h4>La regla del horizonte</h4><p>El oscurecimiento va de arriba (claro) hacia abajo (navy), nunca al revés. El logo negro vive en la zona clara; el blanco, sobre navy.</p></div></div>
+        <div class="hz-line"><span class="n mono">R3</span><div><h4>La regla de la acción en mono</h4><p>Lo que se pulsa o rotula (botones, navegación, etiquetas) va en JetBrains Mono mayúsculas. Lo que se lee va en Inter o Space Grotesk.</p></div></div>
+        <div class="hz-line"><span class="n mono">R4</span><div><h4>Plano por defecto</h4><p>Una superficie en reposo no tiene sombra. Solo la llevan los botones sólidos, el marco del login y los popovers. La profundidad se logra con tono y líneas de 1 px.</p></div></div>
+        <div class="hz-line"><span class="n mono">R5</span><div><h4>Asimetría con intención</h4><p>Titular y contenido en columnas desiguales, listas escalonadas, paneles fijos. Nunca tres tarjetas iguales centradas como solución por defecto.</p></div></div>
+        <div class="hz-line"><span class="n mono">R6</span><div><h4>Honestidad del estado</h4><p>Lo que no existe se muestra como "Próximamente", atenuado y sin enlace; nunca como un vínculo que lleva a un 404. Lo que no se sabe no se promete ("Conexión segura" solo si lo es).</p></div></div>
+        <div class="hz-line"><span class="n mono">R7</span><div><h4>Nunca ampliar el wordmark</h4><p>El logo mide 1144 px de ancho nativo: se maqueta grande y solo se reduce. Ampliarlo lo vuelve borroso.</p></div></div>
+        <div class="hz-line" style="border-bottom:1px solid var(--av-hairline)"><span class="n mono">R8</span><div><h4>El color nunca es el único canal</h4><p>Todo dato con color lleva también texto, forma o posición. Los estados se leen sin ver el color.</p></div></div>
+      </div>
+      <div class="ds-grid ds-grid--2 ds-gap-top">
+        <div class="dd dd--do"><strong>Se hizo y se mantiene</strong><ul><li>Hero guiado por scroll: la A, la palabra y la figura de arcos.</li><li>Espacios reservados para imagen y video en lugar de relleno.</li><li>Un solo panel navy por pantalla para marcar un cambio de información.</li></ul></div>
+        <div class="dd dd--dont"><strong>Se probó y se descartó</strong><ul><li>Estilo brutalista (mayúsculas gigantes, sombras duras en todo): perdía identidad.</li><li>Tarjetas con sombra y círculos de seis colores en el dashboard.</li><li>Franjas laterales gruesas, glows de color y retículas decorativas.</li></ul></div>
+      </div>
+    </div></section>
+    <!-- MARCA Y FIGURA -->
+    <section class="ds-sec ds-sec--tint" id="marca" aria-labelledby="h-marca" data-nav="Marca y figura" data-grp="Identidad"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Fundamentos · Identidad</span>
+      <h2 id="h-marca">Marca y figura de arcos</h2>
+      <p class="ds-lead">El wordmark "Averyn" parte de una A cuyo arco es la firma de la marca. Hay tres piezas: wordmark, isotipo (la A sola) y lockup (isotipo sobre wordmark).</p>
+
+      <h3 class="ds-sub">Logotipo <small>wordmark · 1144 × 371</small></h3>
+      <div class="ds-grid ds-grid--4">
+        <div class="logo-cell"><img src="../../averyn-frontend/assets/images/averyn-logo-font-black.avif" alt="Wordmark negro"></div>
+        <div class="logo-cell logo-cell--dark"><img src="../../averyn-frontend/assets/images/averyn-logo-font-white.avif" alt="Wordmark blanco"></div>
+        <div class="logo-cell"><img src="../../averyn-frontend/assets/images/averyn-logo-font-blue.avif" alt="Wordmark azul"></div>
+        <div class="logo-cell logo-cell--dark"><img src="../../averyn-frontend/assets/images/averyn-logo-font-cyan.avif" alt="Wordmark cian"></div>
+      </div>
+      <h3 class="ds-sub">Isotipo y lockup <small>786 × 661 · 1144 × 657</small></h3>
+      <div class="ds-grid ds-grid--4">
+        <div class="logo-cell logo-cell--sky"><img src="../../averyn-frontend/assets/images/averyn-logo-black.avif" alt="Isotipo negro"></div>
+        <div class="logo-cell logo-cell--dark"><img src="../../averyn-frontend/assets/images/averyn-logo-white.avif" alt="Isotipo blanco"></div>
+        <div class="logo-cell"><img src="../../averyn-frontend/assets/images/averyn-logo-lockup-black.avif" alt="Lockup negro"></div>
+        <div class="logo-cell logo-cell--blue"><img src="../../averyn-frontend/assets/images/averyn-logo-lockup-white.avif" alt="Lockup blanco"></div>
+      </div>
+
+      <h3 class="ds-sub">Qué logo sobre qué fondo</h3>
+      <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Superficie</th><th>Logo</th><th>Motivo</th></tr></thead><tbody>
+        <tr><td>Blanco, papel azul, cielo (#DCECFF)</td><td>Negro (o azul en formularios)</td><td>Contraste 17:1 o más; es la zona clara del horizonte.</td></tr>
+        <tr><td>Navy, navy nocturno, footer</td><td>Blanco</td><td>Mantiene la regla del horizonte: blanco solo sobre oscuro.</td></tr>
+        <tr><td>Azul de señal (CTA final)</td><td>Blanco</td><td>5.38:1. El cian no se usa como logo sobre azul.</td></tr>
+        <tr><td>Tramo medio del degradado (gris pizarra)</td><td>Ninguno</td><td>La banda intermedia se atraviesa: el logo se reduce y sube antes de llegar a ella.</td></tr>
+      </tbody></table></div>
+      <div class="ds-grid ds-grid--2 ds-gap-top">
+        <div class="dd dd--do"><strong>Hacer</strong><ul><li>Altura mínima: 22 px el wordmark en barras; 96 px el lockup.</li><li>Zona de respeto igual a la altura de la A a cada lado.</li><li>Maquetar a tamaño nativo y reducir con <code>transform: scale()</code>.</li></ul></div>
+        <div class="dd dd--dont"><strong>No hacer</strong><ul><li>Ampliar por encima de 1144 px (borroso). No usar <code>will-change</code> sobre el logo que se escala.</li><li>Deformar, rotar, añadir sombra o contorno, recolorear fuera de las variantes.</li><li>Mostrar dos wordmarks completos a la vez en la misma pantalla.</li></ul></div>
+      </div>
+
+      <h3 class="ds-sub">Figura de arcos <small>firma gráfica</small></h3>
+      <p class="ds-note">Tres arcos concéntricos (eco del arco de la A), una base y una o dos diagonales paralelas (el trazo largo de la A). Es siempre <b>línea fina</b> con extremos redondeados, <code>vector-effect: non-scaling-stroke</code> y <code>pathLength="1"</code> para poder dibujarla con <code>stroke-dashoffset</code>.</p>
+      <div class="ds-grid ds-grid--2 ds-gap-top">
+        <div class="stage stage--sky"><span class="stage__label mono">Sobre claro</span>
+          <svg viewBox="0 0 640 300" width="100%" aria-hidden="true"><path d="M0 290 H640" stroke="#CFDCF3" fill="none"/><path d="M30 290 C110 60 330 40 450 290" stroke="#145FEE" stroke-width="1.5" fill="none"/><path d="M90 290 C150 110 300 95 390 290" stroke="#00ACD2" stroke-width="2" fill="none"/><path d="M150 290 C190 170 270 160 330 290" stroke="#145FEE" stroke-width="1" fill="none"/><path d="M300 8 L545 290" stroke="#145FEE" stroke-width="1.5" fill="none"/><path d="M326 -32 L605 290" stroke="#00ACD2" stroke-width="1.5" fill="none"/></svg></div>
+        <div class="stage stage--night"><span class="stage__label mono">Sobre navy</span>
+          <svg viewBox="0 0 640 300" width="100%" aria-hidden="true"><path d="M0 290 H640" stroke="rgba(255,255,255,.22)" fill="none"/><path d="M30 290 C110 60 330 40 450 290" stroke="#fff" stroke-width="1.5" fill="none"/><path d="M90 290 C150 110 300 95 390 290" stroke="#00ACD2" stroke-width="2" fill="none"/><path d="M150 290 C190 170 270 160 330 290" stroke="#55D6FF" stroke-width="1.5" fill="none"/><path d="M300 8 L545 290" stroke="#3D86FF" stroke-width="2" fill="none"/><path d="M326 -32 L605 290" stroke="#3D86FF" stroke-width="2" fill="none"/></svg></div>
+      </div>
+      <div class="codeblock"><pre id="code-arcs">&lt;svg viewBox="0 0 640 300" aria-hidden="true"&gt;
+  &lt;path d="M0 290 H640" stroke="rgba(255,255,255,.22)"/&gt;
+  &lt;path d="M30 290 C110 60 330 40 450 290" stroke="#fff"     stroke-width="1.5" pathLength="1"/&gt;
+  &lt;path d="M90 290 C150 110 300 95 390 290" stroke="#00ACD2" stroke-width="2"   pathLength="1"/&gt;
+  &lt;path d="M150 290 C190 170 270 160 330 290" stroke="#55D6FF" stroke-width="1.5" pathLength="1"/&gt;
+  &lt;path d="M300 8 L545 290"  stroke="#3D86FF" stroke-width="2" pathLength="1"/&gt;
+  &lt;path d="M326 -32 L605 290" stroke="#3D86FF" stroke-width="2" pathLength="1"/&gt;
+&lt;/svg&gt;</pre><button class="copy" type="button" data-copy="#code-arcs">Copiar</button></div>
+    </div></section>
+    <!-- COLOR -->
+    <section class="ds-sec" id="colores" aria-labelledby="h-colores" data-nav="Color" data-grp="Sistema visual"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Fundamentos · Sistema visual</span>
+      <h2 id="h-colores">Colores</h2>
+      <p class="ds-lead">Paleta de marca disciplinada: un azul de señal, tres navys por profundidad, un par de cianes y neutros azulados. Haz clic en cualquier muestra para copiar su valor.</p>
+
+      <h3 class="ds-sub">Marca <small>acción</small></h3>
+      <div class="ds-grid ds-grid--4" id="sw-brand"></div>
+      <h3 class="ds-sub">Horizonte <small>profundidad</small></h3>
+      <div class="ds-grid ds-grid--4" id="sw-horizon"></div>
+      <h3 class="ds-sub">Neutros <small>texto y estructura</small></h3>
+      <div class="ds-grid ds-grid--4" id="sw-neutral"></div>
+      <h3 class="ds-sub">Semánticos <small>estado</small></h3>
+      <div class="ds-grid ds-grid--4" id="sw-semantic"></div>
+      <p class="ds-note"><b>Base vs. texto.</b> Los colores base (#12B76A, #F79009, #F04438) sirven para puntos, rellenos e iconos; no alcanzan 4.5:1 como texto sobre blanco (2.35–3.76:1). Para texto usa siempre la variante <code>-text</code> (5.0–6.5:1). El cian de información como texto es #0369A1.</p>
+
+      <h3 class="ds-sub">El degradado Horizonte</h3>
+      <div class="ds-grid ds-grid--3">
+        <div><div class="stage" style="height:200px;background:linear-gradient(180deg,#DCECFF 0%,#EAF0FE 14%,#0A2A66 54%,#000C24 82%);border:0"></div><p class="ds-note"><b>Completo.</b> Hero de la landing: el navy cae a medida que se hace scroll.</p></div>
+        <div><div class="stage" style="height:200px;background:linear-gradient(180deg,#DCECFF 0%,#EAF0FE 12%,#0A2A66 40%,#000C24 68%);border:0"></div><p class="ds-note"><b>Compacto.</b> Panel de marca del login: el navy llega antes.</p></div>
+        <div><div class="stage" style="height:200px;background:linear-gradient(180deg,#DCECFF 0%,#EAF0FE 55%,#fff 100%);"></div><p class="ds-note"><b>Cielo a blanco.</b> Bienvenida del dashboard: solo la zona clara.</p></div>
+      </div>
+      <div class="codeblock"><pre id="code-grad">/* Completo (hero) · el navy entra con opacidad guiada por scroll */
+background: linear-gradient(180deg, <b>#DCECFF</b> 0%, <b>#EAF0FE</b> 14%, <b>#0A2A66</b> 54%, <b>#000C24</b> 82%);
+/* Compacto (login) */
+background: linear-gradient(180deg, #DCECFF 0%, #EAF0FE 12%, #0A2A66 40%, #000C24 68%);
+/* Cielo a blanco (dashboard) */
+background: linear-gradient(180deg, #DCECFF 0%, #EAF0FE 55%, #fff 100%);</pre><button class="copy" type="button" data-copy="#code-grad">Copiar</button></div>
+      <p class="ds-note">En el tramo medio (≈ #66708A) no se coloca texto ni logo: se atraviesa. Si el texto ancla en la parte baja, el contraste se mide contra el navy, no contra el primer color del degradado.</p>
+
+      <h3 class="ds-sub">Pares aprobados <small>contraste calculado en vivo</small></h3>
+      <div class="doc-wrap"><table class="doc-table" id="contrast-table"><thead><tr><th>Muestra</th><th>Texto / elemento</th><th>Fondo</th><th>Ratio</th><th>Uso</th></tr></thead><tbody></tbody></table></div>
+      <div class="ds-grid ds-grid--2 ds-gap-top">
+        <div class="dd dd--do"><strong>Hacer</strong><ul><li>Texto sobre azul de señal: blanco (5.38:1) o #F0F5FF (4.92:1).</li><li>#9DB6E6 solo sobre navy (8.49:1) o como decoración.</li><li>Bordes de campo en #6E86B0 (3.68:1); los hairlines son separadores, no bordes de control.</li></ul></div>
+        <div class="dd dd--dont"><strong>No hacer</strong><ul><li>Texto #DCE8FF sobre azul de señal (4.37:1: falla).</li><li>Texto con gray-300 (2.09:1) o gray-400 (3.52:1) salvo grande y decorativo.</li><li>Cian como fondo grande o como color de botón principal.</li></ul></div>
+      </div>
+    </div></section>
+    <!-- TIPOGRAFÍA -->
+    <section class="ds-sec ds-sec--tint" id="tipografia" aria-labelledby="h-tipografia" data-nav="Tipografía" data-grp="Sistema visual"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Fundamentos · Sistema visual</span>
+      <h2 id="h-tipografia">Tipografía</h2>
+      <p class="ds-lead">Una grotesca geométrica con carácter para titulares, un cuerpo neutro y legible, y un mono técnico que da tono de instrumento a todo lo accionable.</p>
+      <div class="ds-grid ds-grid--3 ds-gap-top">
+        <div class="stage"><span class="stage__label mono">Display · Headline</span><div style="font:500 3.6rem/1 var(--av-font-heading);letter-spacing:-.03em">Aa</div><p class="ds-note"><b>Space Grotesk</b> 500 / 600 / 700. Titulares y cifras.</p></div>
+        <div class="stage"><span class="stage__label mono">Cuerpo</span><div style="font:400 3.6rem/1 var(--av-font-body);letter-spacing:-.02em">Aa</div><p class="ds-note"><b>Inter</b> 400 / 500 / 600 / 700. Párrafos, campos y tablas.</p></div>
+        <div class="stage"><span class="stage__label mono">Acción · Etiqueta</span><div style="font:500 3.6rem/1 var(--av-font-mono)">Aa</div><p class="ds-note"><b>JetBrains Mono</b> 500 / 700. Botones, navegación, rótulos y datos técnicos.</p></div>
+      </div>
+
+      <h3 class="ds-sub">Escala</h3>
+      <div>
+        <div class="type-spec"><div class="type-spec__meta mono">Display XL<br>clamp(2.4rem, 6vw, 5rem)</div><div style="font:500 clamp(2.4rem,6vw,4.4rem)/.98 var(--av-font-heading);letter-spacing:-.035em">Ingresa. Automatiza.</div></div>
+        <div class="type-spec"><div class="type-spec__meta mono">Display<br>clamp(2rem, 4.2vw, 3.6rem)</div><div style="font:500 clamp(2rem,4.2vw,3.6rem)/1.06 var(--av-font-heading);letter-spacing:-.025em;text-wrap:balance">Una plataforma institucional</div></div>
+        <div class="type-spec"><div class="type-spec__meta mono">Cifra KPI<br>clamp(3rem, 4.6vw, 4rem)</div><div style="font:500 clamp(3rem,4.6vw,4rem)/1 var(--av-font-heading);letter-spacing:-.04em">1.284</div></div>
+        <div class="type-spec"><div class="type-spec__meta mono">Headline · 1.5–1.8rem<br>500 · 1.15 · -.02em</div><div style="font:500 1.75rem/1.15 var(--av-font-heading);letter-spacing:-.02em">Gestionar personas</div></div>
+        <div class="type-spec"><div class="type-spec__meta mono">Title · 1.25rem<br>500 · 1.2</div><div style="font:500 1.25rem/1.2 var(--av-font-heading);letter-spacing:-.02em">Procesar documento</div></div>
+        <div class="type-spec"><div class="type-spec__meta mono">Lead · 1.05rem<br>400 · 1.6 · máx. 46–62ch</div><div style="font:400 1.05rem/1.6 var(--av-font-body);color:var(--av-gray-500);max-width:56ch">Centraliza la identificación, la autenticación y la automatización de procesos institucionales mediante biometría y seguridad.</div></div>
+        <div class="type-spec"><div class="type-spec__meta mono">Body · 1rem<br>400 · 1.6</div><div style="font:400 1rem/1.6 var(--av-font-body);max-width:62ch">Averyn gestiona su propio modelo de identidad, independiente de las bases de datos institucionales.</div></div>
+        <div class="type-spec"><div class="type-spec__meta mono">Small · .875rem<br>400/600 · 1.45</div><div style="font:400 .875rem/1.45 var(--av-font-body);color:var(--av-gray-500)">3 pendientes de verificación · actualizado hace 2 min</div></div>
+        <div class="type-spec"><div class="type-spec__meta mono">Label · .75rem mono<br>500 · .06em · MAYÚSC.</div><div class="mono" style="color:var(--av-blue)">Procesos electorales activos</div></div>
+        <div class="type-spec"><div class="type-spec__meta mono">Micro · .6875rem mono<br>500 · .06em</div><div class="mono" style="font-size:.6875rem;color:var(--av-gray-500)">Próximamente · CAM-001 · 13/09/2026, 20:42</div></div>
+      </div>
+      <div class="ds-grid ds-grid--2 ds-gap-top">
+        <div class="dd dd--do"><strong>Hacer</strong><ul><li><code>text-wrap: balance</code> en titulares; <code>letter-spacing: -.025em</code> a -.04em según tamaño.</li><li>Mono mayúsculas solo para etiquetas cortas (≤ 4 palabras).</li><li>Cuerpo mínimo 16 px; secundarios 14 px; micro 11–12 px solo en mono y nunca como único portador de información.</li></ul></div>
+        <div class="dd dd--dont"><strong>No hacer</strong><ul><li>Párrafos en mayúsculas o en mono.</li><li>Tracking menor a -.06em (pierde la forma de los caracteres).</li><li>Más de tres familias; negritas 700 en titulares (el peso de marca es 500).</li></ul></div>
+      </div>
+    
+      <p class="ds-note"><b>Decisión v1.4.</b> Se mantiene Space Grotesk para titulares, Inter para el cuerpo y JetBrains Mono para lo accionable. No hay una decisión tomada de cambiar a otra familia; si se propone, se discute y se registra aquí.</p>
+    </div></section>
+    <!-- ESPACIO, FORMA Y MOVIMIENTO -->
+    <section class="ds-sec" id="espacio" aria-labelledby="h-espacio" data-nav="Espacio, forma y movimiento" data-grp="Sistema visual"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Fundamentos · Sistema visual</span>
+      <h2 id="h-espacio">Espacio, forma y movimiento</h2>
+      <p class="ds-lead">Poco ruido y mucho aire. La estructura la dan las líneas de 1 px, la rejilla de 12 columnas y un ritmo vertical generoso; las formas son contenidas.</p>
+
+      <h3 class="ds-sub">Espaciado <small>base 8 px</small></h3>
+      <div class="scale" id="space-scale"></div>
+      <h3 class="ds-sub">Rejilla y contenedores</h3>
+      <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Elemento</th><th>Valor</th><th>Notas</th></tr></thead><tbody>
+        <tr><td>Columnas</td><td><code>repeat(12, minmax(0, 1fr))</code></td><td>Hueco <code>clamp(1rem, 2.4vw, 2rem)</code>.</td></tr>
+        <tr><td>Contenedor</td><td><code>min(100%, 1240px)</code></td><td>Documentación: 1060 px. Texto corrido: 46–62 caracteres.</td></tr>
+        <tr><td>Gutter lateral</td><td><code>clamp(1.25rem, 4vw, 3rem)</code></td><td>Mínimo 16 px en móvil.</td></tr>
+        <tr><td>Ritmo de sección</td><td><code>clamp(5rem, 10vw, 9rem)</code></td><td>Entre bloques del dashboard: <code>clamp(4rem, 8vw, 7rem)</code>.</td></tr>
+        <tr><td>Línea estructural</td><td>1 px <code>--av-hairline</code> / <code>--av-hairline-strong</code></td><td>Reemplaza a las cajas con sombra.</td></tr>
+      </tbody></table></div>
+      <div class="ds-grid ds-grid--3 ds-gap-top">
+        <div class="stage stage--tint"><span class="stage__label mono">5 / 7</span><div class="pat" style="grid-template-columns:5fr 7fr"><div class="t">Titular</div><div>Contenido</div></div></div>
+        <div class="stage stage--tint"><span class="stage__label mono">7 / 4 desplazado</span><div class="pat" style="grid-template-columns:7fr 1fr 4fr"><div class="t">Titular</div><span></span><div style="margin-top:28px">Texto</div></div></div>
+        <div class="stage stage--tint"><span class="stage__label mono">Escalonado 4 · 4 · 4</span><div class="pat" style="grid-template-columns:repeat(3,1fr);align-items:start"><div class="t">1</div><div style="margin-top:20px">2</div><div class="t" style="margin-top:40px">3</div></div></div>
+      </div>
+
+      <h3 class="ds-sub">Radios</h3>
+      <div class="ds-grid ds-grid--4" id="radii"></div>
+      <h3 class="ds-sub">Elevación <small>plano por defecto</small></h3>
+      <div class="ds-grid ds-grid--4">
+        <div class="stage stage--tint"><div class="shd" style="border:1px solid var(--av-hairline-strong)">Plano<br>línea de 1 px</div><p class="ds-note">Tarjetas, secciones, filas. Sin sombra.</p></div>
+        <div class="stage stage--tint"><div class="shd" style="box-shadow:var(--av-shadow-key);border-radius:8px;background:var(--av-blue);color:#fff">Tecla<br>0 3px 0 .3</div><p class="ds-note">Botones sólidos. Baja 2 px al pulsar.</p></div>
+        <div class="stage stage--tint"><div class="shd" style="box-shadow:var(--av-shadow-md)">Popover<br>0 4px 12px .10</div><p class="ds-note">Menús, tooltips y avisos flotantes.</p></div>
+        <div class="stage stage--tint"><div class="shd" style="box-shadow:var(--av-shadow-frame);border-radius:24px">Marco<br>0 24px 60px .14</div><p class="ds-note">Una sola pieza flota por pantalla: login, modal.</p></div>
+      </div>
+      <h3 class="ds-sub">Capas y alturas</h3>
+      <div class="ds-grid ds-grid--2">
+        <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Capa</th><th>z-index</th></tr></thead><tbody>
+          <tr><td>Contenido</td><td><code>0</code></td></tr><tr><td>Sticky de sección</td><td><code>10</code></td></tr><tr><td>Volver arriba</td><td><code>40</code></td></tr><tr><td>Header / navbar</td><td><code>50</code></td></tr><tr><td>Menú desplegable</td><td><code>120</code></td></tr><tr><td>Skip link</td><td><code>200</code></td></tr><tr><td>Modal</td><td><code>300</code></td></tr><tr><td>Toast</td><td><code>400</code></td></tr></tbody></table></div>
+        <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Control</th><th>Altura</th></tr></thead><tbody>
+          <tr><td>Objetivo táctil mínimo</td><td><code>44 px</code></td></tr><tr><td>Botón</td><td><code>44 px</code></td></tr><tr><td>Campo, select</td><td><code>48 px</code></td></tr><tr><td>Ítem del dock</td><td><code>40 px</code> (la píldora completa mide 48)</td></tr><tr><td>Icon-button circular</td><td><code>42 px</code></td></tr><tr><td>Compacto (solo puntero fino)</td><td><code>36 px</code></td></tr></tbody></table></div>
+      </div>
+      <h3 class="ds-sub">Puntos de quiebre</h3>
+      <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Ancho</th><th>Qué cambia</th></tr></thead><tbody>
+        <tr><td><code>1400</code></td><td>El dashboard oculta nombre y rol del usuario.</td></tr>
+        <tr><td><code>1280</code></td><td>El dock muestra solo el icono salvo el activo.</td></tr>
+        <tr><td><code>1100</code></td><td>La navegación pública pasa a menú desplegable.</td></tr>
+        <tr><td><code>1023 / 900</code></td><td>Dos columnas pasan a una; indicadores 4 → 2.</td></tr>
+        <tr><td><code>700 / 560</code></td><td>Mosaico a 2 columnas; indicadores a 1; se ocultan figuras decorativas.</td></tr>
+      </tbody></table></div>
+      <p class="ds-note">Recomendación de consolidación: converger en <b>560 · 768 · 1024 · 1280</b> (los demás valores existen hoy por ajustes puntuales).</p>
+
+      <h3 class="ds-sub">Movimiento</h3>
+      <div class="ds-grid ds-grid--2">
+        <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Token</th><th>Valor</th><th>Uso</th></tr></thead><tbody>
+          <tr><td><code>--av-ease-out</code></td><td><code>cubic-bezier(.23, 1, .32, 1)</code></td><td>Todo: respuesta inmediata, nunca <code>ease-in</code>.</td></tr>
+          <tr><td>Estado</td><td><code>150 ms</code></td><td>Color, borde, foco.</td></tr>
+          <tr><td>Transformación</td><td><code>200 ms</code></td><td>Hover lift, flechas, desplazamientos.</td></tr>
+          <tr><td>Entrada de datos</td><td><code>450 ms</code></td><td>Barras, toasts, paneles.</td></tr>
+          <tr><td>Revelado</td><td><code>600 ms</code></td><td>Secciones al entrar en pantalla.</td></tr>
+          <tr><td>Dibujo de trazos</td><td><code>1.4 s</code> una vez</td><td>Arcos del login.</td></tr>
+        </tbody></table></div>
+        <div class="dd dd--do"><strong>Reglas</strong><ul><li>Anima solo <code>transform</code> y <code>opacity</code>; nunca <code>width</code>, <code>height</code> ni <code>padding</code> (la barra de progreso usa <code>scaleX</code>).</li><li>Pulsar: <code>scale(.97)</code> inmediato. Hover lift solo con <code>@media (hover: hover)</code>.</li><li>Nada que se repite 100 veces al día se anima.</li><li><code>prefers-reduced-motion</code>: sin sticky ni dibujo; estado final directo.</li><li>No uses <code>will-change</code> en elementos que se amplían: rasteriza borroso.</li></ul></div>
+      </div>
+    </div></section>
+    <!-- ICONOGRAFÍA -->
+    <section class="ds-sec ds-sec--tint" id="iconografia" aria-labelledby="h-iconos" data-nav="Iconografía" data-grp="Sistema visual"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Fundamentos · Sistema visual</span>
+      <h2 id="h-iconos">Iconografía</h2>
+      <p class="ds-lead">Bootstrap Icons 1.11.3 (trazo uniforme). Cada módulo tiene un icono que representa su función, no una decoración. Haz clic en uno para copiar su clase.</p>
+      <div class="icons ds-gap-top" id="icon-grid"></div>
+      <div class="ds-grid ds-grid--3 ds-gap-top">
+        <div class="stage"><span class="stage__label mono">Sobre claro</span><div class="row"><span class="hz-tile__icon" style="background:var(--av-blue-tint);color:var(--av-blue)"><i class="bi bi-fingerprint"></i></span><span class="hz-tile__icon" style="background:#fff;border:1px solid var(--av-hairline);color:var(--av-blue)"><i class="bi bi-person-vcard"></i></span></div><p class="ds-note">Azul de señal en círculo tinte o blanco.</p></div>
+        <div class="stage stage--night"><span class="stage__label mono">Sobre navy</span><div class="row"><span class="hz-tile__icon" style="background:rgba(85,214,255,.16);color:var(--av-cyan-glow)"><i class="bi bi-fingerprint"></i></span></div><p class="ds-note" style="color:var(--av-night-text)">Cian-glow en círculo translúcido.</p></div>
+        <div class="stage stage--blue"><span class="stage__label mono">Sobre azul</span><div class="row"><span class="hz-tile__icon" style="background:rgba(255,255,255,.18);color:#fff"><i class="bi bi-person-vcard"></i></span></div><p class="ds-note" style="color:#F0F5FF">Blanco en círculo translúcido.</p></div>
+      </div>
+      <p class="ds-note">Tamaños: 16 px en línea, 20 px en botones, 24 px en navegación, 28–34 px en círculos de tile (48–60 px). Un solo tono por pantalla: el color del icono lo da la superficie, no el módulo. Los iconos decorativos llevan <code>aria-hidden="true"</code>; los que están solos llevan <code>aria-label</code>.</p>
+    </div></section>
+    <!-- TOKENS Y EXPORTACIÓN -->
+    <section class="ds-sec" id="tokens" aria-labelledby="h-tk" data-nav="Tokens y exportación" data-grp="Tokens"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Fundamentos · Tokens</span>
+      <h2 id="h-tk">Tokens exportables (W3C)</h2>
+      <p class="ds-lead">Los tokens salen de <code>tokens.css</code> —la fuente de verdad— con <code>python docs/ds/src/tokens_export.py</code>, en el formato de Design Tokens del W3C (<code>$value</code>, <code>$type</code>). Sirven para Figma (Tokens Studio), Style Dictionary o cualquier herramienta que lo lea. Nunca se editan a mano.</p>
+      <div class="tk-grid">
+        <div class="stage"><span class="stage__label mono">Grupos exportados</span><div class="doc-wrap" style="margin:.6rem 0 0"><table class="doc-table"><thead><tr><th>Grupo</th><th>Tokens</th><th>Tipo W3C</th></tr></thead><tbody id="tk-rows"></tbody></table></div>
+          <div class="pt-actions" style="display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1rem"><button class="hz-btn hz-btn--primary" type="button" id="tk-dl">Descargar tokens.json</button><button class="hz-btn hz-btn--ghost" type="button" id="tk-copy">Copiar JSON</button></div></div>
+        <div><div class="codeblock" style="margin-top:0"><pre id="tk-sample"></pre><button class="copy" type="button" data-copy="#tk-sample">Copiar</button></div></div>
+      </div>
+      <h3 class="ds-sub">Colores exportados <small>clic para copiar</small></h3>
+      <div class="tk-sw" id="tk-sw"></div>
+      <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Para…</th><th>Cómo</th></tr></thead><tbody>
+        <tr><td>Figma · Tokens Studio</td><td>Importar <code>tokens.json</code> como "Single file"; los grupos <code>color</code>, <code>space</code>, <code>radius</code> y <code>shadow</code> se mapean a estilos.</td></tr>
+        <tr><td>Style Dictionary</td><td>Usar el archivo como fuente; el formato <code>$value</code> / <code>$type</code> es el del borrador del W3C.</td></tr>
+        <tr><td>Mantener sincronizado</td><td>Cada cambio en <code>tokens.css</code> exige volver a ejecutar el script; el resultado se versiona.</td></tr>
+        <tr><td>Fuera del JSON</td><td>Los breakpoints (comentario en <code>tokens.css</code>) no son variables CSS y no se exportan: 576, 768, 1024 y 1280 px.</td></tr>
+      </tbody></table></div>
+    </div></section>
+    <script type="application/json" id="tokens-data">{"$description": "Tokens de Averyn (Horizonte). Generado por docs/ds/src/tokens_export.py desde averyn-frontend/assets/css/tokens.css; no editar a mano.", "color": {"blue": {"$type": "color", "$value": "#145FEE"}, "navy": {"$type": "color", "$value": "#000C24"}, "cyan": {"$type": "color", "$value": "#00ACD2"}, "white": {"$type": "color", "$value": "#FFFFFF"}, "gray-50": {"$type": "color", "$value": "#F4F6FA"}, "gray-100": {"$type": "color", "$value": "#E7EBF3"}, "gray-200": {"$type": "color", "$value": "#CBD3E1"}, "gray-300": {"$type": "color", "$value": "#A9B4C7"}, "gray-400": {"$type": "color", "$value": "#7C89A3"}, "gray-500": {"$type": "color", "$value": "#56637F"}, "gray-600": {"$type": "color", "$value": "#3B4664"}, "gray-700": {"$type": "color", "$value": "#26304A"}, "gray-900": {"$type": "color", "$value": "#000C24"}, "success": {"$type": "color", "$value": "#12B76A"}, "success-bg": {"$type": "color", "$value": "#E8F8F0"}, "warning": {"$type": "color", "$value": "#F79009"}, "warning-bg": {"$type": "color", "$value": "#FEF3E2"}, "error": {"$type": "color", "$value": "#F04438"}, "error-bg": {"$type": "color", "$value": "#FDECEA"}, "info": {"$type": "color", "$value": "#00ACD2"}, "info-bg": {"$type": "color", "$value": "#E3F6FA"}, "blue-hover": {"$type": "color", "$value": "#0F4BC7"}, "blue-active": {"$type": "color", "$value": "#0C3B9E"}, "blue-tint": {"$type": "color", "$value": "#EAF0FE"}, "avatar-blue": {"$type": "color", "$value": "#145FEE"}, "avatar-blue-tint": {"$type": "color", "$value": "#EAF0FE"}, "avatar-violet": {"$type": "color", "$value": "#6C5CE7"}, "avatar-violet-tint": {"$type": "color", "$value": "#F0EDFE"}, "avatar-teal": {"$type": "color", "$value": "#0E9384"}, "avatar-teal-tint": {"$type": "color", "$value": "#E5F7F5"}, "avatar-amber": {"$type": "color", "$value": "#E67E22"}, "avatar-amber-tint": {"$type": "color", "$value": "#FEF3E2"}, "avatar-rose": {"$type": "color", "$value": "#E4578A"}, "avatar-rose-tint": {"$type": "color", "$value": "#FDEBF2"}, "avatar-slate": {"$type": "color", "$value": "#56637F"}, "avatar-slate-tint": {"$type": "color", "$value": "#EDF0F6"}, "meta-bg": {"$type": "color", "$value": "#EEF1F6"}, "meta-text": {"$type": "color", "$value": "#475569"}, "meta-icon": {"$type": "color", "$value": "#64748B"}, "chip-success-bg": {"$type": "color", "$value": "#ECFDF5"}, "chip-success-text": {"$type": "color", "$value": "#047857"}, "chip-success-border": {"$type": "color", "$value": "#A7F3D0"}, "chip-warning-bg": {"$type": "color", "$value": "#FFFBEB"}, "chip-warning-text": {"$type": "color", "$value": "#B45309"}, "chip-warning-border": {"$type": "color", "$value": "#FDE68A"}, "chip-error-bg": {"$type": "color", "$value": "#FEF2F2"}, "chip-error-text": {"$type": "color", "$value": "#B91C1C"}, "chip-error-border": {"$type": "color", "$value": "#FECACA"}, "chip-info-bg": {"$type": "color", "$value": "#F0F9FF"}, "chip-info-text": {"$type": "color", "$value": "#0369A1"}, "chip-info-border": {"$type": "color", "$value": "#BAE6FD"}, "chip-neutral-bg": {"$type": "color", "$value": "#F1F5F9"}, "chip-neutral-text": {"$type": "color", "$value": "#475569"}, "chip-neutral-border": {"$type": "color", "$value": "#E2E8F0"}, "ocr-bg": {"$type": "color", "$value": "#ECFDF5"}, "ocr-border": {"$type": "color", "$value": "#A7F3D0"}, "ocr-text": {"$type": "color", "$value": "#047857"}, "indigo": {"$type": "color", "$value": "#4F46E5"}, "indigo-tint": {"$type": "color", "$value": "#EEF0FE"}, "cyan-tint": {"$type": "color", "$value": "#DFF4FA", "$description": "tint suave del celeste de marca (dispositivos)"}, "navy-night": {"$type": "color", "$value": "#071A36", "$description": "sección oscura (Capacidades)"}, "navy-horizon": {"$type": "color", "$value": "#0A2A66", "$description": "tramo medio del degradado"}, "sky": {"$type": "color", "$value": "#DCECFF", "$description": "inicio del hero"}, "paper-blue": {"$type": "color", "$value": "#F4F8FF", "$description": "fondos alternos de sección"}, "hairline": {"$type": "color", "$value": "#DCE5F5", "$description": "separadores de 1 px"}, "hairline-strong": {"$type": "color", "$value": "#CFDCF3", "$description": "bordes de campos y botones fantasma"}, "cyan-glow": {"$type": "color", "$value": "#55D6FF", "$description": "índices y hover sobre navy"}, "night-text": {"$type": "color", "$value": "#B9C9E4", "$description": "texto secundario sobre navy"}, "ink-faint": {"$type": "color", "$value": "#9DB6E6", "$description": "rótulos y numeración discretos"}, "field-border": {"$type": "color", "$value": "#6E86B0"}, "placeholder": {"$type": "color", "$value": "#667390"}, "success-text": {"$type": "color", "$value": "#047857"}, "warning-text": {"$type": "color", "$value": "#B45309"}, "error-text": {"$type": "color", "$value": "#B91C1C"}, "info-text": {"$type": "color", "$value": "#0369A1"}, "success-strong": {"$type": "color", "$value": "#065F46"}, "warning-strong": {"$type": "color", "$value": "#92400E"}, "neutral-bg": {"$type": "color", "$value": "#F4F6FA"}, "neutral-text": {"$type": "color", "$value": "#3B4664"}, "neutral-border": {"$type": "color", "$value": "#CBD3E1"}, "success-on-navy": {"$type": "color", "$value": "#6EE7B7"}, "warning-on-navy": {"$type": "color", "$value": "#FFC15A"}, "error-on-navy": {"$type": "color", "$value": "#FCA5A5"}, "neutral-on-navy": {"$type": "color", "$value": "#B9C9E4"}}, "fontFamily": {"heading": {"$type": "fontFamily", "$value": ["Space Grotesk", "sans-serif"]}, "body": {"$type": "fontFamily", "$value": ["Inter", "sans-serif"]}, "display": {"$type": "fontFamily", "$value": ["Space Grotesk", "sans-serif"]}, "mono": {"$type": "fontFamily", "$value": ["JetBrains Mono", "ui-monospace", "Cascadia Mono", "Consolas", "monospace"]}}, "fontSize": {"h1": {"$type": "dimension", "$value": "2.5rem"}, "h2": {"$type": "dimension", "$value": "2rem"}, "h3": {"$type": "dimension", "$value": "1.5rem"}, "body-lg": {"$type": "dimension", "$value": "1.125rem"}, "body": {"$type": "dimension", "$value": "1rem"}, "sm": {"$type": "dimension", "$value": "0.875rem"}, "xs": {"$type": "dimension", "$value": "0.75rem"}, "page-title": {"$type": "dimension", "$value": "1.75rem"}, "kpi": {"$type": "dimension", "$value": "1.875rem"}, "welcome": {"$type": "other", "$value": "clamp(1.75rem, 1.15rem + 1.5vw, 2.375rem)"}}, "space": {"1": {"$type": "dimension", "$value": "4px"}, "2": {"$type": "dimension", "$value": "8px"}, "3": {"$type": "dimension", "$value": "12px"}, "4": {"$type": "dimension", "$value": "16px"}, "6": {"$type": "dimension", "$value": "24px"}, "8": {"$type": "dimension", "$value": "32px"}, "12": {"$type": "dimension", "$value": "48px"}, "16": {"$type": "dimension", "$value": "64px"}}, "radius": {"sm": {"$type": "dimension", "$value": "6px"}, "md": {"$type": "dimension", "$value": "10px"}, "lg": {"$type": "dimension", "$value": "16px"}, "full": {"$type": "dimension", "$value": "9999px"}, "xl": {"$type": "dimension", "$value": "20px"}, "control": {"$type": "dimension", "$value": "8px", "$description": "botones y campos"}, "frame": {"$type": "dimension", "$value": "24px", "$description": "marco del login"}}, "shadow": {"sm": {"$type": "shadow", "$value": {"color": "#000C240F", "offsetX": "0px", "offsetY": "1px", "blur": "2px", "spread": "0px"}}, "md": {"$type": "shadow", "$value": {"color": "#000C241A", "offsetX": "0px", "offsetY": "4px", "blur": "12px", "spread": "0px"}}, "lg": {"$type": "shadow", "$value": {"color": "#000C2429", "offsetX": "0px", "offsetY": "12px", "blur": "32px", "spread": "0px"}}, "key": {"$type": "shadow", "$value": {"color": "#000C244C", "offsetX": "0px", "offsetY": "3px", "blur": "0px", "spread": "0px"}, "$description": "botón sólido, aspecto de tecla"}, "frame": {"$type": "shadow", "$value": {"color": "#000C2424", "offsetX": "0px", "offsetY": "24px", "blur": "60px", "spread": "0px"}, "$description": "única tarjeta que flota"}}, "transition": {"fast": {"$type": "transition", "$value": {"duration": "150ms", "delay": "0ms", "timingFunction": [0.23, 1.0, 0.32, 1.0]}, "$description": "ease-out fuerte: respuesta inmediata"}}, "ratio": {"ratio-doc": {"$type": "other", "$value": "16 / 10"}}, "easing": {"out": {"$type": "cubicBezier", "$value": [0.23, 1.0, 0.32, 1.0]}}, "chart": {"1": {"$type": "color", "$value": "#145FEE"}, "2": {"$type": "color", "$value": "#C77500"}, "3": {"$type": "color", "$value": "#0092B5"}, "4": {"$type": "color", "$value": "#8A5CF6"}, "5": {"$type": "color", "$value": "#C2457A"}, "other": {"$type": "color", "$value": "#7C89A3"}, "ok": {"$type": "color", "$value": "#059669"}, "retry": {"$type": "color", "$value": "#D97706"}, "bad": {"$type": "color", "$value": "#E11D48"}, "seq-1": {"$type": "color", "$value": "#EAF1FE"}, "seq-2": {"$type": "color", "$value": "#C3D6FB"}, "seq-3": {"$type": "color", "$value": "#8DB0F7"}, "seq-4": {"$type": "color", "$value": "#4F86F2"}, "seq-5": {"$type": "color", "$value": "#145FEE"}, "seq-6": {"$type": "color", "$value": "#0A2A66"}, "div-neg": {"$type": "color", "$value": "#C77500"}, "div-mid": {"$type": "color", "$value": "#E7EBF3"}, "div-pos": {"$type": "color", "$value": "#145FEE"}}}</script>
+
+    </main>
+
+    <footer class="ds-sec" style="padding-block:2.4rem;border-top:1px solid var(--av-hairline)"><div class="ds-wrap"><div class="row" style="justify-content:space-between"><span class="mono" style="color:var(--av-gray-500)">Averyn · Design System v1.4 Horizonte</span><span class="mono" style="color:var(--av-gray-500)">Fuente: DESIGN.md · tokens.css</span></div></div></footer>
+  </div>
+</div>
+<div class="hz-toasts" id="toasts" role="region" aria-label="Notificaciones" aria-live="polite"></div>
+<script src="./ds.js"></script>
+<script src="./foundations.js"></script>
+<script src="./fundamentos.js"></script>
+</body>
+</html>

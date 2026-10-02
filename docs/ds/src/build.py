@@ -23,19 +23,28 @@ VERSION = '1.4'
 
 # (archivo de salida relativo a docs, etiqueta del menú, grupo de la barra lateral)
 PAGES = [
-    ('design-system.html', 'Fundamentos y componentes', 'Sistema'),
+    ('ds/fundamentos.html', 'Fundamentos', 'Sistema'),
+    ('design-system.html', 'Componentes base', 'Sistema'),
     ('ds/graficos.html', 'Gráficos', 'Sistema'),
     ('ds/componentes.html', 'Componentes que faltaban', 'Sistema'),
     ('ds/patrones.html', 'Patrones de Averyn', 'Aplicación'),
     ('ds/plantillas.html', 'Plantillas', 'Aplicación'),
     ('ds/sistema.html', 'Estados del sistema', 'Aplicación'),
     ('ds/marca.html', 'Marca y entregables', 'Marca y calidad'),
+    ('ds/calidad.html', 'Calidad y gobernanza', 'Marca y calidad'),
 ]
 LABEL = {rel: label for rel, label, _g in PAGES}
 
 # Páginas con configuración propia. Se construyen solo si existe su cuerpo en src/.
 CONFIG = {
     'design-system.html': dict(body=['main-body.html'], cover='main-cover.html', css=[], js=['foundations.js']),
+    'ds/fundamentos.html': dict(body=['fundamentos-body.html'], eyebrow='Fundamentos', title='Lo que no cambia.',
+                                lead='Principios, marca y figura de arcos, color, tipografía, espacio, iconografía y los tokens que los hacen exportables.',
+                                css=['fundamentos.css'], js=['foundations.js', 'fundamentos.js'],
+                                inject={'{{TOKENS_JSON}}': lambda: tokens_json()}),
+    'ds/calidad.html': dict(body=['calidad-body.html'], eyebrow='Calidad y gobernanza', title='Cómo se mantiene bien.',
+                            lead='Microcopy, accesibilidad, gobernanza (versiones, novedades y deuda) y cómo usar el sistema en una pantalla nueva.',
+                            css=[], js=['foundations.js']),
     'ds/graficos.html': dict(body=['graficos-body.html'], eyebrow='Gráficos', title='Datos con calma.',
                              lead='Modelos y ejemplos de gráficos para el panel del futuro: tarjetas minimalistas, formas elegidas por el trabajo del dato, color validado y lectura accesible.',
                              css=['charts.css'], js=['charts.js']),
@@ -51,7 +60,7 @@ CONFIG = {
     'ds/marca.html': dict(body=['marca-body.html'], eyebrow='Marca y entregables', title='Todo lo que sale de Averyn.',
                           lead='Ilustración con arcos, favicons, correos transaccionales, estilos de impresión y tokens exportables: la identidad fuera de la pantalla.',
                           css=['charts.css', 'marca.css', 'print.css'], js=['marca.js'],
-                          inject={'{{EMAILS_JSON}}': lambda: emails_json(), '{{TOKENS_JSON}}': lambda: tokens_json()}),
+                          inject={'{{EMAILS_JSON}}': lambda: emails_json()}),
     'ds/sistema.html': dict(body=['sistema-body.html'], eyebrow='Sistema', title='Cuando algo no sale como se espera.',
                             lead='Páginas de error y estados del sistema: 404, 403, 500, sin conexión y mantenimiento.',
                             css=[], js=['sistema.js']),

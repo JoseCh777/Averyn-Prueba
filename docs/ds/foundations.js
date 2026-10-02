@@ -157,13 +157,13 @@
 
   /* ---------- Escalas ---------- */
   var ESP = [['space-1', 4], ['space-2', 8], ['space-3', 12], ['space-4', 16], ['space-6', 24], ['space-8', 32], ['space-12', 48], ['space-16', 64]];
-  $('#space-scale').innerHTML = ESP.map(function (e) { return '<div class="scale__row"><code>--av-' + e[0] + '</code><span class="mono">' + e[1] + ' px</span><span class="scale__bar" style="width:' + e[1] * 3 + 'px"></span></div>'; }).join('');
+  var el_space_scale = $('#space-scale'); if (el_space_scale) el_space_scale.innerHTML = ESP.map(function (e) { return '<div class="scale__row"><code>--av-' + e[0] + '</code><span class="mono">' + e[1] + ' px</span><span class="scale__bar" style="width:' + e[1] * 3 + 'px"></span></div>'; }).join('');
   var RAD = [['4 px', 'sm', 'Marcos de media', '4px'], ['8 px', 'control', 'Botones y campos', '8px'], ['10 px', 'pill', 'Píldora de navegación pública', '10px'], ['16 px', 'tile', 'Tiles, menús, toasts', '16px'], ['24 px', 'frame', 'Marco del login, modal, panel', '24px'], ['9999 px', 'full', 'Dock, chips, avatares', '9999px']];
-  $('#radii').innerHTML = RAD.map(function (r) { return '<div><div class="rad" style="border-radius:' + r[3] + '">' + r[0] + '<br>--av-radius-' + r[1] + '</div><p class="ds-note">' + r[2] + '</p></div>'; }).join('');
+  var el_radii = $('#radii'); if (el_radii) el_radii.innerHTML = RAD.map(function (r) { return '<div><div class="rad" style="border-radius:' + r[3] + '">' + r[0] + '<br>--av-radius-' + r[1] + '</div><p class="ds-note">' + r[2] + '</p></div>'; }).join('');
 
   /* ---------- Iconos ---------- */
   var ICONOS = [['person-vcard', 'Identidad'], ['fingerprint', 'Biometría'], ['file-earmark-text', 'Documento / OCR'], ['camera', 'Cámara'], ['card-checklist', 'Procesos electorales'], ['check2-square', 'Electoral (dock)'], ['stars', 'IA'], ['cpu', 'IA (dock)'], ['person-gear', 'Usuarios'], ['clipboard-data', 'Reportes'], ['door-open', 'Accesos'], ['gear', 'Administración'], ['grid-1x2', 'Dashboard'], ['search', 'Buscar'], ['bell', 'Notificaciones'], ['box-arrow-right', 'Cerrar sesión'], ['chevron-down', 'Desplegar'], ['patch-check', 'Verificar'], ['collection', 'Vacío'], ['cloud-arrow-up', 'Subir archivo'], ['exclamation-circle', 'Error'], ['check-circle', 'Éxito'], ['info-circle', 'Información'], ['x-circle', 'Rechazo']];
-  $('#icon-grid').innerHTML = ICONOS.map(function (i) { return '<button type="button" data-icon="bi bi-' + i[0] + '" aria-label="Copiar clase del icono ' + i[1] + '"><i class="bi bi-' + i[0] + '" aria-hidden="true"></i><span>' + i[1] + '</span></button>'; }).join('');
+  var el_icon_grid = $('#icon-grid'); if (el_icon_grid) el_icon_grid.innerHTML = ICONOS.map(function (i) { return '<button type="button" data-icon="bi bi-' + i[0] + '" aria-label="Copiar clase del icono ' + i[1] + '"><i class="bi bi-' + i[0] + '" aria-hidden="true"></i><span>' + i[1] + '</span></button>'; }).join('');
 
   /* ---------- Demos de componentes ---------- */
   var tg = $('#f-toggle'), pw = $('#f-pass');
