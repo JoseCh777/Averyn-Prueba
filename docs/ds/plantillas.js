@@ -26,7 +26,8 @@
     loading: sk,
     error: function () { return '<div class="hz-alert hz-alert--error" role="alert"><strong>No pudimos cargar los datos</strong>Revisa tu conexión e inténtalo de nuevo.</div><div style="margin-top:.8rem"><button class="hz-btn hz-btn--ghost" type="button">Reintentar</button></div>'; }
   };
-  var chip = function (t, k) { return '<span class="hz-chip hz-chip--' + k + '">' + t + '</span>'; };
+  var ICON = { success: 'bi-check-circle', error: 'bi-x-circle', warning: 'bi-exclamation-circle', info: 'bi-info-circle', neutral: 'bi-clock', brand: 'bi-stars' };
+  var chip = function (t, k, ic) { return '<span class="hz-chip hz-chip--' + k + '"><i class="bi ' + (ic || ICON[k]) + '" aria-hidden="true"></i>' + t + '</span>'; };
 
   /* ---------- Plantillas ---------- */
   var T = {};
@@ -34,7 +35,7 @@
   T.bitacora = function (st) {
     var rows = [['10:42', 'BIOMETRIC_VERIFIED', 'Ana Lucía Pérez', 'CAM-001', 'Aceptada', 'success'], ['10:31', 'LOGIN', 'Carlos Mendoza', 'Web', 'Correcto', 'success'], ['10:15', 'BIOMETRIC_VERIFIED', 'Lucía Ramos', 'LEC-002', 'Rechazada', 'error'],
       ['09:58', 'DOCUMENT_REGISTERED', 'Diego Torres', 'Web', 'Correcto', 'success'], ['09:40', 'PERSON_CREATED', 'Valeria Quispe', 'Web', 'Correcto', 'success'], ['09:12', 'BIOMETRIC_ENROLLED', 'Jorge Salazar', 'CAM-002', 'Correcto', 'success'],
-      ['08:55', 'VOTE_CAST', '— (anónimo)', 'KIOSCO-01', 'Registrado', 'info'], ['08:30', 'LOGIN', 'Mariana Cruz', 'Web', 'Fallido', 'warning']];
+      ['08:55', 'VOTE_CAST', '— (anónimo)', 'KIOSCO-01', 'Registrado', 'info'], ['08:30', 'LOGIN', 'Mariana Cruz', 'Web', 'Fallido', 'error']];
     var data = st === 'empty' ? STATE.empty('bi-journal-text', 'Sin eventos en este periodo', 'Prueba con un periodo más amplio o quita algún filtro.', 'Ampliar a 90 días')
       : st === 'loading' ? sk(7) : st === 'error' ? STATE.error()
       : '<table class="tp-t"><thead><tr><th>Hora</th><th>Evento</th><th>Persona</th><th>Dispositivo</th><th>Resultado</th></tr></thead><tbody>' + rows.map(function (r) { return '<tr><td class="tp-mono">' + r[0] + '</td><td class="tp-ev">' + r[1] + '</td><td>' + r[2] + '</td><td class="tp-mono">' + r[3] + '</td><td>' + chip(r[4], r[5]) + '</td></tr>'; }).join('') + '</tbody></table><div class="tp-foot"><span>Mostrando 1–8 de 1,953</span><div class="hz-pager" role="navigation" aria-label="Paginación"><button type="button" disabled aria-label="Anterior">←</button><button type="button" aria-current="page">1</button><button type="button">2</button><button type="button">3</button><button type="button" aria-label="Siguiente">→</button></div></div>';
@@ -58,7 +59,7 @@
     var feed = st === 'loading' ? sk(5) : st === 'error' ? '<div class="hz-alert hz-alert--error" role="alert"><strong>No pudimos cargar la actividad</strong>Los datos de la persona sí se cargaron.</div>'
       : '<ul class="hz-feed"><li><b>Verificación biométrica</b><span>Rostro verificado · 0.82</span><small>HOY, 10:42 · CAM-001</small></li><li><b>Inicio de sesión</b><span>Correcto</span><small>AYER, 08:15 · WEB</small></li><li class="retry"><b>Verificación biométrica</b><span>Huella con reintento</span><small>30 SEP, 12:20 · LEC-001</small></li><li><b>Biometría registrada</b><span>Rostro y huella</span><small>29 SEP, 17:30 · CAM-002</small></li></ul>';
     return shell('personas', '<p class="hz-crumb mono" style="margin-bottom:1.2rem">Panel / Personas / <b>Ana Lucía Pérez</b></p>' +
-      '<div class="tp-head"><div class="tp-who"><span class="tp-ava" aria-hidden="true">AP</span><div><h1>Ana Lucía Pérez</h1><div class="tp-chips">' + chip('Activa', 'success') + chip('Rostro y huella', 'info') + chip('Estudiante', 'neutral') + '</div></div></div><div style="display:flex;gap:.6rem"><button class="hz-btn hz-btn--primary" type="button">Editar datos</button><button class="tp-btn" type="button" aria-label="Más acciones"><i class="bi bi-three-dots" aria-hidden="true"></i></button></div></div>' +
+      '<div class="tp-head"><div class="tp-who"><span class="tp-ava" aria-hidden="true">AP</span><div><h1>Ana Lucía Pérez</h1><div class="tp-chips">' + chip('Activa', 'success') + chip('Rostro y huella', 'info', 'bi-fingerprint') + chip('Estudiante', 'neutral', 'bi-mortarboard') + '</div></div></div><div style="display:flex;gap:.6rem"><button class="hz-btn hz-btn--primary" type="button">Editar datos</button><button class="tp-btn" type="button" aria-label="Más acciones"><i class="bi bi-three-dots" aria-hidden="true"></i></button></div></div>' +
       '<div class="tp-split"><div><section class="tp-card"><h2>Datos</h2><dl class="tp-kv"><div><dt>Documento</dt><dd>12345678</dd></div><div><dt>Correo</dt><dd>ana.perez@ejemplo.edu</dd></div><div><dt>Teléfono</dt><dd>+51 999 000 111</dd></div><div><dt>Institución</dt><dd>Universidad Horizonte · Sede Central</dd></div><div><dt>Registrada</dt><dd>29 sep 2026</dd></div></dl></section>' +
       '<section class="tp-card"><h2>Biometría</h2><dl class="tp-kv"><div><dt>Rostro</dt><dd>Registrado el 29 sep · calidad 92/100</dd></div><div><dt>Huella</dt><dd>2 dedos · calidad 86/100</dd></div><div><dt>Consentimiento</dt><dd>Aceptado el 29 sep · <a href="#" style="color:var(--av-error-text);font-weight:600">Revocar</a></dd></div></dl></section></div>' +
       '<aside class="tp-night"><h2>Actividad reciente</h2>' + feed + '</aside></div>');

@@ -207,13 +207,13 @@
       { id: 'LEC-002', n: 'Lector de huella', loc: 'Secretaría', st: 'err', last: 'Hace 4 min', ic: 'bi-fingerprint', why: 'Lectura inestable' },
       { id: 'KIOSCO-01', n: 'Kiosco de votación', loc: 'Sala B', st: 'on', last: 'Hace 3 min', ic: 'bi-display' }
     ];
-    var CH = { on: ['success', 'Conectado'], off: ['warning', 'Desconectado'], err: ['error', 'Con error'] };
+    var CH = { on: ['success', 'Conectado', 'bi-check-circle'], off: ['warning', 'Desconectado', 'bi-plug'], err: ['error', 'Con error', 'bi-x-circle'] };
     function draw() {
       ul.innerHTML = '';
       D.forEach(function (d, i) {
         var li = document.createElement('li'); li.className = 'pt-dev'; li.setAttribute('data-st', d.st);
         var act = d.st === 'off' ? 'Reconectar' : 'Probar';
-        li.innerHTML = '<span class="pt-dev__ic"><i class="bi ' + d.ic + '" aria-hidden="true"></i></span><div><b>' + esc(d.id) + ' · ' + esc(d.n) + '</b><small>' + esc(d.loc) + ' · Última señal <span title="Hora de ejemplo">' + esc(d.last) + '</span>' + (d.why ? ' · ' + esc(d.why) : '') + '</small></div><span class="hz-chip hz-chip--' + CH[d.st][0] + '">' + CH[d.st][1] + '</span><button class="pt-dev__act" type="button" aria-label="' + act + ' ' + esc(d.id) + '">' + act + '</button>';
+        li.innerHTML = '<span class="pt-dev__ic"><i class="bi ' + d.ic + '" aria-hidden="true"></i></span><div><b>' + esc(d.id) + ' · ' + esc(d.n) + '</b><small>' + esc(d.loc) + ' · Última señal <span title="Hora de ejemplo">' + esc(d.last) + '</span>' + (d.why ? ' · ' + esc(d.why) : '') + '</small></div><span class="hz-chip hz-chip--' + CH[d.st][0] + '"><i class="bi ' + CH[d.st][2] + '" aria-hidden="true"></i>' + CH[d.st][1] + '</span><button class="pt-dev__act" type="button" aria-label="' + act + ' ' + esc(d.id) + '">' + act + '</button>';
         li.querySelector('button').addEventListener('click', function (e) {
           var b = e.currentTarget;
           if (d.st === 'off') { b.disabled = true; b.textContent = 'Conectando…'; setTimeout(function () { d.st = 'on'; d.last = 'Ahora'; draw(); DS.toast(d.id + ' conectado', 'El dispositivo volvió a responder.'); }, 900); }

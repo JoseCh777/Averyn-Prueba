@@ -11,7 +11,7 @@ import importlib.util, os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 DS_DIR = os.path.dirname(HERE)            # docs/ds
 DOCS = os.path.dirname(DS_DIR)            # docs
-VERSION = '1.3'
+VERSION = '1.4'
 
 # (archivo de salida relativo a docs, etiqueta del menú, titular de la página)
 PAGES = [

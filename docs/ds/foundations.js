@@ -41,17 +41,24 @@
     ],
     semantic: [
       ['Éxito', '--av-success', '#12B76A', 'Puntos y rellenos', '#fff'],
-      ['Éxito texto', '--av-success-text', '#047857', 'Texto de éxito (5.48:1)', '#fff'],
+      ['Éxito texto', '--av-success-text', '#047857', 'Texto de éxito y relleno de la píldora sólida (5.48:1)', '#fff'],
+      ['Éxito strong', '--av-success-strong', '#065F46', 'Texto sobre fondo suave (≥ 5:1)', '#fff'],
       ['Éxito fondo', '--av-success-bg', '#E8F8F0', 'Fondo de chip y alerta', '#047857'],
       ['Aviso', '--av-warning', '#F79009', 'Puntos y rellenos', '#000C24'],
-      ['Aviso texto', '--av-warning-text', '#B45309', 'Texto de aviso (5.02:1)', '#fff'],
+      ['Aviso texto', '--av-warning-text', '#B45309', 'Texto de aviso y relleno de la píldora sólida (5.02:1)', '#fff'],
+      ['Aviso strong', '--av-warning-strong', '#92400E', 'Texto sobre fondo suave (≥ 5:1)', '#fff'],
       ['Aviso fondo', '--av-warning-bg', '#FEF3E2', 'Fondo de chip y alerta', '#B45309'],
       ['Error', '--av-error', '#F04438', 'Puntos y rellenos', '#fff'],
       ['Error texto', '--av-error-text', '#B91C1C', 'Texto de error (6.47:1)', '#fff'],
       ['Error fondo', '--av-error-bg', '#FDECEA', 'Fondo de chip y alerta', '#B91C1C'],
       ['Info', '--av-info', '#00ACD2', 'Puntos y rellenos', '#fff'],
       ['Info texto', '--av-info-text', '#0369A1', 'Texto informativo (5.93:1)', '#fff'],
-      ['Info fondo', '--av-info-bg', '#E3F6FA', 'Fondo de chip y alerta', '#0369A1']
+      ['Info fondo', '--av-info-bg', '#E3F6FA', 'Fondo de chip y alerta', '#0369A1'],
+      ['Neutro texto', '--av-neutral-text', '#3B4664', 'Pendiente y estados sin juicio (9.4:1)', '#fff'],
+      ['Neutro fondo', '--av-neutral-bg', '#F4F6FA', 'Fondo de la píldora neutra', '#3B4664'],
+      ['Éxito sobre navy', '--av-success-on-navy', '#6EE7B7', 'Barras, puntos y toast sobre navy (11.4:1)', '#000C24'],
+      ['Aviso sobre navy', '--av-warning-on-navy', '#FFC15A', 'Reintento sobre navy (10.8:1)', '#000C24'],
+      ['Error sobre navy', '--av-error-on-navy', '#FCA5A5', 'Rechazo sobre navy (9.1:1)', '#000C24']
     ]
   };
   function pintarColores(id, lista) {
@@ -62,6 +69,55 @@
     }).join('');
   }
   Object.keys(COLORES).forEach(function (k) { pintarColores('sw-' + k, COLORES[k]); });
+
+
+  /* ---------- Actividad: un único conjunto de eventos alimenta franja, barras y lista ---------- */
+  (function () {
+    var EVENTOS = [
+      { r: 'ok', quien: 'Ana Torres', que: 'Rostro verificado', disp: 'CAM-001', cuando: '02/10/2026, 10:42' },
+      { r: 'bad', quien: 'Laura Díaz', que: 'Huella rechazada', disp: 'LEC-003', cuando: '02/10/2026, 10:31' },
+      { r: 'retry', quien: 'Andrés Molina', que: 'Rostro: reintento requerido', disp: 'CAM-002', cuando: '02/10/2026, 09:55' },
+      { r: 'ok', quien: 'Carlos Mendoza', que: 'Huella verificada', disp: 'LEC-001', cuando: '02/10/2026, 09:15' },
+      { r: 'ok', quien: 'Valeria Quispe', que: 'Rostro verificado', disp: 'CAM-001', cuando: '01/10/2026, 17:20' },
+      { r: 'retry', quien: 'Jorge Salazar', que: 'Huella: reintento requerido', disp: 'LEC-001', cuando: '01/10/2026, 16:48' }
+    ];
+    var cuenta = { ok: 0, bad: 0, retry: 0 };
+    EVENTOS.forEach(function (e) { cuenta[e.r]++; });
+    var total = EVENTOS.length;
+    /* Regla del sistema: la suma de las partes es el total */
+    if (cuenta.ok + cuenta.bad + cuenta.retry !== total) console.error('Actividad: las partes no suman el total');
+    var plural = function (n, s, p) { return n + ' ' + (n === 1 ? s : p); };
+    var kpi = $('#kpi-ver');
+    if (kpi) {
+      $('[data-k="total"]', kpi).textContent = total;
+      $('[data-k="ok"]', kpi).textContent = plural(cuenta.ok, 'exitosa', 'exitosas');
+      $('[data-k="rest"]', kpi).textContent = plural(cuenta.bad, 'rechazada', 'rechazadas') + ' · ' + plural(cuenta.retry, 'reintento', 'reintentos');
+    }
+    var barras = $('#act-bars'), lista = $('#act-feed');
+    if (barras) {
+      var fila = function (cls, nombre, n) { return '<div class="hz-bar' + cls + '"><span>' + nombre + '</span><span class="hz-bar__track" aria-hidden="true"><i style="--w:' + Math.round(n / total * 100) + '%"></i></span><b>' + n + '</b></div>'; };
+      barras.innerHTML = '<span class="mono" style="color:var(--av-night-text)">Resultados del log · ' + total + ' eventos</span>' + fila('', 'Exitosas', cuenta.ok) + fila(' hz-bar--bad', 'Rechazadas', cuenta.bad) + fila(' hz-bar--retry', 'Reintentos', cuenta.retry);
+    }
+    if (lista) {
+      lista.innerHTML = EVENTOS.slice(0, 3).map(function (e) {
+        return '<li' + (e.r === 'ok' ? '' : ' class="' + e.r + '"') + '><b>Verificación biométrica</b><span>' + e.quien + ' · ' + e.que + '</span><small>' + e.cuando + ' · ' + e.disp + '</small></li>';
+      }).join('');
+      lista.insertAdjacentHTML('afterend', '<p class="hz-panel__sub" style="margin:.2rem 0 0">Últimos 3 de ' + total + ' eventos</p>');
+    }
+  })();
+
+
+  /* ---------- Matriz de píldoras: 3 variantes × estados ---------- */
+  (function () {
+    var host = $('#chip-matrix'); if (!host) return;
+    var T = [['neutral', 'bi-clock', 'Pendiente'], ['info', 'bi-info-circle', 'En revisión'], ['success', 'bi-check-circle', 'Verificada'], ['warning', 'bi-arrow-repeat', 'Reintento'], ['error', 'bi-x-circle', 'Rechazada'], ['brand', 'bi-stars', 'Nueva']];
+    var V = [['outline', 'Contorno'], ['', 'Suave'], ['solid', 'Sólida']];
+    host.innerHTML = V.map(function (v) {
+      return '<div class="chip-matrix__row"><span>' + v[1] + '</span><div class="chip-matrix__chips">' + T.map(function (t) {
+        return '<span class="hz-chip hz-chip--' + t[0] + (v[0] ? ' hz-chip--' + v[0] : '') + '"><i class="bi ' + t[1] + '" aria-hidden="true"></i>' + t[2] + '</span>';
+      }).join('') + '</div></div>';
+    }).join('');
+  })();
 
   /* ---------- Contraste en vivo ---------- */
   function lum(h) { h = h.replace('#', ''); var c = [0, 2, 4].map(function (i) { var v = parseInt(h.substr(i, 2), 16) / 255; return v <= .03928 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4); }); return .2126 * c[0] + .7152 * c[1] + .0722 * c[2]; }
