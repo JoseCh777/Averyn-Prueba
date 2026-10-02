@@ -392,3 +392,20 @@ dialog.hz-modal::backdrop { background: rgba(0, 12, 36, .62); backdrop-filter: b
 .ds-cover--page { padding: clamp(2.6rem, 5vw, 4rem) 0 clamp(2.4rem, 5vw, 3.4rem); background: linear-gradient(180deg, var(--av-navy-horizon) 0%, var(--av-navy) 100%); }
 .ds-cover--page h1 { margin-top: .7rem; font-size: clamp(2rem, 4.6vw, 3.4rem); max-width: 20ch; }
 .ds-cover--page p { max-width: 60ch; }
+
+/* Vistas en vivo de páginas reales (iframe 1440×900 escalado por ds/sistema.js) */
+.dsframe { position: relative; width: 100%; aspect-ratio: 1440 / 900; overflow: hidden; border: 1px solid var(--av-hairline-strong); border-radius: var(--av-radius-tile); background: var(--av-navy); }
+.dsframe iframe { position: absolute; inset: 0 auto auto 0; width: 1440px; height: 900px; border: 0; transform-origin: 0 0; pointer-events: none; }
+
+/* Banner de sistema: franja a todo el ancho bajo el navbar */
+.hz-banner { display: flex; align-items: flex-start; gap: .75rem; padding: .8rem 1.1rem; border-bottom: 1px solid; font-size: .875rem; line-height: 1.5; }
+.hz-banner > i { flex: none; margin-top: .15rem; }
+.hz-banner > span { flex: 1; }
+.hz-banner__x { flex: none; width: 44px; height: 44px; margin: -.7rem -.6rem -.7rem 0; border: 0; background: transparent; color: inherit; font-size: 1.4rem; line-height: 1; cursor: pointer; border-radius: var(--av-radius-control); }
+.hz-banner__x:hover { background: rgba(0, 12, 36, .06); }
+.hz-banner--info { background: var(--av-info-bg); border-color: var(--av-info-border); color: var(--av-info-text); }
+.hz-banner--warn { background: var(--av-warning-bg); border-color: var(--av-warning-border); color: var(--av-warning-text); }
+.hz-banner--bad { background: var(--av-error-bg); border-color: var(--av-error-border); color: var(--av-error-text); }
+
+.ds-split { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); align-items: start; }
+@media (max-width: 860px) { .ds-split { grid-template-columns: minmax(0, 1fr); } }
