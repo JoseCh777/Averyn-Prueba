@@ -76,7 +76,7 @@ def key_of(rel):
 
 
 def main():
-    keys = {rel: key_of(rel) for rel, _ in build.PAGES if os.path.exists(os.path.join(build.HERE, build.CONFIG[rel]['body'][0]))}
+    keys = {rel: key_of(rel) for rel, _l, _g in build.built_pages()}
     frames = {n: error_page(n) for n in ['404.html', '403.html', '500.html', 'offline.html', 'mantenimiento.html']}
     pages = {}
     for rel, key in keys.items():
