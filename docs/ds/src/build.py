@@ -19,17 +19,16 @@ sys.dont_write_bytecode = True
 HERE = os.path.dirname(os.path.abspath(__file__))
 DS_DIR = os.path.dirname(HERE)            # docs/ds
 DOCS = os.path.dirname(DS_DIR)            # docs
-VERSION = '1.4'
+VERSION = '1.5'
 
 # (archivo de salida relativo a docs, etiqueta del menú, grupo de la barra lateral)
 PAGES = [
+    ('design-system.html', 'Inicio', 'Empezar'),
     ('ds/fundamentos.html', 'Fundamentos', 'Sistema'),
     ('ds/componentes.html', 'Componentes', 'Sistema'),
     ('ds/graficos.html', 'Gráficos', 'Sistema'),
-    ('design-system.html', 'Composición', 'Aplicación'),
-    ('ds/patrones.html', 'Patrones de Averyn', 'Aplicación'),
-    ('ds/plantillas.html', 'Plantillas', 'Aplicación'),
-    ('ds/sistema.html', 'Estados del sistema', 'Aplicación'),
+    ('ds/patrones.html', 'Patrones', 'Aplicación'),
+    ('ds/plantillas.html', 'Plantillas y estados', 'Aplicación'),
     ('ds/marca.html', 'Marca y entregables', 'Marca y calidad'),
     ('ds/calidad.html', 'Calidad y gobernanza', 'Marca y calidad'),
 ]
@@ -37,7 +36,7 @@ LABEL = {rel: label for rel, label, _g in PAGES}
 
 # Páginas con configuración propia. Se construyen solo si existe su cuerpo en src/.
 CONFIG = {
-    'design-system.html': dict(body=['main-body.html'], cover='main-cover.html', css=[], js=['foundations.js']),
+    'design-system.html': dict(body=['inicio-body.html'], cover='inicio-cover.html', css=[], js=[]),
     'ds/fundamentos.html': dict(body=['fundamentos-body.html'], eyebrow='Fundamentos', title='Lo que no cambia.',
                                 lead='Principios, marca y figura de arcos, color, tipografía, espacio, iconografía y los tokens que los hacen exportables.',
                                 css=['fundamentos.css'], js=['foundations.js', 'fundamentos.js'],
@@ -54,16 +53,13 @@ CONFIG = {
     'ds/componentes.html': dict(body=['componentes-body.html'], eyebrow='Componentes', title='Las piezas con las que se arma todo.',
                                 lead='Botones, formularios, datos y píldoras de estado, navegación, feedback y capas: cada pieza con su anatomía, su teclado y sus reglas.',
                                 css=['charts.css', 'componentes.css'], js=['foundations.js', 'componentes.js']),
-    'ds/plantillas.html': dict(body=['plantillas-body.html'], eyebrow='Plantillas', title='Pantallas completas, no piezas sueltas.',
-                               lead='Bitácora, configuración, detalle de persona, asistente, notificaciones y perfil: los componentes compuestos en pantallas reales, con sus estados.',
-                               css=['charts.css', 'componentes.css', 'plantillas.css'], js=['plantillas.js']),
+    'ds/plantillas.html': dict(body=['plantillas-body.html'], eyebrow='Plantillas y estados', title='Pantallas completas, no piezas sueltas.',
+                               lead='Bitácora, configuración, detalle de persona, asistente, notificaciones y perfil; los estados de carga y vacío; y las páginas de error y avisos del sistema.',
+                               css=['charts.css', 'componentes.css', 'plantillas.css'], js=['foundations.js', 'plantillas.js', 'sistema.js']),
     'ds/marca.html': dict(body=['marca-body.html'], eyebrow='Marca y entregables', title='Todo lo que sale de Averyn.',
                           lead='Ilustración con arcos, favicons, correos transaccionales, estilos de impresión y tokens exportables: la identidad fuera de la pantalla.',
                           css=['charts.css', 'marca.css', 'print.css'], js=['marca.js'],
                           inject={'{{EMAILS_JSON}}': lambda: emails_json()}),
-    'ds/sistema.html': dict(body=['sistema-body.html'], eyebrow='Sistema', title='Cuando algo no sale como se espera.',
-                            lead='Páginas de error y estados del sistema: 404, 403, 500, sin conexión y mantenimiento.',
-                            css=[], js=['sistema.js']),
 }
 
 
@@ -137,7 +133,7 @@ def render(out_rel):
         body = body.replace(token, fn())
     body = normalize(body)
     anchors = anchors_from(body)
-    rep = lambda s: s.replace('{{FE}}', p['FE']).replace('{{DS}}', p['DS']).replace('{{DOCS}}', p['DOCS'])
+    rep = lambda s: s.replace('{{FE}}', p['FE']).replace('{{DS}}', p['DS']).replace('{{DOCS}}', p['DOCS']).replace('{{VERSION}}', VERSION)
     # --- barra lateral: grupos de páginas; bajo la página actual, su índice por subgrupos
     nav, last_grp = [], None
     for rel, label, grp in built_pages():

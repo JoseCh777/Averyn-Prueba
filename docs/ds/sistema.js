@@ -1,10 +1,10 @@
-/* Página "Estados del sistema": vistas en vivo (iframes escalados) y modal de sesión caducada. */
+/* Páginas de error y avisos (Plantillas y estados): vistas en vivo escaladas, modal de sesión caducada y banners. */
 (function () {
   'use strict';
   var DS = window.DS, $ = DS.$, $$ = DS.$$;
 
   /* Cada .dsframe carga una página real a 1440×900 y la escala al ancho disponible */
-  var frames = $$('.dsframe');
+  var frames = $$('.dsframe[data-src]');
   frames.forEach(function (box) {
     var iframe = document.createElement('iframe');
     var src = box.getAttribute('data-src'), key = src.split('/').pop();
