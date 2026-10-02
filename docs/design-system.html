@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Averyn — Design System Horizonte v1.4 · Componentes base</title>
+<title>Averyn — Design System Horizonte v1.4 · Composición</title>
 <meta name="description" content="Design system de Averyn: principios, tokens, componentes y reglas de uso del estilo Horizonte.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,19 +21,11 @@
     <nav>
       <span class="grp mono">Sistema</span>
       <a class="ds-page" href="ds/fundamentos.html">Fundamentos</a>
-      <a class="ds-page" href="design-system.html" aria-current="page">Componentes base</a>
+      <a class="ds-page" href="ds/componentes.html">Componentes</a>
+      <a class="ds-page" href="ds/graficos.html">Gráficos</a>
+      <span class="grp mono">Aplicación</span>
+      <a class="ds-page" href="design-system.html" aria-current="page">Composición</a>
       <div class="ds-subnav">
-        <span class="grp sub mono">Acciones y formularios</span>
-        <a href="#botones">Botones</a>
-        <a href="#campos">Campos de formulario</a>
-        <span class="grp sub mono">Datos</span>
-        <a href="#superficies">Tarjetas y panel de actividad</a>
-        <span class="grp sub mono">Navegación</span>
-        <a href="#navegacion">Navegación</a>
-        <span class="grp sub mono">Datos</span>
-        <a href="#datos">Tablas y píldoras de estado</a>
-        <span class="grp sub mono">Feedback y capas</span>
-        <a href="#feedback">Alertas, toast, modal y tooltip</a>
         <span class="grp sub mono">Estados de interfaz</span>
         <a href="#estados">Carga, vacío y subida</a>
         <span class="grp sub mono">Patrones de página</span>
@@ -41,9 +33,6 @@
         <span class="grp sub mono">Plantillas de pantalla</span>
         <a href="#plantillas">Catálogo de plantillas</a>
       </div>
-      <a class="ds-page" href="ds/graficos.html">Gráficos</a>
-      <a class="ds-page" href="ds/componentes.html">Componentes que faltaban</a>
-      <span class="grp mono">Aplicación</span>
       <a class="ds-page" href="ds/patrones.html">Patrones de Averyn</a>
       <a class="ds-page" href="ds/plantillas.html">Plantillas</a>
       <a class="ds-page" href="ds/sistema.html">Estados del sistema</a>
@@ -75,241 +64,6 @@
 
     <main id="contenido">
 
-    <!-- BOTONES -->
-    <section class="ds-sec" id="botones" aria-labelledby="h-botones" data-nav="Botones" data-grp="Acciones y formularios"><div class="ds-wrap">
-      <span class="ds-eyebrow mono">Componentes</span>
-      <h2 id="h-botones">Botones</h2>
-      <p class="ds-lead">Esquinas contenidas (8 px), 44 px de alto, texto mono en mayúsculas y respuesta inmediata al pulsar. Un solo botón primario por vista.</p>
-
-      <div class="stage ds-gap-top"><span class="stage__label mono">Sobre claro · variantes</span>
-        <div class="row">
-          <button class="hz-btn hz-btn--primary" type="button">Ingresar →</button>
-          <button class="hz-btn hz-btn--ghost" type="button">Conocer Averyn ↓</button>
-          <button class="hz-btn hz-btn--text" type="button">Ver historial completo →</button>
-          <button class="hz-btn hz-btn--danger" type="button">Eliminar persona</button>
-          <button class="hz-btn hz-btn--primary" type="button" disabled>Deshabilitado</button>
-          <button class="hz-btn hz-btn--primary" type="button" id="btn-load"><span class="hz-spin" aria-hidden="true" hidden></span><span id="btn-load-t">Probar estado de carga</span></button>
-        </div>
-      </div>
-      <div class="ds-grid ds-grid--2 ds-gap-top">
-        <div class="stage stage--blue on-blue"><span class="stage__label mono">Sobre azul de señal</span><div class="row"><button class="hz-btn hz-btn--light" type="button">Ingresar al sistema →</button><button class="hz-btn hz-btn--ghost-inv" type="button">Saber más</button></div></div>
-        <div class="stage stage--night on-night"><span class="stage__label mono">Sobre navy</span><div class="row"><button class="hz-btn hz-btn--primary" type="button">Ingresar →</button><button class="hz-btn hz-btn--ghost-inv" type="button">Conocer Averyn ↓</button></div></div>
-      </div>
-      <div class="stage ds-gap-top"><span class="stage__label mono">Icon-buttons · ancho completo</span>
-        <div class="row"><button class="hz-iconbtn" type="button" aria-label="Buscar"><i class="bi bi-search" aria-hidden="true"></i></button><button class="hz-iconbtn" type="button" aria-label="Notificaciones, 3 sin leer"><i class="bi bi-bell" aria-hidden="true"></i><span class="badge" aria-hidden="true">3</span></button></div>
-        <div style="margin-top:1rem;max-width:360px"><button class="hz-btn hz-btn--primary hz-btn--block" type="button">Ingresar de forma segura →</button></div>
-      </div>
-      <div class="codeblock"><pre id="code-btn">&lt;button class="hz-btn hz-btn--primary"&gt;Ingresar →&lt;/button&gt;
-&lt;button class="hz-btn hz-btn--ghost"&gt;Conocer Averyn ↓&lt;/button&gt;
-
-.hz-btn { min-height: 44px; padding: 11px 20px; border-radius: <b>8px</b>;
-  font: 700 .75rem var(--av-font-mono); letter-spacing: .06em; text-transform: uppercase;
-  transition: transform .15s var(--av-ease-out), background-color .15s var(--av-ease-out); }
-.hz-btn:active { transform: <b>scale(.97)</b>; }
-.hz-btn--primary { background: var(--av-blue); color: #fff; box-shadow: var(--av-shadow-key); }</pre><button class="copy" type="button" data-copy="#code-btn">Copiar</button></div>
-      <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Variante</th><th>Cuándo</th><th>Etiqueta</th></tr></thead><tbody>
-        <tr><td>Primary</td><td>La acción principal de la vista (una).</td><td>Verbo + flecha: "Ingresar →", "Verificar", "Guardar".</td></tr>
-        <tr><td>Light / ghost invertido</td><td>Sobre azul o navy.</td><td>Igual; sin sombra de tecla en ghost.</td></tr>
-        <tr><td>Ghost</td><td>Acción secundaria.</td><td>"Conocer Averyn ↓".</td></tr>
-        <tr><td>Text</td><td>Enlace-acción discreto.</td><td>"Ver historial completo →".</td></tr>
-        <tr><td>Danger</td><td>Acción destructiva; siempre con confirmación (modal).</td><td>Nombra lo que se elimina: "Eliminar persona".</td></tr>
-        <tr><td>Disabled</td><td>Mientras falte un requisito; explica por qué en el texto de ayuda.</td><td>Sin cambio de etiqueta.</td></tr>
-      </tbody></table></div>
-    </div></section>
-
-    <!-- CAMPOS -->
-    <section class="ds-sec ds-sec--tint" id="campos" aria-labelledby="h-campos" data-nav="Campos de formulario" data-grp="Acciones y formularios"><div class="ds-wrap">
-      <span class="ds-eyebrow mono">Componentes</span>
-      <h2 id="h-campos">Campos de formulario</h2>
-      <p class="ds-lead">Etiqueta siempre visible encima; el placeholder solo da un ejemplo. Borde de 3.68:1 (cumple 1.4.11), foco con borde azul y halo, error en texto y con <code>aria-invalid</code>.</p>
-      <div class="ds-grid ds-grid--2 ds-gap-top">
-        <div class="stage"><span class="stage__label mono">Texto · ayuda · contraseña</span>
-          <form class="row row--col" style="gap:1.1rem" onsubmit="return false" novalidate>
-            <div class="hz-field"><label class="hz-label" for="f-email">Correo electrónico</label><input class="hz-input" id="f-email" type="email" placeholder="nombre@organizacion.com" autocomplete="email"><span class="hz-help">Usa el correo que registró tu institución.</span></div>
-            <div class="hz-field"><div class="hz-label__row"><label class="hz-label" for="f-pass">Contraseña</label><button type="button" class="hz-btn hz-btn--text" style="min-height:24px;font-size:.8125rem;text-transform:none;letter-spacing:0;font-family:var(--av-font-body);font-weight:500">¿Olvidaste tu contraseña?</button></div>
-              <div class="hz-pass"><input class="hz-input" id="f-pass" type="password" placeholder="Ingresa tu contraseña" autocomplete="current-password"><button type="button" class="hz-pass__toggle" id="f-toggle" aria-label="Mostrar contraseña" aria-pressed="false">Mostrar</button></div></div>
-          </form></div>
-        <div class="stage"><span class="stage__label mono">Estados</span>
-          <div class="row row--col" style="gap:1.1rem">
-            <div class="hz-field"><label class="hz-label" for="f-err">Documento (error)</label><input class="hz-input" id="f-err" value="12A" aria-invalid="true" aria-describedby="f-err-m"><span class="hz-err" id="f-err-m"><i class="bi bi-exclamation-circle" aria-hidden="true"></i>El documento debe tener solo números.</span></div>
-            <div class="hz-field"><label class="hz-label" for="f-ok">Documento (válido)</label><input class="hz-input hz-input--ok" id="f-ok" value="10234567"><span class="hz-help" style="color:var(--av-success-text)">Documento verificado.</span></div>
-            <div class="hz-field"><label class="hz-label" for="f-dis">Institución (deshabilitado)</label><input class="hz-input" id="f-dis" value="Sede Central" disabled></div>
-          </div></div>
-      </div>
-      <div class="ds-grid ds-grid--2 ds-gap-top">
-        <div class="stage"><span class="stage__label mono">Select · textarea</span>
-          <div class="row row--col" style="gap:1.1rem">
-            <div class="hz-field"><label class="hz-label" for="f-sel">Afiliación</label><select class="hz-select" id="f-sel"><option>Estudiante</option><option>Docente</option><option>Empleado</option></select></div>
-            <div class="hz-field"><label class="hz-label" for="f-ta">Observaciones</label><textarea class="hz-textarea" id="f-ta" placeholder="Notas sobre el registro"></textarea></div>
-          </div></div>
-        <div class="stage"><span class="stage__label mono">Casilla · opciones · interruptor</span>
-          <div class="row row--col" style="gap:.2rem">
-            <label class="hz-check"><input type="checkbox" checked> Recordar mi institución</label>
-            <label class="hz-check"><input type="radio" name="mod" checked> Rostro</label>
-            <label class="hz-check"><input type="radio" name="mod"> Huella</label>
-            <div class="row" style="margin-top:.6rem"><button class="hz-switch" role="switch" aria-checked="true" aria-label="Notificaciones por correo" id="sw1" type="button"></button><span>Notificaciones por correo</span></div>
-          </div></div>
-      </div>
-      <div class="codeblock"><pre id="code-field">&lt;div class="hz-field"&gt;
-  &lt;label class="hz-label" for="doc"&gt;Documento&lt;/label&gt;
-  &lt;input class="hz-input" id="doc" <b>aria-invalid="true" aria-describedby="doc-m"</b>&gt;
-  &lt;span class="hz-err" id="doc-m"&gt;El documento debe tener solo números.&lt;/span&gt;
-&lt;/div&gt;
-.hz-input { min-height: 48px; border: 1px solid <b>var(--av-field-border)</b>; border-radius: 8px; }
-.hz-input:focus { border-color: var(--av-blue); box-shadow: 0 0 0 3px rgba(20,95,238,.18); }</pre><button class="copy" type="button" data-copy="#code-field">Copiar</button></div>
-      <div class="ds-grid ds-grid--2 ds-gap-top">
-        <div class="dd dd--do"><strong>Hacer</strong><ul><li>Validar al salir del campo y al enviar; un mensaje por campo, junto al campo.</li><li>Tras un envío con error, mover el foco al primer campo inválido.</li><li>Reservar el espacio de la alerta para que el formulario no salte.</li><li>El botón de mostrar contraseña cambia el texto y <code>aria-pressed</code>, no la etiqueta.</li></ul></div>
-        <div class="dd dd--dont"><strong>No hacer</strong><ul><li>Marcar en rojo un campo que no falla (p. ej. la contraseña cuando solo el correo es inválido).</li><li>Placeholder como única etiqueta. Bordes de campo con el hairline (2.5:1).</li><li>Mensajes genéricos ("Error", "Inválido") sin decir cómo arreglarlo.</li></ul></div>
-      </div>
-    </div></section>
-
-    <!-- SUPERFICIES -->
-    <section class="ds-sec" id="superficies" aria-labelledby="h-superficies" data-nav="Tarjetas y panel de actividad" data-grp="Datos"><div class="ds-wrap">
-      <span class="ds-eyebrow mono">Componentes</span>
-      <h2 id="h-superficies">Tarjetas y superficies</h2>
-      <p class="ds-lead">Casi nada es una "tarjeta con sombra". Las superficies son tiles de color (acciones), líneas de 1 px (listas y datos), un panel navy (el cambio de información) y marcos reservados para media.</p>
-
-      <h3 class="ds-sub">Tiles de acceso <small>mosaico asimétrico · 6 columnas</small></h3>
-      <div class="stage stage--tint">
-        <div style="display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:1rem">
-          <a class="hz-tile hz-tile--signal" href="#superficies" style="grid-column:span 3;min-height:230px"><span class="hz-tile__icon" aria-hidden="true"><i class="bi bi-person-vcard"></i></span><span><span class="hz-tile__title" style="font-size:1.8rem">Gestionar personas</span><span class="hz-tile__desc">Listado y verificación de identidad</span></span><span class="hz-tile__arrow" aria-hidden="true">↗</span></a>
-          <a class="hz-tile hz-tile--night" href="#superficies" style="grid-column:span 3;min-height:230px"><span class="hz-tile__icon" aria-hidden="true"><i class="bi bi-fingerprint"></i></span><span><span class="hz-tile__title" style="font-size:1.8rem">Biometría</span><span class="hz-tile__desc">Registro y verificación de rostro y huella</span></span><span class="hz-tile__arrow" aria-hidden="true">↗</span></a>
-          <a class="hz-tile hz-tile--tint" href="#superficies" style="grid-column:span 2"><span class="hz-tile__icon" aria-hidden="true"><i class="bi bi-file-earmark-text"></i></span><span><span class="hz-tile__title">Procesar documento</span><span class="hz-tile__desc">OCR · nuevo registro</span></span><span class="hz-tile__arrow" aria-hidden="true">↗</span></a>
-          <a class="hz-tile hz-tile--tint" href="#superficies" style="grid-column:span 2"><span class="hz-tile__icon" aria-hidden="true"><i class="bi bi-card-checklist"></i></span><span><span class="hz-tile__title">Procesos electorales</span><span class="hz-tile__desc">Convocatorias y mesas</span></span><span class="hz-tile__arrow" aria-hidden="true">↗</span></a>
-          <a class="hz-tile hz-tile--tint" href="#superficies" style="grid-column:span 2"><span class="hz-tile__icon" aria-hidden="true"><i class="bi bi-stars"></i></span><span><span class="hz-tile__title">Consultas con IA</span><span class="hz-tile__desc">Sobre identidad y procesos</span></span><span class="hz-tile__arrow" aria-hidden="true">↗</span></a>
-          <div class="hz-tile hz-tile--soon" aria-disabled="true" style="grid-column:span 3;min-height:140px"><span class="hz-tile__icon" aria-hidden="true"><i class="bi bi-person-gear"></i></span><span><span class="hz-tile__title">Gestionar usuarios</span><span class="hz-tile__desc">Cuentas y roles</span></span><span class="hz-tile__tag hz-tag">Próximamente</span></div>
-          <div class="hz-tile hz-tile--soon" aria-disabled="true" style="grid-column:span 3;min-height:140px"><span class="hz-tile__icon" aria-hidden="true"><i class="bi bi-clipboard-data"></i></span><span><span class="hz-tile__title">Reportes y auditoría</span><span class="hz-tile__desc">Trazabilidad y exportación</span></span><span class="hz-tile__tag hz-tag">Próximamente</span></div>
-        </div>
-      </div>
-      <p class="ds-note">Reglas: radio 16 px; <b>grandes</b> (2 por fila) para lo más usado, <b>medianos</b> (3) en azul tenue, <b>pendientes</b> atenuados con borde discontinuo y sin enlace. Hover (solo con puntero fino): sube 4 px y la flecha avanza. Foco: anillo navy de 3 px (visible también sobre el tile azul).</p>
-
-      <h3 class="ds-sub">Franja de indicadores</h3>
-      <div class="hz-kpis">
-        <div class="hz-kpi"><span class="hz-kpi__label mono">Personas registradas</span><span class="hz-kpi__value">8</span><span class="hz-kpi__delta hz-kpi__delta--ok">5 verificadas</span><span class="hz-kpi__note">3 pendientes de verificación</span></div>
-        <div class="hz-kpi" id="kpi-ver"><span class="hz-kpi__label mono">Verificaciones</span><span class="hz-kpi__value" data-k="total">6</span><span class="hz-kpi__delta hz-kpi__delta--ok" data-k="ok">3 exitosas</span><span class="hz-kpi__note" data-k="rest">1 rechazada · 2 reintentos</span></div>
-        <div class="hz-kpi"><span class="hz-kpi__label mono">Procesos electorales</span><span class="hz-kpi__value">0</span><span class="hz-kpi__delta">0 en total</span><span class="hz-kpi__note">Abiertos o en borrador</span></div>
-        <div class="hz-kpi"><span class="hz-kpi__label mono">Dispositivos</span><span class="hz-kpi__value">2</span><span class="hz-kpi__delta hz-kpi__delta--warn">1 desconectado</span><span class="hz-kpi__note">de 3 dispositivos</span></div>
-      </div>
-      <p class="ds-note">Cuatro máximo por franja. <b>Cada cifra es un conteo trazable:</b> la franja, las barras y la lista del panel de abajo salen del mismo conjunto de 6 eventos, y la suma de las partes siempre es el total; el texto del detalle concuerda en número ("1 desconectado", "3 desconectados") y nunca expone claves técnicas de almacenamiento.</p>
-
-      <h3 class="ds-sub">Panel de actividad <small>el único panel oscuro de contenido</small></h3>
-      <div class="ds-grid ds-grid--2">
-        <div class="hz-panel on-night" id="act-panel"><h3>Actividad reciente</h3><p class="hz-panel__sub">Últimas acciones registradas</p><div class="hz-bars" id="act-bars"></div><ul class="hz-feed" id="act-feed" aria-label="Últimos eventos"></ul></div>
-        <div>
-          <p class="ds-note" style="margin-top:0"><b>Cuándo usar el panel.</b> Cuando un bloque cambia de naturaleza (de "acciones" a "registro de lo ocurrido"), el fondo cambia con él. Máximo un panel oscuro <b>de contenido</b> por pantalla; el resto, claro. Los toasts, los tooltips y el fondo de los diálogos son superficies flotantes y no cuentan.</p>
-          <p class="ds-note"><b>Gráficos.</b> Barras horizontales de 8 px sobre pista translúcida, con la etiqueta y el conteo en texto (la barra es decorativa, <code>aria-hidden</code>). Animación de entrada con <code>scaleX</code> ≤ 450 ms. Colores canónicos de estado sobre navy: verde #6EE7B7 (éxito), rojo suave #FCA5A5 (rechazo) y ámbar #FFC15A (reintento), todos ≥ 9:1; el cian no se usa para estados.</p>
-          <p class="ds-note"><b>Línea de tiempo.</b> Riel de 1 px, un punto de 9 px por evento con su color de estado y un halo del color de fondo. Muestra los 3 eventos más recientes de 6 ("Últimos 3 de 6").</p>
-        </div>
-      </div>
-
-      <h3 class="ds-sub">Filas de línea, media y personas</h3>
-      <div class="ds-grid ds-grid--3">
-        <div><div class="hz-line"><span class="n mono">01</span><div><h4>Identidad</h4><p>Personas con identificadores propios de Averyn y afiliaciones por institución.</p></div></div><div class="hz-line" style="border-bottom:1px solid var(--av-hairline)"><span class="n mono">02</span><div><h4>Biometría</h4><p>Enrolamiento y verificación por huella y rostro.</p></div></div></div>
-        <div><div class="hz-media" style="--ratio:4/5;max-width:200px"><span class="hz-media__hint mono">Imagen · 4:5</span></div><p class="ds-note">Espacio reservado: al insertar un <code>&lt;img&gt;</code> o <code>&lt;video&gt;</code> rellena el marco con <code>object-fit: cover</code> y la etiqueta se oculta. Proporciones: 4:5, 16:9, 21:9.</p></div>
-        <div><a class="hz-person" href="#superficies"><span class="hz-person__ini" aria-hidden="true">DD</span><strong>Daniel David Turizo Chacon</strong><small>Core, Arquitectura e Integraciones críticas</small><span class="mono" style="color:var(--av-blue);text-transform:none">@ddturizo-eng ↗</span></a></div>
-      </div>
-    </div></section>
-
-    <!-- NAVEGACIÓN -->
-    <section class="ds-sec ds-sec--tint" id="navegacion" aria-labelledby="h-nav" data-nav="Navegación" data-grp="Navegación"><div class="ds-wrap">
-      <span class="ds-eyebrow mono">Componentes</span>
-      <h2 id="h-nav">Navegación</h2>
-      <p class="ds-lead">Todo el sistema comparte una forma: la píldora. En la landing, una píldora centrada con enlaces mono; en el panel, una píldora completa con icono y etiqueta; en ambos, chips redondeados para logo y acciones.</p>
-
-      <h3 class="ds-sub">Navbar pública</h3>
-      <div class="stage stage--sky"><div class="hz-nav">
-        <span class="hz-brandchip"><img src="../averyn-frontend/assets/images/averyn-logo-font-black.avif" alt="Averyn"></span>
-        <nav class="hz-pill mono" aria-label="Ejemplo de navegación pública"><a href="#navegacion">Qué es</a><a href="#navegacion">Capacidades</a><a href="#navegacion">Soluciones</a><a href="#navegacion">Seguridad</a><a href="#navegacion">Equipo</a></nav>
-        <a class="hz-btn hz-btn--primary" href="#navegacion">Ingresar</a></div></div>
-      <p class="ds-note">Logo a la izquierda (aparece cuando el del hero ya se redujo), píldora centrada translúcida con enlaces mono y un único botón "Ingresar". Bajo 1100 px pasa a botón <b>MENÚ</b> con <code>aria-expanded</code>; el menú es el siguiente elemento en el DOM y Escape devuelve el foco al botón.</p>
-
-      <h3 class="ds-sub">Dock del panel</h3>
-      <div class="stage stage--sky"><div class="hz-nav">
-        <span class="hz-brandchip"><img src="../averyn-frontend/assets/images/averyn-logo-font-black.avif" alt="Averyn"></span>
-        <nav class="hz-dock" aria-label="Ejemplo de dock"><ul style="display:contents;list-style:none;margin:0;padding:0">
-          <li style="display:contents"><a href="#navegacion" aria-current="page"><i class="bi bi-grid-1x2" aria-hidden="true"></i>Dashboard</a></li>
-          <li style="display:contents"><a href="#navegacion"><i class="bi bi-person-vcard" aria-hidden="true"></i>Identidad</a></li>
-          <li style="display:contents"><a href="#navegacion"><i class="bi bi-fingerprint" aria-hidden="true"></i>Biometría</a></li>
-          <li style="display:contents"><a href="#navegacion"><i class="bi bi-camera" aria-hidden="true"></i>OCR</a></li>
-          <li style="display:contents"><a href="#navegacion"><i class="bi bi-check2-square" aria-hidden="true"></i>Electoral</a></li>
-          <li style="display:contents"><span class="soon" aria-disabled="true" title="Próximamente"><i class="bi bi-door-open" aria-hidden="true"></i>Accesos</span></li></ul></nav>
-        <div class="row" style="gap:8px"><button class="hz-iconbtn" type="button" aria-label="Buscar"><i class="bi bi-search" aria-hidden="true"></i></button><button class="hz-iconbtn" type="button" aria-label="Notificaciones, 3 sin leer"><i class="bi bi-bell" aria-hidden="true"></i><span class="badge" aria-hidden="true">3</span></button>
-          <button class="hz-avatar" type="button" id="av-open" aria-haspopup="menu" aria-expanded="false"><span class="hz-avatar__c" aria-hidden="true">UD</span><span><b>Usuario Demo</b><small>Administrador</small></span></button></div></div>
-        <div class="row" style="justify-content:flex-end;margin-top:.8rem"><div class="hz-menu" id="av-menu" role="menu" hidden><button type="button" role="menuitem"><i class="bi bi-box-arrow-right" aria-hidden="true"></i>Cerrar sesión</button></div></div></div>
-      <p class="ds-note">Forma de píldora completa (9999 px), icono + etiqueta en Space Grotesk 600, ítem activo en píldora azul de señal. Bajo 1280 px solo el activo conserva la etiqueta (los demás quedan en icono con <code>title</code> y nombre accesible). Los módulos sin pantalla se atenúan y no enlazan. Haz clic en el usuario para ver el menú.</p>
-
-      <h3 class="ds-sub">Encabezado de página, pestañas y paginación</h3>
-      <div class="stage"><p class="hz-crumb mono"><a href="#navegacion">Dashboard</a> / <b>Identidad</b></p>
-        <div class="row" style="justify-content:space-between;margin:.6rem 0 1.4rem"><h3 style="font-size:2.4rem;line-height:1.05">Personas verificadas</h3><button class="hz-btn hz-btn--primary" type="button">+ Nueva persona</button></div>
-        <div class="hz-tabs" role="tablist" aria-label="Ejemplo de pestañas" id="tabs"><button class="hz-tab" role="tab" aria-selected="true" aria-controls="tp1" id="t1" type="button">Todas</button><button class="hz-tab" role="tab" aria-selected="false" aria-controls="tp2" id="t2" tabindex="-1" type="button">Verificadas</button><button class="hz-tab" role="tab" aria-selected="false" aria-controls="tp3" id="t3" tabindex="-1" type="button">Pendientes</button></div>
-        <div class="hz-tabpanel" role="tabpanel" id="tp1" aria-labelledby="t1">8 personas en el catálogo.</div><div class="hz-tabpanel" role="tabpanel" id="tp2" aria-labelledby="t2" hidden>5 personas verificadas.</div><div class="hz-tabpanel" role="tabpanel" id="tp3" aria-labelledby="t3" hidden>3 personas pendientes de verificación.</div>
-        <div style="margin-top:1.4rem"><div class="hz-pager" role="navigation" aria-label="Paginación"><button type="button" disabled aria-label="Anterior">←</button><button type="button" aria-current="page">1</button><button type="button">2</button><button type="button">3</button><button type="button" aria-label="Siguiente">→</button></div></div></div>
-      <p class="ds-note">Pestañas con teclado: ← → cambian de pestaña (patrón <i>roving tabindex</i>). Paginación con objetivos de 44 px y el número actual en azul de señal.</p>
-    </div></section>
-    <!-- DATOS -->
-    <section class="ds-sec" id="datos" aria-labelledby="h-datos" data-nav="Tablas y píldoras de estado" data-grp="Datos"><div class="ds-wrap">
-      <span class="ds-eyebrow mono">Componentes</span>
-      <h2 id="h-datos">Tablas, chips y datos</h2>
-      <p class="ds-lead">Las tablas son líneas, no cajas: encabezado en mono, filas separadas por un hairline y un hover tenue. Los estados se dicen con una <b>píldora</b> que lleva la palabra y, si ayuda, un icono.</p>
-      <div class="stage ds-gap-top"><div class="doc-wrap"><table class="hz-table"><thead><tr><th scope="col">Persona</th><th scope="col">Documento</th><th scope="col">Afiliación</th><th scope="col">Estado</th><th scope="col" style="text-align:right">Última verificación</th></tr></thead><tbody>
-        <tr><td><span class="who"><i>AT</i>Ana Torres</span></td><td class="num">10234567</td><td>Estudiante</td><td><span class="hz-chip hz-chip--success"><i class="bi bi-check-circle" aria-hidden="true"></i>Verificada</span></td><td class="num" style="text-align:right">02/10/2026, 10:42</td></tr>
-        <tr><td><span class="who"><i>LP</i>Luis Pérez</span></td><td class="num">10345678</td><td>Docente</td><td><span class="hz-chip hz-chip--neutral"><i class="bi bi-clock" aria-hidden="true"></i>Pendiente</span></td><td style="text-align:right">Sin verificar</td></tr>
-        <tr><td><span class="who"><i>LD</i>Laura Díaz</span></td><td class="num">10456789</td><td>Empleada</td><td><span class="hz-chip hz-chip--error"><i class="bi bi-x-circle" aria-hidden="true"></i>Rechazada</span></td><td class="num" style="text-align:right">02/10/2026, 10:31</td></tr>
-        <tr><td><span class="who"><i>AM</i>Andrés Molina</span></td><td class="num">10567890</td><td>Estudiante</td><td><span class="hz-chip hz-chip--warning"><i class="bi bi-arrow-repeat" aria-hidden="true"></i>Reintento</span></td><td class="num" style="text-align:right">02/10/2026, 09:55</td></tr>
-      </tbody></table></div></div>
-      <p class="ds-note">El marco con borde alrededor de la tabla es de la documentación, no del componente: en una pantalla real la tabla vive sobre el fondo de la página, sin caja.</p>
-
-      <h3 class="ds-sub">Píldoras de estado <small>3 variantes</small></h3>
-      <div class="stage chip-matrix" id="chip-matrix"></div>
-      <div class="ds-grid ds-grid--3 ds-gap-top">
-        <div class="stage"><span class="stage__label mono">Suave · por defecto</span><p class="ds-note" style="margin:.5rem 0 0">Fondo tintado y texto del tono, sin borde. Es la que se usa en <b>tablas y listas</b>: se lee de un vistazo y no compite con los datos.</p></div>
-        <div class="stage"><span class="stage__label mono">Contorno</span><p class="ds-note" style="margin:.5rem 0 0">Borde y texto del tono, sin relleno. Para estados <b>secundarios</b>: borrador, "Sin dispositivo", etiquetas dentro de una tarjeta ya coloreada.</p></div>
-        <div class="stage"><span class="stage__label mono">Sólida</span><p class="ds-note" style="margin:.5rem 0 0">Fondo del tono y texto blanco. Para <b>énfasis puntual</b>: un contador, "Nueva", un estado crítico. Nunca más de una por fila.</p></div>
-      </div>
-      <p class="ds-note"><b>Reglas.</b> Una sola variante por tabla. Sin punto: el estado lo dice la palabra; el icono es opcional, decorativo (<code>aria-hidden</code>) y siempre el mismo para el mismo estado. Contraste del texto ≥ 5:1: sobre el fondo suave (los tonos <code>-strong</code> de Éxito y Aviso lo garantizan), blanco sobre el tono <code>-text</code> en la sólida y tono sobre blanco en el contorno. La píldora no es interactiva; si lo fuera, sería un botón.</p>
-      <div class="stage ds-gap-top"><span class="stage__label mono">Etiqueta mono</span><div class="row"><span class="hz-tag">Próximamente</span><span class="hz-tag">Beta</span><span class="hz-tag">CAM-001</span></div><p class="ds-note">Para metadatos y módulos pendientes. No es un estado de negocio.</p></div>
-
-      <h3 class="ds-sub">Tabla única de estados <small>una semántica, dos fondos</small></h3>
-      <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Estado de negocio</th><th>Píldora</th><th>Icono</th><th>Sobre fondo claro</th><th>Sobre navy (panel, toast)</th></tr></thead><tbody>
-        <tr><td>Verificada · Aceptada · Éxito</td><td><span class="hz-chip hz-chip--success"><i class="bi bi-check-circle" aria-hidden="true"></i>Verificada</span></td><td><code>bi-check-circle</code></td><td>Verde <code>#047857</code> sobre <code>#E8F8F0</code></td><td>Verde <code>#6EE7B7</code></td></tr>
-        <tr><td>Reintento · Reintento requerido</td><td><span class="hz-chip hz-chip--warning"><i class="bi bi-arrow-repeat" aria-hidden="true"></i>Reintento</span></td><td><code>bi-arrow-repeat</code></td><td>Ámbar <code>#92400E</code> sobre <code>#FEF3E2</code></td><td>Ámbar <code>#FFC15A</code></td></tr>
-        <tr><td>Rechazada · Rechazo · Error</td><td><span class="hz-chip hz-chip--error"><i class="bi bi-x-circle" aria-hidden="true"></i>Rechazada</span></td><td><code>bi-x-circle</code></td><td>Rojo <code>#B91C1C</code> sobre <code>#FDECEA</code></td><td>Rojo suave <code>#FCA5A5</code></td></tr>
-        <tr><td>Pendiente · Sin verificar</td><td><span class="hz-chip hz-chip--neutral"><i class="bi bi-clock" aria-hidden="true"></i>Pendiente</span></td><td><code>bi-clock</code></td><td>Gris <code>#3B4664</code> sobre <code>#F4F6FA</code></td><td>Gris azulado <code>#B9C9E4</code></td></tr>
-        <tr><td>Desconectado</td><td><span class="hz-chip hz-chip--warning"><i class="bi bi-plug" aria-hidden="true"></i>Desconectado</span></td><td><code>bi-plug</code></td><td>Ámbar (como Reintento: requiere acción)</td><td>Ámbar <code>#FFC15A</code></td></tr>
-        <tr><td>Sin dispositivo</td><td><span class="hz-chip hz-chip--neutral hz-chip--outline">Sin dispositivo</span></td><td>—</td><td>Gris, variante contorno</td><td>—</td></tr>
-        <tr><td>Información · En revisión</td><td><span class="hz-chip hz-chip--info"><i class="bi bi-info-circle" aria-hidden="true"></i>En revisión</span></td><td><code>bi-info-circle</code></td><td>Azul <code>#0369A1</code> sobre <code>#E3F6FA</code></td><td>No se usa sobre navy</td></tr>
-        <tr><td>Cian (<code>#00ACD2</code> / <code>#55D6FF</code>)</td><td>—</td><td>—</td><td colspan="2"><b>Solo resalte</b>: trazos de la figura, índices y hover. Nunca es un estado.</td></tr>
-      </tbody></table></div>
-      <p class="ds-note">Una misma palabra tiene un mismo color en chips, panel, toasts y gráficos. Los <b>gráficos de resultado</b> (exitosas / reintentos / rechazadas) usan estos colores de estado; los gráficos de categorías (por método, por institución) usan la paleta categórica.</p>
-      <p class="ds-note"><b>Datos técnicos</b> (documentos, códigos de dispositivo, fechas) van en JetBrains Mono. Fechas: <code>dd/mm/aaaa, hh:mm</code> (24 h). Una tabla vacía muestra un estado vacío con acción, no una tabla sin filas.</p>
-    </div></section>
-
-    <!-- FEEDBACK -->
-    <section class="ds-sec ds-sec--tint" id="feedback" aria-labelledby="h-feedback" data-nav="Alertas, toast, modal y tooltip" data-grp="Feedback y capas"><div class="ds-wrap">
-      <span class="ds-eyebrow mono">Componentes</span>
-      <h2 id="h-feedback">Alertas y feedback</h2>
-      <p class="ds-lead">El feedback es sobrio y específico: dice qué pasó y qué hacer. Las alertas persisten hasta que se resuelven; los toasts confirman acciones y desaparecen.</p>
-      <div class="ds-grid ds-grid--2 ds-gap-top">
-        <div class="hz-alert hz-alert--error" role="alert"><strong>Credenciales inválidas</strong>Verifica tu correo y contraseña e inténtalo nuevamente.</div>
-        <div class="hz-alert hz-alert--success" role="status"><strong>Autenticación exitosa</strong>Redirigiendo al panel de control…</div>
-        <div class="hz-alert hz-alert--warning" role="status"><strong>Dispositivo desconectado</strong>El lector LEC-002 no responde. Revisa la conexión.</div>
-        <div class="hz-alert hz-alert--info" role="status"><strong>Recuperación no disponible</strong>Por ahora, pide a tu administrador que restablezca tu acceso.</div>
-      </div>
-      <p class="ds-note">Insignia circular con icono (del color -text del estado), fondo claro y borde de 1 px: <b>sin franja lateral</b>. Texto ≥ 5:1. Errores con <code>role="alert"</code>; el resto con <code>role="status"</code>. La alerta ocupa un espacio reservado: no empuja el formulario.</p>
-
-      <div class="ds-grid ds-grid--3 ds-gap-top">
-        <div class="stage"><span class="stage__label mono">Toast</span><div class="row row--col"><button class="hz-btn hz-btn--ghost" type="button" data-toast="ok">Registrar persona</button><button class="hz-btn hz-btn--ghost" type="button" data-toast="bad">Rechazar verificación</button><button class="hz-btn hz-btn--ghost" type="button" data-toast="warn">Marcar reintento</button></div><div class="hz-toast" role="presentation" style="margin-top:1rem;animation:none"><div><b>Persona registrada</b><span>El registro se guardó correctamente.</span></div></div><p class="ds-note">Los botones disparan el toast real (abajo a la derecha). El bloque navy muestra su aspecto.</p></div>
-        <div class="stage"><span class="stage__label mono">Modal</span><button class="hz-btn hz-btn--danger" type="button" id="open-modal">Eliminar persona</button><p class="ds-note">Elemento <code>&lt;dialog&gt;</code> nativo: atrapa el foco, cierra con Escape y devuelve el foco al botón.</p></div>
-        <div class="stage"><span class="stage__label mono">Tooltip</span><span class="hz-tip"><button class="hz-iconbtn" type="button" aria-describedby="tip1" aria-label="¿Qué significa Verificada?"><i class="bi bi-question-circle" aria-hidden="true"></i></button><span class="hz-tip__bubble" role="tooltip" id="tip1">Verificada: la identidad superó el umbral</span></span><p class="ds-note">Aparece con hover y con foco. Usa un icono de ayuda, nunca el de un estado. Solo complementa: nunca es el único portador de información.</p></div>
-      </div>
-      <dialog class="hz-modal" id="modal" aria-labelledby="modal-t"><div class="hz-modal__body"><h3 id="modal-t">¿Eliminar a Ana Torres?</h3><p>Se borrarán su registro y sus datos biométricos. Esta acción no se puede deshacer.</p></div><div class="hz-modal__foot"><button class="hz-btn hz-btn--ghost" type="button" id="close-modal">Cancelar</button><button class="hz-btn hz-btn--danger" type="button" id="ok-modal">Eliminar persona</button></div></dialog>
-      <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Componente</th><th>Cuándo</th><th>Duración</th><th>Rol ARIA</th></tr></thead><tbody>
-        <tr><td>Alerta</td><td>Errores y avisos que requieren acción.</td><td>Hasta resolverse</td><td><code>alert</code> / <code>status</code></td></tr>
-        <tr><td>Toast</td><td>Confirmar una acción ya hecha.</td><td>5 s; pausa con el cursor encima</td><td><code>status</code> en región <code>aria-live="polite"</code></td></tr>
-        <tr><td>Modal</td><td>Confirmaciones destructivas o decisiones que bloquean.</td><td>Hasta decidir</td><td><code>dialog</code> + <code>aria-labelledby</code></td></tr>
-        <tr><td>Tooltip</td><td>Nombrar un icono o aclarar un dato.</td><td>Mientras hay hover/foco</td><td><code>tooltip</code> + <code>aria-describedby</code></td></tr>
-      </tbody></table></div>
-    </div></section>
 
     <!-- ESTADOS -->
     <section class="ds-sec" id="estados" aria-labelledby="h-estados" data-nav="Carga, vacío y subida" data-grp="Estados de interfaz"><div class="ds-wrap">
