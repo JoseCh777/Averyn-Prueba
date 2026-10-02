@@ -8,15 +8,15 @@
   --t1: 1; --t2: 1; --t3: 1; /* estado final si no hay JS */
   --mn-ink: var(--av-navy);
   --mn-muted: var(--av-gray-500);
-  --mn-line: #DCE5F5;
-  --mn-soft: #F4F8FF;
-  --mn-navy-2: #071A36;
-  --mn-cyan-2: #55D6FF;
-  --mn-sky: #DCECFF;
-  --mn-sky-2: #EAF0FE;
-  --mn-night-text: #B9C9E4;
-  --mn-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
-  --mn-ease: cubic-bezier(.23, 1, .32, 1);
+  --mn-line: var(--av-hairline);
+  --mn-soft: var(--av-paper-blue);
+  --mn-navy-2: var(--av-navy-night);
+  --mn-cyan-2: var(--av-cyan-glow);
+  --mn-sky: var(--av-sky);
+  --mn-sky-2: var(--av-blue-tint);
+  --mn-night-text: var(--av-night-text);
+  --mn-mono: var(--av-font-mono);
+  --mn-ease: var(--av-ease-out);
   --mn-gutter: clamp(1.25rem, 4vw, 3rem);
   --mn-max: 1240px;
 }
