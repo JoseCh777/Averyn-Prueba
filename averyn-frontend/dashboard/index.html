@@ -7,21 +7,23 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Bootstrap (stack obligatorio del sprint) -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Bootstrap Icons -->
+  <!-- Bootstrap Icons (los íconos de los módulos y del menú de usuario) -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
 
   <link href="../assets/css/design-system.css" rel="stylesheet">
   <link href="../assets/css/dashboard-shell.css" rel="stylesheet">
+  <!-- Sistema "Horizonte" aplicado solo a esta pantalla (body.av-dash) -->
+  <link href="../assets/css/dashboard-page.css" rel="stylesheet">
   <link rel="icon" href="../assets/images/averyn-logo-blue.avif">
 </head>
-<body>
+<body class="av-dash">
+  <a class="dh-skip" href="#contenido">Saltar al contenido</a>
+
   <header class="av-navbar">
     <a href="index.html" class="av-navbar__brand" aria-label="Averyn — Inicio">
-      <img src="../assets/images/averyn-logo-font-blue.avif" alt="" class="av-navbar__isotipo">
+      <img src="../assets/images/averyn-logo-font-black.avif" alt="" class="av-navbar__isotipo">
     </a>
 
     <nav class="av-dock-container" aria-label="Navegación principal">
@@ -32,8 +34,8 @@
         <li role="none"><a href="documents/index.html" class="av-dock__item" role="menuitem"><i class="bi bi-camera" aria-hidden="true"></i><span>OCR</span></a></li>
         <li role="none"><a href="../modules/ia/index.html" class="av-dock__item" role="menuitem"><i class="bi bi-cpu" aria-hidden="true"></i><span>IA</span></a></li>
         <li role="none"><a href="../modules/electoral/index.html" class="av-dock__item" role="menuitem"><i class="bi bi-check2-square" aria-hidden="true"></i><span>Electoral</span></a></li>
-        <li role="none"><a href="../modules/access/index.html" class="av-dock__item" role="menuitem"><i class="bi bi-door-open" aria-hidden="true"></i><span>Accesos</span></a></li>
-        <li role="none"><a href="../modules/admin/index.html" class="av-dock__item" role="menuitem"><i class="bi bi-gear" aria-hidden="true"></i><span>Administración</span></a></li>
+        <li role="none"><span class="av-dock__item is-soon" role="menuitem" aria-disabled="true" title="Próximamente"><i class="bi bi-door-open" aria-hidden="true"></i><span>Accesos</span></span></li>
+        <li role="none"><span class="av-dock__item is-soon" role="menuitem" aria-disabled="true" title="Próximamente"><i class="bi bi-gear" aria-hidden="true"></i><span>Administración</span></span></li>
       </ul>
     </nav>
 
@@ -66,54 +68,55 @@
     </div>
   </header>
 
-  <main class="av-main-content" aria-label="Contenido del dashboard">
-    <div class="av-page">
+  <main class="av-main-content" id="contenido" aria-label="Contenido del dashboard">
 
-      <!-- 1 · Bienvenida + hero de marca -->
-      <div class="av-dash-grid av-dash-grid--welcome">
-        <section class="av-welcome" aria-labelledby="titulo-bienvenida">
-          <p class="av-welcome__eyebrow" id="eyebrow-bienvenida">Bienvenido, <span id="nombre-usuario">Usuario Demo</span></p>
-          <h1 class="av-welcome__title" id="titulo-bienvenida">Todo en un solo lugar</h1>
-          <p class="av-welcome__desc">Gestiona identidad, documentos, biometría e inteligencia artificial desde un mismo panel, con visibilidad completa de la operación institucional.</p>
-        </section>
-
-        <section class="av-card av-brand-strip" aria-label="Averyn">
-          <img class="av-brand-strip__logo" src="../assets/images/averyn-logo-lockup-blue.avif" alt="Averyn">
-        </section>
+    <!-- 1 · Bienvenida: cielo que se funde con el blanco + arcos de la marca -->
+    <section class="dh-hero" aria-labelledby="titulo-bienvenida">
+      <div class="dh-wrap dh-hero__inner">
+        <div>
+          <p class="dh-mono dh-hero__eyebrow" id="eyebrow-bienvenida">Bienvenido, <span id="nombre-usuario">Usuario Demo</span></p>
+          <h1 class="dh-hero__title" id="titulo-bienvenida">Todo en un solo lugar</h1>
+          <p class="dh-hero__desc">Gestiona identidad, documentos, biometría e inteligencia artificial desde un mismo panel, con visibilidad completa de la operación institucional.</p>
+        </div>
+        <svg class="dh-hero__fig" viewBox="0 0 320 170" aria-hidden="true" focusable="false">
+          <path d="M0 165 H320" stroke="rgba(20,95,238,.25)" stroke-width="1" />
+          <path d="M20 165 C60 30 190 20 240 165" stroke="#145FEE" stroke-width="1.5" fill="none" />
+          <path d="M60 165 C90 70 170 60 205 165" stroke="#00ACD2" stroke-width="1.5" fill="none" />
+          <path d="M100 165 C118 105 150 100 170 165" stroke="#145FEE" stroke-width="1" fill="none" />
+          <path d="M150 6 L290 165" stroke="#145FEE" stroke-width="1.5" fill="none" />
+        </svg>
       </div>
+    </section>
 
-      <!-- 2 · KPIs (4) — renderizados por dashboard.js desde .av-kpi -->
+    <div class="dh-wrap">
+
+      <!-- 2 · Indicadores — renderizados por dashboard.js -->
       <section aria-label="Indicadores principales">
-        <div class="av-kpi-grid" id="kpi-grid"></div>
+        <div class="dh-kpis" id="kpi-grid"></div>
       </section>
 
       <!-- 3 · Accesos rápidos + actividad reciente -->
-      <section class="av-dash-grid av-dash-grid--bottom" aria-label="Accesos rápidos y actividad reciente">
-        <div class="av-card">
-          <div class="av-card__header">
-            <div>
-              <h2 class="av-card__section-title" style="margin: 0">Accesos rápidos</h2>
-              <p class="av-table__sub" style="margin: 2px 0 0">Atajos a los módulos de la plataforma</p>
-            </div>
-          </div>
-          <div class="av-quick-grid" id="grid-accesos-rapidos"></div>
-        </div>
+      <div class="dh-split">
+        <section aria-labelledby="titulo-accesos">
+          <header class="dh-head">
+            <h2 id="titulo-accesos">Accesos rápidos</h2>
+            <p>Atajos a los módulos de la plataforma</p>
+          </header>
+          <ul class="dh-rows" id="grid-accesos-rapidos"></ul>
+        </section>
 
-        <div class="av-card">
-          <div class="av-card__header">
-            <div>
-              <h2 class="av-card__section-title" style="margin: 0">Actividad reciente</h2>
-              <p class="av-table__sub" style="margin: 2px 0 0">Log de las últimas acciones registradas</p>
-            </div>
-          </div>
-          <ul class="av-feed" id="feed-actividad"></ul>
-        </div>
-      </section>
+        <section aria-labelledby="titulo-actividad">
+          <header class="dh-head">
+            <h2 id="titulo-actividad">Actividad reciente</h2>
+            <p>Últimas acciones registradas</p>
+          </header>
+          <ul class="dh-feed" id="feed-actividad"></ul>
+          <a class="dh-more dh-mono" href="../biometrics/history/index.html">Ver historial completo →</a>
+        </section>
+      </div>
 
     </div>
   </main>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
 
   <script src="../assets/js/dashboard-shell.js"></script>
   <script src="../assets/js/common/personas-catalogo.js"></script>
