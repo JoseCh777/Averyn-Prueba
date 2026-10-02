@@ -49,7 +49,7 @@
   });
 
   /* Índice lateral: marca la sección visible de la página actual */
-  var enlaces = $$('.ds-side nav a[href^="#"]');
+  var enlaces = $$('.ds-side nav a[href^="#"]').filter(function (a) { return a.getAttribute('href').indexOf('#go:') !== 0; }); /* #go: = cambio de página en el HTML único */
   var secciones = enlaces.map(function (a) { return $(a.getAttribute('href')); }).filter(Boolean);
   if ('IntersectionObserver' in window && secciones.length) {
     var obs = new IntersectionObserver(function (entradas) {

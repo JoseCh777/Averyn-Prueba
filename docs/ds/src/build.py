@@ -17,6 +17,7 @@ VERSION = '1.2'
 PAGES = [
     ('design-system.html', 'Fundamentos y componentes'),
     ('ds/graficos.html', 'Gráficos'),
+    ('ds/patrones.html', 'Patrones de Averyn'),
     ('ds/sistema.html', 'Estados del sistema'),
 ]
 
@@ -37,6 +38,9 @@ CONFIG = {
     'ds/graficos.html': dict(body=['graficos-body.html'], eyebrow='Gráficos', title='Datos con calma.',
                              lead='Modelos y ejemplos de gráficos para el panel del futuro: tarjetas minimalistas, formas elegidas por el trabajo del dato, color validado y lectura accesible.',
                              anchors=None, css=['charts.css'], js=['charts.js']),
+    'ds/patrones.html': dict(body=['patrones-body.html'], eyebrow='Patrones', title='Cuando la pantalla toca el cuerpo de alguien.',
+                             lead='Captura facial y de huella, resultado de verificación, documento y OCR, papeleta electoral, dispositivos y consentimiento. Simulaciones sin cámara ni datos reales.',
+                             anchors=None, css=['charts.css', 'patrones.css'], js=['patrones.js']),
     'ds/sistema.html': dict(body=['sistema-body.html'], eyebrow='Sistema', title='Cuando algo no sale como se espera.',
                             lead='Páginas de error y estados del sistema: 404, 403, 500, sin conexión y mantenimiento.',
                             anchors=None, css=[], js=['sistema.js']),

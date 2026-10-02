@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Averyn — Design System Horizonte v1.2 · Patrones de Averyn</title>
+<meta name="description" content="Design system de Averyn: principios, tokens, componentes y reglas de uso del estilo Horizonte.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link rel="icon" href="../../averyn-frontend/assets/images/averyn-logo-blue.avif">
+<link href="./ds.css" rel="stylesheet">
+<link href="./charts.css" rel="stylesheet">
+<link href="./patrones.css" rel="stylesheet">
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<div class="ds-shell">
+  <aside class="ds-side" aria-label="Índice del design system">
+    <a class="ds-side__brand" href="../design-system.html" aria-label="Averyn, inicio del design system"><img src="../../averyn-frontend/assets/images/averyn-logo-font-black.avif" alt="Averyn"></a>
+    <p class="ds-side__ver mono">Design System · v1.2 Horizonte</p>
+    <nav>
+      <span class="grp mono">Design system</span>
+      <a class="ds-page" href="../design-system.html">Fundamentos y componentes</a>
+      <a class="ds-page" href="graficos.html">Gráficos</a>
+      <a class="ds-page" href="patrones.html" aria-current="page">Patrones de Averyn</a>
+      <a class="ds-page" href="sistema.html">Estados del sistema</a>
+      <span class="grp mono">En esta página</span>
+      <a href="#principios-bio">01 · Reglas biométricas</a>
+      <a href="#rostro">02 · Captura facial</a>
+      <a href="#huella">03 · Captura de huella</a>
+      <a href="#resultado">04 · Resultado de verificación</a>
+      <a href="#ocr">05 · Documento y OCR</a>
+      <a href="#papeleta">06 · Papeleta y recibo</a>
+      <a href="#dispositivos">07 · Dispositivos</a>
+      <a href="#consentimiento">08 · Consentimiento</a>
+      <a href="#copy-patrones">09 · Resumen de estados</a>
+    </nav>
+  </aside>
+
+  <div class="ds-main" id="top">
+    <header class="ds-cover ds-cover--page"><div class="ds-wrap"><span class="mono" style="color:#fff;opacity:.85">Patrones</span><h1>Cuando la pantalla toca el cuerpo de alguien.</h1><p>Captura facial y de huella, resultado de verificación, documento y OCR, papeleta electoral, dispositivos y consentimiento. Simulaciones sin cámara ni datos reales.</p></div></header>
+
+    <main id="contenido">
+
+    <!-- 01 PRINCIPIOS -->
+    <section class="ds-sec" id="principios-bio" data-nav="01 · Reglas biométricas" aria-labelledby="h-pb"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">01 · Patrones de Averyn</span>
+      <h2 id="h-pb">Cuando la pantalla toca el cuerpo de alguien</h2>
+      <p class="ds-lead">Rostro, huella, documento y voto son los momentos más delicados del producto. Estos patrones fijan cómo se pide permiso, cómo se guía sin culpar y cómo se muestra una decisión sin esconder el número. Todas las demos de esta página son <b>simulaciones</b>: no usan cámara, lector ni datos reales.</p>
+      <div class="ds-grid ds-grid--3 ds-gap-top">
+        <div class="stage"><h3 class="ds-sub" style="margin:0 0 .5rem;font-size:1.15rem">Consentimiento primero</h3><p class="ds-note" style="margin:0">Antes de pedir cámara o huella, se explica qué se guarda, para qué y cuánto tiempo. Quien no acepta tiene una salida clara, no un callejón.</p></div>
+        <div class="stage"><h3 class="ds-sub" style="margin:0 0 .5rem;font-size:1.15rem">Guiar sin culpar</h3><p class="ds-note" style="margin:0">"Acércate un poco más", no "Rostro inválido". Cada indicación dice qué hacer, y el color nunca es el único canal: siempre icono y texto.</p></div>
+        <div class="stage"><h3 class="ds-sub" style="margin:0 0 .5rem;font-size:1.15rem">Decisión con su número</h3><p class="ds-note" style="margin:0">Una verificación muestra la similitud, el umbral y la decisión juntos. Nunca solo "✓" o "✗". El umbral lo manda el servidor; la interfaz no lo fija.</p></div>
+      </div>
+      <div class="ds-grid ds-grid--2 ds-gap-top">
+        <div class="dd dd--do"><strong>Siempre</strong><ul><li>Un solo paso por pantalla y una acción principal.</li><li>Estado visible en texto, anunciado con <code>role="status"</code>.</li><li>Una salida en cada pantalla (cancelar, reintentar, pedir ayuda).</li><li>Mostrar la plantilla guardada como "huella matemática", nunca la foto o el dibujo.</li></ul></div>
+        <div class="dd dd--dont"><strong>Nunca</strong><ul><li>Mostrar una foto del rostro o la huella almacenada tras la captura.</li><li>Dar a entender que un rechazo es culpa de la persona.</li><li>Vincular a una persona con su voto, ni en pantalla ni en el comprobante.</li><li>Usar cuenta atrás que apure a quien tiene dificultad para posicionarse.</li></ul></div>
+      </div>
+    </div></section>
+
+    <!-- 02 CAPTURA FACIAL -->
+    <section class="ds-sec ds-sec--tint" id="rostro" data-nav="02 · Captura facial" aria-labelledby="h-rostro"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">02 · Patrones de Averyn</span>
+      <h2 id="h-rostro">Captura facial</h2>
+      <p class="ds-lead">Un óvalo guía, tres indicadores de calidad en texto y una prueba de vida en pasos cortos. La vista de cámara es una superficie navy: el único lugar de la captura donde el fondo es oscuro.</p>
+      <div class="pt-grid">
+        <div class="pt-card" id="face">
+          <div class="pt-ctrl"><span class="stage__label mono">Estado</span>
+            <div class="vz-seg" id="face-seg" role="group" aria-label="Estado de la captura facial">
+              <button type="button" data-s="searching" aria-pressed="true">Buscando</button><button type="button" data-s="ready" aria-pressed="false">Listo</button><button type="button" data-s="capturing" aria-pressed="false">Capturando</button><button type="button" data-s="success" aria-pressed="false">Éxito</button><button type="button" data-s="error" aria-pressed="false">Error</button><button type="button" data-s="noperm" aria-pressed="false">Sin cámara</button>
+            </div>
+          </div>
+          <div class="pt-view" data-state="searching" id="face-view">
+            <span class="pt-view__tag">Vista de cámara · simulada</span>
+            <svg viewBox="0 0 400 460" aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid slice">
+              <ellipse cx="200" cy="200" rx="84" ry="108" fill="none" stroke="rgba(185,201,228,.28)" stroke-width="2"/>
+              <path d="M50 460 C50 372 120 330 200 330 C280 330 350 372 350 460" fill="none" stroke="rgba(185,201,228,.28)" stroke-width="2"/>
+              <ellipse class="pt-oval" cx="200" cy="205" rx="112" ry="148"/>
+              <ellipse class="pt-oval-prog" cx="200" cy="205" rx="112" ry="148" pathLength="1" transform="rotate(-90 200 205)"/>
+            </svg>
+            <div class="pt-view__msg" id="face-msg" role="status"><i class="bi bi-search" aria-hidden="true"></i><span>Centra tu rostro en el óvalo.</span></div>
+            <div class="pt-view__off"><i class="bi bi-camera-video-off" aria-hidden="true"></i><b>No pudimos usar la cámara.</b><p>Permite el acceso a la cámara en tu navegador y vuelve a intentarlo.</p></div>
+          </div>
+          <ul class="pt-meter" id="face-meter" aria-label="Calidad de la captura">
+            <li data-k="luz"><span>Iluminación</span><span class="pt-meter__seg" aria-hidden="true"><i></i><i></i><i></i></span><b></b></li>
+            <li data-k="enc"><span>Encuadre</span><span class="pt-meter__seg" aria-hidden="true"><i></i><i></i><i></i></span><b></b></li>
+            <li data-k="nit"><span>Nitidez</span><span class="pt-meter__seg" aria-hidden="true"><i></i><i></i><i></i></span><b></b></li>
+          </ul>
+          <ol class="pt-steps" id="face-steps" aria-label="Prueba de vida">
+            <li data-s="now"><span>1</span>Mira al frente</li><li data-s="pending"><span>2</span>Parpadea una vez</li><li data-s="pending"><span>3</span>Gira la cabeza a la izquierda</li>
+          </ol>
+          <div class="pt-actions"><button class="hz-btn hz-btn--primary" type="button" id="face-btn" disabled>Esperando rostro…</button><button class="hz-btn hz-btn--ghost" type="button" id="face-play">Reproducir flujo</button></div>
+        </div>
+        <div class="pt-side">
+          <div><h3>Anatomía</h3><ol><li><b>Óvalo guía.</b> Punteado mientras busca, sólido cian cuando está listo, verde al éxito, rojo claro al error.</li><li><b>Mensaje en vivo.</b> Una sola indicación imperativa y amable, dentro de la vista.</li><li><b>Calidad en tres criterios.</b> Cada fila: barra de 3 segmentos <b>más</b> icono y palabra ("Buena", "Mejorar", "Insuficiente").</li><li><b>Prueba de vida.</b> Tres pasos numerados; el actual en negrita y azul.</li><li><b>Acción única.</b> El botón cambia de verbo según el estado y se desactiva si no se puede avanzar.</li></ol></div>
+          <div><h3>Reglas</h3><ul><li>Sin cuenta atrás ni límite de tiempo visible.</li><li>El mensaje se anuncia con <code>role="status"</code>; el cambio de estado no mueve el foco.</li><li>"Sin cámara" ofrece un camino alterno ("Usar otro dispositivo") si existe; si no, lo dice.</li><li>Tras el éxito, no se muestra la foto: solo "Rostro registrado".</li></ul></div>
+          <div><h3>Copy aprobado</h3><ul><li>Buscando: "Centra tu rostro en el óvalo."</li><li>Listo: "Perfecto, no te muevas."</li><li>Capturando: "Capturando…"</li><li>Éxito: "Rostro registrado."</li><li>Error: "No logramos verla bien. Busca más luz y reintenta."</li><li>Sin cámara: "No pudimos usar la cámara."</li></ul></div>
+        </div>
+      </div>
+    </div></section>
+
+    <!-- 03 HUELLA -->
+    <section class="ds-sec" id="huella" data-nav="03 · Captura de huella" aria-labelledby="h-huella"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">03 · Patrones de Averyn</span>
+      <h2 id="h-huella">Captura de huella</h2>
+      <p class="ds-lead">La huella se dibuja con arcos concéntricos, la misma figura de la marca. Los arcos se iluminan de dentro hacia fuera a medida que avanza la lectura; el porcentaje y la calidad se dicen en texto.</p>
+      <div class="pt-grid">
+        <div class="pt-card" id="fp">
+          <fieldset class="pt-fingers" id="fp-fingers"><legend>Dedo a registrar · mano derecha</legend>
+            <label><input type="radio" name="dedo" value="Pulgar"><span>Pulgar</span></label><label><input type="radio" name="dedo" value="Índice" checked><span>Índice</span></label><label><input type="radio" name="dedo" value="Medio"><span>Medio</span></label><label><input type="radio" name="dedo" value="Anular"><span>Anular</span></label><label><input type="radio" name="dedo" value="Meñique"><span>Meñique</span></label>
+          </fieldset>
+          <div class="pt-fp" data-state="wait" id="fp-box">
+            <div class="pt-fp__pad"><svg viewBox="0 0 200 230" aria-hidden="true" focusable="false" id="fp-svg"></svg></div>
+            <div class="pt-fp__txt">
+              <h4 id="fp-title" role="status">Coloca el dedo índice en el lector.</h4>
+              <p id="fp-sub">Mantenlo quieto hasta que termine la lectura.</p>
+              <div class="pt-prog"><div class="pt-prog__bar" role="progressbar" aria-label="Progreso de la lectura" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="fp-bar"><i></i></div><div class="pt-prog__lab"><span id="fp-pct">0%</span><span id="fp-q">Calidad —</span></div></div>
+            </div>
+          </div>
+          <div class="pt-ctrl" style="margin:1.1rem 0 0"><span class="stage__label mono">Estado</span>
+            <div class="vz-seg" id="fp-seg" role="group" aria-label="Estado de la lectura de huella"><button type="button" data-s="wait" aria-pressed="true">Esperando</button><button type="button" data-s="read" aria-pressed="false">Leyendo</button><button type="button" data-s="low" aria-pressed="false">Calidad baja</button><button type="button" data-s="ok" aria-pressed="false">Éxito</button><button type="button" data-s="err" aria-pressed="false">Error</button></div>
+          </div>
+          <div class="pt-actions"><button class="hz-btn hz-btn--primary" type="button" id="fp-btn">Simular lectura</button></div>
+        </div>
+        <div class="pt-side">
+          <div><h3>Anatomía</h3><ol><li><b>Lector.</b> Superficie navy con 7 arcos; los arcos activos pasan de blanco tenue a cian.</li><li><b>Selector de dedo.</b> Radios nativos de 44 px; los dedos ya registrados llevan una marca ✓ en texto.</li><li><b>Mensaje + progreso.</b> Titular en <code>role="status"</code>, barra con <code>role="progressbar"</code> y calidad en 0–100.</li></ol></div>
+          <div><h3>Estados</h3><ul><li><b>Calidad baja:</b> arcos en ámbar y la causa en una frase ("Presiona un poco más y no muevas el dedo").</li><li><b>Éxito:</b> arcos verdes y "Huella registrada. 86 de calidad."</li><li><b>Error:</b> "No pudimos leer la huella. Límpiala y reintenta."</li></ul></div>
+          <div><h3>Reglas</h3><ul><li>Al menos dos dedos por persona; el avance dice "1 de 2 dedos".</li><li>Nunca se dibuja la huella real; los arcos son decorativos y no codifican datos.</li><li>El umbral de calidad aceptable lo define el servidor.</li></ul></div>
+        </div>
+      </div>
+    </div></section>
+
+    <!-- 04 RESULTADO -->
+    <section class="ds-sec ds-sec--tint" id="resultado" data-nav="04 · Resultado de verificación" aria-labelledby="h-res"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">04 · Patrones de Averyn</span>
+      <h2 id="h-res">Resultado de verificación</h2>
+      <p class="ds-lead">Muestra la similitud, el umbral y la decisión a la vez. La barra reserva el tramo del umbral con una marca oscura y su rótulo; el texto dice cuánto se pasó o faltó. Mueve el control para ver cómo cambia la decisión.</p>
+      <div class="pt-grid">
+        <div class="pt-card"><div class="pt-vr" id="vr">
+          <div class="pt-vr__head"><div><h3 class="pt-card__t">Verificación facial</h3><p class="pt-card__s" style="margin:0">Persona de ejemplo · hoy, 10:42</p></div><span class="pt-dec pt-dec--ok" id="vr-dec" role="status"><i class="bi bi-check-circle-fill" aria-hidden="true"></i>Aceptada</span></div>
+          <div class="pt-score"><b id="vr-n">0.82</b><span id="vr-d">0.14 por encima del umbral de 0.68.</span></div>
+          <div><div class="pt-scale" role="img" aria-label="Similitud 0.82 sobre 1. Umbral 0.68." id="vr-scale"><div class="pt-scale__fill" id="vr-fill" style="width:calc(82% - 6px)"></div><div class="pt-scale__thr"><em>Umbral 0.68</em></div></div><div class="pt-scale__ends"><span>0</span><span>Similitud</span><span>1</span></div></div>
+          <ul class="pt-reasons" id="vr-reasons"></ul>
+          <div class="pt-actions" id="vr-act"><button class="hz-btn hz-btn--primary" type="button" id="vr-main">Continuar →</button><button class="hz-btn hz-btn--ghost" type="button" id="vr-detail">Ver detalle</button></div>
+          <div class="pt-range"><label class="hz-label" for="vr-range">Puntaje de ejemplo: <b id="vr-rv">0.82</b></label><input type="range" id="vr-range" min="0" max="100" value="82" step="1" aria-describedby="vr-rh"><span class="hz-help" id="vr-rh">Mueve el control para simular otro resultado. En producción el puntaje viene del servidor.</span></div>
+        </div></div>
+        <div class="pt-side">
+          <div><h3>Anatomía</h3><ol><li><b>Decisión</b> en cápsula con icono y palabra: "Aceptada" / "Rechazada".</li><li><b>Puntaje grande</b> (Space Grotesk, cifras tabulares) y una frase que explica la distancia al umbral.</li><li><b>Escala 0–1</b> con el umbral rotulado; relleno azul = puntaje. El tramo bajo el umbral es cálido, el superior es azul claro.</li><li><b>Motivos</b> en filas clave/valor con icono: rostro, prueba de vida, documento.</li><li><b>Siguiente acción:</b> continuar o reintentar.</li></ol></div>
+          <div><h3>Reglas</h3><ul><li>El umbral (0.68) es un dato del servidor; la maqueta lo muestra, no lo calcula.</li><li>Un rechazo explica qué se puede intentar, nunca "usted no es quien dice ser".</li><li>La decisión nunca se comunica solo por color.</li><li>Los puntajes cerca del umbral no se disfrazan: se muestran con su número exacto.</li></ul></div>
+          <div><h3>Copy aprobado</h3><ul><li>Aceptada: "Identidad verificada."</li><li>Rechazada: "No pudimos confirmar la identidad. Intenta de nuevo con mejor luz."</li></ul></div>
+        </div>
+      </div>
+    </div></section>
+
+    <!-- 05 OCR -->
+    <section class="ds-sec" id="ocr" data-nav="05 · Documento y OCR" aria-labelledby="h-ocr"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">05 · Patrones de Averyn</span>
+      <h2 id="h-ocr">Captura de documento y revisión de datos</h2>
+      <p class="ds-lead">La cámara lee, la persona confirma. Cada campo extraído se muestra editable con su confianza en texto; los de baja confianza se piden revisar antes de continuar.</p>
+      <div class="pt-card" style="margin-top:1.8rem"><div class="pt-ocr">
+        <div>
+          <div class="pt-doc" data-state="ok" id="ocr-doc"><div class="pt-doc__card" aria-hidden="true"><div class="pt-doc__ph"></div><div class="pt-doc__ln" style="top:20%;width:46%"></div><div class="pt-doc__ln" style="top:38%;width:38%"></div><div class="pt-doc__ln" style="top:56%;width:44%"></div><div class="pt-doc__ln" style="top:74%;width:30%"></div></div><div class="pt-doc__corners" aria-hidden="true"><i></i><i></i><i></i><i></i></div><span class="pt-view__tag" style="color:var(--av-night-text)">Documento · simulado</span><div class="pt-view__msg" id="ocr-msg" role="status"><i class="bi bi-check-circle" aria-hidden="true"></i><span>Documento detectado.</span></div></div>
+          <div class="pt-ctrl" style="margin:1rem 0 0"><span class="stage__label mono">Estado</span><div class="vz-seg" id="ocr-seg" role="group" aria-label="Estado de la captura del documento"><button type="button" data-s="searching" aria-pressed="false">Buscando</button><button type="button" data-s="ok" aria-pressed="true">Detectado</button></div></div>
+        </div>
+        <div>
+          <h3 class="pt-card__t">Revisa los datos leídos</h3><p class="pt-card__s" id="ocr-sum" role="status">2 campos con baja confianza. Revísalos antes de continuar.</p>
+          <div class="pt-fields" id="ocr-fields"></div>
+          <div class="pt-actions"><button class="hz-btn hz-btn--primary" type="button" id="ocr-ok">Confirmar datos →</button><button class="hz-btn hz-btn--ghost" type="button" id="ocr-again">Volver a capturar</button></div>
+        </div>
+      </div></div>
+      <div class="ds-grid ds-grid--2 ds-gap-top">
+        <div class="pt-side"><div><h3>Anatomía</h3><ul><li><b>Marco con esquinas</b> (relación 16:10 del token <code>--av-ratio-doc</code>); blancas buscando, verdes al detectar.</li><li><b>Campos editables</b> con etiqueta, valor y confianza en mono y texto (95.4%).</li><li><b>"Revisar"</b> en ámbar con icono cuando la confianza es menor a 90%; al corregir pasa a "Corregido".</li></ul></div></div>
+        <div class="pt-side"><div><h3>Reglas</h3><ul><li>Nunca se avanza con datos sin que la persona los haya visto.</li><li>El umbral de 90% es un valor de ejemplo: lo define el servicio de OCR.</li><li>Los datos de la maqueta son ficticios.</li></ul></div></div>
+      </div>
+    </div></section>
+
+    <!-- 06 PAPELETA -->
+    <section class="ds-sec ds-sec--tint" id="papeleta" data-nav="06 · Papeleta y recibo" aria-labelledby="h-pap"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">06 · Patrones de Averyn</span>
+      <h2 id="h-pap">Papeleta electoral y comprobante</h2>
+      <p class="ds-lead">Elegir, revisar, confirmar. El comprobante prueba que <b>un voto fue emitido</b> sin decir cuál ni de quién: el código es aleatorio y no guarda relación con la persona ni con la opción.</p>
+      <div class="pt-grid">
+        <div class="pt-card" id="ballot">
+          <ol class="pt-ballot-step" aria-label="Pasos de la votación"><li aria-current="step" data-i="0">1 Elegir</li><li data-i="1">2 Revisar</li><li data-i="2">3 Comprobante</li></ol>
+          <div data-v="0"><fieldset class="pt-ballot" id="ballot-opts"><legend class="pt-card__t" style="padding:0">Elige una opción</legend><p class="pt-card__s">Elecciones de ejemplo · Lista única por cargo.</p>
+            <label class="pt-opt"><input type="radio" name="voto" value="Lista 1 · Horizonte"><span><b>Lista 1 · Horizonte</b><small>Opción de ejemplo</small></span><span class="pt-opt__mk"><i class="bi bi-check-lg" aria-hidden="true"></i></span></label>
+            <label class="pt-opt"><input type="radio" name="voto" value="Lista 2 · Cima"><span><b>Lista 2 · Cima</b><small>Opción de ejemplo</small></span><span class="pt-opt__mk"><i class="bi bi-check-lg" aria-hidden="true"></i></span></label>
+            <label class="pt-opt"><input type="radio" name="voto" value="Lista 3 · Raíz"><span><b>Lista 3 · Raíz</b><small>Opción de ejemplo</small></span><span class="pt-opt__mk"><i class="bi bi-check-lg" aria-hidden="true"></i></span></label>
+            <label class="pt-opt"><input type="radio" name="voto" value="Voto en blanco"><span><b>Voto en blanco</b><small>No elige ninguna lista</small></span><span class="pt-opt__mk"><i class="bi bi-check-lg" aria-hidden="true"></i></span></label>
+          </fieldset><div class="pt-actions"><button class="hz-btn hz-btn--primary" type="button" id="ballot-next" disabled>Revisar mi voto →</button></div></div>
+          <div data-v="1" hidden><h3 class="pt-card__t" id="ballot-h2" tabindex="-1">Revisa antes de confirmar</h3><p class="pt-card__s">Después de confirmar no podrás cambiar tu voto.</p><div class="pt-rc" style="border-style:solid"><span class="stage__label mono">Tu opción</span><p class="pt-rc__code" style="font-family:var(--av-font-heading);letter-spacing:-.01em;font-size:1.5rem" id="ballot-sel"></p></div><div class="pt-actions"><button class="hz-btn hz-btn--primary" type="button" id="ballot-ok">Confirmar voto</button><button class="hz-btn hz-btn--ghost" type="button" id="ballot-back">Volver</button></div></div>
+          <div data-v="2" hidden><h3 class="pt-card__t" id="ballot-h3" tabindex="-1">Tu voto fue registrado.</h3><p class="pt-card__s">Guarda este código para comprobar que tu voto fue contado.</p><div class="pt-rc"><span class="stage__label mono">Código de comprobante</span><p class="pt-rc__code" id="ballot-code">AV-7K3Q-92XD</p><dl><dt>Emitido</dt><dd id="ballot-time">—</dd><dt>Elección</dt><dd>Elecciones de ejemplo</dd></dl></div><p class="ds-note"><i class="bi bi-shield-lock" aria-hidden="true"></i> Este comprobante no contiene tu elección ni tu identidad.</p><div class="pt-actions"><button class="hz-btn hz-btn--primary" type="button" id="ballot-copy">Copiar código</button><button class="hz-btn hz-btn--ghost" type="button" id="ballot-reset">Reiniciar demo</button></div></div>
+        </div>
+        <div class="pt-side">
+          <div><h3>Anatomía</h3><ol><li><b>Indicador de pasos</b> en mono: Elegir / Revisar / Comprobante.</li><li><b>Opciones como tarjetas</b> con radios nativos (flechas para moverse, 64 px de alto); selección = borde y relleno azul <b>más</b> marca ✓.</li><li><b>Revisión</b> con la opción en grande y "No podrás cambiar tu voto".</li><li><b>Comprobante</b> con código mono de uso único y la nota de privacidad.</li></ol></div>
+          <div><h3>Reglas de privacidad</h3><ul><li>El código se genera al azar en el servidor; no se deriva de la persona, la opción ni la hora.</li><li>Ninguna pantalla posterior repite la opción elegida.</li><li>No se guarda ni se registra en bitácora quién eligió qué: solo que votó.</li><li>El voto en blanco es una opción de primera clase, con el mismo peso visual.</li></ul></div>
+          <div><h3>Foco</h3><p style="margin:0">Cada paso lleva el foco al nuevo titular (<code>tabindex="-1"</code>) para que el lector de pantalla lo anuncie.</p></div>
+        </div>
+      </div>
+    </div></section>
+
+    <!-- 07 DISPOSITIVOS -->
+    <section class="ds-sec" id="dispositivos" data-nav="07 · Dispositivos" aria-labelledby="h-dev"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">07 · Patrones de Averyn</span>
+      <h2 id="h-dev">Estado de dispositivos</h2>
+      <p class="ds-lead">Cámaras y lectores son fuentes de datos: si fallan, la persona que administra debe saberlo a primera vista y poder actuar. Cada fila tiene estado en texto, última señal y una acción.</p>
+      <div class="pt-grid">
+        <div class="pt-card"><h3 class="pt-card__t">Dispositivos</h3><p class="pt-card__s">Sede Central · datos de ejemplo</p>
+          <ul class="pt-devs" id="devs"></ul></div>
+        <div class="pt-side">
+          <div><h3>Estados</h3><ul><li><span class="hz-chip hz-chip--success">Conectado</span> responde dentro del tiempo esperado.</li><li><span class="hz-chip hz-chip--warning">Desconectado</span> sin señal; se ofrece "Reconectar".</li><li><span class="hz-chip hz-chip--error">Con error</span> responde mal; se ofrece "Probar" y el motivo.</li></ul></div>
+          <div><h3>Reglas</h3><ul><li>El chip lleva punto de color <b>y</b> palabra; el icono del dispositivo cambia de tono pero no es la única señal.</li><li>"Última señal" en tiempo relativo ("Hace 2 min") con la hora exacta en <code>title</code>.</li><li>Un dispositivo caído se refleja también como banner del sistema (ver <i>Estados del sistema</i>).</li></ul></div>
+        </div>
+      </div>
+    </div></section>
+
+    <!-- 08 CONSENTIMIENTO -->
+    <section class="ds-sec ds-sec--tint" id="consentimiento" data-nav="08 · Consentimiento" aria-labelledby="h-cons"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">08 · Patrones de Averyn</span>
+      <h2 id="h-cons">Consentimiento de datos biométricos</h2>
+      <p class="ds-lead">Va antes de la primera captura. Cuatro respuestas en lenguaje llano: qué guardamos, para qué, por cuánto tiempo y cómo se revoca. El texto legal definitivo lo fija el área jurídica; este patrón fija la <b>estructura</b>.</p>
+      <div class="pt-grid">
+        <div class="pt-card pt-cons"><h3 class="pt-card__t">Tu rostro y tu huella, con tu permiso</h3><p class="pt-card__s">Antes de empezar, esto es lo que vamos a hacer con tus datos.</p>
+          <dl><div><dt>Qué guardamos</dt><dd>Una plantilla matemática de tu rostro y huella. No guardamos fotos ni imágenes de tu huella.</dd></div><div><dt>Para qué</dt><dd>Solo para verificar que eres tú cuando ingresas o participas en un proceso de tu institución.</dd></div><div><dt>Cuánto tiempo</dt><dd>Mientras tengas vínculo con tu institución. Después se eliminan.</dd></div><div><dt>Cómo revocar</dt><dd>Desde tu perfil o escribiendo a tu administrador. Revocar no afecta a tus datos de cuenta.</dd></div></dl>
+          <label class="hz-check"><input type="checkbox" id="cons-chk"> Entiendo y acepto el tratamiento de mis datos biométricos.</label>
+          <div class="pt-actions"><button class="hz-btn hz-btn--primary" type="button" id="cons-ok" disabled>Aceptar y continuar →</button><button class="hz-btn hz-btn--ghost" type="button" id="cons-no">Ahora no</button></div>
+          <p class="hz-help" id="cons-msg" role="status" style="margin-top:.8rem"></p></div>
+        <div class="pt-side">
+          <div><h3>Reglas</h3><ul><li>La casilla <b>nunca</b> viene marcada; el botón principal solo se activa al marcarla.</li><li>"Ahora no" es un botón de igual altura, no un enlace escondido; explica qué no podrá hacer.</li><li>Sin letra pequeña ni desplazamiento oculto: lo esencial cabe sin scroll en móvil.</li><li>El consentimiento se guarda con fecha y versión del texto (para auditoría), sin datos biométricos.</li></ul></div>
+          <div><h3>Pendiente de definir</h3><ul><li>Plazos de conservación exactos y canal de revocación.</li><li>Texto legal y enlace a la política de privacidad.</li></ul></div>
+        </div>
+      </div>
+    </div></section>
+
+    <!-- 09 COPY -->
+    <section class="ds-sec" id="copy-patrones" data-nav="09 · Resumen de estados" aria-labelledby="h-cp"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">09 · Patrones de Averyn</span>
+      <h2 id="h-cp">Resumen de estados y canales</h2>
+      <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Patrón</th><th>Estados</th><th>Canales (nunca solo color)</th><th>Anuncio</th></tr></thead><tbody>
+        <tr><td>Captura facial</td><td>Buscando, listo, capturando, éxito, error, sin cámara</td><td>Óvalo + mensaje + calidad en texto + botón</td><td><code>role="status"</code> en el mensaje</td></tr>
+        <tr><td>Huella</td><td>Esperando, leyendo, calidad baja, éxito, error</td><td>Arcos + titular + % + calidad</td><td>Titular <code>role="status"</code>, <code>progressbar</code></td></tr>
+        <tr><td>Resultado</td><td>Aceptada, rechazada</td><td>Cápsula con icono y palabra + número + frase</td><td><code>role="status"</code> en la decisión</td></tr>
+        <tr><td>Documento / OCR</td><td>Buscando, detectado; campo OK, revisar, corregido</td><td>Esquinas + mensaje + % en texto + chip "Revisar"</td><td>Resumen en <code>role="status"</code></td></tr>
+        <tr><td>Papeleta</td><td>Elegir, revisar, comprobante</td><td>Borde + relleno + ✓ + paso numerado</td><td>Foco al titular de cada paso</td></tr>
+        <tr><td>Dispositivos</td><td>Conectado, desconectado, con error</td><td>Chip con punto y palabra + icono + última señal</td><td>Toast al reconectar</td></tr>
+        <tr><td>Consentimiento</td><td>Sin aceptar, aceptado, rechazado</td><td>Casilla + texto + botón activado/desactivado</td><td>Mensaje <code>role="status"</code></td></tr>
+      </tbody></table></div>
+    </div></section>
+
+    </main>
+
+    <footer class="ds-sec" style="padding-block:2.4rem;border-top:1px solid var(--av-hairline)"><div class="ds-wrap"><div class="row" style="justify-content:space-between"><span class="mono" style="color:var(--av-gray-500)">Averyn · Design System v1.2 Horizonte</span><span class="mono" style="color:var(--av-gray-500)">Fuente: DESIGN.md · tokens.css</span></div></div></footer>
+  </div>
+</div>
+<div class="hz-toasts" id="toasts" role="region" aria-label="Notificaciones" aria-live="polite"></div>
+<script src="./ds.js"></script>
+<script src="./patrones.js"></script>
+</body>
+</html>
