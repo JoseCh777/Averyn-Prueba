@@ -1,0 +1,322 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-02T02:41:03Z",
+  "title": "Design System: Averyn",
+  "extensions": {
+    "colorMeta": {
+      "signal-blue": {
+        "role": "primary",
+        "displayName": "Azul de señal",
+        "canonical": "#145FEE",
+        "tonalRamp": [
+          "#051C47",
+          "#09317E",
+          "#0D46B4",
+          "#115CEA",
+          "#4480F1",
+          "#7BA5F5",
+          "#B1CAF9",
+          "#E7EFFD"
+        ]
+      },
+      "signal-blue-tint": {
+        "role": "primary",
+        "displayName": "Tinte de señal",
+        "canonical": "#EAF0FE",
+        "tonalRamp": [
+          "#031849",
+          "#062B81",
+          "#093DB8",
+          "#0B50F0",
+          "#4076F6",
+          "#779EF9",
+          "#AFC6FB",
+          "#E7EEFE"
+        ]
+      },
+      "cyan-trace": {
+        "role": "secondary",
+        "displayName": "Traza cian",
+        "canonical": "#00ACD2",
+        "tonalRamp": [
+          "#003F4C",
+          "#006E87",
+          "#009EC1",
+          "#00CEFB",
+          "#37DBFF",
+          "#71E5FF",
+          "#ABF0FF",
+          "#E5FAFF"
+        ]
+      },
+      "cyan-glow": {
+        "role": "secondary",
+        "displayName": "Brillo cian",
+        "canonical": "#55D6FF",
+        "tonalRamp": [
+          "#003A4C",
+          "#006687",
+          "#0093C1",
+          "#00BFFB",
+          "#37CFFF",
+          "#71DDFF",
+          "#ABEBFF",
+          "#E5F9FF"
+        ]
+      },
+      "deep-navy": {
+        "role": "neutral",
+        "displayName": "Navy profundo",
+        "canonical": "#000C24",
+        "tonalRamp": [
+          "#00194C",
+          "#002D87",
+          "#0040C1",
+          "#0054FB",
+          "#3779FF",
+          "#71A0FF",
+          "#ABC7FF",
+          "#E5EEFF"
+        ]
+      },
+      "night-navy": {
+        "role": "neutral",
+        "displayName": "Navy nocturno",
+        "canonical": "#071A36",
+        "tonalRamp": [
+          "#092144",
+          "#0F3977",
+          "#1652AB",
+          "#1D6BDF",
+          "#4E8CE8",
+          "#81ADEF",
+          "#B5CFF5",
+          "#E8F0FC"
+        ]
+      },
+      "horizon-navy": {
+        "role": "neutral",
+        "displayName": "Navy de horizonte",
+        "canonical": "#0A2A66",
+        "tonalRamp": [
+          "#071D46",
+          "#0C337B",
+          "#1148B0",
+          "#165EE5",
+          "#4982ED",
+          "#7EA6F2",
+          "#B3CBF8",
+          "#E8EFFD"
+        ]
+      },
+      "sky": {
+        "role": "neutral",
+        "displayName": "Cielo",
+        "canonical": "#DCECFF",
+        "tonalRamp": [
+          "#00234C",
+          "#003E87",
+          "#0058C1",
+          "#0073FB",
+          "#3792FF",
+          "#71B2FF",
+          "#ABD2FF",
+          "#E5F1FF"
+        ]
+      },
+      "paper-blue": {
+        "role": "neutral",
+        "displayName": "Papel azul",
+        "canonical": "#F4F8FF",
+        "tonalRamp": [
+          "#001C4C",
+          "#003187",
+          "#0046C1",
+          "#005BFB",
+          "#377FFF",
+          "#71A5FF",
+          "#ABCAFF",
+          "#E5EFFF"
+        ]
+      },
+      "hairline": {
+        "role": "neutral",
+        "displayName": "Línea",
+        "canonical": "#DCE5F5",
+        "tonalRamp": [
+          "#11203C",
+          "#1E3969",
+          "#2B5296",
+          "#386AC4",
+          "#638BD2",
+          "#90ADDF",
+          "#BECFEC",
+          "#EBF0F9"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Titulares de sección y cierre; Space Grotesk 500 con tracking -0.025em."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Títulos de filas, soluciones e integrantes."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Párrafos en Inter; apoyo en tinta apagada."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Acciones y rótulos en JetBrains Mono mayúsculas."
+      }
+    },
+    "shadows": [
+      {
+        "name": "boton-solido",
+        "value": "0 3px 0 rgba(0, 12, 36, .3)",
+        "purpose": "Aspecto de tecla en botones; baja al pulsar."
+      },
+      {
+        "name": "marco-login",
+        "value": "0 24px 60px rgba(0, 12, 36, .14)",
+        "purpose": "La única tarjeta que flota (login)."
+      },
+      {
+        "name": "popover",
+        "value": "0 4px 12px rgba(0, 12, 36, .10)",
+        "purpose": "Aviso del perfil de integrante."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out-fuerte",
+        "value": "cubic-bezier(.23, 1, .32, 1)",
+        "purpose": "Respuesta inmediata en hover, foco y entradas; 150-250 ms."
+      },
+      {
+        "name": "scroll-hero",
+        "value": "t1 .06-.42 · t2 .42-.66 · t3 .62-.92",
+        "purpose": "Fases del hero guiado por scroll (A, palabra, figura)."
+      },
+      {
+        "name": "dibujo-arcos",
+        "value": "stroke-dashoffset 1.4s ease-out",
+        "purpose": "Arcos del login que se dibujan al cargar."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "nav",
+        "value": "1100px"
+      },
+      {
+        "name": "columna-unica",
+        "value": "900px"
+      },
+      {
+        "name": "compacto",
+        "value": "560px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Botón primario",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Acción principal: azul de señal, mono mayúsculas, sombra de tecla.",
+      "html": "<button class=\"ds-btn-primary\">Ingresar</button>",
+      "css": ".ds-btn-primary{background:#145FEE;color:#fff;border:0;border-radius:8px;min-height:44px;padding:11px 20px;font:700 12px \"JetBrains Mono\",monospace;letter-spacing:.06em;text-transform:uppercase;box-shadow:0 3px 0 rgba(0,12,36,.3);cursor:pointer;transition:background-color .15s,transform .15s}.ds-btn-primary:hover{background:#0F4BC7}.ds-btn-primary:active{transform:scale(.97)}.ds-btn-primary:focus-visible{outline:2px solid #145FEE;outline-offset:3px}"
+    },
+    {
+      "name": "Botón fantasma",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Acción secundaria: contorno fino, sin relleno.",
+      "html": "<button class=\"ds-btn-ghost\">Conocer Averyn ↓</button>",
+      "css": ".ds-btn-ghost{background:#fff;color:#000C24;border:1px solid #CFDCF3;border-radius:8px;min-height:44px;padding:11px 20px;font:700 12px \"JetBrains Mono\",monospace;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:border-color .15s,transform .15s}.ds-btn-ghost:hover{border-color:#000C24}.ds-btn-ghost:active{transform:scale(.97)}.ds-btn-ghost:focus-visible{outline:2px solid #145FEE;outline-offset:3px}"
+    },
+    {
+      "name": "Píldora de navegación",
+      "kind": "nav",
+      "refersTo": "nav-pill",
+      "description": "Menú centrado translúcido con enlaces mono.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\">Qué es</a><a href=\"#\">Capacidades</a><a href=\"#\">Soluciones</a></nav>",
+      "css": ".ds-nav{display:inline-flex;gap:24px;padding:11px 26px;background:rgba(234,240,254,.85);border-radius:10px}.ds-nav a{font:500 12px \"JetBrains Mono\",monospace;letter-spacing:.06em;text-transform:uppercase;color:#26304A;text-decoration:none;transition:color .15s}.ds-nav a:hover{color:#145FEE}.ds-nav a:focus-visible{outline:2px solid #145FEE;outline-offset:3px}"
+    },
+    {
+      "name": "Campo de texto",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Campo del login: borde fino, foco azul con halo.",
+      "html": "<label class=\"ds-label\" for=\"ds-e\">Correo electrónico</label><input id=\"ds-e\" class=\"ds-input\" placeholder=\"nombre@organizacion.com\" />",
+      "css": ".ds-label{display:block;margin-bottom:6px;font:600 14px Inter,sans-serif;color:#000C24}.ds-input{width:100%;min-height:48px;padding:11px 14px;font:16px Inter,sans-serif;color:#000C24;background:#fff;border:1px solid #CFDCF3;border-radius:8px;transition:border-color .15s,box-shadow .15s}.ds-input:hover{border-color:#9DB6E6}.ds-input:focus{outline:none;border-color:#145FEE;box-shadow:0 0 0 3px rgba(20,95,238,.15)}"
+    },
+    {
+      "name": "Fila de lista",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Componente firma: línea de 1 px, índice mono, título y descripción.",
+      "html": "<div class=\"ds-row\"><span>01</span><div><h3>Identidad</h3><p>Personas con identificadores propios de Averyn.</p></div></div>",
+      "css": ".ds-row{display:grid;grid-template-columns:48px 1fr;gap:16px;padding:24px 0;border-top:1px solid #DCE5F5}.ds-row span{padding-top:8px;font:500 12px \"JetBrains Mono\",monospace;letter-spacing:.06em;color:#9DB6E6}.ds-row h3{margin:0 0 6px;font:500 24px \"Space Grotesk\",sans-serif;letter-spacing:-.025em;color:#000C24;transition:color .2s}.ds-row p{margin:0;color:#56637F;max-width:44ch}.ds-row:hover h3{color:#145FEE}"
+    },
+    {
+      "name": "Espacio para media",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Marco reservado para imagen o video futuros.",
+      "html": "<div class=\"ds-media\"><span>Imagen · 16:9</span></div>",
+      "css": ".ds-media{display:grid;place-items:center;aspect-ratio:16/9;background:#F4F8FF;border:1px solid #DCE5F5;border-radius:4px}.ds-media span{font:500 12px \"JetBrains Mono\",monospace;letter-spacing:.06em;text-transform:uppercase;color:#9DB6E6}"
+    }
+  ],
+  "narrative": {
+    "northStar": "El horizonte que se oscurece",
+    "overview": "Averyn abre con un cielo claro y, a medida que se avanza, el fondo cae hacia un navy profundo: la claridad de la plataforma se convierte en seguridad. Sobre ese horizonte, un trazo fino de arcos hace de firma. Sistema sereno e institucional, con la precisión de un instrumento.",
+    "keyCharacteristics": [
+      "Fondo de cielo a navy como gesto central; el logo negro vive en la zona clara.",
+      "Un solo azul de señal; el cian es trazo o resalte, nunca superficie grande.",
+      "Acciones en JetBrains Mono mayúsculas; titulares en Space Grotesk 500.",
+      "Líneas de 1 px y espacio en blanco en lugar de cajas; sombra solo en el marco del login y en los botones.",
+      "Espacios reservados para imágenes y video futuros."
+    ],
+    "rules": [
+      {
+        "name": "The One Signal Rule",
+        "body": "El azul de señal es el único color que invita a actuar; el cian nunca es superficie.",
+        "section": "colors"
+      },
+      {
+        "name": "The Horizon Rule",
+        "body": "El oscurecimiento va de arriba (claro) hacia abajo (navy); el logo negro siempre se apoya en la zona clara.",
+        "section": "colors"
+      },
+      {
+        "name": "The Mono Action Rule",
+        "body": "Lo que se pulsa o rotula va en JetBrains Mono mayúsculas; lo que se lee, en Inter o Space Grotesk.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat-By-Default Rule",
+        "body": "Una superficie en reposo no tiene sombra; solo botones, el marco del login y popovers.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do mantener el logo negro sobre la zona clara del degradado y el blanco sobre navy.",
+      "Do separar con líneas de 1 px y espacio en blanco antes que con tarjetas.",
+      "Do usar JetBrains Mono mayúsculas para botones, rótulos y navegación.",
+      "Do respetar prefers-reduced-motion.",
+      "Do componer de forma asimétrica."
+    ],
+    "donts": [
+      "Don't usar el cian como superficie grande ni el azul de señal como decoración.",
+      "Don't añadir sombras difusas, glows de color ni franjas laterales gruesas.",
+      "Don't volver al estilo brutalista: se probó y se descartó por perder identidad.",
+      "Don't centrar y repetir tres tarjetas iguales como solución por defecto.",
+      "Don't ampliar el wordmark por encima de su tamaño nativo."
+    ]
+  }
+}

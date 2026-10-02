@@ -115,6 +115,25 @@
   --av-indigo-tint: #EEF0FE;
   --av-cyan-tint: #DFF4FA;       /* tint suave del celeste de marca (dispositivos) */
   --av-text-welcome: clamp(1.75rem, 1.15rem + 1.5vw, 2.375rem);
+
+  /* SISTEMA "HORIZONTE" — landing y login (ver DESIGN.md en la raíz).
+     Cielo claro que cae a navy; un solo azul de señal; acciones en mono; líneas de 1 px. */
+  --av-navy-night: #071A36;       /* sección oscura (Capacidades) */
+  --av-navy-horizon: #0A2A66;     /* tramo medio del degradado */
+  --av-sky: #DCECFF;              /* inicio del hero */
+  --av-paper-blue: #F4F8FF;       /* fondos alternos de sección */
+  --av-hairline: #DCE5F5;         /* separadores de 1 px */
+  --av-hairline-strong: #CFDCF3;  /* bordes de campos y botones fantasma */
+  --av-cyan-glow: #55D6FF;        /* índices y hover sobre navy */
+  --av-night-text: #B9C9E4;       /* texto secundario sobre navy */
+  --av-ink-faint: #9DB6E6;        /* rótulos y numeración discretos */
+
+  --av-font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
+  --av-radius-control: 8px;       /* botones y campos */
+  --av-radius-frame: 24px;        /* marco del login */
+  --av-ease-out: cubic-bezier(.23, 1, .32, 1);
+  --av-shadow-key: 0 3px 0 rgba(0, 12, 36, .3);        /* botón sólido, aspecto de tecla */
+  --av-shadow-frame: 0 24px 60px rgba(0, 12, 36, .14); /* única tarjeta que flota */
 }
 
 /* Breakpoints — ver docs/design-system.md
