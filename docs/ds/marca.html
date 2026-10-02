@@ -22,21 +22,28 @@
     <a class="ds-side__brand" href="../design-system.html" aria-label="Averyn, inicio del design system"><img src="../../averyn-frontend/assets/images/averyn-logo-font-black.avif" alt="Averyn"></a>
     <p class="ds-side__ver mono">Design System · v1.4 Horizonte</p>
     <nav>
-      <span class="grp mono">Design system</span>
+      <span class="grp mono">Sistema</span>
       <a class="ds-page" href="../design-system.html">Fundamentos y componentes</a>
       <a class="ds-page" href="graficos.html">Gráficos</a>
-      <a class="ds-page" href="patrones.html">Patrones de Averyn</a>
       <a class="ds-page" href="componentes.html">Componentes que faltaban</a>
+      <span class="grp mono">Aplicación</span>
+      <a class="ds-page" href="patrones.html">Patrones de Averyn</a>
       <a class="ds-page" href="plantillas.html">Plantillas</a>
-      <a class="ds-page" href="marca.html" aria-current="page">Marca y entregables</a>
       <a class="ds-page" href="sistema.html">Estados del sistema</a>
-      <span class="grp mono">En esta página</span>
-      <a href="#ilustracion">01 · Ilustración con arcos</a>
-      <a href="#favicons">02 · Favicons e imagen social</a>
-      <a href="#correos">03 · Correos transaccionales</a>
-      <a href="#impresion">04 · Impresión (actas)</a>
-      <a href="#tokens">05 · Tokens exportables</a>
-      <a href="#entregables">06 · Dónde está cada cosa</a>
+      <span class="grp mono">Marca y calidad</span>
+      <a class="ds-page" href="marca.html" aria-current="page">Marca y entregables</a>
+      <div class="ds-subnav">
+        <span class="grp sub mono">Identidad visual</span>
+        <a href="#ilustracion">Ilustración con arcos</a>
+        <a href="#favicons">Favicons e imagen social</a>
+        <span class="grp sub mono">Fuera de la pantalla</span>
+        <a href="#correos">Correos transaccionales</a>
+        <a href="#impresion">Impresión (actas)</a>
+        <span class="grp sub mono">Tokens</span>
+        <a href="#tokens">Tokens y exportación</a>
+        <span class="grp sub mono">Entregables</span>
+        <a href="#entregables">Mapa de entregables</a>
+      </div>
     </nav>
   </aside>
 
@@ -45,9 +52,9 @@
 
     <main id="contenido">
 
-    <!-- 01 ILUSTRACIÓN -->
-    <section class="ds-sec" id="ilustracion" data-nav="01 · Ilustración con arcos" aria-labelledby="h-ill"><div class="ds-wrap">
-      <span class="ds-eyebrow mono">01 · Marca y entregables</span>
+    <!-- ILUSTRACIÓN -->
+    <section class="ds-sec" id="ilustracion" aria-labelledby="h-ill" data-nav="Ilustración con arcos" data-grp="Identidad visual"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Marca y entregables</span>
       <h2 id="h-ill">Kit de ilustración: los arcos</h2>
       <p class="ds-lead">Averyn no usa mascotas ni escenas: una sola figura, los arcos sobre el horizonte, cambia de estado para contar qué pasa. Solo trazos de 1.5–2 px, sin rellenos, con la paleta de marca. Cada pieza se puede copiar o descargar como SVG.</p>
       <div class="ill-grid" id="ill-grid"></div>
@@ -60,9 +67,9 @@
       <p class="ds-note">Estructura fija: ilustración (96 px de alto), titular que dice qué falta, una frase con el siguiente paso y, si hay una salida, un único botón. Nunca "No hay datos".</p>
     </div></section>
 
-    <!-- 02 FAVICONS -->
-    <section class="ds-sec ds-sec--tint" id="favicons" data-nav="02 · Favicons e imagen social" aria-labelledby="h-fav"><div class="ds-wrap">
-      <span class="ds-eyebrow mono">02 · Marca y entregables</span>
+    <!-- FAVICONS -->
+    <section class="ds-sec ds-sec--tint" id="favicons" aria-labelledby="h-fav" data-nav="Favicons e imagen social" data-grp="Identidad visual"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Marca y entregables</span>
       <h2 id="h-fav">Favicons e imagen para compartir</h2>
       <p class="ds-lead">Generados a partir del isotipo oficial (<code>averyn-logo-blue</code>) y la figura de arcos; nada redibujado. Los archivos están en <code>docs/ds/assets/</code>, listos para copiar al frontend cuando se decida.</p>
       <div class="fav-row">
@@ -85,9 +92,9 @@
       <p class="ds-note">La URL de <code>og:image</code> debe ser absoluta y pública. El titular de la imagen es el mismo del hero de la landing; si cambia uno, cambia el otro.</p>
     </div></section>
 
-    <!-- 03 CORREOS -->
-    <section class="ds-sec" id="correos" data-nav="03 · Correos transaccionales" aria-labelledby="h-mail"><div class="ds-wrap">
-      <span class="ds-eyebrow mono">03 · Marca y entregables</span>
+    <!-- CORREOS -->
+    <section class="ds-sec" id="correos" aria-labelledby="h-mail" data-nav="Correos transaccionales" data-grp="Fuera de la pantalla"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Marca y entregables</span>
       <h2 id="h-mail">Correos transaccionales</h2>
       <p class="ds-lead">Tres plantillas de producción: invitación, verificación de correo y recuperación de contraseña. HTML de tablas con estilos en línea (lo que realmente funciona en Gmail, Outlook y Apple Mail), versión en texto y variables <code>{{así}}</code>. Los archivos viven en <code>docs/ds/emails/</code>.</p>
       <div class="mail">
@@ -110,9 +117,9 @@
       </tbody></table></div>
     </div></section>
 
-    <!-- 04 IMPRESIÓN -->
-    <section class="ds-sec ds-sec--tint" id="impresion" data-nav="04 · Impresión (actas)" aria-labelledby="h-pr"><div class="ds-wrap">
-      <span class="ds-eyebrow mono">04 · Marca y entregables</span>
+    <!-- IMPRESIÓN -->
+    <section class="ds-sec ds-sec--tint" id="impresion" aria-labelledby="h-pr" data-nav="Impresión (actas)" data-grp="Fuera de la pantalla"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Marca y entregables</span>
       <h2 id="h-pr">Estilos de impresión: actas y constancias</h2>
       <p class="ds-lead">Los documentos oficiales (constancias de verificación, actas electorales, reportes) se imprimen o se guardan en PDF desde el navegador. <code>print.css</code> da formato A4 con tinta mínima, tablas que no se parten y pie con número de página.</p>
       <div class="pr-stage">
@@ -133,9 +140,9 @@
 &lt;/main&gt;</pre><button class="copy" type="button" data-copy="#code-print">Copiar</button></div>
     </div></section>
 
-    <!-- 05 TOKENS -->
-    <section class="ds-sec" id="tokens" data-nav="05 · Tokens exportables" aria-labelledby="h-tk"><div class="ds-wrap">
-      <span class="ds-eyebrow mono">05 · Marca y entregables</span>
+    <!-- TOKENS -->
+    <section class="ds-sec" id="tokens" aria-labelledby="h-tk" data-nav="Tokens y exportación" data-grp="Tokens"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Marca y entregables</span>
       <h2 id="h-tk">Tokens exportables (W3C)</h2>
       <p class="ds-lead">Los tokens salen de <code>tokens.css</code> —la fuente de verdad— con <code>python docs/ds/src/tokens_export.py</code>, en el formato de Design Tokens del W3C (<code>$value</code>, <code>$type</code>). Sirven para Figma (Tokens Studio), Style Dictionary o cualquier herramienta que lo lea. Nunca se editan a mano.</p>
       <div class="tk-grid">
@@ -153,9 +160,9 @@
       </tbody></table></div>
     </div></section>
 
-    <!-- 06 ENTREGABLES -->
-    <section class="ds-sec ds-sec--tint" id="entregables" data-nav="06 · Dónde está cada cosa" aria-labelledby="h-ent"><div class="ds-wrap">
-      <span class="ds-eyebrow mono">06 · Marca y entregables</span>
+    <!-- ENTREGABLES -->
+    <section class="ds-sec ds-sec--tint" id="entregables" aria-labelledby="h-ent" data-nav="Mapa de entregables" data-grp="Entregables"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Marca y entregables</span>
       <h2 id="h-ent">Mapa de entregables</h2>
       <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Entregable</th><th>Ubicación</th><th>Estado</th></tr></thead><tbody>
         <tr><td>Design system en un solo HTML</td><td><code>docs/averyn-design-system-horizonte.html</code></td><td><span class="hz-chip hz-chip--success">Listo para compartir</span></td></tr>
