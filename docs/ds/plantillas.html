@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Averyn — Design System Horizonte v1.2 · Plantillas</title>
+<meta name="description" content="Design system de Averyn: principios, tokens, componentes y reglas de uso del estilo Horizonte.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link rel="icon" href="../../averyn-frontend/assets/images/averyn-logo-blue.avif">
+<link href="./ds.css" rel="stylesheet">
+<link href="./charts.css" rel="stylesheet">
+<link href="./componentes.css" rel="stylesheet">
+<link href="./plantillas.css" rel="stylesheet">
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<div class="ds-shell">
+  <aside class="ds-side" aria-label="Índice del design system">
+    <a class="ds-side__brand" href="../design-system.html" aria-label="Averyn, inicio del design system"><img src="../../averyn-frontend/assets/images/averyn-logo-font-black.avif" alt="Averyn"></a>
+    <p class="ds-side__ver mono">Design System · v1.2 Horizonte</p>
+    <nav>
+      <span class="grp mono">Design system</span>
+      <a class="ds-page" href="../design-system.html">Fundamentos y componentes</a>
+      <a class="ds-page" href="graficos.html">Gráficos</a>
+      <a class="ds-page" href="patrones.html">Patrones de Averyn</a>
+      <a class="ds-page" href="componentes.html">Componentes que faltaban</a>
+      <a class="ds-page" href="plantillas.html" aria-current="page">Plantillas</a>
+      <a class="ds-page" href="sistema.html">Estados del sistema</a>
+      <span class="grp mono">En esta página</span>
+      <a href="#intro-plantillas">00 · Cómo leer esto</a>
+      <a href="#bitacora">01 · Bitácora de auditoría</a>
+      <a href="#configuracion">02 · Configuración</a>
+      <a href="#persona">03 · Detalle de persona</a>
+      <a href="#asistente">04 · Asistente electoral</a>
+      <a href="#notificaciones">05 · Centro de notificaciones</a>
+      <a href="#perfil">06 · Perfil</a>
+    </nav>
+  </aside>
+
+  <div class="ds-main" id="top">
+    <header class="ds-cover ds-cover--page"><div class="ds-wrap"><span class="mono" style="color:#fff;opacity:.85">Plantillas</span><h1>Pantallas completas, no piezas sueltas.</h1><p>Bitácora, configuración, detalle de persona, asistente, notificaciones y perfil: los componentes compuestos en pantallas reales, con sus estados.</p></div></header>
+
+    <main id="contenido">
+
+    <!-- INTRO -->
+    <section class="ds-sec" id="intro-plantillas" data-nav="00 · Cómo leer esto" aria-labelledby="h-ip"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Plantillas</span>
+      <h2 id="h-ip">Pantallas completas, no piezas sueltas</h2>
+      <p class="ds-lead">Cada plantilla compone los componentes del sistema en una pantalla real, con navbar en píldora, ancho de 1200 px y la misma jerarquía. Se muestran escaladas dentro de un marco; pulsa <b>"Ver a pantalla completa"</b> para revisarlas a tamaño real. Los datos son ficticios.</p>
+      <div class="ds-grid ds-grid--2 ds-gap-top">
+        <div class="dd dd--do"><strong>Todas las plantillas comparten</strong><ul><li>Navbar en píldora con marca, dock de módulos y avatar.</li><li>Cabecera: migas en mono, titular en Space Grotesk y acciones a la derecha.</li><li>Contenido sobre fondo papel azul, en tarjetas de 1 px sin sombra.</li><li>Estados de cargando, vacío y error resueltos donde hay datos.</li></ul></div>
+        <div class="dd dd--dont"><strong>No hacer</strong><ul><li>Inventar módulos que no existen: "Accesos" y "Reportes" aparecen como Próximamente.</li><li>Mezclar más de un bloque navy en la misma pantalla.</li><li>Poner la acción principal dentro de un menú ⋯.</li><li>Mostrar datos personales reales en maquetas o capturas.</li></ul></div>
+      </div>
+    </div></section>
+
+    <!-- 01 · Bitácora de auditoría -->
+    <section class="ds-sec ds-sec--tint" id="bitacora" data-nav="01 · Bitácora de auditoría" aria-labelledby="h-bitacora"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">01 · Bitácora de auditoría</span>
+      <h2 id="h-bitacora">Bitácora de auditoría</h2>
+      <p class="ds-lead">Una tabla de solo lectura con filtros: quién hizo qué, cuándo y con qué resultado. Es la plantilla base de toda lista con filtros (personas, dispositivos, reportes).</p>
+      <div class="tpf" data-t="bitacora" data-title="Bitácora de auditoría" data-states="1"></div>
+      <div class="tpf__spec">
+        <div><h3>Regiones</h3><ul><li>Cabecera: migas, titular y la acción de exportar.</li><li>Barra de filtros: periodo, tipo de evento y búsqueda, siempre en una fila.</li><li>Tabla con evento en mono, persona, dispositivo y resultado como chip con texto.</li><li>Pie con "Mostrando…" y paginación.</li></ul></div>
+        <div><h3>Estados</h3><ul><li>Normal, vacío (con salida: ampliar periodo), cargando (esqueleto de filas) y error (alerta con reintento).</li><li>Sin permiso: ver la página 403 de Estados del sistema.</li></ul></div>
+        <div><h3>Componentes y datos</h3><ul><li>Selector de fechas, combobox/select, tabla avanzada, chips, paginación.</li><li>Eventos reales: LOGIN, PERSON_CREATED, DOCUMENT_REGISTERED, BIOMETRIC_ENROLLED, BIOMETRIC_VERIFIED, VOTE_CAST.</li></ul></div>
+      </div>
+    </div></section>
+
+    <!-- 02 · Configuración -->
+    <section class="ds-sec" id="configuracion" data-nav="02 · Configuración" aria-labelledby="h-configuracion"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">02 · Configuración</span>
+      <h2 id="h-configuracion">Configuración</h2>
+      <p class="ds-lead">Dos columnas: submenú a la izquierda y secciones en tarjetas a la derecha. Los cambios se guardan juntos desde una barra fija que aparece solo cuando hay algo por guardar.</p>
+      <div class="tpf" data-t="configuracion" data-title="Configuración"></div>
+      <div class="tpf__spec">
+        <div><h3>Regiones</h3><ul><li>Submenú lateral con la sección actual marcada.</li><li>Tarjetas por tema, cada una con un título y su explicación.</li><li>Barra de guardado fija al pie: "Tienes cambios sin guardar".</li><li>Zona de peligro al final, separada y con borde rojo claro.</li></ul></div>
+        <div><h3>Estados</h3><ul><li>Los valores que define el servidor (umbral) se muestran de solo lectura con su motivo.</li><li>Guardado correcto con toast; error con alerta sobre la barra.</li></ul></div>
+        <div><h3>Componentes y datos</h3><ul><li>Campos, interruptores (switch), select, botones y alertas.</li><li>Acciones destructivas con confirmación.</li></ul></div>
+      </div>
+    </div></section>
+
+    <!-- 03 · Detalle de persona -->
+    <section class="ds-sec ds-sec--tint" id="persona" data-nav="03 · Detalle de persona" aria-labelledby="h-persona"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">03 · Detalle de persona</span>
+      <h2 id="h-persona">Detalle de persona</h2>
+      <p class="ds-lead">Titular con identidad, datos en filas clave/valor a la izquierda y un panel navy con la actividad a la derecha: es el único bloque oscuro de la pantalla, igual que en el panel.</p>
+      <div class="tpf" data-t="persona" data-title="Detalle de persona" data-states="1"></div>
+      <div class="tpf__spec">
+        <div><h3>Regiones</h3><ul><li>Cabecera: iniciales, nombre, chips de estado y acciones (editar, más).</li><li>Datos en filas de línea, sin cajas por campo.</li><li>Biometría: estado por rostro y huella, con la acción de revocar.</li><li>Panel navy "Actividad reciente" con la línea de tiempo.</li></ul></div>
+        <div><h3>Estados</h3><ul><li>Cargando y error afectan solo al panel de actividad; los datos se muestran en cuanto llegan.</li><li>Persona sin biometría: filas con "Sin registrar" y botón para iniciar la captura.</li></ul></div>
+        <div><h3>Componentes y datos</h3><ul><li>Avatar, chips, filas clave/valor, línea de tiempo (<code>hz-feed</code>), botones.</li></ul></div>
+      </div>
+    </div></section>
+
+    <!-- 04 · Asistente electoral -->
+    <section class="ds-sec" id="asistente" data-nav="04 · Asistente electoral" aria-labelledby="h-asistente"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">04 · Asistente electoral</span>
+      <h2 id="h-asistente">Asistente (Electoral)</h2>
+      <p class="ds-lead">Un proceso largo dividido en pasos: aquí, crear una elección. Cada paso es una tarjeta; el avance y las acciones son siempre las mismas.</p>
+      <div class="tpf" data-t="asistente" data-title="Asistente (Electoral)"></div>
+      <div class="tpf__spec">
+        <div><h3>Regiones</h3><ul><li>Stepper con el paso actual y los completados.</li><li>Tarjeta del paso con su explicación y el contenido (carga de padrón).</li><li>Resumen de lo cargado y avisos de datos faltantes antes de seguir.</li><li>Pie con Atrás y Siguiente, siempre en el mismo lugar.</li></ul></div>
+        <div><h3>Estados</h3><ul><li>Cada paso valida al avanzar; los avisos no bloquean si no son errores.</li><li>Archivo con errores: lista de filas con problema y opción de corregir o ignorar.</li></ul></div>
+        <div><h3>Componentes y datos</h3><ul><li>Stepper, zona de carga de archivos, alertas, botones.</li><li>La papeleta y el comprobante se documentan en Patrones de Averyn.</li></ul></div>
+      </div>
+    </div></section>
+
+    <!-- 05 · Centro de notificaciones -->
+    <section class="ds-sec ds-sec--tint" id="notificaciones" data-nav="05 · Centro de notificaciones" aria-labelledby="h-notificaciones"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">05 · Centro de notificaciones</span>
+      <h2 id="h-notificaciones">Centro de notificaciones</h2>
+      <p class="ds-lead">Una lista cronológica agrupada por día, con lo no leído marcado y acciones por ítem. Sirve también para avisos del sistema que no necesitan bloquear la pantalla.</p>
+      <div class="tpf" data-t="notificaciones" data-title="Centro de notificaciones" data-states="1"></div>
+      <div class="tpf__spec">
+        <div><h3>Regiones</h3><ul><li>Pestañas Todas / Sin leer con su conteo.</li><li>Grupos por día ("Hoy", "Ayer") con rótulo mono.</li><li>Cada ítem: icono por tipo (con texto), título, detalle, hora y acción.</li><li>No leído = punto azul <b>y</b> título en negrita.</li></ul></div>
+        <div><h3>Estados</h3><ul><li>Vacío ("No tienes notificaciones"), cargando.</li><li>Los avisos críticos (dispositivo caído) también salen como banner de sistema.</li></ul></div>
+        <div><h3>Componentes y datos</h3><ul><li>Pestañas, iconos, botones de texto, estados vacíos.</li></ul></div>
+      </div>
+    </div></section>
+
+    <!-- 06 · Perfil -->
+    <section class="ds-sec" id="perfil" data-nav="06 · Perfil" aria-labelledby="h-perfil"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">06 · Perfil</span>
+      <h2 id="h-perfil">Perfil</h2>
+      <p class="ds-lead">La cuenta de quien usa el panel: datos personales, seguridad y privacidad biométrica. Lo sensible (retirar el consentimiento) está al final y pide confirmación.</p>
+      <div class="tpf" data-t="perfil" data-title="Perfil"></div>
+      <div class="tpf__spec">
+        <div><h3>Regiones</h3><ul><li>Tarjeta de identidad a la izquierda con el rol.</li><li>Datos personales editables; el correo es de solo lectura.</li><li>Seguridad: contraseña y sesiones activas, con "Cerrar sesión" en las otras.</li><li>Biometría y privacidad: qué hay registrado y cómo retirarlo.</li></ul></div>
+        <div><h3>Estados</h3><ul><li>Guardado con toast; errores bajo cada campo (patrón de formulario del login).</li><li>Retirar el consentimiento abre un diálogo de confirmación con las consecuencias.</li></ul></div>
+        <div><h3>Componentes y datos</h3><ul><li>Campos, botones, filas con estado, alerta, modal de confirmación.</li></ul></div>
+      </div>
+    </div></section>
+
+    </main>
+
+    <footer class="ds-sec" style="padding-block:2.4rem;border-top:1px solid var(--av-hairline)"><div class="ds-wrap"><div class="row" style="justify-content:space-between"><span class="mono" style="color:var(--av-gray-500)">Averyn · Design System v1.2 Horizonte</span><span class="mono" style="color:var(--av-gray-500)">Fuente: DESIGN.md · tokens.css</span></div></div></footer>
+  </div>
+</div>
+<div class="hz-toasts" id="toasts" role="region" aria-label="Notificaciones" aria-live="polite"></div>
+<script src="./ds.js"></script>
+<script src="./plantillas.js"></script>
+</body>
+</html>
