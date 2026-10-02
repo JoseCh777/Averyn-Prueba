@@ -1,0 +1,208 @@
+/* Patrones de Averyn: simulaciones interactivas (sin cámara, lector ni datos reales). */
+(function () {
+  'use strict';
+  var DS = window.DS, $ = DS.$, $$ = DS.$$;
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+
+  /* Control segmentado: marca el botón activo y avisa del cambio */
+  function seg(el, cb) {
+    var api = {
+      set: function (s) { $$('button', el).forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-s') === s); }); }
+    };
+    $$('button', el).forEach(function (b) { b.addEventListener('click', function () { api.set(b.getAttribute('data-s')); cb(b.getAttribute('data-s'), true); }); });
+    return api;
+  }
+
+  /* ---------- Captura facial ---------- */
+  (function () {
+    var view = $('#face-view'); if (!view) return;
+    var msg = $('#face-msg'), btn = $('#face-btn'), meter = $$('#face-meter li'), steps = $$('#face-steps li');
+    var LV = [['Sin medir', 'bi-dash-circle'], ['Insuficiente', 'bi-x-circle'], ['Mejorar', 'bi-exclamation-circle'], ['Buena', 'bi-check-circle']];
+    var S = {
+      searching: { icon: 'bi-search', msg: 'Centra tu rostro en el óvalo.', q: [0, 0, 0], btn: ['Esperando rostro…', true], st: ['now', 'pending', 'pending'] },
+      ready: { icon: 'bi-check-circle', msg: 'Perfecto, no te muevas.', q: [3, 3, 3], btn: ['Capturar', false], st: ['now', 'pending', 'pending'] },
+      capturing: { icon: 'bi-camera', msg: 'Capturando…', q: [3, 3, 3], btn: ['Capturando…', true], st: ['done', 'now', 'pending'] },
+      success: { icon: 'bi-check-circle-fill', msg: 'Rostro registrado.', q: [3, 3, 3], btn: ['Continuar →', false], st: ['done', 'done', 'done'] },
+      error: { icon: 'bi-exclamation-triangle', msg: 'No logramos verla bien. Busca más luz y reintenta.', q: [1, 2, 1], btn: ['Reintentar', false], st: ['now', 'pending', 'pending'] },
+      noperm: { icon: 'bi-camera-video-off', msg: '', q: [0, 0, 0], btn: ['Permitir cámara', false], st: ['pending', 'pending', 'pending'] }
+    };
+    var timers = [], cur = 'searching';
+    function clear() { timers.forEach(clearTimeout); timers = []; }
+    function set(s) {
+      cur = s; var d = S[s]; view.setAttribute('data-state', s); seg1.set(s);
+      msg.hidden = !d.msg; msg.innerHTML = '<i class="bi ' + d.icon + '" aria-hidden="true"></i><span>' + esc(d.msg) + '</span>';
+      meter.forEach(function (li, i) { var l = d.q[i]; li.setAttribute('data-lv', l); li.querySelector('b').innerHTML = '<i class="bi ' + LV[l][1] + '" aria-hidden="true"></i>' + LV[l][0]; });
+      steps.forEach(function (li, i) { li.setAttribute('data-s', d.st[i]); li.querySelector('span').textContent = d.st[i] === 'done' ? '✓' : i + 1; });
+      btn.textContent = d.btn[0]; btn.disabled = d.btn[1];
+    }
+    var seg1 = seg($('#face-seg'), function (s) { clear(); set(s); });
+    btn.addEventListener('click', function () {
+      clear();
+      if (cur === 'ready') { set('capturing'); timers.push(setTimeout(function () { set('success'); }, 1700)); }
+      else if (cur === 'success') DS.toast('Continuar', 'Aquí avanzaría al siguiente paso del registro.');
+      else set('searching');
+    });
+    $('#face-play').addEventListener('click', function () {
+      clear(); set('searching');
+      timers.push(setTimeout(function () { set('ready'); }, 1500), setTimeout(function () { set('capturing'); }, 3000), setTimeout(function () { set('success'); }, 4800));
+    });
+    set('searching');
+  })();
+
+  /* ---------- Huella ---------- */
+  (function () {
+    var svg = $('#fp-svg'); if (!svg) return;
+    var box = $('#fp-box'), title = $('#fp-title'), sub = $('#fp-sub'), bar = $('#fp-bar'), pct = $('#fp-pct'), q = $('#fp-q'), btn = $('#fp-btn');
+    var NS = 'http://www.w3.org/2000/svg', rings = [];
+    for (var i = 0; i < 7; i++) {
+      var rx = 12 + 13 * i, ry = 14 + 14 * i, p = document.createElementNS(NS, 'path');
+      p.setAttribute('d', 'M' + (100 - rx) + ' ' + (118 + ry * .5) + ' A' + rx + ' ' + ry + ' 0 0 1 ' + (100 + rx) + ' ' + (118 + ry * .5));
+      p.setAttribute('class', 'pt-fp__ring'); svg.appendChild(p); rings.push(p);
+    }
+    var finger = function () { return $('input[name="dedo"]:checked').value; };
+    var timer;
+    function paint(state, prog, t, s, ql) {
+      box.setAttribute('data-state', state);
+      var n = Math.round(prog / 100 * 7); rings.forEach(function (r, k) { r.classList.toggle('on', k < n); });
+      bar.setAttribute('aria-valuenow', prog); bar.firstElementChild.style.width = prog + '%'; pct.textContent = prog + '%';
+      title.textContent = t; sub.textContent = s; q.textContent = ql;
+    }
+    var S = {
+      wait: function () { paint('wait', 0, 'Coloca el dedo ' + finger().toLowerCase() + ' en el lector.', 'Mantenlo quieto hasta que termine la lectura.', 'Calidad —'); },
+      read: function () { paint('read', 55, 'Leyendo… no muevas el dedo.', 'Casi listo.', 'Calidad —'); },
+      low: function () { paint('low', 70, 'Presiona un poco más y no muevas el dedo.', 'La lectura salió con poca calidad. Inténtalo de nuevo.', 'Calidad 41/100'); },
+      ok: function () { paint('ok', 100, 'Huella registrada.', 'Dedo ' + finger().toLowerCase() + ' registrado. 1 de 2 dedos.', 'Calidad 86/100'); $('input[name="dedo"]:checked').parentNode.classList.add('done'); },
+      err: function () { paint('err', 0, 'No pudimos leer la huella.', 'Límpiala y reintenta.', 'Calidad —'); }
+    };
+    var sg = seg($('#fp-seg'), function (s) { clearInterval(timer); S[s](); });
+    $$('input[name="dedo"]').forEach(function (r) { r.addEventListener('change', function () { clearInterval(timer); sg.set('wait'); S.wait(); }); });
+    btn.addEventListener('click', function () {
+      clearInterval(timer); var p = 0; sg.set('read');
+      timer = setInterval(function () {
+        p += 10; paint('read', p, 'Leyendo… no muevas el dedo.', 'Casi listo.', 'Calidad —');
+        if (p >= 100) { clearInterval(timer); sg.set('ok'); S.ok(); }
+      }, 180);
+    });
+    S.wait();
+  })();
+
+  /* ---------- Resultado de verificación ---------- */
+  (function () {
+    var r = $('#vr-range'); if (!r) return;
+    var T = 68;
+    function paint() {
+      var n = +r.value, s = n / 100, ok = n >= T, diff = Math.abs(s - .68).toFixed(2);
+      $('#vr-rv').textContent = s.toFixed(2); $('#vr-n').textContent = s.toFixed(2);
+      $('#vr-d').textContent = n === T ? 'Justo en el umbral de 0.68.' : diff + (ok ? ' por encima' : ' por debajo') + ' del umbral de 0.68.';
+      var dec = $('#vr-dec'); dec.className = 'pt-dec ' + (ok ? 'pt-dec--ok' : 'pt-dec--bad');
+      dec.innerHTML = '<i class="bi ' + (ok ? 'bi-check-circle-fill' : 'bi-x-circle-fill') + '" aria-hidden="true"></i>' + (ok ? 'Aceptada' : 'Rechazada');
+      $('#vr-fill').style.width = 'max(0px, calc(' + n + '% - 6px))';
+      $('#vr-scale').setAttribute('aria-label', 'Similitud ' + s.toFixed(2) + ' sobre 1. Umbral 0.68. ' + (ok ? 'Por encima.' : 'Por debajo.'));
+      $('#vr-reasons').innerHTML =
+        '<li><span>Similitud facial</span><b class="' + (ok ? 'ok' : 'bad') + '"><i class="bi ' + (ok ? 'bi-check-circle' : 'bi-x-circle') + '" aria-hidden="true"></i>' + s.toFixed(2) + (ok ? ' ≥ ' : ' < ') + '0.68</b></li>' +
+        '<li><span>Prueba de vida</span><b class="ok"><i class="bi bi-check-circle" aria-hidden="true"></i>Superada</b></li>' +
+        '<li><span>Calidad de la captura</span><b class="ok"><i class="bi bi-check-circle" aria-hidden="true"></i>Buena</b></li>';
+      $('#vr-main').textContent = ok ? 'Continuar →' : 'Intentar de nuevo';
+    }
+    r.addEventListener('input', paint); paint();
+    $('#vr-main').addEventListener('click', function () { DS.toast($('#vr-main').textContent, 'Aquí continuaría o reiniciaría la captura.'); });
+    $('#vr-detail').addEventListener('click', function () { DS.toast('Ver detalle', 'Aquí se abriría el detalle de la verificación.'); });
+  })();
+
+  /* ---------- Documento / OCR ---------- */
+  (function () {
+    var host = $('#ocr-fields'); if (!host) return;
+    var F = [['N.º de documento', '12345678', 99.1], ['Apellidos', 'PÉREZ GARCÍA', 97.8], ['Nombres', 'MARÍA ELENA', 97.2], ['Fecha de nacimiento', '14/03/1998', 95.4], ['Dirección', 'AV. LOS ALAMOS 245', 88.9], ['Lugar de nacimiento', 'LIMA', 86.3]];
+    var st = F.map(function (f) { return { low: f[2] < 90, seen: false, fixed: false }; });
+    function conf(i) {
+      var el = $('#ocr-c' + i), f = F[i], s = st[i], txt;
+      if (s.fixed) { el.className = 'pt-conf fixed'; txt = '<i class="bi bi-pencil" aria-hidden="true"></i>Corregido'; }
+      else if (s.low && !s.seen) { el.className = 'pt-conf low'; txt = '<i class="bi bi-exclamation-triangle" aria-hidden="true"></i>Revisar · ' + f[2].toFixed(1) + '%'; }
+      else if (s.low) { el.className = 'pt-conf'; txt = '<i class="bi bi-check2" aria-hidden="true"></i>Revisado · ' + f[2].toFixed(1) + '%'; }
+      else { el.className = 'pt-conf'; txt = f[2].toFixed(1) + '%'; }
+      el.innerHTML = txt;
+    }
+    function sum() {
+      var n = st.filter(function (s) { return s.low && !s.seen && !s.fixed; }).length;
+      $('#ocr-sum').textContent = n ? n + (n === 1 ? ' campo con baja confianza. Revísalo' : ' campos con baja confianza. Revísalos') + ' antes de continuar.' : 'Todo revisado. Puedes confirmar los datos.';
+      $('#ocr-ok').disabled = n > 0;
+    }
+    F.forEach(function (f, i) {
+      var d = document.createElement('div'); d.className = 'pt-fld';
+      d.innerHTML = '<label class="hz-label" for="ocr-i' + i + '">' + esc(f[0]) + '</label><input class="hz-input" id="ocr-i' + i + '" value="' + esc(f[1]) + '" autocomplete="off"><span id="ocr-c' + i + '"></span>';
+      host.appendChild(d);
+      var inp = d.querySelector('input');
+      inp.addEventListener('input', function () { st[i].fixed = inp.value !== f[1]; st[i].seen = true; conf(i); sum(); });
+      inp.addEventListener('blur', function () { if (!st[i].seen) { st[i].seen = true; conf(i); sum(); } });
+      conf(i);
+    });
+    sum();
+    var sg = seg($('#ocr-seg'), function (s) { doc(s); });
+    function doc(s) {
+      $('#ocr-doc').setAttribute('data-state', s); sg.set(s);
+      $('#ocr-msg').innerHTML = s === 'ok' ? '<i class="bi bi-check-circle" aria-hidden="true"></i><span>Documento detectado.</span>' : '<i class="bi bi-search" aria-hidden="true"></i><span>Alinea el documento dentro del marco.</span>';
+    }
+    $('#ocr-again').addEventListener('click', function () { doc('searching'); setTimeout(function () { doc('ok'); }, 1200); });
+    $('#ocr-ok').addEventListener('click', function () { DS.toast('Datos confirmados', 'Aquí avanzaría al siguiente paso.'); });
+  })();
+
+  /* ---------- Papeleta ---------- */
+  (function () {
+    var root = $('#ballot'); if (!root) return;
+    var panels = $$('[data-v]', root), steps = $$('.pt-ballot-step li', root), next = $('#ballot-next');
+    function go(i, focus) {
+      panels.forEach(function (p) { p.hidden = +p.getAttribute('data-v') !== i; });
+      steps.forEach(function (s, k) { if (k === i) s.setAttribute('aria-current', 'step'); else s.removeAttribute('aria-current'); });
+      if (focus) { var h = $('#ballot-h' + (i + 1)); if (h) h.focus(); }
+    }
+    $$('input[name="voto"]').forEach(function (r) { r.addEventListener('change', function () { next.disabled = false; }); });
+    next.addEventListener('click', function () { $('#ballot-sel').textContent = $('input[name="voto"]:checked').value; go(1, true); });
+    $('#ballot-back').addEventListener('click', function () { go(0); });
+    $('#ballot-ok').addEventListener('click', function () {
+      var a = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789', g = function (n) { var s = ''; for (var i = 0; i < n; i++) s += a[Math.floor(Math.random() * a.length)]; return s; };
+      $('#ballot-code').textContent = 'AV-' + g(4) + '-' + g(4);
+      $('#ballot-time').textContent = new Intl.DateTimeFormat('es-PE', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date());
+      go(2, true);
+    });
+    $('#ballot-copy').addEventListener('click', function () { DS.copiar($('#ballot-code').textContent, 'Código de comprobante'); });
+    $('#ballot-reset').addEventListener('click', function () { $$('input[name="voto"]').forEach(function (r) { r.checked = false; }); next.disabled = true; go(0); });
+  })();
+
+  /* ---------- Dispositivos ---------- */
+  (function () {
+    var ul = $('#devs'); if (!ul) return;
+    var D = [
+      { id: 'CAM-001', n: 'Cámara de ingreso', loc: 'Puerta 1', st: 'on', last: 'Hace 1 min', ic: 'bi-camera-video' },
+      { id: 'LEC-001', n: 'Lector de huella', loc: 'Puerta 1', st: 'on', last: 'Hace 1 min', ic: 'bi-fingerprint' },
+      { id: 'CAM-002', n: 'Cámara de oficina', loc: 'Secretaría', st: 'off', last: 'Hace 2 h', ic: 'bi-camera-video-off' },
+      { id: 'LEC-002', n: 'Lector de huella', loc: 'Secretaría', st: 'err', last: 'Hace 4 min', ic: 'bi-fingerprint', why: 'Lectura inestable' },
+      { id: 'KIOSCO-01', n: 'Kiosco de votación', loc: 'Sala B', st: 'on', last: 'Hace 3 min', ic: 'bi-display' }
+    ];
+    var CH = { on: ['success', 'Conectado'], off: ['warning', 'Desconectado'], err: ['error', 'Con error'] };
+    function draw() {
+      ul.innerHTML = '';
+      D.forEach(function (d, i) {
+        var li = document.createElement('li'); li.className = 'pt-dev'; li.setAttribute('data-st', d.st);
+        var act = d.st === 'off' ? 'Reconectar' : 'Probar';
+        li.innerHTML = '<span class="pt-dev__ic"><i class="bi ' + d.ic + '" aria-hidden="true"></i></span><div><b>' + esc(d.id) + ' · ' + esc(d.n) + '</b><small>' + esc(d.loc) + ' · Última señal <span title="Hora de ejemplo">' + esc(d.last) + '</span>' + (d.why ? ' · ' + esc(d.why) : '') + '</small></div><span class="hz-chip hz-chip--' + CH[d.st][0] + '">' + CH[d.st][1] + '</span><button class="pt-dev__act" type="button" aria-label="' + act + ' ' + esc(d.id) + '">' + act + '</button>';
+        li.querySelector('button').addEventListener('click', function (e) {
+          var b = e.currentTarget;
+          if (d.st === 'off') { b.disabled = true; b.textContent = 'Conectando…'; setTimeout(function () { d.st = 'on'; d.last = 'Ahora'; draw(); DS.toast(d.id + ' conectado', 'El dispositivo volvió a responder.'); }, 900); }
+          else if (d.st === 'err') DS.toast('Prueba fallida', d.id + ' sigue respondiendo con errores.', 'bad');
+          else DS.toast('Prueba correcta', d.id + ' respondió en 0.4 s.');
+        });
+        ul.appendChild(li);
+      });
+    }
+    draw();
+  })();
+
+  /* ---------- Consentimiento ---------- */
+  (function () {
+    var chk = $('#cons-chk'); if (!chk) return;
+    var ok = $('#cons-ok'), msg = $('#cons-msg');
+    chk.addEventListener('change', function () { ok.disabled = !chk.checked; msg.textContent = ''; });
+    ok.addEventListener('click', function () { msg.textContent = 'Gracias. Continuamos con la captura.'; DS.toast('Consentimiento registrado', 'Se guardaría con la fecha y la versión del texto.'); });
+    $('#cons-no').addEventListener('click', function () { msg.textContent = 'Entendido. Sin tu permiso no podemos usar cámara ni huella; puedes volver cuando quieras.'; });
+  })();
+})();

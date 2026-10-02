@@ -7,7 +7,9 @@
   var frames = $$('.dsframe');
   frames.forEach(function (box) {
     var iframe = document.createElement('iframe');
-    iframe.src = box.getAttribute('data-src');
+    var src = box.getAttribute('data-src'), key = src.split('/').pop();
+    /* En el HTML único (bundle.py) las páginas viajan dentro del archivo: window.DS_FRAMES[nombre] */
+    if (window.DS_FRAMES && window.DS_FRAMES[key]) iframe.srcdoc = window.DS_FRAMES[key]; else iframe.src = src;
     iframe.title = box.getAttribute('data-title') || 'Vista previa';
     iframe.loading = 'lazy';
     iframe.setAttribute('tabindex', '-1');
