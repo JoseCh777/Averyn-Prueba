@@ -201,6 +201,12 @@ Geometría contenida: 8 px en botones y campos, 10 px en píldoras del header, 2
 ### Páginas de error (v1.2)
 - 404, 403, 500, sin conexión y mantenimiento comparten `error.css`/`error.js`: horizonte cielo→navy, figura de arcos que se dibuja y se parte, número decorativo (`aria-hidden`), un solo `<h1>`, ruta pedida escapada y siempre una salida. Los módulos pendientes muestran "Próximamente", no un error.
 
+### Patrones, componentes, plantillas y marca (v1.3, documentados en `docs/ds/`)
+- **Patrones biométricos** (`patrones.html`): consentimiento antes de la captura; guía sin culpar y siempre con texto además de color; un resultado de verificación muestra similitud, umbral (0.68, dato del servidor) y decisión; el comprobante de voto nunca vincula persona y opción.
+- **Componentes** (`componentes.html`): selector de fechas, menú ⋯, combobox, acordeón, stepper, popover, drawer (`<dialog>` modal), paleta Ctrl+K y tabla avanzada, con patrones de teclado WAI-ARIA y objetivos de 44 px.
+- **Plantillas** (`plantillas.html`): navbar en píldora, ancho de 1200 px, un solo bloque navy por pantalla, tarjetas de 1 px y estados cargando/vacío/error resueltos.
+- **Marca y entregables** (`marca.html`): una sola figura (arcos) cambia de estado; correos con tablas y estilos en línea; `print.css` para A4 con tinta mínima; `tokens.json` W3C generado desde `tokens.css`. Modo nocturno fuera de alcance.
+
 ## Do's and Don'ts
 
 ### Do:

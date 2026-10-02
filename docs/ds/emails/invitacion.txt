@@ -1,0 +1,13 @@
+Te invitaron a Averyn.
+
+Hola {{nombre}},
+{{institucion}} te invitó a crear tu cuenta en Averyn, la plataforma con la que verificarás tu identidad de forma segura.
+Solo toma unos minutos. Te pediremos tu consentimiento antes de usar la cámara o el lector de huellas.
+
+Crear mi cuenta: {{enlace}}
+
+El enlace vence en 48 horas. Si no esperabas esta invitación, puedes ignorar este correo.
+
+--
+Enviado por Averyn en nombre de {{institucion}}. Mensaje automático: no respondas a este correo.
+¿Necesitas ayuda? {{correo_soporte}}
