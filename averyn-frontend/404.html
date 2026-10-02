@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Averyn — Página no encontrada</title>
+    <!-- Esta página puede servirse en cualquier ruta que no existe: se fija <base> a la raíz de la app para que carguen los estilos -->
+    <script>(function(){var p=location.pathname.split('/').filter(Boolean),i=p.indexOf('averyn-frontend'),r=i>=0?'/'+p.slice(0,i+1).join('/')+'/':'/';document.write('<base href="'+r+'">');})();</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+    <link href="assets/css/tokens.css" rel="stylesheet" />
+    <link href="assets/css/error.css" rel="stylesheet" />
+    <link rel="icon" href="assets/images/averyn-logo-blue.avif" />
+  </head>
+  <body class="er" data-error="404">
+    <div class="er-page">
+      <header class="er-top">
+        <a class="er-brand" href="index.html" aria-label="Averyn, ir al inicio"><img src="assets/images/averyn-logo-font-black.avif" alt="Averyn" /></a>
+        <span class="er-tag">Error 404</span>
+      </header>
+
+      <main class="er-stage" id="contenido">
+        <div class="er-copy">
+          <p class="er-num" aria-hidden="true">404</p>
+          <p class="er-eyebrow">Error 404 · Página no encontrada</p>
+          <h1 class="er-title">No encontramos esa página.</h1>
+          <p class="er-lead">La dirección que pediste no existe o se movió. Revisa que esté bien escrita o vuelve al inicio.</p>
+          <p class="er-path" id="er-path" hidden><span class="er-tag" style="color:var(--av-night-text)">Ruta</span> <code></code></p>
+          <div class="er-actions">
+            <a class="er-btn er-btn--primary" href="index.html">Volver al inicio →</a>
+            <a class="er-btn er-btn--ghost" href="dashboard/index.html" data-go="panel">Ir al panel →</a>
+            <a class="er-btn er-btn--ghost" href="login.html" data-go="auth">Ingresar</a>
+          </div>
+        </div>
+
+        <div class="er-fig">
+          <svg viewBox="0 0 640 300" aria-hidden="true" focusable="false">
+            <path d="M0 290 H640" stroke="rgba(255,255,255,.22)" stroke-width="1" />
+            <path class="er-draw" style="--d:0" d="M30 290 C110 60 330 40 450 290" pathLength="1" stroke="#FFFFFF" stroke-width="1.5" />
+            <path class="er-draw" style="--d:1" d="M90 290 C121 196 177 147 236 149" pathLength="1" stroke="#00ACD2" stroke-width="2" />
+            <g class="er-crack" style="--cx:18px;--cy:14px"><path class="er-draw" style="--d:1.4" d="M236 149 C290 151 347 196 390 290" pathLength="1" stroke="#00ACD2" stroke-width="2" /></g>
+            <g class="er-crack" style="--cx:22px;--cy:-8px"><path class="er-draw" style="--d:2" d="M150 290 C190 170 270 160 330 290" pathLength="1" stroke="#55D6FF" stroke-width="1.5" /></g>
+            <path class="er-draw" style="--d:3" d="M300 8 L545 290" pathLength="1" stroke="#3D86FF" stroke-width="2" />
+            <path class="er-draw" style="--d:3.4" d="M326 -32 L471 135" pathLength="1" stroke="#3D86FF" stroke-width="2" />
+            <g class="er-crack" style="--cx:-22px;--cy:10px"><path class="er-draw" style="--d:3.8" d="M471 135 L605 290" pathLength="1" stroke="#3D86FF" stroke-width="2" /></g>
+            <circle class="er-ghost" cx="248" cy="139" r="15" stroke="#55D6FF" stroke-width="1.5" />
+          </svg>
+        </div>
+      </main>
+    </div>
+
+    <script src="assets/js/error.js" defer></script>
+  </body>
+</html>
