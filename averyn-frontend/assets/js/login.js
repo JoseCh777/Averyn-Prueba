@@ -3,6 +3,7 @@
 
   var MOCK = { email: 'admin@averyn.test', password: 'Averyn2026', rol: 'Administrador' };
   var SESSION_KEY = 'averyn.session';
+  var EMAIL_RE = /^\S+@\S+\.\S+$/;
 
   var saveSession = function (email) {
     try {
@@ -34,7 +35,8 @@
   var form = document.getElementById('login-form');
   var emailInput = document.getElementById('email');
   var passwordInput = document.getElementById('password');
-  var passwordHelp = document.getElementById('password-help');
+  var emailError = document.getElementById('email-error');
+  var passwordError = document.getElementById('password-error');
   var forgotLink = document.getElementById('forgot-link');
   var toggleBtn = document.getElementById('toggle-password');
   var submitBtn = document.getElementById('submit-btn');
@@ -43,7 +45,11 @@
   var alertError = document.getElementById('alert-error');
   var alertSuccess = document.getElementById('alert-success');
   var alertInfo = document.getElementById('alert-info');
+  var secureNote = document.getElementById('secure-note');
   var alertIds = ['alert-error', 'alert-success', 'alert-info'];
+
+  /* La nota de conexión segura solo se muestra si la página realmente va por HTTPS */
+  if (secureNote && window.location.protocol === 'https:') { secureNote.hidden = false; }
 
   var show = function (el, msg) {
     el.querySelector('span').textContent = msg || '';
@@ -54,31 +60,47 @@
     submitBtn.disabled = loading;
     idleLabel.hidden = loading;
     loadingLabel.hidden = !loading;
+    form.setAttribute('aria-busy', String(loading));
   };
 
-  var setErrorState = function (msg) {
-    emailInput.classList.toggle('av-input--error', msg && !/^\S+@\S+\.\S+$/.test(emailInput.value));
-    passwordHelp.textContent = ''; /* el mensaje ya se muestra en la alerta */
-    passwordInput.classList.toggle('av-input--error', Boolean(msg));
-    if (msg) { show(alertError, msg); } else { hide(alertError); }
+  /* Error de un campo: mensaje junto al campo, aria-invalid y aria-describedby */
+  var setFieldError = function (input, errorEl, msg) {
+    if (msg) {
+      errorEl.textContent = msg;
+      errorEl.hidden = false;
+      input.setAttribute('aria-invalid', 'true');
+      input.classList.add('av-input--error');
+    } else {
+      errorEl.textContent = '';
+      errorEl.hidden = true;
+      input.removeAttribute('aria-invalid');
+      input.classList.remove('av-input--error');
+    }
   };
 
   var resetState = function () {
     alertIds.forEach(function (id) { hide(document.getElementById(id)); });
-    setErrorState('');
+    setFieldError(emailInput, emailError, '');
+    setFieldError(passwordInput, passwordError, '');
   };
 
+  /* Al corregir un campo se limpia solo su error */
+  emailInput.addEventListener('input', function () { setFieldError(emailInput, emailError, ''); });
+  passwordInput.addEventListener('input', function () {
+    setFieldError(passwordInput, passwordError, '');
+    hide(alertError);
+  });
+
+  /* El nombre del botón es su texto visible (Mostrar / Ocultar): evita que el nombre y el estado se contradigan */
   toggleBtn.addEventListener('click', function () {
     var showing = passwordInput.type === 'text';
     passwordInput.type = showing ? 'password' : 'text';
-    toggleBtn.setAttribute('aria-label', showing ? 'Mostrar contraseña' : 'Ocultar contraseña');
-    toggleBtn.setAttribute('aria-pressed', String(!showing));
     toggleBtn.textContent = showing ? 'Mostrar' : 'Ocultar';
   });
 
   forgotLink.addEventListener('click', function () {
     resetState();
-    show(alertInfo, 'Te enviaremos instrucciones de recuperación cuando el servicio esté conectado.');
+    show(alertInfo, 'La recuperación aún no está disponible; contacta a tu administrador.');
   });
 
   form.addEventListener('submit', function (event) {
@@ -88,27 +110,33 @@
     var email = emailInput.value.trim();
     var password = passwordInput.value;
 
-    if (!email || !password) {
-      setErrorState('Completa tu correo electrónico y contraseña para continuar.');
-      return;
-    }
-    if (!/^\S+@\S+\.\S+$/.test(email)) {
-      setErrorState('Ingresa un correo electrónico válido.');
+    var emailMsg = !email ? 'Ingresa tu correo electrónico.'
+      : (!EMAIL_RE.test(email) ? 'Ingresa un correo válido, por ejemplo nombre@organizacion.com.' : '');
+    var passwordMsg = !password ? 'Ingresa tu contraseña.' : '';
+
+    if (emailMsg || passwordMsg) {
+      setFieldError(emailInput, emailError, emailMsg);
+      setFieldError(passwordInput, passwordError, passwordMsg);
+      (emailMsg ? emailInput : passwordInput).focus(); /* foco al primer campo con error */
       return;
     }
 
     setLoading(true);
     window.setTimeout(function () {
-      setLoading(false);
       if (email.toLowerCase() === MOCK.email && password === MOCK.password) {
-        setErrorState('');
+        /* Éxito: el botón sigue bloqueado mientras se redirige */
         saveSession(email.toLowerCase());
         show(alertSuccess, 'Autenticación exitosa. Redirigiendo al panel de control...');
         window.setTimeout(function () {
           window.location.href = 'dashboard/index.html';
         }, 900);
       } else {
-        setErrorState('Credenciales inválidas. Verifica tu correo y contraseña e inténtalo nuevamente.');
+        setLoading(false);
+        show(alertError, 'Credenciales inválidas. Verifica tu correo y contraseña e inténtalo nuevamente.');
+        passwordInput.setAttribute('aria-invalid', 'true');
+        passwordInput.classList.add('av-input--error');
+        passwordInput.value = '';
+        passwordInput.focus(); /* el foco vuelve al campo que hay que corregir */
       }
     }, 850);
   });

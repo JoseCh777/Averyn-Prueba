@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Averyn — Design System Horizonte v1.0</title>
+<title>Averyn — Design System Horizonte v1.1</title>
 <meta name="description" content="Design system de Averyn: principios, tokens, componentes y reglas de uso del estilo Horizonte.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -406,7 +406,7 @@ dialog.hz-modal::backdrop { background: rgba(0, 12, 36, .62); backdrop-filter: b
 <div class="ds-shell">
   <aside class="ds-side" aria-label="Índice del design system">
     <a class="ds-side__brand" href="#top" aria-label="Averyn, inicio del documento"><img src="../averyn-frontend/assets/images/averyn-logo-font-black.avif" alt="Averyn"></a>
-    <p class="ds-side__ver mono">Design System · v1.0 Horizonte</p>
+    <p class="ds-side__ver mono">Design System · v1.1 Horizonte</p>
     <nav>
       <span class="grp mono">Fundamentos</span>
       <a href="#principios">01 · Principios</a>
@@ -441,7 +441,7 @@ dialog.hz-modal::backdrop { background: rgba(0, 12, 36, .62); backdrop-filter: b
         <span class="mono" style="color:#fff;opacity:.85">Design System</span>
         <h1>Claridad que se oscurece en seguridad.</h1>
         <p>El sistema visual de Averyn: principios, tokens, componentes y reglas de uso para landing, acceso y panel. Nace de lo que construimos y decidimos, y extiende el mismo lenguaje a lo que aún no existe.</p>
-        <div class="ds-cover__meta mono"><span>Versión 1.0 · Horizonte</span><span>Octubre 2026</span><span>Fuente: DESIGN.md + tokens.css</span></div>
+        <div class="ds-cover__meta mono"><span>Versión 1.1 · Horizonte</span><span>Octubre 2026</span><span>Fuente: DESIGN.md + tokens.css</span></div>
       </div>
       <svg viewBox="0 0 640 300" aria-hidden="true" focusable="false">
         <path d="M0 290 H640" stroke="rgba(255,255,255,.22)" stroke-width="1" fill="none"/>
@@ -927,7 +927,7 @@ background: linear-gradient(180deg, #DCECFF 0%, #EAF0FE 55%, #fff 100%);</pre><b
         <tr><td><code>--t3</code></td><td>62 % → 92 %</td><td>Se dibuja la figura de arcos (<code>stroke-dashoffset</code>) y aparecen la bajada y los botones.</td></tr>
       </tbody></table></div>
       <div class="ds-grid ds-grid--2 ds-gap-top">
-        <div class="dd dd--do"><strong>Recomendado en v1.1</strong><ul><li>Acortar el stage de 330 a ~220 vh y adelantar la bajada (~60 %).</li><li>Poner un <code>&lt;h1&gt;</code> real (o <code>sr-only</code>) y una promesa concreta en la bajada.</li><li>Ocultar (<code>visibility: hidden</code> / <code>inert</code>) los botones del hero mientras estén en opacidad 0.</li></ul></div>
+        <div class="dd dd--do"><strong>Aplicado en v1.1</strong><ul><li>Stage acortado de 330 a 220 vh; la bajada aparece hacia el 50 % del recorrido (fases: 4–30 %, 30–50 %, 42–72 %).</li><li><code>&lt;h1&gt;</code> real y visible: "Identidad inteligente para procesos institucionales".</li><li>La marca de la cabecera y el bloque de texto llevan <code>inert</code> mientras están invisibles: no reciben foco ni los lee un lector de pantalla.</li><li>La figura de arcos se ancla sobre el texto (<code>bottom: calc(100% + 1.2rem)</code>): nunca se pisan.</li></ul></div>
         <div class="dd dd--dont"><strong>Reglas fijas</strong><ul><li>Solo <code>transform</code>, <code>clip-path</code> y <code>opacity</code>.</li><li>Con <code>prefers-reduced-motion</code>: sin sticky, estado final estático.</li><li>El wordmark se maqueta grande y se reduce: nunca se amplía.</li></ul></div>
       </div>
 
@@ -958,7 +958,7 @@ background: linear-gradient(180deg, #DCECFF 0%, #EAF0FE 55%, #fff 100%);</pre><b
           <div class="hz-field"><span class="hz-label">Correo electrónico</span><div class="hz-input" style="display:flex;align-items:center;color:var(--av-placeholder)">nombre@organizacion.com</div></div>
           <div class="hz-field"><span class="hz-label">Contraseña</span><div class="hz-input" style="display:flex;align-items:center;color:var(--av-placeholder)">Ingresa tu contraseña</div></div>
           <span class="hz-btn hz-btn--primary hz-btn--block">Ingresar de forma segura →</span></div></div>
-      <p class="ds-note">Marco de hasta 1020 px, radio 24 px, sombra de marco, sobre un fondo azul claro con brillo cian. Panel de marca con el degradado compacto y la figura de arcos (se dibuja una vez al cargar); formulario a 5/11. Móvil: el panel pasa a franja superior. Pendiente de v1.1: texto del panel que prepare al usuario (institución, auditoría) y recuperación honesta.</p>
+      <p class="ds-note">Marco de hasta 1020 px, radio 24 px, sombra de marco, sobre un fondo azul claro con brillo cian. Panel de marca con el degradado compacto y la figura de arcos (se dibuja una vez al cargar); formulario a 5/11. Móvil: el panel pasa a franja superior. v1.1: el titular del panel de marca ("Ingresa a tu panel.") ya no es un encabezado; el único <code>&lt;h1&gt;</code> es "Bienvenido de nuevo.". Errores por campo, foco al primer campo inválido y espacio estable para que el formulario no salte. Pendiente: selector de institución y segundo factor.</p>
 
       <h3 class="ds-sub">B · Panel (dashboard)</h3>
       <div class="stage stage--sky" style="padding:1.4rem">
@@ -1033,8 +1033,8 @@ background: linear-gradient(180deg, #DCECFF 0%, #EAF0FE 55%, #fff 100%);</pre><b
         <tr><td>Recuperar contraseña (sin servicio)</td><td>La recuperación aún no está disponible; contacta a tu administrador.</td></tr>
       </tbody></table></div>
       <div class="ds-grid ds-grid--2 ds-gap-top">
-        <div class="dd dd--do"><strong>Hacer</strong><ul><li>Botones con verbo y flecha cuando avanzan: "Ingresar →".</li><li>Un único nombre por acción: "Ingresar" en navbar, hero, cierre y login (hoy mezclamos "Iniciar sesión" y "Ingresar al sistema").</li><li>Explica la causa y el siguiente paso en la misma frase.</li></ul></div>
-        <div class="dd dd--dont"><strong>No hacer</strong><ul><li>"Todo listo para continuar" antes de que el usuario haga algo.</li><li>"Conexión segura y protegida" como adorno: solo si hay HTTPS verificable.</li><li>"Te enviaremos instrucciones…" si no existe el envío.</li></ul></div>
+        <div class="dd dd--do"><strong>Hacer</strong><ul><li>Botones con verbo y flecha cuando avanzan: "Ingresar →".</li><li>Un único nombre por acción: "Ingresar" en navbar, hero, cierre, footer y login (en v1.1 se unificó el footer).</li><li>Explica la causa y el siguiente paso en la misma frase.</li></ul></div>
+        <div class="dd dd--dont"><strong>No hacer</strong><ul><li>"Todo listo para continuar" antes de que el usuario haga algo (reemplazado por "Ingresa a tu panel.").</li><li>"Conexión segura y protegida" como adorno: el login solo la muestra si la página va por HTTPS.</li><li>"Te enviaremos instrucciones…" si no existe el envío.</li></ul></div>
       </div>
     </div></section>
 
@@ -1095,14 +1095,12 @@ background: linear-gradient(180deg, #DCECFF 0%, #EAF0FE 55%, #fff 100%);</pre><b
       </tbody></table></div>
       <h3 class="ds-sub">Changelog</h3>
       <div class="doc-wrap"><table class="doc-table"><tbody>
+        <tr><td><b>v1.1</b> · oct 2026</td><td>Accesibilidad y teclado en landing y login. Landing: hero de 220 vh con <code>&lt;h1&gt;</code> real, <code>inert</code> en lo invisible, figura anclada al texto, anillo de foco por superficie (blanco sobre azul, cian sobre navy), menú móvil con botón antes del nav y Escape que devuelve el foco, contrastes corregidos, objetivos ≥ 44 px, contenido visible sin JS. Login: errores por campo con <code>aria-invalid</code>, foco al primer inválido y a la contraseña tras credenciales inválidas, sin salto de layout, botón bloqueado durante la redirección, "Mostrar/Ocultar" sin contradicción de nombre, nota de seguridad solo en HTTPS. Tokens nuevos aplicados a <code>tokens.css</code>.</td></tr>
         <tr><td><b>v1.0</b> · oct 2026</td><td>Primera versión del sistema Horizonte: fundamentos, 20 componentes, patrones y plantillas. Tokens nuevos: <code>--av-field-border</code> (#6E86B0) y <code>--av-placeholder</code> (#667390), variantes <code>-text</code> de estado, reglas de foco por superficie.</td></tr>
       </tbody></table></div>
       <h3 class="ds-sub">Deuda conocida <small>v1.1</small></h3>
       <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Tema</th><th>Qué falta</th></tr></thead><tbody>
         <tr><td>Prefijos</td><td>El código usa <code>mn-</code>, <code>lg-</code> y <code>dh-</code>; consolidar en <code>hz-</code> o <code>av-</code>.</td></tr>
-        <tr><td>Hero</td><td>Acortar a ~220 vh, añadir <code>&lt;h1&gt;</code>, ocultar del foco los botones antes de aparecer, arreglar el anillo de foco sobre el CTA azul.</td></tr>
-        <tr><td>Login</td><td>Foco tras enviar, mensajes por campo, borde y placeholder a los nuevos tokens, textos honestos.</td></tr>
-        <tr><td>Contraste</td><td>Etiquetas de media (#9DB6E6 → gray-500), palabras de Tecnología y párrafo del CTA (#DCE8FF → #F0F5FF).</td></tr>
         <tr><td>CSS</td><td>~50 KB de <code>components.css</code>, <code>modules.css</code> y <code>dashboard.css</code> se cargan sin usarse en landing y login.</td></tr>
         <tr><td>Módulos</td><td>Identidad, Documentos, Biometría, Electoral e IA siguen con el estilo anterior y con Bootstrap.</td></tr>
       </tbody></table></div>
@@ -1136,8 +1134,8 @@ body.av-mi-pantalla { background: #fff; color: var(--av-navy); font-family: var(
       </tbody></table></div>
       <h3 class="ds-sub">Estado de adopción</h3>
       <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Pantalla</th><th>Estado</th><th>Archivos</th></tr></thead><tbody>
-        <tr><td>Landing</td><td class="pass">Horizonte v1.0</td><td><code>index.html</code> · <code>landing.css</code> · <code>home.js</code></td></tr>
-        <tr><td>Login</td><td class="pass">Horizonte v1.0</td><td><code>login.html</code> · <code>login.css</code> · <code>login.js</code></td></tr>
+        <tr><td>Landing</td><td class="pass">Horizonte v1.1</td><td><code>index.html</code> · <code>landing.css</code> · <code>home.js</code></td></tr>
+        <tr><td>Login</td><td class="pass">Horizonte v1.1</td><td><code>login.html</code> · <code>login.css</code> · <code>login.js</code></td></tr>
         <tr><td>Dashboard</td><td class="pass">Horizonte v1.0 (shell acotado)</td><td><code>dashboard/index.html</code> · <code>dashboard-page.css</code> · <code>dashboard.js</code></td></tr>
         <tr><td>Shell global (dock en las demás pantallas)</td><td class="fail">Pendiente: lo decide el equipo</td><td><code>dashboard-shell.css</code> · <code>components.css</code></td></tr>
         <tr><td>Identidad, Documentos, Biometría, Electoral, IA</td><td class="fail">Estilo anterior</td><td><code>modules.css</code> y páginas de cada módulo</td></tr>
@@ -1147,7 +1145,7 @@ body.av-mi-pantalla { background: #fff; color: var(--av-navy); font-family: var(
     </div></section>
     </main>
 
-    <footer class="ds-sec" style="padding-block:2.4rem;border-top:1px solid var(--av-hairline)"><div class="ds-wrap"><div class="row" style="justify-content:space-between"><span class="mono" style="color:var(--av-gray-500)">Averyn · Design System v1.0 Horizonte</span><span class="mono" style="color:var(--av-gray-500)">Fuente: DESIGN.md · tokens.css</span></div></div></footer>
+    <footer class="ds-sec" style="padding-block:2.4rem;border-top:1px solid var(--av-hairline)"><div class="ds-wrap"><div class="row" style="justify-content:space-between"><span class="mono" style="color:var(--av-gray-500)">Averyn · Design System v1.1 Horizonte</span><span class="mono" style="color:var(--av-gray-500)">Fuente: DESIGN.md · tokens.css</span></div></div></footer>
   </div>
 </div>
 <div class="hz-toasts" id="toasts" role="region" aria-label="Notificaciones" aria-live="polite"></div>
