@@ -55,7 +55,6 @@ body.mn { margin: 0; background: #fff; color: var(--mn-ink); font-family: var(--
 .mn-pill a:hover { color: var(--av-blue); }
 .mn-actions { justify-self: end; display: flex; align-items: center; gap: 1.4rem; }
 .mn-actions .mn-btn--blue { box-shadow: 0 0 0 2px #fff, 0 4px 0 2px rgba(0, 12, 36, .25); }
-.mn-actions > a:first-child { text-decoration: none; padding: .75rem 1.1rem; white-space: nowrap; background: rgba(234, 240, 254, .85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 10px; }
 .mn-actions > a:first-child:hover { color: var(--av-blue); }
 .mn-burger { display: none; justify-self: end; width: 44px; height: 44px; border: 1px solid var(--av-gray-200); background: #fff; border-radius: 8px; cursor: pointer; font-family: var(--mn-mono); font-size: .7rem; font-weight: 700; }
 
@@ -65,13 +64,15 @@ body.mn { margin: 0; background: #fff; color: var(--mn-ink); font-family: var(--
 /* El navy cae desde abajo a medida que el logo sube (el logo negro necesita fondo claro al inicio) */
 .mn-sticky::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10, 42, 102, 0) 18%, #0A2A66 54%, var(--mn-ink) 82%); opacity: var(--t2); }
 .mn-lockup {
-  /* Wordmark 1144x371: la A (x 32-314) y la "v" se entrelazan, asi que el borde del recorte es una recta inclinada
-     (pendiente 0,564 medida sobre el AVIF) que barre hacia la derecha. --cx = x del borde en la fila superior, en %. */
+  /* Wordmark 1144x371. Se maqueta grande (cerca de su tamano nativo) y solo se reduce: asi nunca se amplia y no se ve borroso.
+     La A (x 32-314) y la "v" se entrelazan: el borde del recorte es una recta inclinada (pendiente 0,564 medida sobre el AVIF).
+     --sf = escala final (la fija home.js segun el ancho); --cx = x del borde en la fila superior, en %. */
+  --sf: .36;
   --cx: calc(15.95 + 84.05 * var(--t1));
-  --grow: calc(1 + (1 - var(--t1)) * 1.6);
-  position: absolute; left: 50%; top: 50%; width: clamp(260px, 40vw, 520px); aspect-ratio: 1144 / 371;
-  transform: translate(calc(-50% + (1 - var(--t1)) * var(--grow) * 34.9%), calc(-50% - var(--t2) * 27svh)) scale(calc(var(--grow) * (1 - var(--t2) * .45)));
-  will-change: transform;
+  --s: calc(1 - (1 - var(--sf)) * (.55 * var(--t1) + .45 * var(--t2)));
+  position: absolute; left: 50%; top: 50%; width: min(120vw, 1040px); aspect-ratio: 1144 / 371;
+  transform: translate(calc(-50% + (1 - var(--t1)) * var(--s) * 34.9%), calc(-50% - var(--t2) * 27svh)) scale(var(--s));
+  backface-visibility: hidden;
 }
 .mn-lockup__word { display: block; width: 100%; height: 100%; clip-path: polygon(0 0, calc(var(--cx) * 1%) 0, calc(var(--cx) * 1% + 18.3%) 100%, 0 100%); }
 .mn-cue { position: absolute; left: 50%; bottom: 2.2rem; transform: translateX(-50%); color: rgba(0, 12, 36, .6); opacity: calc(1 - var(--t1) * 6); display: flex; flex-direction: column; align-items: center; gap: .6rem; }
@@ -200,7 +201,11 @@ body.mn { margin: 0; background: #fff; color: var(--mn-ink); font-family: var(--
 .mn-person-wrap:hover .mn-pop, .mn-person-wrap:focus-within .mn-pop { opacity: 1; visibility: visible; transform: none; }
 
 /* CTA */
-.mn-cta { background: var(--av-blue); color: #fff; }
+.mn-cta { position: relative; overflow: hidden; background: var(--av-blue); color: #fff; }
+.mn-cta .mn-wrap { position: relative; z-index: 1; }
+.mn-cta__fig { position: absolute; z-index: 0; right: -4vw; bottom: -6%; width: min(58vw, 760px); pointer-events: none; }
+.mn-cta__fig svg { display: block; width: 100%; height: auto; overflow: visible; }
+.mn-cta__fig path { fill: none; vector-effect: non-scaling-stroke; stroke-linecap: round; }
 .mn-cta .mn-title { grid-column: 1 / span 8; font-size: clamp(2.4rem, 6vw, 5rem); color: #fff; }
 .mn-cta__side { grid-column: 1 / span 5; margin-top: 2rem; }
 .mn-cta__side p { color: #DCE8FF; margin-bottom: 1.8rem; }
@@ -232,6 +237,7 @@ body.mn { margin: 0; background: #fff; color: var(--mn-ink); font-family: var(--
   .mn-pill.is-open { display: flex; }
   .mn-pill a { padding: .8rem 0; border-bottom: 1px solid var(--mn-line); }
   .mn-pill .mn-pill__mobile { display: flex; gap: 1rem; padding-top: 1rem; border: 0; }
+  .mn-pill .mn-pill__mobile .mn-btn { padding: .7rem 1.25rem; border-bottom: 0; color: #fff; }
 }
 @media (max-width: 900px) {
   .mn-grid > * { grid-column: 1 / -1 !important; margin-top: 0 !important; }

@@ -13,6 +13,16 @@
   var ease = function (t) { return t * t * (3 - 2 * t); };
   var phase = function (p, from, to) { return ease(clamp((p - from) / (to - from))); };
 
+  var lockup = document.querySelector('.mn-lockup');
+  var fitLogo = function () {
+    if (!lockup) return;
+    var w0 = lockup.offsetWidth;
+    var wf = Math.min(372, Math.max(186, window.innerWidth * 0.258)); /* ancho final del logo en px */
+    lockup.style.setProperty('--sf', (wf / w0).toFixed(4));
+  };
+  fitLogo();
+  window.addEventListener('resize', fitLogo);
+
   var setVars = function (t1, t2, t3) {
     root.style.setProperty('--t1', t1.toFixed(4));
     root.style.setProperty('--t2', t2.toFixed(4));
