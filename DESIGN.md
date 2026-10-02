@@ -214,6 +214,11 @@ Geometría contenida: 8 px en botones y campos, 10 px en píldoras del header, 2
 - **Panel de actividad**: franja, barras y lista salen de un mismo conjunto de eventos; la suma de las partes es el total. Un solo panel oscuro de contenido por pantalla (toasts, tooltips y scrim no cuentan).
 - Series de resultado en gráficos usan `--viz-ok`, `--viz-retry` y `--viz-bad` (los mismos tonos, más oscuros, ≥ 3:1) con icono y palabra en la leyenda.
 
+### Mapa de la documentación (v1.5)
+- El design system se documenta en **8 páginas por propósito** (`docs/design-system.html` + `docs/ds/*.html`), agrupadas en la barra lateral: **Inicio** · **Sistema** (Fundamentos, Componentes, Gráficos) · **Aplicación** (Patrones, Plantillas y estados) · **Marca y calidad** (Marca y entregables, Calidad y gobernanza). Todo viaja también en un solo HTML: `docs/averyn-design-system-horizonte.html`.
+- **Dónde va cada cosa:** un valor → Fundamentos; una pieza reutilizable → Componentes; datos → Gráficos; un problema de producto → Patrones; una pantalla o su estado → Plantillas y estados; lo que sale de la pantalla → Marca y entregables; reglas de proceso → Calidad y gobernanza.
+- Las fuentes viven en `docs/ds/src/*-body.html`; `build.py` valida ids únicos y enlaces. Sin numeración de secciones; cada sección declara `data-nav` y `data-grp`.
+
 ## Do's and Don'ts
 
 ### Do:
