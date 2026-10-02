@@ -12,6 +12,7 @@ colors:
   cyan-trace: "#00ACD2"
   cyan-glow: "#55D6FF"
   paper-blue: "#F4F8FF"
+  white: "#FFFFFF"
   hairline: "#DCE5F5"
   ink-muted: "#56637F"
   night-text: "#B9C9E4"
