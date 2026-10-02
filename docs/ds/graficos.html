@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Averyn — Design System Horizonte v1.2 · Gráficos</title>
+<meta name="description" content="Design system de Averyn: principios, tokens, componentes y reglas de uso del estilo Horizonte.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link rel="icon" href="../../averyn-frontend/assets/images/averyn-logo-blue.avif">
+<link href="./ds.css" rel="stylesheet">
+<link href="./charts.css" rel="stylesheet">
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<div class="ds-shell">
+  <aside class="ds-side" aria-label="Índice del design system">
+    <a class="ds-side__brand" href="../design-system.html" aria-label="Averyn, inicio del design system"><img src="../../averyn-frontend/assets/images/averyn-logo-font-black.avif" alt="Averyn"></a>
+    <p class="ds-side__ver mono">Design System · v1.2 Horizonte</p>
+    <nav>
+      <span class="grp mono">Design system</span>
+      <a class="ds-page" href="../design-system.html">Fundamentos y componentes</a>
+      <a class="ds-page" href="graficos.html" aria-current="page">Gráficos</a>
+      <a class="ds-page" href="sistema.html">Estados del sistema</a>
+      <span class="grp mono">En esta página</span>
+      <a href="#principios">01 · Elegir la forma</a>
+      <a href="#color">02 · Color validado</a>
+      <a href="#tarjeta">03 · Tarjeta de gráfico</a>
+      <a href="#tendencias">04 · Tendencias</a>
+      <a href="#comparaciones">05 · Comparaciones</a>
+      <a href="#partes">06 · Partes y metas</a>
+      <a href="#resumenes">07 · Resúmenes</a>
+      <a href="#distribuciones">08 · Distribuciones y flujo</a>
+      <a href="#tablas">09 · Tabla breakdown</a>
+      <a href="#interaccion">10 · Interacción y a11y</a>
+      <a href="#datos">11 · Contrato de datos</a>
+      <a href="#reglas">12 · Lista de control</a>
+    </nav>
+  </aside>
+
+  <div class="ds-main" id="top">
+    <header class="ds-cover ds-cover--page"><div class="ds-wrap"><span class="mono" style="color:#fff;opacity:.85">Gráficos</span><h1>Datos con calma.</h1><p>Modelos y ejemplos de gráficos para el panel del futuro: tarjetas minimalistas, formas elegidas por el trabajo del dato, color validado y lectura accesible.</p></div></header>
+
+    <main id="contenido">
+
+    <!-- 01 PRINCIPIOS -->
+    <section class="ds-sec" id="principios" data-nav="01 · Elegir la forma" aria-labelledby="h-principios"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">01 · Gráficos</span>
+      <h2 id="h-principios">Primero el trabajo del dato, después el gráfico</h2>
+      <p class="ds-lead">Un gráfico no decora: responde una pregunta. Antes de elegir tipo, se define qué hace el dato (comparar, seguir en el tiempo, repartir, medir contra una meta). A veces la respuesta correcta es <b>no usar un gráfico</b> y mostrar el número.</p>
+      <div class="doc-wrap"><table class="doc-table"><thead><tr><th>El dato debe…</th><th>Forma</th><th>Ejemplo en Averyn</th><th>Evitar</th></tr></thead><tbody>
+        <tr><td>Mostrar <b>un solo número</b></td><td>Ficha KPI / cifra grande</td><td>Verificaciones de hoy</td><td>Un gráfico para un único valor</td></tr>
+        <tr><td>Seguir un cambio <b>en el tiempo</b></td><td>Área / línea suave</td><td>Verificaciones por día</td><td>Barras con más de 20–30 puntos</td></tr>
+        <tr><td><b>Comparar</b> categorías</td><td>Barras (píldora, recta u horizontal)</td><td>Registros por semana · OCR por campo</td><td>Anillos con más de 5 partes</td></tr>
+        <tr><td>Mostrar <b>partes de un todo</b></td><td>Anillo (≤ 5) o barra apilada</td><td>Verificaciones por método</td><td>3D, porciones separadas, más de 5 colores</td></tr>
+        <tr><td>Medir contra una <b>meta</b></td><td>Bullet</td><td>Participación por mesa vs 80%</td><td>Velocímetros decorativos</td></tr>
+        <tr><td>Mostrar la <b>distribución</b></td><td>Histograma (con umbral si lo hay)</td><td>Puntajes de similitud · umbral 0.68</td><td>Un promedio que esconde la forma</td></tr>
+        <tr><td>Revelar un patrón en <b>dos dimensiones</b></td><td>Mapa de calor</td><td>Accesos por día × franja horaria</td><td>Una línea por cada día de la semana</td></tr>
+        <tr><td>Mostrar dónde se <b>pierde</b> gente</td><td>Embudo (barras decrecientes)</td><td>Captura → coincidencia</td><td>Embudos 3D o con curvas</td></tr>
+        <tr><td>Dar el <b>valor exacto</b> y permitir actuar</td><td>Tabla "breakdown"</td><td>Eventos de auditoría</td><td>Un gráfico cuando se pide leer cifras</td></tr>
+      </tbody></table></div>
+      <div class="ds-grid ds-grid--2 ds-gap-top">
+        <div class="dd dd--do"><strong>Principios</strong><ul><li><b>Una señal azul.</b> El azul de marca es la serie principal; lo demás es contexto o comparación.</li><li><b>Plano por defecto.</b> Tarjeta con línea fina de 1 px, sin sombras ni degradados decorativos.</li><li><b>Marcas finas y cuadrícula sólida de línea fina.</b></li><li><b>Honestidad.</b> Todo dato de ejemplo se rotula así; ningún gráfico finge datos reales.</li></ul></div>
+        <div class="dd dd--dont"><strong>Nunca</strong><ul><li>Doble eje (dos escalas en un gráfico): se separan en dos gráficos.</li><li>Un número sobre cada punto o barra: se rotula el máximo y el resto va en tooltip y tabla.</li><li>El color como único canal: siempre texto, forma o posición lo acompañan.</li><li>Repintar una serie cuando otro filtro cambia el número de series.</li></ul></div>
+      </div>
+    </div></section>
+
+    <!-- 02 COLOR -->
+    <section class="ds-sec ds-sec--tint" id="color" data-nav="02 · Color validado" aria-labelledby="h-color"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">02 · Gráficos</span>
+      <h2 id="h-color">Una paleta calculada, no elegida a ojo</h2>
+      <p class="ds-lead">Los colores categóricos se asignan <b>en orden fijo</b> y nunca se ciclan. La paleta se validó con <code>validate_palette.js</code> (modo claro, superficie blanca): banda de luminosidad, croma mínimo, separación para daltonismo, separación en visión normal y contraste.</p>
+      <h3 class="ds-sub">Categórica <small>identidad · orden fijo</small></h3>
+      <div class="sw-grid">
+        <button class="sw" type="button" data-hex="#145FEE" style="--c:#145FEE"><span class="sw__c"></span><span class="sw__t"><b>Serie 1 · Azul de señal</b><code>#145FEE</code> <span data-contrast="#145FEE"></span></span></button>
+        <button class="sw" type="button" data-hex="#C77500" style="--c:#C77500"><span class="sw__c"></span><span class="sw__t"><b>Serie 2 · Ámbar</b><code>#C77500</code> <span data-contrast="#C77500"></span></span></button>
+        <button class="sw" type="button" data-hex="#0092B5" style="--c:#0092B5"><span class="sw__c"></span><span class="sw__t"><b>Serie 3 · Cian de gráfico</b><code>#0092B5</code> <span data-contrast="#0092B5"></span></span></button>
+        <button class="sw" type="button" data-hex="#8A5CF6" style="--c:#8A5CF6"><span class="sw__c"></span><span class="sw__t"><b>Serie 4 · Violeta</b><code>#8A5CF6</code> <span data-contrast="#8A5CF6"></span></span></button>
+        <button class="sw" type="button" data-hex="#C2457A" style="--c:#C2457A"><span class="sw__c"></span><span class="sw__t"><b>Serie 5 · Magenta</b><code>#C2457A</code> <span data-contrast="#C2457A"></span></span></button>
+        <button class="sw" type="button" data-hex="#7C89A3" style="--c:#7C89A3"><span class="sw__c"></span><span class="sw__t"><b>Otros / referencia</b><code>#7C89A3</code> <span data-contrast="#7C89A3"></span></span></button>
+      </div>
+      <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Comprobación</th><th>Resultado</th><th>Qué significa en la práctica</th></tr></thead><tbody>
+        <tr><td>Banda de luminosidad (OKLCH 0.43–0.77)</td><td>PASS</td><td>Ninguna serie se pierde sobre blanco ni "pesa" más que otra.</td></tr>
+        <tr><td>Croma mínimo</td><td>PASS</td><td>Ninguna serie se lee como gris.</td></tr>
+        <tr><td>Separación para daltonismo (adyacentes)</td><td>PASS · ΔE ≥ 10.2</td><td>Series vecinas se distinguen con protanopia, deuteranopia y tritanopia.</td></tr>
+        <tr><td>Visión normal (adyacentes)</td><td>PASS · ΔE ≥ 20.9</td><td>Cualquier lector distingue series consecutivas.</td></tr>
+        <tr><td>Contraste de marcas ≥ 3:1</td><td>PASS</td><td>Las líneas y barras se ven sobre blanco. El ámbar y el cian de marca (<code>#00ACD2</code>) no llegaban, por eso el cian de gráfico es <code>#0092B5</code>.</td></tr>
+        <tr><td>Todas las parejas (series 1–3)</td><td>PASS · ΔE ≥ 15.3</td><td><b>Regla:</b> hasta 3 series sin ayudas. Las series 4 y 5 solo con etiquetas directas, porque violeta y azul se acercan con protanopia.</td></tr>
+      </tbody></table></div>
+      <p class="ds-note">Un 6.º elemento nunca es un color nuevo: se agrupa en "Otros" (gris) o se divide en gráficos pequeños. El modo nocturno tendrá sus propios pasos de la misma rampa, validados contra la superficie oscura (pendiente: fase "Marca y entregables").</p>
+
+      <h3 class="ds-sub">Secuencial y divergente <small>magnitud · polaridad</small></h3>
+      <div class="ds-grid ds-grid--2">
+        <div class="stage"><span class="stage__label mono">Secuencial · un tono, de claro a oscuro</span>
+          <div class="hm-scale__ramp" style="display:flex;gap:2px;margin-top:.5rem"><i style="flex:1;height:44px;border-radius:6px 0 0 6px;background:var(--viz-seq-1);box-shadow:inset 0 0 0 1px var(--av-hairline)"></i><i style="flex:1;background:var(--viz-seq-2)"></i><i style="flex:1;background:var(--viz-seq-3)"></i><i style="flex:1;background:var(--viz-seq-4)"></i><i style="flex:1;background:var(--viz-seq-5)"></i><i style="flex:1;border-radius:0 6px 6px 0;background:var(--viz-seq-6)"></i></div>
+          <p class="ds-note" style="margin-top:.8rem">Intensidad = cantidad. Mapa de calor, embudo, relleno de barras. Siempre acompañado de leyenda "Menos → Más".</p></div>
+        <div class="stage"><span class="stage__label mono">Divergente · dos tonos y gris neutro en el centro</span>
+          <div style="display:flex;gap:2px;margin-top:.5rem"><i style="flex:1;height:44px;border-radius:6px 0 0 6px;background:var(--viz-div-neg)"></i><i style="flex:1;background:#E3B873"></i><i style="flex:1;background:var(--viz-div-mid);box-shadow:inset 0 0 0 1px var(--av-hairline)"></i><i style="flex:1;background:#8DB0F7"></i><i style="flex:1;border-radius:0 6px 6px 0;background:var(--viz-div-pos)"></i></div>
+          <p class="ds-note" style="margin-top:.8rem">Para desviaciones respecto a un valor de referencia (más / menos que la meta). El punto medio nunca lleva color.</p></div>
+      </div>
+
+      <h3 class="ds-sub">Estados <small>reservados</small></h3>
+      <div class="row" style="gap:.7rem;flex-wrap:wrap">
+        <span class="hz-chip hz-chip--success">Correcto</span><span class="hz-chip hz-chip--warning">Atención</span><span class="hz-chip hz-chip--error">Error</span><span class="hz-chip hz-chip--info">Información</span>
+      </div>
+      <p class="ds-note">Verde, ámbar de aviso y rojo son <b>solo</b> para estados (variaciones, alertas). Nunca se reutilizan como "serie 4". Siempre llevan icono y texto; el color no es el único canal.</p>
+    </div></section>
+
+    <!-- 03 TARJETA -->
+    <section class="ds-sec" id="tarjeta" data-nav="03 · Tarjeta de gráfico" aria-labelledby="h-tarjeta"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">03 · Gráficos</span>
+      <h2 id="h-tarjeta">La tarjeta de gráfico</h2>
+      <p class="ds-lead">Todos los gráficos viven en la misma tarjeta: línea fina de 1 px, sin sombra, mucho aire. La cifra grande responde primero a la pregunta; el gráfico la explica.</p>
+      <div class="ds-grid ds-split ds-gap-top">
+        <div id="m-kpis-shell"><article class="cc" aria-label="Ejemplo de anatomía">
+          <header class="cc__head"><h3 class="cc__label" style="margin:0">Verificaciones<span class="mk">1</span></h3><div class="cc__tools"><button class="cc__menu" type="button" aria-label="Menú de ejemplo (decorativo)" tabindex="-1"><i class="bi bi-three-dots" aria-hidden="true"></i></button></div></header>
+          <p class="cc__value">12,480<span class="mk">2</span></p>
+          <p class="cc__meta"><span class="cc__delta cc__delta--good"><i class="bi bi-arrow-up-short" aria-hidden="true"></i>+1.5%</span><span>en el periodo seleccionado<span class="mk">3</span></span></p>
+          <div class="cc__body"><div class="stage stage--tint" style="min-height:90px;display:grid;place-items:center;color:var(--av-gray-600);font-size:.875rem">Gráfico<span class="mk">4</span></div></div>
+          <footer class="cc__foot"><span class="cc__sample">Datos de ejemplo<span class="mk">5</span></span><span style="color:var(--av-blue);font-weight:600">Ver detalle →<span class="mk">6</span></span></footer>
+        </article></div>
+        <ol class="ds-note" style="margin:0;padding-left:1.2rem;display:grid;gap:.7rem">
+          <li><b>Etiqueta</b> en mono mayúsculas, gris 600: nombra la métrica, no la explica.</li>
+          <li><b>Cifra grande</b> en Space Grotesk 500, cifras tabulares: es lo primero que se lee.</li>
+          <li><b>Variación + periodo.</b> Flecha = dirección; color = si es bueno o malo; texto = cuánto. Siempre con el periodo comparado.</li>
+          <li><b>Gráfico</b> con tooltip, teclado y vista en tabla.</li>
+          <li><b>Rótulo "Datos de ejemplo"</b> mientras no haya API real.</li>
+          <li><b>Acción</b> opcional: un enlace hacia el detalle (bitácora, informe). Menú "⋯" con tabla, copiar y descargar CSV.</li>
+        </ol>
+      </div>
+      <h3 class="ds-sub">Variación: dirección ≠ valoración</h3>
+      <div class="ds-grid ds-grid--3">
+        <div class="stage"><p class="cc__meta" style="margin:0"><span class="cc__delta cc__delta--good"><i class="bi bi-arrow-up-short" aria-hidden="true"></i>+4.2%</span><span>Más verificaciones: bueno</span></p></div>
+        <div class="stage"><p class="cc__meta" style="margin:0"><span class="cc__delta cc__delta--good"><i class="bi bi-arrow-down-short" aria-hidden="true"></i>−0.2 s</span><span>Menos tiempo: bueno</span></p></div>
+        <div class="stage"><p class="cc__meta" style="margin:0"><span class="cc__delta cc__delta--bad"><i class="bi bi-arrow-up-short" aria-hidden="true"></i>+12%</span><span>Más rechazos: malo</span></p></div>
+      </div>
+      <p class="ds-note">El modelo de datos lleva <code>change</code> (número con signo) y <code>tone</code> (<code>good</code>, <code>bad</code> o <code>flat</code>): la interfaz nunca deduce "bueno" de "sube".</p>
+
+      <h3 class="ds-sub">Estados de la tarjeta</h3>
+      <div class="ds-grid ds-grid--3">
+        <div><div id="m-state-loading"></div><p class="ds-note"><b>Cargando.</b> Esqueleto con la forma final (cifra y gráfico), <code>aria-busy</code>; sin spinner. Con movimiento reducido el brillo se detiene.</p></div>
+        <div><div id="m-state-empty"></div><p class="ds-note"><b>Vacío.</b> Dice por qué está vacío y qué hacer; nunca una tarjeta en blanco ni un gráfico con ceros.</p></div>
+        <div><div id="m-state-error"></div><p class="ds-note"><b>Error.</b> <code>role="alert"</code>, mensaje sin culpas, acción de reintento y la garantía de que no se perdió nada.</p></div>
+      </div>
+    </div></section>
+
+    <!-- 04 TENDENCIAS -->
+    <section class="ds-sec ds-sec--tint" id="tendencias" data-nav="04 · Tendencias" aria-labelledby="h-tend"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">04 · Gráficos</span>
+      <h2 id="h-tend">Tendencias: área y línea suave</h2>
+      <p class="ds-lead">Para ver cómo cambia una medida en el tiempo. Línea de 2 px, relleno con degradado al 22% que se desvanece, y un punto final de 8 px con anillo de superficie. El periodo anterior va en gris, punteado: se compara sin competir.</p>
+      <div class="cdoc">
+        <div id="m-area"></div>
+        <div class="cdoc__spec">
+          <div><h3>Cuándo usarlo</h3><ul><li>Verificaciones, registros o accesos por día, semana o mes.</li><li>De 7 a ~90 puntos. Con más, se agrega por semana.</li></ul></div>
+          <div><h3>Anatomía</h3><ul><li>Curva monótona: suaviza sin inventar picos ni valles.</li><li>Eje Y desde 0, 4–5 marcas; cuadrícula sólida de línea fina.</li><li>Eje X: máximo 7 etiquetas, ancladas al último dato.</li><li>Leyenda siempre que haya 2 series.</li></ul></div>
+          <div><h3>Interacción</h3><ul><li>Cursor vertical + tooltip con todas las series.</li><li>Teclado: <kbd>←</kbd> <kbd>→</kbd> recorren, <kbd>Inicio</kbd>/<kbd>Fin</kbd> saltan, <kbd>Esc</kbd> sale.</li><li>Selector de periodo (7/30/90 d) arriba a la derecha; también cambia la cifra y la variación.</li></ul></div>
+        </div>
+      </div>
+      <details class="vz-model"><summary>Modelo de datos (JSON)</summary><div class="codeblock"><pre id="mod-area"></pre><button class="copy" type="button" data-copy="#mod-area">Copiar</button></div></details>
+    </div></section>
+
+    <!-- 05 COMPARACIONES -->
+    <section class="ds-sec" id="comparaciones" data-nav="05 · Comparaciones" aria-labelledby="h-comp-g"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">05 · Gráficos</span>
+      <h2 id="h-comp-g">Comparaciones: barras</h2>
+      <p class="ds-lead">Para comparar cantidades entre categorías. Tres variantes: <b>píldora suave</b> (la firma de Averyn), <b>recta</b> (para series densas) y <b>horizontal</b> (para nombres largos y rankings).</p>
+      <div class="ds-grid ds-grid--2">
+        <div id="m-bars"></div>
+        <div id="m-bars-flat"></div>
+      </div>
+      <div class="ds-grid ds-split ds-gap-top" style="margin-top:1.4rem">
+        <div class="stage stage--tint"><span class="stage__label mono">Excepción documentada · la píldora</span>
+          <p class="ds-note" style="margin-top:.7rem">La guía general de gráficos pide extremos de 4 px y barras finas. La <b>píldora suave</b> (24–32 px, redondeada, degradado de azul a casi blanco) es una decisión de marca para que los gráficos hablen el mismo idioma que el navbar y los botones. Se permite <b>solo</b> con las condiciones de la derecha; si no se cumplen, se usa la barra recta.</p></div>
+        <ul class="ds-note" style="margin:0;padding-left:1.2rem;display:grid;gap:.4rem"><li>Máximo <b>12 barras</b> y ancho mínimo de 14 px.</li><li>La parte alta de la píldora cumple 3:1; la base clara es degradado, no información.</li><li>El máximo se rotula con texto; el resto va en tooltip y en la vista en tabla.</li><li>Un solo tono: nunca píldoras de varios colores en la misma serie.</li></ul>
+      </div>
+      <details class="vz-model"><summary>Modelo de datos (JSON)</summary><div class="codeblock"><pre id="mod-bars"></pre><button class="copy" type="button" data-copy="#mod-bars">Copiar</button></div></details>
+
+      <h3 class="ds-sub">Ranking y composición</h3>
+      <div class="ds-grid ds-grid--2">
+        <div id="m-ocr"></div>
+        <div id="m-stack"></div>
+      </div>
+      <div class="ds-grid ds-grid--2 ds-gap-top">
+        <div class="cdoc__spec"><div><h3>Barra horizontal (ranking)</h3><ul><li>Orden de mayor a menor; el valor <b>siempre visible</b> al final de la fila (≤ 10 filas).</li><li>Pista gris con la escala completa (100% aquí): se ve cuánto falta.</li><li>Sin tooltip: lo que cabe en pantalla no se esconde.</li></ul></div>
+          <details class="vz-model"><summary>Modelo de datos (JSON)</summary><div class="codeblock"><pre id="mod-ocr"></pre><button class="copy" type="button" data-copy="#mod-ocr">Copiar</button></div></details></div>
+        <div class="cdoc__spec"><div><h3>Barra apilada</h3><ul><li>2 px de separación entre segmentos, extremos redondeados.</li><li>Leyenda obligatoria (3 series); el segmento principal parte del eje.</li><li>Tooltip por segmento con su porción del total; teclado con flechas.</li></ul></div>
+          <details class="vz-model"><summary>Modelo de datos (JSON)</summary><div class="codeblock"><pre id="mod-stack"></pre><button class="copy" type="button" data-copy="#mod-stack">Copiar</button></div></details></div>
+      </div>
+    </div></section>
+
+    <!-- 06 PARTES Y METAS -->
+    <section class="ds-sec ds-sec--tint" id="partes" data-nav="06 · Partes y metas" aria-labelledby="h-partes"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">06 · Gráficos</span>
+      <h2 id="h-partes">Partes de un todo y avance hacia una meta</h2>
+      <div class="ds-grid ds-grid--2">
+        <div id="m-donut"></div>
+        <div id="m-bullet"></div>
+      </div>
+      <div class="ds-grid ds-grid--2 ds-gap-top">
+        <div class="cdoc__spec"><div><h3>Anillo</h3><ul><li>Máximo 5 segmentos; el resto, en "Otros".</li><li>Separación de 2 px entre segmentos; trazo de 22 px.</li><li>Cada segmento aparece en la leyenda con su <b>valor y porcentaje en texto</b>.</li><li>Total en el centro, en cifra tabular.</li></ul></div>
+          <details class="vz-model"><summary>Modelo de datos (JSON)</summary><div class="codeblock"><pre id="mod-donut"></pre><button class="copy" type="button" data-copy="#mod-donut">Copiar</button></div></details></div>
+        <div class="cdoc__spec"><div><h3>Bullet (valor frente a meta)</h3><ul><li>Reemplaza al velocímetro: ocupa menos y se compara entre filas.</li><li>Barra = valor; marca vertical oscura = meta. La meta se nombra en la leyenda.</li><li>El cumplimiento se dice en texto en la vista de tabla ("Sí / No"), no solo por la posición.</li></ul></div>
+          <details class="vz-model"><summary>Modelo de datos (JSON)</summary><div class="codeblock"><pre id="mod-bullet"></pre><button class="copy" type="button" data-copy="#mod-bullet">Copiar</button></div></details></div>
+      </div>
+    </div></section>
+
+    <!-- 07 RESÚMENES -->
+    <section class="ds-sec" id="resumenes" data-nav="07 · Resúmenes" aria-labelledby="h-res"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">07 · Gráficos</span>
+      <h2 id="h-res">Resúmenes: fichas KPI y cifra grande</h2>
+      <p class="ds-lead">Cuando el dato es <b>un número</b>, el número es el gráfico. La ficha KPI añade una sparkline sin ejes como contexto; la cifra grande sobre navy reserva el máximo énfasis para <b>una</b> métrica por pantalla.</p>
+      <div class="kpi-grid" id="m-kpis"></div>
+      <div class="cdoc__spec" style="margin-top:1rem"><div><h3>Ficha KPI</h3><ul><li>Cifra + variación + sparkline de 12 mediciones; la sparkline es contexto, no se lee sola (<code>role="img"</code> con su descripción).</li><li>Sin ejes ni cuadrícula; el punto final de 8 px marca el valor actual.</li><li>Gris neutro cuando no hay cambio o no aplica juicio ("Dispositivos activos").</li></ul></div>
+        <details class="vz-model"><summary>Modelo de datos (JSON)</summary><div class="codeblock"><pre id="mod-kpi"></pre><button class="copy" type="button" data-copy="#mod-kpi">Copiar</button></div></details></div>
+      <h3 class="ds-sub">Cifra grande <small>hero figure</small></h3>
+      <div class="hero-stat">
+        <p class="hero-stat__label">Coincidencias correctas</p>
+        <p class="hero-stat__num">98.4%</p>
+        <p class="hero-stat__txt"><span class="cc__delta cc__delta--good"><i class="bi bi-arrow-up-short" aria-hidden="true"></i>+0.6 pp</span> &nbsp;frente al mes anterior, con el umbral de similitud en 0.68.</p>
+        <svg viewBox="0 0 640 300" aria-hidden="true" focusable="false"><path d="M0 290 H640" stroke="rgba(255,255,255,.22)" fill="none"/><path d="M30 290 C110 60 330 40 450 290" stroke="#fff" stroke-width="1.5" fill="none"/><path d="M90 290 C150 110 300 95 390 290" stroke="#00ACD2" stroke-width="2" fill="none"/><path d="M150 290 C190 170 270 160 330 290" stroke="#55D6FF" stroke-width="1.5" fill="none"/></svg>
+      </div>
+      <p class="ds-note">Una por pantalla, y solo para la métrica que define el éxito del producto. Texto blanco (21:1) y verde claro <code>#6EE7B7</code> sobre navy para la variación. Las líneas son la firma de arcos: decorativas, sin significado de datos.</p>
+    </div></section>
+
+    <!-- 08 DISTRIBUCIONES -->
+    <section class="ds-sec ds-sec--tint" id="distribuciones" data-nav="08 · Distribuciones y flujo" aria-labelledby="h-dist"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">08 · Gráficos</span>
+      <h2 id="h-dist">Distribuciones, patrones y flujo</h2>
+      <p class="ds-lead">Los gráficos propios de un producto biométrico: cómo se reparten los puntajes de similitud y dónde cae el umbral, cuándo se concentran los accesos y en qué paso se pierde gente.</p>
+      <div class="ds-grid ds-grid--2">
+        <div id="m-hist"></div>
+        <div id="m-funnel"></div>
+      </div>
+      <div class="ds-grid ds-grid--2 ds-gap-top">
+        <div class="cdoc__spec"><div><h3>Histograma con umbral</h3><ul><li>Barras adyacentes con 2 px de separación, extremos de 3 px.</li><li>Umbral = línea punteada oscura con rótulo; ambos lados llevan texto ("← Rechazadas", "Aceptadas →") además del color.</li><li>Intervalos de 0.04 para que el umbral 0.68 caiga exactamente en un borde.</li><li>Los puntajes son <b>de ejemplo</b>: este gráfico nunca debe usarse para justificar el umbral sin datos reales.</li></ul></div>
+          <details class="vz-model"><summary>Modelo de datos (JSON)</summary><div class="codeblock"><pre id="mod-hist"></pre><button class="copy" type="button" data-copy="#mod-hist">Copiar</button></div></details></div>
+        <div class="cdoc__spec"><div><h3>Embudo</h3><ul><li>Barras horizontales decrecientes, no trapecios: el ancho es comparable.</li><li>Cada paso dice cuántos quedan <b>y el % del paso anterior</b>, que es la información que decide qué mejorar.</li><li>Un solo tono secuencial.</li></ul></div>
+          <details class="vz-model"><summary>Modelo de datos (JSON)</summary><div class="codeblock"><pre id="mod-funnel"></pre><button class="copy" type="button" data-copy="#mod-funnel">Copiar</button></div></details></div>
+      </div>
+      <div style="margin-top:1.6rem" id="m-heat"></div>
+      <div class="cdoc__spec" style="margin-top:1rem"><div><h3>Mapa de calor</h3><ul><li>Rampa secuencial de 6 pasos, con leyenda "Menos → Más". El color <b>no</b> es el único canal: cada celda tiene tooltip y la tabla da el número.</li><li>Teclado en 2 dimensiones: <kbd>←</kbd> <kbd>→</kbd> cambian de franja, <kbd>↑</kbd> <kbd>↓</kbd> de día.</li><li>12 franjas de 2 h × 7 días = 84 celdas: es el máximo recomendado; más, se agrega.</li></ul></div>
+        <details class="vz-model"><summary>Modelo de datos (JSON)</summary><div class="codeblock"><pre id="mod-heat"></pre><button class="copy" type="button" data-copy="#mod-heat">Copiar</button></div></details></div>
+    </div></section>
+
+    <!-- 09 TABLAS -->
+    <section class="ds-sec" id="tablas" data-nav="09 · Tabla breakdown" aria-labelledby="h-tablas"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">09 · Gráficos</span>
+      <h2 id="h-tablas">Tabla "breakdown" con pestañas</h2>
+      <p class="ds-lead">Cuando se necesita el valor exacto y poder actuar sobre él, la tabla gana al gráfico. Las pestañas cambian la dimensión (por evento, por dispositivo) sin salir de la tarjeta.</p>
+      <div class="cdoc">
+        <div id="m-bd"></div>
+        <div class="cdoc__spec">
+          <div><h3>Anatomía</h3><ul><li>Pestañas con <code>role="tablist"</code>; <kbd>←</kbd> <kbd>→</kbd> cambian de pestaña.</li><li>Columna de total en <b>azul</b>: cada cifra es un botón que abre la bitácora filtrada. Si no hay destino, va en tinta, no en azul.</li><li>Variación con flecha, signo y color; el rojo solo cuando el cambio es malo (menos enrolamientos), no por bajar.</li><li>Fila de total al pie, en negrita.</li></ul></div>
+          <div><h3>Los eventos son los reales</h3><p style="margin:0">Los nombres (<code>LOGIN</code>, <code>PERSON_CREATED</code>, <code>DOCUMENT_REGISTERED</code>, <code>BIOMETRIC_ENROLLED</code>, <code>BIOMETRIC_VERIFIED</code>, <code>VOTE_CAST</code>) son los tipos de la bitácora de auditoría; los números son de ejemplo.</p></div>
+        </div>
+      </div>
+      <details class="vz-model"><summary>Modelo de datos (JSON)</summary><div class="codeblock"><pre id="mod-bd"></pre><button class="copy" type="button" data-copy="#mod-bd">Copiar</button></div></details>
+    </div></section>
+
+    <!-- 10 INTERACCIÓN -->
+    <section class="ds-sec ds-sec--tint" id="interaccion" data-nav="10 · Interacción y a11y" aria-labelledby="h-int"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">10 · Gráficos</span>
+      <h2 id="h-int">Interacción y accesibilidad</h2>
+      <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Capacidad</th><th>Regla</th></tr></thead><tbody>
+        <tr><td>Tooltip</td><td>Aparece al pasar el cursor, al tocar y al enfocar con teclado. Fondo navy, texto blanco, máximo 260 px. Nunca es la única vía al dato.</td></tr>
+        <tr><td>Teclado</td><td>El gráfico es un <code>group</code> enfocable con <code>aria-roledescription="gráfico interactivo"</code>. Flechas recorren los valores, <kbd>Inicio</kbd>/<kbd>Fin</kbd> saltan, <kbd>Esc</kbd> cierra. El valor activo se anuncia en una región <code>aria-live="polite"</code>.</td></tr>
+        <tr><td>Vista en tabla</td><td>Todo gráfico ofrece su tabla (menú "⋯" → "Ver como tabla"), con <code>caption</code>, encabezados <code>scope</code> y desplazamiento accesible. También copiar y descargar CSV.</td></tr>
+        <tr><td>Leyenda</td><td>Con 2 o más series, siempre. Con 1, el título la nombra. Texto en tinta; el color va en la marca.</td></tr>
+        <tr><td>Color no es el único canal</td><td>Línea punteada para la referencia, etiquetas "← Rechazadas / Aceptadas →", valores en texto en ranking y leyendas, flecha + signo en variaciones.</td></tr>
+        <tr><td>Movimiento</td><td>Barras y relleno crecen una vez (0.7 s, <code>ease-out</code>). Con <code>prefers-reduced-motion</code> aparecen ya dibujados.</td></tr>
+        <tr><td>Objetivos táctiles</td><td>Botones del menú, periodos y pestañas ≥ 44 px de alto. Las marcas del gráfico se alcanzan por banda, no por su tamaño.</td></tr>
+        <tr><td>Texto</td><td>Números en cifras tabulares (<code>tabular-nums</code>). Formato <code>es-PE</code>: miles con coma, decimales con punto.</td></tr>
+        <tr><td>Respuesta</td><td>El gráfico se redibuja al cambiar el ancho de su tarjeta (<code>ResizeObserver</code>); en móvil las filas de barras pasan a dos líneas.</td></tr>
+      </tbody></table></div>
+    </div></section>
+
+    <!-- 11 DATOS -->
+    <section class="ds-sec" id="datos" data-nav="11 · Contrato de datos" aria-labelledby="h-datos"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">11 · Gráficos</span>
+      <h2 id="h-datos">Contrato de datos (propuesta)</h2>
+      <p class="ds-lead">Los gráficos no calculan nada: dibujan lo que reciben. Para que el día que exista el API no haga falta tocar los componentes, todos aceptan el mismo sobre. Es una <b>propuesta de diseño</b>, no un endpoint existente.</p>
+      <div class="codeblock"><pre id="code-env">{
+  "metric": "verifications",            // identificador estable de la métrica
+  "unit": "count",                      // count | percent | seconds
+  "period": { "from": "2026-09-02", "to": "2026-10-01", "granularity": "day" },
+  "compare": { "mode": "previous_period", "change": 1.5, "tone": "good" },
+  "series": [
+    { "id": "current", "name": "Periodo actual",
+      "points": [ { "t": "2026-09-02", "v": 412 } ] }
+  ],
+  "updatedAt": "2026-10-01T23:59:00-05:00",
+  "state": "ok"                          // ok | loading | empty | error
+}</pre><button class="copy" type="button" data-copy="#code-env">Copiar</button></div>
+      <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Campo</th><th>Regla</th></tr></thead><tbody>
+        <tr><td><code>metric</code></td><td>Identificador en inglés y minúsculas con guiones bajos; las etiquetas visibles las pone la interfaz (español).</td></tr>
+        <tr><td><code>series[].id</code></td><td>Estable: el color sigue a la entidad, no al orden. Si un filtro quita una serie, las demás no cambian de color.</td></tr>
+        <tr><td><code>change</code> y <code>tone</code></td><td>El servidor (o la capa de datos) dice si el cambio es bueno o malo; la interfaz no lo infiere.</td></tr>
+        <tr><td><code>state</code></td><td>Manda qué estado se pinta: cifra con gráfico, esqueleto, vacío o error.</td></tr>
+        <tr><td>Privacidad</td><td>Solo agregados. Ningún gráfico recibe datos de personas ni se puede enlazar una persona con su voto.</td></tr>
+      </tbody></table></div>
+    </div></section>
+
+    <!-- 12 REGLAS -->
+    <section class="ds-sec ds-sec--tint" id="reglas" data-nav="12 · Lista de control" aria-labelledby="h-reglas"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">12 · Gráficos</span>
+      <h2 id="h-reglas">Lista de control antes de publicar un gráfico</h2>
+      <div class="ds-grid ds-grid--2">
+        <div class="dd dd--do"><strong>Debe cumplir</strong><ul><li>La forma responde a una pregunta concreta (tabla de la sección 1).</li><li>Colores de la paleta validada, en orden fijo; ≤ 3 series sin ayudas.</li><li>Leyenda si hay ≥ 2 series; el máximo rotulado, el resto en tooltip.</li><li>Tooltip, teclado y vista en tabla funcionando.</li><li>Estados de cargando, vacío y error resueltos.</li><li>Rotulado "Datos de ejemplo" mientras no sean reales.</li><li>Renderizado y revisado a 1440, 820 y 390 px.</li></ul></div>
+        <div class="dd dd--dont"><strong>Rechazar si…</strong><ul><li>Hay dos ejes Y o escalas distintas en un mismo gráfico.</li><li>Un número aparece sobre cada punto o barra.</li><li>El texto se pinta con el color de la serie.</li><li>La única diferencia entre dos series es el color.</li><li>Rojo y verde se usan como categorías (no solo estados).</li><li>La cuadrícula compite con los datos (líneas gruesas o punteadas).</li><li>Hay animación de rebote o que se repite.</li></ul></div>
+      </div>
+    </div></section>
+
+    </main>
+
+    <footer class="ds-sec" style="padding-block:2.4rem;border-top:1px solid var(--av-hairline)"><div class="ds-wrap"><div class="row" style="justify-content:space-between"><span class="mono" style="color:var(--av-gray-500)">Averyn · Design System v1.2 Horizonte</span><span class="mono" style="color:var(--av-gray-500)">Fuente: DESIGN.md · tokens.css</span></div></div></footer>
+  </div>
+</div>
+<div class="hz-toasts" id="toasts" role="region" aria-label="Notificaciones" aria-live="polite"></div>
+<script src="./ds.js"></script>
+<script src="./charts.js"></script>
+</body>
+</html>
