@@ -1,73 +1,3 @@
-<!doctype html>
-<html lang="es">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Averyn — Design System Horizonte v1.1 · Fundamentos y componentes</title>
-<meta name="description" content="Design system de Averyn: principios, tokens, componentes y reglas de uso del estilo Horizonte.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-<link rel="icon" href="../averyn-frontend/assets/images/averyn-logo-blue.avif">
-<link href="ds/ds.css" rel="stylesheet">
-</head>
-<body>
-<a class="skip" href="#contenido">Saltar al contenido</a>
-<div class="ds-shell">
-  <aside class="ds-side" aria-label="Índice del design system">
-    <a class="ds-side__brand" href="./design-system.html" aria-label="Averyn, inicio del design system"><img src="../averyn-frontend/assets/images/averyn-logo-font-black.avif" alt="Averyn"></a>
-    <p class="ds-side__ver mono">Design System · v1.1 Horizonte</p>
-    <nav>
-      <span class="grp mono">Design system</span>
-      <a class="ds-page" href="design-system.html" aria-current="page">Fundamentos y componentes</a>
-      <span class="grp mono">Fundamentos</span>
-      <a href="#principios">01 · Principios</a>
-      <a href="#marca">02 · Marca y figura</a>
-      <a href="#colores">03 · Colores</a>
-      <a href="#tipografia">04 · Tipografía</a>
-      <a href="#espacio">05 · Espacio, forma y movimiento</a>
-      <a href="#iconografia">06 · Iconografía</a>
-      <span class="grp mono">Componentes</span>
-      <a href="#botones">07 · Botones</a>
-      <a href="#campos">08 · Campos de formulario</a>
-      <a href="#superficies">09 · Tarjetas y superficies</a>
-      <a href="#navegacion">10 · Navegación</a>
-      <a href="#datos">11 · Tablas, chips y datos</a>
-      <a href="#feedback">12 · Alertas y feedback</a>
-      <a href="#estados">13 · Estados: carga, vacío, subida</a>
-      <span class="grp mono">Composición</span>
-      <a href="#patrones">14 · Patrones de página</a>
-      <a href="#plantillas">15 · Plantillas</a>
-      <span class="grp mono">Contenido y calidad</span>
-      <a href="#microcopy">16 · Microcopy</a>
-      <a href="#accesibilidad">17 · Accesibilidad</a>
-      <a href="#gobernanza">18 · Gobernanza</a>
-      <a href="#consumo">19 · Consumo</a>
-    </nav>
-  </aside>
-
-  <div class="ds-main" id="top">
-    <header class="ds-cover">
-      <div class="ds-wrap">
-        <img class="ds-cover__logo" src="../averyn-frontend/assets/images/averyn-logo-font-black.avif" alt="Averyn">
-        <span class="mono" style="color:#fff;opacity:.85">Design System</span>
-        <h1>Claridad que se oscurece en seguridad.</h1>
-        <p>El sistema visual de Averyn: principios, tokens, componentes y reglas de uso para landing, acceso y panel. Nace de lo que construimos y decidimos, y extiende el mismo lenguaje a lo que aún no existe.</p>
-        <div class="ds-cover__meta mono"><span>Versión 1.1 · Horizonte</span><span>Octubre 2026</span><span>Fuente: DESIGN.md + tokens.css</span></div>
-      </div>
-      <svg viewBox="0 0 640 300" aria-hidden="true" focusable="false">
-        <path d="M0 290 H640" stroke="rgba(255,255,255,.22)" stroke-width="1" fill="none"/>
-        <path d="M30 290 C110 60 330 40 450 290" stroke="#fff" stroke-width="1.5" fill="none"/>
-        <path d="M90 290 C150 110 300 95 390 290" stroke="#00ACD2" stroke-width="2" fill="none"/>
-        <path d="M150 290 C190 170 270 160 330 290" stroke="#55D6FF" stroke-width="1.5" fill="none"/>
-        <path d="M300 8 L545 290" stroke="#3D86FF" stroke-width="2" fill="none"/>
-        <path d="M326 -32 L605 290" stroke="#3D86FF" stroke-width="2" fill="none"/>
-      </svg>
-    </header>
-
-
-    <main id="contenido">
     <!-- 01 PRINCIPIOS -->
     <section class="ds-sec" id="principios" aria-labelledby="h-principios"><div class="ds-wrap">
       <span class="ds-eyebrow mono">01 · Fundamentos</span>
@@ -97,17 +27,17 @@
 
       <h3 class="ds-sub">Logotipo <small>wordmark · 1144 × 371</small></h3>
       <div class="ds-grid ds-grid--4">
-        <div class="logo-cell"><img src="../averyn-frontend/assets/images/averyn-logo-font-black.avif" alt="Wordmark negro"></div>
-        <div class="logo-cell logo-cell--dark"><img src="../averyn-frontend/assets/images/averyn-logo-font-white.avif" alt="Wordmark blanco"></div>
-        <div class="logo-cell"><img src="../averyn-frontend/assets/images/averyn-logo-font-blue.avif" alt="Wordmark azul"></div>
-        <div class="logo-cell logo-cell--dark"><img src="../averyn-frontend/assets/images/averyn-logo-font-cyan.avif" alt="Wordmark cian"></div>
+        <div class="logo-cell"><img src="{{FE}}/assets/images/averyn-logo-font-black.avif" alt="Wordmark negro"></div>
+        <div class="logo-cell logo-cell--dark"><img src="{{FE}}/assets/images/averyn-logo-font-white.avif" alt="Wordmark blanco"></div>
+        <div class="logo-cell"><img src="{{FE}}/assets/images/averyn-logo-font-blue.avif" alt="Wordmark azul"></div>
+        <div class="logo-cell logo-cell--dark"><img src="{{FE}}/assets/images/averyn-logo-font-cyan.avif" alt="Wordmark cian"></div>
       </div>
       <h3 class="ds-sub">Isotipo y lockup <small>786 × 661 · 1144 × 657</small></h3>
       <div class="ds-grid ds-grid--4">
-        <div class="logo-cell logo-cell--sky"><img src="../averyn-frontend/assets/images/averyn-logo-black.avif" alt="Isotipo negro"></div>
-        <div class="logo-cell logo-cell--dark"><img src="../averyn-frontend/assets/images/averyn-logo-white.avif" alt="Isotipo blanco"></div>
-        <div class="logo-cell"><img src="../averyn-frontend/assets/images/averyn-logo-lockup-black.avif" alt="Lockup negro"></div>
-        <div class="logo-cell logo-cell--blue"><img src="../averyn-frontend/assets/images/averyn-logo-lockup-white.avif" alt="Lockup blanco"></div>
+        <div class="logo-cell logo-cell--sky"><img src="{{FE}}/assets/images/averyn-logo-black.avif" alt="Isotipo negro"></div>
+        <div class="logo-cell logo-cell--dark"><img src="{{FE}}/assets/images/averyn-logo-white.avif" alt="Isotipo blanco"></div>
+        <div class="logo-cell"><img src="{{FE}}/assets/images/averyn-logo-lockup-black.avif" alt="Lockup negro"></div>
+        <div class="logo-cell logo-cell--blue"><img src="{{FE}}/assets/images/averyn-logo-lockup-white.avif" alt="Lockup blanco"></div>
       </div>
 
       <h3 class="ds-sub">Qué logo sobre qué fondo</h3>
@@ -430,14 +360,14 @@ background: linear-gradient(180deg, #DCECFF 0%, #EAF0FE 55%, #fff 100%);</pre><b
 
       <h3 class="ds-sub">Navbar pública</h3>
       <div class="stage stage--sky"><div class="hz-nav">
-        <span class="hz-brandchip"><img src="../averyn-frontend/assets/images/averyn-logo-font-black.avif" alt="Averyn"></span>
+        <span class="hz-brandchip"><img src="{{FE}}/assets/images/averyn-logo-font-black.avif" alt="Averyn"></span>
         <nav class="hz-pill mono" aria-label="Ejemplo de navegación pública"><a href="#navegacion">Qué es</a><a href="#navegacion">Capacidades</a><a href="#navegacion">Soluciones</a><a href="#navegacion">Seguridad</a><a href="#navegacion">Equipo</a></nav>
         <a class="hz-btn hz-btn--primary" href="#navegacion">Ingresar</a></div></div>
       <p class="ds-note">Logo a la izquierda (aparece cuando el del hero ya se redujo), píldora centrada translúcida con enlaces mono y un único botón "Ingresar". Bajo 1100 px pasa a botón <b>MENÚ</b> con <code>aria-expanded</code>; el menú es el siguiente elemento en el DOM y Escape devuelve el foco al botón.</p>
 
       <h3 class="ds-sub">Dock del panel</h3>
       <div class="stage stage--sky"><div class="hz-nav">
-        <span class="hz-brandchip"><img src="../averyn-frontend/assets/images/averyn-logo-font-black.avif" alt="Averyn"></span>
+        <span class="hz-brandchip"><img src="{{FE}}/assets/images/averyn-logo-font-black.avif" alt="Averyn"></span>
         <nav class="hz-dock" aria-label="Ejemplo de dock"><ul style="display:contents;list-style:none;margin:0;padding:0">
           <li style="display:contents"><a href="#navegacion" aria-current="page"><i class="bi bi-grid-1x2" aria-hidden="true"></i>Dashboard</a></li>
           <li style="display:contents"><a href="#navegacion"><i class="bi bi-person-vcard" aria-hidden="true"></i>Identidad</a></li>
@@ -531,7 +461,7 @@ background: linear-gradient(180deg, #DCECFF 0%, #EAF0FE 55%, #fff 100%);</pre><b
       <h3 class="ds-sub">Hero guiado por scroll <small>demo en vivo</small></h3>
       <div class="stage" style="padding:0;overflow:hidden"><div id="hero-demo" style="position:relative;height:340px;background:linear-gradient(180deg,#DCECFF 0%,#EAF0FE 100%);overflow:hidden">
         <div id="hd-navy" style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,42,102,0) 18%,#0A2A66 54%,#000C24 82%);opacity:0"></div>
-        <img id="hd-logo" src="../averyn-frontend/assets/images/averyn-logo-font-black.avif" alt="Wordmark Averyn mostrado durante la demo del hero" style="position:absolute;left:50%;top:50%;width:900px;max-width:none">
+        <img id="hd-logo" src="{{FE}}/assets/images/averyn-logo-font-black.avif" alt="Wordmark Averyn mostrado durante la demo del hero" style="position:absolute;left:50%;top:50%;width:900px;max-width:none">
         <svg id="hd-fig" viewBox="0 0 640 300" aria-hidden="true" style="position:absolute;left:50%;bottom:64px;width:300px;transform:translateX(-50%);opacity:0"><path d="M0 290 H640" stroke="rgba(255,255,255,.22)" fill="none"/><path d="M30 290 C110 60 330 40 450 290" stroke="#fff" stroke-width="1.5" fill="none" pathLength="1" class="hd-p"/><path d="M90 290 C150 110 300 95 390 290" stroke="#00ACD2" stroke-width="2" fill="none" pathLength="1" class="hd-p"/><path d="M150 290 C190 170 270 160 330 290" stroke="#55D6FF" stroke-width="1.5" fill="none" pathLength="1" class="hd-p"/><path d="M300 8 L545 290" stroke="#3D86FF" stroke-width="2" fill="none" pathLength="1" class="hd-p"/></svg>
         <p id="hd-copy" style="position:absolute;left:50%;bottom:18px;transform:translateX(-50%);color:#D7E0F3;font-size:.8rem;white-space:nowrap;opacity:0">Plataforma de identidad, biometría, IA y seguridad.</p></div></div>
       <div class="stage ds-gap-top"><label class="hz-label" for="hd-range">Progreso de scroll <span class="mono" id="hd-val">0 %</span></label><input id="hd-range" class="demo-slider" type="range" min="0" max="100" value="0" aria-valuetext="0 %"></div>
@@ -565,7 +495,7 @@ background: linear-gradient(180deg, #DCECFF 0%, #EAF0FE 55%, #fff 100%);</pre><b
 
       <h3 class="ds-sub">A · Acceso (login)</h3>
       <div class="hz-frame">
-        <div class="hz-frame__brand"><img src="../averyn-frontend/assets/images/averyn-logo-font-black.avif" alt="Averyn">
+        <div class="hz-frame__brand"><img src="{{FE}}/assets/images/averyn-logo-font-black.avif" alt="Averyn">
           <svg viewBox="0 0 640 300" aria-hidden="true"><path d="M0 290 H640" stroke="rgba(255,255,255,.22)" fill="none"/><path d="M30 290 C110 60 330 40 450 290" stroke="#fff" stroke-width="1.5" fill="none"/><path d="M90 290 C150 110 300 95 390 290" stroke="#00ACD2" stroke-width="2" fill="none"/><path d="M150 290 C190 170 270 160 330 290" stroke="#55D6FF" stroke-width="1.5" fill="none"/><path d="M300 8 L545 290" stroke="#3D86FF" stroke-width="2" fill="none"/></svg>
           <div><h4>Todo listo para continuar.</h4></div></div>
         <div class="hz-frame__form"><span class="mono" style="color:var(--av-gray-500)">← Volver al inicio</span><h4 style="font-size:1.9rem">Bienvenido de nuevo.</h4>
@@ -576,7 +506,7 @@ background: linear-gradient(180deg, #DCECFF 0%, #EAF0FE 55%, #fff 100%);</pre><b
 
       <h3 class="ds-sub">B · Panel (dashboard)</h3>
       <div class="stage stage--sky" style="padding:1.4rem">
-        <div class="hz-nav" style="margin-bottom:1.6rem"><span class="hz-brandchip"><img src="../averyn-frontend/assets/images/averyn-logo-font-black.avif" alt="Averyn"></span><span class="hz-dock" aria-hidden="true"><a href="#plantillas" aria-current="page" tabindex="-1">Dashboard</a><a href="#plantillas" tabindex="-1">Identidad</a><a href="#plantillas" tabindex="-1">Biometría</a></span><span class="hz-avatar" aria-hidden="true"><span class="hz-avatar__c">UD</span></span></div>
+        <div class="hz-nav" style="margin-bottom:1.6rem"><span class="hz-brandchip"><img src="{{FE}}/assets/images/averyn-logo-font-black.avif" alt="Averyn"></span><span class="hz-dock" aria-hidden="true"><a href="#plantillas" aria-current="page" tabindex="-1">Dashboard</a><a href="#plantillas" tabindex="-1">Identidad</a><a href="#plantillas" tabindex="-1">Biometría</a></span><span class="hz-avatar" aria-hidden="true"><span class="hz-avatar__c">UD</span></span></div>
         <p class="mono" style="color:var(--av-blue)">Bienvenido, admin</p><h3 style="font-size:2.6rem;line-height:1.04;margin:.4rem 0 1.4rem">Todo en un solo lugar</h3>
         <div class="hz-kpis"><div class="hz-kpi"><span class="hz-kpi__label mono">Personas</span><span class="hz-kpi__value">8</span></div><div class="hz-kpi"><span class="hz-kpi__label mono">Verificaciones</span><span class="hz-kpi__value">4</span></div><div class="hz-kpi"><span class="hz-kpi__label mono">Procesos</span><span class="hz-kpi__value">0</span></div><div class="hz-kpi"><span class="hz-kpi__label mono">Dispositivos</span><span class="hz-kpi__value">2</span></div></div>
         <div style="display:grid;grid-template-columns:7fr 5fr;gap:1.2rem;margin-top:1.4rem"><div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem"><div class="hz-tile hz-tile--signal" style="min-height:110px"></div><div class="hz-tile hz-tile--night" style="min-height:110px"></div><div class="hz-tile hz-tile--tint" style="min-height:70px"></div><div class="hz-tile hz-tile--tint" style="min-height:70px"></div></div><div class="hz-panel" style="min-height:190px"><h3 style="font-size:1.2rem">Actividad reciente</h3></div></div></div>
@@ -758,14 +688,3 @@ body.av-mi-pantalla { background: #fff; color: var(--av-navy); font-family: var(
       <ol class="ds-note" style="color:var(--av-night-text);padding-left:1.2rem"><li>Acota los estilos a una clase de body (<code>body.av-identidad</code>) y crea su CSS propio.</li><li>Cambia el contenedor a la rejilla de 12 columnas y aplica el ritmo de sección.</li><li>Sustituye tarjetas con sombra por líneas de 1 px; usa un panel navy solo si hay un cambio de información.</li><li>Pasa botones, campos y chips a los componentes de este documento.</li><li>Define carga, vacío y error; revisa foco, contraste y reduced-motion.</li><li>Quita Bootstrap de la página si ya no se usa (se conservan los iconos).</li></ol>
     </div></section>
     
-
-    </main>
-
-    <footer class="ds-sec" style="padding-block:2.4rem;border-top:1px solid var(--av-hairline)"><div class="ds-wrap"><div class="row" style="justify-content:space-between"><span class="mono" style="color:var(--av-gray-500)">Averyn · Design System v1.1 Horizonte</span><span class="mono" style="color:var(--av-gray-500)">Fuente: DESIGN.md · tokens.css</span></div></div></footer>
-  </div>
-</div>
-<div class="hz-toasts" id="toasts" role="region" aria-label="Notificaciones" aria-live="polite"></div>
-<script src="ds/ds.js"></script>
-<script src="ds/foundations.js"></script>
-</body>
-</html>
