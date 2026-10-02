@@ -274,7 +274,7 @@
   function stacked(host, cfg) {
     host.innerHTML = '';
     var lg = H('ul', 'vz-legend', '', host);
-    cfg.series.forEach(function (s) { H('li', '', '<i style="--c:' + s.color + '"></i>' + esc(s.name), lg); });
+    cfg.series.forEach(function (s) { H('li', '', (s.icon ? '<i class="bi ' + s.icon + '" style="--c:' + s.color + '" aria-hidden="true"></i>' : '<i style="--c:' + s.color + '"></i>') + esc(s.name), lg); });
     var ul = H('ul', 'sb', '', host), max = Math.max.apply(null, cfg.rows.map(function (r) { return sum(cfg.series.map(function (s) { return r.vals[s.id]; })); }));
     var segs = [], items = [];
     cfg.rows.forEach(function (r) {
@@ -407,7 +407,7 @@
   function histogram(host, cfg) {
     host.innerHTML = '';
     var W = Math.max(280, host.clientWidth), Ht = cfg.height || 260, m = { l: 42, r: 10, t: 26, b: 44 }, pw = W - m.l - m.r, ph = Ht - m.t - m.b, n = cfg.bins.length;
-    var lg = H('ul', 'vz-legend', '<li><i style="--c:var(--viz-2)"></i>Rechazadas (< umbral)</li><li><i style="--c:var(--viz-1)"></i>Aceptadas (≥ umbral)</li><li><i class="is-line is-dash" style="--c:var(--viz-ink)"></i>Umbral ' + nf2.format(cfg.threshold) + '</li>', host);
+    var lg = H('ul', 'vz-legend', '<li><i class="bi bi-x-circle" style="--c:var(--viz-bad)" aria-hidden="true"></i>Rechazadas (< umbral)</li><li><i class="bi bi-check-circle" style="--c:var(--viz-ok)" aria-hidden="true"></i>Aceptadas (≥ umbral)</li><li><i class="is-line is-dash" style="--c:var(--viz-ink)"></i>Umbral ' + nf2.format(cfg.threshold) + '</li>', host);
     var ticks = niceTicks(Math.max.apply(null, cfg.bins.map(function (b) { return b.n; }))), top = ticks[ticks.length - 1];
     var Y = function (v) { return m.t + ph - v / top * ph; }, XS = function (s) { return m.l + s * pw; }, bw = pw / n;
     var wrap = H('div', 'vz', '', host), svg = S('svg', { viewBox: '0 0 ' + W + ' ' + Ht, width: W, height: Ht, 'aria-hidden': 'true' }, wrap);
@@ -420,7 +420,7 @@
     var els = [];
     cfg.bins.forEach(function (b, i) {
       var ok = b.from >= cfg.threshold - 1e-9, x = m.l + bw * i + 1, w = bw - 2, y = Y(b.n), h = Y(0) - y, r = Math.min(3, h);
-      els.push(S('path', { d: 'M' + x + ' ' + Y(0) + 'V' + (y + r) + 'Q' + x + ' ' + y + ' ' + (x + r) + ' ' + y + 'H' + (x + w - r) + 'Q' + (x + w) + ' ' + y + ' ' + (x + w) + ' ' + (y + r) + 'V' + Y(0) + 'Z', fill: ok ? 'var(--viz-1)' : 'var(--viz-2)', class: 'vz-bar' }, svg));
+      els.push(S('path', { d: 'M' + x + ' ' + Y(0) + 'V' + (y + r) + 'Q' + x + ' ' + y + ' ' + (x + r) + ' ' + y + 'H' + (x + w - r) + 'Q' + (x + w) + ' ' + y + ' ' + (x + w) + ' ' + (y + r) + 'V' + Y(0) + 'Z', fill: ok ? 'var(--viz-ok)' : 'var(--viz-bad)', class: 'vz-bar' }, svg));
     });
     var tx = XS(cfg.threshold);
     S('line', { x1: tx, x2: tx, y1: m.t - 8, y2: m.t + ph, class: 'vz-thr' }, svg);
@@ -430,7 +430,7 @@
     var items = cfg.bins.map(function (b, i) {
       var ok = b.from >= cfg.threshold - 1e-9, lab = nf2.format(b.from) + '–' + nf2.format(b.to);
       return {
-        html: tipHtml('Similitud ' + lab, [{ k: ok ? 'Aceptadas' : 'Rechazadas', v: N(b.n), c: ok ? 'var(--viz-1)' : 'var(--viz-2)' }]), say: 'Similitud ' + lab + ': ' + N(b.n) + (ok ? ' aceptadas' : ' rechazadas'),
+        html: tipHtml('Similitud ' + lab, [{ k: ok ? 'Aceptadas' : 'Rechazadas', v: N(b.n), c: ok ? 'var(--viz-ok)' : 'var(--viz-bad)' }]), say: 'Similitud ' + lab + ': ' + N(b.n) + (ok ? ' aceptadas' : ' rechazadas'),
         at: function () { var r = svg.getBoundingClientRect(), k = r.width / W; return { x: r.left + (m.l + bw * i + bw / 2) * k, y: r.top + Y(b.n) * k }; }
       };
     });
@@ -591,7 +591,7 @@
   };
   D.bars = { name: 'Registros', label: 'Registros por semana', data: [412, 530, 486, 602, 574, 690, 655, 742].map(function (v, i) { var t = END - (7 - i) * 7 * 864e5; return { label: fShort.format(t).replace('.', ''), long: 'Semana del ' + fShort.format(t - 6 * 864e5).replace('.', '') + ' al ' + fShort.format(t).replace('.', ''), v: v }; }) };
   D.ocr = { rows: [{ label: 'N.º de documento', v: 99.1 }, { label: 'Apellidos', v: 97.8 }, { label: 'Nombres', v: 97.2 }, { label: 'Fecha de nacimiento', v: 95.4 }, { label: 'Dirección', v: 88.9 }, { label: 'Lugar de nacimiento', v: 86.3 }] };
-  D.stack = { label: 'Verificaciones por dispositivo', series: [{ id: 'ok', name: 'Exitosas', color: 'var(--viz-1)' }, { id: 'retry', name: 'Reintentos', color: 'var(--viz-2)' }, { id: 'rej', name: 'Rechazadas', color: 'var(--viz-5)' }],
+  D.stack = { label: 'Verificaciones por dispositivo', series: [{ id: 'ok', name: 'Exitosas', color: 'var(--viz-ok)', icon: 'bi-check-circle' }, { id: 'retry', name: 'Reintentos', color: 'var(--viz-retry)', icon: 'bi-arrow-repeat' }, { id: 'rej', name: 'Rechazadas', color: 'var(--viz-bad)', icon: 'bi-x-circle' }],
     rows: [{ label: 'CAM-001', vals: { ok: 1840, retry: 212, rej: 96 } }, { label: 'CAM-002', vals: { ok: 1522, retry: 188, rej: 74 } }, { label: 'LEC-001', vals: { ok: 1204, retry: 64, rej: 41 } }, { label: 'LEC-002', vals: { ok: 968, retry: 120, rej: 88 } }, { label: 'KIOSCO-01', vals: { ok: 612, retry: 35, rej: 20 } }] };
   D.donut = { name: 'Verificaciones por método', label: 'Verificaciones por método', unit: 'verificaciones', segs: [{ label: 'Rostro', v: 7240, color: 'var(--viz-1)' }, { label: 'Huella', v: 3868, color: 'var(--viz-2)' }, { label: 'Documento (OCR)', v: 1372, color: 'var(--viz-3)' }] };
   D.bullet = { name: 'Participación', goal: 80, rows: [{ label: 'Mesa 1', v: 88 }, { label: 'Mesa 2', v: 72 }, { label: 'Mesa 3', v: 54 }, { label: 'Mesa 4', v: 81 }] };

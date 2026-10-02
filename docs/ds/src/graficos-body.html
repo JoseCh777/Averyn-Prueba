@@ -60,6 +60,7 @@
         <span class="hz-chip hz-chip--success">Correcto</span><span class="hz-chip hz-chip--warning">Atención</span><span class="hz-chip hz-chip--error">Error</span><span class="hz-chip hz-chip--info">Información</span>
       </div>
       <p class="ds-note">Verde, ámbar de aviso y rojo son <b>solo</b> para estados (variaciones, alertas). Nunca se reutilizan como "serie 4". Siempre llevan icono y texto; el color no es el único canal.</p>
+      <p class="ds-note"><b>Series de resultado.</b> Exitosas, reintentos y rechazadas (y aceptadas / rechazadas en el histograma) <b>son estados</b>: usan <code>--viz-ok</code> <code>#059669</code>, <code>--viz-retry</code> <code>#D97706</code> y <code>--viz-bad</code> <code>#E11D48</code>, los mismos tonos de las píldoras y del panel pero más oscuros para llegar a 3:1 sobre blanco. Validadas con <code>validate_palette.js</code>: separación en visión normal ΔE ≥ 16.6 y contraste ≥ 3:1; la separación para daltonismo es 7.9 (rango permitido solo con codificación secundaria), por eso la leyenda lleva <b>icono y palabra</b>, cada segmento tiene tooltip y existe la tabla alternativa. Los gráficos de categorías (método, institución) siguen con la paleta categórica.</p>
     </div></section>
 
     <!-- 03 TARJETA -->
