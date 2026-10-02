@@ -6,7 +6,7 @@ Empaqueta todo el design system en UN solo archivo HTML autocontenido para compa
 Cada página del DS (design-system, gráficos, patrones, sistema, ...) se construye con build.py,
 se le incrustan CSS, JS e imágenes (data URI) y viaja como texto dentro del archivo. Un marco
 mínimo la carga en un iframe (srcdoc), así los ids, estilos y scripts de cada página quedan aislados.
-Las páginas de error reales (404, 403, ...) viajan igual y alimentan las vistas en vivo de "Estados del sistema".
+Las páginas de error reales (404, 403, ...) viajan igual y alimentan las vistas en vivo de "Plantillas y estados".
 Requiere internet solo para las fuentes de Google y los iconos (CDN).
 """
 import base64, importlib.util, json, os, re, sys
@@ -100,7 +100,7 @@ def main():
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Averyn — Design System Horizonte v%(v)s</title>
-<meta name="description" content="Design system de Averyn en un solo archivo: fundamentos, componentes, gráficos, patrones y estados del sistema.">
+<meta name="description" content="Design system de Averyn en un solo archivo: fundamentos, componentes, gráficos, patrones, plantillas y estados, marca y calidad.">
 <style>html,body{margin:0;height:100%%;background:#F4F8FF}iframe{display:block;width:100%%;height:100%%;border:0}.ns{padding:2rem;font:16px/1.5 system-ui,sans-serif}</style>
 </head>
 <body>

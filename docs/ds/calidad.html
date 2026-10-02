@@ -148,6 +148,24 @@
         <tr><td>✓ Contraste y foco verificados sobre cada superficie donde aparece</td><td>✓ Responsive: 1440, 820 y 390 px sin scroll horizontal</td></tr>
         <tr><td>✓ <code>prefers-reduced-motion</code> y teclado probados</td><td>✓ Documentado aquí con un ejemplo vivo y su regla de uso</td></tr>
       </tbody></table></div>
+      <h3 class="ds-sub">Dónde va cada cosa</h3>
+      <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Si lo que añades es…</th><th>Va en…</th><th>Ejemplos</th></tr></thead><tbody>
+        <tr><td>Un <b>valor</b> o una regla visual</td><td><a href="./fundamentos.html">Fundamentos</a></td><td>Un color, una escala de espacio, un token</td></tr>
+        <tr><td>Una <b>pieza reutilizable</b></td><td><a href="./componentes.html">Componentes</a>, en su familia</td><td>Botón, campo, tabla, alerta, drawer</td></tr>
+        <tr><td>Una <b>forma de mostrar datos</b></td><td><a href="./graficos.html">Gráficos</a></td><td>Un tipo de gráfico, una regla de color de serie</td></tr>
+        <tr><td>Una <b>solución a un problema de producto</b> (varias piezas juntas)</td><td><a href="./patrones.html">Patrones</a></td><td>Captura facial, tarjetón, consentimiento</td></tr>
+        <tr><td>Una <b>pantalla</b> completa o un estado de pantalla</td><td><a href="./plantillas.html">Plantillas y estados</a></td><td>Bitácora, página 404, estado vacío</td></tr>
+        <tr><td>Algo que <b>sale de la pantalla</b></td><td><a href="./marca.html">Marca y entregables</a></td><td>Correo, impresión, favicon</td></tr>
+        <tr><td>Una <b>regla de calidad o de proceso</b></td><td>Calidad y gobernanza (aquí)</td><td>Microcopy, accesibilidad, versión</td></tr>
+      </tbody></table></div>
+      <h3 class="ds-sub">Cómo añadir o mover una sección</h3>
+      <ul class="ds-note" style="padding-left:1.1rem;display:grid;gap:.4rem">
+        <li>Cada <code>&lt;section&gt;</code> lleva <code>id</code> único en <b>todo</b> el sistema, <code>data-nav</code> (la etiqueta del índice) y <code>data-grp</code> (su subgrupo dentro de la página). Los nombres dicen <b>qué es</b>, nunca cuándo se hizo.</li>
+        <li><b>Sin numeración</b>: el orden lo da la posición. El fondo alterno de las secciones lo calcula <code>build.py</code>; no se pone a mano.</li>
+        <li>Para mover una sección, se corta el bloque completo a otro <code>src/*-body.html</code> y se ajusta su <code>data-grp</code>; el contenido no cambia.</li>
+        <li><code>python docs/ds/src/build.py</code> <b>valida</b> ids repetidos, anclas internas y enlaces entre páginas (con su <code>#fragmento</code>) y termina con error si algo se rompe.</li>
+        <li>Los nombres de página son del propósito (Componentes, Patrones…); las versiones y novedades se anotan en el changelog de abajo.</li>
+      </ul>
       <h3 class="ds-sub">Registro de decisiones</h3>
       <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Decisión</th><th>Motivo</th></tr></thead><tbody>
         <tr><td>Estilo "Horizonte" (cielo a navy, arcos, mono en acciones)</td><td>Identidad propia y reconocible; la A del logo es la firma.</td></tr>
@@ -157,6 +175,7 @@
         <tr><td>Shell en píldora (landing y dashboard)</td><td>Coherencia con el dock anterior y con la navegación pública.</td></tr>
         <tr><td>Wordmark: maquetar grande y reducir</td><td>Ampliarlo (o <code>will-change</code>) lo rasterizaba borroso.</td></tr>
         <tr><td>Módulos sin pantalla: "Próximamente", sin enlace</td><td>Honestidad del estado; evita los 404.</td></tr>
+        <tr><td>Estructura por propósito, no por orden de llegada (v1.5)</td><td>El sistema había crecido por capas y la gente no sabía dónde buscar; ahora cada cosa tiene un único lugar y una regla para decidirlo.</td></tr>
         <tr><td>Sin Bootstrap en landing, login y dashboard</td><td>Menos peso y estilos propios; Bootstrap Icons se conserva.</td></tr>
       </tbody></table></div>
       <h3 class="ds-sub">Changelog</h3>
