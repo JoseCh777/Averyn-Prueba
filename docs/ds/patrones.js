@@ -146,26 +146,55 @@
     $('#ocr-ok').addEventListener('click', function () { DS.toast('Datos confirmados', 'Aquí avanzaría al siguiente paso.'); });
   })();
 
-  /* ---------- Papeleta ---------- */
+  /* ---------- Tarjetón y comprobante ---------- */
   (function () {
     var root = $('#ballot'); if (!root) return;
-    var panels = $$('[data-v]', root), steps = $$('.pt-ballot-step li', root), next = $('#ballot-next');
+    var WHO = [['Presidente', 'Nombre Apellido'], ['Vicepresidente', 'Nombre Apellido']];
+    var OPTS = [
+      { v: '1', n: '1', party: 'Lista Horizonte', who: WHO },
+      { v: '2', n: '2', party: 'Lista Cima', who: WHO },
+      { v: '3', n: '3', party: 'Lista Raíz', who: WHO },
+      { v: 'blanco', n: '', party: 'Voto en blanco', who: null }
+    ];
+    function box(o, radio) {
+      var inner;
+      if (o.who) {
+        inner = '<span class="tj-opt__n">' + o.n + '</span>' +
+          '<span class="tj-opt__ph">' + o.who.map(function () { return '<span class="tj-opt__f"><i class="bi bi-person-fill" aria-hidden="true"></i></span>'; }).join('') + '</span>' +
+          '<span class="tj-opt__who">' + o.who.map(function (w) { return '<span>' + esc(w[0]) + '<b>' + esc(w[1]) + '</b></span>'; }).join('') + '</span>' +
+          '<span class="tj-opt__logo">Logo · ' + esc(o.party) + '</span>';
+      } else {
+        inner = '<span class="tj-opt__mid">Voto<br>en blanco</span>';
+      }
+      var name = o.who ? o.party + ', número ' + o.n + '. ' + o.who.map(function (w) { return w[0] + ' ' + w[1]; }).join('. ') : 'Voto en blanco';
+      return '<label class="tj-opt' + (o.who ? '' : ' tj-opt--blank') + '">' + (radio ? '<input type="radio" name="voto" value="' + o.v + '" aria-label="' + esc(name) + '">' : '') + '<span class="tj-opt__ok"><i class="bi bi-check-lg" aria-hidden="true"></i>Marcada</span>' + inner + '</label>';
+    }
+    $('#tj-grid').innerHTML = OPTS.map(function (o) { return box(o, true); }).join('');
+    var panels = $$('[data-v]', root), steps = $$('.pt-ballot-step li', root), next = $('#ballot-next'), hint = $('#ballot-hint');
     function go(i, focus) {
       panels.forEach(function (p) { p.hidden = +p.getAttribute('data-v') !== i; });
       steps.forEach(function (s, k) { if (k === i) s.setAttribute('aria-current', 'step'); else s.removeAttribute('aria-current'); });
       if (focus) { var h = $('#ballot-h' + (i + 1)); if (h) h.focus(); }
     }
-    $$('input[name="voto"]').forEach(function (r) { r.addEventListener('change', function () { next.disabled = false; }); });
-    next.addEventListener('click', function () { $('#ballot-sel').textContent = $('input[name="voto"]:checked').value; go(1, true); });
+    $$('input[name="voto"]').forEach(function (r) {
+      r.addEventListener('change', function () {
+        next.disabled = false; var o = OPTS.filter(function (x) { return x.v === r.value; })[0];
+        hint.textContent = 'Marcaste: ' + (o.who ? o.party + ' (número ' + o.n + ')' : 'voto en blanco') + '.';
+      });
+    });
+    next.addEventListener('click', function () {
+      var v = $('input[name="voto"]:checked').value, o = OPTS.filter(function (x) { return x.v === v; })[0];
+      $('#ballot-sel').innerHTML = box(o, false); go(1, true);
+    });
     $('#ballot-back').addEventListener('click', function () { go(0); });
     $('#ballot-ok').addEventListener('click', function () {
       var a = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789', g = function (n) { var s = ''; for (var i = 0; i < n; i++) s += a[Math.floor(Math.random() * a.length)]; return s; };
       $('#ballot-code').textContent = 'AV-' + g(4) + '-' + g(4);
       $('#ballot-time').textContent = new Intl.DateTimeFormat('es-PE', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date());
-      go(2, true);
+      $('#ballot-sel').innerHTML = ''; go(2, true);
     });
     $('#ballot-copy').addEventListener('click', function () { DS.copiar($('#ballot-code').textContent, 'Código de comprobante'); });
-    $('#ballot-reset').addEventListener('click', function () { $$('input[name="voto"]').forEach(function (r) { r.checked = false; }); next.disabled = true; go(0); });
+    $('#ballot-reset').addEventListener('click', function () { $$('input[name="voto"]').forEach(function (r) { r.checked = false; }); next.disabled = true; hint.textContent = 'Aún no has elegido una opción.'; go(0); });
   })();
 
   /* ---------- Dispositivos ---------- */
