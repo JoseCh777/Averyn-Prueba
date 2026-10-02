@@ -3,15 +3,15 @@
  *
  * Decisión de diseño: se priorizó un panel con datos simples y trazables
  * (conteos y un log de acciones) sobre visualizaciones complejas, para que
- * cada elemento se pueda explicar y sustentar. Por eso no hay gráficos ni
- * cálculos estadísticos: cada número es un conteo del mock (que en producción
- * vendría de la API) y la actividad reciente es un log de eventos.
+ * cada elemento se pueda explicar y sustentar. Por eso no hay cálculos
+ * estadísticos: cada número es un conteo del mock (que en producción vendría
+ * de la API) y el único gráfico son tres barras con el conteo del log.
  *
  * Datos de esta pantalla:
  * - Indicadores: conteos por módulo (personas, verificaciones, procesos, dispositivos).
- * - Accesos rápidos: enlaces a los módulos, sin lógica. Los módulos que aún
- *   no existen se muestran como "Próximamente" en vez de enlazar a un 404.
- * - Actividad reciente: últimas acciones registradas (log).
+ * - Accesos rápidos: mosaico de enlaces a los módulos, sin lógica. Los módulos
+ *   que aún no existen se muestran como "Próximamente" en vez de enlazar a un 404.
+ * - Actividad reciente: resumen por resultado y últimas acciones registradas (log).
  */
 
 const USUARIO_DEMO = { nombre: 'Usuario Demo', rol: 'Administrador' };
@@ -81,19 +81,41 @@ function construirKpis() {
 }
 
 /**
- * Atajos a los módulos. Son enlaces: no tienen lógica asociada.
- * `proximamente` marca los módulos cuya pantalla aún no existe.
- * @type {Array<{titulo: string, desc: string, href: string, proximamente?: boolean}>}
+ * Atajos a los módulos, en el orden del mosaico. Son enlaces: no tienen lógica.
+ * - `tamano`: 'lg' (2 por fila), 'md' (3 por fila) o 'sm' (2 por fila, módulos pendientes).
+ * - `tono`: color de la tarjeta ('signal' azul, 'night' navy, 'tint' azul tenue, 'soon' atenuada).
+ * - `proximamente`: el módulo aún no tiene pantalla; no enlaza.
+ * @type {Array<{titulo: string, desc: string, href: string, icono: string, tamano: 'lg'|'md'|'sm', tono: string, proximamente?: boolean}>}
  */
 const ACCESOS_RAPIDOS_MOCK = [
-  { titulo: 'Gestionar personas', desc: 'Listado y verificación de identidad', href: 'identity/index.html' },
-  { titulo: 'Biometría', desc: 'Registro y verificación biométrica', href: '../biometrics/index.html' },
-  { titulo: 'Procesar documento', desc: 'OCR · nuevo registro desde documento', href: 'documents/pre-registro.html' },
-  { titulo: 'Procesos electorales', desc: 'Convocatorias y mesas de votación', href: '../modules/electoral/index.html' },
-  { titulo: 'Consultas con IA', desc: 'Preguntas sobre identidad y procesos', href: '../modules/ia/index.html' },
-  { titulo: 'Gestionar usuarios', desc: 'Cuentas y roles de la organización', href: '../modules/admin/index.html', proximamente: true },
-  { titulo: 'Reportes y auditoría', desc: 'Trazabilidad y exportación de datos', href: '../modules/admin/index.html', proximamente: true },
+  { titulo: 'Gestionar personas', desc: 'Listado y verificación de identidad', href: 'identity/index.html', icono: 'bi-person-vcard', tamano: 'lg', tono: 'signal' },
+  { titulo: 'Biometría', desc: 'Registro y verificación biométrica de rostro y huella', href: '../biometrics/index.html', icono: 'bi-fingerprint', tamano: 'lg', tono: 'night' },
+  { titulo: 'Procesar documento', desc: 'OCR · nuevo registro desde documento', href: 'documents/pre-registro.html', icono: 'bi-file-earmark-text', tamano: 'md', tono: 'tint' },
+  { titulo: 'Procesos electorales', desc: 'Convocatorias y mesas de votación', href: '../modules/electoral/index.html', icono: 'bi-card-checklist', tamano: 'md', tono: 'tint' },
+  { titulo: 'Consultas con IA', desc: 'Preguntas sobre identidad y procesos', href: '../modules/ia/index.html', icono: 'bi-stars', tamano: 'md', tono: 'tint' },
+  { titulo: 'Gestionar usuarios', desc: 'Cuentas y roles de la organización', href: '../modules/admin/index.html', icono: 'bi-person-gear', tamano: 'sm', tono: 'soon', proximamente: true },
+  { titulo: 'Reportes y auditoría', desc: 'Trazabilidad y exportación de datos', href: '../modules/admin/index.html', icono: 'bi-clipboard-data', tamano: 'sm', tono: 'soon', proximamente: true },
 ];
+
+/**
+ * Resumen del log biométrico por resultado, para el mini gráfico de barras.
+ * Cuenta TODOS los eventos del log (no solo los 4 que muestra la línea de tiempo).
+ * @returns {{total: number, barras: Array<{clave: string, etiqueta: string, n: number, pct: number}>}}
+ */
+function construirResumenResultados() {
+  const eventos = listarEventosBiometricos();
+  const total = eventos.length;
+  const definicion = [
+    { clave: 'exito', etiqueta: 'Exitosas' },
+    { clave: 'rechazo', etiqueta: 'Rechazadas' },
+    { clave: 'reintento', etiqueta: 'Reintentos' },
+  ];
+  const barras = definicion.map((d) => {
+    const n = eventos.filter((e) => e.resultado === d.clave).length;
+    return { ...d, n, pct: total > 0 ? Math.round((n / total) * 100) : 0 };
+  });
+  return { total, barras };
+}
 
 /**
  * Construye la actividad reciente desde el log biométrico real
@@ -155,27 +177,55 @@ function renderizarKpis() {
 }
 
 /**
- * Pinta los accesos rápidos como filas. Los módulos sin pantalla se muestran
- * deshabilitados con la etiqueta "Próximamente".
+ * Pinta los accesos rápidos como mosaico asimétrico. Los módulos sin pantalla
+ * se muestran atenuados con la etiqueta "Próximamente" y no son enlaces.
  * @returns {void}
  */
 function renderizarAccesosRapidos() {
   const lista = document.getElementById('grid-accesos-rapidos');
   if (!lista) return;
 
-  lista.innerHTML = ACCESOS_RAPIDOS_MOCK.map((acceso, i) => {
-    const indice = String(i + 1).padStart(2, '0');
-    const cuerpo = `
-      <span class="dh-row__n dh-mono" aria-hidden="true">${indice}</span>
-      <span class="dh-row__body">
-        <span class="dh-row__title">${escaparHtml(acceso.titulo)}</span>
-        <span class="dh-row__desc">${escaparHtml(acceso.desc)}</span>
+  lista.innerHTML = ACCESOS_RAPIDOS_MOCK.map((acceso) => {
+    const contenido = `
+      <span class="dh-tile__icon" aria-hidden="true"><i class="bi ${acceso.icono}"></i></span>
+      <span class="dh-tile__body">
+        <span class="dh-tile__title">${escaparHtml(acceso.titulo)}</span>
+        <span class="dh-tile__desc">${escaparHtml(acceso.desc)}</span>
       </span>`;
+    const celda = `dh-cell dh-cell--${acceso.tamano}`;
     if (acceso.proximamente) {
-      return `<li><span class="dh-row is-soon" aria-disabled="true">${cuerpo}<span class="dh-row__tag dh-mono">Próximamente</span></span></li>`;
+      return `<li class="${celda}"><div class="dh-tile dh-tile--${acceso.tono}" aria-disabled="true">${contenido}<span class="dh-tile__tag dh-mono">Próximamente</span></div></li>`;
     }
-    return `<li><a class="dh-row" href="${acceso.href}">${cuerpo}<span class="dh-row__arrow" aria-hidden="true">→</span></a></li>`;
+    return `<li class="${celda}"><a class="dh-tile dh-tile--${acceso.tono}" href="${acceso.href}">${contenido}<span class="dh-tile__arrow" aria-hidden="true">↗</span></a></li>`;
   }).join('');
+}
+
+/**
+ * Pinta el mini gráfico de resultados (tres barras con su conteo). Cada fila
+ * tiene texto visible, así que no depende del color; la barra es decorativa.
+ * Sin eventos en el log, el gráfico se oculta.
+ * @returns {void}
+ */
+function renderizarResumenResultados() {
+  const contenedor = document.getElementById('resumen-resultados');
+  if (!contenedor) return;
+
+  const { total, barras } = construirResumenResultados();
+  if (total === 0) {
+    contenedor.hidden = true;
+    contenedor.innerHTML = '';
+    return;
+  }
+
+  contenedor.hidden = false;
+  contenedor.innerHTML = `
+    <p class="dh-bars__title dh-mono">Resultados del log · ${conteoTexto(total, 'evento', 'eventos')}</p>
+    ${barras.map((b) => `
+      <div class="dh-bar dh-bar--${b.clave}">
+        <span class="dh-bar__label">${escaparHtml(b.etiqueta)}</span>
+        <span class="dh-bar__track" aria-hidden="true"><i style="--w: ${b.pct}%"></i></span>
+        <span class="dh-bar__n dh-mono">${b.n}</span>
+      </div>`).join('')}`;
 }
 
 /**
@@ -208,5 +258,6 @@ document.addEventListener('DOMContentLoaded', () => {
   renderizarBienvenida();
   renderizarKpis();
   renderizarAccesosRapidos();
+  renderizarResumenResultados();
   renderizarFeedActividad();
 });

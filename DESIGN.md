@@ -47,6 +47,8 @@ rounded:
   control: "8px"
   pill: "10px"
   frame: "24px"
+  tile: "16px"
+  full: "9999px"
 spacing:
   xs: "8px"
   sm: "16px"
@@ -175,6 +177,15 @@ Geometría contenida: 8 px en botones y campos, 10 px en píldoras del header, 2
 - **Focus:** borde azul de señal y halo de 3 px al 15 %.
 - **Error:** borde rojo y mensaje en una alerta con borde izquierdo de 3 px; el estado de carga bloquea el botón.
 
+### Shell del dashboard (píldora)
+- Dock en **píldora completa** (9999 px) en azul tenue translúcido con línea de 1 px, icono + etiqueta en Space Grotesk 600 y el ítem activo en píldora azul de señal. Logo, búsqueda, notificaciones y usuario son chips en píldora del mismo material. Bajo 1280 px solo el ítem activo conserva su etiqueta; los demás quedan en icono (con `title` y nombre accesible). Los módulos sin pantalla se atenúan y no enlazan.
+
+### Mosaico de accesos
+- Rejilla de 6 columnas con tarjetas asimétricas (radio 16 px): dos grandes (azul de señal y navy nocturno), tres medianas en azul tenue y las pendientes atenuadas con borde discontinuo y la etiqueta "Próximamente". Cada una lleva un icono que representa su función (tarjeta de identidad, huella, documento, lista de verificación, destellos de IA). Hover solo en dispositivos con hover: sube 4 px y la flecha avanza.
+
+### Panel de actividad
+- El único bloque oscuro de la pantalla (navy nocturno, radio 24 px): marca el cambio de información. Resume el log con tres barras (exitosas, rechazadas, reintentos) con su conteo en texto, y una línea de tiempo con puntos cian, rojo suave y ámbar.
+
 ### Filas y listas (componente firma)
 - Listas hechas de líneas de 1 px con índice mono pequeño, título en Space Grotesk y descripción en tinta apagada; el hover solo cambia el color del título. Sirven para capacidades, soluciones y arquitectura.
 
@@ -189,6 +200,8 @@ Geometría contenida: 8 px en botones y campos, 10 px en píldoras del header, 2
 - **Do** usar JetBrains Mono mayúsculas para botones, rótulos y navegación.
 - **Do** respetar `prefers-reduced-motion`: sin sticky ni dibujo de trazos, estado final directo.
 - **Do** componer de forma asimétrica: titular y contenido en columnas desiguales.
+- **Do** reservar el navy a un solo panel por pantalla para marcar un cambio de información.
+- **Do** acompañar todo dato gráfico con su valor en texto; el color nunca es el único canal.
 
 ### Don't:
 - **Don't** usar el cian como superficie grande ni el azul de señal como decoración.
