@@ -134,6 +134,14 @@
   --av-ease-out: cubic-bezier(.23, 1, .32, 1);
   --av-shadow-key: 0 3px 0 rgba(0, 12, 36, .3);        /* botón sólido, aspecto de tecla */
   --av-shadow-frame: 0 24px 60px rgba(0, 12, 36, .14); /* única tarjeta que flota */
+
+  /* Accesibilidad (design system v1.0): bordes de campo ≥ 3:1, placeholder ≥ 4.5:1 y texto de estado ≥ 4.5:1 */
+  --av-field-border: #6E86B0;
+  --av-placeholder: #667390;
+  --av-success-text: #047857;
+  --av-warning-text: #B45309;
+  --av-error-text: #B91C1C;
+  --av-info-text: #0369A1;
 }
 
 /* Breakpoints — ver docs/design-system.md

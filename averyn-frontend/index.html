@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
     <link href="assets/css/design-system.css" rel="stylesheet" />
     <link href="assets/css/landing.css" rel="stylesheet" />
+    <script>document.documentElement.classList.add("js");</script>
   </head>
   <body class="mn">
     <a class="mn-skip" href="#que-es">Saltar al contenido</a>
@@ -17,6 +18,7 @@
     <header class="mn-header">
       <div class="mn-wrap mn-header__grid">
         <a class="mn-brand" href="#inicio" aria-label="Averyn, inicio"><img src="assets/images/averyn-logo-font-black.avif" alt="Averyn" /></a>
+        <button class="mn-burger" type="button" aria-expanded="false" aria-controls="mn-nav">MENÚ</button>
         <nav class="mn-pill mn-mono" id="mn-nav" aria-label="Navegación principal">
           <a href="#que-es">Qué es</a>
           <a href="#capacidades">Capacidades</a>
@@ -31,7 +33,6 @@
         <div class="mn-actions mn-mono">
           <a class="mn-btn mn-btn--blue" href="login.html">Ingresar</a>
         </div>
-        <button class="mn-burger" type="button" aria-expanded="false" aria-controls="mn-nav">MENÚ</button>
       </div>
     </header>
 
@@ -43,18 +44,19 @@
             <img class="mn-lockup__word" src="assets/images/averyn-logo-font-black.avif" alt="Averyn" />
           </div>
 
-          <div class="mn-fig" aria-hidden="true">
-            <svg viewBox="0 0 640 300" focusable="false">
-              <path d="M0 290 H640" pathLength="1" stroke="rgba(255,255,255,.22)" stroke-width="1" />
-              <path d="M30 290 C110 60 330 40 450 290" pathLength="1" stroke="#FFFFFF" stroke-width="1.5" />
-              <path d="M90 290 C150 110 300 95 390 290" pathLength="1" stroke="#00ACD2" stroke-width="2" />
-              <path d="M150 290 C190 170 270 160 330 290" pathLength="1" stroke="#55D6FF" stroke-width="1.5" />
-              <path d="M300 8 L545 290" pathLength="1" stroke="#3D86FF" stroke-width="2" />
-              <path d="M326 -32 L605 290" pathLength="1" stroke="#3D86FF" stroke-width="2" />
-            </svg>
-          </div>
 
           <div class="mn-copy">
+            <div class="mn-fig" aria-hidden="true">
+            <svg viewBox="0 0 640 300" focusable="false">
+            <path d="M0 290 H640" pathLength="1" stroke="rgba(255,255,255,.22)" stroke-width="1" />
+            <path d="M30 290 C110 60 330 40 450 290" pathLength="1" stroke="#FFFFFF" stroke-width="1.5" />
+            <path d="M90 290 C150 110 300 95 390 290" pathLength="1" stroke="#00ACD2" stroke-width="2" />
+            <path d="M150 290 C190 170 270 160 330 290" pathLength="1" stroke="#55D6FF" stroke-width="1.5" />
+            <path d="M300 8 L545 290" pathLength="1" stroke="#3D86FF" stroke-width="2" />
+            <path d="M326 -32 L605 290" pathLength="1" stroke="#3D86FF" stroke-width="2" />
+            </svg>
+            </div>
+            <h1>Identidad inteligente para procesos institucionales</h1>
             <p>Plataforma de identidad, biometría, inteligencia artificial y seguridad diseñada para automatizar procesos institucionales críticos.</p>
             <div class="mn-copy__cta">
               <a class="mn-btn mn-btn--blue" href="login.html">Ingresar al sistema →</a>
@@ -191,28 +193,28 @@
           <p class="mn-lead mn-eq__intro">Averyn nace como una propuesta académica para modernizar los procesos institucionales mediante software, biometría y arquitecturas distribuidas.</p>
           <div class="mn-team">
             <div class="mn-person-wrap">
-              <a class="mn-person" href="https://github.com/ing-jorgehg" target="_blank" rel="noreferrer" aria-label="Abrir perfil de GitHub de Jorge Ivan Herrera Garcia">
+              <a class="mn-person" href="https://github.com/ing-jorgehg" target="_blank" rel="noreferrer" aria-describedby="pop-jorge" aria-label="Abrir perfil de GitHub de Jorge Ivan Herrera Garcia (se abre en una pestaña nueva)">
                 <span class="mn-person__ini" aria-hidden="true">JI</span><strong>Jorge Ivan Herrera Garcia</strong><small>Identidad y Auditoría</small><span class="mn-mono">@ing-jorgehg ↗</span>
               </a>
-              <div class="mn-pop" role="tooltip"><img src="https://github.com/ing-jorgehg.png?size=96" alt="Avatar de Jorge Ivan Herrera Garcia" loading="lazy" /><div><strong>Jorge Ivan Herrera Garcia</strong><small>@ing-jorgehg</small><p>Módulo de identidad (personas, documentos y perfiles) y auditoría: consulta del historial y filtros.</p></div></div>
+              <div class="mn-pop" role="tooltip" id="pop-jorge"><img src="https://github.com/ing-jorgehg.png?size=96" alt="Avatar de Jorge Ivan Herrera Garcia" loading="lazy" /><div><strong>Jorge Ivan Herrera Garcia</strong><small>@ing-jorgehg</small><p>Módulo de identidad (personas, documentos y perfiles) y auditoría: consulta del historial y filtros.</p></div></div>
             </div>
             <div class="mn-person-wrap">
-              <a class="mn-person" href="https://github.com/ddturizo-eng" target="_blank" rel="noreferrer" aria-label="Abrir perfil de GitHub de Daniel David Turizo Chacon">
+              <a class="mn-person" href="https://github.com/ddturizo-eng" target="_blank" rel="noreferrer" aria-describedby="pop-daniel" aria-label="Abrir perfil de GitHub de Daniel David Turizo Chacon (se abre en una pestaña nueva)">
                 <span class="mn-person__ini" aria-hidden="true">DD</span><strong>Daniel David Turizo Chacon</strong><small>Core, Arquitectura e Integraciones críticas</small><span class="mn-mono">@ddturizo-eng ↗</span>
               </a>
-              <div class="mn-pop" role="tooltip"><img src="https://github.com/ddturizo-eng.png?size=96" alt="Avatar de Daniel David Turizo Chacon" loading="lazy" /><div><strong>Daniel David Turizo Chacon</strong><small>@ddturizo-eng</small><p>Arquitectura general, Core, base de datos, multi-tenancy y contratos críticos con los servicios.</p></div></div>
+              <div class="mn-pop" role="tooltip" id="pop-daniel"><img src="https://github.com/ddturizo-eng.png?size=96" alt="Avatar de Daniel David Turizo Chacon" loading="lazy" /><div><strong>Daniel David Turizo Chacon</strong><small>@ddturizo-eng</small><p>Arquitectura general, Core, base de datos, multi-tenancy y contratos críticos con los servicios.</p></div></div>
             </div>
             <div class="mn-person-wrap">
-              <a class="mn-person" href="https://github.com/JoseCh777" target="_blank" rel="noreferrer" aria-label="Abrir perfil de GitHub de Jose Antonio Chinchia Gutierrez">
+              <a class="mn-person" href="https://github.com/JoseCh777" target="_blank" rel="noreferrer" aria-describedby="pop-jose" aria-label="Abrir perfil de GitHub de Jose Antonio Chinchia Gutierrez (se abre en una pestaña nueva)">
                 <span class="mn-person__ini" aria-hidden="true">JC</span><strong>Jose Antonio Chinchia Gutierrez</strong><small>Frontend, Autenticación y Fingerprint</small><span class="mn-mono">@JoseCh777 ↗</span>
               </a>
-              <div class="mn-pop" role="tooltip"><img src="https://github.com/JoseCh777.png?size=96" alt="Avatar de Jose Antonio Chinchia Gutierrez" loading="lazy" /><div><strong>Jose Antonio Chinchia Gutierrez</strong><small>@JoseCh777</small><p>Frontend y Design System, autenticación y servicio de huella digital.</p></div></div>
+              <div class="mn-pop" role="tooltip" id="pop-jose"><img src="https://github.com/JoseCh777.png?size=96" alt="Avatar de Jose Antonio Chinchia Gutierrez" loading="lazy" /><div><strong>Jose Antonio Chinchia Gutierrez</strong><small>@JoseCh777</small><p>Frontend y Design System, autenticación y servicio de huella digital.</p></div></div>
             </div>
             <div class="mn-person-wrap">
-              <a class="mn-person" href="https://github.com/mcalderona" target="_blank" rel="noreferrer" aria-label="Abrir perfil de GitHub de Mateo Calderon Araujo">
+              <a class="mn-person" href="https://github.com/mcalderona" target="_blank" rel="noreferrer" aria-describedby="pop-mateo" aria-label="Abrir perfil de GitHub de Mateo Calderon Araujo (se abre en una pestaña nueva)">
                 <span class="mn-person__ini" aria-hidden="true">MC</span><strong>Mateo Calderon Araujo</strong><small>Elecciones y OCR</small><span class="mn-mono">@mcalderona ↗</span>
               </a>
-              <div class="mn-pop" role="tooltip"><img src="https://github.com/mcalderona.png?size=96" alt="Avatar de Mateo Calderon Araujo" loading="lazy" /><div><strong>Mateo Calderon Araujo</strong><small>@mcalderona</small><p>Módulo electoral (elecciones, candidatos y votación) e integración del servicio OCR.</p></div></div>
+              <div class="mn-pop" role="tooltip" id="pop-mateo"><img src="https://github.com/mcalderona.png?size=96" alt="Avatar de Mateo Calderon Araujo" loading="lazy" /><div><strong>Mateo Calderon Araujo</strong><small>@mcalderona</small><p>Módulo electoral (elecciones, candidatos y votación) e integración del servicio OCR.</p></div></div>
             </div>
           </div>
         </div>
@@ -249,7 +251,7 @@
           </div>
           <div>
             <h3>Proyecto</h3>
-            <a href="login.html">Iniciar sesión →</a>
+            <a href="login.html">Ingresar →</a>
           </div>
           <address id="contacto">
             <h3>Contacto Averyn</h3>

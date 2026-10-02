@@ -31,7 +31,7 @@
         </div>
 
         <div class="lg-copy">
-          <h1>Todo listo para continuar.</h1>
+          <p class="lg-copy__title">Ingresa a tu panel.</p>
           <p>Centraliza la identidad, la verificación biométrica y la automatización de tus procesos institucionales en una sola plataforma.</p>
         </div>
       </aside>
@@ -41,13 +41,14 @@
         <a class="lg-back lg-mono" href="index.html">← Volver al inicio</a>
 
         <div class="lg-form-wrap">
-          <h2 id="login-title">Bienvenido de nuevo.</h2>
+          <h1 id="login-title">Bienvenido de nuevo.</h1>
           <p class="lg-lead">Ingresa tus credenciales para continuar.</p>
 
           <form id="login-form" novalidate>
             <div class="lg-field">
               <label for="email">Correo electrónico</label>
-              <input id="email" name="email" type="email" class="lg-input" placeholder="nombre@organizacion.com" autocomplete="email" />
+              <input id="email" name="email" type="email" class="lg-input" placeholder="nombre@organizacion.com" autocomplete="email" aria-describedby="email-error" />
+              <span id="email-error" class="lg-err" hidden></span>
             </div>
 
             <div class="lg-field">
@@ -56,10 +57,10 @@
                 <button type="button" id="forgot-link" class="lg-link">¿Olvidaste tu contraseña?</button>
               </div>
               <div class="lg-pass">
-                <input id="password" name="password" type="password" class="lg-input" placeholder="Ingresa tu contraseña" autocomplete="current-password" aria-describedby="password-help" />
-                <button class="lg-pass__toggle lg-mono" type="button" id="toggle-password" aria-label="Mostrar contraseña" aria-pressed="false">Mostrar</button>
+                <input id="password" name="password" type="password" class="lg-input" placeholder="Ingresa tu contraseña" autocomplete="current-password" aria-describedby="password-error" />
+                <button class="lg-pass__toggle lg-mono" type="button" id="toggle-password" aria-controls="password">Mostrar</button>
               </div>
-              <small id="password-help" class="lg-help" aria-live="polite"></small>
+              <span id="password-error" class="lg-err" hidden></span>
             </div>
 
             <div id="alert-error" class="lg-alert lg-alert--error" role="alert" hidden><span></span></div>
@@ -72,7 +73,7 @@
             </button>
           </form>
 
-          <p class="lg-secure"><i aria-hidden="true"></i>Conexión segura y protegida</p>
+          <p class="lg-secure" id="secure-note" hidden><i aria-hidden="true"></i>Conexión segura y protegida</p>
         </div>
 
       </section>
