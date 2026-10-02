@@ -203,7 +203,7 @@ body.mn { margin: 0; background: #fff; color: var(--mn-ink); font-family: var(--
 /* CTA */
 .mn-cta { position: relative; overflow: hidden; background: var(--av-blue); color: #fff; }
 .mn-cta .mn-wrap { position: relative; z-index: 1; }
-.mn-cta__fig { position: absolute; z-index: 0; right: -4vw; bottom: -6%; width: min(58vw, 760px); pointer-events: none; }
+.mn-cta__fig { position: absolute; z-index: 0; right: 0; bottom: -6%; width: min(58vw, 760px); pointer-events: none; }
 .mn-cta__fig svg { display: block; width: 100%; height: auto; overflow: visible; }
 .mn-cta__fig path { fill: none; vector-effect: non-scaling-stroke; stroke-linecap: round; }
 .mn-cta .mn-title { grid-column: 1 / span 8; font-size: clamp(2.4rem, 6vw, 5rem); color: #fff; }
