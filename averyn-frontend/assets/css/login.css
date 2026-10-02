@@ -20,36 +20,40 @@ body.lg { margin: 0; background: #fff; color: var(--lg-ink); font-family: var(--
 .lg :focus-visible { outline: 2px solid var(--av-blue); outline-offset: 3px; }
 .lg-mono { font-family: var(--lg-mono); font-size: .75rem; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; }
 
-.lg-page { min-height: 100svh; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+/* Fondo de página + marco centrado (no ocupa toda la pantalla) */
+.lg-page { min-height: 100svh; display: flex; align-items: center; justify-content: center; padding: clamp(1rem, 4vw, 2.5rem);
+  background: radial-gradient(circle at 12% 14%, rgba(0, 172, 210, .22), transparent 30%), radial-gradient(circle at 90% 90%, rgba(20, 95, 238, .14), transparent 34%), linear-gradient(135deg, #F4F8FF, #FFFFFF 58%, #EAF0FE); }
+.lg-card { width: min(100%, 1020px); min-height: min(660px, calc(100svh - 2rem)); display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+  background: #fff; border: 1px solid #DCE5F5; border-radius: 24px; box-shadow: 0 24px 60px rgba(0, 12, 36, .14); overflow: hidden; }
 
 /* ---------- Panel de marca ---------- */
 .lg-side {
   position: relative; overflow: hidden; isolation: isolate; color: #fff;
   display: flex; flex-direction: column; justify-content: space-between; gap: 2rem;
-  padding: clamp(1.5rem, 4vw, 3rem);
-  background: linear-gradient(180deg, #DCECFF 0%, #EAF0FE 20%, #0A2A66 56%, #000C24 86%);
+  padding: clamp(1.5rem, 3vw, 2.4rem);
+  background: linear-gradient(180deg, #DCECFF 0%, #EAF0FE 12%, #0A2A66 40%, #000C24 68%);
 }
 .lg-brand { display: inline-block; align-self: flex-start; }
 .lg-brand img { display: block; height: 34px; width: auto; }
-.lg-fig { position: absolute; z-index: -1; left: 50%; top: 50%; width: min(86%, 600px); transform: translate(-50%, -34%); pointer-events: none; }
+.lg-fig { position: absolute; z-index: -1; left: 50%; top: 21%; width: min(82%, 520px); transform: translateX(-50%); pointer-events: none; }
 .lg-fig svg { display: block; width: 100%; height: auto; overflow: visible; }
 .lg-fig path { fill: none; stroke-linecap: round; vector-effect: non-scaling-stroke; }
 .lg-draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: lg-draw 1.4s var(--lg-ease) forwards; animation-delay: calc(var(--d) * .14s + .15s); }
 @keyframes lg-draw { to { stroke-dashoffset: 0; } }
 .lg-copy { max-width: 30rem; }
-.lg-copy h1 { font-size: clamp(2rem, 3.6vw, 3.2rem); line-height: 1.06; color: #fff; text-wrap: balance; }
+.lg-copy h1 { font-size: clamp(1.9rem, 3vw, 2.7rem); line-height: 1.06; color: #fff; text-wrap: balance; }
 .lg-copy p { margin-top: 1rem; color: #D7E0F3; font-size: 1rem; }
 
 /* ---------- Panel del formulario ---------- */
-.lg-panel { display: flex; flex-direction: column; padding: clamp(1.5rem, 4vw, 3rem); background: #fff; }
+.lg-panel { display: flex; flex-direction: column; padding: clamp(1.5rem, 3vw, 2.4rem); background: #fff; }
 .lg-back { align-self: flex-start; color: var(--lg-muted); text-decoration: none; padding: .4rem 0; transition: color .15s var(--lg-ease); }
 .lg-back:hover { color: var(--av-blue); }
-.lg-form-wrap { width: min(100%, 25rem); margin: auto; padding-block: 2rem; }
+.lg-form-wrap { width: min(100%, 24rem); margin: auto; padding-block: 1.2rem; }
 .lg-eyebrow { display: block; margin-bottom: 1rem; color: var(--av-blue); }
-.lg-form-wrap h2 { font-size: clamp(1.9rem, 3vw, 2.5rem); line-height: 1.08; }
+.lg-form-wrap h2 { font-size: clamp(1.7rem, 2.3vw, 2.15rem); line-height: 1.1; }
 .lg-lead { margin-top: .6rem; color: var(--lg-muted); }
 
-#login-form { margin-top: 2rem; }
+#login-form { margin-top: 1.6rem; }
 .lg-field { margin-bottom: 1.15rem; }
 .lg-field label { display: block; margin-bottom: .4rem; font-size: .875rem; font-weight: 600; }
 .lg-field__row { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
@@ -98,8 +102,9 @@ body.lg { margin: 0; background: #fff; color: var(--lg-ink); font-family: var(--
 
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
-  .lg-page { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
-  .lg-side { min-height: 230px; padding: 1.25rem; gap: 1.2rem; background: linear-gradient(180deg, #DCECFF 0%, #EAF0FE 28%, #0A2A66 70%, #000C24 100%); }
+  .lg-page { align-items: flex-start; }
+  .lg-card { grid-template-columns: 1fr; min-height: 0; border-radius: 20px; }
+  .lg-side { min-height: 210px; padding: 1.25rem; gap: 1.2rem; background: linear-gradient(180deg, #DCECFF 0%, #EAF0FE 28%, #0A2A66 70%, #000C24 100%); }
   .lg-fig, .lg-copy p { display: none; }
   .lg-brand img { height: 28px; }
   .lg-copy h1 { font-size: 1.6rem; }
