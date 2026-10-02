@@ -58,7 +58,7 @@
 
   var setErrorState = function (msg) {
     emailInput.classList.toggle('av-input--error', msg && !/^\S+@\S+\.\S+$/.test(emailInput.value));
-    passwordHelp.textContent = msg && emailInput.classList.contains('av-input--error') ? '' : msg;
+    passwordHelp.textContent = ''; /* el mensaje ya se muestra en la alerta */
     passwordInput.classList.toggle('av-input--error', Boolean(msg));
     if (msg) { show(alertError, msg); } else { hide(alertError); }
   };
@@ -72,7 +72,8 @@
     var showing = passwordInput.type === 'text';
     passwordInput.type = showing ? 'password' : 'text';
     toggleBtn.setAttribute('aria-label', showing ? 'Mostrar contraseña' : 'Ocultar contraseña');
-    toggleBtn.querySelector('i').className = showing ? 'bi bi-eye' : 'bi bi-eye-slash';
+    toggleBtn.setAttribute('aria-pressed', String(!showing));
+    toggleBtn.textContent = showing ? 'Mostrar' : 'Ocultar';
   });
 
   forgotLink.addEventListener('click', function () {
