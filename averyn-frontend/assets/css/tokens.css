@@ -142,6 +142,19 @@
   --av-warning-text: #B45309;
   --av-error-text: #B91C1C;
   --av-info-text: #0369A1;
+
+  /* Estados (design system v1.4): una sola semántica Estado → color, en fondo claro y sobre navy.
+     Éxito = verde · Reintento = ámbar · Rechazo/Error = rojo · Pendiente = gris neutro · Info = azul.
+     El cian es solo resalte, nunca un estado. Los tonos "strong" garantizan texto ≥ 5:1 sobre el fondo suave. */
+  --av-success-strong: #065F46;
+  --av-warning-strong: #92400E;
+  --av-neutral-bg: #F4F6FA;
+  --av-neutral-text: #3B4664;
+  --av-neutral-border: #CBD3E1;
+  --av-success-on-navy: #6EE7B7;
+  --av-warning-on-navy: #FFC15A;
+  --av-error-on-navy: #FCA5A5;
+  --av-neutral-on-navy: #B9C9E4;
 }
 
 /* Breakpoints — ver docs/design-system.md

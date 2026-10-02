@@ -207,6 +207,13 @@ Geometría contenida: 8 px en botones y campos, 10 px en píldoras del header, 2
 - **Plantillas** (`plantillas.html`): navbar en píldora, ancho de 1200 px, un solo bloque navy por pantalla, tarjetas de 1 px y estados cargando/vacío/error resueltos.
 - **Marca y entregables** (`marca.html`): una sola figura (arcos) cambia de estado; correos con tablas y estilos en línea; `print.css` para A4 con tinta mínima; `tokens.json` W3C generado desde `tokens.css`. Modo nocturno fuera de alcance.
 
+### Estados y píldoras (v1.4)
+- **Una sola semántica Estado → color**, en fondo claro y sobre navy: éxito/verificada = verde (`--av-success-text` / `--av-success-on-navy`), reintento = ámbar, rechazo/error = rojo, pendiente = gris neutro (`--av-neutral-*`), información = azul. **El cian es solo resalte**, nunca un estado.
+- **Píldoras de estado** (`hz-chip`): cápsula sin punto, con icono opcional decorativo, en 3 variantes: **suave** (por defecto en tablas y listas), **contorno** (secundarios) y **sólida** (énfasis puntual). Texto ≥ 5:1 (tonos `--av-success-strong` y `--av-warning-strong` sobre el fondo suave). Una variante por tabla.
+- **Alertas** (`hz-alert`): insignia circular con icono + título + descripción, fondo claro y borde de 1 px; sin franja lateral.
+- **Panel de actividad**: franja, barras y lista salen de un mismo conjunto de eventos; la suma de las partes es el total. Un solo panel oscuro de contenido por pantalla (toasts, tooltips y scrim no cuentan).
+- Series de resultado en gráficos usan `--viz-ok`, `--viz-retry` y `--viz-bad` (los mismos tonos, más oscuros, ≥ 3:1) con icono y palabra en la leyenda.
+
 ## Do's and Don'ts
 
 ### Do:
