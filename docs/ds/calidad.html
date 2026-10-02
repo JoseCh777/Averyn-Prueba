@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Averyn — Design System Horizonte v1.4 · Calidad y gobernanza</title>
+<title>Averyn — Design System Horizonte v1.5 · Calidad y gobernanza</title>
 <meta name="description" content="Design system de Averyn: principios, tokens, componentes y reglas de uso del estilo Horizonte.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,17 +17,17 @@
 <div class="ds-shell">
   <aside class="ds-side" aria-label="Índice del design system">
     <a class="ds-side__brand" href="../design-system.html" aria-label="Averyn, inicio del design system"><img src="../../averyn-frontend/assets/images/averyn-logo-font-black.avif" alt="Averyn"></a>
-    <p class="ds-side__ver mono">Design System · v1.4 Horizonte</p>
+    <p class="ds-side__ver mono">Design System · v1.5 Horizonte</p>
     <nav>
+      <span class="grp mono">Empezar</span>
+      <a class="ds-page" href="../design-system.html">Inicio</a>
       <span class="grp mono">Sistema</span>
       <a class="ds-page" href="fundamentos.html">Fundamentos</a>
       <a class="ds-page" href="componentes.html">Componentes</a>
       <a class="ds-page" href="graficos.html">Gráficos</a>
       <span class="grp mono">Aplicación</span>
-      <a class="ds-page" href="../design-system.html">Composición</a>
-      <a class="ds-page" href="patrones.html">Patrones de Averyn</a>
-      <a class="ds-page" href="plantillas.html">Plantillas</a>
-      <a class="ds-page" href="sistema.html">Estados del sistema</a>
+      <a class="ds-page" href="patrones.html">Patrones</a>
+      <a class="ds-page" href="plantillas.html">Plantillas y estados</a>
       <span class="grp mono">Marca y calidad</span>
       <a class="ds-page" href="marca.html">Marca y entregables</a>
       <a class="ds-page" href="calidad.html" aria-current="page">Calidad y gobernanza</a>
@@ -161,6 +161,7 @@
       </tbody></table></div>
       <h3 class="ds-sub">Changelog</h3>
       <div class="doc-wrap"><table class="doc-table"><tbody>
+        <tr><td><b>v1.5</b> · oct 2026</td><td><b>Reorganización por propósito.</b> De 7 páginas por orden de llegada a 8 por propósito, en 4 grupos de la barra lateral: <i>Inicio</i> · <i>Fundamentos, Componentes, Gráficos</i> · <i>Patrones, Plantillas y estados</i> · <i>Marca y entregables, Calidad y gobernanza</i>. Los componentes que estaban repartidos en dos páginas son uno solo; "Estados del sistema" pasa a ser parte de Plantillas y estados; los tokens pasan de Marca a Fundamentos; microcopy, accesibilidad y gobernanza viven juntos. Secciones sin numeración, índice por subgrupos, ids únicos (los de Gráficos con prefijo <code>grafico-</code>) y <b>validación automática</b> de ids y enlaces en <code>build.py</code>. Nueva página de Inicio con mapa y novedades.</td></tr>
         <tr><td><b>v1.4</b> · oct 2026</td><td><b>Auditoría del líder.</b> <i>Estados unificados:</i> una sola tabla Estado → color (verde éxito, ámbar reintento, rojo rechazo, gris pendiente, azul info; el cian queda solo como resalte) en fondo claro y sobre navy, con tokens nuevos <code>-strong</code> y <code>-on-navy</code>. <i>Píldoras de estado</i> en 3 variantes (suave por defecto en tablas, contorno y sólida), sin punto y con icono opcional; contraste ≥ 5:1. <i>Alertas</i> con insignia circular de icono en lugar de franja lateral. <i>Panel de actividad</i> y franja de indicadores generados desde un solo conjunto de 6 eventos (las partes suman el total). Gráficos de resultado con colores de estado. Correcciones de contenido: IDs de dispositivo (LEC-/CAM-), concordancia ("Huella rechazada"), "Sin verificar", fechas, tooltip con icono de ayuda y demo de toast con acciones. Nueva sección "Implementación recomendada" (librerías, solo documentada).</td></tr>
         <tr><td><b>v1.3</b> · oct 2026</td><td><b>Cobertura completa.</b> <i>Patrones de Averyn:</i> captura facial y de huella, resultado de verificación frente al umbral 0.68, documento y OCR con revisión de datos, papeleta y comprobante sin vincular persona↔voto, dispositivos y consentimiento biométrico. <i>Componentes:</i> selector de fechas, menú de acciones, combobox, acordeón, stepper, popover, drawer, paleta de comandos Ctrl+K y tabla avanzada, todos con teclado completo. <i>Plantillas:</i> bitácora, configuración, detalle de persona, asistente electoral, notificaciones y perfil, con estados y vista a pantalla completa. <i>Marca y entregables:</i> kit de ilustración con arcos y estados vacíos, favicons e imagen social, tres correos transaccionales, <code>print.css</code> para actas y exportación de tokens W3C (<code>tokens.json</code>). Nuevo: <b>HTML único</b> compartible (<code>docs/averyn-design-system-horizonte.html</code>).</td></tr>
         <tr><td><b>v1.2</b> · oct 2026</td><td>Design system multipágina (<code>design-system.html</code>, <code>ds/graficos.html</code>, <code>ds/sistema.html</code>) con <code>ds.css</code> y <code>ds.js</code> compartidos. <b>Estados del sistema:</b> páginas 404, 403, 500, sin conexión y mantenimiento (concepto "arcos rotos sobre el horizonte"), ruta pedida escapada, <code>&lt;base&gt;</code> para rutas anidadas, banners y modal de sesión. <b>Biblioteca de gráficos:</b> paleta categórica validada (azul, ámbar, cian de gráfico, violeta, magenta), tarjeta de gráfico con estados, área, barras de píldora y rectas, ranking, apiladas, anillo, bullet, KPI con sparkline, mapa de calor, embudo, histograma con umbral 0.68 y tabla "breakdown"; tooltip, teclado y vista en tabla en todos; contrato de datos propuesto.</td></tr>
@@ -234,7 +235,7 @@ body.av-mi-pantalla { background: #fff; color: var(--av-navy); font-family: var(
       </div></section>
     </main>
 
-    <footer class="ds-sec" style="padding-block:2.4rem;border-top:1px solid var(--av-hairline)"><div class="ds-wrap"><div class="row" style="justify-content:space-between"><span class="mono" style="color:var(--av-gray-500)">Averyn · Design System v1.4 Horizonte</span><span class="mono" style="color:var(--av-gray-500)">Fuente: DESIGN.md · tokens.css</span></div></div></footer>
+    <footer class="ds-sec" style="padding-block:2.4rem;border-top:1px solid var(--av-hairline)"><div class="ds-wrap"><div class="row" style="justify-content:space-between"><span class="mono" style="color:var(--av-gray-500)">Averyn · Design System v1.5 Horizonte</span><span class="mono" style="color:var(--av-gray-500)">Fuente: DESIGN.md · tokens.css</span></div></div></footer>
   </div>
 </div>
 <div class="hz-toasts" id="toasts" role="region" aria-label="Notificaciones" aria-live="polite"></div>

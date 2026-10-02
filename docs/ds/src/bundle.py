@@ -86,7 +86,7 @@ def main():
         for r2, k2 in keys.items():
             html = re.sub(r'href="(?:\.\./|\./|ds/)*%s(?:#[^"]*)?"' % re.escape(os.path.basename(r2)), 'href="#go:%s"' % k2, html)
         html = re.sub(r'<a [^>]*href="[^"]*averyn-frontend/[^"]*\.html"[^>]*>.*?</a>', '', html, flags=re.S)  # "Abrir página": no existe en el archivo único
-        if rel.endswith('sistema.html'):
+        if '<script src="./sistema.js"></script>' in html:
             fr = '<script>window.DS_FRAMES=%s;</script>\n' % safe_js(json.dumps(frames, ensure_ascii=False))
             html = html.replace('<script src="./sistema.js"></script>', fr + '<script src="./sistema.js"></script>')
         html = inline(html, base)

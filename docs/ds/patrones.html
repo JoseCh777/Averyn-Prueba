@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Averyn — Design System Horizonte v1.4 · Patrones de Averyn</title>
+<title>Averyn — Design System Horizonte v1.5 · Patrones</title>
 <meta name="description" content="Design system de Averyn: principios, tokens, componentes y reglas de uso del estilo Horizonte.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,16 +19,19 @@
 <div class="ds-shell">
   <aside class="ds-side" aria-label="Índice del design system">
     <a class="ds-side__brand" href="../design-system.html" aria-label="Averyn, inicio del design system"><img src="../../averyn-frontend/assets/images/averyn-logo-font-black.avif" alt="Averyn"></a>
-    <p class="ds-side__ver mono">Design System · v1.4 Horizonte</p>
+    <p class="ds-side__ver mono">Design System · v1.5 Horizonte</p>
     <nav>
+      <span class="grp mono">Empezar</span>
+      <a class="ds-page" href="../design-system.html">Inicio</a>
       <span class="grp mono">Sistema</span>
       <a class="ds-page" href="fundamentos.html">Fundamentos</a>
       <a class="ds-page" href="componentes.html">Componentes</a>
       <a class="ds-page" href="graficos.html">Gráficos</a>
       <span class="grp mono">Aplicación</span>
-      <a class="ds-page" href="../design-system.html">Composición</a>
-      <a class="ds-page" href="patrones.html" aria-current="page">Patrones de Averyn</a>
+      <a class="ds-page" href="patrones.html" aria-current="page">Patrones</a>
       <div class="ds-subnav">
+        <span class="grp sub mono">Patrones de página</span>
+        <a href="#patrones">Patrones de página</a>
         <span class="grp sub mono">Biométricos y electorales</span>
         <a href="#principios-bio">Reglas biométricas</a>
         <a href="#rostro">Captura facial</a>
@@ -40,8 +43,7 @@
         <a href="#consentimiento">Consentimiento</a>
         <a href="#copy-patrones">Resumen de estados y canales</a>
       </div>
-      <a class="ds-page" href="plantillas.html">Plantillas</a>
-      <a class="ds-page" href="sistema.html">Estados del sistema</a>
+      <a class="ds-page" href="plantillas.html">Plantillas y estados</a>
       <span class="grp mono">Marca y calidad</span>
       <a class="ds-page" href="marca.html">Marca y entregables</a>
       <a class="ds-page" href="calidad.html">Calidad y gobernanza</a>
@@ -53,9 +55,43 @@
 
     <main id="contenido">
 
-    <!-- PRINCIPIOS -->
-    <section class="ds-sec" id="principios-bio" aria-labelledby="h-pb" data-nav="Reglas biométricas" data-grp="Biométricos y electorales"><div class="ds-wrap">
-      <span class="ds-eyebrow mono">Patrones de Averyn</span>
+    <!-- PATRONES DE PÁGINA -->
+    <section class="ds-sec" id="patrones" aria-labelledby="h-patrones" data-nav="Patrones de página" data-grp="Patrones de página"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Patrones · Patrones de página</span>
+      <h2 id="h-patrones">Patrones de página</h2>
+      <p class="ds-lead">Cómo se combinan las piezas. El impacto se concentra en momentos concretos (el hero, la figura); el resto respira.</p>
+
+      <h3 class="ds-sub">Hero guiado por scroll <small>demo en vivo</small></h3>
+      <div class="stage" style="padding:0;overflow:hidden"><div id="hero-demo" style="position:relative;height:340px;background:linear-gradient(180deg,#DCECFF 0%,#EAF0FE 100%);overflow:hidden">
+        <div id="hd-navy" style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,42,102,0) 18%,#0A2A66 54%,#000C24 82%);opacity:0"></div>
+        <img id="hd-logo" src="../../averyn-frontend/assets/images/averyn-logo-font-black.avif" alt="Wordmark Averyn mostrado durante la demo del hero" style="position:absolute;left:50%;top:50%;width:900px;max-width:none">
+        <svg id="hd-fig" viewBox="0 0 640 300" aria-hidden="true" style="position:absolute;left:50%;bottom:64px;width:300px;transform:translateX(-50%);opacity:0"><path d="M0 290 H640" stroke="rgba(255,255,255,.22)" fill="none"/><path d="M30 290 C110 60 330 40 450 290" stroke="#fff" stroke-width="1.5" fill="none" pathLength="1" class="hd-p"/><path d="M90 290 C150 110 300 95 390 290" stroke="#00ACD2" stroke-width="2" fill="none" pathLength="1" class="hd-p"/><path d="M150 290 C190 170 270 160 330 290" stroke="#55D6FF" stroke-width="1.5" fill="none" pathLength="1" class="hd-p"/><path d="M300 8 L545 290" stroke="#3D86FF" stroke-width="2" fill="none" pathLength="1" class="hd-p"/></svg>
+        <p id="hd-copy" style="position:absolute;left:50%;bottom:18px;transform:translateX(-50%);color:#D7E0F3;font-size:.8rem;white-space:nowrap;opacity:0">Plataforma de identidad, biometría, IA y seguridad.</p></div></div>
+      <div class="stage ds-gap-top"><label class="hz-label" for="hd-range">Progreso de scroll <span class="mono" id="hd-val">0 %</span></label><input id="hd-range" class="demo-slider" type="range" min="0" max="100" value="0" aria-valuetext="0 %"></div>
+      <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Fase</th><th>Rango de scroll</th><th>Qué ocurre</th></tr></thead><tbody>
+        <tr><td><code>--t1</code></td><td>6 % → 42 %</td><td>La A sale sola, grande y centrada; "veryn" emerge en horizontal con un recorte <b>inclinado</b> (pendiente 0,564 medida sobre el AVIF, para no dejar astillas de la "v").</td></tr>
+        <tr><td><code>--t2</code></td><td>42 % → 66 %</td><td>El wordmark completo se reduce y sube; el navy cae desde abajo (opacidad).</td></tr>
+        <tr><td><code>--t3</code></td><td>62 % → 92 %</td><td>Se dibuja la figura de arcos (<code>stroke-dashoffset</code>) y aparecen la bajada y los botones.</td></tr>
+      </tbody></table></div>
+      <div class="ds-grid ds-grid--2 ds-gap-top">
+        <div class="dd dd--do"><strong>Aplicado en v1.1</strong><ul><li>Stage acortado de 330 a 220 vh; la bajada aparece hacia el 50 % del recorrido (fases: 4–30 %, 30–50 %, 42–72 %).</li><li><code>&lt;h1&gt;</code> real y visible: "Identidad inteligente para procesos institucionales".</li><li>La marca de la cabecera y el bloque de texto llevan <code>inert</code> mientras están invisibles: no reciben foco ni los lee un lector de pantalla.</li><li>La figura de arcos se ancla sobre el texto (<code>bottom: calc(100% + 1.2rem)</code>): nunca se pisan.</li></ul></div>
+        <div class="dd dd--dont"><strong>Reglas fijas</strong><ul><li>Solo <code>transform</code>, <code>clip-path</code> y <code>opacity</code>.</li><li>Con <code>prefers-reduced-motion</code>: sin sticky, estado final estático.</li><li>El wordmark se maqueta grande y se reduce: nunca se amplía.</li></ul></div>
+      </div>
+
+      <h3 class="ds-sub">Secciones asimétricas</h3>
+      <div class="ds-grid ds-grid--2">
+        <div class="stage"><span class="stage__label mono">Titular + texto desplazado</span><div class="pat" style="grid-template-columns:7fr 1fr 4fr"><div class="t" style="min-height:96px;text-align:left;place-items:center start">Titular (Display) · 7 col</div><span></span><div style="margin-top:42px;min-height:54px">Lead · 4 col</div></div></div>
+        <div class="stage"><span class="stage__label mono">Lado fijo + lista</span><div class="pat" style="grid-template-columns:4fr 1fr 7fr"><div class="t" style="min-height:140px">Sticky 4 col</div><span></span><div style="min-height:140px;place-items:start;text-align:left">Lista de líneas · 7 col</div></div></div>
+      </div>
+      <p class="ds-note">Alterna fondos entre secciones: blanco, papel azul (#F4F8FF), navy nocturno (una vez) y azul de señal (el cierre). Cada sección: rótulo mono azul + titular Display + texto de apoyo de 46 caracteres. <b>No numeres</b> todas las secciones ("01 / …"): es un patrón repetido por las plantillas genéricas.</p>
+
+      <h3 class="ds-sub">Espacio para media futura</h3>
+      <div class="ds-grid ds-grid--3"><div class="hz-media" style="--ratio:4/5"><span class="hz-media__hint mono">Imagen · 4:5</span></div><div class="hz-media" style="--ratio:16/9"><span class="hz-media__hint mono">Video · 16:9</span></div><div class="hz-media" style="--ratio:21/9"><span class="hz-media__hint mono">Imagen · 21:9</span></div></div>
+      <p class="ds-note">Usa capturas reales del producto (registro, captura biométrica) en el mismo lenguaje de línea fina. Un hueco vacío resta más de lo que reserva: si no hay media, no pongas el marco.</p>
+    </div></section>
+    <!-- REGLAS BIOMÉTRICAS -->
+    <section class="ds-sec ds-sec--tint" id="principios-bio" aria-labelledby="h-pb" data-nav="Reglas biométricas" data-grp="Biométricos y electorales"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Patrones · Biométricos y electorales</span>
       <h2 id="h-pb">Cuando la pantalla toca el cuerpo de alguien</h2>
       <p class="ds-lead">Rostro, huella, documento y voto son los momentos más delicados del producto. Estos patrones fijan cómo se pide permiso, cómo se guía sin culpar y cómo se muestra una decisión sin esconder el número. Todas las demos de esta página son <b>simulaciones</b>: no usan cámara, lector ni datos reales.</p>
       <div class="ds-grid ds-grid--3 ds-gap-top">
@@ -68,10 +104,9 @@
         <div class="dd dd--dont"><strong>Nunca</strong><ul><li>Mostrar una foto del rostro o la huella almacenada tras la captura.</li><li>Dar a entender que un rechazo es culpa de la persona.</li><li>Vincular a una persona con su voto, ni en pantalla ni en el comprobante.</li><li>Usar cuenta atrás que apure a quien tiene dificultad para posicionarse.</li></ul></div>
       </div>
     </div></section>
-
     <!-- CAPTURA FACIAL -->
-    <section class="ds-sec ds-sec--tint" id="rostro" aria-labelledby="h-rostro" data-nav="Captura facial" data-grp="Biométricos y electorales"><div class="ds-wrap">
-      <span class="ds-eyebrow mono">Patrones de Averyn</span>
+    <section class="ds-sec" id="rostro" aria-labelledby="h-rostro" data-nav="Captura facial" data-grp="Biométricos y electorales"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Patrones · Biométricos y electorales</span>
       <h2 id="h-rostro">Captura facial</h2>
       <p class="ds-lead">Un óvalo guía, tres indicadores de calidad en texto y una prueba de vida en pasos cortos. La vista de cámara es una superficie navy: el único lugar de la captura donde el fondo es oscuro.</p>
       <div class="pt-grid">
@@ -109,10 +144,9 @@
         </div>
       </div>
     </div></section>
-
-    <!-- HUELLA -->
-    <section class="ds-sec" id="huella" aria-labelledby="h-huella" data-nav="Captura de huella" data-grp="Biométricos y electorales"><div class="ds-wrap">
-      <span class="ds-eyebrow mono">Patrones de Averyn</span>
+    <!-- CAPTURA DE HUELLA -->
+    <section class="ds-sec ds-sec--tint" id="huella" aria-labelledby="h-huella" data-nav="Captura de huella" data-grp="Biométricos y electorales"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Patrones · Biométricos y electorales</span>
       <h2 id="h-huella">Captura de huella</h2>
       <p class="ds-lead">La huella se dibuja con arcos concéntricos, la misma figura de la marca. Los arcos se iluminan de dentro hacia fuera a medida que avanza la lectura; el porcentaje y la calidad se dicen en texto.</p>
       <div class="pt-grid">
@@ -140,10 +174,9 @@
         </div>
       </div>
     </div></section>
-
-    <!-- RESULTADO -->
-    <section class="ds-sec ds-sec--tint" id="resultado" aria-labelledby="h-res" data-nav="Resultado de verificación" data-grp="Biométricos y electorales"><div class="ds-wrap">
-      <span class="ds-eyebrow mono">Patrones de Averyn</span>
+    <!-- RESULTADO DE VERIFICACIÓN -->
+    <section class="ds-sec" id="resultado" aria-labelledby="h-res" data-nav="Resultado de verificación" data-grp="Biométricos y electorales"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Patrones · Biométricos y electorales</span>
       <h2 id="h-res">Resultado de verificación</h2>
       <p class="ds-lead">Muestra la similitud, el umbral y la decisión a la vez. La barra reserva el tramo del umbral con una marca oscura y su rótulo; el texto dice cuánto se pasó o faltó. Mueve el control para ver cómo cambia la decisión.</p>
       <div class="pt-grid">
@@ -162,10 +195,9 @@
         </div>
       </div>
     </div></section>
-
-    <!-- OCR -->
-    <section class="ds-sec" id="ocr" aria-labelledby="h-ocr" data-nav="Documento y OCR" data-grp="Biométricos y electorales"><div class="ds-wrap">
-      <span class="ds-eyebrow mono">Patrones de Averyn</span>
+    <!-- DOCUMENTO Y OCR -->
+    <section class="ds-sec ds-sec--tint" id="ocr" aria-labelledby="h-ocr" data-nav="Documento y OCR" data-grp="Biométricos y electorales"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Patrones · Biométricos y electorales</span>
       <h2 id="h-ocr">Captura de documento y revisión de datos</h2>
       <p class="ds-lead">La cámara lee, la persona confirma. Cada campo extraído se muestra editable con su confianza en texto; los de baja confianza se piden revisar antes de continuar.</p>
       <div class="pt-card" style="margin-top:1.8rem"><div class="pt-ocr">
@@ -184,10 +216,9 @@
         <div class="pt-side"><div><h3>Reglas</h3><ul><li>Nunca se avanza con datos sin que la persona los haya visto.</li><li>El umbral de 90% es un valor de ejemplo: lo define el servicio de OCR.</li><li>Los datos de la maqueta son ficticios.</li></ul></div></div>
       </div>
     </div></section>
-
-    <!-- PAPELETA -->
-    <section class="ds-sec ds-sec--tint" id="papeleta" aria-labelledby="h-pap" data-nav="Tarjetón y comprobante" data-grp="Biométricos y electorales"><div class="ds-wrap">
-      <span class="ds-eyebrow mono">Patrones de Averyn</span>
+    <!-- TARJETÓN Y COMPROBANTE -->
+    <section class="ds-sec" id="papeleta" aria-labelledby="h-pap" data-nav="Tarjetón y comprobante" data-grp="Biométricos y electorales"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Patrones · Biométricos y electorales</span>
       <h2 id="h-pap">Tarjetón electoral y comprobante</h2>
       <p class="ds-lead">La papeleta digital imita al tarjetón de papel que la gente ya conoce: cada opción es una casilla grande con espacio para la <b>foto</b>, el <b>número</b>, el <b>nombre</b> y el <b>logo</b> de la lista, y el voto en blanco es una casilla igual de grande. El comprobante prueba que <b>un voto fue emitido</b> sin decir cuál ni de quién.</p>
       <div class="pt-card tj-card" id="ballot" style="margin-top:1.8rem">
@@ -216,10 +247,9 @@
         </div>
       </div>
     </div></section>
-
     <!-- DISPOSITIVOS -->
-    <section class="ds-sec" id="dispositivos" aria-labelledby="h-dev" data-nav="Dispositivos" data-grp="Biométricos y electorales"><div class="ds-wrap">
-      <span class="ds-eyebrow mono">Patrones de Averyn</span>
+    <section class="ds-sec ds-sec--tint" id="dispositivos" aria-labelledby="h-dev" data-nav="Dispositivos" data-grp="Biométricos y electorales"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Patrones · Biométricos y electorales</span>
       <h2 id="h-dev">Estado de dispositivos</h2>
       <p class="ds-lead">Cámaras y lectores son fuentes de datos: si fallan, la persona que administra debe saberlo a primera vista y poder actuar. Cada fila tiene estado en texto, última señal y una acción.</p>
       <div class="pt-grid">
@@ -227,14 +257,13 @@
           <ul class="pt-devs" id="devs"></ul></div>
         <div class="pt-side">
           <div><h3>Estados</h3><ul><li><span class="hz-chip hz-chip--success"><i class="bi bi-check-circle" aria-hidden="true"></i>Conectado</span> responde dentro del tiempo esperado.</li><li><span class="hz-chip hz-chip--warning"><i class="bi bi-plug" aria-hidden="true"></i>Desconectado</span> sin señal; se ofrece "Reconectar".</li><li><span class="hz-chip hz-chip--error"><i class="bi bi-x-circle" aria-hidden="true"></i>Con error</span> responde mal; se ofrece "Probar" y el motivo.</li></ul></div>
-          <div><h3>Reglas</h3><ul><li>La píldora lleva la <b>palabra</b> y un icono; el icono del dispositivo cambia de tono pero no es la única señal.</li><li>"Última señal" en tiempo relativo ("Hace 2 min") con la hora exacta en <code>title</code>.</li><li>Un dispositivo caído se refleja también como banner del sistema (ver <i>Estados del sistema</i>).</li></ul></div>
+          <div><h3>Reglas</h3><ul><li>La píldora lleva la <b>palabra</b> y un icono; el icono del dispositivo cambia de tono pero no es la única señal.</li><li>"Última señal" en tiempo relativo ("Hace 2 min") con la hora exacta en <code>title</code>.</li><li>Un dispositivo caído se refleja también como banner del sistema (ver <i>Plantillas y estados › Avisos del sistema</i>).</li></ul></div>
         </div>
       </div>
     </div></section>
-
     <!-- CONSENTIMIENTO -->
-    <section class="ds-sec ds-sec--tint" id="consentimiento" aria-labelledby="h-cons" data-nav="Consentimiento" data-grp="Biométricos y electorales"><div class="ds-wrap">
-      <span class="ds-eyebrow mono">Patrones de Averyn</span>
+    <section class="ds-sec" id="consentimiento" aria-labelledby="h-cons" data-nav="Consentimiento" data-grp="Biométricos y electorales"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Patrones · Biométricos y electorales</span>
       <h2 id="h-cons">Consentimiento de datos biométricos</h2>
       <p class="ds-lead">Va antes de la primera captura. Cuatro respuestas en lenguaje llano: qué guardamos, para qué, por cuánto tiempo y cómo se revoca. El texto legal definitivo lo fija el área jurídica; este patrón fija la <b>estructura</b>.</p>
       <div class="pt-grid">
@@ -249,10 +278,9 @@
         </div>
       </div>
     </div></section>
-
-    <!-- COPY -->
-    <section class="ds-sec" id="copy-patrones" aria-labelledby="h-cp" data-nav="Resumen de estados y canales" data-grp="Biométricos y electorales"><div class="ds-wrap">
-      <span class="ds-eyebrow mono">Patrones de Averyn</span>
+    <!-- RESUMEN DE ESTADOS Y CANALES -->
+    <section class="ds-sec ds-sec--tint" id="copy-patrones" aria-labelledby="h-cp" data-nav="Resumen de estados y canales" data-grp="Biométricos y electorales"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Patrones · Biométricos y electorales</span>
       <h2 id="h-cp">Resumen de estados y canales</h2>
       <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Patrón</th><th>Estados</th><th>Canales (nunca solo color)</th><th>Anuncio</th></tr></thead><tbody>
         <tr><td>Captura facial</td><td>Buscando, listo, capturando, éxito, error, sin cámara</td><td>Óvalo + mensaje + calidad en texto + botón</td><td><code>role="status"</code> en el mensaje</td></tr>
@@ -267,7 +295,7 @@
 
     </main>
 
-    <footer class="ds-sec" style="padding-block:2.4rem;border-top:1px solid var(--av-hairline)"><div class="ds-wrap"><div class="row" style="justify-content:space-between"><span class="mono" style="color:var(--av-gray-500)">Averyn · Design System v1.4 Horizonte</span><span class="mono" style="color:var(--av-gray-500)">Fuente: DESIGN.md · tokens.css</span></div></div></footer>
+    <footer class="ds-sec" style="padding-block:2.4rem;border-top:1px solid var(--av-hairline)"><div class="ds-wrap"><div class="row" style="justify-content:space-between"><span class="mono" style="color:var(--av-gray-500)">Averyn · Design System v1.5 Horizonte</span><span class="mono" style="color:var(--av-gray-500)">Fuente: DESIGN.md · tokens.css</span></div></div></footer>
   </div>
 </div>
 <div class="hz-toasts" id="toasts" role="region" aria-label="Notificaciones" aria-live="polite"></div>

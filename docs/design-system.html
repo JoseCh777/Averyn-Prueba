@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Averyn — Design System Horizonte v1.4 · Composición</title>
+<title>Averyn — Design System Horizonte v1.5 · Inicio</title>
 <meta name="description" content="Design system de Averyn: principios, tokens, componentes y reglas de uso del estilo Horizonte.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,25 +17,26 @@
 <div class="ds-shell">
   <aside class="ds-side" aria-label="Índice del design system">
     <a class="ds-side__brand" href="./design-system.html" aria-label="Averyn, inicio del design system"><img src="../averyn-frontend/assets/images/averyn-logo-font-black.avif" alt="Averyn"></a>
-    <p class="ds-side__ver mono">Design System · v1.4 Horizonte</p>
+    <p class="ds-side__ver mono">Design System · v1.5 Horizonte</p>
     <nav>
+      <span class="grp mono">Empezar</span>
+      <a class="ds-page" href="design-system.html" aria-current="page">Inicio</a>
+      <div class="ds-subnav">
+        <span class="grp sub mono">Presentación</span>
+        <a href="#que-es">Qué es Horizonte</a>
+        <a href="#mapa">Mapa del sistema</a>
+        <a href="#empezar">Por dónde empezar</a>
+        <span class="grp sub mono">Estado</span>
+        <a href="#novedades">Novedades</a>
+        <a href="#compartir">Cómo compartirlo</a>
+      </div>
       <span class="grp mono">Sistema</span>
       <a class="ds-page" href="ds/fundamentos.html">Fundamentos</a>
       <a class="ds-page" href="ds/componentes.html">Componentes</a>
       <a class="ds-page" href="ds/graficos.html">Gráficos</a>
       <span class="grp mono">Aplicación</span>
-      <a class="ds-page" href="design-system.html" aria-current="page">Composición</a>
-      <div class="ds-subnav">
-        <span class="grp sub mono">Estados de interfaz</span>
-        <a href="#estados">Carga, vacío y subida</a>
-        <span class="grp sub mono">Patrones de página</span>
-        <a href="#patrones">Patrones de página</a>
-        <span class="grp sub mono">Plantillas de pantalla</span>
-        <a href="#plantillas">Catálogo de plantillas</a>
-      </div>
-      <a class="ds-page" href="ds/patrones.html">Patrones de Averyn</a>
-      <a class="ds-page" href="ds/plantillas.html">Plantillas</a>
-      <a class="ds-page" href="ds/sistema.html">Estados del sistema</a>
+      <a class="ds-page" href="ds/patrones.html">Patrones</a>
+      <a class="ds-page" href="ds/plantillas.html">Plantillas y estados</a>
       <span class="grp mono">Marca y calidad</span>
       <a class="ds-page" href="ds/marca.html">Marca y entregables</a>
       <a class="ds-page" href="ds/calidad.html">Calidad y gobernanza</a>
@@ -49,7 +50,7 @@
         <span class="mono" style="color:#fff;opacity:.85">Design System</span>
         <h1>Claridad que se oscurece en seguridad.</h1>
         <p>El sistema visual de Averyn: principios, tokens, componentes y reglas de uso para landing, acceso y panel. Nace de lo que construimos y decidimos, y extiende el mismo lenguaje a lo que aún no existe.</p>
-        <div class="ds-cover__meta mono"><span>Versión 1.4 · Horizonte</span><span>Octubre 2026</span><span>Fuente: DESIGN.md + tokens.css</span></div>
+        <div class="ds-cover__meta mono"><span>Versión 1.5 · Horizonte</span><span>Octubre 2026</span><span>Fuente: DESIGN.md + tokens.css</span></div>
       </div>
       <svg viewBox="0 0 640 300" aria-hidden="true" focusable="false">
         <path d="M0 290 H640" stroke="rgba(255,255,255,.22)" stroke-width="1" fill="none"/>
@@ -64,104 +65,76 @@
 
     <main id="contenido">
 
-
-    <!-- ESTADOS -->
-    <section class="ds-sec" id="estados" aria-labelledby="h-estados" data-nav="Carga, vacío y subida" data-grp="Estados de interfaz"><div class="ds-wrap">
-      <span class="ds-eyebrow mono">Componentes</span>
-      <h2 id="h-estados">Estados: carga, vacío y subida</h2>
-      <p class="ds-lead">Cada pantalla define los tres estados antes de darse por terminada: cargando, vacía y con error. Un estado vacío siempre ofrece el siguiente paso.</p>
+    <!-- QUÉ ES -->
+    <section class="ds-sec" id="que-es" data-nav="Qué es Horizonte" data-grp="Presentación" aria-labelledby="h-que-es"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Inicio</span>
+      <h2 id="h-que-es">Qué es Horizonte</h2>
+      <p class="ds-lead">Horizonte es el design system de Averyn: el conjunto de reglas, piezas y pantallas que hacen que la landing, el acceso y el panel se vean y se comporten como un solo producto. Está pensado para una plataforma de identidad y biometría, donde la claridad y la confianza importan más que la decoración.</p>
       <div class="ds-grid ds-grid--3 ds-gap-top">
-        <div class="stage"><span class="stage__label mono">Carga</span><div class="row row--col" style="gap:.9rem"><div class="row"><span class="hz-spin" style="border-color:rgba(20,95,238,.25);border-top-color:var(--av-blue)" aria-hidden="true"></span><span>Verificando…</span></div><span class="hz-skel" style="width:90%"></span><span class="hz-skel" style="width:70%"></span><span class="hz-skel" style="width:80%"></span><div class="hz-progress" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" aria-label="Captura"><i style="--p:.4"></i></div></div><p class="ds-note">Spinner en botones; esqueletos en listas; barra con <code>scaleX</code> en procesos con avance conocido.</p></div>
-        <div class="stage"><span class="stage__label mono">Vacío</span><div class="hz-empty"><span class="hz-empty__icon"><i class="bi bi-collection" aria-hidden="true"></i></span><h4>Sin actividad reciente</h4><p>Aún no hay eventos en el log biométrico. Registra o verifica una persona para empezar.</p><button class="hz-btn hz-btn--primary" type="button">Registrar persona</button></div></div>
-        <div class="stage"><span class="stage__label mono">Subida de archivo</span><div class="hz-drop" id="drop" tabindex="0" role="button" aria-label="Subir documento"><span class="ic"><i class="bi bi-cloud-arrow-up" aria-hidden="true"></i></span><b>Arrastra tu documento aquí</b><p>o haz clic para elegirlo · JPG, PNG o PDF · máx. 10 MB</p></div></div>
-      </div>
-      <div class="ds-grid ds-grid--2 ds-gap-top">
-        <div class="stage"><span class="stage__label mono">Error de sección</span><div class="hz-alert hz-alert--error" role="alert"><strong>No pudimos cargar el historial</strong>Revisa tu conexión e inténtalo de nuevo.</div><div style="margin-top:.8rem"><button class="hz-btn hz-btn--ghost" type="button">Reintentar</button></div></div>
-        <div class="stage"><span class="stage__label mono">Módulo no disponible</span><div class="hz-tile hz-tile--soon" aria-disabled="true" style="min-height:130px"><span class="hz-tile__icon" aria-hidden="true"><i class="bi bi-door-open"></i></span><span><span class="hz-tile__title">Accesos</span><span class="hz-tile__desc">Zonas, puntos y políticas</span></span><span class="hz-tile__tag hz-tag">Próximamente</span></div><p class="ds-note">Regla R6: se muestra, se atenúa y no enlaza. Nunca un vínculo a un 404.</p></div>
+        <div class="stage"><h3 class="ds-sub" style="margin:0 0 .5rem;font-size:1.15rem">Una sola señal</h3><p class="ds-note" style="margin:0">El azul de marca es el único color de acción. El resto es tinta, líneas finas y estados con palabra.</p></div>
+        <div class="stage"><h3 class="ds-sub" style="margin:0 0 .5rem;font-size:1.15rem">El horizonte que se oscurece</h3><p class="ds-note" style="margin:0">La información va de lo claro a lo oscuro. El fondo cambia cuando el contenido cambia de naturaleza.</p></div>
+        <div class="stage"><h3 class="ds-sub" style="margin:0 0 .5rem;font-size:1.15rem">Honestidad</h3><p class="ds-note" style="margin:0">Lo que no existe se dice ("Próximamente"). Nada finge datos reales y el color nunca es el único canal.</p></div>
       </div>
     </div></section>
 
-    <!-- PATRONES -->
-    <section class="ds-sec ds-sec--tint" id="patrones" aria-labelledby="h-patrones" data-nav="Patrones de página" data-grp="Patrones de página"><div class="ds-wrap">
-      <span class="ds-eyebrow mono">Composición</span>
-      <h2 id="h-patrones">Patrones de página</h2>
-      <p class="ds-lead">Cómo se combinan las piezas. El impacto se concentra en momentos concretos (el hero, la figura); el resto respira.</p>
-
-      <h3 class="ds-sub">Hero guiado por scroll <small>demo en vivo</small></h3>
-      <div class="stage" style="padding:0;overflow:hidden"><div id="hero-demo" style="position:relative;height:340px;background:linear-gradient(180deg,#DCECFF 0%,#EAF0FE 100%);overflow:hidden">
-        <div id="hd-navy" style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,42,102,0) 18%,#0A2A66 54%,#000C24 82%);opacity:0"></div>
-        <img id="hd-logo" src="../averyn-frontend/assets/images/averyn-logo-font-black.avif" alt="Wordmark Averyn mostrado durante la demo del hero" style="position:absolute;left:50%;top:50%;width:900px;max-width:none">
-        <svg id="hd-fig" viewBox="0 0 640 300" aria-hidden="true" style="position:absolute;left:50%;bottom:64px;width:300px;transform:translateX(-50%);opacity:0"><path d="M0 290 H640" stroke="rgba(255,255,255,.22)" fill="none"/><path d="M30 290 C110 60 330 40 450 290" stroke="#fff" stroke-width="1.5" fill="none" pathLength="1" class="hd-p"/><path d="M90 290 C150 110 300 95 390 290" stroke="#00ACD2" stroke-width="2" fill="none" pathLength="1" class="hd-p"/><path d="M150 290 C190 170 270 160 330 290" stroke="#55D6FF" stroke-width="1.5" fill="none" pathLength="1" class="hd-p"/><path d="M300 8 L545 290" stroke="#3D86FF" stroke-width="2" fill="none" pathLength="1" class="hd-p"/></svg>
-        <p id="hd-copy" style="position:absolute;left:50%;bottom:18px;transform:translateX(-50%);color:#D7E0F3;font-size:.8rem;white-space:nowrap;opacity:0">Plataforma de identidad, biometría, IA y seguridad.</p></div></div>
-      <div class="stage ds-gap-top"><label class="hz-label" for="hd-range">Progreso de scroll <span class="mono" id="hd-val">0 %</span></label><input id="hd-range" class="demo-slider" type="range" min="0" max="100" value="0" aria-valuetext="0 %"></div>
-      <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Fase</th><th>Rango de scroll</th><th>Qué ocurre</th></tr></thead><tbody>
-        <tr><td><code>--t1</code></td><td>6 % → 42 %</td><td>La A sale sola, grande y centrada; "veryn" emerge en horizontal con un recorte <b>inclinado</b> (pendiente 0,564 medida sobre el AVIF, para no dejar astillas de la "v").</td></tr>
-        <tr><td><code>--t2</code></td><td>42 % → 66 %</td><td>El wordmark completo se reduce y sube; el navy cae desde abajo (opacidad).</td></tr>
-        <tr><td><code>--t3</code></td><td>62 % → 92 %</td><td>Se dibuja la figura de arcos (<code>stroke-dashoffset</code>) y aparecen la bajada y los botones.</td></tr>
-      </tbody></table></div>
-      <div class="ds-grid ds-grid--2 ds-gap-top">
-        <div class="dd dd--do"><strong>Aplicado en v1.1</strong><ul><li>Stage acortado de 330 a 220 vh; la bajada aparece hacia el 50 % del recorrido (fases: 4–30 %, 30–50 %, 42–72 %).</li><li><code>&lt;h1&gt;</code> real y visible: "Identidad inteligente para procesos institucionales".</li><li>La marca de la cabecera y el bloque de texto llevan <code>inert</code> mientras están invisibles: no reciben foco ni los lee un lector de pantalla.</li><li>La figura de arcos se ancla sobre el texto (<code>bottom: calc(100% + 1.2rem)</code>): nunca se pisan.</li></ul></div>
-        <div class="dd dd--dont"><strong>Reglas fijas</strong><ul><li>Solo <code>transform</code>, <code>clip-path</code> y <code>opacity</code>.</li><li>Con <code>prefers-reduced-motion</code>: sin sticky, estado final estático.</li><li>El wordmark se maqueta grande y se reduce: nunca se amplía.</li></ul></div>
+    <!-- MAPA -->
+    <section class="ds-sec ds-sec--tint" id="mapa" data-nav="Mapa del sistema" data-grp="Presentación" aria-labelledby="h-mapa"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Inicio</span>
+      <h2 id="h-mapa">Mapa del sistema</h2>
+      <p class="ds-lead">El sistema se organiza por <b>propósito</b>. Si buscas una pieza reutilizable, está en Componentes; si buscas una pantalla o un flujo, en Patrones o Plantillas; si buscas un valor (color, espacio, token), en Fundamentos.</p>
+      <div class="map ds-gap-top">
+        <a class="map__card" href="ds/fundamentos.html"><span class="map__k mono">Sistema</span><b>Fundamentos</b><span>Principios, marca y figura de arcos, color, tipografía, espacio, iconografía y tokens exportables.</span></a>
+        <a class="map__card" href="ds/componentes.html"><span class="map__k mono">Sistema</span><b>Componentes</b><span>Botones, formularios, fechas, tablas y píldoras de estado, navegación, alertas, toast, modal, drawer y más.</span></a>
+        <a class="map__card" href="ds/graficos.html"><span class="map__k mono">Sistema</span><b>Gráficos</b><span>12 tipos de gráfico con paleta validada, tooltip, teclado, vista en tabla y modelos de datos.</span></a>
+        <a class="map__card" href="ds/patrones.html"><span class="map__k mono">Aplicación</span><b>Patrones</b><span>Patrones de página y los propios de Averyn: captura facial y de huella, verificación, OCR, tarjetón electoral, consentimiento.</span></a>
+        <a class="map__card" href="ds/plantillas.html"><span class="map__k mono">Aplicación</span><b>Plantillas y estados</b><span>Pantallas completas (bitácora, configuración, persona…), estados de carga y vacío, y las páginas de error.</span></a>
+        <a class="map__card" href="ds/marca.html"><span class="map__k mono">Marca y calidad</span><b>Marca y entregables</b><span>Ilustración con arcos, favicons e imagen social, correos transaccionales y estilos de impresión.</span></a>
+        <a class="map__card" href="ds/calidad.html"><span class="map__k mono">Marca y calidad</span><b>Calidad y gobernanza</b><span>Microcopy, accesibilidad, versiones y novedades, deuda conocida y cómo usar el sistema en una pantalla nueva.</span></a>
       </div>
-
-      <h3 class="ds-sub">Secciones asimétricas</h3>
-      <div class="ds-grid ds-grid--2">
-        <div class="stage"><span class="stage__label mono">Titular + texto desplazado</span><div class="pat" style="grid-template-columns:7fr 1fr 4fr"><div class="t" style="min-height:96px;text-align:left;place-items:center start">Titular (Display) · 7 col</div><span></span><div style="margin-top:42px;min-height:54px">Lead · 4 col</div></div></div>
-        <div class="stage"><span class="stage__label mono">Lado fijo + lista</span><div class="pat" style="grid-template-columns:4fr 1fr 7fr"><div class="t" style="min-height:140px">Sticky 4 col</div><span></span><div style="min-height:140px;place-items:start;text-align:left">Lista de líneas · 7 col</div></div></div>
-      </div>
-      <p class="ds-note">Alterna fondos entre secciones: blanco, papel azul (#F4F8FF), navy nocturno (una vez) y azul de señal (el cierre). Cada sección: rótulo mono azul + titular Display + texto de apoyo de 46 caracteres. <b>No numeres</b> todas las secciones ("01 / …"): es un patrón repetido por las plantillas genéricas.</p>
-
-      <h3 class="ds-sub">Espacio para media futura</h3>
-      <div class="ds-grid ds-grid--3"><div class="hz-media" style="--ratio:4/5"><span class="hz-media__hint mono">Imagen · 4:5</span></div><div class="hz-media" style="--ratio:16/9"><span class="hz-media__hint mono">Video · 16:9</span></div><div class="hz-media" style="--ratio:21/9"><span class="hz-media__hint mono">Imagen · 21:9</span></div></div>
-      <p class="ds-note">Usa capturas reales del producto (registro, captura biométrica) en el mismo lenguaje de línea fina. Un hueco vacío resta más de lo que reserva: si no hay media, no pongas el marco.</p>
     </div></section>
 
-    <!-- PLANTILLAS -->
-    <section class="ds-sec" id="plantillas" aria-labelledby="h-plantillas" data-nav="Catálogo de plantillas" data-grp="Plantillas de pantalla"><div class="ds-wrap">
-      <span class="ds-eyebrow mono">Composición</span>
-      <h2 id="h-plantillas">Plantillas</h2>
-      <p class="ds-lead">Tres plantillas ya construidas y una guía para las que faltan. Todas parten del mismo horizonte.</p>
-
-      <h3 class="ds-sub">A · Acceso (login)</h3>
-      <div class="hz-frame">
-        <div class="hz-frame__brand"><img src="../averyn-frontend/assets/images/averyn-logo-font-black.avif" alt="Averyn">
-          <svg viewBox="0 0 640 300" aria-hidden="true"><path d="M0 290 H640" stroke="rgba(255,255,255,.22)" fill="none"/><path d="M30 290 C110 60 330 40 450 290" stroke="#fff" stroke-width="1.5" fill="none"/><path d="M90 290 C150 110 300 95 390 290" stroke="#00ACD2" stroke-width="2" fill="none"/><path d="M150 290 C190 170 270 160 330 290" stroke="#55D6FF" stroke-width="1.5" fill="none"/><path d="M300 8 L545 290" stroke="#3D86FF" stroke-width="2" fill="none"/></svg>
-          <div><h4>Todo listo para continuar.</h4></div></div>
-        <div class="hz-frame__form"><span class="mono" style="color:var(--av-gray-500)">← Volver al inicio</span><h4 style="font-size:1.9rem">Bienvenido de nuevo.</h4>
-          <div class="hz-field"><span class="hz-label">Correo electrónico</span><div class="hz-input" style="display:flex;align-items:center;color:var(--av-placeholder)">nombre@organizacion.com</div></div>
-          <div class="hz-field"><span class="hz-label">Contraseña</span><div class="hz-input" style="display:flex;align-items:center;color:var(--av-placeholder)">Ingresa tu contraseña</div></div>
-          <span class="hz-btn hz-btn--primary hz-btn--block">Ingresar de forma segura →</span></div></div>
-      <p class="ds-note">Marco de hasta 1020 px, radio 24 px, sombra de marco, sobre un fondo azul claro con brillo cian. Panel de marca con el degradado compacto y la figura de arcos (se dibuja una vez al cargar); formulario a 5/11. Móvil: el panel pasa a franja superior. v1.1: el titular del panel de marca ("Ingresa a tu panel.") ya no es un encabezado; el único <code>&lt;h1&gt;</code> es "Bienvenido de nuevo.". Errores por campo, foco al primer campo inválido y espacio estable para que el formulario no salte. Pendiente: selector de institución y segundo factor.</p>
-
-      <h3 class="ds-sub">B · Panel (dashboard)</h3>
-      <div class="stage stage--sky" style="padding:1.4rem">
-        <div class="hz-nav" style="margin-bottom:1.6rem"><span class="hz-brandchip"><img src="../averyn-frontend/assets/images/averyn-logo-font-black.avif" alt="Averyn"></span><span class="hz-dock" aria-hidden="true"><a href="#plantillas" aria-current="page" tabindex="-1">Dashboard</a><a href="#plantillas" tabindex="-1">Identidad</a><a href="#plantillas" tabindex="-1">Biometría</a></span><span class="hz-avatar" aria-hidden="true"><span class="hz-avatar__c">UD</span></span></div>
-        <p class="mono" style="color:var(--av-blue)">Bienvenido, admin</p><h3 style="font-size:2.6rem;line-height:1.04;margin:.4rem 0 1.4rem">Todo en un solo lugar</h3>
-        <div class="hz-kpis"><div class="hz-kpi"><span class="hz-kpi__label mono">Personas</span><span class="hz-kpi__value">8</span></div><div class="hz-kpi"><span class="hz-kpi__label mono">Verificaciones</span><span class="hz-kpi__value">4</span></div><div class="hz-kpi"><span class="hz-kpi__label mono">Procesos</span><span class="hz-kpi__value">0</span></div><div class="hz-kpi"><span class="hz-kpi__label mono">Dispositivos</span><span class="hz-kpi__value">2</span></div></div>
-        <div style="display:grid;grid-template-columns:7fr 5fr;gap:1.2rem;margin-top:1.4rem"><div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem"><div class="hz-tile hz-tile--signal" style="min-height:110px"></div><div class="hz-tile hz-tile--night" style="min-height:110px"></div><div class="hz-tile hz-tile--tint" style="min-height:70px"></div><div class="hz-tile hz-tile--tint" style="min-height:70px"></div></div><div class="hz-panel" style="min-height:190px"><h3 style="font-size:1.2rem">Actividad reciente</h3></div></div></div>
-      <p class="ds-note">Orden de lectura: bienvenida (cielo a blanco) → franja de indicadores → <b>accesos en mosaico</b> (izquierda, 7/12) + <b>panel de actividad</b> navy (derecha, 5/12). Un solo cambio de fondo por pantalla.</p>
-
-      <h3 class="ds-sub">C · Landing</h3>
-      <p class="ds-note">Hero guiado por scroll → secciones asimétricas (blanco / papel azul / navy nocturno / azul de cierre) con espacios para media → equipo con roles → cierre azul con figura → footer navy. Navbar pública fija sobre el degradado.</p>
-
-      <h3 class="ds-sub">D · Plantillas pendientes <small>mismo lenguaje</small></h3>
-      <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Plantilla</th><th>Estructura propuesta</th><th>Componentes</th></tr></thead><tbody>
-        <tr><td>Listado + filtros + tabla (Identidad)</td><td>Encabezado de página (crumb + título + acción) → pestañas de estado → búsqueda y filtros → tabla en líneas → paginación.</td><td>Header, tabs, campos, tabla, chips, paginación</td></tr>
-        <tr><td>Captura en pasos (Biometría, OCR)</td><td>Columna de pasos con numeración mono + escenario de cámara/documento en marco de 16 px + panel de resultado. Barra de progreso con <code>scaleX</code>.</td><td>Media, progreso, alertas, botones</td></tr>
-        <tr><td>Detalle de persona</td><td>Titular + datos en filas de línea (clave/valor) a la izquierda; panel navy con historial a la derecha.</td><td>Filas, chips, panel de actividad</td></tr>
-        <tr><td>Asistente (Electoral)</td><td>Pasos horizontales mono → formulario a una columna de 24rem → resumen lateral → confirmación en modal.</td><td>Campos, tabs/pasos, modal</td></tr>
-        <tr><td>Módulo "Próximamente"</td><td>Título + mensaje + CTA de regreso; sin tabla ni formularios.</td><td>Estado vacío, tag</td></tr>
+    <!-- POR DÓNDE EMPEZAR -->
+    <section class="ds-sec" id="empezar" data-nav="Por dónde empezar" data-grp="Presentación" aria-labelledby="h-empezar"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Inicio</span>
+      <h2 id="h-empezar">Por dónde empezar</h2>
+      <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Si eres…</th><th>Empieza por</th><th>Después</th></tr></thead><tbody>
+        <tr><td><b>Diseño</b></td><td><a href="ds/fundamentos.html">Fundamentos</a>: principios, color y tipografía</td><td><a href="ds/componentes.html">Componentes</a> y <a href="ds/plantillas.html">Plantillas</a></td></tr>
+        <tr><td><b>Frontend</b></td><td><a href="ds/calidad.html#consumo">Consumo e implementación</a> y <a href="ds/fundamentos.html#tokens">Tokens</a></td><td><a href="ds/componentes.html">Componentes</a> (anatomía, teclado y ARIA)</td></tr>
+        <tr><td><b>Producto o revisión</b></td><td><a href="ds/plantillas.html">Plantillas</a>, con "Ver a pantalla completa"</td><td><a href="ds/patrones.html">Patrones</a> biométricos y electorales</td></tr>
+        <tr><td><b>Contenido</b></td><td><a href="ds/calidad.html#microcopy">Microcopy</a></td><td><a href="ds/plantillas.html#copy-errores">Copy de errores</a></td></tr>
       </tbody></table></div>
     </div></section>
-    
+
+    <!-- NOVEDADES -->
+    <section class="ds-sec ds-sec--tint" id="novedades" data-nav="Novedades" data-grp="Estado" aria-labelledby="h-novedades"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Inicio · Versión 1.5</span>
+      <h2 id="h-novedades">Novedades</h2>
+      <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Versión</th><th>Qué cambió</th></tr></thead><tbody>
+        <tr><td><b>v1.5</b> · oct 2026</td><td><b>Reorganización por propósito.</b> 8 páginas en 4 grupos, secciones sin numerar, índice por subgrupos, página de inicio, y validación automática de ids y enlaces al construir.</td></tr>
+        <tr><td><b>v1.4</b> · oct 2026</td><td>Auditoría del líder: estados unificados, píldoras en 3 variantes, alertas con insignia y panel de actividad desde un solo conjunto de datos.</td></tr>
+        <tr><td><b>v1.3</b> · oct 2026</td><td>Cobertura completa: patrones de Averyn, componentes avanzados, plantillas, marca y entregables, y tokens W3C.</td></tr>
+      </tbody></table></div>
+      <p class="ds-note">El historial completo y la deuda conocida están en <a href="ds/calidad.html#gobernanza">Calidad y gobernanza</a>.</p>
+    </div></section>
+
+    <!-- COMPARTIR -->
+    <section class="ds-sec" id="compartir" data-nav="Cómo compartirlo" data-grp="Estado" aria-labelledby="h-compartir"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Inicio</span>
+      <h2 id="h-compartir">Cómo compartir el design system</h2>
+      <p class="ds-lead">Todo el sistema viaja en <b>un solo archivo HTML</b>: <code>docs/averyn-design-system-horizonte.html</code>. Se abre con doble clic, sin servidor, y se puede enviar por correo o Drive. Necesita internet solo para las fuentes de Google y los iconos.</p>
+      <div class="codeblock"><pre id="code-share">python docs/ds/src/tokens_export.py   # tokens.json desde tokens.css
+python docs/ds/src/emails.py          # correos transaccionales
+python docs/ds/src/build.py           # páginas (valida ids y enlaces)
+python docs/ds/src/bundle.py          # el HTML único para compartir</pre><button class="copy" type="button" data-copy="#code-share">Copiar</button></div>
+      <p class="ds-note">Los gráficos, patrones y plantillas son <b>simulaciones con datos ficticios</b>: están documentados, pero todavía no existen en el frontend real. El detalle está en la deuda conocida.</p>
+    </div></section>
 
     </main>
 
-    <footer class="ds-sec" style="padding-block:2.4rem;border-top:1px solid var(--av-hairline)"><div class="ds-wrap"><div class="row" style="justify-content:space-between"><span class="mono" style="color:var(--av-gray-500)">Averyn · Design System v1.4 Horizonte</span><span class="mono" style="color:var(--av-gray-500)">Fuente: DESIGN.md · tokens.css</span></div></div></footer>
+    <footer class="ds-sec" style="padding-block:2.4rem;border-top:1px solid var(--av-hairline)"><div class="ds-wrap"><div class="row" style="justify-content:space-between"><span class="mono" style="color:var(--av-gray-500)">Averyn · Design System v1.5 Horizonte</span><span class="mono" style="color:var(--av-gray-500)">Fuente: DESIGN.md · tokens.css</span></div></div></footer>
   </div>
 </div>
 <div class="hz-toasts" id="toasts" role="region" aria-label="Notificaciones" aria-live="polite"></div>
 <script src="ds/ds.js"></script>
-<script src="ds/foundations.js"></script>
 </body>
 </html>
