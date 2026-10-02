@@ -6,12 +6,12 @@ Cada página = plantilla común (barra lateral, portada, pie) + un archivo de cu
 Las rutas se calculan según la carpeta: docs/design-system.html y docs/ds/*.html.
 Marcadores en los cuerpos: {{FE}} -> carpeta averyn-frontend, {{DS}} -> carpeta docs/ds, {{DOCS}} -> carpeta docs.
 """
-import os
+import importlib.util, os, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DS_DIR = os.path.dirname(HERE)            # docs/ds
 DOCS = os.path.dirname(DS_DIR)            # docs
-VERSION = '1.2'
+VERSION = '1.3'
 
 # (archivo de salida relativo a docs, etiqueta del menú, titular de la página)
 PAGES = [
@@ -20,6 +20,7 @@ PAGES = [
     ('ds/patrones.html', 'Patrones de Averyn'),
     ('ds/componentes.html', 'Componentes que faltaban'),
     ('ds/plantillas.html', 'Plantillas'),
+    ('ds/marca.html', 'Marca y entregables'),
     ('ds/sistema.html', 'Estados del sistema'),
 ]
 
@@ -49,10 +50,31 @@ CONFIG = {
     'ds/plantillas.html': dict(body=['plantillas-body.html'], eyebrow='Plantillas', title='Pantallas completas, no piezas sueltas.',
                                lead='Bitácora, configuración, detalle de persona, asistente, notificaciones y perfil: los componentes compuestos en pantallas reales, con sus estados.',
                                anchors=None, css=['charts.css', 'componentes.css', 'plantillas.css'], js=['plantillas.js']),
+    'ds/marca.html': dict(body=['marca-body.html'], eyebrow='Marca y entregables', title='Todo lo que sale de Averyn.',
+                          lead='Ilustración con arcos, favicons, correos transaccionales, estilos de impresión y tokens exportables: la identidad fuera de la pantalla.',
+                          anchors=None, css=['charts.css', 'marca.css', 'print.css'], js=['marca.js'],
+                          inject={'{{EMAILS_JSON}}': lambda: emails_json(), '{{TOKENS_JSON}}': lambda: tokens_json()}),
     'ds/sistema.html': dict(body=['sistema-body.html'], eyebrow='Sistema', title='Cuando algo no sale como se espera.',
                             lead='Páginas de error y estados del sistema: 404, 403, 500, sin conexión y mantenimiento.',
                             anchors=None, css=[], js=['sistema.js']),
 }
+
+
+def _json_script(obj):
+    import json
+    return json.dumps(obj, ensure_ascii=False).replace('</', '<' + chr(92) + '/')
+
+
+def emails_json():
+    sys.dont_write_bytecode = True
+    spec = importlib.util.spec_from_file_location('emails', os.path.join(HERE, 'emails.py'))
+    m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+    return _json_script(m.all_mails())
+
+
+def tokens_json():
+    import json
+    return _json_script(json.load(open(os.path.join(DS_DIR, 'tokens.json'), encoding='utf-8')))
 
 
 def read(name):
@@ -77,6 +99,8 @@ def render(out_rel):
     cfg = CONFIG[out_rel]
     p = paths(out_rel)
     body = ''.join(read(n) for n in cfg['body'])
+    for token, fn in cfg.get('inject', {}).items():
+        body = body.replace(token, fn())
     if cfg.get('anchors') is None:
         cfg['anchors'] = [('grp', 'En esta página')] + anchors_from(body)
     rep = lambda s: s.replace('{{FE}}', p['FE']).replace('{{DS}}', p['DS']).replace('{{DOCS}}', p['DOCS'])

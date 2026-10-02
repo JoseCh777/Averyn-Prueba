@@ -1,0 +1,47 @@
+/* ==========================================================================
+   ESTILOS DE IMPRESIÓN — actas, constancias y reportes de Averyn (A4).
+   Uso en una página real:  <link rel="stylesheet" href="print.css">  y la clase .pr-doc en el contenedor.
+   Principios: tinta mínima (sin fondos de color; los estados llevan texto), tabla que no se parte,
+   encabezados que no quedan huérfanos, enlaces con su dirección y pie con número de página.
+   ========================================================================== */
+
+/* Hoja en pantalla (vista previa del documento) */
+.pr-sheet { box-sizing: border-box; width: 210mm; min-height: 297mm; margin: 0 auto; padding: 18mm 16mm 20mm; background: #fff; color: #000C24; font-family: Inter, Arial, sans-serif; font-size: 10.5pt; line-height: 1.5; box-shadow: 0 0 0 1px #DCE5F5, 0 12px 32px rgba(0, 12, 36, .12); }
+.pr-sheet *, .pr-sheet *::before, .pr-sheet *::after { box-sizing: border-box; }
+.pr-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 12mm; padding-bottom: 6mm; border-bottom: 1.5pt solid #000C24; }
+.pr-head img { height: 9mm; display: block; }
+.pr-title { margin: 0; font: 500 20pt/1.1 'Space Grotesk', Arial, sans-serif; letter-spacing: -.02em; }
+.pr-sub { margin: 1mm 0 0; font-size: 9.5pt; color: #3B4664; }
+.pr-folio { text-align: right; font: 500 8.5pt 'JetBrains Mono', 'Courier New', monospace; letter-spacing: .04em; text-transform: uppercase; color: #3B4664; }
+.pr-folio b { display: block; font-size: 11pt; color: #000C24; letter-spacing: .06em; }
+.pr-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 0 10mm; margin: 7mm 0 6mm; }
+.pr-meta div { display: grid; grid-template-columns: 34mm 1fr; gap: 4mm; padding: 2mm 0; border-bottom: .5pt solid #A9B4C7; font-size: 10pt; }
+.pr-meta dt { font: 500 7.5pt 'JetBrains Mono', 'Courier New', monospace; letter-spacing: .06em; text-transform: uppercase; color: #3B4664; padding-top: .4mm; }
+.pr-meta dd { margin: 0; }
+.pr-h2 { margin: 7mm 0 2.5mm; font: 500 13pt 'Space Grotesk', Arial, sans-serif; letter-spacing: -.01em; }
+.pr-table { width: 100%; border-collapse: collapse; font-size: 9.5pt; }
+.pr-table th { padding: 1.5mm 3mm 1.5mm 0; text-align: left; font: 500 7.5pt 'JetBrains Mono', 'Courier New', monospace; letter-spacing: .06em; text-transform: uppercase; color: #3B4664; border-bottom: 1pt solid #000C24; }
+.pr-table td { padding: 2.2mm 3mm 2.2mm 0; border-bottom: .5pt solid #A9B4C7; vertical-align: top; }
+.pr-ok::before { content: '\2713\00a0'; } .pr-bad::before { content: '\2715\00a0'; }
+.pr-note { margin: 6mm 0 0; padding: 3mm 4mm; border: .75pt solid #56637F; border-radius: 1.5mm; font-size: 9pt; color: #26304A; }
+.pr-sign { display: grid; grid-template-columns: 1fr 1fr 28mm; gap: 10mm; align-items: end; margin-top: 18mm; }
+.pr-sign > div { padding-top: 2mm; border-top: .75pt solid #000C24; font-size: 8.5pt; color: #3B4664; }
+.pr-sign .pr-qr { display: grid; place-items: center; height: 28mm; border: .75pt solid #000C24; border-top: .75pt solid #000C24; font: 500 7pt 'JetBrains Mono', 'Courier New', monospace; text-align: center; padding: 2mm; text-transform: uppercase; }
+.pr-foot { margin-top: 8mm; font-size: 8pt; color: #56637F; }
+
+@media print {
+  html, body { background: #fff !important; }
+  body { margin: 0; color: #000; -webkit-print-color-adjust: economy; print-color-adjust: economy; }
+  .no-print, nav, .hz-nav, .hz-dock, .hz-banner, .hz-toasts, button, dialog { display: none !important; }
+  .pr-sheet { width: auto; min-height: 0; margin: 0; padding: 0; box-shadow: none; }
+  .pr-doc { font-size: 10.5pt; }
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 8pt; color: #3B4664; word-break: break-all; }
+  h1, h2, h3, .pr-h2 { break-after: avoid; page-break-after: avoid; }
+  table, .pr-note, .pr-sign, .pr-meta { break-inside: avoid; page-break-inside: avoid; }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; page-break-inside: avoid; }
+  .pr-break { break-before: page; page-break-before: always; }
+}
+
+/* Tamaño, márgenes y pie con número de página (Chromium y navegadores con soporte de márgenes de página) */
+@page { size: A4; margin: 18mm 16mm 20mm; @bottom-left { content: "Averyn · documento verificable"; font: 8pt Inter, Arial, sans-serif; color: #56637F; } @bottom-right { content: "Página " counter(page) " de " counter(pages); font: 8pt Inter, Arial, sans-serif; color: #56637F; } }

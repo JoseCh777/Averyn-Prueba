@@ -1,0 +1,12 @@
+Confirma tu correo.
+
+Hola {{nombre}},
+Usa este código para confirmar tu correo electrónico. Vence en 10 minutos.
+
+Código: {{codigo}}
+
+No compartas este código con nadie. Averyn nunca te lo pedirá por teléfono, chat ni redes sociales. Si no lo solicitaste, ignora este correo.
+
+--
+Enviado por Averyn en nombre de {{institucion}}. Mensaje automático: no respondas a este correo.
+¿Necesitas ayuda? {{correo_soporte}}

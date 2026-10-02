@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Averyn — Design System Horizonte v1.2 · Fundamentos y componentes</title>
+<title>Averyn — Design System Horizonte v1.3 · Fundamentos y componentes</title>
 <meta name="description" content="Design system de Averyn: principios, tokens, componentes y reglas de uso del estilo Horizonte.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,7 +17,7 @@
 <div class="ds-shell">
   <aside class="ds-side" aria-label="Índice del design system">
     <a class="ds-side__brand" href="./design-system.html" aria-label="Averyn, inicio del design system"><img src="../averyn-frontend/assets/images/averyn-logo-font-black.avif" alt="Averyn"></a>
-    <p class="ds-side__ver mono">Design System · v1.2 Horizonte</p>
+    <p class="ds-side__ver mono">Design System · v1.3 Horizonte</p>
     <nav>
       <span class="grp mono">Design system</span>
       <a class="ds-page" href="design-system.html" aria-current="page">Fundamentos y componentes</a>
@@ -25,6 +25,7 @@
       <a class="ds-page" href="ds/patrones.html">Patrones de Averyn</a>
       <a class="ds-page" href="ds/componentes.html">Componentes que faltaban</a>
       <a class="ds-page" href="ds/plantillas.html">Plantillas</a>
+      <a class="ds-page" href="ds/marca.html">Marca y entregables</a>
       <a class="ds-page" href="ds/sistema.html">Estados del sistema</a>
       <span class="grp mono">Fundamentos</span>
       <a href="#principios">01 · Principios</a>
@@ -59,7 +60,7 @@
         <span class="mono" style="color:#fff;opacity:.85">Design System</span>
         <h1>Claridad que se oscurece en seguridad.</h1>
         <p>El sistema visual de Averyn: principios, tokens, componentes y reglas de uso para landing, acceso y panel. Nace de lo que construimos y decidimos, y extiende el mismo lenguaje a lo que aún no existe.</p>
-        <div class="ds-cover__meta mono"><span>Versión 1.2 · Horizonte</span><span>Octubre 2026</span><span>Fuente: DESIGN.md + tokens.css</span></div>
+        <div class="ds-cover__meta mono"><span>Versión 1.3 · Horizonte</span><span>Octubre 2026</span><span>Fuente: DESIGN.md + tokens.css</span></div>
       </div>
       <svg viewBox="0 0 640 300" aria-hidden="true" focusable="false">
         <path d="M0 290 H640" stroke="rgba(255,255,255,.22)" stroke-width="1" fill="none"/>
@@ -714,15 +715,21 @@ background: linear-gradient(180deg, #DCECFF 0%, #EAF0FE 55%, #fff 100%);</pre><b
       </tbody></table></div>
       <h3 class="ds-sub">Changelog</h3>
       <div class="doc-wrap"><table class="doc-table"><tbody>
+        <tr><td><b>v1.3</b> · oct 2026</td><td><b>Cobertura completa.</b> <i>Patrones de Averyn:</i> captura facial y de huella, resultado de verificación frente al umbral 0.68, documento y OCR con revisión de datos, papeleta y comprobante sin vincular persona↔voto, dispositivos y consentimiento biométrico. <i>Componentes:</i> selector de fechas, menú de acciones, combobox, acordeón, stepper, popover, drawer, paleta de comandos Ctrl+K y tabla avanzada, todos con teclado completo. <i>Plantillas:</i> bitácora, configuración, detalle de persona, asistente electoral, notificaciones y perfil, con estados y vista a pantalla completa. <i>Marca y entregables:</i> kit de ilustración con arcos y estados vacíos, favicons e imagen social, tres correos transaccionales, <code>print.css</code> para actas y exportación de tokens W3C (<code>tokens.json</code>). Nuevo: <b>HTML único</b> compartible (<code>docs/averyn-design-system-horizonte.html</code>).</td></tr>
         <tr><td><b>v1.2</b> · oct 2026</td><td>Design system multipágina (<code>design-system.html</code>, <code>ds/graficos.html</code>, <code>ds/sistema.html</code>) con <code>ds.css</code> y <code>ds.js</code> compartidos. <b>Estados del sistema:</b> páginas 404, 403, 500, sin conexión y mantenimiento (concepto "arcos rotos sobre el horizonte"), ruta pedida escapada, <code>&lt;base&gt;</code> para rutas anidadas, banners y modal de sesión. <b>Biblioteca de gráficos:</b> paleta categórica validada (azul, ámbar, cian de gráfico, violeta, magenta), tarjeta de gráfico con estados, área, barras de píldora y rectas, ranking, apiladas, anillo, bullet, KPI con sparkline, mapa de calor, embudo, histograma con umbral 0.68 y tabla "breakdown"; tooltip, teclado y vista en tabla en todos; contrato de datos propuesto.</td></tr>
         <tr><td><b>v1.1</b> · oct 2026</td><td>Accesibilidad y teclado en landing y login. Landing: hero de 220 vh con <code>&lt;h1&gt;</code> real, <code>inert</code> en lo invisible, figura anclada al texto, anillo de foco por superficie (blanco sobre azul, cian sobre navy), menú móvil con botón antes del nav y Escape que devuelve el foco, contrastes corregidos, objetivos ≥ 44 px, contenido visible sin JS. Login: errores por campo con <code>aria-invalid</code>, foco al primer inválido y a la contraseña tras credenciales inválidas, sin salto de layout, botón bloqueado durante la redirección, "Mostrar/Ocultar" sin contradicción de nombre, nota de seguridad solo en HTTPS. Tokens nuevos aplicados a <code>tokens.css</code>.</td></tr>
         <tr><td><b>v1.0</b> · oct 2026</td><td>Primera versión del sistema Horizonte: fundamentos, 20 componentes, patrones y plantillas. Tokens nuevos: <code>--av-field-border</code> (#6E86B0) y <code>--av-placeholder</code> (#667390), variantes <code>-text</code> de estado, reglas de foco por superficie.</td></tr>
       </tbody></table></div>
-      <h3 class="ds-sub">Deuda conocida <small>v1.1</small></h3>
+      <h3 class="ds-sub">Deuda conocida <small>v1.3</small></h3>
       <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Tema</th><th>Qué falta</th></tr></thead><tbody>
         <tr><td>Prefijos</td><td>El código usa <code>mn-</code>, <code>lg-</code> y <code>dh-</code>; consolidar en <code>hz-</code> o <code>av-</code>.</td></tr>
         <tr><td>CSS</td><td>~50 KB de <code>components.css</code>, <code>modules.css</code> y <code>dashboard.css</code> se cargan sin usarse en landing y login.</td></tr>
         <tr><td>Módulos</td><td>Identidad, Documentos, Biometría, Electoral e IA siguen con el estilo anterior y con Bootstrap.</td></tr>
+        <tr><td>Modo nocturno</td><td>Fuera de alcance por ahora: faltaría validar la paleta de gráficos y los tokens contra una superficie oscura.</td></tr>
+        <tr><td>Patrones, componentes y plantillas</td><td>Están documentados como simulaciones; no existen aún en <code>averyn-frontend/</code>. Hay que implementarlos con datos reales y revisar con quien opere cámara, lector y padrón.</td></tr>
+        <tr><td>Consentimiento biométrico</td><td>Plazos de conservación, canal de revocación y texto legal pendientes de definir con el área jurídica.</td></tr>
+        <tr><td>Correos</td><td>Probar en clientes reales (Gmail, Outlook, Apple Mail) y alojar el logo en un dominio público para <code>{{logo_url}}</code>.</td></tr>
+        <tr><td>Shell de navegación</td><td>La unificación del shell del dashboard con el resto de páginas espera la señal del equipo.</td></tr>
       </tbody></table></div>
     </div></section>
 
@@ -767,7 +774,7 @@ body.av-mi-pantalla { background: #fff; color: var(--av-navy); font-family: var(
 
     </main>
 
-    <footer class="ds-sec" style="padding-block:2.4rem;border-top:1px solid var(--av-hairline)"><div class="ds-wrap"><div class="row" style="justify-content:space-between"><span class="mono" style="color:var(--av-gray-500)">Averyn · Design System v1.2 Horizonte</span><span class="mono" style="color:var(--av-gray-500)">Fuente: DESIGN.md · tokens.css</span></div></div></footer>
+    <footer class="ds-sec" style="padding-block:2.4rem;border-top:1px solid var(--av-hairline)"><div class="ds-wrap"><div class="row" style="justify-content:space-between"><span class="mono" style="color:var(--av-gray-500)">Averyn · Design System v1.3 Horizonte</span><span class="mono" style="color:var(--av-gray-500)">Fuente: DESIGN.md · tokens.css</span></div></div></footer>
   </div>
 </div>
 <div class="hz-toasts" id="toasts" role="region" aria-label="Notificaciones" aria-live="polite"></div>
