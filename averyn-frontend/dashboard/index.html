@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Bootstrap Icons (los íconos de los módulos y del menú de usuario) -->
+  <!-- Bootstrap Icons (íconos del dock, de los accesos y del menú de usuario) -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
 
   <link href="../assets/css/design-system.css" rel="stylesheet">
@@ -28,14 +28,14 @@
 
     <nav class="av-dock-container" aria-label="Navegación principal">
       <ul class="av-dock" role="menubar">
-        <li role="none"><a href="index.html" class="av-dock__item" role="menuitem"><i class="bi bi-grid-1x2" aria-hidden="true"></i><span>Dashboard</span></a></li>
-        <li role="none"><a href="identity/index.html" class="av-dock__item" role="menuitem"><i class="bi bi-person-vcard" aria-hidden="true"></i><span>Identidad</span></a></li>
-        <li role="none"><a href="../biometrics/index.html" class="av-dock__item" role="menuitem" data-modulo="biometria"><i class="bi bi-fingerprint" aria-hidden="true"></i><span>Biometría</span></a></li>
-        <li role="none"><a href="documents/index.html" class="av-dock__item" role="menuitem"><i class="bi bi-camera" aria-hidden="true"></i><span>OCR</span></a></li>
-        <li role="none"><a href="../modules/ia/index.html" class="av-dock__item" role="menuitem"><i class="bi bi-cpu" aria-hidden="true"></i><span>IA</span></a></li>
-        <li role="none"><a href="../modules/electoral/index.html" class="av-dock__item" role="menuitem"><i class="bi bi-check2-square" aria-hidden="true"></i><span>Electoral</span></a></li>
-        <li role="none"><span class="av-dock__item is-soon" role="menuitem" aria-disabled="true" title="Próximamente"><i class="bi bi-door-open" aria-hidden="true"></i><span>Accesos</span></span></li>
-        <li role="none"><span class="av-dock__item is-soon" role="menuitem" aria-disabled="true" title="Próximamente"><i class="bi bi-gear" aria-hidden="true"></i><span>Administración</span></span></li>
+        <li role="none"><a href="index.html" class="av-dock__item" role="menuitem" title="Dashboard"><i class="bi bi-grid-1x2" aria-hidden="true"></i><span>Dashboard</span></a></li>
+        <li role="none"><a href="identity/index.html" class="av-dock__item" role="menuitem" title="Identidad"><i class="bi bi-person-vcard" aria-hidden="true"></i><span>Identidad</span></a></li>
+        <li role="none"><a href="../biometrics/index.html" class="av-dock__item" role="menuitem" data-modulo="biometria" title="Biometría"><i class="bi bi-fingerprint" aria-hidden="true"></i><span>Biometría</span></a></li>
+        <li role="none"><a href="documents/index.html" class="av-dock__item" role="menuitem" title="OCR"><i class="bi bi-camera" aria-hidden="true"></i><span>OCR</span></a></li>
+        <li role="none"><a href="../modules/ia/index.html" class="av-dock__item" role="menuitem" title="IA"><i class="bi bi-cpu" aria-hidden="true"></i><span>IA</span></a></li>
+        <li role="none"><a href="../modules/electoral/index.html" class="av-dock__item" role="menuitem" title="Electoral"><i class="bi bi-check2-square" aria-hidden="true"></i><span>Electoral</span></a></li>
+        <li role="none"><span class="av-dock__item is-soon" role="menuitem" aria-disabled="true" title="Accesos · Próximamente"><i class="bi bi-door-open" aria-hidden="true"></i><span>Accesos</span></span></li>
+        <li role="none"><span class="av-dock__item is-soon" role="menuitem" aria-disabled="true" title="Administración · Próximamente"><i class="bi bi-gear" aria-hidden="true"></i><span>Administración</span></span></li>
       </ul>
     </nav>
 
@@ -81,9 +81,10 @@
         <svg class="dh-hero__fig" viewBox="0 0 320 170" aria-hidden="true" focusable="false">
           <path d="M0 165 H320" stroke="rgba(20,95,238,.25)" stroke-width="1" />
           <path d="M20 165 C60 30 190 20 240 165" stroke="#145FEE" stroke-width="1.5" fill="none" />
-          <path d="M60 165 C90 70 170 60 205 165" stroke="#00ACD2" stroke-width="1.5" fill="none" />
+          <path d="M60 165 C90 70 170 60 205 165" stroke="#00ACD2" stroke-width="2" fill="none" />
           <path d="M100 165 C118 105 150 100 170 165" stroke="#145FEE" stroke-width="1" fill="none" />
           <path d="M150 6 L290 165" stroke="#145FEE" stroke-width="1.5" fill="none" />
+          <path d="M176 -6 L316 153" stroke="#00ACD2" stroke-width="1.5" fill="none" />
         </svg>
       </div>
     </section>
@@ -95,21 +96,22 @@
         <div class="dh-kpis" id="kpi-grid"></div>
       </section>
 
-      <!-- 3 · Accesos rápidos + actividad reciente -->
+      <!-- 3 · Accesos rápidos (mosaico) + actividad reciente (panel navy) -->
       <div class="dh-split">
         <section aria-labelledby="titulo-accesos">
           <header class="dh-head">
             <h2 id="titulo-accesos">Accesos rápidos</h2>
             <p>Atajos a los módulos de la plataforma</p>
           </header>
-          <ul class="dh-rows" id="grid-accesos-rapidos"></ul>
+          <ul class="dh-mosaic" id="grid-accesos-rapidos"></ul>
         </section>
 
-        <section aria-labelledby="titulo-actividad">
+        <section class="dh-panel" aria-labelledby="titulo-actividad">
           <header class="dh-head">
             <h2 id="titulo-actividad">Actividad reciente</h2>
             <p>Últimas acciones registradas</p>
           </header>
+          <div class="dh-bars" id="resumen-resultados" hidden></div>
           <ul class="dh-feed" id="feed-actividad"></ul>
           <a class="dh-more dh-mono" href="../biometrics/history/index.html">Ver historial completo →</a>
         </section>
