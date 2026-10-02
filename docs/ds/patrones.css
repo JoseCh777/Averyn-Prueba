@@ -189,3 +189,56 @@
   .pt-view[data-state="capturing"] .pt-oval-prog { animation: none; stroke-dashoffset: 0; }
   .pt-oval, .pt-fp__ring, .pt-prog__bar i, .pt-scale__fill, .pt-opt { transition: none; }
 }
+
+/* ---------- Tarjetón electoral ---------- */
+.tj-card { overflow: hidden; }
+.tj-fs { margin: 0; padding: 0; border: 0; min-width: 0; }
+.tj { position: relative; padding: clamp(.9rem, 2.4vw, 1.5rem); border: 2px solid var(--av-navy); border-radius: 10px; background: var(--av-paper-blue); overflow: hidden; }
+.tj__mark { position: absolute; inset: 0; z-index: 0; display: grid; place-items: center; padding: 1rem; transform: rotate(-16deg); font: 700 clamp(1.8rem, 6.2vw, 4.2rem)/1.05 var(--av-font-heading); letter-spacing: .03em; text-align: center; text-transform: uppercase; color: rgba(0, 12, 36, .06); pointer-events: none; user-select: none; }
+.tj__head, .tj__rule, .tj__grid { position: relative; z-index: 1; }
+.tj__head { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 1rem; }
+.tj__crest { display: grid; place-items: center; width: 4.2rem; height: 4.2rem; padding: .3rem; border: 1.5px dashed var(--av-field-border); border-radius: 8px; font: 500 .5625rem/1.2 var(--av-font-mono); letter-spacing: .04em; text-align: center; text-transform: uppercase; color: var(--av-gray-600); }
+.tj__crest img { width: 100%; height: 100%; object-fit: contain; }
+.tj__title { margin: 0; font: 500 clamp(1.05rem, 2.6vw, 1.55rem)/1.15 var(--av-font-heading); letter-spacing: -.01em; text-align: center; text-transform: uppercase; color: var(--av-navy); }
+.tj__sub { margin: .35rem 0 0; font: 500 .75rem var(--av-font-mono); letter-spacing: .06em; text-align: center; text-transform: uppercase; color: var(--av-gray-600); }
+.tj__code { padding: .35rem .6rem; border: 1px solid var(--av-navy); border-radius: 4px; font-size: .6875rem; letter-spacing: .06em; text-transform: uppercase; color: var(--av-navy); }
+.tj__rule { margin: 1rem 0 .9rem; padding-bottom: .9rem; border-bottom: 1.5px dashed var(--av-field-border); text-align: center; font: 700 clamp(.75rem, 1.8vw, .9375rem) var(--av-font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--av-error-text); }
+.tj__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(.5rem, 1.6vw, 1rem); }
+.tj-opt { position: relative; display: flex; flex-direction: column; min-width: 0; padding: .6rem .6rem .7rem; border: 2px solid var(--av-navy); border-radius: 6px; background: transparent; cursor: pointer; transition: background-color .15s var(--av-ease-out), box-shadow .15s var(--av-ease-out); }
+.tj-opt:hover { background: rgba(255, 255, 255, .7); }
+.tj-opt input { position: absolute; inset: 0; opacity: 0; cursor: pointer; margin: 0; }
+.tj-opt__n { align-self: flex-start; display: grid; place-items: center; min-width: 2.1rem; height: 2.1rem; padding: 0 .5rem; border-radius: 6px; background: var(--av-navy); color: #fff; font: 700 1.15rem var(--av-font-heading); font-variant-numeric: tabular-nums; }
+.tj-opt__ph { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: .35rem; margin-top: .55rem; }
+.tj-opt__f { display: grid; place-items: center; aspect-ratio: 3 / 4; overflow: hidden; border-radius: 4px; background: linear-gradient(180deg, var(--av-blue-tint), var(--av-sky)); color: var(--av-blue); font-size: 1.8rem; }
+.tj-opt__f img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.tj-opt__who { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: .35rem; margin-top: .45rem; text-align: center; }
+.tj-opt__who span { display: block; min-width: 0; font: 700 clamp(.46rem, 1vw, .5625rem) var(--av-font-mono); letter-spacing: .02em; text-transform: uppercase; color: var(--av-gray-600); }
+.tj-opt__who b { display: block; margin-top: .1rem; font: 700 clamp(.625rem, 1.2vw, .75rem)/1.2 var(--av-font-body); letter-spacing: .02em; text-transform: uppercase; color: var(--av-navy); overflow-wrap: anywhere; }
+.tj-opt__logo { display: grid; place-items: center; height: 2.6rem; margin-top: .6rem; border: 1.5px dashed var(--av-field-border); border-radius: 4px; font: 500 .5625rem var(--av-font-mono); letter-spacing: .04em; text-transform: uppercase; color: var(--av-gray-600); text-align: center; padding: 0 .3rem; }
+.tj-opt__logo img { width: 100%; height: 100%; object-fit: contain; }
+.tj-opt__ok { position: absolute; top: .55rem; right: .55rem; display: none; align-items: center; gap: .25rem; padding: .15rem .5rem .15rem .35rem; border-radius: 999px; background: var(--av-blue); color: #fff; font: 700 .6875rem var(--av-font-mono); letter-spacing: .04em; text-transform: uppercase; }
+.tj-opt:has(input:checked) { border-color: var(--av-blue); background: rgba(255, 255, 255, .85); box-shadow: 0 0 0 3px var(--av-blue); }
+.tj-opt:has(input:checked) .tj-opt__ok { display: inline-flex; }
+.tj-opt:has(input:checked) .tj-opt__n { background: var(--av-blue); }
+.tj-opt:has(input:focus-visible) { outline: 3px solid var(--av-navy); outline-offset: 3px; }
+.tj-opt--blank .tj-opt__mid { flex: 1; display: grid; place-items: center; min-height: 8rem; text-align: center; font: 700 clamp(.875rem, 2vw, 1.15rem)/1.25 var(--av-font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--av-navy); }
+.tj-rev { display: grid; grid-template-columns: minmax(0, 15rem); }
+.tj-rev .tj-opt { cursor: default; pointer-events: none; border-color: var(--av-blue); box-shadow: 0 0 0 3px var(--av-blue); background: var(--av-paper-blue); }
+.tj-rev .tj-opt__ok { display: inline-flex; }
+@media (max-width: 1000px) { .tj__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) {
+  .tj__head { grid-template-columns: minmax(0, 1fr); justify-items: center; }
+  .tj__crest { width: 3.4rem; height: 3.4rem; }
+  .tj__code { display: none; }
+  .tj__grid { grid-template-columns: minmax(0, 1fr); }
+  .tj-opt { flex-direction: row; flex-wrap: wrap; align-items: center; gap: .5rem .7rem; padding-top: 2.6rem; }
+  .tj-opt__n { position: absolute; top: .5rem; left: .5rem; }
+  .tj-opt__ph { margin-top: 0; }
+  .tj-opt__who { flex: 1; min-width: 7rem; margin-top: 0; grid-auto-flow: row; gap: .5rem; text-align: left; }
+  .tj-opt__who span { font-size: .6875rem; }
+  .tj-opt__who b { font-size: .8125rem; overflow-wrap: normal; }
+  .tj-opt__ph { width: 7rem; }
+  .tj-opt__logo { width: 100%; height: 2rem; margin-top: 0; }
+  .tj-opt--blank { flex-direction: column; padding-top: .6rem; }
+}
+@media (prefers-reduced-motion: reduce) { .tj-opt { transition: none; } }
