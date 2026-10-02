@@ -18,6 +18,7 @@ PAGES = [
     ('design-system.html', 'Fundamentos y componentes'),
     ('ds/graficos.html', 'Gráficos'),
     ('ds/patrones.html', 'Patrones de Averyn'),
+    ('ds/componentes.html', 'Componentes que faltaban'),
     ('ds/sistema.html', 'Estados del sistema'),
 ]
 
@@ -41,6 +42,9 @@ CONFIG = {
     'ds/patrones.html': dict(body=['patrones-body.html'], eyebrow='Patrones', title='Cuando la pantalla toca el cuerpo de alguien.',
                              lead='Captura facial y de huella, resultado de verificación, documento y OCR, papeleta electoral, dispositivos y consentimiento. Simulaciones sin cámara ni datos reales.',
                              anchors=None, css=['charts.css', 'patrones.css'], js=['patrones.js']),
+    'ds/componentes.html': dict(body=['componentes-body.html'], eyebrow='Componentes', title='Lo que faltaba para trabajar de verdad.',
+                                lead='Selector de fechas, menú de acciones, combobox, acordeón, stepper, popover, drawer, paleta de comandos y tabla avanzada, con teclado completo.',
+                                anchors=None, css=['charts.css', 'componentes.css'], js=['componentes.js']),
     'ds/sistema.html': dict(body=['sistema-body.html'], eyebrow='Sistema', title='Cuando algo no sale como se espera.',
                             lead='Páginas de error y estados del sistema: 404, 403, 500, sin conexión y mantenimiento.',
                             anchors=None, css=[], js=['sistema.js']),

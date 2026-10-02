@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Averyn — Design System Horizonte v1.2 · Componentes que faltaban</title>
+<meta name="description" content="Design system de Averyn: principios, tokens, componentes y reglas de uso del estilo Horizonte.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link rel="icon" href="../../averyn-frontend/assets/images/averyn-logo-blue.avif">
+<link href="./ds.css" rel="stylesheet">
+<link href="./charts.css" rel="stylesheet">
+<link href="./componentes.css" rel="stylesheet">
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<div class="ds-shell">
+  <aside class="ds-side" aria-label="Índice del design system">
+    <a class="ds-side__brand" href="../design-system.html" aria-label="Averyn, inicio del design system"><img src="../../averyn-frontend/assets/images/averyn-logo-font-black.avif" alt="Averyn"></a>
+    <p class="ds-side__ver mono">Design System · v1.2 Horizonte</p>
+    <nav>
+      <span class="grp mono">Design system</span>
+      <a class="ds-page" href="../design-system.html">Fundamentos y componentes</a>
+      <a class="ds-page" href="graficos.html">Gráficos</a>
+      <a class="ds-page" href="patrones.html">Patrones de Averyn</a>
+      <a class="ds-page" href="componentes.html" aria-current="page">Componentes que faltaban</a>
+      <a class="ds-page" href="sistema.html">Estados del sistema</a>
+      <span class="grp mono">En esta página</span>
+      <a href="#fechas">01 · Selector de fechas</a>
+      <a href="#menu-acciones">02 · Menú de acciones</a>
+      <a href="#combobox">03 · Combobox</a>
+      <a href="#acordeon">04 · Acordeón</a>
+      <a href="#stepper">05 · Stepper</a>
+      <a href="#popover">06 · Popover</a>
+      <a href="#drawer">07 · Drawer lateral</a>
+      <a href="#comandos">08 · Paleta de comandos</a>
+      <a href="#tabla">09 · Tabla avanzada</a>
+      <a href="#resumen-teclado">10 · Resumen y banner</a>
+    </nav>
+  </aside>
+
+  <div class="ds-main" id="top">
+    <header class="ds-cover ds-cover--page"><div class="ds-wrap"><span class="mono" style="color:#fff;opacity:.85">Componentes</span><h1>Lo que faltaba para trabajar de verdad.</h1><p>Selector de fechas, menú de acciones, combobox, acordeón, stepper, popover, drawer, paleta de comandos y tabla avanzada, con teclado completo.</p></div></header>
+
+    <main id="contenido">
+
+    <!-- 01 FECHAS -->
+    <section class="ds-sec" id="fechas" data-nav="01 · Selector de fechas" aria-labelledby="h-fechas"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">01 · Componentes</span>
+      <h2 id="h-fechas">Selector de fechas y rangos</h2>
+      <p class="ds-lead">Para filtrar gráficos, bitácoras y reportes. Atajos a la izquierda para lo habitual (hoy, 7 días, 30 días, trimestre) y un calendario para el rango exacto. No se pueden elegir fechas futuras: no hay datos de lo que aún no pasó.</p>
+      <div class="cp-grid">
+        <div class="cp-demo cp-demo--open" id="dp-demo" style="min-height:600px">
+          <button class="cp-trig" type="button" id="dp-btn" aria-haspopup="dialog" aria-expanded="false" aria-controls="dp-pop"><i class="bi bi-calendar3" aria-hidden="true"></i><span id="dp-label">Últimos 30 días</span><i class="bi bi-chevron-down" aria-hidden="true"></i></button>
+          <div class="cp-pop dp" id="dp-pop" role="dialog" aria-label="Elegir periodo" hidden>
+            <div class="dp__presets" id="dp-presets" role="group" aria-label="Atajos de periodo"></div>
+            <div class="dp__cal">
+              <div class="dp__nav"><button type="button" id="dp-prev" aria-label="Mes anterior"><i class="bi bi-chevron-left" aria-hidden="true"></i></button><b id="dp-month" aria-live="polite"></b><button type="button" id="dp-next" aria-label="Mes siguiente"><i class="bi bi-chevron-right" aria-hidden="true"></i></button></div>
+              <div class="dp__grid" id="dp-grid" role="grid" aria-labelledby="dp-month"></div>
+              <div class="dp__foot"><span id="dp-sum" role="status">Elige la fecha inicial.</span><span style="display:flex;gap:.5rem"><button class="hz-btn hz-btn--ghost" type="button" id="dp-cancel" style="min-height:44px;padding:0 .9rem">Cancelar</button><button class="hz-btn hz-btn--primary" type="button" id="dp-apply" style="min-height:44px;padding:0 .9rem" disabled>Aplicar</button></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="cp-side">
+          <div><h3>Teclado</h3><ul><li><kbd>←</kbd> <kbd>→</kbd> día · <kbd>↑</kbd> <kbd>↓</kbd> semana</li><li><kbd>Inicio</kbd> / <kbd>Fin</kbd> primer y último día de la semana</li><li><kbd>RePág</kbd> / <kbd>AvPág</kbd> mes anterior y siguiente</li><li><kbd>Enter</kbd> o <kbd>Espacio</kbd> marca el inicio y luego el fin</li><li><kbd>Esc</kbd> cierra y devuelve el foco al botón</li></ul></div>
+          <div><h3>Reglas</h3><ul><li>El botón muestra el periodo vigente en texto ("1 sep – 30 sep 2026"), no solo "Personalizado".</li><li>Los atajos aplican al instante; el rango manual necesita "Aplicar".</li><li>Fechas futuras deshabilitadas con <code>aria-disabled</code> y en gris claro, no ocultas.</li><li>Días de 40 px y rejilla con <code>role="grid"</code>; el rango se dice en texto bajo el calendario.</li><li>Semana desde lunes. Formato <code>es-PE</code>.</li></ul></div>
+        </div>
+      </div>
+    </div></section>
+
+    <!-- 02 MENÚ -->
+    <section class="ds-sec ds-sec--tint" id="menu-acciones" data-nav="02 · Menú de acciones" aria-labelledby="h-menu"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">02 · Componentes</span>
+      <h2 id="h-menu">Menú de acciones (⋯)</h2>
+      <p class="ds-lead">Agrupa las acciones secundarias de una fila o tarjeta. La acción principal nunca vive aquí: si es la más usada, va visible. Lo destructivo va al final, separado y en rojo con su texto.</p>
+      <div class="cp-grid">
+        <div class="cp-demo" style="min-height:300px"><div class="am-row"><div><b>Ana Lucía Pérez</b><small>Registrada hace 3 días</small></div>
+          <div class="am" id="am"><button class="am__btn" type="button" id="am-btn" aria-haspopup="menu" aria-expanded="false" aria-controls="am-menu" aria-label="Acciones de Ana Lucía Pérez"><i class="bi bi-three-dots" aria-hidden="true"></i></button>
+            <div class="hz-menu" id="am-menu" role="menu" aria-labelledby="am-btn" hidden>
+              <button type="button" role="menuitem" tabindex="-1"><i class="bi bi-eye" aria-hidden="true"></i>Ver detalle</button>
+              <button type="button" role="menuitem" tabindex="-1"><i class="bi bi-pencil" aria-hidden="true"></i>Editar datos</button>
+              <button type="button" role="menuitem" tabindex="-1"><i class="bi bi-files" aria-hidden="true"></i>Duplicar</button>
+              <div role="separator"></div>
+              <button type="button" role="menuitem" tabindex="-1" class="is-danger"><i class="bi bi-trash3" aria-hidden="true"></i>Eliminar…</button>
+            </div></div></div></div>
+        <div class="cp-side">
+          <div><h3>Teclado</h3><ul><li><kbd>Enter</kbd>, <kbd>Espacio</kbd> o <kbd>↓</kbd> abre y enfoca el primer ítem.</li><li><kbd>↑</kbd> <kbd>↓</kbd> recorren (con vuelta), <kbd>Inicio</kbd>/<kbd>Fin</kbd> saltan.</li><li><kbd>Esc</kbd> cierra y devuelve el foco al botón; <kbd>Tab</kbd> cierra y sigue.</li></ul></div>
+          <div><h3>Reglas</h3><ul><li>Botón de 44 px con <code>aria-label</code> que nombra la fila ("Acciones de Ana Lucía Pérez").</li><li>Máximo 6 ítems; con más, la acción merece una pantalla.</li><li>"Eliminar…" con puntos suspensivos: abre una confirmación, no borra directo.</li><li>Cada ítem con icono <b>y</b> texto.</li></ul></div>
+        </div>
+      </div>
+    </div></section>
+
+    <!-- 03 COMBOBOX -->
+    <section class="ds-sec" id="combobox" data-nav="03 · Combobox" aria-labelledby="h-cb"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">03 · Componentes</span>
+      <h2 id="h-cb">Combobox con autocompletar</h2>
+      <p class="ds-lead">Para elegir un valor de una lista larga (instituciones, personas, dispositivos). Se escribe para filtrar; el texto coincidente se resalta y el lector de pantalla anuncia cuántos resultados hay.</p>
+      <div class="cp-grid">
+        <div class="cp-demo cp-demo--open"><div class="cb" id="cb">
+          <label class="hz-label" for="cb-in">Institución</label>
+          <div class="cb__wrap"><input class="hz-input" id="cb-in" role="combobox" aria-expanded="false" aria-controls="cb-list" aria-autocomplete="list" aria-describedby="cb-help" autocomplete="off" placeholder="Escribe para buscar…"><i class="bi bi-search cb__ic" aria-hidden="true"></i></div>
+          <ul class="cb__list" id="cb-list" role="listbox" aria-label="Instituciones" hidden></ul>
+          <span class="hz-help" id="cb-help">Usa las flechas para recorrer y Enter para elegir.</span>
+          <div class="sr-only" id="cb-live" aria-live="polite"></div>
+        </div></div>
+        <div class="cp-side">
+          <div><h3>Teclado</h3><ul><li><kbd>↓</kbd> <kbd>↑</kbd> mueven la opción activa (<code>aria-activedescendant</code>); el foco se queda en el campo.</li><li><kbd>Enter</kbd> elige · <kbd>Esc</kbd> cierra, y una segunda vez limpia el texto.</li></ul></div>
+          <div><h3>Reglas</h3><ul><li>Roles ARIA 1.2: <code>combobox</code> + <code>listbox</code> + <code>option</code>.</li><li>Opciones de 44 px; el texto buscado en azul y negrita, no solo con fondo.</li><li>Sin resultados: "Sin resultados para «x»", nunca una lista vacía.</li><li>Para menos de 7 opciones, usa un <code>&lt;select&gt;</code> (<code>hz-select</code>).</li></ul></div>
+        </div>
+      </div>
+    </div></section>
+
+    <!-- 04 ACORDEÓN -->
+    <section class="ds-sec ds-sec--tint" id="acordeon" data-nav="04 · Acordeón" aria-labelledby="h-ac"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">04 · Componentes</span>
+      <h2 id="h-ac">Acordeón</h2>
+      <p class="ds-lead">Para contenido de lectura opcional (preguntas frecuentes, ayuda, detalles). Líneas de 1 px y títulos en Space Grotesk, sin cajas ni sombras.</p>
+      <div class="cp-grid">
+        <div class="cp-demo"><label class="hz-switch" style="margin-bottom:1rem;display:inline-flex;align-items:center;gap:.7rem;min-height:44px"><input type="checkbox" id="ac-multi"> <span>Permitir abrir varios</span></label>
+          <div class="ac" id="ac">
+            <div class="ac__item"><h3 style="margin:0"><button class="ac__btn" type="button" id="ac-b1" aria-expanded="true" aria-controls="ac-p1">¿Qué datos biométricos se guardan?<i class="bi bi-chevron-down" aria-hidden="true"></i></button></h3><div class="ac__panel" id="ac-p1" role="region" aria-labelledby="ac-b1"><p style="margin:0">Una plantilla matemática de tu rostro y tu huella. No guardamos fotos ni imágenes de la huella.</p></div></div>
+            <div class="ac__item"><h3 style="margin:0"><button class="ac__btn" type="button" id="ac-b2" aria-expanded="false" aria-controls="ac-p2">¿Quién puede ver mis datos?<i class="bi bi-chevron-down" aria-hidden="true"></i></button></h3><div class="ac__panel" id="ac-p2" role="region" aria-labelledby="ac-b2" hidden><p style="margin:0">Solo el personal autorizado de tu institución, y cada consulta queda registrada en la bitácora de auditoría.</p></div></div>
+            <div class="ac__item"><h3 style="margin:0"><button class="ac__btn" type="button" id="ac-b3" aria-expanded="false" aria-controls="ac-p3">¿Puedo retirar mi consentimiento?<i class="bi bi-chevron-down" aria-hidden="true"></i></button></h3><div class="ac__panel" id="ac-p3" role="region" aria-labelledby="ac-b3" hidden><p style="margin:0">Sí, desde tu perfil o escribiendo a tu administrador. Al retirarlo se eliminan tus plantillas biométricas.</p></div></div>
+            <div class="ac__item"><h3 style="margin:0"><button class="ac__btn" type="button" id="ac-b4" aria-expanded="false" aria-controls="ac-p4">¿Qué pasa si la cámara no funciona?<i class="bi bi-chevron-down" aria-hidden="true"></i></button></h3><div class="ac__panel" id="ac-p4" role="region" aria-labelledby="ac-b4" hidden><p style="margin:0">Revisa los permisos del navegador y vuelve a intentarlo. Si sigue igual, avisa a tu administrador.</p></div></div>
+          </div></div>
+        <div class="cp-side">
+          <div><h3>Teclado</h3><ul><li><kbd>Enter</kbd> / <kbd>Espacio</kbd> abre o cierra.</li><li><kbd>↑</kbd> <kbd>↓</kbd> pasan entre títulos, <kbd>Inicio</kbd>/<kbd>Fin</kbd> saltan al primero y al último.</li></ul></div>
+          <div><h3>Reglas</h3><ul><li>Botón dentro de un encabezado (<code>h3</code>) con <code>aria-expanded</code> y <code>aria-controls</code>.</li><li>El panel es una <code>region</code> con su título como nombre.</li><li>Por defecto abre uno a la vez; "varios" solo si se comparan respuestas.</li><li>Nunca esconder en un acordeón lo que la persona necesita para completar la tarea.</li></ul></div>
+        </div>
+      </div>
+    </div></section>
+
+    <!-- 05 STEPPER -->
+    <section class="ds-sec" id="stepper" data-nav="05 · Stepper" aria-labelledby="h-st"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">05 · Componentes</span>
+      <h2 id="h-st">Stepper y asistente</h2>
+      <p class="ds-lead">Para procesos de varios pasos (registrar una persona, configurar una elección). Muestra dónde estás y cuánto falta; valida cada paso antes de avanzar y deja volver sin perder lo escrito.</p>
+      <div class="cp-grid">
+        <div class="cp-demo"><div class="st" id="st">
+          <ol class="st__list" id="st-list" aria-label="Pasos del registro"></ol>
+          <div id="st-panels">
+            <div class="st__panel" data-p="0"><h3 tabindex="-1">Datos de la persona</h3><p>Empieza por lo básico. Puedes corregirlo después.</p><div class="hz-field"><label class="hz-label" for="st-name">Nombre completo</label><input class="hz-input" id="st-name" autocomplete="off" aria-describedby="st-err"><span class="hz-err" id="st-err" hidden><i class="bi bi-exclamation-circle" aria-hidden="true"></i> Escribe el nombre para continuar.</span></div></div>
+            <div class="st__panel" data-p="1" hidden><h3 tabindex="-1">Documento</h3><p>Captura el documento de identidad con la cámara.</p><div class="hz-alert hz-alert--info"><strong>Vista de ejemplo</strong>Aquí iría la captura de documento (ver Patrones de Averyn).</div></div>
+            <div class="st__panel" data-p="2" hidden><h3 tabindex="-1">Biometría</h3><p>Rostro y huella, con el consentimiento de la persona.</p><div class="hz-alert hz-alert--info"><strong>Vista de ejemplo</strong>Aquí irían la captura facial y de huella.</div></div>
+            <div class="st__panel" data-p="3" hidden><h3 tabindex="-1">Confirmar</h3><p>Revisa los datos antes de guardar.</p><dl class="cp-kv"><div><dt>Nombre</dt><dd id="st-sum">—</dd></div><div><dt>Documento</dt><dd>Capturado</dd></div><div><dt>Biometría</dt><dd>Rostro y huella</dd></div></dl></div>
+          </div>
+          <div class="st__foot"><span class="st__count" id="st-count" role="status">Paso 1 de 4</span><span style="display:flex;gap:.6rem"><button class="hz-btn hz-btn--ghost" type="button" id="st-back" disabled>Atrás</button><button class="hz-btn hz-btn--primary" type="button" id="st-next">Siguiente →</button></span></div>
+        </div></div>
+        <div class="cp-side">
+          <div><h3>Anatomía</h3><ol><li><b>Lista de pasos</b> con círculos numerados: completado (azul con número), actual (borde azul, negrita), pendiente (gris).</li><li><b>Panel del paso</b> con su titular; el foco va a él al cambiar.</li><li><b>Contador</b> "Paso 2 de 4" en <code>role="status"</code>.</li><li><b>Acciones:</b> Atrás (secundaria) y Siguiente (principal); en el último, "Guardar".</li></ol></div>
+          <div><h3>Reglas</h3><ul><li>Cada paso se valida al avanzar; el error se muestra bajo el campo y el foco va a él.</li><li>Atrás nunca borra lo escrito.</li><li>Máximo 6 pasos; con más, se divide en dos procesos.</li><li>En móvil solo se rotula el paso actual; el resto son círculos.</li></ul></div>
+        </div>
+      </div>
+    </div></section>
+
+    <!-- 06 POPOVER -->
+    <section class="ds-sec ds-sec--tint" id="popover" data-nav="06 · Popover" aria-labelledby="h-po"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">06 · Componentes</span>
+      <h2 id="h-po">Popover</h2>
+      <p class="ds-lead">Panel pequeño y no modal anclado a un botón. Para una explicación que merece más que un tooltip (título, párrafo y un enlace) sin sacar a la persona de lo que hace.</p>
+      <div class="cp-grid">
+        <div class="cp-demo" style="min-height:260px"><div class="po" id="po"><button class="cp-trig" type="button" id="po-btn" aria-expanded="false" aria-controls="po-pop"><i class="bi bi-info-circle" aria-hidden="true"></i>¿Qué es el umbral?</button>
+          <div class="cp-pop" id="po-pop" role="dialog" aria-labelledby="po-t" hidden><h4 id="po-t">Umbral de similitud</h4><p>Es el puntaje mínimo (de 0 a 1) para aceptar una verificación. Hoy es 0.68 y lo define el servidor.</p><a href="./patrones.html#resultado" class="hz-btn hz-btn--text" style="min-height:44px">Ver el patrón de resultado →</a></div></div></div>
+        <div class="cp-side">
+          <div><h3>Popover, tooltip o modal</h3><div class="doc-wrap" style="margin:0"><table class="doc-table"><thead><tr><th></th><th>Contiene</th><th>Se abre</th></tr></thead><tbody><tr><td>Tooltip</td><td>Una frase, sin acciones</td><td>Foco o cursor</td></tr><tr><td>Popover</td><td>Texto con título y acción</td><td>Clic o Enter</td></tr><tr><td>Modal</td><td>Decisión que bloquea</td><td>Acción explícita</td></tr></tbody></table></div></div>
+          <div><h3>Reglas</h3><ul><li><kbd>Esc</kbd> o clic fuera cierra y devuelve el foco al botón.</li><li>No atrapa el foco (no es modal) pero <kbd>Tab</kbd> sale del botón hacia el contenido.</li><li>Ancho máximo de 20 rem; nunca más de 2 acciones.</li></ul></div>
+        </div>
+      </div>
+    </div></section>
+
+    <!-- 07 DRAWER -->
+    <section class="ds-sec" id="drawer" data-nav="07 · Drawer lateral" aria-labelledby="h-dr"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">07 · Componentes</span>
+      <h2 id="h-dr">Drawer lateral</h2>
+      <p class="ds-lead">Para ver o editar el detalle de algo sin perder la lista de fondo. Entra desde la derecha, atrapa el foco (es un <code>&lt;dialog&gt;</code> modal) y se cierra con <kbd class="cp-k">Esc</kbd>, la X o un clic en la sombra.</p>
+      <div class="cp-grid">
+        <div class="cp-demo" style="min-height:160px"><button class="hz-btn hz-btn--primary" type="button" id="dr-open">Ver detalle de persona</button>
+          <dialog class="cp-drawer" id="dr" aria-labelledby="dr-t">
+            <div class="cp-drawer__h"><div><h3 id="dr-t">Ana Lucía Pérez</h3><p>Estudiante · Sede Central</p></div><button class="cp-x" type="button" id="dr-x" aria-label="Cerrar detalle"><i class="bi bi-x-lg" aria-hidden="true"></i></button></div>
+            <div class="cp-drawer__b"><dl class="cp-kv"><div><dt>Documento</dt><dd>12345678</dd></div><div><dt>Correo</dt><dd>ana.perez@ejemplo.edu</dd></div><div><dt>Biometría</dt><dd><span class="hz-chip hz-chip--success">Rostro y huella</span></dd></div><div><dt>Último acceso</dt><dd>Hoy, 10:42 · CAM-001</dd></div><div><dt>Registrada</dt><dd>29 sep 2026</dd></div></dl>
+              <h4 style="margin:1.4rem 0 .4rem;font:500 .75rem var(--av-font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--av-gray-600)">Actividad reciente</h4>
+              <ul style="margin:0;padding-left:1.1rem;display:grid;gap:.4rem;font-size:.875rem;color:var(--av-gray-700)"><li>BIOMETRIC_VERIFIED · hoy, 10:42</li><li>LOGIN · ayer, 08:15</li><li>BIOMETRIC_ENROLLED · 29 sep</li></ul></div>
+            <div class="cp-drawer__f"><button class="hz-btn hz-btn--primary" type="button" id="dr-edit">Editar datos</button><button class="hz-btn hz-btn--ghost" type="button" id="dr-close">Cerrar</button></div>
+          </dialog></div>
+        <div class="cp-side">
+          <div><h3>Reglas</h3><ul><li>Ancho de 26 rem (100% en móvil); cabecera, cuerpo con scroll y pie con las acciones.</li><li>Foco inicial en el botón de cerrar o en el primer campo; al cerrar vuelve al botón que lo abrió (lo hace <code>&lt;dialog&gt;</code>).</li><li>Un drawer no abre otro drawer. Si hace falta, el contenido es una página.</li><li>Entrada de 280 ms, desde la derecha; sin movimiento con <code>prefers-reduced-motion</code>.</li></ul></div>
+        </div>
+      </div>
+    </div></section>
+
+    <!-- 08 PALETA -->
+    <section class="ds-sec ds-sec--tint" id="comandos" data-nav="08 · Paleta de comandos" aria-labelledby="h-cmd"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">08 · Componentes</span>
+      <h2 id="h-cmd">Paleta de comandos <kbd class="cp-k">Ctrl</kbd> <kbd class="cp-k">K</kbd></h2>
+      <p class="ds-lead">Un acceso rápido a cualquier pantalla o acción escribiendo. Complementa la navegación, no la reemplaza. Lo que aún no existe aparece como "Próximamente" y no se puede abrir, igual que en el dock.</p>
+      <div class="cp-grid">
+        <div class="cp-demo" style="min-height:160px"><button class="cp-trig" type="button" id="cmd-open" aria-haspopup="dialog"><i class="bi bi-search" aria-hidden="true"></i>Buscar o ir a…<kbd class="cp-k" style="margin-left:1.4rem">Ctrl K</kbd></button>
+          <p class="ds-note" style="margin:.9rem 0 0">También puedes pulsar <kbd class="cp-k">Ctrl</kbd> + <kbd class="cp-k">K</kbd> (⌘ K en Mac) en cualquier parte de esta página.</p>
+          <dialog class="cmd" id="cmd" aria-label="Paleta de comandos">
+            <div class="cmd__top"><i class="bi bi-search" aria-hidden="true"></i><input class="cmd__in" id="cmd-in" role="combobox" aria-expanded="true" aria-controls="cmd-list" aria-autocomplete="list" aria-label="Buscar comandos" placeholder="Escribe un comando o una pantalla…" autocomplete="off"></div>
+            <ul class="cmd__list" id="cmd-list" role="listbox" aria-label="Resultados"></ul>
+            <div class="cmd__foot"><span><kbd class="cp-k">↑</kbd> <kbd class="cp-k">↓</kbd> navegar</span><span><kbd class="cp-k">↵</kbd> abrir</span><span><kbd class="cp-k">Esc</kbd> cerrar</span></div>
+            <div class="sr-only" id="cmd-live" aria-live="polite"></div>
+          </dialog></div>
+        <div class="cp-side">
+          <div><h3>Reglas</h3><ul><li>Atajo global <kbd>Ctrl</kbd>/<kbd>⌘</kbd> + <kbd>K</kbd>; siempre hay también un botón visible para quien no usa atajos.</li><li>Grupos: "Ir a" y "Acciones". Máximo 8 resultados por grupo.</li><li>Los ítems sin pantalla llevan la etiqueta "Próximamente" y <code>aria-disabled</code>.</li><li>Sin resultados: "Nada coincide con «x»".</li><li>Las acciones destructivas no van aquí.</li></ul></div>
+        </div>
+      </div>
+    </div></section>
+
+    <!-- 09 TABLA -->
+    <section class="ds-sec" id="tabla" data-nav="09 · Tabla avanzada" aria-labelledby="h-ta"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">09 · Componentes</span>
+      <h2 id="h-ta">Tabla avanzada</h2>
+      <p class="ds-lead">Para listas de personas, dispositivos o eventos con las que se trabaja: búsqueda, orden, selección, acciones masivas, densidad y paginación. Misma línea fina de 1 px del resto del sistema.</p>
+      <div class="cp-demo ta" id="ta" style="margin-top:1.8rem">
+        <div class="ta__bar" id="ta-bar"><div style="flex:1;min-width:12rem;max-width:18rem"><label class="sr-only" for="ta-q">Buscar personas</label><input class="hz-input" id="ta-q" type="search" placeholder="Buscar persona o documento" autocomplete="off"></div><span class="ta__sp"></span>
+          <div class="vz-seg" id="ta-dens" role="group" aria-label="Densidad de filas"><button type="button" data-d="comfy" aria-pressed="true">Cómoda</button><button type="button" data-d="compact" aria-pressed="false">Compacta</button></div></div>
+        <div class="ta__bar ta__bar--sel" id="ta-sel" hidden><b id="ta-selc" role="status"></b><span class="ta__sp"></span><button class="hz-btn hz-btn--ghost" type="button" id="ta-exp" style="min-height:44px">Exportar</button><button class="hz-btn hz-btn--ghost" type="button" id="ta-off" style="min-height:44px">Desactivar</button><button class="hz-btn hz-btn--text" type="button" id="ta-clr" style="min-height:44px">Limpiar selección</button></div>
+        <div class="ta__wrap" tabindex="0" role="region" aria-label="Tabla de personas (desplazable)"><table id="ta-t"><thead><tr><th class="ta__ck" scope="col"><label><input type="checkbox" id="ta-all" aria-label="Seleccionar todas las filas de esta página"></label></th><th scope="col" aria-sort="ascending"><button class="ta__sort" type="button" data-k="n">Nombre<i class="bi bi-arrow-down-up" aria-hidden="true"></i></button></th><th scope="col"><button class="ta__sort" type="button" data-k="d">Documento<i class="bi bi-arrow-down-up" aria-hidden="true"></i></button></th><th scope="col">Estado</th><th scope="col" aria-sort="none"><button class="ta__sort" type="button" data-k="a">Último acceso<i class="bi bi-arrow-down-up" aria-hidden="true"></i></button></th></tr></thead><tbody id="ta-body"></tbody></table></div>
+        <div class="ta__foot"><span id="ta-info" role="status"></span><div class="ta__pg" id="ta-pg" aria-label="Paginación" role="group"></div></div>
+      </div>
+      <div class="cp-grid" style="margin-top:1.4rem">
+        <div class="cp-side"><div><h3>Anatomía</h3><ol><li><b>Barra:</b> búsqueda a la izquierda, densidad a la derecha. Al seleccionar filas se reemplaza por la barra de acciones masivas con el conteo.</li><li><b>Cabecera:</b> columnas ordenables como botones con <code>aria-sort</code>; flecha azul en la activa.</li><li><b>Filas</b> de 60 px (cómoda) o 44 px (compacta), con casilla de 44 px de área.</li><li><b>Pie:</b> "Mostrando 1–5 de 12" y paginación con página actual marcada.</li></ol></div></div>
+        <div class="cp-side"><div><h3>Reglas</h3><ul><li>La casilla de cabecera selecciona solo la página visible y queda "indeterminada" si hay parcial.</li><li>El conteo seleccionado se anuncia con <code>role="status"</code>.</li><li>La tabla se desplaza dentro de su contenedor en móvil (con foco y nombre), no desborda la página.</li><li>Sin resultados: una fila con mensaje y cómo limpiar el filtro.</li><li>Las acciones masivas destructivas piden confirmación.</li></ul></div></div>
+      </div>
+    </div></section>
+
+    <!-- 10 BANNER -->
+    <section class="ds-sec ds-sec--tint" id="resumen-teclado" data-nav="10 · Resumen y banner" aria-labelledby="h-rt"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">10 · Componentes</span>
+      <h2 id="h-rt">Resumen de teclado y banner</h2>
+      <p class="ds-lead">El <b>banner de sistema</b> ya está documentado en <a href="./sistema.html">Estados del sistema</a>: no se repite aquí. Esta tabla junta los patrones de teclado de todos los componentes interactivos.</p>
+      <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Componente</th><th>Rol ARIA</th><th>Abrir / activar</th><th>Moverse</th><th>Cerrar</th></tr></thead><tbody>
+        <tr><td>Selector de fechas</td><td><code>dialog</code> + <code>grid</code></td><td>Enter, Espacio</td><td>Flechas, RePág/AvPág, Inicio/Fin</td><td>Esc</td></tr>
+        <tr><td>Menú de acciones</td><td><code>menu</code>/<code>menuitem</code></td><td>Enter, Espacio, ↓</td><td>↑ ↓, Inicio/Fin</td><td>Esc, Tab</td></tr>
+        <tr><td>Combobox</td><td><code>combobox</code>/<code>listbox</code></td><td>Escribir, ↓</td><td>↑ ↓ (foco en el campo)</td><td>Esc (2.ª vez limpia)</td></tr>
+        <tr><td>Acordeón</td><td>botón + <code>region</code></td><td>Enter, Espacio</td><td>↑ ↓, Inicio/Fin</td><td>—</td></tr>
+        <tr><td>Stepper</td><td>lista + <code>status</code></td><td>Botones Atrás/Siguiente</td><td>Tab</td><td>—</td></tr>
+        <tr><td>Popover</td><td><code>dialog</code> no modal</td><td>Enter, Espacio</td><td>Tab</td><td>Esc, clic fuera</td></tr>
+        <tr><td>Drawer</td><td><code>dialog</code> modal</td><td>Botón</td><td>Tab atrapado</td><td>Esc, X, sombra</td></tr>
+        <tr><td>Paleta de comandos</td><td><code>combobox</code>/<code>listbox</code></td><td>Ctrl/⌘ K</td><td>↑ ↓</td><td>Esc</td></tr>
+        <tr><td>Tabla avanzada</td><td><code>table</code> + <code>aria-sort</code></td><td>Enter en cabecera</td><td>Tab, Espacio en casillas</td><td>—</td></tr>
+      </tbody></table></div>
+    </div></section>
+
+    </main>
+
+    <footer class="ds-sec" style="padding-block:2.4rem;border-top:1px solid var(--av-hairline)"><div class="ds-wrap"><div class="row" style="justify-content:space-between"><span class="mono" style="color:var(--av-gray-500)">Averyn · Design System v1.2 Horizonte</span><span class="mono" style="color:var(--av-gray-500)">Fuente: DESIGN.md · tokens.css</span></div></div></footer>
+  </div>
+</div>
+<div class="hz-toasts" id="toasts" role="region" aria-label="Notificaciones" aria-live="polite"></div>
+<script src="./ds.js"></script>
+<script src="./componentes.js"></script>
+</body>
+</html>
