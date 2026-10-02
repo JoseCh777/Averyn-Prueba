@@ -9,7 +9,8 @@ mínimo la carga en un iframe (srcdoc), así los ids, estilos y scripts de cada 
 Las páginas de error reales (404, 403, ...) viajan igual y alimentan las vistas en vivo de "Estados del sistema".
 Requiere internet solo para las fuentes de Google y los iconos (CDN).
 """
-import base64, importlib.util, json, os, re
+import base64, importlib.util, json, os, re, sys
+sys.dont_write_bytecode = True
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 spec = importlib.util.spec_from_file_location('build', os.path.join(HERE, 'build.py'))
@@ -83,7 +84,7 @@ def main():
         base = os.path.dirname(os.path.join(DOCS, rel))
         # enlaces entre páginas -> mensajes al marco
         for r2, k2 in keys.items():
-            html = re.sub(r'href="(?:\.\./|\./|ds/)*%s"' % re.escape(os.path.basename(r2)), 'href="#go:%s"' % k2, html)
+            html = re.sub(r'href="(?:\.\./|\./|ds/)*%s(?:#[^"]*)?"' % re.escape(os.path.basename(r2)), 'href="#go:%s"' % k2, html)
         html = re.sub(r'<a [^>]*href="[^"]*averyn-frontend/[^"]*\.html"[^>]*>.*?</a>', '', html, flags=re.S)  # "Abrir página": no existe en el archivo único
         if rel.endswith('sistema.html'):
             fr = '<script>window.DS_FRAMES=%s;</script>\n' % safe_js(json.dumps(frames, ensure_ascii=False))
