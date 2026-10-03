@@ -53,34 +53,22 @@
   (function () {
     var svg = $('#fp-svg'); if (!svg) return;
     var box = $('#fp-box'), title = $('#fp-title'), sub = $('#fp-sub'), bar = $('#fp-bar'), pct = $('#fp-pct'), q = $('#fp-q'), btn = $('#fp-btn');
-    /* Crestas de una huella tipo "bucle": arcos anidados alrededor de un núcleo, tramo inferior de curvas suaves,
-       pequeños cortes en las crestas y una ligera inclinación. Decorativa: no codifica ningún dato real. */
+    /* Huella simplificada: 8 crestas redondeadas y concéntricas, abiertas por abajo (más cada vez) y un núcleo con punto.
+       Decorativa: no codifica ningún dato real. */
     var NS = 'http://www.w3.org/2000/svg', rings = [];
     (function () {
-      var g = document.createElementNS(NS, 'g'); g.setAttribute('transform', 'rotate(-5 100 128)'); svg.appendChild(g);
-      var seed = 7, rnd = function () { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
-      var CX = 100, N = 12, parts = [];
-      function leg(k) { return 5 + k * 7.3; }
-      function yb(k) { return Math.min(214, 118 + k * 9); }
-      function breaks(skip) {   /* trazos con 1–2 cortes pequeños, repartidos al azar (pathLength = 1) */
-        if (skip || rnd() < .35) return '';
-        var g1 = .012 + rnd() * .018, p1 = .3 + rnd() * .35, g2 = .012 + rnd() * .016;
-        return (p1).toFixed(3) + ' ' + g1.toFixed(3) + ' ' + (1 - p1 - g1 - g2 - .002).toFixed(3) + ' ' + g2.toFixed(3) + ' .002 0';
+      var g = document.createElementNS(NS, 'g'); g.setAttribute('transform', 'rotate(-6 100 115)'); svg.appendChild(g);
+      var CX = 100, CY = 112, parts = [];
+      function arc(rx, ry, gap, shift, dash) {   /* elipse abierta: el hueco queda abajo, desplazado `shift` grados */
+        var rad = Math.PI / 180, s = (90 + gap / 2 + shift) * rad, e = (90 - gap / 2 + shift + 360) * rad;
+        var x1 = CX + rx * Math.cos(s), y1 = CY + ry * Math.sin(s), x2 = CX + rx * Math.cos(e), y2 = CY + ry * Math.sin(e);
+        return { r: rx, d: 'M' + x1.toFixed(1) + ' ' + y1.toFixed(1) + ' A' + rx + ' ' + ry + ' 0 1 1 ' + x2.toFixed(1) + ' ' + y2.toFixed(1), dash: dash || '' };
       }
-      for (var k = 1; k < N; k++) {
-        var w = leg(k), base = yb(k), apex = 98 - k * 6.9, c = (4 * apex - base) / 3, sh = -k * .45;
-        var xl = CX - w + sh, xr = CX + w * (1 + .008 * k) + sh;
-        parts.push({ r: w, d: 'M' + xl.toFixed(1) + ' ' + base + ' C' + xl.toFixed(1) + ' ' + c.toFixed(1) + ' ' + xr.toFixed(1) + ' ' + c.toFixed(1) + ' ' + xr.toFixed(1) + ' ' + (base + (k > 5 ? 0 : 0)), dash: breaks(k < 3) });
+      parts.push({ r: 1, d: 'M' + CX + ' ' + (CY + 1) + ' L' + CX + ' ' + (CY + 1.2), dash: '', dot: true });
+      for (var k = 0; k < 8; k++) {
+        var rx = 12 + k * 11.2, gap = k === 0 ? 40 : 34 + k * 7, shift = (k % 2 ? 1 : -1) * (6 + k * 2.2);
+        parts.push(arc(rx, rx * 1.1, gap, shift, (k === 3 || k === 6) ? '.46 .02 .52 0' : ''));
       }
-      /* núcleo: bucle pequeño y un punto */
-      parts.push({ r: 1, d: 'M' + (CX - 4) + ' 120 C' + (CX - 4) + ' 98 ' + (CX + 4) + ' 98 ' + (CX + 4) + ' 120', dash: '' });
-      parts.push({ r: 2, d: 'M' + (CX - .2) + ' 113 L' + (CX + .2) + ' 113', dash: '', dot: true });
-      /* curvas bajo el núcleo, entre las patas de los bucles interiores */
-      [130, 142, 154, 166, 178].forEach(function (y, j2) {
-        var kk = 1; while (yb(kk) < y && kk < N) kk++;
-        var half = leg(kk) - 5 - j2 * .3, dip = 7 + j2 * 1.4;
-        parts.push({ r: half + (y - 118) * .5, d: 'M' + (CX - half).toFixed(1) + ' ' + y + ' C' + (CX - half * .45).toFixed(1) + ' ' + (y + dip) + ' ' + (CX + half * .45).toFixed(1) + ' ' + (y + dip) + ' ' + (CX + half).toFixed(1) + ' ' + y, dash: breaks(false) });
-      });
       parts.sort(function (a, b) { return a.r - b.r; });
       parts.forEach(function (pt) {
         var p = document.createElementNS(NS, 'path'); p.setAttribute('d', pt.d); p.setAttribute('class', 'pt-fp__ring' + (pt.dot ? ' pt-fp__dot' : ''));
