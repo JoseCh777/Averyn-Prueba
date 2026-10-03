@@ -49,7 +49,7 @@ CONFIG = {
                              css=['charts.css'], js=['charts.js']),
     'ds/patrones.html': dict(body=['patrones-body.html'], eyebrow='Patrones', title='Cuando la pantalla toca el cuerpo de alguien.',
                              lead='Captura facial y de huella, resultado de verificación, documento y OCR, papeleta electoral, dispositivos y consentimiento. Simulaciones sin cámara ni datos reales.',
-                             css=['charts.css', 'patrones.css'], js=['patrones.js']),
+                             css=['charts.css', 'patrones.css'], js=['patrones.js', 'herodemo.js']),
     'ds/componentes.html': dict(body=['componentes-body.html'], eyebrow='Componentes', title='Las piezas con las que se arma todo.',
                                 lead='Botones, formularios, datos y píldoras de estado, navegación, feedback y capas: cada pieza con su anatomía, su teclado y sus reglas.',
                                 css=['charts.css', 'componentes.css'], js=['foundations.js', 'componentes.js']),
@@ -217,6 +217,26 @@ def validate(rendered):
                     errors.append('%s: el fragmento "#%s" no existe en %s' % (rel, frag, outs[target]))
             elif path.endswith(('.html', '.css', '.js')) and not os.path.exists(target):
                 errors.append('%s: enlace roto "%s"' % (rel, href))
+    errors += orphan_scripts(rendered)
+    return errors
+
+
+def orphan_scripts(rendered):
+    """Una demo no funciona si su página no carga el script que la maneja: avisa si una página contiene
+    elementos (por id) que un script del sistema espera, pero ese script no está en la página."""
+    errors = []
+    js_ids = {}
+    for f in os.listdir(DS_DIR):
+        if f.endswith('.js') and f != 'ds.js':
+            t = open(os.path.join(DS_DIR, f), encoding='utf-8').read()
+            js_ids[f] = set(re.findall(r"\$\('#([\w-]+)'\)", t)) | set(re.findall(r"getElementById\('([\w-]+)'\)", t))
+    for rel, html in rendered.items():
+        ids = set(re.findall(r'\sid="([^"]+)"', _strip_code(html)))
+        loaded = set(re.findall(r'<script src="[^"]*/(\w+\.js)"', html))
+        for f, wanted in js_ids.items():
+            have = sorted(i for i in wanted if i in ids)
+            if have and f not in loaded:
+                errors.append('%s: tiene elementos de %s (%s…) pero no carga ese script' % (rel, f, ', '.join(have[:3])))
     return errors
 
 
