@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Averyn — Design System Horizonte v1.6 · Calidad y gobernanza</title>
+<title>Averyn — Design System Horizonte v1.7 · Calidad y gobernanza</title>
 <meta name="description" content="Design system de Averyn: principios, tokens, componentes y reglas de uso del estilo Horizonte.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,7 +17,7 @@
 <div class="ds-shell">
   <aside class="ds-side" aria-label="Índice del design system">
     <a class="ds-side__brand" href="../design-system.html" aria-label="Averyn, inicio del design system"><img src="../../averyn-frontend/assets/images/averyn-logo-font-black.avif" alt="Averyn"></a>
-    <p class="ds-side__ver mono">Design System · v1.6 Horizonte</p>
+    <p class="ds-side__ver mono">Design System · v1.7 Horizonte</p>
     <nav>
       <span class="grp mono">Empezar</span>
       <a class="ds-page" href="../design-system.html">Inicio</a>
@@ -217,6 +217,7 @@
       </tbody></table></div>
       <h3 class="ds-sub">Changelog</h3>
       <div class="doc-wrap"><table class="doc-table"><tbody>
+        <tr><td><b>v1.7</b> · oct 2026</td><td><b>Aclaraciones y guía de migración.</b> Plantillas y patrones se declaran <i>ejemplos de uso del sistema</i>, no una copia fiel del producto final. Huella dactilar con crestas de bucle, núcleo y cortes, sin perder el estilo de arcos. Segundo tarjetón: <i>una persona por partido</i> (personero, representante) junto al de fórmula. Guía de migración a React ampliada: qué pasa sin cambios, qué se reemplaza, librerías recomendadas, qué evitar y ruta por fases.</td></tr>
         <tr><td><b>v1.6</b> · oct 2026</td><td><b>Huecos cerrados y validación.</b> <i>Formularios nuevos:</i> campo de búsqueda, código de un solo uso de 6 dígitos, contraseña con indicador de fuerza, multi-select con filtros activos y validación con resumen de errores. <i>Acceso y cuenta:</i> recuperar contraseña, segundo factor, selección de institución y aceptar invitación. <i>Propuestas de diseño (pendientes de validar con el equipo):</i> revisión manual de verificaciones, escrutinio, mesas y padrón, roles y permisos. <i>Tarjetón</i> electoral con espacio para foto, número, nombre y logo. <i>Validación:</i> auditoría <code>axe-core</code> y de teclado sobre las 8 páginas, A4 real en impresión, portada de Inicio con contraste ≥ 7:1, demo del hero restaurada y verificación automática de demos huérfanas. Informe completo en esta página.</td></tr>
         <tr><td><b>v1.5</b> · oct 2026</td><td><b>Reorganización por propósito.</b> De 7 páginas por orden de llegada a 8 por propósito, en 4 grupos de la barra lateral: <i>Inicio</i> · <i>Fundamentos, Componentes, Gráficos</i> · <i>Patrones, Plantillas y estados</i> · <i>Marca y entregables, Calidad y gobernanza</i>. Los componentes que estaban repartidos en dos páginas son uno solo; "Estados del sistema" pasa a ser parte de Plantillas y estados; los tokens pasan de Marca a Fundamentos; microcopy, accesibilidad y gobernanza viven juntos. Secciones sin numeración, índice por subgrupos, ids únicos (los de Gráficos con prefijo <code>grafico-</code>) y <b>validación automática</b> de ids y enlaces en <code>build.py</code>. Nueva página de Inicio con mapa y novedades.</td></tr>
         <tr><td><b>v1.4</b> · oct 2026</td><td><b>Auditoría del líder.</b> <i>Estados unificados:</i> una sola tabla Estado → color (verde éxito, ámbar reintento, rojo rechazo, gris pendiente, azul info; el cian queda solo como resalte) en fondo claro y sobre navy, con tokens nuevos <code>-strong</code> y <code>-on-navy</code>. <i>Píldoras de estado</i> en 3 variantes (suave por defecto en tablas, contorno y sólida), sin punto y con icono opcional; contraste ≥ 5:1. <i>Alertas</i> con insignia circular de icono en lugar de franja lateral. <i>Panel de actividad</i> y franja de indicadores generados desde un solo conjunto de 6 eventos (las partes suman el total). Gráficos de resultado con colores de estado. Correcciones de contenido: IDs de dispositivo (LEC-/CAM-), concordancia ("Huella rechazada"), "Sin verificar", fechas, tooltip con icono de ayuda y demo de toast con acciones. Nueva sección "Implementación recomendada" (librerías, solo documentada).</td></tr>
@@ -277,23 +278,47 @@ body.av-mi-pantalla { background: #fff; color: var(--av-navy); font-family: var(
       <h3 class="ds-sub">Migrar un módulo</h3>
       <ol class="ds-note" style="color:var(--av-night-text);padding-left:1.2rem"><li>Acota los estilos a una clase de body (<code>body.av-identidad</code>) y crea su CSS propio.</li><li>Cambia el contenedor a la rejilla de 12 columnas y aplica el ritmo de sección.</li><li>Sustituye tarjetas con sombra por líneas de 1 px; usa un panel navy solo si hay un cambio de información.</li><li>Pasa botones, campos y chips a los componentes de este documento.</li><li>Define carga, vacío y error; revisa foco, contraste y reduced-motion.</li><li>Quita Bootstrap de la página si ya no se usa (se conservan los iconos).</li></ol>
     
-      <h3 class="ds-sub">Implementación recomendada <small>informe de auditoría v1.3</small></h3>
-      <p class="ds-note" style="color:var(--av-night-text)">Es una <b>recomendación documentada</b>, no una migración: el frontend actual es HTML, CSS y JavaScript estático. Si el equipo pasa a React / Next.js, esta es la propuesta. Verificar versiones, compatibilidad con Next.js y licencias antes de adoptar cualquiera.</p>
+      <h3 class="ds-sub">Migración a React <small>informe de auditoría v1.3 · ampliado en v1.7</small></h3>
+      <p class="ds-note" style="color:var(--av-night-text)">Es una <b>recomendación documentada</b>, no una migración: el frontend actual es HTML, CSS y JavaScript estático y no se ha tocado. <b>Sí se puede migrar a React, y de forma incremental</b>: lo que define el estilo (los tokens) pasa sin cambios y lo que se reemplaza es el comportamiento de los componentes. Verificar versiones, compatibilidad con la versión de Next.js en uso y licencias antes de adoptar cualquier librería.</p>
+
+      <h4 class="ds-sub">Qué pasa a React y cómo</h4>
+      <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Pieza actual</th><th>En React</th></tr></thead><tbody>
+        <tr><td><code>tokens.css</code> y <code>tokens.json</code> (color, tipografía, radios, sombras, movimiento)</td><td><b>Sin cambios.</b> Variables CSS, o <code>@theme</code> de Tailwind v4 si se usa shadcn/ui. Siguen siendo la fuente de verdad.</td></tr>
+        <tr><td>Clases <code>hz-*</code> (botones, chips, alertas, tablas, tarjetas)</td><td><b>Se reutilizan.</b> Como CSS global o Módulos CSS; los componentes React solo ponen las clases y las variantes.</td></tr>
+        <tr><td>JavaScript de las demos (combobox, fechas, drawer, Ctrl + K, tabla avanzada, código de 6 dígitos)</td><td><b>Se reemplaza</b> por componentes con foco, teclado y ARIA ya resueltos. Nuestro código sirve como especificación y como pruebas de aceptación.</td></tr>
+        <tr><td>Gráficos SVG propios</td><td>Se mantienen como componentes React (estilo "píldora" propio) o se apoyan en Recharts / Visx con formas personalizadas.</td></tr>
+        <tr><td>Documentación generada con <code>build.py</code></td><td>Puede seguir igual, o pasar a Storybook cuando existan los componentes.</td></tr>
+      </tbody></table></div>
+
+      <h4 class="ds-sub">Librería recomendada</h4>
       <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Componente</th><th>Librería recomendada</th><th>Por qué</th></tr></thead><tbody>
-        <tr><td>Botones, campos, modal, popover, tooltip, menú, combobox, drawer</td><td>shadcn/ui sobre Radix UI</td><td>Foco, teclado y ARIA resueltos; el código vive en el repositorio y se tematiza con los tokens.</td></tr>
-        <tr><td>Alertas</td><td><code>Alert</code> de shadcn/ui</td><td>Estructura icono + título + descripción, sin franja lateral.</td></tr>
+        <tr><td>Base: botones, campos, modal, popover, tooltip, menú, drawer, alertas</td><td><b>shadcn/ui</b></td><td>El código se copia al repositorio (no es una dependencia opaca) y se tematiza con los tokens <code>--av-*</code>. Es lo que propone la auditoría del líder.</td></tr>
+        <tr><td>Primitivas bajo shadcn/ui</td><td><b>React Aria</b>, Base UI o Radix UI</td><td>shadcn/ui permite elegir la base. <b>Decisión sugerida:</b> React Aria Components para fechas, combobox y tablas, donde la accesibilidad pesa más; el resto con la base por defecto. Base UI es una alternativa de API simple; Radix sigue siendo válido, aunque su ritmo de lanzamientos se ha reducido.</td></tr>
         <tr><td>Toasts</td><td>Sonner</td><td>Apilado, pausa al pasar el cursor, <code>aria-live</code> y animación listos.</td></tr>
         <tr><td>Tabla avanzada</td><td>TanStack Table + tabla de shadcn/ui</td><td>Orden, filtro, selección y paginación robustos; el aspecto sigue siendo "líneas, no cajas".</td></tr>
+        <tr><td>Paleta Ctrl + K</td><td>cmdk</td><td>Búsqueda y navegación por teclado listas.</td></tr>
+        <tr><td>Código de 6 dígitos</td><td>input-otp</td><td>Pegado, autocompletado y foco entre casillas.</td></tr>
+        <tr><td>Fechas</td><td>react-day-picker, o React Aria</td><td>Navegación por teclado incluida.</td></tr>
+        <tr><td>Formularios y validación</td><td>React Hook Form + Zod</td><td>Resumen de errores y mensajes por campo según el patrón de este documento.</td></tr>
         <tr><td>Píldoras de estado</td><td><code>Badge</code> de shadcn/ui con variantes</td><td>Una sola definición de las 3 variantes y los tonos, consumida en toda la app.</td></tr>
-        <tr><td>Gráficos y panel de actividad</td><td>Recharts o Tremor</td><td>Barras, líneas y KPIs con la paleta <code>--viz-*</code> y los colores de estado.</td></tr>
-        <tr><td>Selector de fechas</td><td><code>Calendar</code> + <code>Popover</code> (react-day-picker)</td><td>Navegación por teclado incluida.</td></tr>
+        <tr><td>Gráficos y panel de actividad</td><td>Recharts o Visx</td><td>Barras, líneas y KPIs con la paleta <code>--viz-*</code> y los colores de estado.</td></tr>
+        <tr><td>Documentación viva y pruebas visuales</td><td>Storybook</td><td>Cada componente con sus estados, controles y comprobaciones de accesibilidad.</td></tr>
         <tr><td>Iconos</td><td>lucide-react, o Bootstrap Icons para continuidad</td><td>—</td></tr>
       </tbody></table></div>
-      <p class="ds-note" style="color:var(--av-night-text)"><b>Para que no se vea genérico:</b> (1) los tokens de <code>tokens.css</code> son la fuente de verdad —variables CSS o configuración de Tailwind—, nunca el tema por defecto de la librería; (2) se conservan las reglas propias (señal única, acción en mono, plano por defecto, el color nunca es el único canal); (3) la librería aporta mecánica, no estética; (4) una sola tabla de estados consumida por píldoras, panel, toasts y gráficos. Alternativa de kit completo: Mantine o HeroUI, también con su tema sobrescrito con los tokens.</p>
+
+      <h4 class="ds-sub">Qué evitar</h4>
+      <p class="ds-note" style="color:var(--av-night-text)">Los kits con estética propia (MUI, Chakra, Tremor, HeroUI, Mantine) salvo que se sobrescriba todo su tema con los tokens: el riesgo es justo el que la auditoría quiere evitar, que la aplicación se vea genérica.</p>
+
+      <h4 class="ds-sub">Ruta por fases</h4>
+      <ol class="ds-note" style="color:var(--av-night-text)" style="color:var(--av-night-text);padding-left:1.2rem"><li><b>Base:</b> Next.js, Tailwind v4 y los tokens como variables CSS.</li><li><b>Componentes base</b> (8–10): Button, Input, Select, Chip / Badge, Alert, Dialog, Tabs, Tooltip y Toast, con las clases <code>hz-*</code>.</li><li><b>Formularios y tabla avanzada.</b></li><li><b>Patrones biométricos y plantillas.</b></li><li><b>Gráficos.</b></li><li><b>Storybook</b> como documentación viva.</li></ol>
+      <p class="ds-note" style="color:var(--av-night-text)">Las pantallas del producto se migran por módulos, no de golpe.</p>
+
+      <h4 class="ds-sub">Advertencias</h4>
+      <ul class="ds-note" style="color:var(--av-night-text)" style="color:var(--av-night-text);padding-left:1.2rem"><li>shadcn/ui asume Tailwind: habría que introducirlo si hoy no se usa.</li><li>Las reglas propias (señal única, mono en acciones, plano por defecto, el color nunca es el único canal) <b>no se heredan</b>: deben escribirse como variantes de los componentes.</li><li>La librería aporta mecánica, no estética: una sola tabla de estados consumida por píldoras, panel, toasts y gráficos evita que cada componente decida por su cuenta.</li><li>Las recomendaciones salen de comparativas publicadas en 2026, no de pruebas propias; conviene una prueba de concepto con 3 componentes antes de comprometerse.</li></ul>
       </div></section>
     </main>
 
-    <footer class="ds-sec" style="padding-block:2.4rem;border-top:1px solid var(--av-hairline)"><div class="ds-wrap"><div class="row" style="justify-content:space-between"><span class="mono" style="color:var(--av-gray-500)">Averyn · Design System v1.6 Horizonte</span><span class="mono" style="color:var(--av-gray-500)">Fuente: DESIGN.md · tokens.css</span></div></div></footer>
+    <footer class="ds-sec" style="padding-block:2.4rem;border-top:1px solid var(--av-hairline)"><div class="ds-wrap"><div class="row" style="justify-content:space-between"><span class="mono" style="color:var(--av-gray-500)">Averyn · Design System v1.7 Horizonte</span><span class="mono" style="color:var(--av-gray-500)">Fuente: DESIGN.md · tokens.css</span></div></div></footer>
   </div>
 </div>
 <div class="hz-toasts" id="toasts" role="region" aria-label="Notificaciones" aria-live="polite"></div>

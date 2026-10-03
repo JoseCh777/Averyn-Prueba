@@ -94,7 +94,7 @@ code, kbd, pre { font-family: var(--av-font-mono); }
 .ds-sec { padding-block: clamp(3.5rem, 7vw, 6rem); border-top: 1px solid var(--av-hairline); }
 .ds-sec--tint { background: var(--av-paper-blue); }
 .ds-sec--night { background: var(--av-navy-night); color: #fff; border-top-color: transparent; }
-.ds-sec--night h2, .ds-sec--night h3 { color: #fff; }
+.ds-sec--night h2, .ds-sec--night h3, .ds-sec--night h4 { color: #fff; }
 .ds-sec--night .ds-lead, .ds-sec--night p { color: var(--av-night-text); }
 .ds-sec--night .ds-sub small, .ds-sec--night .ds-note b { color: var(--av-night-text); }
 .ds-sec--night .ds-note b { color: #fff; }
@@ -104,6 +104,7 @@ code, kbd, pre { font-family: var(--av-font-mono); }
 .ds-lead { margin-top: 1rem; max-width: 62ch; color: var(--av-gray-600); font-size: 1.05rem; }
 .ds-sub { margin: clamp(2.5rem, 5vw, 3.6rem) 0 1rem; font-size: 1.5rem; }
 .ds-sub small { margin-left: .6rem; color: var(--av-gray-500); font-family: var(--av-font-mono); font-size: .75rem; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; }
+h4.ds-sub { margin-top: 2rem; font-size: 1.125rem; }
 .ds-note { margin-top: .9rem; max-width: 70ch; color: var(--av-gray-600); font-size: .95rem; }
 .ds-note b { color: var(--av-navy); }
 .ds-grid { display: grid; gap: 1rem; }
