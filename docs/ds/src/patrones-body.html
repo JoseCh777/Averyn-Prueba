@@ -190,10 +190,11 @@
       <div class="pt-card tj-card" id="ballot" style="margin-top:1.8rem">
         <ol class="pt-ballot-step" aria-label="Pasos de la votación"><li aria-current="step" data-i="0">1 Elegir</li><li data-i="1">2 Revisar</li><li data-i="2">3 Comprobante</li></ol>
         <div data-v="0">
+          <div class="pt-ctrl"><span class="stage__label mono">Tipo de tarjetón</span><div class="vz-seg" id="tj-seg" role="group" aria-label="Tipo de tarjetón"><button type="button" data-s="formula" aria-pressed="true">Fórmula (2 personas)</button><button type="button" data-s="unica" aria-pressed="false">Una persona por partido</button></div></div>
           <fieldset class="tj-fs" id="ballot-opts"><legend class="sr-only">Tarjetón: elige una opción</legend>
             <div class="tj" id="tj"><span class="tj__mark" aria-hidden="true">Muestra · no válida para votar</span>
-              <header class="tj__head"><span class="tj__crest" aria-hidden="true">Logo de la elección</span><div><h3 class="tj__title">Voto por la fórmula de<br>Presidente y Vicepresidente</h3><p class="tj__sub">Elecciones de ejemplo · Periodo 2026 – 2030</p></div><span class="tj__code mono" aria-hidden="true">Serie 000001</span></header>
-              <p class="tj__rule">Marque solo una opción de su preferencia</p>
+              <header class="tj__head"><span class="tj__crest" aria-hidden="true">Logo de la elección</span><div><h3 class="tj__title" id="tj-title">Voto por la fórmula de<br>Presidente y Vicepresidente</h3><p class="tj__sub" id="tj-sub">Elecciones de ejemplo · Periodo 2026 – 2030</p></div><span class="tj__code mono" aria-hidden="true">Serie 000001</span></header>
+              <p class="tj__rule" id="tj-rule">Marque solo una opción de su preferencia</p>
               <div class="tj__grid" id="tj-grid"></div>
             </div>
           </fieldset>
@@ -205,6 +206,7 @@
       <div class="ds-grid ds-grid--2 ds-gap-top">
         <div class="pt-side">
           <div><h3>Anatomía del tarjetón</h3><ol><li><b>Encabezado:</b> espacio para el logo de la elección, título en dos líneas y serie.</li><li><b>Instrucción en rojo:</b> "Marque solo una opción", en mono mayúsculas.</li><li><b>Casilla de opción:</b> borde navy de 2 px; dentro, de arriba abajo: número, <b>foto(s)</b>, cargo y nombre, y <b>logo</b> de la lista.</li><li><b>Voto en blanco:</b> casilla del mismo tamaño y peso, con el texto centrado.</li><li><b>Marca de agua</b> diagonal "Muestra · no válida para votar" mientras sea una demostración.</li></ol></div>
+          <div><h3>Dos variantes del tarjetón</h3><div class="doc-wrap" style="margin:0"><table class="doc-table"><thead><tr><th>Variante</th><th>Cuándo</th><th>Casilla</th></tr></thead><tbody><tr><td><b>Fórmula</b></td><td>Un cargo que se elige en pareja (presidente y vicepresidente).</td><td>2 fotos, 2 nombres con su cargo, número y logo.</td></tr><tr><td><b>Una persona por partido</b></td><td>Un cargo individual: personero, representante, delegado.</td><td>1 foto grande, nombre, cargo, número y logo.</td></tr></tbody></table></div></div>
           <div><h3>Espacios para imagen</h3><ul><li>Foto: relación 3:4 con fondo azul claro y un icono de persona hasta que se cargue (<code>&lt;img&gt;</code> con <code>object-fit: cover</code>).</li><li>Una casilla admite 1 foto (un cargo) o 2 (fórmula presidente + vicepresidente).</li><li>Logo de la lista: recuadro de 16:6; nunca se estira, se contiene con <code>object-fit: contain</code>.</li><li>Toda imagen lleva <code>alt</code> con el nombre ("Foto de …"); el nombre y el número siempre están en texto.</li></ul></div>
         </div>
         <div class="pt-side">

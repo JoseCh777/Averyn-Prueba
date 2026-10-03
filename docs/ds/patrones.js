@@ -178,13 +178,17 @@
   /* ---------- Tarjetón y comprobante ---------- */
   (function () {
     var root = $('#ballot'); if (!root) return;
-    var WHO = [['Presidente', 'Nombre Apellido'], ['Vicepresidente', 'Nombre Apellido']];
-    var OPTS = [
-      { v: '1', n: '1', party: 'Lista Horizonte', who: WHO },
-      { v: '2', n: '2', party: 'Lista Cima', who: WHO },
-      { v: '3', n: '3', party: 'Lista Raíz', who: WHO },
-      { v: 'blanco', n: '', party: 'Voto en blanco', who: null }
-    ];
+    /* Dos variantes: fórmula (2 personas por lista) y una persona por partido (personero, representante, delegado…) */
+    var FORM = [['Presidente', 'Nombre Apellido'], ['Vicepresidente', 'Nombre Apellido']], SOLO = [['Candidata a representante', 'Nombre Apellido']];
+    var MODES = {
+      formula: { title: 'Voto por la fórmula de<br>Presidente y Vicepresidente', sub: 'Elecciones de ejemplo · Periodo 2026 – 2030', rule: 'Marque solo una opción de su preferencia', who: FORM },
+      unica: { title: 'Voto por el representante<br>de los estudiantes', sub: 'Elecciones de ejemplo · Un cargo, una persona por lista', rule: 'Marque solo una persona de su preferencia', who: SOLO }
+    };
+    var OPTS = [];
+    function optsFor(m) {
+      var w = MODES[m].who;
+      return [{ v: '1', n: '1', party: 'Lista Horizonte', who: w }, { v: '2', n: '2', party: 'Lista Cima', who: w }, { v: '3', n: '3', party: 'Lista Raíz', who: w }, { v: 'blanco', n: '', party: 'Voto en blanco', who: null }];
+    }
     function box(o, radio) {
       var inner;
       if (o.who) {
@@ -196,21 +200,28 @@
         inner = '<span class="tj-opt__mid">Voto<br>en blanco</span>';
       }
       var name = o.who ? o.party + ', número ' + o.n + '. ' + o.who.map(function (w) { return w[0] + ' ' + w[1]; }).join('. ') : 'Voto en blanco';
-      return '<label class="tj-opt' + (o.who ? '' : ' tj-opt--blank') + '">' + (radio ? '<input type="radio" name="voto" value="' + o.v + '" aria-label="' + esc(name) + '">' : '') + '<span class="tj-opt__ok"><i class="bi bi-check-lg" aria-hidden="true"></i>Marcada</span>' + inner + '</label>';
+      return '<label class="tj-opt' + (o.who ? (o.who.length === 1 ? ' tj-opt--solo' : '') : ' tj-opt--blank') + '">' + (radio ? '<input type="radio" name="voto" value="' + o.v + '" aria-label="' + esc(name) + '">' : '') + '<span class="tj-opt__ok"><i class="bi bi-check-lg" aria-hidden="true"></i>Marcada</span>' + inner + '</label>';
     }
-    $('#tj-grid').innerHTML = OPTS.map(function (o) { return box(o, true); }).join('');
     var panels = $$('[data-v]', root), steps = $$('.pt-ballot-step li', root), next = $('#ballot-next'), hint = $('#ballot-hint');
     function go(i, focus) {
       panels.forEach(function (p) { p.hidden = +p.getAttribute('data-v') !== i; });
       steps.forEach(function (s, k) { if (k === i) s.setAttribute('aria-current', 'step'); else s.removeAttribute('aria-current'); });
       if (focus) { var h = $('#ballot-h' + (i + 1)); if (h) h.focus(); }
     }
-    $$('input[name="voto"]').forEach(function (r) {
-      r.addEventListener('change', function () {
-        next.disabled = false; var o = OPTS.filter(function (x) { return x.v === r.value; })[0];
-        hint.textContent = 'Marcaste: ' + (o.who ? o.party + ' (número ' + o.n + ')' : 'voto en blanco') + '.';
+    function render(m) {
+      OPTS = optsFor(m); var M = MODES[m];
+      $('#tj-title').innerHTML = M.title; $('#tj-sub').textContent = M.sub; $('#tj-rule').textContent = M.rule;
+      $('#tj-grid').innerHTML = OPTS.map(function (o) { return box(o, true); }).join('');
+      next.disabled = true; hint.textContent = 'Aún no has elegido una opción.';
+      $$('input[name="voto"]').forEach(function (r) {
+        r.addEventListener('change', function () {
+          next.disabled = false; var o = OPTS.filter(function (x) { return x.v === r.value; })[0];
+          hint.textContent = 'Marcaste: ' + (o.who ? o.party + ' (número ' + o.n + ')' : 'voto en blanco') + '.';
+        });
       });
-    });
+    }
+    seg($('#tj-seg'), function (s) { render(s); });
+    render('formula');
     next.addEventListener('click', function () {
       var v = $('input[name="voto"]:checked').value, o = OPTS.filter(function (x) { return x.v === v; })[0];
       $('#ballot-sel').innerHTML = box(o, false); go(1, true);
