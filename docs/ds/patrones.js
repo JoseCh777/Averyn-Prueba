@@ -53,7 +53,7 @@
   (function () {
     var svg = $('#fp-svg'); if (!svg) return;
     var box = $('#fp-box'), title = $('#fp-title'), sub = $('#fp-sub'), bar = $('#fp-bar'), pct = $('#fp-pct'), q = $('#fp-q'), btn = $('#fp-btn');
-    /* Huella simplificada: 8 crestas redondeadas y concéntricas, abiertas por abajo (más cada vez) y un núcleo con punto.
+    /* Huella simplificada: 7 crestas redondeadas y concéntricas, abiertas por abajo (más cada vez) y un núcleo con punto.
        Decorativa: no codifica ningún dato real. */
     var NS = 'http://www.w3.org/2000/svg', rings = [];
     (function () {
@@ -65,8 +65,8 @@
         return { r: rx, d: 'M' + x1.toFixed(1) + ' ' + y1.toFixed(1) + ' A' + rx + ' ' + ry + ' 0 1 1 ' + x2.toFixed(1) + ' ' + y2.toFixed(1), dash: dash || '' };
       }
       parts.push({ r: 1, d: 'M' + CX + ' ' + (CY + 1) + ' L' + CX + ' ' + (CY + 1.2), dash: '', dot: true });
-      for (var k = 0; k < 8; k++) {
-        var rx = 12 + k * 11.2, gap = k === 0 ? 40 : 34 + k * 7, shift = (k % 2 ? 1 : -1) * (6 + k * 2.2);
+      for (var k = 0; k < 7; k++) {
+        var rx = 13 + k * 12.8, gap = k === 0 ? 40 : 34 + k * 7 + (k >= 3 ? 30 : 0), shift = (k % 2 ? 1 : -1) * (6 + k * 2.2);
         parts.push(arc(rx, rx * 1.1, gap, shift, (k === 3 || k === 6) ? '.46 .02 .52 0' : ''));
       }
       parts.sort(function (a, b) { return a.r - b.r; });
