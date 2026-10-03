@@ -53,28 +53,20 @@
   (function () {
     var svg = $('#fp-svg'); if (!svg) return;
     var box = $('#fp-box'), title = $('#fp-title'), sub = $('#fp-sub'), bar = $('#fp-bar'), pct = $('#fp-pct'), q = $('#fp-q'), btn = $('#fp-btn');
-    /* Huella de bucle con la silueta de la referencia: contorno alto y redondeado, crestas anidadas, núcleo con tallo y
-       cortes. Trazo fino y colores de marca. Decorativa: no codifica ningún dato real. */
+    /* Huella de arcos anidados: un núcleo con tallo y 6 crestas en cúpula cuyas patas bajan cada vez más, con algunos cortes.
+       Trazo fino y colores de marca. Decorativa: no codifica ningún dato real. */
     var NS = 'http://www.w3.org/2000/svg', rings = [];
     (function () {
       var g = document.createElementNS(NS, 'g'); g.setAttribute('transform', 'rotate(-4 100 115)'); svg.appendChild(g);
-      var CX = 100, CY = 84, YB = 150, parts = [];
-      function line(x, y1, y2) { return 'M' + x + ' ' + y1 + ' L' + x + ' ' + y2; }
-      /* núcleo: tallo, horquilla y tres trazos cortos bajo ella */
-      parts.push({ d: line(CX, CY + 2, CY + 24) });
-      parts.push({ d: 'M' + (CX - 6) + ' ' + (CY + 26) + ' L' + (CX - 6) + ' ' + CY + ' A6 6 0 0 1 ' + (CX + 6) + ' ' + CY + ' L' + (CX + 6) + ' ' + (CY + 26) });
-      [-9, 0, 9].forEach(function (dx) { parts.push({ d: line(CX + dx, CY + 60, CY + 90 - Math.abs(dx) * .8) }); });
-      /* crestas de dentro hacia fuera: las tres interiores son arcos abiertos; las tres exteriores cierran el contorno por abajo
-         y se abren en diagonal (cada una termina en un ángulo distinto) */
-      var R = [14, 25.2, 36.4, 47.6, 58.8, 70], END = [0, 0, 0, 160, 150, 138], CUT = [0, .3, 0, .22, 0, .58];
+      var CX = 100, CY = 84, parts = [];
+      parts.push({ d: 'M' + CX + ' ' + (CY + 2) + ' L' + CX + ' ' + (CY + 30) });
+      parts.push({ d: 'M' + (CX - 6) + ' ' + (CY + 34) + ' L' + (CX - 6) + ' ' + CY + ' A6 6 0 0 1 ' + (CX + 6) + ' ' + CY + ' L' + (CX + 6) + ' ' + (CY + 34) });
+      var R = [14, 25.2, 36.4, 47.6, 58.8, 70],
+          YL = [138, 152, 172, 190, 206, 218],      /* hasta dónde baja la pata izquierda de cada cresta */
+          YR = [132, 146, 176, 186, 198, 208],      /* y la derecha */
+          CUT = [0, 0, 0, .11, .27, .73];           /* posición (0–1) del corte de cada cresta; 0 = sin corte */
       R.forEach(function (r, i) {
-        var d;
-        if (i < 3) d = 'M' + (CX - r) + ' ' + [122, 138, 150][i] + ' L' + (CX - r) + ' ' + CY + ' A' + r + ' ' + r + ' 0 0 1 ' + (CX + r) + ' ' + CY + ' L' + (CX + r) + ' ' + [114, 146, 134][i];
-        else {
-          var e = END[i] * Math.PI / 180, bx = CX + r * Math.cos(e), by = YB + r * Math.sin(e);
-          d = 'M' + (CX - r) + ' ' + YB + ' L' + (CX - r) + ' ' + CY + ' A' + r + ' ' + r + ' 0 0 1 ' + (CX + r) + ' ' + CY + ' L' + (CX + r) + ' ' + YB + ' A' + r + ' ' + r + ' 0 0 1 ' + bx.toFixed(1) + ' ' + by.toFixed(1);
-        }
-        parts.push({ d: d, cut: CUT[i] });
+        parts.push({ d: 'M' + (CX - r) + ' ' + YL[i] + ' L' + (CX - r) + ' ' + CY + ' A' + r + ' ' + r + ' 0 0 1 ' + (CX + r) + ' ' + CY + ' L' + (CX + r) + ' ' + YR[i], cut: CUT[i] });
       });
       parts.forEach(function (pt) {
         var p = document.createElementNS(NS, 'path'); p.setAttribute('d', pt.d); p.setAttribute('class', 'pt-fp__ring'); p.setAttribute('pathLength', '1');
