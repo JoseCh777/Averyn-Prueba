@@ -19,7 +19,7 @@ sys.dont_write_bytecode = True
 HERE = os.path.dirname(os.path.abspath(__file__))
 DS_DIR = os.path.dirname(HERE)            # docs/ds
 DOCS = os.path.dirname(DS_DIR)            # docs
-VERSION = '1.5'
+VERSION = '1.6'
 
 # (archivo de salida relativo a docs, etiqueta del menú, grupo de la barra lateral)
 PAGES = [
