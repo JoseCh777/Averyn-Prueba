@@ -82,7 +82,7 @@
   function sgn(n, f) { return (n > 0 ? '+' : n < 0 ? '−' : '') + (f || nf1).format(Math.abs(n)); }
 
   /* ---------- tooltip + navegación con teclado ---------- */
-  var tip = H('div', 'vz-tip', '', document.body); tip.setAttribute('role', 'tooltip');
+  var tip = H('div', 'vz-tip', '', document.body); tip.setAttribute('aria-hidden', 'true'); /* decorativo: el valor se anuncia por la región aria-live */
   var live = H('div', 'sr-only', '', document.body); live.setAttribute('aria-live', 'polite');
   function showTip(html, x, y) {
     tip.innerHTML = html; tip.classList.add('is-on');
@@ -275,7 +275,7 @@
     host.innerHTML = '';
     var lg = H('ul', 'vz-legend', '', host);
     cfg.series.forEach(function (s) { H('li', '', (s.icon ? '<i class="bi ' + s.icon + '" style="--c:' + s.color + '" aria-hidden="true"></i>' : '<i style="--c:' + s.color + '"></i>') + esc(s.name), lg); });
-    var ul = H('ul', 'sb', '', host), max = Math.max.apply(null, cfg.rows.map(function (r) { return sum(cfg.series.map(function (s) { return r.vals[s.id]; })); }));
+    var swrap = H('div', '', '', host), ul = H('ul', 'sb', '', swrap), max = Math.max.apply(null, cfg.rows.map(function (r) { return sum(cfg.series.map(function (s) { return r.vals[s.id]; })); }));
     var segs = [], items = [];
     cfg.rows.forEach(function (r) {
       var tot = sum(cfg.series.map(function (s) { return r.vals[s.id]; })), li = H('li', 'sb__row', '', ul);
@@ -294,7 +294,7 @@
       });
       H('span', 'sb__total', N(tot), li);
     });
-    var ins = inspector(ul, cfg.label, items, {
+    var ins = inspector(swrap, cfg.label, items, {
       on: function (i) { ul.classList.toggle('is-hover', i >= 0); segs.forEach(function (e, k) { e.classList.toggle('is-on', k === i); }); }
     });
   }

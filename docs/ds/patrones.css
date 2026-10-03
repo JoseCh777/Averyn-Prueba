@@ -75,11 +75,11 @@
 .pt-fp[data-state="low"] .pt-fp__ring.on { stroke: #FCD34D; }
 .pt-fp[data-state="err"] .pt-fp__ring { stroke: rgba(252, 165, 165, .55); }
 .pt-fp__txt { display: grid; gap: .6rem; min-width: 0; }
-.pt-fp__txt h4 { margin: 0; font: 500 1.15rem var(--av-font-heading); letter-spacing: -.01em; }
+.pt-fp__txt h3 { margin: 0; font: 500 1.15rem var(--av-font-heading); letter-spacing: -.01em; }
 .pt-fp__txt p { margin: 0; font-size: .875rem; color: var(--av-gray-600); }
 .pt-prog { display: grid; gap: .3rem; }
 .pt-prog__bar { height: 8px; border-radius: var(--av-radius-full); background: var(--av-gray-100); overflow: hidden; }
-.pt-prog__bar i { display: block; height: 100%; width: 0; border-radius: inherit; background: var(--av-blue); transition: width .2s linear; }
+.pt-prog__bar i { display: block; height: 100%; width: 100%; border-radius: inherit; background: var(--av-blue); transform: scaleX(var(--p, 0)); transform-origin: 0 50%; transition: transform .2s linear; }
 .pt-prog__lab { display: flex; justify-content: space-between; font: 500 .75rem var(--av-font-mono); color: var(--av-gray-600); }
 .pt-fingers { display: flex; flex-wrap: wrap; gap: .4rem; margin: 0 0 1.1rem; padding: 0; border: 0; }
 .pt-fingers legend { padding: 0; margin-bottom: .45rem; font: 500 .75rem var(--av-font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--av-gray-600); }
@@ -101,7 +101,7 @@
 .pt-score b { font: 500 clamp(3rem, 7vw, 4.2rem)/1 var(--av-font-heading); letter-spacing: -.04em; font-variant-numeric: tabular-nums; color: var(--av-navy); }
 .pt-score span { font-size: .9375rem; color: var(--av-gray-600); }
 .pt-scale { position: relative; height: 14px; margin: 1.9rem 0 .2rem; border-radius: var(--av-radius-full); background: linear-gradient(90deg, #F6E3C4 0 68%, var(--av-blue-tint) 68% 100%); box-shadow: inset 0 0 0 1px var(--av-hairline); }
-.pt-scale__fill { position: absolute; inset: 3px auto 3px 3px; border-radius: var(--av-radius-full); background: var(--av-blue); transition: width .25s var(--av-ease-out); }
+.pt-scale__fill { position: absolute; inset: 3px auto 3px 3px; border-radius: var(--av-radius-full); background: var(--av-blue);  }
 .pt-scale__thr { position: absolute; top: -7px; bottom: -7px; left: 68%; width: 2px; background: var(--av-navy); }
 .pt-scale__thr em { position: absolute; bottom: calc(100% + 4px); left: 50%; transform: translateX(-50%); font: 600 .75rem var(--av-font-mono); font-style: normal; white-space: nowrap; color: var(--av-navy); }
 .pt-scale__ends { display: flex; justify-content: space-between; margin: .35rem 0 0; font: 500 .6875rem var(--av-font-mono); color: var(--av-gray-500); }

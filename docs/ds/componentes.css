@@ -109,7 +109,7 @@ kbd.cp-k, .cp-side kbd { display: inline-block; min-width: 1.5em; padding: .08em
 /* ---------- Popover ---------- */
 .po { position: relative; display: inline-block; }
 .po .cp-pop { width: min(20rem, 80vw); padding: 1rem 1.1rem; font-size: .875rem; color: var(--av-gray-600); }
-.po .cp-pop h4 { margin: 0 0 .3rem; font: 500 1rem var(--av-font-heading); color: var(--av-navy); }
+.po .cp-pop h3 { margin: 0 0 .3rem; font: 500 1rem var(--av-font-heading); color: var(--av-navy); }
 .po .cp-pop p { margin: 0 0 .7rem; }
 
 /* ---------- Drawer ---------- */
