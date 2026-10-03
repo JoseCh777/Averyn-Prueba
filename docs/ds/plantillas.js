@@ -91,6 +91,49 @@
       '<section class="tp-card"><h2>Biometría y privacidad</h2><p>Guardamos una plantilla matemática, nunca fotos.</p><div class="tp-row"><div><b>Rostro</b><small>Registrado el 29 sep</small></div>' + chip('Activo', 'success') + '</div><div class="tp-row"><div><b>Huella</b><small>2 dedos · 29 sep</small></div>' + chip('Activo', 'success') + '</div><div style="margin-top:.6rem"><button class="hz-btn hz-btn--text" type="button" style="color:var(--av-error-text)">Retirar mi consentimiento…</button></div></section></div></div>');
   };
 
+
+  /* ---------- Acceso y cuenta (mismo marco del login) ---------- */
+  var ARCS = '<svg viewBox="0 0 640 300" aria-hidden="true"><path d="M0 290 H640" stroke="rgba(255,255,255,.22)" fill="none"/><path d="M30 290 C110 60 330 40 450 290" stroke="#fff" stroke-width="1.5" fill="none"/><path d="M90 290 C150 110 300 95 390 290" stroke="#00ACD2" stroke-width="2" fill="none"/><path d="M150 290 C190 170 270 160 330 290" stroke="#55D6FF" stroke-width="1.5" fill="none"/><path d="M300 8 L545 290" stroke="#3D86FF" stroke-width="2" fill="none"/><path d="M326 -32 L605 290" stroke="#3D86FF" stroke-width="2" fill="none"/></svg>';
+  function auth(inner, claim) {
+    return '<div class="tp-auth"><div class="hz-frame"><div class="hz-frame__brand"><img src="' + logo + '" alt="Averyn">' + ARCS + '<div><h4>' + (claim || 'Todo listo para continuar.') + '</h4></div></div><div class="hz-frame__form">' + inner + '</div></div></div>';
+  }
+  var back = '<a href="#" class="mono tp-back">← Volver a ingresar</a>';
+  var alertH = function (k, t, d, role) { return '<div class="hz-alert hz-alert--' + k + '" role="' + (role || 'status') + '"><strong>' + t + '</strong>' + d + '</div>'; };
+  var field = function (id, label, val, extra) { return '<div class="hz-field"><label class="hz-label" for="' + id + '">' + label + '</label><input class="hz-input" id="' + id + '" value="' + (val || '') + '" ' + (extra || '') + '></div>'; };
+  var btn = function (t, k, dis) { return '<button class="hz-btn hz-btn--' + (k || 'primary') + ' hz-btn--block" type="button"' + (dis ? ' disabled' : '') + '>' + t + '</button>'; };
+
+  T.recuperar = function (st) {
+    var body;
+    if (st === 'enviado') body = '<h1 class="tp-h1">Revisa tu correo</h1><p class="tp-p">Si hay una cuenta con ese correo, te enviamos un enlace para elegir una nueva contraseña. Puede tardar unos minutos; revisa también la carpeta de spam.</p>' + alertH('info', 'Por seguridad no confirmamos si el correo existe', 'El mensaje es el mismo para cualquier dirección.') + btn('Reenviar enlace (disponible en 30 s)', 'ghost', true);
+    else if (st === 'nueva') body = '<h1 class="tp-h1">Elige una nueva contraseña</h1><p class="tp-p">Usa al menos 10 caracteres. Este enlace solo sirve una vez.</p>' +
+      '<div class="hz-field"><label class="hz-label" for="p1">Nueva contraseña</label><input class="hz-input" id="p1" type="password" value="Horizonte26"></div><div class="pw" data-lv="3" style="margin:-.2rem 0 .3rem"><div class="pw__bar" aria-hidden="true"><i></i><i></i><i></i><i></i></div><p class="pw__st">Seguridad: Buena. Cumples 3 de 4 requisitos.</p></div>' + field('p2', 'Confirma la contraseña', '', 'type="password"') + btn('Guardar contraseña');
+    else if (st === 'vencido') body = '<h1 class="tp-h1">Este enlace venció</h1><p class="tp-p">Por seguridad, los enlaces de recuperación duran 30 minutos y solo se pueden usar una vez.</p>' + alertH('warning', 'No pasa nada: puedes pedir uno nuevo', 'Te lo enviaremos al mismo correo.') + btn('Pedir un enlace nuevo');
+    else body = '<h1 class="tp-h1">Recupera tu acceso</h1><p class="tp-p">Escribe el correo de tu cuenta y te enviaremos un enlace para elegir una nueva contraseña.</p>' + field('em', 'Correo electrónico', '', 'placeholder="nombre@organizacion.com" type="email"') + btn('Enviar enlace →');
+    return auth(back + body);
+  };
+
+  T.segundo = function (st) {
+    var cells = '', vals = st === 'ok' ? '482913' : '';
+    for (var i = 0; i < 6; i++) cells += '<input class="otp__d" value="' + (vals[i] || '') + '" aria-label="Dígito ' + (i + 1) + ' de 6"' + (st === 'bloqueado' || st === 'ok' ? ' disabled' : '') + '>';
+    var msg = st === 'error' ? 'Código incorrecto. Te quedan 2 intentos.' : st === 'bloqueado' ? 'Demasiados intentos. Vuelve a intentarlo en 5 minutos.' : st === 'ok' ? 'Identidad confirmada.' : '';
+    return auth(back + '<h1 class="tp-h1">Confirma que eres tú</h1><p class="tp-p">Ingresa el código de 6 dígitos que enviamos a <b>a•••@ejemplo.edu</b>.</p><fieldset class="otp" data-s="' + (st === 'error' ? 'error' : st === 'ok' ? 'ok' : '') + '"><legend class="sr-only">Código de verificación</legend><div class="otp__row">' + cells + '</div><p class="otp__msg" role="status">' + msg + '</p></fieldset>' + btn(st === 'ok' ? 'Continuar →' : 'Verificar', 'primary', st === 'bloqueado') + '<p class="tp-p" style="margin:.4rem 0 0;text-align:center">¿No te llegó? <a href="#" class="tp-link">Reenviar código</a> · <a href="#" class="tp-link">Usar otro método</a></p>');
+  };
+
+  T.institucion = function (st) {
+    var rows = [['Universidad Horizonte', 'Sede Central · Lima'], ['Universidad Horizonte', 'Sede Norte · Trujillo'], ['Instituto Cima', 'Campus Arequipa']];
+    var body = st === 'sin' ? '<h1 class="tp-h1">Tu cuenta aún no tiene instituciones</h1><p class="tp-p">Pide a tu administrador que te agregue a una institución para continuar.</p>' + alertH('info', 'Te avisaremos por correo', 'Cuando te agreguen, podrás entrar con esta misma cuenta.') + btn('Cerrar sesión', 'ghost')
+      : '<h1 class="tp-h1">Elige tu institución</h1><p class="tp-p">Tu cuenta pertenece a más de una. Puedes cambiar de institución después desde tu perfil.</p><div class="tp-inst" role="radiogroup" aria-label="Institución">' + rows.map(function (r, i) { return '<label class="tp-inst__o"><input type="radio" name="inst"' + (i === 0 ? ' checked' : '') + '><span><b>' + r[0] + '</b><small>' + r[1] + '</small></span></label>'; }).join('') + '</div>' + btn('Continuar →');
+    return auth(body, 'Una cuenta, varias instituciones.');
+  };
+
+  T.invitacion = function (st) {
+    var body;
+    if (st === 'vencida') body = '<h1 class="tp-h1">Esta invitación venció</h1><p class="tp-p">Las invitaciones duran 48 horas. Pide una nueva a quien te invitó.</p>' + alertH('warning', 'Invitada por Carlos Mendoza', 'Universidad Horizonte · enviada el 28 sep 2026') + btn('Volver al inicio', 'ghost');
+    else if (st === 'usada') body = '<h1 class="tp-h1">Esta invitación ya se usó</h1><p class="tp-p">Si ya creaste tu cuenta, ingresa con tu correo y tu contraseña.</p>' + btn('Ingresar →');
+    else body = '<span class="mono" style="color:var(--av-gray-500)">Invitación de Carlos Mendoza</span><h1 class="tp-h1">Te invitaron a Averyn</h1><p class="tp-p"><b>Universidad Horizonte</b> te invitó a crear tu cuenta. Tardas unos minutos.</p>' + field('inv-n', 'Nombre completo', 'Ana Torres') + field('inv-p', 'Crea una contraseña', '', 'type="password" placeholder="Al menos 10 caracteres"') + '<label class="hz-check"><input type="checkbox"> Acepto los términos de uso</label><p class="tp-p" style="margin:0">El consentimiento para usar tu rostro y huella se pide más adelante, antes de la primera captura.</p>' + btn('Crear mi cuenta →');
+    return auth(body, 'Bienvenido a tu panel.');
+  };
+
   /* ---------- Documento y marcos ---------- */
   function doc(key, st) { return '<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=1440">' + styles() + '</head><body class="tp">' + T[key](st) + '</body></html>'; }
 
@@ -102,8 +145,10 @@
 
   var frames = [];
   $$('.tpf').forEach(function (host) {
-    var key = host.getAttribute('data-t'), title = host.getAttribute('data-title'), st = 'normal', states = host.hasAttribute('data-states');
-    host.innerHTML = '<div class="tpf__ctrl"><span class="stage__label mono" style="margin:0">Plantilla · ' + title + '</span>' + (states ? '<div class="vz-seg" role="group" aria-label="Estado de la plantilla ' + title + '"><button type="button" data-s="normal" aria-pressed="true">Normal</button><button type="button" data-s="empty" aria-pressed="false">Vacío</button><button type="button" data-s="loading" aria-pressed="false">Cargando</button><button type="button" data-s="error" aria-pressed="false">Error</button></div>' : '') + '</div>' +
+    var key = host.getAttribute('data-t'), title = host.getAttribute('data-title'), spec = host.getAttribute('data-states');
+    var list = !spec ? [] : spec === '1' ? [['normal', 'Normal'], ['empty', 'Vacío'], ['loading', 'Cargando'], ['error', 'Error']] : spec.split(',').map(function (x) { return x.split(':'); });
+    var st = list.length ? list[0][0] : 'normal';
+    host.innerHTML = '<div class="tpf__ctrl"><span class="stage__label mono" style="margin:0">Plantilla · ' + title + '</span>' + (list.length ? '<div class="vz-seg" role="group" aria-label="Estado de la plantilla ' + title + '">' + list.map(function (s, i) { return '<button type="button" data-s="' + s[0] + '" aria-pressed="' + (i === 0) + '">' + s[1] + '</button>'; }).join('') + '</div>' : '') + '</div>' +
       '<div class="tpf__frame"><div class="dsframe"><iframe title="Vista previa de la plantilla ' + title + '" tabindex="-1" aria-hidden="true"></iframe></div><button class="tpf__open" type="button"><i class="bi bi-arrows-fullscreen" aria-hidden="true"></i>Ver a pantalla completa</button></div>';
     var fr = $('iframe', host);
     function paint() { fr.srcdoc = doc(key, st); }

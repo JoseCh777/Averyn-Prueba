@@ -41,6 +41,11 @@
         <a href="#asistente">Asistente electoral</a>
         <a href="#notificaciones">Notificaciones</a>
         <a href="#perfil">Perfil</a>
+        <span class="grp sub mono">Acceso y cuenta</span>
+        <a href="#recuperar">Recuperar contraseña</a>
+        <a href="#segundo-factor">Segundo factor</a>
+        <a href="#institucion">Selección de institución</a>
+        <a href="#invitacion">Aceptar invitación</a>
         <span class="grp sub mono">Estados de interfaz</span>
         <a href="#estados">Carga, vacío y subida</a>
         <span class="grp sub mono">Páginas de error</span>
@@ -88,7 +93,7 @@
           <div class="hz-field"><span class="hz-label">Correo electrónico</span><div class="hz-input" style="display:flex;align-items:center;color:var(--av-placeholder)">nombre@organizacion.com</div></div>
           <div class="hz-field"><span class="hz-label">Contraseña</span><div class="hz-input" style="display:flex;align-items:center;color:var(--av-placeholder)">Ingresa tu contraseña</div></div>
           <span class="hz-btn hz-btn--primary hz-btn--block">Ingresar de forma segura →</span></div></div>
-      <p class="ds-note">Marco de hasta 1020 px, radio 24 px, sombra de marco, sobre un fondo azul claro con brillo cian. Panel de marca con el degradado compacto y la figura de arcos (se dibuja una vez al cargar); formulario a 5/11. Móvil: el panel pasa a franja superior. v1.1: el titular del panel de marca ("Ingresa a tu panel.") ya no es un encabezado; el único <code>&lt;h1&gt;</code> es "Bienvenido de nuevo.". Errores por campo, foco al primer campo inválido y espacio estable para que el formulario no salte. Pendiente: selector de institución y segundo factor.</p>
+      <p class="ds-note">Marco de hasta 1020 px, radio 24 px, sombra de marco, sobre un fondo azul claro con brillo cian. Panel de marca con el degradado compacto y la figura de arcos (se dibuja una vez al cargar); formulario a 5/11. Móvil: el panel pasa a franja superior. v1.1: el titular del panel de marca ("Ingresa a tu panel.") ya no es un encabezado; el único <code>&lt;h1&gt;</code> es "Bienvenido de nuevo.". Errores por campo, foco al primer campo inválido y espacio estable para que el formulario no salte. Las pantallas de recuperación, segundo factor, selección de institución e invitación están más abajo, en <i>Acceso y cuenta</i>.</p>
 
       <h3 class="ds-sub">B · Panel (dashboard)</h3>
       <div class="stage stage--sky" style="padding:1.4rem">
@@ -182,6 +187,59 @@
         <div><h3>Componentes y datos</h3><ul><li>Campos, botones, filas con estado, alerta, modal de confirmación.</li></ul></div>
       </div>
     </div></section>
+
+    <!-- RECUPERAR CONTRASEÑA -->
+    <section class="ds-sec" id="recuperar" aria-labelledby="h-recuperar" data-nav="Recuperar contraseña" data-grp="Acceso y cuenta"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Plantillas y estados · Acceso y cuenta</span>
+      <h2 id="h-recuperar">Recuperar contraseña</h2>
+      <p class="ds-lead">Cuatro pasos con el mismo marco del login: pedir el enlace, avisar que se envió, elegir la nueva contraseña y manejar el enlace vencido. El mensaje nunca confirma si el correo existe.</p>
+      <div class="tpf" data-t="recuperar" data-title="Recuperar contraseña" data-states="normal:Solicitud,enviado:Enviado,nueva:Nueva contraseña,vencido:Enlace vencido"></div>
+      <div class="tpf__spec">
+        <div><h3>Regiones</h3><ul><li>Marco del login: panel de marca + formulario (el panel pasa a franja superior en móvil).</li><li>Un único <code>&lt;h1&gt;</code>, un campo y un botón por paso.</li><li>"Volver a ingresar" siempre visible.</li></ul></div>
+        <div><h3>Estados</h3><ul><li><b>Enviado:</b> el mismo texto exista o no la cuenta, con la explicación de por qué.</li><li><b>Nueva contraseña:</b> indicador de fuerza y confirmación.</li><li><b>Enlace vencido:</b> dice por qué (30 min, un solo uso) y ofrece uno nuevo.</li></ul></div>
+        <div><h3>Componentes y reglas</h3><ul><li>Campos, botón de bloque y alertas; contraseña con fuerza (<i>Componentes › Contraseña y fuerza</i>).</li><li>El enlace del correo de recuperación coincide: vence en 30 minutos.</li><li>Rate limit: tras varios envíos, "Espera unos minutos antes de pedir otro enlace", sin culpar.</li></ul></div>
+      </div>
+    </div></section>
+
+    <!-- SEGUNDO FACTOR -->
+    <section class="ds-sec ds-sec--tint" id="segundo-factor" aria-labelledby="h-segundo-factor" data-nav="Segundo factor" data-grp="Acceso y cuenta"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Plantillas y estados · Acceso y cuenta</span>
+      <h2 id="h-segundo-factor">Segundo factor (código de verificación)</h2>
+      <p class="ds-lead">Tras la contraseña, un código de 6 dígitos enviado al correo o al teléfono. Reutiliza el componente de código de un solo uso, con el mismo tratamiento de error y bloqueo.</p>
+      <div class="tpf" data-t="segundo" data-title="Segundo factor (código de verificación)" data-states="normal:Normal,error:Código incorrecto,bloqueado:Bloqueado,ok:Confirmado"></div>
+      <div class="tpf__spec">
+        <div><h3>Regiones</h3><ul><li>Titular que dice qué se pide y a dónde se envió (correo enmascarado: a•••@ejemplo.edu).</li><li>Casillas del código, botón Verificar y ayuda: reenviar o usar otro método.</li></ul></div>
+        <div><h3>Estados</h3><ul><li><b>Código incorrecto:</b> "Te quedan 2 intentos."</li><li><b>Bloqueado:</b> motivo y cuándo reintentar (5 minutos); casillas y botón deshabilitados.</li><li><b>Confirmado:</b> mensaje en texto antes de continuar.</li></ul></div>
+        <div><h3>Componentes y reglas</h3><ul><li>Código de un solo uso (<i>Componentes</i>): pegar, avance automático, <code>autocomplete="one-time-code"</code>.</li><li>Siempre hay una salida: "Usar otro método" o contactar al administrador.</li><li>El código vence en 10 minutos (igual que el correo de verificación).</li></ul></div>
+      </div>
+    </div></section>
+
+    <!-- SELECCIÓN DE INSTITUCIÓN -->
+    <section class="ds-sec" id="institucion" aria-labelledby="h-institucion" data-nav="Selección de institución" data-grp="Acceso y cuenta"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Plantillas y estados · Acceso y cuenta</span>
+      <h2 id="h-institucion">Selección de institución</h2>
+      <p class="ds-lead">Para cuentas que pertenecen a más de una institución. Una lista corta de radios; si hubiera más de 7, se cambia por un combobox con búsqueda.</p>
+      <div class="tpf" data-t="institucion" data-title="Selección de institución" data-states="normal:Varias instituciones,sin:Ninguna"></div>
+      <div class="tpf__spec">
+        <div><h3>Regiones</h3><ul><li>Titular, texto de ayuda y lista de instituciones como radios de 60 px.</li><li>Botón Continuar.</li></ul></div>
+        <div><h3>Estados</h3><ul><li><b>Varias:</b> la última usada va seleccionada de antemano.</li><li><b>Una sola:</b> el paso se omite (no se muestra una elección de una opción).</li><li><b>Ninguna:</b> explica qué hacer y ofrece cerrar sesión.</li></ul></div>
+        <div><h3>Componentes y reglas</h3><ul><li>Radios nativos con tarjeta (borde + relleno al elegir, nunca solo color).</li><li>Más de 7 opciones: combobox (<i>Componentes › Combobox</i>).</li><li>Cambiar de institución después desde el perfil, sin volver a ingresar.</li></ul></div>
+      </div>
+    </div></section>
+
+    <!-- ACEPTAR INVITACIÓN -->
+    <section class="ds-sec ds-sec--tint" id="invitacion" aria-labelledby="h-invitacion" data-nav="Aceptar invitación" data-grp="Acceso y cuenta"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Plantillas y estados · Acceso y cuenta</span>
+      <h2 id="h-invitacion">Aceptar invitación</h2>
+      <p class="ds-lead">Lo primero que ve una persona invitada desde el correo. Dice quién la invita y a qué institución, y pide solo lo mínimo para crear la cuenta; el consentimiento biométrico llega después.</p>
+      <div class="tpf" data-t="invitacion" data-title="Aceptar invitación" data-states="normal:Normal,vencida:Vencida,usada:Ya usada"></div>
+      <div class="tpf__spec">
+        <div><h3>Regiones</h3><ul><li>Quién invita y de qué institución, en la primera línea.</li><li>Nombre (precargado), contraseña y aceptación de términos.</li></ul></div>
+        <div><h3>Estados</h3><ul><li><b>Vencida:</b> a las 48 horas; explica y dice que se pida una nueva a quien invitó.</li><li><b>Ya usada:</b> lleva a ingresar.</li></ul></div>
+        <div><h3>Componentes y reglas</h3><ul><li>Enlaza con el correo de invitación (vence en 48 horas).</li><li>El consentimiento para rostro y huella no se mezcla aquí: ver <i>Patrones › Consentimiento</i>.</li><li>Contraseña con indicador de fuerza.</li></ul></div>
+      </div>
+    </div></section>
+
     <!-- CARGA, VACÍO Y SUBIDA -->
     <section class="ds-sec" id="estados" aria-labelledby="h-estados" data-nav="Carga, vacío y subida" data-grp="Estados de interfaz"><div class="ds-wrap">
       <span class="ds-eyebrow mono">Plantillas y estados · Estados de interfaz</span>
