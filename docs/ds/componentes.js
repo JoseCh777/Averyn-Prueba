@@ -284,4 +284,177 @@
     $('#ta-off').addEventListener('click', function () { DS.toast('Desactivar', 'Aquí se pediría confirmación antes de desactivar.'); });
     draw();
   })();
+
+  /* ---------- Campo de búsqueda ---------- */
+  (function () {
+    var inp = $('#sf-in'); if (!inp) return;
+    var P = [['Ana Torres', '10234567'], ['Luis Pérez', '10345678'], ['Laura Díaz', '10456789'], ['Andrés Molina', '10567890'], ['Carlos Mendoza', '23456789'], ['Valeria Quispe', '56789012']];
+    var list = $('#sf-list'), cnt = $('#sf-count'), x = $('#sf-x');
+    function hi(t, q) { if (!q) return esc(t); var i = norm(t).indexOf(norm(q)); return i < 0 ? esc(t) : esc(t.slice(0, i)) + '<mark>' + esc(t.slice(i, i + q.length)) + '</mark>' + esc(t.slice(i + q.length)); }
+    function draw() {
+      var q = inp.value.trim(), r = P.filter(function (p) { return !q || norm(p[0] + ' ' + p[1]).indexOf(norm(q)) >= 0; });
+      list.innerHTML = r.map(function (p) { return '<li><span>' + hi(p[0], q) + '</span><span class="mono">' + hi(p[1], q) + '</span></li>'; }).join('');
+      cnt.textContent = !q ? P.length + ' personas' : r.length ? r.length + (r.length === 1 ? ' resultado' : ' resultados') : 'Sin resultados para «' + q + '». Revisa la ortografía o prueba con el documento.';
+      x.hidden = !q;
+    }
+    inp.addEventListener('input', draw);
+    x.addEventListener('click', function () { inp.value = ''; draw(); inp.focus(); });
+    inp.addEventListener('keydown', function (e) { if (e.key === 'Escape') { if (inp.value) { inp.value = ''; draw(); } else inp.blur(); } });
+    document.addEventListener('keydown', function (e) {
+      var t = e.target, tag = t && t.tagName;
+      if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey || tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || (t && t.isContentEditable)) return;
+      e.preventDefault(); inp.focus();
+    });
+    draw();
+  })();
+
+  /* ---------- Código de un solo uso ---------- */
+  (function () {
+    var row = $('#otp-row'); if (!row) return;
+    var box = $('#otp-box'), msg = $('#otp-msg'), ok = $('#otp-ok'), re = $('#otp-re');
+    var N = 6, CORRECT = '482913', tries = 3, locked = false, ds = [], wait = 0, timer;
+    for (var i = 0; i < N; i++) {
+      var d = document.createElement('input'); d.className = 'otp__d'; d.type = 'text'; d.inputMode = 'numeric'; d.maxLength = 1;
+      d.setAttribute('autocomplete', i === 0 ? 'one-time-code' : 'off'); d.setAttribute('aria-label', 'Dígito ' + (i + 1) + ' de ' + N);
+      row.appendChild(d); ds.push(d);
+    }
+    var code = function () { return ds.map(function (d) { return d.value; }).join(''); };
+    function setS(s, t) { box.setAttribute('data-s', s || ''); msg.textContent = t || ''; ds.forEach(function (d) { if (s === 'error') d.setAttribute('aria-invalid', 'true'); else d.removeAttribute('aria-invalid'); }); }
+    function lock(on) { ds.forEach(function (d) { d.disabled = on; }); }
+    function verify() {
+      if (locked) return;
+      if (code() === CORRECT) { setS('ok', 'Correo confirmado.'); lock(true); ok.disabled = true; return; }
+      tries--;
+      if (tries <= 0) { locked = true; setS('error', 'Demasiados intentos. Vuelve a intentarlo en 5 minutos.'); lock(true); ok.disabled = true; return; }
+      setS('error', 'Código incorrecto. Te quedan ' + tries + (tries === 1 ? ' intento.' : ' intentos.'));
+      ds.forEach(function (d) { d.value = ''; }); ok.disabled = true; ds[0].focus();
+    }
+    function changed() { var full = code().length === N; ok.disabled = !full || locked; if (full) verify(); }
+    ds.forEach(function (d, i) {
+      d.addEventListener('input', function () {
+        var v = d.value.replace(/\D/g, ''); d.value = v.slice(-1);
+        if (box.getAttribute('data-s') === 'error') setS('');
+        if (v && i < N - 1) ds[i + 1].focus(); changed();
+      });
+      d.addEventListener('keydown', function (e) {
+        if (e.key === 'Backspace' && !d.value && i > 0) { ds[i - 1].focus(); ds[i - 1].value = ''; e.preventDefault(); changed(); }
+        else if (e.key === 'ArrowLeft' && i > 0) { e.preventDefault(); ds[i - 1].focus(); }
+        else if (e.key === 'ArrowRight' && i < N - 1) { e.preventDefault(); ds[i + 1].focus(); }
+        else if (e.key === 'Home') { e.preventDefault(); ds[0].focus(); }
+        else if (e.key === 'End') { e.preventDefault(); ds[N - 1].focus(); }
+      });
+      d.addEventListener('focus', function () { d.select(); });
+      d.addEventListener('paste', function (e) {
+        e.preventDefault();
+        var t = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '').slice(0, N); if (!t) return;
+        var from = t.length === N ? 0 : i;
+        for (var k = 0; k < t.length && from + k < N; k++) ds[from + k].value = t[k];
+        ds[Math.min(N - 1, from + t.length)].focus(); if (box.getAttribute('data-s') === 'error') setS(''); changed();
+      });
+    });
+    ok.addEventListener('click', verify);
+    function countdown() {
+      wait = 10; re.disabled = true; clearInterval(timer);
+      timer = setInterval(function () { wait--; if (wait <= 0) { clearInterval(timer); re.disabled = locked; re.textContent = 'Reenviar código'; } else re.textContent = 'Reenviar en ' + wait + ' s'; }, 1000);
+      re.textContent = 'Reenviar en ' + wait + ' s';
+    }
+    re.addEventListener('click', function () { DS.toast('Código reenviado', 'Revisa tu correo. El código anterior ya no sirve.'); setS(''); ds.forEach(function (d) { d.value = ''; }); ds[0].focus(); countdown(); });
+    countdown();
+  })();
+
+  /* ---------- Contraseña con indicador de fuerza ---------- */
+  (function () {
+    var inp = $('#pw-in'); if (!inp) return;
+    var box = $('#pw'), st = $('#pw-st'), reqs = $('#pw-req'), t = $('#pw-t');
+    var R = [['Al menos 10 caracteres', function (v) { return v.length >= 10; }], ['Mayúsculas y minúsculas', function (v) { return /[a-z]/.test(v) && /[A-Z]/.test(v); }], ['Un número', function (v) { return /\d/.test(v); }], ['Un símbolo (por ejemplo ! ? # $)', function (v) { return /[^A-Za-z0-9]/.test(v); }]];
+    var W = ['', 'Muy débil', 'Débil', 'Buena', 'Fuerte'], live;
+    reqs.innerHTML = R.map(function (r) { return '<li><i class="bi bi-circle" aria-hidden="true"></i><span>' + r[0] + '</span><span class="sr-only">: falta</span></li>'; }).join('');
+    function update() {
+      var v = inp.value, met = R.map(function (r) { return r[1](v); }), n = met.filter(Boolean).length;
+      var lv = !v ? 0 : n <= 1 ? 1 : n === 2 ? 2 : n === 3 ? 3 : 4;
+      if (v.length >= 14 && n >= 3) lv = 4;
+      box.setAttribute('data-lv', lv);
+      $$('li', reqs).forEach(function (li, i) { li.className = met[i] ? 'ok' : ''; $('i', li).className = 'bi ' + (met[i] ? 'bi-check-circle-fill' : 'bi-circle'); $('.sr-only', li).textContent = met[i] ? ': cumplido' : ': falta'; });
+      clearTimeout(live);
+      live = setTimeout(function () { st.textContent = !v ? 'Escribe una contraseña.' : 'Seguridad: ' + W[lv] + '. Cumples ' + n + ' de ' + R.length + ' requisitos.'; }, v ? 450 : 0);
+    }
+    inp.addEventListener('input', update);
+    t.addEventListener('click', function () { var show = inp.type === 'password'; inp.type = show ? 'text' : 'password'; t.setAttribute('aria-pressed', show); t.textContent = show ? 'Ocultar' : 'Mostrar'; });
+    update();
+  })();
+
+  /* ---------- Multi-select y filtros activos ---------- */
+  (function () {
+    var inp = $('#ms-in'); if (!inp) return;
+    var OPT = ['CAM-001', 'CAM-002', 'LEC-001', 'LEC-002', 'KIOSCO-01'], EV = { 'CAM-001': 412, 'CAM-002': 198, 'LEC-001': 356, 'LEC-002': 231, 'KIOSCO-01': 87 };
+    var list = $('#ms-list'), chips = $('#ms-chips'), fchips = $('#fa-chips'), fclear = $('#fa-clear'), fn = $('#fa-n'), field = $('#ms-field');
+    var sel = [], act = -1, shown = [];
+    var chip = function (v) { return '<span class="chipx">' + esc(v) + '<button type="button" data-v="' + esc(v) + '" aria-label="Quitar ' + esc(v) + '"><i class="bi bi-x-lg" aria-hidden="true"></i></button></span>'; };
+    function sum(a) { return a.reduce(function (s, v) { return s + EV[v]; }, 0); }
+    function renderChips() {
+      chips.innerHTML = sel.map(chip).join(''); fchips.innerHTML = sel.map(chip).join(''); fclear.hidden = !sel.length;
+      fn.textContent = (sel.length ? sum(sel) : sum(OPT)).toLocaleString('es-PE') + ' eventos' + (sel.length ? ' en ' + sel.length + (sel.length === 1 ? ' dispositivo' : ' dispositivos') : ' en todos los dispositivos');
+    }
+    function renderList() {
+      shown = OPT.filter(function (o) { return norm(o).indexOf(norm(inp.value.trim())) >= 0; });
+      list.innerHTML = shown.length ? shown.map(function (o, i) { return '<li class="cb__opt cb__opt--m" role="option" id="ms-o' + i + '" data-v="' + o + '" aria-selected="' + (sel.indexOf(o) >= 0) + '"><span class="cb__ck"><i class="bi bi-check-lg" aria-hidden="true"></i></span><span>' + esc(o) + '<small>' + EV[o] + ' eventos</small></span></li>'; }).join('') : '<li class="cb__none" role="presentation">Sin resultados para «' + esc(inp.value.trim()) + '».</li>';
+      setAct(Math.min(act, shown.length - 1));
+    }
+    function setAct(i) {
+      act = i; $$('.cb__opt', list).forEach(function (o, k) { o.classList.toggle('is-act', k === i); o.style.background = k === i ? 'var(--av-blue-tint)' : ''; });
+      var o = $('#ms-o' + i); if (o) inp.setAttribute('aria-activedescendant', o.id); else inp.removeAttribute('aria-activedescendant');
+    }
+    function open() { list.hidden = false; inp.setAttribute('aria-expanded', 'true'); renderList(); }
+    function close() { list.hidden = true; inp.setAttribute('aria-expanded', 'false'); inp.removeAttribute('aria-activedescendant'); act = -1; }
+    function toggle(v) { var i = sel.indexOf(v); if (i >= 0) sel.splice(i, 1); else sel.push(v); renderChips(); renderList(); }
+    function remove(v) { var i = sel.indexOf(v); if (i >= 0) sel.splice(i, 1); renderChips(); if (!list.hidden) renderList(); inp.focus(); }
+    inp.addEventListener('input', function () { if (list.hidden) open(); else { act = 0; renderList(); } });
+    inp.addEventListener('focus', function () { if (list.hidden) open(); });
+    inp.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowDown') { e.preventDefault(); if (list.hidden) open(); setAct(Math.min(shown.length - 1, act + 1)); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); if (list.hidden) open(); setAct(Math.max(0, act - 1)); }
+      else if ((e.key === 'Enter' || (e.key === ' ' && !inp.value)) && !list.hidden && act >= 0) { e.preventDefault(); toggle(shown[act]); }
+      else if (e.key === 'Backspace' && !inp.value && sel.length) { remove(sel[sel.length - 1]); }
+      else if (e.key === 'Escape' && !list.hidden) { e.preventDefault(); close(); }
+    });
+    list.addEventListener('mousedown', function (e) { var o = e.target.closest('.cb__opt'); if (o) { e.preventDefault(); toggle(o.getAttribute('data-v')); inp.focus(); } });
+    field.addEventListener('click', function (e) { if (!e.target.closest('button')) inp.focus(); });
+    [chips, fchips].forEach(function (c) { c.addEventListener('click', function (e) { var b = e.target.closest('button[data-v]'); if (b) remove(b.getAttribute('data-v')); }); });
+    fclear.addEventListener('click', function () { sel = []; renderChips(); if (!list.hidden) renderList(); inp.focus(); });
+    document.addEventListener('click', function (e) { if (!$('#ms').contains(e.target)) close(); });
+    renderChips();
+  })();
+
+  /* ---------- Validación y resumen de errores ---------- */
+  (function () {
+    var f = $('#fv'); if (!f) return;
+    var sum = $('#fv-sum'), sl = $('#fv-sum-l');
+    var F = {
+      n: { el: $('#fv-n'), err: $('#fv-n-e'), lab: 'Nombre completo', check: function (v) { return v.trim().length >= 3 ? '' : 'Escribe el nombre completo.'; } },
+      c: { el: $('#fv-c'), err: $('#fv-c-e'), lab: 'Correo electrónico', check: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) ? '' : 'Escribe un correo como nombre@dominio.com.'; } },
+      d: { el: $('#fv-d'), err: $('#fv-d-e'), lab: 'Documento', check: function (v) { return /^\d{8}$/.test(v.trim()) ? '' : 'El documento tiene 8 dígitos.'; } }
+    };
+    function show(k) {
+      var m = F[k], e = m.check(m.el.value);
+      m.err.hidden = !e; m.err.innerHTML = e ? '<i class="bi bi-exclamation-circle" aria-hidden="true"></i> ' + esc(e) : '';
+      if (e) m.el.setAttribute('aria-invalid', 'true'); else m.el.removeAttribute('aria-invalid');
+      return e;
+    }
+    Object.keys(F).forEach(function (k) {
+      F[k].el.addEventListener('blur', function () { if (F[k].el.value || F[k].touched) show(k); F[k].touched = true; });
+      F[k].el.addEventListener('input', function () { if (F[k].el.getAttribute('aria-invalid')) show(k); });
+    });
+    f.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      var errs = [];
+      Object.keys(F).forEach(function (k) { var e = show(k); if (e) errs.push([k, e]); });
+      if (errs.length) {
+        $('#fv-sum-t').textContent = 'Corrige ' + errs.length + (errs.length === 1 ? ' campo' : ' campos') + ' para continuar';
+        sl.innerHTML = errs.map(function (x) { return '<li><a href="#fv-' + x[0] + '">' + esc(F[x[0]].lab) + ': ' + esc(x[1]) + '</a></li>'; }).join('');
+        sum.hidden = false; sum.focus();
+      } else { sum.hidden = true; DS.toast('Persona guardada', 'Los datos pasaron la validación.'); }
+    });
+    sl.addEventListener('click', function (e) { var a = e.target.closest('a'); if (!a) return; e.preventDefault(); $(a.getAttribute('href')).focus(); });
+    $('#fv-reset').addEventListener('click', function () { Object.keys(F).forEach(function (k) { F[k].el.value = ''; F[k].touched = false; F[k].el.removeAttribute('aria-invalid'); F[k].err.hidden = true; }); sum.hidden = true; });
+  })();
 })();
