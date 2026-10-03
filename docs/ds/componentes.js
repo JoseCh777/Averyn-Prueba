@@ -457,4 +457,85 @@
     sl.addEventListener('click', function (e) { var a = e.target.closest('a'); if (!a) return; e.preventDefault(); $(a.getAttribute('href')).focus(); });
     $('#fv-reset').addEventListener('click', function () { Object.keys(F).forEach(function (k) { F[k].el.value = ''; F[k].touched = false; F[k].el.removeAttribute('aria-invalid'); F[k].err.hidden = true; }); sum.hidden = true; });
   })();
+
+  /* ---------- Carga de archivos (simulada: no sube nada) ---------- */
+  (function () {
+    var list = $('#up-list'), inp = $('#up-in'), drop = $('#up-drop'); if (!list) return;
+    var live = $('#up-live'), MAX = 5 * 1024 * 1024, OK = /\.(pdf|jpe?g|png)$/i, id = 0, timers = {}, rows = {};
+    var size = function (b) { return b >= 1048576 ? (b / 1048576).toFixed(1).replace('.', ',') + ' MB' : Math.max(1, Math.round(b / 1024)) + ' KB'; };
+    var icon = function (n) { return /\.pdf$/i.test(n) ? 'bi-file-earmark-pdf' : /\.(jpe?g|png)$/i.test(n) ? 'bi-file-earmark-image' : 'bi-file-earmark'; };
+    var CHIP = { load: ['hz-chip--info', 'bi-arrow-repeat', 'Cargando'], ok: ['hz-chip--success', 'bi-check-circle', 'Listo'], err: ['hz-chip--warning', 'bi-exclamation-circle', 'Error de red'], rej: ['hz-chip--error', 'bi-x-circle', 'Rechazado'] };
+    function say(t) { live.textContent = ''; setTimeout(function () { live.textContent = t; }, 30); }
+    function paint(r) {
+      var el = r.el, c = CHIP[r.state], pct = Math.round(r.p * 100), btn = '';
+      if (r.state === 'load') btn = '<button class="up__btn" type="button" data-a="cancel">Cancelar<span class="sr-only"> ' + esc(r.name) + '</span></button>';
+      else if (r.state === 'err') btn = '<button class="up__btn" type="button" data-a="retry">Reintentar<span class="sr-only"> ' + esc(r.name) + '</span></button><button class="up__btn" type="button" data-a="del">Quitar<span class="sr-only"> ' + esc(r.name) + '</span></button>';
+      else btn = '<button class="up__btn" type="button" data-a="del">Quitar<span class="sr-only"> ' + esc(r.name) + '</span></button>';
+      var meta = r.state === 'rej' ? r.why : size(r.bytes) + (r.state === 'load' ? ' · ' + pct + ' %' : r.state === 'err' ? ' · se cortó la conexión' : '');
+      el.setAttribute('data-state', r.state);
+      el.innerHTML = '<i class="bi ' + icon(r.name) + ' up__ic" aria-hidden="true"></i><div class="up__nm"><b title="' + esc(r.name) + '">' + esc(r.name) + '</b><span class="up__meta"><span class="hz-chip ' + c[0] + '"><i class="bi ' + c[1] + '" aria-hidden="true"></i>' + c[2] + '</span><small>' + esc(meta) + '</small></span></div><div class="up__act">' + btn + '</div>' +
+        (r.state === 'load' ? '<div class="up__bar" role="progressbar" aria-label="Carga de ' + esc(r.name) + '" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + pct + '"><i style="--p:' + r.p + '"></i></div>' : '');
+    }
+    function run(r) {
+      r.state = 'load'; r.p = 0; paint(r); clearInterval(timers[r.id]);
+      timers[r.id] = setInterval(function () {
+        r.p = Math.min(1, r.p + .09 + Math.random() * .06);
+        if (r.failAt && r.p >= r.failAt && !r.retried) { clearInterval(timers[r.id]); r.state = 'err'; r.p = r.failAt; paint(r); say(r.name + ': error de red. Puedes reintentar.'); return; }
+        if (r.p >= 1) { clearInterval(timers[r.id]); r.state = 'ok'; r.p = 1; paint(r); say(r.name + ': listo.'); return; }
+        paint(r);
+      }, window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 60 : 180);
+    }
+    function add(name, bytes, opt) {
+      var r = { id: ++id, name: name, bytes: bytes, p: 0, failAt: opt && opt.failAt, state: 'load' };
+      var li = document.createElement('li'); li.className = 'up__row'; r.el = li; rows[r.id] = r; list.appendChild(li);
+      if (!OK.test(name)) { r.state = 'rej'; r.why = 'Formato no permitido: usa PDF, JPG o PNG'; paint(r); say(name + ': rechazado, formato no permitido.'); return; }
+      if (bytes > MAX) { r.state = 'rej'; r.why = 'Pesa ' + size(bytes) + ': el máximo es 5 MB'; paint(r); say(name + ': rechazado, pesa más de 5 MB.'); return; }
+      run(r);
+    }
+    function take(files) { Array.prototype.forEach.call(files, function (f) { add(f.name, f.size); }); }
+    inp.addEventListener('change', function () { take(inp.files); inp.value = ''; });
+    ['dragenter', 'dragover'].forEach(function (t) { drop.addEventListener(t, function (e) { e.preventDefault(); drop.classList.add('is-over'); }); });
+    ['dragleave', 'drop'].forEach(function (t) { drop.addEventListener(t, function (e) { e.preventDefault(); drop.classList.remove('is-over'); }); });
+    drop.addEventListener('drop', function (e) { take(e.dataTransfer.files); });
+    list.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return; var li = b.closest('li'), r = rows[Object.keys(rows).filter(function (k) { return rows[k].el === li; })[0]];
+      var a = b.getAttribute('data-a'), next = li.nextElementSibling || li.previousElementSibling;
+      if (a === 'retry') { r.retried = true; run(r); var nb = li.querySelector('button'); if (nb) nb.focus(); return; }
+      clearInterval(timers[r.id]); delete rows[r.id]; li.remove(); say(r.name + (a === 'cancel' ? ': carga cancelada.' : ': quitado de la lista.'));
+      ((next && next.querySelector('button')) || $('#up-demo')).focus();
+    });
+    $('#up-demo').addEventListener('click', function () {
+      add('cedula-frente.jpg', 1.3 * 1048576); add('cedula-reverso.png', 2.1 * 1048576, { failAt: .55 }); add('constancia-matricula.docx', 380 * 1024);
+    });
+    $('#up-clear').addEventListener('click', function () { Object.keys(timers).forEach(function (k) { clearInterval(timers[k]); }); rows = {}; list.innerHTML = ''; say('Lista vaciada.'); });
+  })();
+
+  /* ---------- Estados de carga ---------- */
+  (function () {
+    var go = $('#ld-go'), list = $('#ld-list'); if (!go) return;
+    var box = $('#ld'), live = $('#ld-live'), save = $('#ld-save'), t1, t2;
+    var DATA = [['MR', 'María Rojas Quispe', 'Verificada · hoy 09:12', 'hz-chip--success', 'bi-check-circle', 'Verificada'], ['LP', 'Luis Paredes Gómez', 'En reintento · hoy 08:47', 'hz-chip--warning', 'bi-exclamation-circle', 'Reintento'], ['AC', 'Ana Castro Núñez', 'Pendiente · ayer 17:30', 'hz-chip--neutral', 'bi-clock', 'Pendiente']];
+    function skeleton() { return DATA.map(function () { return '<li class="ld__item"><span class="ld__sk ld__sk--av"></span><div><span class="ld__sk ld__sk--l1"></span><span class="ld__sk ld__sk--l2"></span></div><span class="ld__sk ld__sk--chip"></span></li>'; }).join(''); }
+    function content() { return DATA.map(function (d) { return '<li class="ld__item"><span class="ld__av" aria-hidden="true">' + d[0] + '</span><div class="ld__nm"><b>' + d[1] + '</b><small>' + d[2] + '</small></div><span class="hz-chip ' + d[3] + '"><i class="bi ' + d[4] + '" aria-hidden="true"></i>' + d[5] + '</span></li>'; }).join(''); }
+    function load() {
+      clearTimeout(t1); box.setAttribute('aria-busy', 'true'); go.disabled = true; list.innerHTML = skeleton(); live.textContent = '';
+      t1 = setTimeout(function () { list.innerHTML = content(); box.setAttribute('aria-busy', 'false'); go.disabled = false; live.textContent = 'Lista cargada: 3 personas.'; }, 1600);
+    }
+    function fail() {
+      clearTimeout(t1); box.setAttribute('aria-busy', 'true'); go.disabled = fb.disabled = true; list.innerHTML = skeleton(); live.textContent = '';
+      t1 = setTimeout(function () {
+        list.innerHTML = '<li class="ld__err"><div class="hz-alert hz-alert--error" role="alert"><strong>No pudimos cargar la lista</strong>Revisa tu conexión e inténtalo de nuevo. <button class="up__btn" type="button" id="ld-retry">Reintentar</button></div></li>';
+        box.setAttribute('aria-busy', 'false'); go.disabled = fb.disabled = false; $('#ld-retry').focus();
+        $('#ld-retry').addEventListener('click', load);
+      }, 1200);
+    }
+    var fb = $('#ld-fail');
+    go.addEventListener('click', load); fb.addEventListener('click', fail);
+    save.addEventListener('click', function () {
+      if (save.getAttribute('aria-busy') === 'true') return;
+      save.setAttribute('aria-busy', 'true'); save.setAttribute('aria-disabled', 'true'); save.querySelector('.ld__lbl').textContent = 'Guardando…'; live.textContent = 'Guardando cambios.';
+      t2 = setTimeout(function () { save.removeAttribute('aria-busy'); save.removeAttribute('aria-disabled'); save.querySelector('.ld__lbl').textContent = 'Guardar cambios'; live.textContent = 'Cambios guardados.'; DS.toast('Cambios guardados', 'Se aplicaron correctamente.'); }, 1500);
+    });
+    list.innerHTML = content();
+  })();
 })();
