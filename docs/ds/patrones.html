@@ -37,6 +37,7 @@
         <a href="#rostro">Captura facial</a>
         <a href="#huella">Captura de huella</a>
         <a href="#resultado">Resultado de verificación</a>
+        <a href="#revision-manual">Revisión manual</a>
         <a href="#ocr">Documento y OCR</a>
         <a href="#papeleta">Tarjetón y comprobante</a>
         <a href="#dispositivos">Dispositivos</a>
@@ -195,8 +196,29 @@
         </div>
       </div>
     </div></section>
+
+    <!-- REVISIÓN MANUAL -->
+    <section class="ds-sec ds-sec--tint" id="revision-manual" aria-labelledby="h-revision-manual" data-nav="Revisión manual" data-grp="Biométricos y electorales"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Patrones · Biométricos y electorales</span>
+      <h2 id="h-revision-manual">Revisión manual de verificaciones</h2>
+      <p class="ds-lead">Cuando un puntaje cae cerca del umbral, una persona autorizada decide. Una cola de casos, el detalle con el puntaje frente al umbral y una decisión que <b>exige motivo</b> y queda en la bitácora. <span class="hz-chip hz-chip--info hz-chip--outline hz-chip--wrap"><i class="bi bi-lightbulb" aria-hidden="true"></i>Propuesta de diseño, pendiente de validar con el equipo</span></p>
+      <div class="pt-grid rv-grid">
+        <div class="pt-card" id="rv">
+          <div class="rv__layout">
+            <div class="rv__queue"><h3 class="rv__h">Cola de revisión <span class="hz-chip hz-chip--warning" id="rv-count"></span></h3><ul class="rv__list" id="rv-list" aria-label="Casos pendientes"></ul></div>
+            <div class="rv__detail" id="rv-detail" tabindex="-1"></div>
+          </div>
+        </div>
+        <div class="pt-side">
+          <div><h3>Anatomía</h3><ol><li><b>Cola</b> ordenada por antigüedad, con el puntaje y la distancia al umbral en texto.</li><li><b>Detalle</b>: puntaje grande, escala con el umbral, y los datos del intento (dispositivo, calidad, prueba de vida, intentos previos).</li><li><b>Decisión</b>: aprobar o rechazar, con <b>motivo obligatorio</b> y nota opcional.</li><li><b>Registro</b>: la decisión guarda quién, cuándo y por qué en la bitácora (<code>BIOMETRIC_VERIFIED</code> con origen "revisión manual").</li></ol></div>
+          <div><h3>Reglas</h3><ul><li>La <b>banda de revisión</b> (aquí 0.60–0.75) la define el servidor, igual que el umbral.</li><li>Esta propuesta compara <b>puntajes y metadatos</b>; si el revisor puede ver imágenes es una decisión de privacidad por tomar.</li><li>Nadie revisa sus propios casos (el sistema excluye al usuario implicado).</li><li>Decidir no es reversible desde esta pantalla; un error se corrige con una nueva revisión que deja rastro.</li></ul></div>
+          <div><h3>Copy aprobado</h3><ul><li>Cola vacía: "No hay casos pendientes. Buen trabajo."</li><li>Tras decidir: "Decisión registrada. Quedan 3 casos."</li></ul></div>
+        </div>
+      </div>
+    </div></section>
+
     <!-- DOCUMENTO Y OCR -->
-    <section class="ds-sec ds-sec--tint" id="ocr" aria-labelledby="h-ocr" data-nav="Documento y OCR" data-grp="Biométricos y electorales"><div class="ds-wrap">
+    <section class="ds-sec" id="ocr" aria-labelledby="h-ocr" data-nav="Documento y OCR" data-grp="Biométricos y electorales"><div class="ds-wrap">
       <span class="ds-eyebrow mono">Patrones · Biométricos y electorales</span>
       <h2 id="h-ocr">Captura de documento y revisión de datos</h2>
       <p class="ds-lead">La cámara lee, la persona confirma. Cada campo extraído se muestra editable con su confianza en texto; los de baja confianza se piden revisar antes de continuar.</p>
@@ -217,7 +239,7 @@
       </div>
     </div></section>
     <!-- TARJETÓN Y COMPROBANTE -->
-    <section class="ds-sec" id="papeleta" aria-labelledby="h-pap" data-nav="Tarjetón y comprobante" data-grp="Biométricos y electorales"><div class="ds-wrap">
+    <section class="ds-sec ds-sec--tint" id="papeleta" aria-labelledby="h-pap" data-nav="Tarjetón y comprobante" data-grp="Biométricos y electorales"><div class="ds-wrap">
       <span class="ds-eyebrow mono">Patrones · Biométricos y electorales</span>
       <h2 id="h-pap">Tarjetón electoral y comprobante</h2>
       <p class="ds-lead">La papeleta digital imita al tarjetón de papel que la gente ya conoce: cada opción es una casilla grande con espacio para la <b>foto</b>, el <b>número</b>, el <b>nombre</b> y el <b>logo</b> de la lista, y el voto en blanco es una casilla igual de grande. El comprobante prueba que <b>un voto fue emitido</b> sin decir cuál ni de quién.</p>
@@ -248,7 +270,7 @@
       </div>
     </div></section>
     <!-- DISPOSITIVOS -->
-    <section class="ds-sec ds-sec--tint" id="dispositivos" aria-labelledby="h-dev" data-nav="Dispositivos" data-grp="Biométricos y electorales"><div class="ds-wrap">
+    <section class="ds-sec" id="dispositivos" aria-labelledby="h-dev" data-nav="Dispositivos" data-grp="Biométricos y electorales"><div class="ds-wrap">
       <span class="ds-eyebrow mono">Patrones · Biométricos y electorales</span>
       <h2 id="h-dev">Estado de dispositivos</h2>
       <p class="ds-lead">Cámaras y lectores son fuentes de datos: si fallan, la persona que administra debe saberlo a primera vista y poder actuar. Cada fila tiene estado en texto, última señal y una acción.</p>
@@ -262,7 +284,7 @@
       </div>
     </div></section>
     <!-- CONSENTIMIENTO -->
-    <section class="ds-sec" id="consentimiento" aria-labelledby="h-cons" data-nav="Consentimiento" data-grp="Biométricos y electorales"><div class="ds-wrap">
+    <section class="ds-sec ds-sec--tint" id="consentimiento" aria-labelledby="h-cons" data-nav="Consentimiento" data-grp="Biométricos y electorales"><div class="ds-wrap">
       <span class="ds-eyebrow mono">Patrones · Biométricos y electorales</span>
       <h2 id="h-cons">Consentimiento de datos biométricos</h2>
       <p class="ds-lead">Va antes de la primera captura. Cuatro respuestas en lenguaje llano: qué guardamos, para qué, por cuánto tiempo y cómo se revoca. El texto legal definitivo lo fija el área jurídica; este patrón fija la <b>estructura</b>.</p>
@@ -279,7 +301,7 @@
       </div>
     </div></section>
     <!-- RESUMEN DE ESTADOS Y CANALES -->
-    <section class="ds-sec ds-sec--tint" id="copy-patrones" aria-labelledby="h-cp" data-nav="Resumen de estados y canales" data-grp="Biométricos y electorales"><div class="ds-wrap">
+    <section class="ds-sec" id="copy-patrones" aria-labelledby="h-cp" data-nav="Resumen de estados y canales" data-grp="Biométricos y electorales"><div class="ds-wrap">
       <span class="ds-eyebrow mono">Patrones · Biométricos y electorales</span>
       <h2 id="h-cp">Resumen de estados y canales</h2>
       <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Patrón</th><th>Estados</th><th>Canales (nunca solo color)</th><th>Anuncio</th></tr></thead><tbody>

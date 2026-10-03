@@ -226,6 +226,7 @@ code, kbd, pre { font-family: var(--av-font-mono); }
 .hz-chip--neutral { --c-fg: var(--av-neutral-text); --c-bg: var(--av-neutral-bg); --c-solid: var(--av-neutral-text); }
 .hz-chip--outline { background: transparent; border-color: var(--c-bd); }
 .hz-chip--solid { background: var(--c-solid); color: #fff; }
+.hz-chip--wrap { white-space: normal; max-width: 100%; text-align: left; }
 .hz-tag { display: inline-block; padding: .2rem .6rem; border: 1px solid var(--av-hairline-strong); border-radius: 999px; background: #fff; color: var(--av-gray-500); font-family: var(--av-font-mono); font-size: .6875rem; letter-spacing: .06em; text-transform: uppercase; }
 
 /* Tiles, KPI, panel, media, equipo */

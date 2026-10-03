@@ -46,6 +46,10 @@
         <a href="#segundo-factor">Segundo factor</a>
         <a href="#institucion">Selección de institución</a>
         <a href="#invitacion">Aceptar invitación</a>
+        <span class="grp sub mono">Administración y escrutinio</span>
+        <a href="#escrutinio">Escrutinio</a>
+        <a href="#mesas">Mesas y padrón</a>
+        <a href="#roles">Roles y permisos</a>
         <span class="grp sub mono">Estados de interfaz</span>
         <a href="#estados">Carga, vacío y subida</a>
         <span class="grp sub mono">Páginas de error</span>
@@ -240,8 +244,48 @@
       </div>
     </div></section>
 
+    <!-- ESCRUTINIO -->
+    <section class="ds-sec" id="escrutinio" aria-labelledby="h-escrutinio" data-nav="Escrutinio" data-grp="Administración y escrutinio"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Plantillas y estados · Administración y escrutinio</span>
+      <h2 id="h-escrutinio">Escrutinio (resultados electorales)</h2>
+      <p class="ds-lead">Los resultados de una elección en una sola pantalla: participación frente a la meta, votos por lista y estado de cada mesa. Solo muestra <b>agregados</b>. <span class="hz-chip hz-chip--info hz-chip--outline hz-chip--wrap"><i class="bi bi-lightbulb" aria-hidden="true"></i>Propuesta de diseño, pendiente de validar con el equipo</span></p>
+      <div class="tpf" data-t="escrutinio" data-title="Escrutinio (resultados electorales)" data-states="conteo:En conteo,final:Resultados finales,sin:Sin datos"></div>
+      <div class="tpf__spec">
+        <div><h3>Regiones</h3><ul><li>Cabecera con el estado de la elección (En conteo / Resultados finales) y la acción de exportar el acta.</li><li>Tres indicadores: participación, mesas reportadas y votos emitidos.</li><li>Votos por lista (barras con el valor y el porcentaje en texto) y participación frente a la meta (bullet).</li><li>Tabla de mesas con su estado como píldora.</li></ul></div>
+        <div><h3>Estados</h3><ul><li><b>En conteo:</b> mesas pendientes y participación "por debajo" de la meta, dicho en texto.</li><li><b>Resultados finales:</b> todas las mesas reportadas; el estado cambia a verde.</li><li><b>Sin datos:</b> explica qué aparecerá y cuándo.</li></ul></div>
+        <div><h3>Componentes y reglas</h3><ul><li>Reutiliza las formas de <i>Gráficos</i>: fichas KPI, barras horizontales y bullet.</li><li>Privacidad: solo totales; nada permite vincular a una persona con su voto.</li><li>Orden de las listas y peso visual iguales para todas; el orden lo define la autoridad electoral.</li><li>Acta de resultados: ver <i>Marca y entregables › Impresión</i>.</li></ul></div>
+      </div>
+    </div></section>
+
+    <!-- MESAS Y PADRÓN -->
+    <section class="ds-sec ds-sec--tint" id="mesas" aria-labelledby="h-mesas" data-nav="Mesas y padrón" data-grp="Administración y escrutinio"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Plantillas y estados · Administración y escrutinio</span>
+      <h2 id="h-mesas">Mesas y padrón</h2>
+      <p class="ds-lead">Dónde se vota y quién puede hacerlo: la lista de mesas con sus habilitados, su responsable y su estado, y la importación del padrón. <span class="hz-chip hz-chip--info hz-chip--outline hz-chip--wrap"><i class="bi bi-lightbulb" aria-hidden="true"></i>Propuesta de diseño, pendiente de validar con el equipo</span></p>
+      <div class="tpf" data-t="mesas" data-title="Mesas y padrón" data-states="normal:Normal,vacio:Vacío"></div>
+      <div class="tpf__spec">
+        <div><h3>Regiones</h3><ul><li>Cabecera con "Importar padrón" y "Nueva mesa".</li><li>Búsqueda y filtro por estado.</li><li>Tabla de mesas con paginación.</li></ul></div>
+        <div><h3>Estados</h3><ul><li><b>Sin responsable:</b> se avisa con píldora de aviso (requiere acción), no solo con una celda vacía.</li><li><b>Vacío:</b> ofrece importar el padrón o crear la primera mesa.</li></ul></div>
+        <div><h3>Componentes y reglas</h3><ul><li>Tabla avanzada, píldoras de estado y paginación (<i>Componentes</i>).</li><li>El asistente electoral (<i>Asistente electoral</i>, más arriba) carga el padrón en su paso 3.</li><li>Los datos de las personas del padrón no se muestran en esta lista.</li></ul></div>
+      </div>
+    </div></section>
+
+    <!-- ROLES Y PERMISOS -->
+    <section class="ds-sec" id="roles" aria-labelledby="h-roles" data-nav="Roles y permisos" data-grp="Administración y escrutinio"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Plantillas y estados · Administración y escrutinio</span>
+      <h2 id="h-roles">Roles y permisos</h2>
+      <p class="ds-lead">Una matriz de roles por acciones. Los cambios se guardan juntos y los que quitan poder a un administrador piden confirmación. <span class="hz-chip hz-chip--info hz-chip--outline hz-chip--wrap"><i class="bi bi-lightbulb" aria-hidden="true"></i>Propuesta de diseño, pendiente de validar con el equipo</span></p>
+      <div class="tpf" data-t="roles" data-title="Roles y permisos" data-states="normal:Normal,cambios:Con cambios"></div>
+      <div class="tpf__spec">
+        <div><h3>Regiones</h3><ul><li>Matriz con permisos en filas y roles en columnas.</li><li>Barra de guardado fija cuando hay cambios.</li><li>Nota que explica lo que no se puede cambiar.</li></ul></div>
+        <div><h3>Estados</h3><ul><li><b>Con cambios:</b> alerta de aviso, contador de cambios y barra de guardado.</li><li><b>Bloqueado:</b> "Administrar usuarios" no se puede quitar al Administrador (se muestra "Siempre" con candado y en texto).</li></ul></div>
+        <div><h3>Componentes y reglas</h3><ul><li>Casillas de 22 px con etiqueta para lector de pantalla ("Operador: Registrar personas").</li><li>Auditoría: cada cambio de permisos queda en la bitácora.</li><li>El módulo de usuarios aún figura como "Próximamente" en el dock; esta plantilla es una propuesta.</li></ul></div>
+      </div>
+    </div></section>
+
+
     <!-- CARGA, VACÍO Y SUBIDA -->
-    <section class="ds-sec" id="estados" aria-labelledby="h-estados" data-nav="Carga, vacío y subida" data-grp="Estados de interfaz"><div class="ds-wrap">
+    <section class="ds-sec ds-sec--tint" id="estados" aria-labelledby="h-estados" data-nav="Carga, vacío y subida" data-grp="Estados de interfaz"><div class="ds-wrap">
       <span class="ds-eyebrow mono">Plantillas y estados · Estados de interfaz</span>
       <h2 id="h-estados">Estados: carga, vacío y subida</h2>
       <p class="ds-lead">Cada pantalla define los tres estados antes de darse por terminada: cargando, vacía y con error. Un estado vacío siempre ofrece el siguiente paso.</p>
@@ -256,7 +300,7 @@
       </div>
     </div></section>
     <!-- ANATOMÍA DE UN ERROR -->
-    <section class="ds-sec ds-sec--tint" id="anatomia" aria-labelledby="h-anatomia" data-nav="Anatomía de un error" data-grp="Páginas de error"><div class="ds-wrap">
+    <section class="ds-sec" id="anatomia" aria-labelledby="h-anatomia" data-nav="Anatomía de un error" data-grp="Páginas de error"><div class="ds-wrap">
       <span class="ds-eyebrow mono">Plantillas y estados · Páginas de error</span>
       <h2 id="h-anatomia">Una página de error que ayuda</h2>
       <p class="ds-lead">Cuando algo no sale como se espera, la pantalla no regaña ni se disculpa de más: dice qué pasó, qué hacer y deja salida. Es la misma firma de Averyn, el horizonte y los arcos, pero con los arcos <b>rotos</b>: la figura "no encaja", igual que la página que se buscaba.</p>
@@ -280,7 +324,7 @@
       </div>
     </div></section>
     <!-- VARIANTES -->
-    <section class="ds-sec" id="variantes" aria-labelledby="h-variantes" data-nav="Variantes" data-grp="Páginas de error"><div class="ds-wrap">
+    <section class="ds-sec ds-sec--tint" id="variantes" aria-labelledby="h-variantes" data-nav="Variantes" data-grp="Páginas de error"><div class="ds-wrap">
       <span class="ds-eyebrow mono">Plantillas y estados · Páginas de error</span>
       <h2 id="h-variantes">Cinco variantes, una sola hoja de estilos</h2>
       <p class="ds-lead">Las páginas reales están en <code>averyn-frontend/</code> y comparten <code>error.css</code> y <code>error.js</code>; cambian el atributo <code>data-error</code> y el texto. Las vistas de abajo cargan las páginas verdaderas.</p>
@@ -301,7 +345,7 @@
       <p class="ds-note">En sin conexión y mantenimiento el número se reemplaza por una palabra ("Offline", "Pronto") en la misma escala tipográfica. Ninguna variante promete una hora de regreso.</p>
     </div></section>
     <!-- COMPORTAMIENTO Y ROBUSTEZ -->
-    <section class="ds-sec ds-sec--tint" id="comportamiento" aria-labelledby="h-comp" data-nav="Comportamiento y robustez" data-grp="Páginas de error"><div class="ds-wrap">
+    <section class="ds-sec" id="comportamiento" aria-labelledby="h-comp" data-nav="Comportamiento y robustez" data-grp="Páginas de error"><div class="ds-wrap">
       <span class="ds-eyebrow mono">Plantillas y estados · Páginas de error</span>
       <h2 id="h-comp">Comportamiento y robustez</h2>
       <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Aspecto</th><th>Regla</th></tr></thead><tbody>
@@ -324,7 +368,7 @@
       </tbody></table></div>
     </div></section>
     <!-- LA FIGURA ROTA -->
-    <section class="ds-sec" id="figura" aria-labelledby="h-figura" data-nav="La figura rota" data-grp="Páginas de error"><div class="ds-wrap">
+    <section class="ds-sec ds-sec--tint" id="figura" aria-labelledby="h-figura" data-nav="La figura rota" data-grp="Páginas de error"><div class="ds-wrap">
       <span class="ds-eyebrow mono">Plantillas y estados · Páginas de error</span>
       <h2 id="h-figura">Cómo se construye la figura rota</h2>
       <p class="ds-lead">Es la figura de arcos con tres piezas desplazadas. Para que antes de separarse encajen al píxel, las curvas se parten con el algoritmo de De Casteljau en lugar de dibujarse a ojo.</p>
@@ -347,7 +391,7 @@
       <p class="ds-note">La animación va en un <code>&lt;g&gt;</code> envolvente y no en el trazo: el trazo ya usa <code>animation</code> para dibujarse y dos clases con <code>animation</code> se pisarían. Desplazamientos: arco medio (+18, +14), arco interior (+22, −8), diagonal inferior (−22, +10).</p>
     </div></section>
     <!-- COPY DE ERRORES -->
-    <section class="ds-sec ds-sec--tint" id="copy-errores" aria-labelledby="h-copy" data-nav="Copy de errores" data-grp="Páginas de error"><div class="ds-wrap">
+    <section class="ds-sec" id="copy-errores" aria-labelledby="h-copy" data-nav="Copy de errores" data-grp="Páginas de error"><div class="ds-wrap">
       <span class="ds-eyebrow mono">Plantillas y estados · Páginas de error</span>
       <h2 id="h-copy">Copy aprobado</h2>
       <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Estado</th><th>Etiqueta</th><th>Titular</th><th>Apoyo</th></tr></thead><tbody>
@@ -360,7 +404,7 @@
       </tbody></table></div>
     </div></section>
     <!-- BANNER, SESIÓN CADUCADA Y MÓDULOS PENDIENTES -->
-    <section class="ds-sec" id="otros-estados" aria-labelledby="h-otros" data-nav="Banner, sesión caducada y módulos pendientes" data-grp="Avisos del sistema"><div class="ds-wrap">
+    <section class="ds-sec ds-sec--tint" id="otros-estados" aria-labelledby="h-otros" data-nav="Banner, sesión caducada y módulos pendientes" data-grp="Avisos del sistema"><div class="ds-wrap">
       <span class="ds-eyebrow mono">Plantillas y estados · Avisos del sistema</span>
       <h2 id="h-otros">Avisos del sistema dentro de la app</h2>
       <p class="ds-lead">No todo estado necesita una página: algunos viven dentro de la pantalla como un aviso persistente o una confirmación.</p>
