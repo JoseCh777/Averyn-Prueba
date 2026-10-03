@@ -278,3 +278,9 @@
 .rv__done b { font: 500 1.2rem var(--av-font-heading); color: var(--av-navy); }
 @media (max-width: 1000px) { .rv-grid .pt-side { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 700px) { .rv__layout { grid-template-columns: minmax(0, 1fr); } .rv__meta { grid-template-columns: minmax(0, 1fr); } }
+
+/* Tarjetón de una persona por partido: una sola foto, más grande, con el nombre en primer plano */
+.tj-opt--solo .tj-opt__f { aspect-ratio: 4 / 5; font-size: 3.4rem; }
+.tj-opt--solo .tj-opt__who b { font-size: clamp(.75rem, 1.5vw, .9375rem); }
+.tj-opt--solo .tj-opt__who span { font-size: clamp(.5rem, 1.1vw, .625rem); }
+@media (max-width: 560px) { .tj-opt--solo .tj-opt__f { aspect-ratio: 3 / 4; font-size: 2rem; } }
