@@ -72,7 +72,7 @@ NAV = (
 
 
 def key_of(rel):
-    return 'inicio' if rel == 'design-system.html' else os.path.splitext(os.path.basename(rel))[0]
+    return os.path.splitext(os.path.basename(rel))[0]
 
 
 def main():

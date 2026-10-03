@@ -3,8 +3,8 @@
 Uso:  python docs/ds/src/build.py
 
 Cada página = plantilla común (barra lateral por grupos, portada, pie) + uno o varios archivos de cuerpo en src/.
-Las rutas se calculan según la carpeta: docs/design-system.html y docs/ds/*.html.
-Marcadores en los cuerpos: {{FE}} -> carpeta averyn-frontend, {{DS}} -> carpeta docs/ds, {{DOCS}} -> carpeta docs.
+Las rutas se calculan según la carpeta de cada página (todas viven junto a este directorio de fuentes).
+Marcadores en los cuerpos: {{FE}} -> carpeta del frontend, {{DS}} -> carpeta del design system, {{DOCS}} -> carpeta de documentación.
 
 Cómo se organiza (ver también la sección "Gobernanza" del propio design system):
   * PAGES define el orden y el GRUPO de cada página en la barra lateral.
@@ -23,7 +23,7 @@ VERSION = '1.7'
 
 # (archivo de salida relativo a docs, etiqueta del menú, grupo de la barra lateral)
 PAGES = [
-    ('design-system.html', 'Inicio', 'Empezar'),
+    ('ds/inicio.html', 'Inicio', 'Empezar'),
     ('ds/fundamentos.html', 'Fundamentos', 'Sistema'),
     ('ds/componentes.html', 'Componentes', 'Sistema'),
     ('ds/graficos.html', 'Gráficos', 'Sistema'),
@@ -36,7 +36,7 @@ LABEL = {rel: label for rel, label, _g in PAGES}
 
 # Páginas con configuración propia. Se construyen solo si existe su cuerpo en src/.
 CONFIG = {
-    'design-system.html': dict(body=['inicio-body.html'], cover='inicio-cover.html', css=[], js=[]),
+    'ds/inicio.html': dict(body=['inicio-body.html'], cover='inicio-cover.html', css=[], js=[]),
     'ds/fundamentos.html': dict(body=['fundamentos-body.html'], eyebrow='Fundamentos', title='Lo que no cambia.',
                                 lead='Principios, marca y figura de arcos, color, tipografía, espacio, iconografía y los tokens que los hacen exportables.',
                                 css=['fundamentos.css'], js=['foundations.js', 'fundamentos.js'],
@@ -149,9 +149,9 @@ def render(out_rel):
             sub.append('      </div>')
             nav.append('\n'.join(sub))
     side = ('<aside class="ds-side" aria-label="Índice del design system">\n'
-            '    <a class="ds-side__brand" href="%s/design-system.html" aria-label="Averyn, inicio del design system"><img src="%s/assets/images/averyn-logo-font-black.avif" alt="Averyn"></a>\n'
+            '    <a class="ds-side__brand" href="%s/inicio.html" aria-label="Averyn, inicio del design system"><img src="%s/assets/images/averyn-logo-font-black.avif" alt="Averyn"></a>\n'
             '    <p class="ds-side__ver mono">Design System · v%s Horizonte</p>\n'
-            '    <nav>\n%s\n    </nav>\n  </aside>' % (p['DOCS'], p['FE'], VERSION, '\n'.join(nav)))
+            '    <nav>\n%s\n    </nav>\n  </aside>' % (p['DS'], p['FE'], VERSION, '\n'.join(nav)))
     # --- portada
     if cfg.get('cover'):
         cover = read(cfg['cover'])
