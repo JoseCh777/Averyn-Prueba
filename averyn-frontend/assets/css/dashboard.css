@@ -22,7 +22,7 @@
   padding-top: var(--av-space-2);
 }
 /* Kicker decorativo del bloque de bienvenida: única excepción al
-   sentence-case (no es un label/estado; ver design-system.md § 8). */
+   sentence-case (es decorativo, no un label ni un estado). */
 .av-welcome__eyebrow {
   margin: 0;
   font-size: var(--av-text-xs);

@@ -42,7 +42,7 @@ sistema y debe decidirlo el equipo (o gestarse como variante compacta, ej.
    y `dashboard-shell.js` (`inicializarAlturaNavbar()` con `ResizeObserver`).
 2. **Design system** — `design-system.css` (L127 `--av-ratio-doc: 16/10`; chips de estado
    700/50/200, metadatos neutrales, paleta de avatares, componente `.av-card__section-title`
-   L969, wizard/stepper/banner/seg/input-ocr/capture/techbar). Guía: `docs/design-system.md`.
+   L969, wizard/stepper/banner/seg/input-ocr/capture/techbar). Guía vigente: `docs/averyn-design-system-horizonte.md` (la guía anterior se retiró).
 3. **Densidad del wizard** (lo que "debería" haber arreglado la escala):
    - `.av-wizard` (L1014): sidebar `240px → 220px`, gap `24px → 16px`.
    - `.av-capture__stage` (L1105–1108): `min-height: 220px` → `aspect-ratio: 16/10` +
@@ -92,4 +92,4 @@ sistema y debe decidirlo el equipo (o gestarse como variante compacta, ej.
 - `averyn-frontend/assets/css/design-system.css` (tokens y componentes — el estándar)
 - `averyn-frontend/assets/css/dashboard-shell.css` + `assets/js/dashboard-shell.js` (layout)
 - `averyn-frontend/dashboard/documents/pre-registro.html` (vista del problema)
-- `docs/design-system.md` (guía oficial del sistema visual)
+- `docs/averyn-design-system-horizonte.md` (guía oficial del sistema visual; la anterior, `design-system.md`, se retiró)

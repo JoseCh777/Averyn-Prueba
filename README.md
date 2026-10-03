@@ -109,8 +109,6 @@ averyn/
 │   ├── averyn-design-system-horizonte.md    # Documento maestro del Design System "Horizonte"
 │   ├── averyn-design-system-horizonte.html  # El mismo sistema, navegable, en un solo archivo
 │   ├── design-system.html          # Inicio de la documentación por páginas (docs/ds/)
-│   ├── style-guide.html            # Catálogo de la capa anterior (.av-*), legado
-│   ├── design-system.md            # Guía de la capa anterior (.av-*), legado
 │   └── diagnostico-densidad-wizard.md
 ├── DESIGN.md                       # Principios y reglas del Design System
 ├── PRODUCT.md                      # Contexto del producto
@@ -134,12 +132,11 @@ La apariencia está centralizada, no se define por pantalla:
 
 - `averyn-frontend/assets/css/design-system.css` es el punto de entrada; el contenido
   está dividido por capas: `tokens`, `base`, `components`, `modules` y `dashboard`.
-- **Sistema vigente: "Horizonte" (v1.7).** La referencia es `docs/averyn-design-system-horizonte.md`
+- **La única guía de diseño es "Horizonte" (v1.7).** La referencia es `docs/averyn-design-system-horizonte.md`
   y el catálogo navegable es `docs/averyn-design-system-horizonte.html` (un solo archivo).
   Los valores viven en `averyn-frontend/assets/css/tokens.css`; los principios, en `DESIGN.md`.
-- **Capa anterior (`.av-*`), legado.** `docs/style-guide.html` y `docs/design-system.md` describen los
-  componentes que todavía usan los módulos de Identidad, Documentos, Biometría, Electoral e IA.
-  Se retiran cuando cada módulo migre a Horizonte.
+- Los módulos que aún no han migrado (Identidad, Documentos, Biometría, Electoral e IA) siguen usando las
+  clases anteriores (`.av-*`); su guía se retiró. Al migrar cada módulo se pasa a las clases de Horizonte.
 
 Los módulos consumen estas clases (`.av-*`) en vez de crear estilos propios.
 

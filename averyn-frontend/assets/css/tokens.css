@@ -1,4 +1,4 @@
-/* 1. VARIABLES (TOKENS) — ver docs/design-system.md (tokens y breakpoints) */
+/* 1. VARIABLES (TOKENS) — ver docs/averyn-design-system-horizonte.md (Fundamentos) */
 :root {
   /* Color de marca */
   --av-blue: #145FEE;
@@ -93,7 +93,7 @@
   --av-meta-icon: #64748B;
 
   /* Chips de estado (sello editorial): texto 700-series sobre fondo 50-series.
-     Sin sombra. Contraste WCAG AA verificado en docs/design-system.md. */
+     Sin sombra. Contraste WCAG AA verificado (ver Estados y color semántico en docs/averyn-design-system-horizonte.md). */
   --av-chip-success-bg: #ECFDF5;  --av-chip-success-text: #047857; --av-chip-success-border: #A7F3D0;
   --av-chip-warning-bg: #FFFBEB;  --av-chip-warning-text: #B45309; --av-chip-warning-border: #FDE68A;
   --av-chip-error-bg:   #FEF2F2;  --av-chip-error-text:   #B91C1C; --av-chip-error-border:   #FECACA;
@@ -110,7 +110,7 @@
 
   /* EXTENSIÓN DASHBOARD — categorías de módulo (pantalla principal)
      Índigo es la única adición cromática (categoría "Accesos"); el resto
-     reutiliza la paleta existente. Ver docs/design-system.md § 8. */
+     reutiliza la paleta existente. Ver docs/averyn-design-system-horizonte.md. */
   --av-indigo: #4F46E5;
   --av-indigo-tint: #EEF0FE;
   --av-cyan-tint: #DFF4FA;       /* tint suave del celeste de marca (dispositivos) */
@@ -157,7 +157,7 @@
   --av-neutral-on-navy: #B9C9E4;
 }
 
-/* Breakpoints — ver docs/design-system.md
+/* Breakpoints — ver docs/averyn-design-system-horizonte.md
    CSS no permite var() dentro de @media, así que estos valores son fijos
    y deben copiarse tal cual en cualquier @media nuevo. No inventar otros anchos.
    --bp-sm: 576px   (móvil grande)

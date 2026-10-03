@@ -11,7 +11,7 @@ body {
 
 button { font-family: inherit; }
 
-/* Foco visible obligatorio (ver docs/design-system.md accesibilidad) — nunca se quita sin reemplazo */
+/* Foco visible obligatorio (ver Accesibilidad en docs/averyn-design-system-horizonte.md) — nunca se quita sin reemplazo */
 :focus-visible {
   outline: 2px solid var(--av-blue);
   outline-offset: 2px;

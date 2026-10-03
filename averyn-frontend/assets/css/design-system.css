@@ -1,7 +1,7 @@
 /* AVERYN - DESIGN SYSTEM
    Punto de entrada. El contenido vive en archivos por capa, importados en
    orden de cascada: tokens, base, components, modules y dashboard.
-   Ver docs/design-system.md. */
+   Ver docs/averyn-design-system-horizonte.md. */
 
 @import url('tokens.css');
 @import url('base.css');

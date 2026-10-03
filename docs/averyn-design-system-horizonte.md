@@ -57,7 +57,6 @@ Averyn-Prueba/
     ├── averyn-design-system-horizonte.html   # TODO el sistema en un solo archivo para compartir
     ├── averyn-design-system-horizonte.md     # Este documento
     ├── design-system.html                    # Página "Inicio" de la documentación
-    ├── design-system.md                      # Guía de la capa anterior (.av-*), conservada como legado
     └── ds/
         ├── *.html                 # Páginas generadas: fundamentos, componentes, graficos,
         │                          #   patrones, plantillas, marca, calidad
@@ -487,5 +486,4 @@ Las pantallas se migran **por módulos**, no de golpe.
 | [`DESIGN.md`](../DESIGN.md) | Principios y reglas del sistema en formato para herramientas de diseño. |
 | [`PRODUCT.md`](../PRODUCT.md) | Contexto del producto: usuarios, propósito, restricciones y principios. |
 | [`averyn-design-system-horizonte.html`](./averyn-design-system-horizonte.html) | El catálogo completo en un solo archivo. |
-| [`design-system.md`](./design-system.md) | Guía de la capa anterior (`.av-*`) que aún usan los módulos del frontend; legado, a retirar cuando migren. |
 | [`ds/tokens.json`](./ds/tokens.json) | Tokens en formato W3C (generado). |
