@@ -96,3 +96,17 @@ body.tp { margin: 0; min-height: 100vh; background: var(--av-paper-blue); color:
 @keyframes tp-sk { to { background-position: -200% 0; } }
 @media (prefers-reduced-motion: reduce) { .tp-sk i { animation: none; } }
 @media (max-width: 900px) { .tp-cols, .tp-split { grid-template-columns: minmax(0, 1fr); } .tp-sub-nav { position: static; } }
+
+/* ---------- Acceso y cuenta ---------- */
+.tp-auth { min-height: 100vh; display: grid; place-items: center; padding: 2.5rem; background: linear-gradient(180deg, var(--av-sky), var(--av-paper-blue) 60%); }
+.tp-auth .hz-frame { width: min(1020px, 100%); min-height: 540px; }
+.tp-h1 { margin: .2rem 0 0; font: 500 1.9rem/1.1 var(--av-font-heading); letter-spacing: -.02em; color: var(--av-navy); }
+.tp-p { margin: 0 0 .5rem; color: var(--av-gray-600); font-size: .9375rem; }
+.tp-back, .tp-link { color: var(--av-blue); text-decoration: none; font-weight: 600; }
+.tp-back { color: var(--av-gray-500); font-weight: 500; }
+.tp-auth .hz-btn--block { width: 100%; }
+.tp-inst { display: grid; gap: .6rem; margin: .2rem 0 .6rem; }
+.tp-inst__o { display: flex; align-items: center; gap: .8rem; min-height: 60px; padding: .6rem 1rem; border: 1.5px solid var(--av-hairline-strong); border-radius: var(--av-radius-tile); background: #fff; cursor: pointer; }
+.tp-inst__o:has(input:checked) { border-color: var(--av-blue); background: var(--av-blue-tint); }
+.tp-inst__o input { accent-color: var(--av-blue); width: 20px; height: 20px; }
+.tp-inst__o b { display: block; font-size: .9375rem; color: var(--av-navy); } .tp-inst__o small { color: var(--av-gray-600); font-size: .8125rem; }
