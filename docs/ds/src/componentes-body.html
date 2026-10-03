@@ -243,6 +243,29 @@
       </div>
     </div></section>
     <!-- TABLAS Y PÍLDORAS DE ESTADO -->
+    
+
+    <!-- CARGA DE ARCHIVOS -->
+    <section class="ds-sec" id="carga-archivos" aria-labelledby="h-carga-archivos" data-nav="Carga de archivos" data-grp="Acciones y formularios"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Componentes · Acciones y formularios</span>
+      <h2 id="h-carga-archivos">Carga de archivos</h2>
+      <p class="ds-lead">Para subir documentos de identidad, constancias o padrones. Una zona para soltar archivos que también funciona con teclado, y una lista donde cada archivo dice su estado con texto: cargando, listo, error o rechazado. Ningún archivo se sube de verdad en esta demo.</p>
+      <div class="cp-grid">
+        <div class="cp-demo">
+          <label class="up__drop" id="up-drop" for="up-in"><i class="bi bi-cloud-arrow-up" aria-hidden="true"></i><span class="up__t"><b>Arrastra los archivos aquí</b> o elígelos desde tu equipo</span><span class="up__h" id="up-h">PDF, JPG o PNG · hasta 5 MB cada uno</span></label>
+          <input class="sr-only" id="up-in" type="file" multiple accept=".pdf,.jpg,.jpeg,.png" aria-describedby="up-h">
+          <ul class="up__list" id="up-list" aria-label="Archivos seleccionados"></ul>
+          <p class="sr-only" id="up-live" role="status"></p>
+          <div class="up__acts"><button class="hz-btn hz-btn--secondary" type="button" id="up-demo">Simular 3 archivos</button><button class="hz-btn hz-btn--ghost" type="button" id="up-clear">Vaciar lista</button></div>
+        </div>
+        <div class="cp-side">
+          <div><h3>Estados de cada archivo</h3><ul><li><b>Cargando:</b> barra con porcentaje y botón "Cancelar".</li><li><b>Listo:</b> chip verde con "Listo"; el botón pasa a "Quitar".</li><li><b>Error de red:</b> chip ámbar y botón "Reintentar" (se puede volver a intentar).</li><li><b>Rechazado:</b> chip rojo con el motivo ("Formato no permitido", "Pesa más de 5 MB"); no se reintenta, se elige otro archivo.</li></ul></div>
+          <div><h3>Teclado</h3><ul><li><kbd>Tab</kbd> llega a la zona (el campo real es nativo, con foco visible en toda la zona).</li><li><kbd>Enter</kbd> o <kbd>Espacio</kbd> abre el selector de archivos.</li><li>Cada fila tiene su botón de acción de 44 px.</li></ul></div>
+          <div><h3>Reglas</h3><ul><li>Arrastrar es una mejora: siempre debe existir la vía de elegir con el selector.</li><li>Dilo antes de subir: formatos y tamaño máximo están a la vista, no solo en el error.</li><li>Valida en el navegador para avisar rápido y <b>otra vez en el servidor</b>: el navegador no es de fiar.</li><li>El avance se anuncia sin ruido: cada archivo anuncia "Listo" o su error, no cada porcentaje.</li><li>Los documentos de identidad son datos sensibles: avisar dónde se guardan y quién los ve.</li></ul></div>
+        </div>
+      </div>
+    </div></section>
+
     <section class="ds-sec" id="datos" aria-labelledby="h-datos" data-nav="Tablas y píldoras de estado" data-grp="Datos"><div class="ds-wrap">
       <span class="ds-eyebrow mono">Componentes · Datos</span>
       <h2 id="h-datos">Tablas, chips y datos</h2>
@@ -445,6 +468,32 @@
       </tbody></table></div>
     </div></section>
     <!-- POPOVER -->
+    
+
+    <!-- ESTADOS DE CARGA -->
+    <section class="ds-sec" id="estados-carga" aria-labelledby="h-estados-carga" data-nav="Estados de carga" data-grp="Feedback y capas"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Componentes · Feedback y capas</span>
+      <h2 id="h-estados-carga">Estados de carga</h2>
+      <p class="ds-lead">Tres formas de decir "estoy trabajando", según lo que se espere: una <b>silueta</b> (skeleton) cuando se carga contenido, un <b>spinner dentro del botón</b> cuando se envía una acción y una <b>barra</b> cuando se conoce el avance. Todas respetan el movimiento reducido y no cambian el tamaño de la pantalla al terminar.</p>
+      <div class="cp-grid">
+        <div class="cp-demo">
+          <div class="ld__bar"><button class="hz-btn hz-btn--secondary" type="button" id="ld-go">Recargar lista</button><button class="hz-btn hz-btn--ghost" type="button" id="ld-fail">Simular error</button><span class="ld__hint mono">Tarda ~1,6 s</span></div>
+          <div class="ld" id="ld" aria-live="polite" aria-busy="false">
+            <ul class="ld__list" id="ld-list"></ul>
+          </div>
+          <div class="ld__row2">
+            <button class="hz-btn hz-btn--primary ld__save" type="button" id="ld-save"><span class="ld__spin" aria-hidden="true"></span><span class="ld__lbl">Guardar cambios</span></button>
+            <div class="ld__ind" aria-hidden="true"><i></i></div><span class="ld__hint mono" aria-hidden="true">Barra indeterminada</span>
+          </div>
+          <p class="sr-only" id="ld-live" role="status"></p>
+        </div>
+        <div class="cp-side">
+          <div><h3>Cuál usar</h3><ul><li><b>Silueta:</b> listas, tablas y tarjetas que van a aparecer. Misma altura y columnas que el contenido real.</li><li><b>Spinner en el botón:</b> acciones de envío. El botón queda desactivado, cambia su texto ("Guardando…") y conserva su ancho.</li><li><b>Barra determinada:</b> cargas y lecturas con avance real. <b>Indeterminada</b> solo si no se puede saber.</li></ul></div>
+          <div><h3>Reglas</h3><ul><li>No mostrar nada si tarda menos de ~300 ms: un parpadeo es peor que esperar.</li><li>El contenedor marca <code>aria-busy="true"</code> mientras carga y un mensaje <code>role="status"</code> dice "Lista cargada" al terminar.</li><li>El brillo de la silueta es lento y suave; con <code>prefers-reduced-motion</code> queda fija.</li><li>Si pasa de ~10 s, decirlo con texto y ofrecer cancelar.</li><li>Si falla, la silueta se reemplaza por el estado de error con "Reintentar", nunca se queda cargando para siempre.</li></ul></div>
+        </div>
+      </div>
+    </div></section>
+
     <section class="ds-sec ds-sec--tint" id="popover" aria-labelledby="h-po" data-nav="Popover" data-grp="Feedback y capas"><div class="ds-wrap">
       <span class="ds-eyebrow mono">Componentes · Feedback y capas</span>
       <h2 id="h-po">Popover</h2>
