@@ -18,7 +18,7 @@
     <section class="ds-sec ds-sec--tint" id="favicons" aria-labelledby="h-fav" data-nav="Favicons e imagen social" data-grp="Identidad visual"><div class="ds-wrap">
       <span class="ds-eyebrow mono">Marca y entregables</span>
       <h2 id="h-fav">Favicons e imagen para compartir</h2>
-      <p class="ds-lead">Generados a partir del isotipo oficial (<code>averyn-logo-blue</code>) y la figura de arcos; nada redibujado. Los archivos están en <code>docs/ds/assets/</code>, listos para copiar al frontend cuando se decida.</p>
+      <p class="ds-lead">Generados a partir del isotipo oficial (<code>averyn-logo-blue</code>) y la figura de arcos; nada redibujado. Los archivos están en la carpeta de recursos del design system (<a href="{{DS}}/calidad.html#ubicacion">Dónde vive cada archivo</a>), listos para copiar al frontend cuando se decida.</p>
       <div class="fav-row">
         <figure class="fav"><img src="./assets/favicon-32.png" width="32" height="32" alt="Favicon 32 por 32"><figcaption><b>favicon-32.png</b>Pestaña del navegador · 32 × 32, fondo transparente</figcaption><a class="hz-btn hz-btn--text" href="./assets/favicon-32.png" download>Descargar</a></figure>
         <figure class="fav"><img src="./assets/favicon-48.png" width="48" height="48" alt="Favicon 48 por 48"><figcaption><b>favicon-48.png</b>Atajos y resultados de búsqueda · 48 × 48</figcaption><a class="hz-btn hz-btn--text" href="./assets/favicon-48.png" download>Descargar</a></figure>
@@ -43,7 +43,7 @@
     <section class="ds-sec" id="correos" aria-labelledby="h-mail" data-nav="Correos transaccionales" data-grp="Fuera de la pantalla"><div class="ds-wrap">
       <span class="ds-eyebrow mono">Marca y entregables</span>
       <h2 id="h-mail">Correos transaccionales</h2>
-      <p class="ds-lead">Tres plantillas de producción: invitación, verificación de correo y recuperación de contraseña. HTML de tablas con estilos en línea (lo que realmente funciona en Gmail, Outlook y Apple Mail), versión en texto y variables <code>{{así}}</code>. Los archivos viven en <code>docs/ds/emails/</code>.</p>
+      <p class="ds-lead">Tres plantillas de producción: invitación, verificación de correo y recuperación de contraseña. HTML de tablas con estilos en línea (lo que realmente funciona en Gmail, Outlook y Apple Mail), versión en texto y variables <code>{{así}}</code>. Los archivos viven en la carpeta de correos (<a href="{{DS}}/calidad.html#ubicacion">Dónde vive cada archivo</a>).</p>
       <div class="mail">
         <div class="mail__side">
           <div class="vz-seg" id="mail-seg" role="group" aria-label="Plantilla de correo"></div>
@@ -91,18 +91,18 @@
     <section class="ds-sec ds-sec--tint" id="entregables" aria-labelledby="h-ent" data-nav="Mapa de entregables" data-grp="Entregables"><div class="ds-wrap">
       <span class="ds-eyebrow mono">Marca y entregables</span>
       <h2 id="h-ent">Mapa de entregables</h2>
-      <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Entregable</th><th>Ubicación</th><th>Estado</th></tr></thead><tbody>
-        <tr><td>Design system en un solo HTML</td><td><code>docs/averyn-design-system-horizonte.html</code></td><td><span class="hz-chip hz-chip--success">Listo para compartir</span></td></tr>
-        <tr><td>Design system por páginas</td><td><code>docs/design-system.html</code> + <code>docs/ds/*.html</code></td><td><span class="hz-chip hz-chip--success">Listo</span></td></tr>
-        <tr><td>Páginas de error (404, 403, 500, offline, mantenimiento)</td><td><code>averyn-frontend/*.html</code> + <code>assets/css/error.css</code></td><td><span class="hz-chip hz-chip--success">En el frontend</span></td></tr>
-        <tr><td>Favicons e imagen social</td><td><code>docs/ds/assets/</code></td><td><span class="hz-chip hz-chip--warning">Pendiente de copiar al frontend</span></td></tr>
-        <tr><td>Correos transaccionales</td><td><code>docs/ds/emails/</code></td><td><span class="hz-chip hz-chip--warning">Pendiente de integrar al servicio de correo</span></td></tr>
-        <tr><td>Estilos de impresión</td><td><code>docs/ds/print.css</code></td><td><span class="hz-chip hz-chip--warning">Pendiente de usar en actas reales</span></td></tr>
-        <tr><td>Tokens W3C</td><td><code>docs/ds/tokens.json</code></td><td><span class="hz-chip hz-chip--success">Generado</span></td></tr>
+      <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Entregable</th><th>Qué es</th><th>Estado</th></tr></thead><tbody>
+        <tr><td>Design system en un solo HTML</td><td>Archivo único, el <b>entregable</b></td><td><span class="hz-chip hz-chip--success">Listo para compartir</span></td></tr>
+        <tr><td>Documento maestro (.md)</td><td>Referencia escrita para el repositorio</td><td><span class="hz-chip hz-chip--success">Listo</span></td></tr>
+        <tr><td>Páginas de error (404, 403, 500, offline, mantenimiento)</td><td>Páginas y estilos de error del frontend</td><td><span class="hz-chip hz-chip--success">En el frontend</span></td></tr>
+        <tr><td>Favicons e imagen social</td><td>Carpeta de recursos del design system</td><td><span class="hz-chip hz-chip--warning">Pendiente de copiar al frontend</span></td></tr>
+        <tr><td>Correos transaccionales</td><td>Carpeta de correos</td><td><span class="hz-chip hz-chip--warning">Pendiente de integrar al servicio de correo</span></td></tr>
+        <tr><td>Estilos de impresión</td><td>Hoja de impresión</td><td><span class="hz-chip hz-chip--warning">Pendiente de usar en actas reales</span></td></tr>
+        <tr><td>Tokens W3C</td><td>Archivo de tokens generado</td><td><span class="hz-chip hz-chip--success">Generado</span></td></tr>
         <tr><td>Modo nocturno</td><td>—</td><td><span class="hz-chip hz-chip--neutral">Fuera de alcance por ahora</span></td></tr>
         <tr><td>Gráficos, patrones biométricos y plantillas en el frontend</td><td>—</td><td><span class="hz-chip hz-chip--neutral">Solo documentados; se implementan con datos reales</span></td></tr>
       </tbody></table></div>
-      <p class="ds-note">Para regenerar todo: <code>python docs/ds/src/tokens_export.py</code>, <code>python docs/ds/src/emails.py</code>, <code>python docs/ds/src/build.py</code> y, por último, <code>python docs/ds/src/bundle.py</code> (produce el HTML único).</p>
+      <p class="ds-note">Para regenerar todo, desde la carpeta de herramientas: <code>python tokens_export.py</code>, <code>python emails.py</code>, <code>python build.py</code> y, por último, <code>python bundle.py</code> (produce el HTML único). Las rutas de cada cosa están en <a href="{{DS}}/calidad.html#ubicacion">Dónde vive cada archivo</a>.</p>
     </div></section>
 
     <script type="application/json" id="emails-data">{{EMAILS_JSON}}</script>

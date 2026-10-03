@@ -16,11 +16,11 @@
 <a class="skip" href="#contenido">Saltar al contenido</a>
 <div class="ds-shell">
   <aside class="ds-side" aria-label="Índice del design system">
-    <a class="ds-side__brand" href="../design-system.html" aria-label="Averyn, inicio del design system"><img src="../../averyn-frontend/assets/images/averyn-logo-font-black.avif" alt="Averyn"></a>
+    <a class="ds-side__brand" href="./inicio.html" aria-label="Averyn, inicio del design system"><img src="../../averyn-frontend/assets/images/averyn-logo-font-black.avif" alt="Averyn"></a>
     <p class="ds-side__ver mono">Design System · v1.7 Horizonte</p>
     <nav>
       <span class="grp mono">Empezar</span>
-      <a class="ds-page" href="../design-system.html">Inicio</a>
+      <a class="ds-page" href="inicio.html">Inicio</a>
       <span class="grp mono">Sistema</span>
       <a class="ds-page" href="fundamentos.html">Fundamentos</a>
       <a class="ds-page" href="componentes.html">Componentes</a>
@@ -41,6 +41,7 @@
         <a href="#gobernanza">Gobernanza y novedades</a>
         <a href="#consumo">Consumo e implementación</a>
         <a href="#dependencias">Dependencias y librerías</a>
+        <a href="#ubicacion">Dónde vive cada archivo</a>
       </div>
     </nav>
   </aside>
@@ -201,7 +202,7 @@
         <li>Cada <code>&lt;section&gt;</code> lleva <code>id</code> único en <b>todo</b> el sistema, <code>data-nav</code> (la etiqueta del índice) y <code>data-grp</code> (su subgrupo dentro de la página). Los nombres dicen <b>qué es</b>, nunca cuándo se hizo.</li>
         <li><b>Sin numeración</b>: el orden lo da la posición. El fondo alterno de las secciones lo calcula <code>build.py</code>; no se pone a mano.</li>
         <li>Para mover una sección, se corta el bloque completo a otro <code>src/*-body.html</code> y se ajusta su <code>data-grp</code>; el contenido no cambia.</li>
-        <li><code>python docs/ds/src/build.py</code> <b>valida</b> ids repetidos, anclas internas y enlaces entre páginas (con su <code>#fragmento</code>) y termina con error si algo se rompe.</li>
+        <li><code>python build.py</code> (desde la carpeta de herramientas) <b>valida</b> ids repetidos, anclas internas y enlaces entre páginas (con su <code>#fragmento</code>) y termina con error si algo se rompe.</li>
         <li>Los nombres de página son del propósito (Componentes, Patrones…); las versiones y novedades se anotan en el changelog de abajo.</li>
       </ul>
       <h3 class="ds-sub">Registro de decisiones</h3>
@@ -214,16 +215,18 @@
         <tr><td>Wordmark: maquetar grande y reducir</td><td>Ampliarlo (o <code>will-change</code>) lo rasterizaba borroso.</td></tr>
         <tr><td>Módulos sin pantalla: "Próximamente", sin enlace</td><td>Honestidad del estado; evita los 404.</td></tr>
         <tr><td>Estructura por propósito, no por orden de llegada (v1.5)</td><td>El sistema había crecido por capas y la gente no sabía dónde buscar; ahora cada cosa tiene un único lugar y una regla para decidirlo.</td></tr>
+        <tr><td>Migración a React sobre Next.js</td><td>Decisión del equipo; shadcn/ui y los complementos recomendados funcionan sobre Next.js.</td></tr>
+        <tr><td>Documentación sin rutas fijas; entregable = HTML único</td><td>El sistema se mudará al repositorio oficial de la organización; solo una tabla guarda las rutas.</td></tr>
         <tr><td>Sin Bootstrap en landing, login y dashboard</td><td>Menos peso y estilos propios; Bootstrap Icons se conserva.</td></tr>
       </tbody></table></div>
       <h3 class="ds-sub">Changelog</h3>
       <div class="doc-wrap"><table class="doc-table"><tbody>
-        <tr><td><b>v1.7</b> · oct 2026</td><td><b>Aclaraciones y guía de migración.</b> Plantillas y patrones se declaran <i>ejemplos de uso del sistema</i>, no una copia fiel del producto final. Huella dactilar de arcos anidados según el dibujo del equipo (núcleo con tallo, 6 crestas en cúpula con cortes y patas largas), con el estilo de arcos de la marca. <i>Componentes nuevos:</i> carga de archivos (zona para soltar, estados cargando / listo / error de red / rechazado) y estados de carga (silueta, spinner en botón, barra). Segundo tarjetón: <i>una persona por partido</i> (personero, representante) junto al de fórmula. Guía de migración a React ampliada: qué pasa sin cambios, qué se reemplaza, librerías recomendadas, qué evitar y ruta por fases. <i>Dependencias y librerías</i>: lo necesario para usar, construir y probar el sistema, y los paquetes de la migración con su versión en npm.</td></tr>
+        <tr><td><b>v1.7</b> · oct 2026</td><td><b>Aclaraciones y guía de migración.</b> Plantillas y patrones se declaran <i>ejemplos de uso del sistema</i>, no una copia fiel del producto final. Huella dactilar de arcos anidados según el dibujo del equipo (núcleo con tallo, 6 crestas en cúpula con cortes y patas largas), con el estilo de arcos de la marca. <i>Componentes nuevos:</i> carga de archivos (zona para soltar, estados cargando / listo / error de red / rechazado) y estados de carga (silueta, spinner en botón, barra). Segundo tarjetón: <i>una persona por partido</i> (personero, representante) junto al de fórmula. Guía de migración a React ampliada: qué pasa sin cambios, qué se reemplaza, librerías recomendadas, qué evitar y ruta por fases. <i>Dependencias y librerías</i>: lo necesario para usar, construir y probar el sistema, y los paquetes de la migración con su versión en npm. <i>Independencia de la arquitectura:</i> la documentación habla de roles, no de rutas; una sola tabla, "Dónde vive cada archivo", concentra las rutas para mudar el sistema a otro repositorio. El entregable es el HTML único.</td></tr>
         <tr><td><b>v1.6</b> · oct 2026</td><td><b>Huecos cerrados y validación.</b> <i>Formularios nuevos:</i> campo de búsqueda, código de un solo uso de 6 dígitos, contraseña con indicador de fuerza, multi-select con filtros activos y validación con resumen de errores. <i>Acceso y cuenta:</i> recuperar contraseña, segundo factor, selección de institución y aceptar invitación. <i>Propuestas de diseño (pendientes de validar con el equipo):</i> revisión manual de verificaciones, escrutinio, mesas y padrón, roles y permisos. <i>Tarjetón</i> electoral con espacio para foto, número, nombre y logo. <i>Validación:</i> auditoría <code>axe-core</code> y de teclado sobre las 8 páginas, A4 real en impresión, portada de Inicio con contraste ≥ 7:1, demo del hero restaurada y verificación automática de demos huérfanas. Informe completo en esta página.</td></tr>
         <tr><td><b>v1.5</b> · oct 2026</td><td><b>Reorganización por propósito.</b> De 7 páginas por orden de llegada a 8 por propósito, en 4 grupos de la barra lateral: <i>Inicio</i> · <i>Fundamentos, Componentes, Gráficos</i> · <i>Patrones, Plantillas y estados</i> · <i>Marca y entregables, Calidad y gobernanza</i>. Los componentes que estaban repartidos en dos páginas son uno solo; "Estados del sistema" pasa a ser parte de Plantillas y estados; los tokens pasan de Marca a Fundamentos; microcopy, accesibilidad y gobernanza viven juntos. Secciones sin numeración, índice por subgrupos, ids únicos (los de Gráficos con prefijo <code>grafico-</code>) y <b>validación automática</b> de ids y enlaces en <code>build.py</code>. Nueva página de Inicio con mapa y novedades.</td></tr>
         <tr><td><b>v1.4</b> · oct 2026</td><td><b>Auditoría del líder.</b> <i>Estados unificados:</i> una sola tabla Estado → color (verde éxito, ámbar reintento, rojo rechazo, gris pendiente, azul info; el cian queda solo como resalte) en fondo claro y sobre navy, con tokens nuevos <code>-strong</code> y <code>-on-navy</code>. <i>Píldoras de estado</i> en 3 variantes (suave por defecto en tablas, contorno y sólida), sin punto y con icono opcional; contraste ≥ 5:1. <i>Alertas</i> con insignia circular de icono en lugar de franja lateral. <i>Panel de actividad</i> y franja de indicadores generados desde un solo conjunto de 6 eventos (las partes suman el total). Gráficos de resultado con colores de estado. Correcciones de contenido: IDs de dispositivo (LEC-/CAM-), concordancia ("Huella rechazada"), "Sin verificar", fechas, tooltip con icono de ayuda y demo de toast con acciones. Nueva sección "Implementación recomendada" (librerías, solo documentada).</td></tr>
-        <tr><td><b>v1.3</b> · oct 2026</td><td><b>Cobertura completa.</b> <i>Patrones de Averyn:</i> captura facial y de huella, resultado de verificación frente al umbral 0.68, documento y OCR con revisión de datos, papeleta y comprobante sin vincular persona↔voto, dispositivos y consentimiento biométrico. <i>Componentes:</i> selector de fechas, menú de acciones, combobox, acordeón, stepper, popover, drawer, paleta de comandos Ctrl+K y tabla avanzada, todos con teclado completo. <i>Plantillas:</i> bitácora, configuración, detalle de persona, asistente electoral, notificaciones y perfil, con estados y vista a pantalla completa. <i>Marca y entregables:</i> kit de ilustración con arcos y estados vacíos, favicons e imagen social, tres correos transaccionales, <code>print.css</code> para actas y exportación de tokens W3C (<code>tokens.json</code>). Nuevo: <b>HTML único</b> compartible (<code>docs/averyn-design-system-horizonte.html</code>).</td></tr>
-        <tr><td><b>v1.2</b> · oct 2026</td><td>Design system multipágina (<code>design-system.html</code>, <code>ds/graficos.html</code>, <code>ds/sistema.html</code>) con <code>ds.css</code> y <code>ds.js</code> compartidos. <b>Estados del sistema:</b> páginas 404, 403, 500, sin conexión y mantenimiento (concepto "arcos rotos sobre el horizonte"), ruta pedida escapada, <code>&lt;base&gt;</code> para rutas anidadas, banners y modal de sesión. <b>Biblioteca de gráficos:</b> paleta categórica validada (azul, ámbar, cian de gráfico, violeta, magenta), tarjeta de gráfico con estados, área, barras de píldora y rectas, ranking, apiladas, anillo, bullet, KPI con sparkline, mapa de calor, embudo, histograma con umbral 0.68 y tabla "breakdown"; tooltip, teclado y vista en tabla en todos; contrato de datos propuesto.</td></tr>
+        <tr><td><b>v1.3</b> · oct 2026</td><td><b>Cobertura completa.</b> <i>Patrones de Averyn:</i> captura facial y de huella, resultado de verificación frente al umbral 0.68, documento y OCR con revisión de datos, papeleta y comprobante sin vincular persona↔voto, dispositivos y consentimiento biométrico. <i>Componentes:</i> selector de fechas, menú de acciones, combobox, acordeón, stepper, popover, drawer, paleta de comandos Ctrl+K y tabla avanzada, todos con teclado completo. <i>Plantillas:</i> bitácora, configuración, detalle de persona, asistente electoral, notificaciones y perfil, con estados y vista a pantalla completa. <i>Marca y entregables:</i> kit de ilustración con arcos y estados vacíos, favicons e imagen social, tres correos transaccionales, <code>print.css</code> para actas y exportación de tokens W3C (<code>tokens.json</code>). Nuevo: <b>HTML único</b> compartible (<code>averyn-design-system-horizonte.html</code>).</td></tr>
+        <tr><td><b>v1.2</b> · oct 2026</td><td>Design system multipágina (inicio, gráficos y estados del sistema) con <code>ds.css</code> y <code>ds.js</code> compartidos. <b>Estados del sistema:</b> páginas 404, 403, 500, sin conexión y mantenimiento (concepto "arcos rotos sobre el horizonte"), ruta pedida escapada, <code>&lt;base&gt;</code> para rutas anidadas, banners y modal de sesión. <b>Biblioteca de gráficos:</b> paleta categórica validada (azul, ámbar, cian de gráfico, violeta, magenta), tarjeta de gráfico con estados, área, barras de píldora y rectas, ranking, apiladas, anillo, bullet, KPI con sparkline, mapa de calor, embudo, histograma con umbral 0.68 y tabla "breakdown"; tooltip, teclado y vista en tabla en todos; contrato de datos propuesto.</td></tr>
         <tr><td><b>v1.1</b> · oct 2026</td><td>Accesibilidad y teclado en landing y login. Landing: hero de 220 vh con <code>&lt;h1&gt;</code> real, <code>inert</code> en lo invisible, figura anclada al texto, anillo de foco por superficie (blanco sobre azul, cian sobre navy), menú móvil con botón antes del nav y Escape que devuelve el foco, contrastes corregidos, objetivos ≥ 44 px, contenido visible sin JS. Login: errores por campo con <code>aria-invalid</code>, foco al primer inválido y a la contraseña tras credenciales inválidas, sin salto de layout, botón bloqueado durante la redirección, "Mostrar/Ocultar" sin contradicción de nombre, nota de seguridad solo en HTTPS. Tokens nuevos aplicados a <code>tokens.css</code>.</td></tr>
         <tr><td><b>v1.0</b> · oct 2026</td><td>Primera versión del sistema Horizonte: fundamentos, 20 componentes, patrones y plantillas. Tokens nuevos: <code>--av-field-border</code> (#6E86B0) y <code>--av-placeholder</code> (#667390), variantes <code>-text</code> de estado, reglas de foco por superficie.</td></tr>
       </tbody></table></div>
@@ -241,7 +244,7 @@
         <tr><td>Prueba de concepto en React</td><td><b>Pospuesta.</b> Se eligió solo documentar la migración; la prueba con 3 componentes (botón, píldora de estado y alerta) está descrita pero no hecha.</td></tr>
         <tr><td>Idiomas</td><td>Todo el sistema está en español. Si el producto se ofrece en otros idiomas hay que revisar textos, fechas y longitudes de etiqueta.</td></tr>
         <tr><td>Aviso de cookies y consentimiento web</td><td>No está cubierto; solo existe el consentimiento biométrico.</td></tr>
-        <tr><td>Patrones, componentes y plantillas</td><td>Son <b>ejemplos ilustrativos de uso del sistema</b>, no una copia fiel del producto final. Están documentados como simulaciones; no existen aún en <code>averyn-frontend/</code>. Hay que implementarlos con datos reales y revisar con quien opere cámara, lector y padrón.</td></tr>
+        <tr><td>Patrones, componentes y plantillas</td><td>Son <b>ejemplos ilustrativos de uso del sistema</b>, no una copia fiel del producto final. Están documentados como simulaciones; no existen aún en el frontend del producto. Hay que implementarlos con datos reales y revisar con quien opere cámara, lector y padrón.</td></tr>
         <tr><td>Consentimiento biométrico</td><td>Plazos de conservación, canal de revocación y texto legal pendientes de definir con el área jurídica.</td></tr>
         <tr><td>Correos</td><td>Probar en clientes reales (Gmail, Outlook, Apple Mail) y alojar el logo en un dominio público para <code>{{logo_url}}</code>.</td></tr>
         <tr><td>Shell de navegación</td><td>La unificación del shell del dashboard con el resto de páginas espera la señal del equipo.</td></tr>
@@ -256,8 +259,8 @@
       <h3 class="ds-sub">Empezar una pantalla</h3>
       <div class="codeblock"><pre id="code-start">&lt;link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"&gt;
 &lt;link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"&gt;
-&lt;link href="../assets/css/design-system.css" rel="stylesheet"&gt;   <b>&lt;!-- tokens.css --&gt;</b>
-&lt;link href="../assets/css/mi-pantalla.css" rel="stylesheet"&gt;    <b>&lt;!-- solo lo propio, acotado a body.av-mi-pantalla --&gt;</b>
+&lt;link href="RUTA/design-system.css" rel="stylesheet"&gt;   <b>&lt;!-- tokens.css --&gt;</b>
+&lt;link href="RUTA/mi-pantalla.css" rel="stylesheet"&gt;    <b>&lt;!-- solo lo propio, acotado a body.av-mi-pantalla --&gt;</b>
 
 body.av-mi-pantalla { background: #fff; color: var(--av-navy); font-family: var(--av-font-body); }
 .av-mi-pantalla :focus-visible { outline: 2px solid var(--av-blue); outline-offset: 3px; }</pre><button class="copy" type="button" data-copy="#code-start">Copiar</button></div>
@@ -335,7 +338,7 @@ body.av-mi-pantalla { background: #fff; color: var(--av-navy); font-family: var(
         <tr><td><b>Inter</b></td><td>pesos 400, 500, 600, 700</td><td>Texto de interfaz</td></tr>
         <tr><td><b>JetBrains Mono</b></td><td>pesos 500, 700</td><td>Acciones, rótulos y datos</td></tr>
         <tr><td><b>Bootstrap Icons</b></td><td>1.11.3</td><td>Iconografía (<code>bi bi-*</code>)</td><td>cdnjs, hoja de estilos con la fuente de iconos</td></tr>
-        <tr><td><b>Bootstrap</b></td><td>5.3.3</td><td>Solo el frontend actual (<code>averyn-frontend</code>); <b>este sistema no lo necesita</b></td><td>CDN, hasta que cada módulo migre</td></tr>
+        <tr><td><b>Bootstrap</b></td><td>5.3.3</td><td>Solo el frontend actual; <b>este sistema no lo necesita</b></td><td>CDN, hasta que cada módulo migre</td></tr>
         <tr><td><b><code>tokens.css</code> / <code>design-system.css</code></b></td><td>del repositorio</td><td>Colores, tipografía, radios, sombras y movimiento (<code>--av-*</code>)</td><td>Archivos del repositorio; <code>tokens.json</code> es el mismo contenido para otras herramientas</td></tr>
       </tbody></table></div>
       <p class="ds-note"><b>JavaScript:</b> ninguna librería. Las demos usan JS propio sin dependencias. <b>Sin internet:</b> las fuentes y los iconos vienen de un CDN; para trabajar sin conexión hay que descargarlos y servirlos desde el repositorio (aún no está hecho, ver la deuda conocida).</p>
@@ -343,7 +346,7 @@ body.av-mi-pantalla { background: #fff; color: var(--av-navy); font-family: var(
       <h3 class="ds-sub">Para construir la documentación <small>herramientas de este repositorio</small></h3>
       <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Herramienta</th><th>Versión</th><th>Para qué</th></tr></thead><tbody>
         <tr><td><b>Python 3</b></td><td>3.x (probado con 3.14)</td><td><code>build.py</code> arma las 8 páginas y valida ids, enlaces y demos; <code>bundle.py</code> genera el HTML único; <code>emails.py</code> y <code>tokens_export.py</code> generan correos y <code>tokens.json</code>. Usan solo la <b>biblioteca estándar</b>: no hay que instalar paquetes.</td></tr>
-        <tr><td><b>Servidor estático</b></td><td>cualquiera</td><td>Para ver las páginas por separado: <code>python -m http.server</code> desde la raíz del repositorio.</td></tr>
+        <tr><td><b>Servidor estático</b></td><td>cualquiera</td><td>Para ver las páginas por separado: <code>python -m http.server</code> desde la carpeta que contiene las páginas generadas.</td></tr>
         <tr><td><b>Navegador</b></td><td>Chrome / Edge 111, Safari 16.2, Firefox 121 o posterior</td><td>Mínimos por <code>:has()</code> y <code>color-mix()</code> (ver el informe de validación).</td></tr>
       </tbody></table></div>
 
@@ -352,7 +355,7 @@ body.av-mi-pantalla { background: #fff; color: var(--av-navy); font-family: var(
         <tr><td><b>Node.js</b></td><td>probado con 24</td><td>Ejecuta las pruebas.</td></tr>
         <tr><td><b>Playwright</b> (<code>playwright-core</code>)</td><td>1.63.0</td><td>Recorrer las páginas, probar demos, teclado, capturas y PDF A4. Usado con Microsoft Edge.</td></tr>
         <tr><td><b>axe-core</b></td><td>4.10.2 usado · en npm: 4.13.0</td><td>Auditoría de accesibilidad automática (WCAG 2.2 AA). <code>@axe-core/playwright</code> 4.13.0 la integra con Playwright.</td></tr>
-        <tr><td><b>Detector de Impeccable</b></td><td>del repositorio</td><td>Revisión de patrones de diseño (<code>.claude/skills/impeccable</code>).</td></tr>
+        <tr><td><b>Detector de Impeccable</b></td><td>del repositorio</td><td>Revisión de patrones de diseño (skill Impeccable del repositorio).</td></tr>
       </tbody></table></div>
       <p class="ds-note">Las pruebas están hechas con scripts sueltos, no con un <code>package.json</code>. Si pasan a ser parte del repositorio oficial, conviene crearlo con estas tres dependencias de desarrollo.</p>
 
@@ -389,6 +392,29 @@ body.av-mi-pantalla { background: #fff; color: var(--av-navy); font-family: var(
 4. Desarrollo y pruebas
    npm i -D storybook @playwright/test @axe-core/playwright</pre><button class="copy" type="button" data-copy="#code-react">Copiar</button></div>
       <p class="ds-note">Los comandos son una guía: <code>shadcn init</code> pregunta la base de primitivas (Base UI o Radix) y el estilo, y su salida cambia con la versión. Los tokens de <code>tokens.css</code> se pasan a <code>@theme</code> <b>antes</b> de añadir componentes, para que nada herede el tema por defecto.</p>
+    </div></section>
+
+    <!-- DÓNDE VIVE CADA ARCHIVO -->
+    <section class="ds-sec" id="ubicacion" aria-labelledby="h-ubicacion" data-nav="Dónde vive cada archivo" data-grp="Gobernanza"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Calidad y gobernanza · Gobernanza</span>
+      <h2 id="h-ubicacion">Dónde vive cada archivo</h2>
+      <p class="ds-lead">El resto de la documentación habla de <b>roles</b> ("la fuente de tokens", "la carpeta de herramientas"), no de rutas. Esta es la <b>única tabla con rutas</b>: al mover el sistema a otro repositorio solo hay que actualizarla (y los marcadores <code>../../averyn-frontend</code>, <code>.</code> y <code>..</code> del script de construcción).</p>
+      <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Rol</th><th>Hoy (repositorio de pruebas)</th><th>En el repositorio oficial</th></tr></thead><tbody>
+        <tr><td><b>Fuente de verdad de los valores</b> (tokens)</td><td><code>averyn-frontend/assets/css/tokens.css</code></td><td><span class="hz-chip hz-chip--warning"><i class="bi bi-exclamation-circle" aria-hidden="true"></i>Por definir</span></td></tr>
+        <tr><td><b>Estilos de los componentes</b> en el frontend</td><td><code>averyn-frontend/assets/css/design-system.css</code></td><td><span class="hz-chip hz-chip--warning"><i class="bi bi-exclamation-circle" aria-hidden="true"></i>Por definir</span></td></tr>
+        <tr><td><b>Principios y reglas</b></td><td><code>DESIGN.md</code> (raíz)</td><td><span class="hz-chip hz-chip--warning"><i class="bi bi-exclamation-circle" aria-hidden="true"></i>Por definir</span></td></tr>
+        <tr><td><b>Documento maestro</b> (.md)</td><td><code>docs/averyn-design-system-horizonte.md</code></td><td><span class="hz-chip hz-chip--warning"><i class="bi bi-exclamation-circle" aria-hidden="true"></i>Por definir</span></td></tr>
+        <tr><td><b>HTML único</b> (el entregable)</td><td><code>docs/averyn-design-system-horizonte.html</code></td><td><span class="hz-chip hz-chip--warning"><i class="bi bi-exclamation-circle" aria-hidden="true"></i>Por definir</span></td></tr>
+        <tr><td><b>Fuentes de las páginas</b> y herramientas de construcción</td><td><code>docs/ds/src/</code> (<code>*-body.html</code> y los scripts <code>build.py</code>, <code>bundle.py</code>, <code>emails.py</code>, <code>tokens_export.py</code>)</td><td><span class="hz-chip hz-chip--warning"><i class="bi bi-exclamation-circle" aria-hidden="true"></i>Por definir</span></td></tr>
+        <tr><td><b>Páginas generadas</b> (salida de la construcción; no se entregan)</td><td><code>docs/ds/*.html</code></td><td><span class="hz-chip hz-chip--neutral">No se versionan o se regeneran</span></td></tr>
+        <tr><td><b>Tokens en formato W3C</b> (generado)</td><td><code>docs/ds/tokens.json</code></td><td><span class="hz-chip hz-chip--warning"><i class="bi bi-exclamation-circle" aria-hidden="true"></i>Por definir</span></td></tr>
+        <tr><td><b>Correos transaccionales</b></td><td><code>docs/ds/emails/</code></td><td><span class="hz-chip hz-chip--warning"><i class="bi bi-exclamation-circle" aria-hidden="true"></i>Por definir</span></td></tr>
+        <tr><td><b>Favicons e imagen social</b></td><td><code>docs/ds/assets/</code></td><td><span class="hz-chip hz-chip--warning"><i class="bi bi-exclamation-circle" aria-hidden="true"></i>Por definir</span></td></tr>
+        <tr><td><b>Estilos de impresión</b></td><td><code>docs/ds/print.css</code></td><td><span class="hz-chip hz-chip--warning"><i class="bi bi-exclamation-circle" aria-hidden="true"></i>Por definir</span></td></tr>
+        <tr><td><b>Páginas de error</b> reales</td><td><code>averyn-frontend/</code> (<code>404.html</code>, <code>403.html</code>, <code>500.html</code>, <code>offline.html</code>, <code>mantenimiento.html</code>) y <code>assets/css/error.css</code></td><td><span class="hz-chip hz-chip--warning"><i class="bi bi-exclamation-circle" aria-hidden="true"></i>Por definir</span></td></tr>
+        <tr><td><b>Logos</b></td><td><code>averyn-frontend/assets/images/</code></td><td><span class="hz-chip hz-chip--warning"><i class="bi bi-exclamation-circle" aria-hidden="true"></i>Por definir</span></td></tr>
+      </tbody></table></div>
+      <p class="ds-note"><b>Qué se entrega:</b> el HTML único y el documento maestro. Las páginas por separado existen solo para construir el HTML único y se pueden regenerar en cualquier momento.</p>
     </div></section>
 
     </main>

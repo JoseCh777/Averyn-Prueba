@@ -1,7 +1,7 @@
 # Averyn — Design System "Horizonte" · Documento maestro
 
 > **Versión 1.7 · octubre 2026.** Este archivo reúne, en un solo lugar, todo lo que hay que saber del sistema de diseño de Averyn: qué es, dónde vive, cómo se usa, qué contiene, cómo se valida, qué librerías necesita y qué queda pendiente.
-> El catálogo visual y navegable está en [`averyn-design-system-horizonte.html`](./averyn-design-system-horizonte.html) (un solo archivo, se abre con doble clic). Este `.md` es la referencia escrita para los repositorios.
+> El catálogo visual y navegable está en `averyn-design-system-horizonte.html` (un solo archivo, se abre con doble clic). Este `.md` es la referencia escrita para los repositorios. **El entregable es el HTML único**; las 8 páginas por separado son solo salida de construcción.
 
 ## Índice
 
@@ -45,54 +45,50 @@ El tono es sereno e institucional, con la precisión de un instrumento: líneas 
 
 ## 2. Dónde vive cada cosa
 
-```text
-Averyn-Prueba/
-├── DESIGN.md                      # Principios y reglas del sistema (formato para herramientas de diseño)
-├── PRODUCT.md                     # Contexto del producto
-├── averyn-frontend/
-│   └── assets/css/
-│       ├── tokens.css             # FUENTE DE VERDAD de los valores (--av-*)
-│       └── design-system.css      # Estilos del frontend (capa anterior .av-*, ver sección 15)
-└── docs/
-    ├── averyn-design-system-horizonte.html   # TODO el sistema en un solo archivo para compartir
-    ├── averyn-design-system-horizonte.md     # Este documento
-    ├── design-system.html                    # Página "Inicio" de la documentación
-    └── ds/
-        ├── *.html                 # Páginas generadas: fundamentos, componentes, graficos,
-        │                          #   patrones, plantillas, marca, calidad
-        ├── src/                   # FUENTES de las páginas y herramientas de construcción
-        │   ├── *-body.html        #   contenido de cada página (aquí se edita)
-        │   ├── build.py           #   arma las páginas y valida ids, enlaces y demos
-        │   ├── bundle.py          #   genera el HTML único para compartir
-        │   ├── emails.py          #   genera los correos transaccionales
-        │   └── tokens_export.py   #   exporta tokens.css → tokens.json
-        ├── *.css / *.js           # Estilos y demos de cada página
-        ├── tokens.json            # Tokens en formato W3C (generado; no editar a mano)
-        ├── emails/                # Correos transaccionales de ejemplo
-        └── assets/                # Favicons e imagen social
-```
+El sistema se describe por **roles**, no por rutas, porque va a mudarse al repositorio oficial de la organización. Esta es la **única tabla con rutas**; al mudarlo solo se actualiza aquí.
 
-**Fuentes de verdad, en orden:** (1) `tokens.css` (valores) · (2) `DESIGN.md` (principios y reglas) · (3) este documento y el catálogo HTML. **Si hay conflicto, gana el valor del token.**
+| Rol | Hoy (repositorio de pruebas) | En el repositorio oficial |
+|---|---|---|
+| **Fuente de verdad de los valores** (tokens, `--av-*`) | `averyn-frontend/assets/css/tokens.css` | Por definir |
+| Estilos de los componentes en el frontend | `averyn-frontend/assets/css/design-system.css` | Por definir |
+| **Principios y reglas** | `DESIGN.md` (raíz) | Por definir |
+| **Documento maestro** (este archivo) | `docs/averyn-design-system-horizonte.md` | Por definir |
+| **HTML único** (el entregable) | `docs/averyn-design-system-horizonte.html` | Por definir |
+| Fuentes de las páginas y herramientas de construcción | `docs/ds/src/` (`*-body.html`, `build.py`, `bundle.py`, `emails.py`, `tokens_export.py`) | Por definir |
+| Páginas generadas (salida de la construcción; no se entregan) | `docs/ds/*.html` | No se versionan o se regeneran |
+| Tokens en formato W3C (generado) | `docs/ds/tokens.json` | Por definir |
+| Correos transaccionales | `docs/ds/emails/` | Por definir |
+| Favicons e imagen social | `docs/ds/assets/` | Por definir |
+| Estilos de impresión | `docs/ds/print.css` | Por definir |
+| Páginas de error reales | `averyn-frontend/` (`404.html`, `403.html`, `500.html`, `offline.html`, `mantenimiento.html`) y `assets/css/error.css` | Por definir |
+| Logos | `averyn-frontend/assets/images/` | Por definir |
+
+La misma tabla está en el HTML único (Calidad y gobernanza → *Dónde vive cada archivo*). Las rutas del resto del documento son **nombres de rol o de archivo, nunca carpetas**.
+
+**Fuentes de verdad, en orden:** (1) la fuente de los tokens (valores) · (2) `DESIGN.md` (principios y reglas) · (3) este documento y el catálogo HTML. **Si hay conflicto, gana el valor del token.**
 
 ---
 
 ## 3. Cómo usarlo
 
 ### Ver el sistema
-- **Un solo archivo:** abrir `docs/averyn-design-system-horizonte.html` en el navegador. Funciona desde disco (`file://`); necesita internet solo para fuentes e iconos.
-- **Por páginas:** servir el repositorio (`python -m http.server`) y abrir `docs/design-system.html`.
+- **Un solo archivo (el entregable):** abrir `averyn-design-system-horizonte.html` en el navegador. Funciona desde disco (`file://`); necesita internet solo para fuentes e iconos.
+- **Por páginas (solo para desarrollar):** `build.py` genera las 8 páginas; se sirven con cualquier servidor estático (`python -m http.server`) desde la carpeta que las contiene y se abre *Inicio*.
 
 ### Empezar una pantalla
 ```html
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-<link href="../assets/css/design-system.css" rel="stylesheet">   <!-- incluye tokens.css -->
+<link href="RUTA/design-system.css" rel="stylesheet">   <!-- incluye los tokens -->
 ```
 
 ### Reconstruir la documentación
 ```bash
-python docs/ds/src/build.py     # genera las 8 páginas y VALIDA ids únicos, enlaces, anclas y demos
-python docs/ds/src/bundle.py    # regenera el HTML único (docs/averyn-design-system-horizonte.html)
+# desde la carpeta de herramientas (ver la tabla de la sección 2)
+python tokens_export.py   # tokens.json desde la fuente de tokens
+python emails.py          # correos transaccionales
+python build.py           # genera las 8 páginas y VALIDA ids únicos, enlaces, anclas y demos
+python bundle.py          # regenera el HTML único
 ```
 `build.py` termina con error si hay un id repetido, un enlace roto o una demo cuyo script no se carga.
 
@@ -149,7 +145,7 @@ Reglas: *The One Signal Rule* (el azul es el único color que invita a actuar) y
 **Bootstrap Icons 1.11.3** (`bi bi-*`). Los iconos decorativos llevan `aria-hidden="true"`; los que van solos, `aria-label`.
 
 ### Tokens y exportación
-`tokens.css` es la fuente. `docs/ds/tokens.json` (formato W3C) se **genera** con `tokens_export.py` y trae: `color`, `fontFamily`, `fontSize`, `space`, `radius`, `shadow`, `transition`, `ratio`, `easing` y `chart` (categórica, de resultado y secuencial). Cualquier valor nuevo entra primero como token; no se escriben hex sueltos salvo los documentados.
+El archivo de tokens (`tokens.css`) es la fuente. `tokens.json` (formato W3C) se **genera** con `tokens_export.py` y trae: `color`, `fontFamily`, `fontSize`, `space`, `radius`, `shadow`, `transition`, `ratio`, `easing` y `chart` (categórica, de resultado y secuencial). Cualquier valor nuevo entra primero como token; no se escriben hex sueltos salvo los documentados.
 
 ---
 
@@ -249,7 +245,7 @@ Reglas de plantilla: navbar en píldora, ancho de 1200 px, un solo bloque navy p
 ## 10. Marca y entregables
 
 - **Ilustración con arcos:** una sola figura cambia de estado (vacío, error, éxito).
-- **Favicons e imagen social:** `docs/ds/assets/` (favicon 32/48, apple-touch-icon, icon-512, og-image).
+- **Favicons e imagen social:** favicon 32/48, apple-touch-icon, icon-512 y og-image, en la carpeta de recursos.
 - **Correos transaccionales:** tres plantillas con tablas y estilos en línea, generadas con `emails.py`. Pendiente probar en Gmail, Outlook y Apple Mail, y alojar el logo en un dominio público.
 - **Impresión (actas):** `print.css` para **A4 real**, tinta mínima, sin botones ni sombras.
 - **Logo:** negro sobre la zona clara del degradado, blanco sobre navy. El wordmark se maqueta grande y solo se reduce (nunca ampliarlo por encima de su tamaño nativo).
@@ -320,7 +316,7 @@ La voz es **serena, directa e institucional**: habla de tú, en frases cortas, s
 | Una regla de calidad o de proceso | Calidad y gobernanza |
 
 ### Cómo añadir o mover una sección
-Cada `<section>` en `docs/ds/src/*-body.html` lleva un `id` único en todo el sistema, `data-nav` (etiqueta del índice) y `data-grp` (subgrupo). Sin numeración; el fondo alterno lo calcula `build.py`. Para moverla se corta el bloque a otro `*-body.html` y se ajusta `data-grp`. Después, `python docs/ds/src/build.py`.
+Cada `<section>` de los `*-body.html` (carpeta de herramientas) lleva un `id` único en todo el sistema, `data-nav` (etiqueta del índice) y `data-grp` (subgrupo). Sin numeración; el fondo alterno lo calcula `build.py`. Para moverla se corta el bloque a otro `*-body.html` y se ajusta `data-grp`. Después, `python build.py`.
 
 ### Proponer un cambio
 Issue con captura → prototipo en rama → revisión (**nadie valida lo suyo**) → actualizar token, `DESIGN.md` y este documento → merge a `dev`.
@@ -340,11 +336,13 @@ Issue con captura → prototipo en rama → revisión (**nadie valida lo suyo**)
 | Módulos sin pantalla: "Próximamente", sin enlace | Honestidad del estado; evita los 404. |
 | Estructura por propósito (v1.5) | La gente no sabía dónde buscar. |
 | Sin Bootstrap en landing, login y dashboard | Menos peso; se conservan los iconos. |
+| Migración a React sobre **Next.js** | Decisión del equipo; shadcn/ui y los complementos recomendados funcionan sobre Next.js. |
+| Documentación sin rutas fijas; entregable = HTML único | El sistema se muda al repositorio oficial de la organización; solo una tabla guarda las rutas. |
 
 ### Historial de versiones
 | Versión | Resumen |
 |---|---|
-| **v1.7** | Plantillas y patrones declarados *ejemplos de uso*; huella de arcos anidados; componentes de carga de archivos y estados de carga; segundo tarjetón (una persona por partido); guía de migración a React; dependencias y librerías; lista de lo pospuesto. |
+| **v1.7** | Documentación independiente de la arquitectura (roles en lugar de rutas, una sola tabla "Dónde vive"); el entregable es el HTML único; stack de migración: Next.js. Plantillas y patrones declarados *ejemplos de uso*; huella de arcos anidados; componentes de carga de archivos y estados de carga; segundo tarjetón (una persona por partido); guía de migración a React; dependencias y librerías; lista de lo pospuesto. |
 | **v1.6** | Formularios nuevos (búsqueda, código de 6 dígitos, contraseña con fuerza, multi-select, validación); flujos de cuenta; propuestas de escrutinio, mesas, roles y revisión manual; tarjetón; informe de validación (axe, teclado, A4). |
 | **v1.5** | Reorganización por propósito (8 páginas en 4 grupos), secciones sin numerar, validación automática en `build.py`. |
 | **v1.4** | Auditoría del líder: estados unificados, píldoras en 3 variantes, alertas con insignia, panel de actividad desde un solo conjunto de datos. |
@@ -390,7 +388,7 @@ Las pruebas son scripts sueltos, sin `package.json`. Si pasan al repositorio ofi
 
 ## 14. Migración a React (recomendación)
 
-**Sí se puede migrar, y de forma incremental.** El frontend actual es HTML, CSS y JS estático; esta es una **recomendación documentada, no una migración hecha**.
+**Sí se puede migrar, y de forma incremental. El equipo decidió Next.js.** El frontend actual es HTML, CSS y JS estático; esta es una **recomendación documentada, no una migración hecha**.
 
 | Pieza actual | En React |
 |---|---|
@@ -483,7 +481,7 @@ Las pantallas se migran **por módulos**, no de golpe.
 
 | Documento | Qué es |
 |---|---|
-| [`DESIGN.md`](../DESIGN.md) | Principios y reglas del sistema en formato para herramientas de diseño. |
-| [`PRODUCT.md`](../PRODUCT.md) | Contexto del producto: usuarios, propósito, restricciones y principios. |
-| [`averyn-design-system-horizonte.html`](./averyn-design-system-horizonte.html) | El catálogo completo en un solo archivo. |
-| [`ds/tokens.json`](./ds/tokens.json) | Tokens en formato W3C (generado). |
+| `DESIGN.md` | Principios y reglas del sistema en formato para herramientas de diseño. |
+| `PRODUCT.md` | Contexto del producto: usuarios, propósito, restricciones y principios. |
+| `averyn-design-system-horizonte.html` | El catálogo completo en un solo archivo. |
+| `tokens.json` | Tokens en formato W3C (generado desde la fuente de tokens). |

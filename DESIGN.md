@@ -192,7 +192,7 @@ Geometría contenida: 8 px en botones y campos, 10 px en píldoras del header, 2
 ### Espacio para media
 - Marco con `aspect-ratio` configurable (`--ratio`), fondo papel azul, borde de 1 px y etiqueta mono "Imagen · 16:9". Al insertar un `<img>` o `<video>` rellena el marco con `object-fit: cover` y la etiqueta se oculta.
 
-### Gráficos (v1.2, documentados en `docs/ds/graficos.html`)
+### Gráficos (v1.2, documentados en la página Gráficos del design system)
 - Tarjeta plana de 1 px (radio 16): etiqueta mono, cifra grande en Space Grotesk, chip de variación (flecha = dirección, color = bueno/malo, texto = cuánto) y pie "Datos de ejemplo". Estados: cargando (esqueleto), vacío y error.
 - Paleta categórica validada con `validate_palette.js`, en orden fijo: `#145FEE`, `#C77500`, `#0092B5`, `#8A5CF6`, `#C2457A` (+ gris "Otros"); hasta 3 series sin ayudas, 4–5 solo con etiquetas directas. Secuencial azul de 6 pasos; divergente ámbar ↔ azul con gris neutro. Verde/ámbar/rojo de estado nunca son series.
 - Barras "píldora suave" (24–32 px, degradado azul→casi blanco, máx. 12) como excepción de marca a la guía de 4 px; la variante recta se usa en series densas. Cuadrícula sólida de línea fina, sin doble eje, sin número en cada marca.
@@ -201,7 +201,7 @@ Geometría contenida: 8 px en botones y campos, 10 px en píldoras del header, 2
 ### Páginas de error (v1.2)
 - 404, 403, 500, sin conexión y mantenimiento comparten `error.css`/`error.js`: horizonte cielo→navy, figura de arcos que se dibuja y se parte, número decorativo (`aria-hidden`), un solo `<h1>`, ruta pedida escapada y siempre una salida. Los módulos pendientes muestran "Próximamente", no un error.
 
-### Patrones, componentes, plantillas y marca (v1.3, documentados en `docs/ds/`)
+### Patrones, componentes, plantillas y marca (v1.3, documentados en el design system)
 - **Patrones biométricos** (`patrones.html`): consentimiento antes de la captura; guía sin culpar y siempre con texto además de color; un resultado de verificación muestra similitud, umbral (0.68, dato del servidor) y decisión; el comprobante de voto nunca vincula persona y opción.
 - **Componentes** (`componentes.html`): selector de fechas, menú ⋯, combobox, acordeón, stepper, popover, drawer (`<dialog>` modal), paleta Ctrl+K y tabla avanzada, con patrones de teclado WAI-ARIA y objetivos de 44 px.
 - **Plantillas** (`plantillas.html`): navbar en píldora, ancho de 1200 px, un solo bloque navy por pantalla, tarjetas de 1 px y estados cargando/vacío/error resueltos.
@@ -215,9 +215,9 @@ Geometría contenida: 8 px en botones y campos, 10 px en píldoras del header, 2
 - Series de resultado en gráficos usan `--viz-ok`, `--viz-retry` y `--viz-bad` (los mismos tonos, más oscuros, ≥ 3:1) con icono y palabra en la leyenda.
 
 ### Mapa de la documentación (v1.5)
-- El design system se documenta en **8 páginas por propósito** (`docs/design-system.html` + `docs/ds/*.html`), agrupadas en la barra lateral: **Inicio** · **Sistema** (Fundamentos, Componentes, Gráficos) · **Aplicación** (Patrones, Plantillas y estados) · **Marca y calidad** (Marca y entregables, Calidad y gobernanza). Todo viaja también en un solo HTML: `docs/averyn-design-system-horizonte.html`.
+- El design system se documenta en **8 páginas por propósito** (páginas generadas), agrupadas en la barra lateral: **Inicio** · **Sistema** (Fundamentos, Componentes, Gráficos) · **Aplicación** (Patrones, Plantillas y estados) · **Marca y calidad** (Marca y entregables, Calidad y gobernanza). Todo viaja también en un solo HTML, `averyn-design-system-horizonte.html`, que es el entregable.
 - **Dónde va cada cosa:** un valor → Fundamentos; una pieza reutilizable → Componentes; datos → Gráficos; un problema de producto → Patrones; una pantalla o su estado → Plantillas y estados; lo que sale de la pantalla → Marca y entregables; reglas de proceso → Calidad y gobernanza.
-- Las fuentes viven en `docs/ds/src/*-body.html`; `build.py` valida ids únicos y enlaces. Sin numeración de secciones; cada sección declara `data-nav` y `data-grp`.
+- Las fuentes son los `*-body.html` de la carpeta de herramientas; `build.py` valida ids únicos y enlaces. Las rutas concretas están solo en la tabla «Dónde vive cada archivo» (Calidad y gobernanza). Sin numeración de secciones; cada sección declara `data-nav` y `data-grp`.
 
 ## Do's and Don'ts
 
@@ -239,4 +239,4 @@ Geometría contenida: 8 px en botones y campos, 10 px en píldoras del header, 2
 
 ### Migración a React (recomendación, sin ejecutar)
 - Los tokens (`tokens.css` / `tokens.json`) y las clases `hz-*` pasan sin cambios; el JS de las demos se reemplaza por componentes con comportamiento resuelto.
-- Base sugerida: shadcn/ui (React Aria para fechas, combobox y tablas) + Sonner, TanStack Table, cmdk, input-otp, React Hook Form + Zod, Recharts/Visx y Storybook. Detalle y ruta por fases en Calidad y gobernanza → Cómo se consume.
+- Base sugerida: shadcn/ui (React Aria para fechas, combobox y tablas) + Sonner, TanStack Table, cmdk, input-otp, React Hook Form + Zod, Recharts/Visx y Storybook. Stack decidido: Next.js. Detalle y ruta por fases en Calidad y gobernanza → Consumo e implementación.

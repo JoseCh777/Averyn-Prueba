@@ -156,12 +156,12 @@ sin una fuente de datos real detrás.
 1. **Pulido de diseño** — completar pendientes visuales: placeholders de los
    módulos de Accesos y Administración, revisión de estados vacíos/error y
    pasadas de accesibilidad (contraste, foco, etiquetas).
-2. **Migración a React** — reescribir el frontend sobre **Vite + React** (SPA con
-   routing). La migración reutiliza intacto el Design System: los tokens siguen
-   siendo variables CSS en `design-system.css` y cada componente `.av-*` se
-   porta a un componente React con la misma hoja de estilos, garantizando
-   paridad visual. La capa de datos pasa a un store (Contexto o Zustand) que
-   mantiene las mismas claves de `localStorage`.
+2. **Migración a React** — reescribir el frontend sobre **Next.js** (decisión del
+   equipo). La migración reutiliza el Design System **Horizonte**: los tokens
+   siguen siendo variables CSS y los componentes se construyen con shadcn/ui
+   tematizado con esos tokens (detalle, paquetes y ruta por fases en
+   `docs/averyn-design-system-horizonte.md`). La capa de datos pasa a un store
+   (Contexto o Zustand) que mantiene las mismas claves de `localStorage`.
 3. **Backend** — implementar `averyn-backend/` (reservado) y conectar los
    módulos a una API real, reemplazando la capa de datos simulada.
 

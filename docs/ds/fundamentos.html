@@ -17,11 +17,11 @@
 <a class="skip" href="#contenido">Saltar al contenido</a>
 <div class="ds-shell">
   <aside class="ds-side" aria-label="Índice del design system">
-    <a class="ds-side__brand" href="../design-system.html" aria-label="Averyn, inicio del design system"><img src="../../averyn-frontend/assets/images/averyn-logo-font-black.avif" alt="Averyn"></a>
+    <a class="ds-side__brand" href="./inicio.html" aria-label="Averyn, inicio del design system"><img src="../../averyn-frontend/assets/images/averyn-logo-font-black.avif" alt="Averyn"></a>
     <p class="ds-side__ver mono">Design System · v1.7 Horizonte</p>
     <nav>
       <span class="grp mono">Empezar</span>
-      <a class="ds-page" href="../design-system.html">Inicio</a>
+      <a class="ds-page" href="inicio.html">Inicio</a>
       <span class="grp mono">Sistema</span>
       <a class="ds-page" href="fundamentos.html" aria-current="page">Fundamentos</a>
       <div class="ds-subnav">
@@ -268,7 +268,7 @@ background: linear-gradient(180deg, #DCECFF 0%, #EAF0FE 55%, #fff 100%);</pre><b
     <section class="ds-sec" id="tokens" aria-labelledby="h-tk" data-nav="Tokens y exportación" data-grp="Tokens"><div class="ds-wrap">
       <span class="ds-eyebrow mono">Fundamentos · Tokens</span>
       <h2 id="h-tk">Tokens exportables (W3C)</h2>
-      <p class="ds-lead">Los tokens salen de <code>tokens.css</code> —la fuente de verdad— con <code>python docs/ds/src/tokens_export.py</code>, en el formato de Design Tokens del W3C (<code>$value</code>, <code>$type</code>). Sirven para Figma (Tokens Studio), Style Dictionary o cualquier herramienta que lo lea. Nunca se editan a mano.</p>
+      <p class="ds-lead">Los tokens salen de <code>tokens.css</code> —la fuente de verdad— con <code>python tokens_export.py</code>, en el formato de Design Tokens del W3C (<code>$value</code>, <code>$type</code>). Sirven para Figma (Tokens Studio), Style Dictionary o cualquier herramienta que lo lea. Nunca se editan a mano.</p>
       <div class="tk-grid">
         <div class="stage"><span class="stage__label mono">Grupos exportados</span><div class="doc-wrap" style="margin:.6rem 0 0"><table class="doc-table"><thead><tr><th>Grupo</th><th>Tokens</th><th>Tipo W3C</th></tr></thead><tbody id="tk-rows"></tbody></table></div>
           <div class="pt-actions" style="display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1rem"><button class="hz-btn hz-btn--primary" type="button" id="tk-dl">Descargar tokens.json</button><button class="hz-btn hz-btn--ghost" type="button" id="tk-copy">Copiar JSON</button></div></div>
