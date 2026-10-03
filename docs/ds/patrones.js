@@ -53,19 +53,33 @@
   (function () {
     var svg = $('#fp-svg'); if (!svg) return;
     var box = $('#fp-box'), title = $('#fp-title'), sub = $('#fp-sub'), bar = $('#fp-bar'), pct = $('#fp-pct'), q = $('#fp-q'), btn = $('#fp-btn');
-    /* Huella simplificada: 7 crestas en forma de cúpula con patas rectas que terminan dentro de un contorno redondo, y un
-       punto de núcleo. Decorativa: no codifica ningún dato real. */
+    /* Huella de bucle con la silueta de la referencia: contorno alto y redondeado, crestas anidadas, núcleo con tallo y
+       cortes. Trazo fino y colores de marca. Decorativa: no codifica ningún dato real. */
     var NS = 'http://www.w3.org/2000/svg', rings = [];
     (function () {
-      var g = document.createElementNS(NS, 'g'); g.setAttribute('transform', 'rotate(-5 100 115)'); svg.appendChild(g);
-      var CX = 100, CY = 108, RX = 96, RY = 104, parts = [{ d: 'M100 112L100 113', dot: true }];
-      for (var k = 1; k <= 7; k++) {
-        var r = 6 + k * 12.8, top = CY - k * .6, base = Math.min(216, CY + Math.sqrt(Math.max(0, 1 - r * r / (RX * RX))) * RY * .92);
-        parts.push({ d: 'M' + (CX - r) + ' ' + base.toFixed(1) + ' L' + (CX - r) + ' ' + top.toFixed(1) + ' A' + r + ' ' + r + ' 0 0 1 ' + (CX + r) + ' ' + top.toFixed(1) + ' L' + (CX + r) + ' ' + (base - (k % 2 ? 9 : 0)).toFixed(1) });
-      }
+      var g = document.createElementNS(NS, 'g'); g.setAttribute('transform', 'rotate(-4 100 115)'); svg.appendChild(g);
+      var CX = 100, CY = 84, YB = 150, parts = [];
+      function line(x, y1, y2) { return 'M' + x + ' ' + y1 + ' L' + x + ' ' + y2; }
+      /* núcleo: tallo, horquilla y tres trazos cortos bajo ella */
+      parts.push({ d: line(CX, CY + 2, CY + 24) });
+      parts.push({ d: 'M' + (CX - 6) + ' ' + (CY + 26) + ' L' + (CX - 6) + ' ' + CY + ' A6 6 0 0 1 ' + (CX + 6) + ' ' + CY + ' L' + (CX + 6) + ' ' + (CY + 26) });
+      [-9, 0, 9].forEach(function (dx) { parts.push({ d: line(CX + dx, CY + 60, CY + 90 - Math.abs(dx) * .8) }); });
+      /* crestas de dentro hacia fuera: las tres interiores son arcos abiertos; las tres exteriores cierran el contorno por abajo
+         y se abren en diagonal (cada una termina en un ángulo distinto) */
+      var R = [14, 25.2, 36.4, 47.6, 58.8, 70], END = [0, 0, 0, 160, 150, 138], CUT = [0, .3, 0, .22, 0, .58];
+      R.forEach(function (r, i) {
+        var d;
+        if (i < 3) d = 'M' + (CX - r) + ' ' + [122, 138, 150][i] + ' L' + (CX - r) + ' ' + CY + ' A' + r + ' ' + r + ' 0 0 1 ' + (CX + r) + ' ' + CY + ' L' + (CX + r) + ' ' + [114, 146, 134][i];
+        else {
+          var e = END[i] * Math.PI / 180, bx = CX + r * Math.cos(e), by = YB + r * Math.sin(e);
+          d = 'M' + (CX - r) + ' ' + YB + ' L' + (CX - r) + ' ' + CY + ' A' + r + ' ' + r + ' 0 0 1 ' + (CX + r) + ' ' + CY + ' L' + (CX + r) + ' ' + YB + ' A' + r + ' ' + r + ' 0 0 1 ' + bx.toFixed(1) + ' ' + by.toFixed(1);
+        }
+        parts.push({ d: d, cut: CUT[i] });
+      });
       parts.forEach(function (pt) {
-        var p = document.createElementNS(NS, 'path'); p.setAttribute('d', pt.d); p.setAttribute('class', 'pt-fp__ring' + (pt.dot ? ' pt-fp__dot' : ''));
-        p.setAttribute('pathLength', '1'); g.appendChild(p); rings.push(p);
+        var p = document.createElementNS(NS, 'path'); p.setAttribute('d', pt.d); p.setAttribute('class', 'pt-fp__ring'); p.setAttribute('pathLength', '1');
+        if (pt.cut) p.setAttribute('stroke-dasharray', pt.cut.toFixed(3) + ' .035 ' + (.965 - pt.cut).toFixed(3));
+        g.appendChild(p); rings.push(p);
       });
     })();
     var finger = function () { return $('input[name="dedo"]:checked').value; };
