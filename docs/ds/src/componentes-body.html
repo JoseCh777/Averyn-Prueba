@@ -337,7 +337,7 @@
 
       <h3 class="ds-sub">Filas de línea, media y personas</h3>
       <div class="ds-grid ds-grid--3">
-        <div><div class="hz-line"><span class="n mono">01</span><div><h4>Identidad</h4><p>Personas con identificadores propios de Averyn y afiliaciones por institución.</p></div></div><div class="hz-line" style="border-bottom:1px solid var(--av-hairline)"><span class="n mono">02</span><div><h4>Biometría</h4><p>Enrolamiento y verificación por huella y rostro.</p></div></div></div>
+        <div><div class="hz-line"><span class="n mono">01</span><div><h3>Identidad</h3><p>Personas con identificadores propios de Averyn y afiliaciones por institución.</p></div></div><div class="hz-line" style="border-bottom:1px solid var(--av-hairline)"><span class="n mono">02</span><div><h3>Biometría</h3><p>Enrolamiento y verificación por huella y rostro.</p></div></div></div>
         <div><div class="hz-media" style="--ratio:4/5;max-width:200px"><span class="hz-media__hint mono">Imagen · 4:5</span></div><p class="ds-note">Espacio reservado: al insertar un <code>&lt;img&gt;</code> o <code>&lt;video&gt;</code> rellena el marco con <code>object-fit: cover</code> y la etiqueta se oculta. Proporciones: 4:5, 16:9, 21:9.</p></div>
         <div><a class="hz-person" href="#superficies"><span class="hz-person__ini" aria-hidden="true">DD</span><strong>Daniel David Turizo Chacon</strong><small>Core, Arquitectura e Integraciones críticas</small><span class="mono" style="color:var(--av-blue);text-transform:none">@ddturizo-eng ↗</span></a></div>
       </div>
@@ -451,7 +451,7 @@
       <p class="ds-lead">Panel pequeño y no modal anclado a un botón. Para una explicación que merece más que un tooltip (título, párrafo y un enlace) sin sacar a la persona de lo que hace.</p>
       <div class="cp-grid">
         <div class="cp-demo" style="min-height:260px"><div class="po" id="po"><button class="cp-trig" type="button" id="po-btn" aria-expanded="false" aria-controls="po-pop"><i class="bi bi-info-circle" aria-hidden="true"></i>¿Qué es el umbral?</button>
-          <div class="cp-pop" id="po-pop" role="dialog" aria-labelledby="po-t" hidden><h4 id="po-t">Umbral de similitud</h4><p>Es el puntaje mínimo (de 0 a 1) para aceptar una verificación. Hoy es 0.68 y lo define el servidor.</p><a href="{{DS}}/patrones.html#resultado" class="hz-btn hz-btn--text" style="min-height:44px">Ver el patrón de resultado →</a></div></div></div>
+          <div class="cp-pop" id="po-pop" role="dialog" aria-labelledby="po-t" hidden><h3 id="po-t">Umbral de similitud</h3><p>Es el puntaje mínimo (de 0 a 1) para aceptar una verificación. Hoy es 0.68 y lo define el servidor.</p><a href="{{DS}}/patrones.html#resultado" class="hz-btn hz-btn--text" style="min-height:44px">Ver el patrón de resultado →</a></div></div></div>
         <div class="cp-side">
           <div><h3>Popover, tooltip o modal</h3><div class="doc-wrap" style="margin:0"><table class="doc-table"><thead><tr><th></th><th>Contiene</th><th>Se abre</th></tr></thead><tbody><tr><td>Tooltip</td><td>Una frase, sin acciones</td><td>Foco o cursor</td></tr><tr><td>Popover</td><td>Texto con título y acción</td><td>Clic o Enter</td></tr><tr><td>Modal</td><td>Decisión que bloquea</td><td>Acción explícita</td></tr></tbody></table></div></div>
           <div><h3>Reglas</h3><ul><li><kbd>Esc</kbd> o clic fuera cierra y devuelve el foco al botón.</li><li>No atrapa el foco (no es modal) pero <kbd>Tab</kbd> sale del botón hacia el contenido.</li><li>Ancho máximo de 20 rem; nunca más de 2 acciones.</li></ul></div>

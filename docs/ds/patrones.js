@@ -64,7 +64,7 @@
     function paint(state, prog, t, s, ql) {
       box.setAttribute('data-state', state);
       var n = Math.round(prog / 100 * 7); rings.forEach(function (r, k) { r.classList.toggle('on', k < n); });
-      bar.setAttribute('aria-valuenow', prog); bar.firstElementChild.style.width = prog + '%'; pct.textContent = prog + '%';
+      bar.setAttribute('aria-valuenow', prog); bar.firstElementChild.style.setProperty('--p', prog / 100); pct.textContent = prog + '%';
       title.textContent = t; sub.textContent = s; q.textContent = ql;
     }
     var S = {

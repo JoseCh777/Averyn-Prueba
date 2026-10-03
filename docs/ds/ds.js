@@ -62,4 +62,18 @@
       if (window.scrollY < 120) enlaces.forEach(function (a) { a.classList.remove('is-current'); });
     }, { passive: true });
   }
+
+  /* Regiones con desplazamiento horizontal (tablas, código): deben poder recorrerse con teclado */
+  function regionesDesplazables() {
+    $$('.doc-wrap, .codeblock pre').forEach(function (el) {
+      var corta = el.scrollWidth > el.clientWidth + 1;
+      if (corta && !el.hasAttribute('data-sr')) {
+        el.setAttribute('data-sr', '1'); el.tabIndex = 0; el.setAttribute('role', 'region');
+        el.setAttribute('aria-label', el.matches('pre') ? 'Código (desplazable)' : 'Tabla (desplazable)');
+      } else if (!corta && el.hasAttribute('data-sr')) {
+        el.removeAttribute('data-sr'); el.removeAttribute('tabindex'); el.removeAttribute('role'); el.removeAttribute('aria-label');
+      }
+    });
+  }
+  regionesDesplazables(); window.addEventListener('resize', regionesDesplazables); window.addEventListener('load', regionesDesplazables);
 })();

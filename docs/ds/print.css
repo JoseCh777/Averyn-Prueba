@@ -43,5 +43,7 @@
   .pr-break { break-before: page; page-break-before: always; }
 }
 
-/* Tamaño, márgenes y pie con número de página (Chromium y navegadores con soporte de márgenes de página) */
-@page { size: A4; margin: 18mm 16mm 20mm; @bottom-left { content: "Averyn · documento verificable"; font: 8pt Inter, Arial, sans-serif; color: #56637F; } @bottom-right { content: "Página " counter(page) " de " counter(pages); font: 8pt Inter, Arial, sans-serif; color: #56637F; } }
+/* Tamaño y márgenes: regla propia, para que A4 no dependa del soporte de cuadros de margen */
+@page { size: A4; margin: 18mm 16mm 20mm; }
+/* Pie con número de página (navegadores con soporte de cuadros de margen; si no, se ignora sin afectar lo anterior) */
+@page { @bottom-left { content: "Averyn · documento verificable"; font: 8pt Inter, Arial, sans-serif; color: #56637F; } @bottom-right { content: "Página " counter(page) " de " counter(pages); font: 8pt Inter, Arial, sans-serif; color: #56637F; } }

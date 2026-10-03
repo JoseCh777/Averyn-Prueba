@@ -65,7 +65,8 @@
     var cont = $('#' + id); if (!cont) return;
     cont.innerHTML = lista.map(function (c) {
       var borde = /^#(FFFFFF|F4F8FF|F4F6FA|EAF0FE|E8F8F0|FEF3E2|FDECEA|E3F6FA|DCE5F5|CFDCF3|DCECFF)$/i.test(c[2]) ? 'box-shadow:inset 0 0 0 1px rgba(0,12,36,.08);' : '';
-      return '<button class="sw" type="button" data-hex="' + c[2] + '" aria-label="Copiar ' + c[0] + ' ' + c[2] + '"><span class="sw__chip" style="background:' + c[2] + ';color:' + c[4] + ';' + borde + '">' + c[2] + '</span><span class="sw__meta"><b>' + c[0] + '</b><span>' + c[1] + '</span><em>' + c[3] + '</em></span></button>';
+      var txt = ratio('#FFFFFF', c[2]) >= ratio('#000C24', c[2]) ? '#FFFFFF' : '#000C24';
+      return '<button class="sw" type="button" data-hex="' + c[2] + '" aria-label="Copiar ' + c[0] + ' ' + c[2] + '"><span class="sw__chip" style="background:' + c[2] + ';color:' + txt + ';' + borde + '">' + c[2] + '</span><span class="sw__meta"><b>' + c[0] + '</b><span>' + c[1] + '</span><em>' + c[3] + '</em></span></button>';
     }).join('');
   }
   Object.keys(COLORES).forEach(function (k) { pintarColores('sw-' + k, COLORES[k]); });
@@ -152,7 +153,7 @@
     var r = ratio(p[0], p[1]); var nivel = r >= 7 ? 'AAA' : r >= 4.5 ? 'AA' : r >= 3 ? 'Solo grande / componente' : 'No cumple';
     var prohibido = /NO USAR|nunca texto|Solo separador/.test(p[3]);
     var clase = (r >= 4.5 && !prohibido) || (r >= 3 && /componente|foco/i.test(p[3])) ? 'pass' : 'fail';
-    return '<tr><td><span style="display:inline-block;padding:.2rem .7rem;border-radius:6px;background:' + p[1] + ';color:' + p[0] + ';font-weight:600;box-shadow:inset 0 0 0 1px rgba(0,12,36,.1)">Aa</span></td><td>' + p[2] + '<br><code>' + p[0] + '</code></td><td><code>' + p[1] + '</code></td><td class="' + clase + '">' + r.toFixed(2) + ':1<br><small>' + nivel + '</small></td><td>' + p[3] + '</td></tr>';
+    return '<tr><td><span aria-hidden="true" data-demo="contraste" style="display:inline-block;padding:.2rem .7rem;border-radius:6px;background:' + p[1] + ';color:' + p[0] + ';font-weight:600;box-shadow:inset 0 0 0 1px rgba(0,12,36,.1)">Aa</span></td><td>' + p[2] + '<br><code>' + p[0] + '</code></td><td><code>' + p[1] + '</code></td><td class="' + clase + '">' + r.toFixed(2) + ':1<br><small>' + nivel + '</small></td><td>' + p[3] + '</td></tr>';
   }).join('');
 
   /* ---------- Escalas ---------- */
