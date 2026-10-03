@@ -69,8 +69,8 @@
 .pt-fp { display: grid; grid-template-columns: minmax(0, 190px) minmax(0, 1fr); gap: 1.5rem; align-items: center; }
 .pt-fp__pad { position: relative; aspect-ratio: 1 / 1.15; border-radius: var(--av-radius-tile); background: radial-gradient(100% 80% at 50% 25%, var(--av-navy-horizon), var(--av-navy-night)); }
 .pt-fp__pad svg { position: absolute; inset: 8%; width: 84%; height: 84%; }
-.pt-fp__ring { fill: none; stroke: rgba(255, 255, 255, .26); stroke-width: 2.6; stroke-linecap: round; transition: stroke .25s var(--av-ease-out); }
-.pt-fp__dot { stroke-width: 4.5; }
+.pt-fp__ring { fill: none; stroke: rgba(255, 255, 255, .28); stroke-width: 3.4; stroke-linecap: round; transition: stroke .25s var(--av-ease-out); }
+.pt-fp__dot { stroke-width: 6; }
 .pt-fp__ring.on { stroke: var(--pt-signal); }
 .pt-fp[data-state="ok"] .pt-fp__ring.on { stroke: var(--pt-ok); }
 .pt-fp[data-state="low"] .pt-fp__ring.on { stroke: #FCD34D; }
