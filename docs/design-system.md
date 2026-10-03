@@ -1,5 +1,9 @@
 # Averyn — Guía de Diseño (Design System)
 
+> **Estado: legado.** Esta guía describe la capa anterior (`.av-*`) que todavía usan los módulos que no han migrado.
+> El sistema vigente es **Horizonte**: ver [`averyn-design-system-horizonte.md`](./averyn-design-system-horizonte.md).
+> Se retira cuando el último módulo migre.
+
 > Dirección visual del contenido de los módulos: **"registro civil digital"**.
 > Autoridad (azul/marina), precisión (tipografía de datos) y el **sello de verificación**
 > como motivo central. El navbar/dock flotante es el patrón de navegación único y **no se modifica**.
