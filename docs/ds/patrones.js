@@ -53,17 +53,46 @@
   (function () {
     var svg = $('#fp-svg'); if (!svg) return;
     var box = $('#fp-box'), title = $('#fp-title'), sub = $('#fp-sub'), bar = $('#fp-bar'), pct = $('#fp-pct'), q = $('#fp-q'), btn = $('#fp-btn');
+    /* Crestas de una huella tipo "bucle": arcos anidados alrededor de un núcleo, tramo inferior de curvas suaves,
+       pequeños cortes en las crestas y una ligera inclinación. Decorativa: no codifica ningún dato real. */
     var NS = 'http://www.w3.org/2000/svg', rings = [];
-    for (var i = 0; i < 7; i++) {
-      var rx = 12 + 13 * i, ry = 14 + 14 * i, p = document.createElementNS(NS, 'path');
-      p.setAttribute('d', 'M' + (100 - rx) + ' ' + (118 + ry * .5) + ' A' + rx + ' ' + ry + ' 0 0 1 ' + (100 + rx) + ' ' + (118 + ry * .5));
-      p.setAttribute('class', 'pt-fp__ring'); svg.appendChild(p); rings.push(p);
-    }
+    (function () {
+      var g = document.createElementNS(NS, 'g'); g.setAttribute('transform', 'rotate(-5 100 128)'); svg.appendChild(g);
+      var seed = 7, rnd = function () { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+      var CX = 100, N = 12, parts = [];
+      function leg(k) { return 5 + k * 7.3; }
+      function yb(k) { return Math.min(214, 118 + k * 9); }
+      function breaks(skip) {   /* trazos con 1–2 cortes pequeños, repartidos al azar (pathLength = 1) */
+        if (skip || rnd() < .35) return '';
+        var g1 = .012 + rnd() * .018, p1 = .3 + rnd() * .35, g2 = .012 + rnd() * .016;
+        return (p1).toFixed(3) + ' ' + g1.toFixed(3) + ' ' + (1 - p1 - g1 - g2 - .002).toFixed(3) + ' ' + g2.toFixed(3) + ' .002 0';
+      }
+      for (var k = 1; k < N; k++) {
+        var w = leg(k), base = yb(k), apex = 98 - k * 6.9, c = (4 * apex - base) / 3, sh = -k * .45;
+        var xl = CX - w + sh, xr = CX + w * (1 + .008 * k) + sh;
+        parts.push({ r: w, d: 'M' + xl.toFixed(1) + ' ' + base + ' C' + xl.toFixed(1) + ' ' + c.toFixed(1) + ' ' + xr.toFixed(1) + ' ' + c.toFixed(1) + ' ' + xr.toFixed(1) + ' ' + (base + (k > 5 ? 0 : 0)), dash: breaks(k < 3) });
+      }
+      /* núcleo: bucle pequeño y un punto */
+      parts.push({ r: 1, d: 'M' + (CX - 4) + ' 120 C' + (CX - 4) + ' 98 ' + (CX + 4) + ' 98 ' + (CX + 4) + ' 120', dash: '' });
+      parts.push({ r: 2, d: 'M' + (CX - .2) + ' 113 L' + (CX + .2) + ' 113', dash: '', dot: true });
+      /* curvas bajo el núcleo, entre las patas de los bucles interiores */
+      [130, 142, 154, 166, 178].forEach(function (y, j2) {
+        var kk = 1; while (yb(kk) < y && kk < N) kk++;
+        var half = leg(kk) - 5 - j2 * .3, dip = 7 + j2 * 1.4;
+        parts.push({ r: half + (y - 118) * .5, d: 'M' + (CX - half).toFixed(1) + ' ' + y + ' C' + (CX - half * .45).toFixed(1) + ' ' + (y + dip) + ' ' + (CX + half * .45).toFixed(1) + ' ' + (y + dip) + ' ' + (CX + half).toFixed(1) + ' ' + y, dash: breaks(false) });
+      });
+      parts.sort(function (a, b) { return a.r - b.r; });
+      parts.forEach(function (pt) {
+        var p = document.createElementNS(NS, 'path'); p.setAttribute('d', pt.d); p.setAttribute('class', 'pt-fp__ring' + (pt.dot ? ' pt-fp__dot' : ''));
+        p.setAttribute('pathLength', '1'); if (pt.dash) p.setAttribute('stroke-dasharray', pt.dash);
+        g.appendChild(p); rings.push(p);
+      });
+    })();
     var finger = function () { return $('input[name="dedo"]:checked').value; };
     var timer;
     function paint(state, prog, t, s, ql) {
       box.setAttribute('data-state', state);
-      var n = Math.round(prog / 100 * 7); rings.forEach(function (r, k) { r.classList.toggle('on', k < n); });
+      var n = Math.round(prog / 100 * rings.length); rings.forEach(function (r, k) { r.classList.toggle('on', k < n); });
       bar.setAttribute('aria-valuenow', prog); bar.firstElementChild.style.setProperty('--p', prog / 100); pct.textContent = prog + '%';
       title.textContent = t; sub.textContent = s; q.textContent = ql;
     }
