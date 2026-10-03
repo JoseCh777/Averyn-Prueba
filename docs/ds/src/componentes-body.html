@@ -85,6 +85,59 @@
         <div class="dd dd--dont"><strong>No hacer</strong><ul><li>Marcar en rojo un campo que no falla (p. ej. la contraseña cuando solo el correo es inválido).</li><li>Placeholder como única etiqueta. Bordes de campo con el hairline (2.5:1).</li><li>Mensajes genéricos ("Error", "Inválido") sin decir cómo arreglarlo.</li></ul></div>
       </div>
     </div></section>
+
+    <!-- CAMPO DE BÚSQUEDA -->
+    <section class="ds-sec" id="busqueda" aria-labelledby="h-busqueda" data-nav="Campo de búsqueda" data-grp="Acciones y formularios"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Componentes · Acciones y formularios</span>
+      <h2 id="h-busqueda">Campo de búsqueda</h2>
+      <p class="ds-lead">Para filtrar una lista que ya está en pantalla. Filtra mientras se escribe, dice cuántos resultados hay y se limpia con un botón o con <kbd class="cp-k">Esc</kbd>. El atajo <kbd class="cp-k">/</kbd> lo enfoca desde cualquier parte de la página.</p>
+      <div class="cp-grid">
+        <div class="cp-demo"><div class="sf" id="sf"><label class="sr-only" for="sf-in">Buscar personas</label><i class="bi bi-search sf__ic" aria-hidden="true"></i><input class="hz-input sf__in" id="sf-in" type="search" placeholder="Buscar por nombre o documento" autocomplete="off" aria-describedby="sf-count"><button class="sf__x" type="button" id="sf-x" aria-label="Limpiar búsqueda" hidden><i class="bi bi-x-lg" aria-hidden="true"></i></button><kbd class="cp-k sf__k" aria-hidden="true">/</kbd></div>
+          <p class="sf__count" id="sf-count" role="status"></p><ul class="sf__list" id="sf-list"></ul></div>
+        <div class="cp-side">
+          <div><h3>Teclado</h3><ul><li><kbd>/</kbd> enfoca el campo (si no estás escribiendo en otro).</li><li><kbd>Esc</kbd> limpia el texto; con el campo vacío, quita el foco.</li></ul></div>
+          <div><h3>Reglas</h3><ul><li><code>type="search"</code> con etiqueta oculta para lectores de pantalla (el icono no es una etiqueta).</li><li>El conteo se anuncia con <code>role="status"</code>: "3 resultados" o "Sin resultados para «x»".</li><li>El botón de limpiar solo aparece con texto y mide 44 px.</li><li>Sin resultados: ofrecer cómo salir ("Quita algún filtro"), no una lista vacía.</li></ul></div>
+        </div>
+      </div>
+    </div></section>
+
+    <!-- CÓDIGO DE UN SOLO USO -->
+    <section class="ds-sec" id="otp" aria-labelledby="h-otp" data-nav="Código de un solo uso" data-grp="Acciones y formularios"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Componentes · Acciones y formularios</span>
+      <h2 id="h-otp">Código de un solo uso (6 dígitos)</h2>
+      <p class="ds-lead">Para confirmar el correo o el segundo factor. Seis casillas que se comportan como un solo campo: avanzan solas, aceptan pegar el código completo y avisan sin culpar si falla. Es el mismo código que prometen los correos de verificación.</p>
+      <div class="cp-grid">
+        <div class="cp-demo"><fieldset class="otp" id="otp-box" aria-describedby="otp-help otp-msg"><legend class="hz-label">Código de verificación</legend>
+            <div class="otp__row" id="otp-row"></div>
+            <span class="hz-help" id="otp-help">Escribe los 6 dígitos que enviamos a ana@ejemplo.edu. En esta demo el código correcto es <b>482913</b>.</span>
+            <p class="otp__msg" id="otp-msg" role="status"></p>
+            <div class="pt-actions" style="display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin-top:.8rem"><button class="hz-btn hz-btn--primary" type="button" id="otp-ok" disabled>Verificar</button><button class="hz-btn hz-btn--text" type="button" id="otp-re" style="min-height:44px" disabled>Reenviar código</button></div></fieldset></div>
+        <div class="cp-side">
+          <div><h3>Teclado</h3><ul><li>Cada dígito avanza a la siguiente casilla; <kbd>Retroceso</kbd> en una casilla vacía vuelve a la anterior.</li><li><kbd>←</kbd> <kbd>→</kbd> se mueven entre casillas; <kbd>Inicio</kbd>/<kbd>Fin</kbd> saltan a la primera y a la última.</li><li>Pegar (<kbd>Ctrl</kbd>+<kbd>V</kbd>) reparte los dígitos; se ignoran espacios y guiones.</li></ul></div>
+          <div><h3>Reglas</h3><ul><li><code>inputmode="numeric"</code> y <code>autocomplete="one-time-code"</code> para que el móvil sugiera el código del SMS o del correo.</li><li>Un <code>fieldset</code> con <code>legend</code>; cada casilla tiene su etiqueta ("Dígito 3 de 6").</li><li>Al completarse, se verifica sola; el botón existe para quien no confía en la automatización.</li><li>Error: borde rojo <b>y</b> texto ("Código incorrecto. Te quedan 2 intentos."). Tras 3 fallos, se bloquea con el motivo y cuándo se puede reintentar.</li><li>"Reenviar" se activa tras una espera visible; nunca se dice si el correo existe.</li></ul></div>
+          <div><h3>Copy aprobado</h3><ul><li>Error: "Código incorrecto. Te quedan 2 intentos."</li><li>Bloqueo: "Demasiados intentos. Vuelve a intentarlo en 5 minutos."</li><li>Éxito: "Correo confirmado."</li></ul></div>
+        </div>
+      </div>
+    </div></section>
+
+    <!-- CONTRASEÑA Y FUERZA -->
+    <section class="ds-sec" id="contrasena" aria-labelledby="h-contrasena" data-nav="Contraseña y fuerza" data-grp="Acciones y formularios"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Componentes · Acciones y formularios</span>
+      <h2 id="h-contrasena">Contraseña con indicador de fuerza</h2>
+      <p class="ds-lead">Muestra qué se pide <b>antes</b> de escribir y cómo va la contraseña mientras se escribe: una barra de cuatro tramos, una palabra y una lista de requisitos con icono. El color nunca es el único aviso.</p>
+      <div class="cp-grid">
+        <div class="cp-demo"><div class="pw" id="pw"><div class="hz-field"><div class="hz-label__row"><label class="hz-label" for="pw-in">Nueva contraseña</label><button class="hz-btn hz-btn--text" type="button" id="pw-t" style="min-height:44px;font-size:.8125rem;text-transform:none;letter-spacing:0;font-family:var(--av-font-body)" aria-pressed="false">Mostrar</button></div>
+            <input class="hz-input" id="pw-in" type="password" autocomplete="new-password" aria-describedby="pw-req pw-st"></div>
+            <div class="pw__bar" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+            <p class="pw__st" id="pw-st" role="status" aria-live="polite">Escribe una contraseña.</p>
+            <ul class="pw__req" id="pw-req" aria-label="Requisitos"></ul></div></div>
+        <div class="cp-side">
+          <div><h3>Reglas</h3><ul><li>Los requisitos se ven desde el principio, no como regaño tras el primer error.</li><li>Cada requisito lleva icono <b>y</b> estado en texto ("cumplido" / "falta") para lectores de pantalla.</li><li>La barra tiene 4 tramos y una palabra: Muy débil, Débil, Buena, Fuerte. La palabra se anuncia de forma educada (<code>aria-live="polite"</code>).</li><li>Mostrar/Ocultar es un botón con <code>aria-pressed</code>; nunca se deshabilita pegar.</li><li><code>autocomplete="new-password"</code> para que el gestor de contraseñas proponga una.</li><li>Mínimo 10 caracteres; sin tope máximo menor a 64.</li></ul></div>
+          <div><h3>Importante</h3><p style="margin:0">La fuerza de esta demo es una estimación simple. En producción la validación definitiva (y la lista de contraseñas filtradas) la hace el servidor.</p></div>
+        </div>
+      </div>
+    </div></section>
+
     <!-- SELECTOR DE FECHAS -->
     <section class="ds-sec" id="fechas" aria-labelledby="h-fechas" data-nav="Selector de fechas" data-grp="Acciones y formularios"><div class="ds-wrap">
       <span class="ds-eyebrow mono">Componentes · Acciones y formularios</span>
@@ -127,6 +180,46 @@
         </div>
       </div>
     </div></section>
+
+    <!-- MULTI-SELECT Y FILTROS ACTIVOS -->
+    <section class="ds-sec" id="multiselect" aria-labelledby="h-multiselect" data-nav="Multi-select y filtros activos" data-grp="Acciones y formularios"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Componentes · Acciones y formularios</span>
+      <h2 id="h-multiselect">Multi-select y filtros activos</h2>
+      <p class="ds-lead">Para elegir varios valores de una lista (dispositivos, estados, instituciones). Lo elegido se ve como chips que se quitan uno a uno, y los filtros activos quedan resumidos sobre la tabla con una salida clara: "Limpiar filtros".</p>
+      <div class="cp-grid">
+        <div class="cp-demo cp-demo--open" style="min-height:420px"><div class="ms" id="ms"><label class="hz-label" id="ms-lab" for="ms-in">Dispositivo</label>
+            <div class="ms__field" id="ms-field"><span class="ms__chips" id="ms-chips"></span><input class="ms__in" id="ms-in" role="combobox" aria-expanded="false" aria-controls="ms-list" aria-autocomplete="list" aria-describedby="ms-help" autocomplete="off" placeholder="Elige uno o varios…"></div>
+            <ul class="cb__list" id="ms-list" role="listbox" aria-multiselectable="true" aria-labelledby="ms-lab" hidden></ul>
+            <span class="hz-help" id="ms-help">Usa las flechas y Espacio o Enter para marcar. Retroceso quita el último.</span></div>
+          <div class="fa" id="fa" aria-label="Filtros activos"><span class="fa__t mono">Filtros</span><span class="fa__chips" id="fa-chips"></span><button class="hz-btn hz-btn--text" type="button" id="fa-clear" style="min-height:44px" hidden>Limpiar filtros</button></div>
+          <p class="fa__n" id="fa-n" role="status"></p></div>
+        <div class="cp-side">
+          <div><h3>Teclado</h3><ul><li><kbd>↓</kbd> <kbd>↑</kbd> mueven la opción activa; <kbd>Espacio</kbd> o <kbd>Enter</kbd> marcan o desmarcan y <b>mantienen abierta</b> la lista.</li><li><kbd>Retroceso</kbd> con el campo vacío quita el último chip; <kbd>Esc</kbd> cierra la lista.</li><li>Cada chip es un botón (<kbd>Tab</kbd>, <kbd>Enter</kbd> o <kbd>Supr</kbd> lo quitan).</li></ul></div>
+          <div><h3>Reglas</h3><ul><li><code>listbox</code> con <code>aria-multiselectable="true"</code> y opciones con <code>aria-selected</code>; la marca es un check <b>más</b> el texto.</li><li>Cada chip es un botón que dice "Quitar CAM-001" (<code>aria-label</code>), con área de 28 px dentro de una píldora de 32 px (mínimo 24 px en WCAG 2.2); no es solo un ✕ sin nombre.</li><li>Los filtros activos viven en una fila propia sobre los resultados, con el conteo ("5 eventos") y "Limpiar filtros".</li><li>Más de 5 chips: se resumen ("+3 más") con su detalle en el tooltip.</li></ul></div>
+        </div>
+      </div>
+    </div></section>
+
+    <!-- VALIDACIÓN Y RESUMEN DE ERRORES -->
+    <section class="ds-sec" id="validacion" aria-labelledby="h-validacion" data-nav="Validación y resumen de errores" data-grp="Acciones y formularios"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Componentes · Acciones y formularios</span>
+      <h2 id="h-validacion">Validación de formularios y resumen de errores</h2>
+      <p class="ds-lead">Cuándo avisar y cómo. Se valida <b>al salir del campo</b> (no mientras se escribe por primera vez) y de nuevo al enviar. Si hay errores, una alerta arriba los resume con enlaces a cada campo y recibe el foco.</p>
+      <div class="cp-grid">
+        <div class="cp-demo"><form class="fv" id="fv" novalidate aria-label="Registro de persona">
+            <div class="hz-alert hz-alert--error fv__sum" id="fv-sum" role="alert" tabindex="-1" hidden><strong id="fv-sum-t">Corrige 2 campos para continuar</strong><ul id="fv-sum-l"></ul></div>
+            <div class="hz-field"><label class="hz-label" for="fv-n">Nombre completo</label><input class="hz-input" id="fv-n" autocomplete="name" aria-describedby="fv-n-e"><span class="hz-err" id="fv-n-e" hidden></span></div>
+            <div class="hz-field"><label class="hz-label" for="fv-c">Correo electrónico</label><input class="hz-input" id="fv-c" type="email" autocomplete="email" aria-describedby="fv-c-e"><span class="hz-err" id="fv-c-e" hidden></span></div>
+            <div class="hz-field"><label class="hz-label" for="fv-d">Documento (8 dígitos)</label><input class="hz-input" id="fv-d" inputmode="numeric" maxlength="8" aria-describedby="fv-d-e"><span class="hz-err" id="fv-d-e" hidden></span></div>
+            <div class="pt-actions" style="display:flex;gap:.6rem;margin-top:.4rem"><button class="hz-btn hz-btn--primary" type="submit">Guardar persona</button><button class="hz-btn hz-btn--ghost" type="button" id="fv-reset">Limpiar</button></div></form></div>
+        <div class="cp-side">
+          <div><h3>Cuándo validar</h3><ul><li><b>Al salir del campo</b> (<code>blur</code>), solo si la persona ya lo tocó; así no se grita al empezar.</li><li>Una vez inválido, <b>revalida mientras escribe</b> para que el error desaparezca en cuanto se corrige.</li><li><b>Al enviar</b>, valida todo, muestra el resumen y mueve el foco a él.</li></ul></div>
+          <div><h3>Reglas</h3><ul><li>Error en el campo: borde rojo, icono, texto bajo el campo (<code>aria-describedby</code>) y <code>aria-invalid="true"</code>.</li><li>Resumen: <code>role="alert"</code>, <code>tabindex="-1"</code> para recibir el foco, y enlaces que llevan al campo.</li><li>El mensaje dice qué hacer ("Escribe un correo como nombre@dominio.com"), no solo qué está mal.</li><li>Nunca se vacía un formulario por un error; nunca se deshabilita el botón de enviar como única señal.</li></ul></div>
+          <div><h3>Copy aprobado</h3><ul><li>Resumen: "Corrige 2 campos para continuar."</li><li>Nombre: "Escribe el nombre completo."</li><li>Correo: "Escribe un correo como nombre@dominio.com."</li><li>Documento: "El documento tiene 8 dígitos."</li></ul></div>
+        </div>
+      </div>
+    </div></section>
+
     <!-- STEPPER -->
     <section class="ds-sec" id="stepper" aria-labelledby="h-st" data-nav="Stepper" data-grp="Acciones y formularios"><div class="ds-wrap">
       <span class="ds-eyebrow mono">Componentes · Acciones y formularios</span>
@@ -412,6 +505,11 @@
         <tr><td>Selector de fechas</td><td><code>dialog</code> + <code>grid</code></td><td>Enter, Espacio</td><td>Flechas, RePág/AvPág, Inicio/Fin</td><td>Esc</td></tr>
         <tr><td>Menú de acciones</td><td><code>menu</code>/<code>menuitem</code></td><td>Enter, Espacio, ↓</td><td>↑ ↓, Inicio/Fin</td><td>Esc, Tab</td></tr>
         <tr><td>Combobox</td><td><code>combobox</code>/<code>listbox</code></td><td>Escribir, ↓</td><td>↑ ↓ (foco en el campo)</td><td>Esc (2.ª vez limpia)</td></tr>
+        <tr><td>Campo de búsqueda</td><td><code>search</code> + <code>status</code></td><td><kbd>/</kbd> enfoca</td><td>—</td><td>Esc limpia</td></tr>
+        <tr><td>Código de un solo uso</td><td><code>group</code> + 6 campos</td><td>Escribir o pegar</td><td>← →, Inicio/Fin</td><td>—</td></tr>
+        <tr><td>Contraseña con fuerza</td><td><code>status</code> (polite)</td><td>Botón Mostrar</td><td>Tab</td><td>—</td></tr>
+        <tr><td>Multi-select</td><td><code>combobox</code> multiselectable</td><td>Escribir, ↓</td><td>↑ ↓, Espacio marca</td><td>Esc; Retroceso quita chip</td></tr>
+        <tr><td>Resumen de errores</td><td><code>alert</code> con foco</td><td>Enviar el formulario</td><td>Tab a los enlaces</td><td>—</td></tr>
         <tr><td>Acordeón</td><td>botón + <code>region</code></td><td>Enter, Espacio</td><td>↑ ↓, Inicio/Fin</td><td>—</td></tr>
         <tr><td>Stepper</td><td>lista + <code>status</code></td><td>Botones Atrás/Siguiente</td><td>Tab</td><td>—</td></tr>
         <tr><td>Popover</td><td><code>dialog</code> no modal</td><td>Enter, Espacio</td><td>Tab</td><td>Esc, clic fuera</td></tr>
