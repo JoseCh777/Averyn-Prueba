@@ -110,3 +110,8 @@ body.tp { margin: 0; min-height: 100vh; background: var(--av-paper-blue); color:
 .tp-inst__o:has(input:checked) { border-color: var(--av-blue); background: var(--av-blue-tint); }
 .tp-inst__o input { accent-color: var(--av-blue); width: 20px; height: 20px; }
 .tp-inst__o b { display: block; font-size: .9375rem; color: var(--av-navy); } .tp-inst__o small { color: var(--av-gray-600); font-size: .8125rem; }
+
+/* ---------- Matriz de permisos ---------- */
+.tp-matrix th[scope="row"] { padding: .85rem 1rem .85rem 0; text-transform: none; letter-spacing: 0; font: 500 .875rem var(--av-font-body); color: var(--av-navy); }
+.tp-matrix input[type="checkbox"] { width: 22px; height: 22px; accent-color: var(--av-blue); }
+.tp-lock { font: 600 .75rem var(--av-font-mono); letter-spacing: .04em; text-transform: uppercase; color: var(--av-gray-600); }

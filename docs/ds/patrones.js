@@ -234,4 +234,45 @@
     ok.addEventListener('click', function () { msg.textContent = 'Gracias. Continuamos con la captura.'; DS.toast('Consentimiento registrado', 'Se guardaría con la fecha y la versión del texto.'); });
     $('#cons-no').addEventListener('click', function () { msg.textContent = 'Entendido. Sin tu permiso no podemos usar cámara ni huella; puedes volver cuando quieras.'; });
   })();
+
+  /* ---------- Revisión manual ---------- */
+  (function () {
+    var root = $('#rv'); if (!root) return;
+    var CASES = [
+      { id: 'REV-0412', who: 'Ana Lucía Pérez', s: 66, dev: 'CAM-001', at: '02/10/2026, 10:42', q: 'Buena', tries: 1 },
+      { id: 'REV-0411', who: 'Carlos Mendoza', s: 64, dev: 'LEC-001', at: '02/10/2026, 10:15', q: 'Buena', tries: 2 },
+      { id: 'REV-0409', who: 'Valeria Quispe', s: 71, dev: 'CAM-002', at: '02/10/2026, 09:31', q: 'Mejorable', tries: 1 },
+      { id: 'REV-0406', who: 'Jorge Salazar', s: 62, dev: 'CAM-001', at: '01/10/2026, 17:48', q: 'Buena', tries: 3 }
+    ];
+    var cur = 0, list = $('#rv-list'), det = $('#rv-detail'), cnt = $('#rv-count');
+    var T = 68;
+    function dist(s) { var d = Math.abs(s - T) / 100; return d.toFixed(2) + (s >= T ? ' por encima' : ' por debajo') + ' del umbral'; }
+    function paintList() {
+      cnt.textContent = CASES.length + (CASES.length === 1 ? ' pendiente' : ' pendientes');
+      list.innerHTML = CASES.map(function (c, i) { return '<li><button class="rv__case" type="button" data-i="' + i + '"' + (i === cur ? ' aria-current="true"' : '') + '><b>' + esc(c.id) + ' · ' + esc(c.who) + '</b><small>' + esc(c.at) + '</small><span>' + (c.s / 100).toFixed(2) + ' · ' + dist(c.s) + '</span></button></li>'; }).join('');
+    }
+    function paintDetail() {
+      if (!CASES.length) { det.innerHTML = '<div class="rv__done"><i class="bi bi-check2-circle" aria-hidden="true"></i><b>No hay casos pendientes.</b><span>Buen trabajo.</span></div>'; return; }
+      var c = CASES[cur], s = c.s / 100;
+      det.innerHTML = '<h3 class="rv__t">' + esc(c.id) + ' · ' + esc(c.who) + '</h3><p class="rv__sub">Verificación facial · ' + esc(c.at) + '</p>' +
+        '<div class="pt-score"><b>' + s.toFixed(2) + '</b><span>' + dist(c.s) + ' de 0.68.</span></div>' +
+        '<div class="pt-scale" role="img" aria-label="Similitud ' + s.toFixed(2) + ' sobre 1. Umbral 0.68."><div class="pt-scale__fill" style="width:max(0px,calc(' + c.s + '% - 6px))"></div><div class="pt-scale__thr"><em>Umbral 0.68</em></div></div><div class="pt-scale__ends"><span>0</span><span>Similitud</span><span>1</span></div>' +
+        '<dl class="rv__meta"><div><dt>Dispositivo</dt><dd>' + esc(c.dev) + '</dd></div><div><dt>Calidad</dt><dd>' + esc(c.q) + '</dd></div><div><dt>Prueba de vida</dt><dd>Superada</dd></div><div><dt>Intentos previos</dt><dd>' + c.tries + '</dd></div></dl>' +
+        '<fieldset class="rv__dec"><legend>Decisión</legend><label class="rv__opt"><input type="radio" name="rv-d" value="ok"><span>Aprobar<small>La identidad se confirma.</small></span></label><label class="rv__opt"><input type="radio" name="rv-d" value="no"><span>Rechazar<small>La identidad no se confirma.</small></span></label></fieldset>' +
+        '<div class="hz-field"><label class="hz-label" for="rv-m">Motivo (obligatorio)</label><select class="hz-select" id="rv-m" aria-describedby="rv-mh"><option value="">Elige un motivo…</option><option>Calidad de captura insuficiente</option><option>Coincide con el documento presentado</option><option>Diferencia visible con el registro</option><option>Otro (explicar en la nota)</option></select><span class="hz-help" id="rv-mh">Queda en la bitácora junto con tu nombre y la hora.</span></div>' +
+        '<div class="hz-field"><label class="hz-label" for="rv-n">Nota (opcional)</label><textarea class="hz-textarea" id="rv-n" rows="2"></textarea></div>' +
+        '<div class="pt-actions"><button class="hz-btn hz-btn--primary" type="button" id="rv-go" disabled>Registrar decisión</button></div>' +
+        '<p class="rv__audit"><i class="bi bi-journal-check" aria-hidden="true"></i> Esta decisión se registra con tu nombre, la fecha y el motivo.</p>';
+      var go = $('#rv-go'), upd = function () { go.disabled = !($('input[name="rv-d"]:checked') && $('#rv-m').value); };
+      $$('input[name="rv-d"]', det).forEach(function (r) { r.addEventListener('change', upd); }); $('#rv-m').addEventListener('change', upd);
+      go.addEventListener('click', function () {
+        var dec = $('input[name="rv-d"]:checked').value === 'ok' ? 'aprobada' : 'rechazada', id = c.id;
+        CASES.splice(cur, 1); cur = Math.min(cur, CASES.length - 1);
+        DS.toast('Decisión registrada', id + ' ' + dec + '. ' + (CASES.length ? 'Quedan ' + CASES.length + (CASES.length === 1 ? ' caso.' : ' casos.') : 'No quedan casos pendientes.'));
+        paintList(); paintDetail(); if (CASES.length) det.focus(); else list.innerHTML = '';
+      });
+    }
+    list.addEventListener('click', function (e) { var b = e.target.closest('.rv__case'); if (!b) return; cur = +b.getAttribute('data-i'); paintList(); paintDetail(); det.focus(); });
+    paintList(); paintDetail();
+  })();
 })();

@@ -139,6 +139,27 @@
         </div>
       </div>
     </div></section>
+
+    <!-- REVISIÓN MANUAL -->
+    <section class="ds-sec" id="revision-manual" aria-labelledby="h-revision-manual" data-nav="Revisión manual" data-grp="Biométricos y electorales"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Patrones · Biométricos y electorales</span>
+      <h2 id="h-revision-manual">Revisión manual de verificaciones</h2>
+      <p class="ds-lead">Cuando un puntaje cae cerca del umbral, una persona autorizada decide. Una cola de casos, el detalle con el puntaje frente al umbral y una decisión que <b>exige motivo</b> y queda en la bitácora. <span class="hz-chip hz-chip--info hz-chip--outline hz-chip--wrap"><i class="bi bi-lightbulb" aria-hidden="true"></i>Propuesta de diseño, pendiente de validar con el equipo</span></p>
+      <div class="pt-grid rv-grid">
+        <div class="pt-card" id="rv">
+          <div class="rv__layout">
+            <div class="rv__queue"><h3 class="rv__h">Cola de revisión <span class="hz-chip hz-chip--warning" id="rv-count"></span></h3><ul class="rv__list" id="rv-list" aria-label="Casos pendientes"></ul></div>
+            <div class="rv__detail" id="rv-detail" tabindex="-1"></div>
+          </div>
+        </div>
+        <div class="pt-side">
+          <div><h3>Anatomía</h3><ol><li><b>Cola</b> ordenada por antigüedad, con el puntaje y la distancia al umbral en texto.</li><li><b>Detalle</b>: puntaje grande, escala con el umbral, y los datos del intento (dispositivo, calidad, prueba de vida, intentos previos).</li><li><b>Decisión</b>: aprobar o rechazar, con <b>motivo obligatorio</b> y nota opcional.</li><li><b>Registro</b>: la decisión guarda quién, cuándo y por qué en la bitácora (<code>BIOMETRIC_VERIFIED</code> con origen "revisión manual").</li></ol></div>
+          <div><h3>Reglas</h3><ul><li>La <b>banda de revisión</b> (aquí 0.60–0.75) la define el servidor, igual que el umbral.</li><li>Esta propuesta compara <b>puntajes y metadatos</b>; si el revisor puede ver imágenes es una decisión de privacidad por tomar.</li><li>Nadie revisa sus propios casos (el sistema excluye al usuario implicado).</li><li>Decidir no es reversible desde esta pantalla; un error se corrige con una nueva revisión que deja rastro.</li></ul></div>
+          <div><h3>Copy aprobado</h3><ul><li>Cola vacía: "No hay casos pendientes. Buen trabajo."</li><li>Tras decidir: "Decisión registrada. Quedan 3 casos."</li></ul></div>
+        </div>
+      </div>
+    </div></section>
+
     <!-- DOCUMENTO Y OCR -->
     <section class="ds-sec" id="ocr" aria-labelledby="h-ocr" data-nav="Documento y OCR" data-grp="Biométricos y electorales"><div class="ds-wrap">
       <span class="ds-eyebrow mono">Patrones · Biométricos y electorales</span>
