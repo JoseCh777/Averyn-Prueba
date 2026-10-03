@@ -183,12 +183,12 @@
     var key = host.getAttribute('data-t'), title = host.getAttribute('data-title'), spec = host.getAttribute('data-states');
     var list = !spec ? [] : spec === '1' ? [['normal', 'Normal'], ['empty', 'Vacío'], ['loading', 'Cargando'], ['error', 'Error']] : spec.split(',').map(function (x) { return x.split(':'); });
     var st = list.length ? list[0][0] : 'normal';
-    host.innerHTML = '<div class="tpf__ctrl"><span class="stage__label mono" style="margin:0">Plantilla · ' + title + '</span>' + (list.length ? '<div class="vz-seg" role="group" aria-label="Estado de la plantilla ' + title + '">' + list.map(function (s, i) { return '<button type="button" data-s="' + s[0] + '" aria-pressed="' + (i === 0) + '">' + s[1] + '</button>'; }).join('') + '</div>' : '') + '</div>' +
+    host.innerHTML = '<div class="tpf__ctrl"><span class="stage__label mono" style="margin:0">Ejemplo de uso · ' + title + '</span>' + (list.length ? '<div class="vz-seg" role="group" aria-label="Estado de la plantilla ' + title + '">' + list.map(function (s, i) { return '<button type="button" data-s="' + s[0] + '" aria-pressed="' + (i === 0) + '">' + s[1] + '</button>'; }).join('') + '</div>' : '') + '</div>' +
       '<div class="tpf__frame"><div class="dsframe"><iframe title="Vista previa de la plantilla ' + title + '" tabindex="-1" aria-hidden="true"></iframe></div><button class="tpf__open" type="button"><i class="bi bi-arrows-fullscreen" aria-hidden="true"></i>Ver a pantalla completa</button></div>';
     var fr = $('iframe', host);
     function paint() { fr.srcdoc = doc(key, st); }
     $$('.vz-seg button', host).forEach(function (b) { b.addEventListener('click', function () { st = b.getAttribute('data-s'); $$('.vz-seg button', host).forEach(function (x) { x.setAttribute('aria-pressed', x === b); }); paint(); }); });
-    $('.tpf__open', host).addEventListener('click', function () { $('#tpfull-t').textContent = title; $('iframe', dlg).srcdoc = doc(key, st); dlg.showModal(); });
+    $('.tpf__open', host).addEventListener('click', function () { $('#tpfull-t').textContent = title + ' · ejemplo ilustrativo, no es el producto final'; $('iframe', dlg).srcdoc = doc(key, st); dlg.showModal(); });
     frames.push(host); paint();
   });
   function scale() { frames.forEach(function (h) { var box = $('.dsframe', h), f = $('iframe', h), s = box.clientWidth / 1440; f.style.transform = 'scale(' + s + ')'; }); }
