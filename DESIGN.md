@@ -236,3 +236,7 @@ Geometría contenida: 8 px en botones y campos, 10 px en píldoras del header, 2
 - **Don't** volver al estilo brutalista (mayúsculas gigantes, sombras duras en todo): se probó y se descartó por perder identidad.
 - **Don't** centrar y repetir tres tarjetas iguales como solución por defecto.
 - **Don't** ampliar el wordmark por encima de su tamaño nativo (1144 px): se maqueta grande y solo se reduce, o se ve borroso.
+
+### Migración a React (recomendación, sin ejecutar)
+- Los tokens (`tokens.css` / `tokens.json`) y las clases `hz-*` pasan sin cambios; el JS de las demos se reemplaza por componentes con comportamiento resuelto.
+- Base sugerida: shadcn/ui (React Aria para fechas, combobox y tablas) + Sonner, TanStack Table, cmdk, input-otp, React Hook Form + Zod, Recharts/Visx y Storybook. Detalle y ruta por fases en Calidad y gobernanza → Cómo se consume.
