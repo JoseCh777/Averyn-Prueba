@@ -31,24 +31,26 @@ El Design System **Horizonte** es la única guía visual de Averyn (ADR-011). To
 
 Convenciones vigentes:
 
-* prefijo `av-` para clases y nombres de componentes ⚑
+* tokens `--av-*` en `app/globals.css`, expuestos a Tailwind v4 con `@theme` ⚑
 * Plus Jakarta Sans para headings ⚑
 * Inter para body
 * breakpoints: 576, 768, 1024 y 1280
-* los tokens globales (`--av-*`) viven en `app/globals.css`; no se usan colores, tamaños ni sombras sueltos fuera de los tokens
+* no se usan colores, tamaños ni sombras sueltos fuera de los tokens
 * accesibilidad WCAG 2.2 AA y responsive probado a 375 y 1440 px (coding-standard §70 y §71)
 
 Dónde vive cada cosa:
 
 * genéricos y reutilizables: `components/ui/`
 * compuestos que mezclan varios genéricos: `components/shared/`
+* efectos de marca (Aceternity adaptado): `components/effects/`, solo en superficies de marca
 * específicos de una funcionalidad: `features/<funcionalidad>/components/`
 
 Reglas de trabajo:
 
 * si falta un componente, se diseña primero en Horizonte y luego se implementa (coding-standard §72)
 * los componentes son tipados, con nombres en inglés (§75), y usan `'use client'` solo cuando tienen interacción
-* no se añaden dependencias de UI sin el checklist de §56 y un ADR (ver §8)
+* librerías de UI aprobadas en ADR-011: Tailwind v4 (estilos), shadcn/ui con Base UI (comportamiento), Aceternity UI y `motion` (solo efectos de marca, en `components/effects/`) y Lineicons (iconos); cualquier otra pasa por el checklist de §56 y un ADR (ver §8)
+* las páginas no importan esas librerías directamente: se consumen desde `components/*`
 * la revisión de cada PR de frontend incluye la casilla «Consistencia con el Design System»
 * las plantillas marcadas «Futuro · fuera del MVP oficial» en la documentación de Horizonte no se implementan
 ```

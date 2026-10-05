@@ -1,0 +1,67 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "./tokens.css";
+
+/* Horizonte v2: los tokens --av-* (tokens.css) son la fuente de verdad.
+   @theme los expone como utilidades de Tailwind sin duplicar valores. */
+@theme inline {
+  --color-av-blue: var(--av-blue);
+  --color-av-blue-hover: var(--av-blue-hover);
+  --color-av-blue-active: var(--av-blue-active);
+  --color-av-blue-tint: var(--av-blue-tint);
+  --color-av-navy: var(--av-navy);
+  --color-av-navy-night: var(--av-navy-night);
+  --color-av-navy-horizon: var(--av-navy-horizon);
+  --color-av-cyan: var(--av-cyan);
+  --color-av-cyan-glow: var(--av-cyan-glow);
+  --color-av-sky: var(--av-sky);
+  --color-av-paper: var(--av-paper-blue);
+  --color-av-hairline: var(--av-hairline);
+  --color-av-hairline-strong: var(--av-hairline-strong);
+  --color-av-field-border: var(--av-field-border);
+  --color-av-placeholder: var(--av-placeholder);
+  --color-av-night-text: var(--av-night-text);
+  --color-av-gray-50: var(--av-gray-50);
+  --color-av-gray-100: var(--av-gray-100);
+  --color-av-gray-200: var(--av-gray-200);
+  --color-av-gray-300: var(--av-gray-300);
+  --color-av-gray-400: var(--av-gray-400);
+  --color-av-gray-500: var(--av-gray-500);
+  --color-av-gray-600: var(--av-gray-600);
+  --color-av-gray-700: var(--av-gray-700);
+  --color-av-success: var(--av-success);
+  --color-av-warning: var(--av-warning);
+  --color-av-error: var(--av-error);
+  --color-av-info: var(--av-info);
+
+  --font-heading: var(--font-heading);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-mono);
+
+  --radius-control: var(--av-radius-control);
+  --radius-frame: var(--av-radius-frame);
+  --shadow-key: var(--av-shadow-key);
+  --shadow-frame: var(--av-shadow-frame);
+
+  /* Breakpoints oficiales (averyn-web AGENTS §9) */
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+}
+
+html { color-scheme: light; }
+body {
+  background: var(--av-white);
+  color: var(--av-navy);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+h1, h2, h3, h4 { font-family: var(--font-heading), system-ui, sans-serif; }
+
+/* Foco visible único para todo el sistema (WCAG 2.4.7) */
+:focus-visible { outline: 2px solid var(--av-blue); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}

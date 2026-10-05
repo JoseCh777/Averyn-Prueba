@@ -26,7 +26,7 @@ El contrato dice que el `429` lleva `Retry-After`. Falta fijar si va en **segund
 El contrato pide mismo origen (`demo.localhost:3000`) y que el frontend reenvíe `/api/v1`. Tres riesgos:
 
 1. **Puerto:** web y Core usan 3000 por defecto. Hay que fijar otro para el Core (propuesta: 3001) y documentarlo.
-2. **`Host`:** el Core resuelve el tenant solo por la cabecera `Host` e ignora `X-Forwarded-Host`. Un `rewrite` de Next hacia el Core probablemente cambia el `Host` y daría `TENANT_NOT_FOUND`. Hay que **verificarlo** el Día 3 antes de construir sobre ello; si ocurre, o el Core lee `X-Forwarded-Host` solo cuando la petición viene del proxy de confianza, o el rewrite conserva el `Host`.
+2. **`Host`:** el Core resuelve el tenant solo por la cabecera `Host` e ignora `X-Forwarded-Host`. Un `rewrite` de Next hacia el Core probablemente cambia el `Host` y daría `TENANT_NOT_FOUND`. Hay que **verificarlo** antes de construir sobre ello (antes de AVY-005); si ocurre, o el Core lee `X-Forwarded-Host` solo cuando la petición viene del proxy de confianza, o el rewrite conserva el `Host`.
 3. **`.env.example` de web:** apunta a `http://localhost:3000/api` (otro origen y sin `/v1`). Debe cambiar a una ruta relativa `/api/v1`.
 
 ### 2.4 Códigos de error que necesita el frontend
@@ -55,6 +55,6 @@ Con los códigos del contrato el frontend ya puede traducir: `AUTH_INVALID_CREDE
 | Resuelve el `Host` tras el proxy | Se mantiene el tenant por subdominio sin cambiar el Core |
 
 ## 4. Orden sugerido
-1. **Hoy (Día 1):** enviar este documento a Daniel; verificar el comportamiento del `Host` con un `rewrite` mínimo.
-2. **Día 2:** respuestas de §1 y §2.3 antes de empezar AVY-004.
-3. **Día 3:** AVY-003 con mock y AVY-004 con los valores confirmados.
+1. **Primero:** enviar este documento a Daniel; verificar el comportamiento del `Host` con un `rewrite` mínimo.
+2. **Antes de AVY-004:** respuestas de §1 y §2.3.
+3. **Después:** AVY-003 con mock y AVY-004 con los valores confirmados.
