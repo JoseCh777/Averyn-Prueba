@@ -102,6 +102,25 @@
   var field = function (id, label, val, extra) { return '<div class="hz-field"><label class="hz-label" for="' + id + '">' + label + '</label><input class="hz-input" id="' + id + '" value="' + (val || '') + '" ' + (extra || '') + '></div>'; };
   var btn = function (t, k, dis) { return '<button class="hz-btn hz-btn--' + (k || 'primary') + ' hz-btn--block" type="button"' + (dis ? ' disabled' : '') + '>' + t + '</button>'; };
 
+  /* Login y organización no encontrada: errores decididos por el `code` de la API (contrato de Auth v0.2) */
+  T.login = function (st) {
+    var busy = st === 'cargando', lock = st === 'bloqueado';
+    var msg = st === 'error' ? alertH('error', 'Correo o contraseña incorrectos', 'Revisa los datos e inténtalo de nuevo. Por seguridad no indicamos cuál de los dos falló.', 'alert')
+      : lock ? alertH('warning', 'Demasiados intentos', 'Por seguridad bloqueamos el acceso un momento. Podrás volver a intentarlo en <b>14:32</b>.', 'alert')
+      : st === 'inesperado' ? alertH('error', 'Algo falló de nuestro lado', 'No pudimos iniciar tu sesión. Inténtalo de nuevo; si sigue pasando, comparte este código con tu administrador: <span class="mono">7f3c9a1e</span>', 'alert') : '';
+    var off = busy || lock ? ' disabled' : '';
+    return auth('<h1 class="tp-h1">Bienvenido de nuevo.</h1><p class="tp-p">Ingresa con tu cuenta de <b>Universidad Horizonte</b>.</p>' + msg +
+      field('lg-em', 'Correo electrónico', st === 'normal' ? '' : 'ana@horizonte.edu', 'type="email" autocomplete="username" placeholder="nombre@organizacion.com"' + off) +
+      field('lg-pw', 'Contraseña', st === 'normal' ? '' : 'contrasena-demo', 'type="password" autocomplete="current-password" placeholder="Ingresa tu contraseña"' + off) +
+      (busy ? '<button class="hz-btn hz-btn--primary hz-btn--block" type="button" aria-busy="true" disabled>Ingresando…</button>' : btn('Ingresar de forma segura →', 'primary', lock)) +
+      '<p class="tp-p" style="margin-top:1rem;font-size:.82rem">¿Olvidaste tu contraseña? La recuperación aún no está disponible; contacta a tu administrador.</p>');
+  };
+
+  T.tenant = function () {
+    return auth('<span class="mono" style="color:var(--av-gray-500)">Error 404 · Organización no encontrada</span><h1 class="tp-h1">No encontramos esta organización.</h1><p class="tp-p">La dirección que abriste no corresponde a una organización de Averyn. Revisa que esté bien escrita o pide el enlace correcto a tu administrador.</p>' +
+      alertH('info', 'Código de soporte', 'TENANT_NOT_FOUND · <span class="mono">7f3c9a1e</span>') + '<p class="tp-p" style="font-size:.82rem">No decimos por qué: la misma pantalla aparece si la organización no existe o no está disponible.</p>', 'Cada organización, su propio espacio.');
+  };
+
   T.recuperar = function (st) {
     var body;
     if (st === 'enviado') body = '<h1 class="tp-h1">Revisa tu correo</h1><p class="tp-p">Si hay una cuenta con ese correo, te enviamos un enlace para elegir una nueva contraseña. Puede tardar unos minutos; revisa también la carpeta de spam.</p>' + alertH('info', 'Por seguridad no confirmamos si el correo existe', 'El mensaje es el mismo para cualquier dirección.') + btn('Reenviar enlace (disponible en 30 s)', 'ghost', true);

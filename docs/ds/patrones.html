@@ -42,6 +42,7 @@
         <a href="#papeleta">Tarjetón y comprobante</a>
         <a href="#dispositivos">Dispositivos</a>
         <a href="#consentimiento">Consentimiento</a>
+        <a href="#estados-oficiales">Estados oficiales de biometría</a>
         <a href="#copy-patrones">Resumen de estados y canales</a>
       </div>
       <a class="ds-page" href="plantillas.html">Plantillas y estados</a>
@@ -263,7 +264,7 @@
       <div class="ds-grid ds-grid--2 ds-gap-top">
         <div class="pt-side">
           <div><h3>Anatomía del tarjetón</h3><ol><li><b>Encabezado:</b> espacio para el logo de la elección, título en dos líneas y serie.</li><li><b>Instrucción en rojo:</b> "Marque solo una opción", en mono mayúsculas.</li><li><b>Casilla de opción:</b> borde navy de 2 px; dentro, de arriba abajo: número, <b>foto(s)</b>, cargo y nombre, y <b>logo</b> de la lista.</li><li><b>Voto en blanco:</b> casilla del mismo tamaño y peso, con el texto centrado.</li><li><b>Marca de agua</b> diagonal "Muestra · no válida para votar" mientras sea una demostración.</li></ol></div>
-          <div><h3>Dos variantes del tarjetón</h3><div class="doc-wrap" style="margin:0"><table class="doc-table"><thead><tr><th>Variante</th><th>Cuándo</th><th>Casilla</th></tr></thead><tbody><tr><td><b>Fórmula</b></td><td>Un cargo que se elige en pareja (presidente y vicepresidente).</td><td>2 fotos, 2 nombres con su cargo, número y logo.</td></tr><tr><td><b>Una persona por partido</b></td><td>Un cargo individual: personero, representante, delegado.</td><td>1 foto grande, nombre, cargo, número y logo.</td></tr></tbody></table></div></div>
+          <div><h3>Dos variantes del tarjetón</h3><div class="hz-alert hz-alert--warning" role="note" style="margin:0 0 .8rem"><strong>La «fórmula» no tiene respaldo en el modelo</strong>Hoy un candidato es una persona por cargo y la selección es única. Foto, logo y partido tampoco tienen columnas en <code>election_candidate</code> (solo <code>display_name</code> y <code>ballot_order</code>). Construir primero «una persona por partido» y solo con nombre y orden; la fórmula y las imágenes esperan a que el modelo cambie.</div><div class="doc-wrap" style="margin:0"><table class="doc-table"><thead><tr><th>Variante</th><th>Cuándo</th><th>Casilla</th></tr></thead><tbody><tr><td><b>Fórmula</b></td><td>Un cargo que se elige en pareja (presidente y vicepresidente).</td><td>2 fotos, 2 nombres con su cargo, número y logo.</td></tr><tr><td><b>Una persona por partido</b></td><td>Un cargo individual: personero, representante, delegado.</td><td>1 foto grande, nombre, cargo, número y logo.</td></tr></tbody></table></div></div>
           <div><h3>Espacios para imagen</h3><ul><li>Foto: relación 3:4 con fondo azul claro y un icono de persona hasta que se cargue (<code>&lt;img&gt;</code> con <code>object-fit: cover</code>).</li><li>Una casilla admite 1 foto (un cargo) o 2 (fórmula presidente + vicepresidente).</li><li>Logo de la lista: recuadro de 16:6; nunca se estira, se contiene con <code>object-fit: contain</code>.</li><li>Toda imagen lleva <code>alt</code> con el nombre ("Foto de …"); el nombre y el número siempre están en texto.</li></ul></div>
         </div>
         <div class="pt-side">
@@ -303,8 +304,31 @@
         </div>
       </div>
     </div></section>
+    <section class="ds-sec" id="estados-oficiales" aria-labelledby="h-eo" data-nav="Estados oficiales de biometría" data-grp="Biométricos y electorales"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Patrones · Biométricos y electorales</span>
+      <h2 id="h-eo">Estados oficiales: del dato a la pantalla</h2>
+      <p class="ds-lead">Los patrones biométricos se pintan con los valores del diccionario de datos y con la máquina de estados de captura del estándar de código (§23). Un resultado distinto es un mensaje distinto: <b>ERROR nunca se muestra como NO_MATCH</b>.</p>
+      <h3 class="ds-sub">Resultado de verificación</h3>
+      <div class="doc-wrap"><table class="doc-table"><thead><tr><th><code>verification_outcome</code></th><th>Píldora</th><th>Mensaje</th><th>Acción</th></tr></thead><tbody>
+        <tr><td><code>MATCH</code></td><td>Aceptada · éxito</td><td>Identidad verificada.</td><td>Continuar.</td></tr>
+        <tr><td><code>NO_MATCH</code></td><td>Rechazada · error</td><td>No coincide con la persona registrada.</td><td>Reintentar o usar otra vía.</td></tr>
+        <tr><td><code>LIVENESS_FAILED</code></td><td>Rechazada · aviso</td><td>No pudimos confirmar que es una persona real.</td><td>Reintentar con buena luz y sin fotos ni pantallas.</td></tr>
+        <tr><td><code>QUALITY_REJECTED</code></td><td>Calidad baja · aviso</td><td>La captura no tiene calidad suficiente.</td><td>Repetir la captura con la guía de calidad.</td></tr>
+        <tr><td><code>ERROR</code></td><td>Error del sistema · neutro</td><td>No pudimos completar la verificación.</td><td>Reintentar; con código de soporte. No cuenta como rechazo.</td></tr>
+      </tbody></table></div>
+      <h3 class="ds-sub">Estado del enrolamiento</h3>
+      <div class="doc-wrap"><table class="doc-table"><thead><tr><th><code>biometric_enrollment</code></th><th>Píldora</th><th>Significado en pantalla</th></tr></thead><tbody>
+        <tr><td><code>PENDING</code></td><td>Pendiente · neutro</td><td>Falta completar la captura.</td></tr>
+        <tr><td><code>ACTIVE</code></td><td>Activo · éxito</td><td>Listo para verificar.</td></tr>
+        <tr><td><code>FAILED</code></td><td>Fallido · error</td><td>La captura no se pudo registrar; permitir repetirla.</td></tr>
+        <tr><td><code>REVOKED</code></td><td>Revocado · neutro</td><td>El consentimiento se retiró; no se usa.</td></tr>
+        <tr><td><code>SUPERSEDED</code></td><td>Reemplazado · neutro</td><td>Existe un registro más reciente; solo se muestra en el historial.</td></tr>
+      </tbody></table></div>
+      <h3 class="ds-sub">Máquina de estados de la captura</h3>
+      <p class="ds-note"><b>IDLE → INITIALIZING → CAPTURING → PROCESSING → VERIFYING → SUCCESS | FAILURE.</b> Cada estado tiene mensaje propio y se anuncia con <code>role="status"</code>; la interfaz no avanza sola de FAILURE a CAPTURING. El consentimiento biométrico se acepta antes de salir de IDLE. La huella agrega el estado «lector no disponible» cuando el servicio local no responde.</p>
+    </div></section>
     <!-- RESUMEN DE ESTADOS Y CANALES -->
-    <section class="ds-sec" id="copy-patrones" aria-labelledby="h-cp" data-nav="Resumen de estados y canales" data-grp="Biométricos y electorales"><div class="ds-wrap">
+    <section class="ds-sec ds-sec--tint" id="copy-patrones" aria-labelledby="h-cp" data-nav="Resumen de estados y canales" data-grp="Biométricos y electorales"><div class="ds-wrap">
       <span class="ds-eyebrow mono">Patrones · Biométricos y electorales</span>
       <h2 id="h-cp">Resumen de estados y canales</h2>
       <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Patrón</th><th>Estados</th><th>Canales (nunca solo color)</th><th>Anuncio</th></tr></thead><tbody>

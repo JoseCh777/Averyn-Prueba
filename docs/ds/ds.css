@@ -372,7 +372,7 @@ dialog.hz-modal::backdrop { background: rgba(0, 12, 36, .62); backdrop-filter: b
 /* Espacio, radios, sombras, z */
 .scale { display: grid; gap: 10px; }
 .scale__row { display: grid; grid-template-columns: 110px 70px minmax(0, 1fr); align-items: center; gap: 1rem; }
-.scale__bar { height: 14px; border-radius: 3px; background: var(--av-blue); }
+.scale__bar { max-width: 100%; height: 14px; border-radius: 3px; background: var(--av-blue); }
 .rad { display: grid; place-items: center; height: 92px; background: var(--av-blue-tint); border: 1px solid var(--av-hairline-strong); font: 500 .75rem var(--av-font-mono); text-align: center; }
 .shd { display: grid; place-items: center; height: 100px; border-radius: var(--av-radius-tile); background: #fff; font: 500 .75rem var(--av-font-mono); text-align: center; padding: .5rem; }
 .type-spec { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 1.4rem; align-items: baseline; padding: 1.3rem 0; border-top: 1px solid var(--av-hairline); }

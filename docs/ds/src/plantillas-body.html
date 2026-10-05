@@ -100,6 +100,7 @@
       <span class="ds-eyebrow mono">Plantillas y estados · Plantillas de pantalla</span>
       <h2 id="h-notificaciones">Centro de notificaciones</h2>
       <p class="ds-lead">Una lista cronológica agrupada por día, con lo no leído marcado y acciones por ítem. Sirve también para avisos del sistema que no necesitan bloquear la pantalla.</p>
+      <div class="hz-alert hz-alert--info" role="note" style="margin-top:1rem"><strong>Futuro · fuera del MVP oficial</strong>No hay backend de notificaciones y el WebSocket solo se adopta con necesidad demostrada (arquitectura 04). Diseño de referencia, sin actividad asignada.</div>
       <div class="tpf" data-t="notificaciones" data-title="Centro de notificaciones" data-states="1"></div>
       <div class="tpf__spec">
         <div><h3>Regiones</h3><ul><li>Pestañas Todas / Sin leer con su conteo.</li><li>Grupos por día ("Hoy", "Ayer") con rótulo mono.</li><li>Cada ítem: icono por tipo (con texto), título, detalle, hora y acción.</li><li>No leído = punto azul <b>y</b> título en negrita.</li></ul></div>
@@ -121,10 +122,32 @@
     </div></section>
 
     <!-- RECUPERAR CONTRASEÑA -->
+    <section class="ds-sec" id="login" aria-labelledby="h-login" data-nav="Login" data-grp="Acceso y cuenta"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Plantillas y estados · Acceso y cuenta</span>
+      <h2 id="h-login">Login</h2>
+      <p class="ds-lead">La pantalla de entrada con el marco de Horizonte y los cinco estados que el contrato de Auth obliga a resolver: normal, enviando, credenciales inválidas, bloqueo temporal (429) y fallo inesperado. El mensaje se decide por el <code>code</code> de la respuesta, nunca por su texto.</p>
+      <div class="tpf" data-t="login" data-title="Login" data-states="normal:Normal,cargando:Enviando,error:Credenciales inválidas,bloqueado:Bloqueado (429),inesperado:Inesperado"></div>
+      <div class="tpf__spec">
+        <div><h3>Regiones</h3><ul><li>Panel de marca + formulario; un único <code>&lt;h1&gt;</code>, dos campos y un botón.</li><li>El nombre de la organización sale del subdominio (<code>demo.localhost:3000</code> en local).</li><li>Aviso de error encima de los campos, con <code>role="alert"</code>.</li></ul></div>
+        <div><h3>Estados</h3><ul><li><b>Inválidas</b> (<code>AUTH_INVALID_CREDENTIALS</code>): un solo mensaje, sin decir si falló el correo o la contraseña.</li><li><b>Bloqueado</b> (<code>429</code>): cuenta atrás con el <code>Retry-After</code>; campos y botón deshabilitados hasta que termine.</li><li><b>Inesperado</b> (5xx): código de soporte con el <code>X-Request-Id</code> de la respuesta.</li><li><b>Enviando:</b> botón con <code>aria-busy</code>; no se puede reenviar.</li></ul></div>
+        <div><h3>Componentes y reglas</h3><ul><li>Campos, botón de bloque y alertas del sistema; contraseña con <code>autocomplete="current-password"</code>.</li><li>Tras entrar se pide <code>GET /auth/me</code>; los tokens viajan en cookies HttpOnly y el JavaScript nunca los ve.</li><li>Sin enlace de recuperación mientras no exista (ver <i>Recuperar contraseña</i>).</li></ul></div>
+      </div>
+    </div></section>
+    <section class="ds-sec" id="tenant" aria-labelledby="h-tenant" data-nav="Organización no encontrada" data-grp="Acceso y cuenta"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Plantillas y estados · Acceso y cuenta</span>
+      <h2 id="h-tenant">Organización no encontrada</h2>
+      <p class="ds-lead">Se muestra cuando el subdominio no resuelve a una organización (<code>TENANT_NOT_FOUND</code>, 404). La API usa el mismo cuerpo para los cuatro casos posibles, y la pantalla tampoco revela cuál ocurrió.</p>
+      <div class="tpf" data-t="tenant" data-title="Organización no encontrada"></div>
+      <div class="tpf__spec">
+        <div><h3>Regiones</h3><ul><li>Marco del login, sin formulario.</li><li>Etiqueta mono con el estado, titular, apoyo y código de soporte.</li></ul></div>
+        <div><h3>Reglas</h3><ul><li>Sin enlace «volver a ingresar»: sin organización no hay a dónde.</li><li>Sin sugerencias de otras organizaciones ni listado de las existentes.</li><li>El código de soporte lleva el <code>code</code> y el <code>X-Request-Id</code>.</li></ul></div>
+      </div>
+    </div></section>
     <section class="ds-sec" id="recuperar" aria-labelledby="h-recuperar" data-nav="Recuperar contraseña" data-grp="Acceso y cuenta"><div class="ds-wrap">
       <span class="ds-eyebrow mono">Plantillas y estados · Acceso y cuenta</span>
       <h2 id="h-recuperar">Recuperar contraseña</h2>
       <p class="ds-lead">Cuatro pasos con el mismo marco del login: pedir el enlace, avisar que se envió, elegir la nueva contraseña y manejar el enlace vencido. El mensaje nunca confirma si el correo existe.</p>
+      <div class="hz-alert hz-alert--info" role="note" style="margin-top:1rem"><strong>Futuro · fuera del MVP oficial</strong>La recuperación por correo no está en el MVP (<code>06</code> §46): hoy el login indica «contacta a tu administrador». Esta plantilla queda como diseño listo para cuando exista el endpoint.</div>
       <div class="tpf" data-t="recuperar" data-title="Recuperar contraseña" data-states="normal:Solicitud,enviado:Enviado,nueva:Nueva contraseña,vencido:Enlace vencido"></div>
       <div class="tpf__spec">
         <div><h3>Regiones</h3><ul><li>Marco del login: panel de marca + formulario (el panel pasa a franja superior en móvil).</li><li>Un único <code>&lt;h1&gt;</code>, un campo y un botón por paso.</li><li>"Volver a ingresar" siempre visible.</li></ul></div>
@@ -138,6 +161,7 @@
       <span class="ds-eyebrow mono">Plantillas y estados · Acceso y cuenta</span>
       <h2 id="h-segundo-factor">Segundo factor (código de verificación)</h2>
       <p class="ds-lead">Tras la contraseña, un código de 6 dígitos enviado al correo o al teléfono. Reutiliza el componente de código de un solo uso, con el mismo tratamiento de error y bloqueo.</p>
+      <div class="hz-alert hz-alert--info" role="note" style="margin-top:1rem"><strong>Futuro · fuera del MVP oficial</strong>La verificación en dos pasos (MFA) está fuera del MVP. No se implementa en las 3 semanas; el diseño queda disponible.</div>
       <div class="tpf" data-t="segundo" data-title="Segundo factor (código de verificación)" data-states="normal:Normal,error:Código incorrecto,bloqueado:Bloqueado,ok:Confirmado"></div>
       <div class="tpf__spec">
         <div><h3>Regiones</h3><ul><li>Titular que dice qué se pide y a dónde se envió (correo enmascarado: a•••@ejemplo.edu).</li><li>Casillas del código, botón Verificar y ayuda: reenviar o usar otro método.</li></ul></div>
@@ -151,6 +175,7 @@
       <span class="ds-eyebrow mono">Plantillas y estados · Acceso y cuenta</span>
       <h2 id="h-institucion">Selección de institución</h2>
       <p class="ds-lead">Para cuentas que pertenecen a más de una institución. Una lista corta de radios; si hubiera más de 7, se cambia por un combobox con búsqueda.</p>
+      <div class="hz-alert hz-alert--info" role="note" style="margin-top:1rem"><strong>Futuro · fuera del MVP oficial</strong>El tenant lo fija el subdominio (1 tenant = 1 organización) y el contrato de Auth no tiene selector. Solo aplicaría si una cuenta llegara a pertenecer a varias organizaciones.</div>
       <div class="tpf" data-t="institucion" data-title="Selección de institución" data-states="normal:Varias instituciones,sin:Ninguna"></div>
       <div class="tpf__spec">
         <div><h3>Regiones</h3><ul><li>Titular, texto de ayuda y lista de instituciones como radios de 60 px.</li><li>Botón Continuar.</li></ul></div>
@@ -164,6 +189,7 @@
       <span class="ds-eyebrow mono">Plantillas y estados · Acceso y cuenta</span>
       <h2 id="h-invitacion">Aceptar invitación</h2>
       <p class="ds-lead">Lo primero que ve una persona invitada desde el correo. Dice quién la invita y a qué institución, y pide solo lo mínimo para crear la cuenta; el consentimiento biométrico llega después.</p>
+      <div class="hz-alert hz-alert--info" role="note" style="margin-top:1rem"><strong>Futuro · fuera del MVP oficial</strong>El contrato de Auth v0.2 no tiene endpoint de invitaciones y las cuentas se crean desde la administración. Diseño para una fase posterior.</div>
       <div class="tpf" data-t="invitacion" data-title="Aceptar invitación" data-states="normal:Normal,vencida:Vencida,usada:Ya usada"></div>
       <div class="tpf__spec">
         <div><h3>Regiones</h3><ul><li>Quién invita y de qué institución, en la primera línea.</li><li>Nombre (precargado), contraseña y aceptación de términos.</li></ul></div>
@@ -177,6 +203,7 @@
       <span class="ds-eyebrow mono">Plantillas y estados · Administración y escrutinio</span>
       <h2 id="h-escrutinio">Escrutinio (resultados electorales)</h2>
       <p class="ds-lead">Los resultados de una elección en una sola pantalla: participación frente a la meta, votos por lista y estado de cada mesa. Solo muestra <b>agregados</b>. <span class="hz-chip hz-chip--info hz-chip--outline hz-chip--wrap"><i class="bi bi-lightbulb" aria-hidden="true"></i>Propuesta de diseño, pendiente de validar con el equipo</span></p>
+      <div class="hz-alert hz-alert--info" role="note" style="margin-top:1rem"><strong>Futuro · fuera del MVP oficial</strong>El cierre y conteo de una elección no tiene actividad asignada en el plan de 3 semanas. Diseño de referencia.</div>
       <div class="tpf" data-t="escrutinio" data-title="Escrutinio (resultados electorales)" data-states="conteo:En conteo,final:Resultados finales,sin:Sin datos"></div>
       <div class="tpf__spec">
         <div><h3>Regiones</h3><ul><li>Cabecera con el estado de la elección (En conteo / Resultados finales) y la acción de exportar el acta.</li><li>Tres indicadores: participación, mesas reportadas y votos emitidos.</li><li>Votos por lista (barras con el valor y el porcentaje en texto) y participación frente a la meta (bullet).</li><li>Tabla de mesas con su estado como píldora.</li></ul></div>
@@ -190,6 +217,7 @@
       <span class="ds-eyebrow mono">Plantillas y estados · Administración y escrutinio</span>
       <h2 id="h-mesas">Mesas y padrón</h2>
       <p class="ds-lead">Dónde se vota y quién puede hacerlo: la lista de mesas con sus habilitados, su responsable y su estado, y la importación del padrón. <span class="hz-chip hz-chip--info hz-chip--outline hz-chip--wrap"><i class="bi bi-lightbulb" aria-hidden="true"></i>Propuesta de diseño, pendiente de validar con el equipo</span></p>
+      <div class="hz-alert hz-alert--info" role="note" style="margin-top:1rem"><strong>Futuro · fuera del MVP oficial</strong>Mesas y jurados están fuera del MVP; el padrón (elegibilidad por elección) sí existe. Construir solo la parte de padrón cuando haya actividad asignada.</div>
       <div class="tpf" data-t="mesas" data-title="Mesas y padrón" data-states="normal:Normal,vacio:Vacío"></div>
       <div class="tpf__spec">
         <div><h3>Regiones</h3><ul><li>Cabecera con "Importar padrón" y "Nueva mesa".</li><li>Búsqueda y filtro por estado.</li><li>Tabla de mesas con paginación.</li></ul></div>
@@ -203,6 +231,7 @@
       <span class="ds-eyebrow mono">Plantillas y estados · Administración y escrutinio</span>
       <h2 id="h-roles">Roles y permisos</h2>
       <p class="ds-lead">Una matriz de roles por acciones. Los cambios se guardan juntos y los que quitan poder a un administrador piden confirmación. <span class="hz-chip hz-chip--info hz-chip--outline hz-chip--wrap"><i class="bi bi-lightbulb" aria-hidden="true"></i>Propuesta de diseño, pendiente de validar con el equipo</span></p>
+      <div class="hz-alert hz-alert--info" role="note" style="margin-top:1rem"><strong>Futuro · fuera del MVP oficial</strong>El MVP usa RBAC simple con cinco roles sembrados (ADMIN, OPERATOR, ELECTION_MANAGER, AUDITOR, VOTER); no hay actividad para editar la matriz. La pantalla es de solo lectura hasta entonces.</div>
       <div class="tpf" data-t="roles" data-title="Roles y permisos" data-states="normal:Normal,cambios:Con cambios"></div>
       <div class="tpf__spec">
         <div><h3>Regiones</h3><ul><li>Matriz con permisos en filas y roles en columnas.</li><li>Barra de guardado fija cuando hay cambios.</li><li>Nota que explica lo que no se puede cambiar.</li></ul></div>
@@ -330,6 +359,23 @@
         <tr><td>Sin conexión</td><td>Sin conexión</td><td>No hay conexión.</td><td>Revisa tu red. No perdiste nada: esta página se recargará sola cuando vuelva la conexión.</td></tr>
         <tr><td>Mantenimiento</td><td>Mantenimiento</td><td>Estamos haciendo mejoras.</td><td>Averyn vuelve en breve. Gracias por tu paciencia.</td></tr>
       </tbody></table></div>
+    </div></section>
+    <section class="ds-sec" id="errores-api" aria-labelledby="h-errores-api" data-nav="Errores de la API" data-grp="Páginas de error"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Plantillas y estados · Páginas de error</span>
+      <h2 id="h-errores-api">Errores de la API: del código al mensaje</h2>
+      <p class="ds-lead">La API responde <code>application/problem+json</code> con un <code>code</code> estable y la cabecera <code>X-Request-Id</code>. El frontend traduce por <code>code</code> (los textos técnicos de la API están en inglés y nunca se muestran tal cual).</p>
+      <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Código o estado</th><th>Mensaje al usuario</th><th>Qué hace la interfaz</th></tr></thead><tbody>
+        <tr><td><code>AUTH_INVALID_CREDENTIALS</code> · 401</td><td>Correo o contraseña incorrectos.</td><td>Aviso en el formulario; el mismo texto sea cual sea la causa.</td></tr>
+        <tr><td><code>AUTH_UNAUTHENTICATED</code> · 401</td><td>Tu sesión caducó.</td><td>Un único refresh compartido y reintento de la petición; si falla, la pantalla de sesión caducada.</td></tr>
+        <tr><td>429 · <code>Retry-After</code></td><td>Demasiados intentos. Podrás volver a intentarlo en 14:32.</td><td>Cuenta atrás y controles deshabilitados hasta que termine.</td></tr>
+        <tr><td><code>TENANT_NOT_FOUND</code> · 404</td><td>No encontramos esta organización.</td><td>Pantalla «Organización no encontrada», sin más detalle.</td></tr>
+        <tr><td>403 (sin permiso)</td><td>No tienes permiso para ver esto.</td><td>Página 403; ver el copy aprobado.</td></tr>
+        <tr><td><code>VALIDATION_ERROR</code> · 400</td><td>Revisa los campos marcados.</td><td>Mensaje junto a cada campo y foco en el primero con error.</td></tr>
+        <tr><td><code>DOCUMENT_ALREADY_REGISTERED</code> · 409</td><td>Ese documento ya está registrado.</td><td>Aviso en el campo; sin mostrar a quién pertenece.</td></tr>
+        <tr><td><code>PERSON_NOT_FOUND</code> · 404</td><td>No encontramos a esa persona.</td><td>Estado vacío con acción de volver al listado.</td></tr>
+        <tr><td>5xx o sin <code>code</code></td><td>Algo falló de nuestro lado.</td><td>Aviso con el <code>X-Request-Id</code> para soporte, nunca el detalle técnico.</td></tr>
+      </tbody></table></div>
+      <p class="ds-note">La lista crece con el contrato: cada <code>code</code> nuevo entra aquí con su mensaje antes de usarse. El <code>X-Request-Id</code> es lo único técnico que el usuario puede ver, y solo en errores inesperados.</p>
     </div></section>
     <!-- BANNER, SESIÓN CADUCADA Y MÓDULOS PENDIENTES -->
     <section class="ds-sec ds-sec--tint" id="otros-estados" aria-labelledby="h-otros" data-nav="Banner, sesión caducada y módulos pendientes" data-grp="Avisos del sistema"><div class="ds-wrap">

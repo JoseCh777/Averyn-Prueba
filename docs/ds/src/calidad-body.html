@@ -80,7 +80,7 @@
         <tr><td>Movimiento</td><td><code>prefers-reduced-motion</code>: sin sticky, sin dibujo, sin deslizamientos; el contenido nunca depende de JS para verse.</td><td>Emular reduced-motion; probar con JS desactivado.</td></tr>
         <tr><td>Color</td><td>Nunca único canal. Estados con texto; gráficos con valor en texto.</td><td>Ver en escala de grises.</td></tr>
         <tr><td>Estados</td><td>Los módulos pendientes usan <code>aria-disabled="true"</code> y no son enlaces. Los iconos decorativos <code>aria-hidden</code>; los solos con <code>aria-label</code>.</td><td>Revisar el árbol de accesibilidad.</td></tr>
-        <tr><td>Zoom y reflujo</td><td>Usable a 200 % y a 320 px de ancho sin scroll horizontal.</td><td>Probar 1440, 820 y 390 px.</td></tr>
+        <tr><td>Zoom y reflujo</td><td>Usable a 200 % y a 320 px de ancho sin scroll horizontal.</td><td>Probar 1440, 768 y 375 px.</td></tr>
       </tbody></table></div>
     </div></section>
 
@@ -88,7 +88,7 @@
     <section class="ds-sec" id="informe-validacion" aria-labelledby="h-informe-validacion" data-nav="Informe de validación" data-grp="Calidad"><div class="ds-wrap">
       <span class="ds-eyebrow mono">Calidad y gobernanza · Calidad</span>
       <h2 id="h-informe-validacion">Informe de validación (v1.6)</h2>
-      <p class="ds-lead">Qué se comprobó antes de compartir el sistema, cómo, qué se encontró y qué <b>no</b> se pudo probar. Las pruebas automáticas se hicieron en Edge (Chromium), a 1440 y 390 px; lo que necesita una persona o un dispositivo real está marcado como pendiente.</p>
+      <p class="ds-lead">Qué se comprobó antes de compartir el sistema, cómo, qué se encontró y qué <b>no</b> se pudo probar. Las pruebas automáticas se hicieron en Edge (Chromium), a 1440 y 390 px (el estándar oficial pide 375 y 1440: ver «Alineación con la arquitectura oficial»); lo que necesita una persona o un dispositivo real está marcado como pendiente.</p>
       <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Prueba</th><th>Cómo</th><th>Resultado</th></tr></thead><tbody>
         <tr><td>Accesibilidad automática (WCAG 2.2 AA)</td><td><code>axe-core</code> 4.10 sobre las 8 páginas, en escritorio y móvil</td><td><span class="hz-chip hz-chip--success"><i class="bi bi-check-circle" aria-hidden="true"></i>Corregido</span> Se encontraron 5 tipos de incumplimiento (contraste en etiquetas y muestras, regiones desplazables sin teclado, tooltip sin nombre, lista con rol cambiado). Todos corregidos. Quedan 8 avisos de contraste en Fundamentos que son <b>muestras demostrativas</b> de pares que fallan a propósito (marcadas como decorativas, con su razón al lado).</td></tr>
         <tr><td>Teclado</td><td>Recorrido con <kbd>Tab</kbd> de cada página; se comprueba indicador de foco y nombre accesible en cada elemento</td><td><span class="hz-chip hz-chip--success"><i class="bi bi-check-circle" aria-hidden="true"></i>Sin problemas</span> 657 elementos enfocables recorridos en 8 páginas; ninguno sin indicador de foco ni sin nombre.</td></tr>
@@ -120,6 +120,26 @@
     </div></section>
 
     <!-- GOBERNANZA Y NOVEDADES -->
+    <section class="ds-sec ds-sec--tint" id="alineacion-oficial" aria-labelledby="h-alineacion" data-nav="Alineación con la arquitectura oficial" data-grp="Calidad"><div class="ds-wrap">
+      <span class="ds-eyebrow mono">Calidad y gobernanza · Calidad</span>
+      <h2 id="h-alineacion">Alineación con la arquitectura oficial</h2>
+      <p class="ds-lead">Horizonte es la única guía visual de Averyn. Esta matriz compara el sistema con las reglas de <code>averyn-web</code> (AGENTS) y <code>averyn-docs</code> (estándar de código y diccionario de datos). «Decidir» significa que lo resuelve el ADR propuesto para que lo apruebe el responsable técnico.</p>
+      <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Regla oficial</th><th>Horizonte hoy</th><th>Estado</th><th>Resolución</th></tr></thead><tbody>
+        <tr><td>Accesibilidad (§70)</td><td>WCAG 2.2 AA, axe sin violaciones, teclado completo</td><td>Cumple</td><td>Mantener en cada componente portado.</td></tr>
+        <tr><td>Estados de UI y biometría (§21–23)</td><td>Carga, vacío, error, éxito y deshabilitado; mapa de estados oficiales</td><td>Cumple</td><td>Ver <i>Patrones › Estados oficiales</i>.</td></tr>
+        <tr><td>Tokens <code>--av-*</code> e Inter</td><td>Mismos nombres y fuente de cuerpo</td><td>Cumple</td><td>Portar a <code>app/globals.css</code>.</td></tr>
+        <tr><td>Prefijo <code>av-</code></td><td>Clases <code>hz-*</code></td><td>Decidir</td><td>Renombrar al portar o declarar <code>hz-</code> en el ADR.</td></tr>
+        <tr><td>Plus Jakarta Sans en títulos</td><td>Space Grotesk (y JetBrains Mono, que <code>layout.tsx</code> no carga)</td><td>Decidir</td><td>El ADR fija la fuente de títulos y si se mantiene la mono.</td></tr>
+        <tr><td>Breakpoints 576 · 768 · 1024 · 1280</td><td>Documentados; este sitio usa valores sueltos</td><td>Alineado en la guía</td><td>Solo los oficiales en el código portado.</td></tr>
+        <tr><td>Responsive a 375 y 1440 (§71)</td><td>Probado a 390 y 1440</td><td>Pendiente</td><td>Añadir 375 px a la prueba de cada pantalla portada.</td></tr>
+        <tr><td>React 19 + TypeScript estricto</td><td>HTML, CSS y JS sin framework</td><td>Portar</td><td>Componentes tipados en <code>components/ui</code>; <code>'use client'</code> solo con interacción.</td></tr>
+        <tr><td>Código en inglés (§75)</td><td>Ids y estructura de la documentación en español</td><td>Portar</td><td>Componentes y props en inglés; la documentación sigue en español.</td></tr>
+        <tr><td>Dependencias nuevas (§56)</td><td>La guía recomienda librerías</td><td>Aplazar</td><td>Sin dependencias nuevas en la primera semana; cada una con ADR.</td></tr>
+        <tr><td>Contenido sin respaldo del MVP</td><td>2FA, recuperación por correo, invitación, selector de institución, mesas, notificaciones, escrutinio</td><td>Marcado</td><td>Cada plantilla lleva el aviso «Futuro · fuera del MVP oficial».</td></tr>
+        <tr><td>Modelo de datos del tarjetón</td><td>Variante fórmula, fotos y logos</td><td>Marcado</td><td>Ver nota en <i>Patrones › Papeleta</i>.</td></tr>
+      </tbody></table></div>
+      <p class="ds-note">Para que sea ley y no solo guía: ADR en estado <i>Propuesto</i> aprobado por el responsable técnico, reescritura de <code>AGENTS.md</code> §9, componentes en <code>components/ui</code> y la casilla «Consistencia con el Design System» en la revisión de cada PR. Un componente que falta se crea primero en el sistema (§72).</p>
+    </div></section>
     <section class="ds-sec ds-sec--tint" id="gobernanza" aria-labelledby="h-gob" data-nav="Gobernanza y novedades" data-grp="Gobernanza"><div class="ds-wrap">
       <span class="ds-eyebrow mono">Calidad y gobernanza · Gobernanza</span>
       <h2 id="h-gob">Gobernanza</h2>
@@ -132,7 +152,7 @@
       <h3 class="ds-sub">Un componente está terminado cuando…</h3>
       <div class="doc-wrap"><table class="doc-table"><tbody>
         <tr><td>✓ Usa solo tokens (sin hex sueltos salvo los documentados)</td><td>✓ Estados: reposo, hover, foco, activo, deshabilitado, carga, error</td></tr>
-        <tr><td>✓ Contraste y foco verificados sobre cada superficie donde aparece</td><td>✓ Responsive: 1440, 820 y 390 px sin scroll horizontal</td></tr>
+        <tr><td>✓ Contraste y foco verificados sobre cada superficie donde aparece</td><td>✓ Responsive: 1440, 820 y 390 px sin scroll horizontal (375 px: ver alineación)</td></tr>
         <tr><td>✓ <code>prefers-reduced-motion</code> y teclado probados</td><td>✓ Documentado aquí con un ejemplo vivo y su regla de uso</td></tr>
       </tbody></table></div>
       <h3 class="ds-sub">Dónde va cada cosa</h3>
