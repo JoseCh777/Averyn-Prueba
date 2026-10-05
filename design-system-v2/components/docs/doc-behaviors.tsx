@@ -30,6 +30,13 @@ export function DocBehaviors() {
     return () => document.removeEventListener("click", click);
   }, [toast]);
 
+  /* Formularios de muestra (data-nosubmit): no envían nada. */
+  useEffect(() => {
+    const submit = (e: Event) => { if ((e.target as HTMLElement).closest("form[data-nosubmit]")) e.preventDefault(); };
+    document.addEventListener("submit", submit);
+    return () => document.removeEventListener("submit", submit);
+  }, []);
+
   useEffect(() => {
     const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('.ds-side nav a[href^="#"]'));
     const secs = links.map((a) => document.querySelector(a.getAttribute("href")!)).filter(Boolean) as Element[];

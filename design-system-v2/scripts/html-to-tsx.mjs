@@ -61,6 +61,8 @@ function attrs(el, tag) {
     let n = ATTR[name] ?? name;
     if (tag === "input" && name === "value") n = "defaultValue";
     if (tag === "input" && name === "checked") { out.push("defaultChecked"); continue; }
+    if (name === "onsubmit") { out.push('data-nosubmit="true"'); continue; }
+    if (/^on[a-z]+$/.test(name)) continue;
     if (name === "style") { out.push(`style=${style(value)}`); continue; }
     if (name === "selected") continue;
     if (n === name && name.includes("-") && !name.startsWith("data-") && !name.startsWith("aria-")) n = camel(name);
