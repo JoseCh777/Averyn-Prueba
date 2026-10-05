@@ -10,7 +10,7 @@ import { TEMPLATES } from "./screens";
 const BLANK = '<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=1440"></head><body class="tp"></body></html>';
 
 /** Prepara un iframe: copia los estilos y las variables de fuente de la página y devuelve el <body> donde pintar. */
-function useFrameBody() {
+export function useFrameBody(bodyClass = "tp") {
   const ref = useRef<HTMLIFrameElement>(null);
   const [body, setBody] = useState<HTMLElement | null>(null);
   const prepare = () => {
@@ -19,7 +19,7 @@ function useFrameBody() {
     d.documentElement.className = document.documentElement.className;
     d.head.querySelectorAll("[data-copied]").forEach((n) => n.remove());
     document.head.querySelectorAll('link[rel="stylesheet"], style').forEach((n) => { const c = n.cloneNode(true) as HTMLElement; c.setAttribute("data-copied", "1"); d.head.appendChild(c); });
-    d.body.className = "tp";
+    d.body.className = bodyClass;
     setBody(d.body);
   };
   useEffect(() => { if (ref.current?.contentDocument?.readyState === "complete") prepare(); }, []); // eslint-disable-line react-hooks/exhaustive-deps

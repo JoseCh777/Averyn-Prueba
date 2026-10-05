@@ -20,7 +20,8 @@
 13. [Dependencias y librerías](#13-dependencias-y-librerías)
 14. [Migración a React (recomendación)](#14-migración-a-react-recomendación)
 15. [Deuda conocida y pospuesto](#15-deuda-conocida-y-pospuesto)
-16. [Documentos relacionados](#16-documentos-relacionados)
+16. [Horizonte 2.0: todo en React](#16-horizonte-20-todo-en-react)
+17. [Documentos relacionados](#17-documentos-relacionados)
 
 ---
 
@@ -500,7 +501,29 @@ Las pantallas se migran **por módulos**, no de golpe.
 
 ---
 
-## 16. Documentos relacionados
+## 16. Horizonte 2.0: todo en React
+
+El 5 de octubre de 2026 el equipo decidió migrar todo el sistema a React. La v2.0 vive en `design-system-v2/` (Next.js 16, React 19, TypeScript estricto, Tailwind v4) y reemplaza a la v1.7 en HTML/CSS/JS como fuente. Qué cambió:
+
+| Parte | v1.7 | v2.0 |
+|---|---|---|
+| Componentes | HTML + CSS + JS por demo (`componentes.js`) | `components/ui/*` tipados: Button, Field, Alert, Chip, Modal, Tabs, DataTable, Combobox, MultiSelect, DateRangePicker, OtpInput, FileUpload, CommandPalette, Drawer, Stepper… |
+| Patrones | `patrones.js` | `components/patterns/*`: captura facial, huella, resultado, revisión manual, documento/OCR, tarjetón, dispositivos, consentimiento |
+| Gráficos | `charts.js` (DOM imperativo) | `components/charts/*`: SVG en React con tooltip, teclado y tabla alternativa |
+| Plantillas | HTML generado en `plantillas.js` | `components/templates/*`: 15 plantillas con estados, dentro de marcos de revisión; páginas de error como rutas |
+| Documentación | 8 HTML + HTML único | 8 rutas de Next.js (`app/(ds)/`) |
+| Iconos | Fuente Bootstrap Icons | Bootstrap Icons como SVG (`react-bootstrap-icons`); Lineicons queda como opción futura |
+| Estilos | `ds.css` y archivos por página | Los mismos estilos `hz-*` portados a `app/styles/`, con los tokens `--av-*` expuestos a Tailwind v4 con `@theme` |
+
+Decisiones: una librería por rol (Tailwind, shadcn/ui con Base UI, Aceternity UI + `motion` para efectos de marca, Bootstrap Icons); Aceternity solo en superficies de marca y siempre revisado (`components/effects/background-beams.tsx` documenta qué se adaptó); las páginas no importan las librerías directamente. El detalle y la evaluación de cada una están en `docs/propuestas/ADR-011-design-system-horizonte.md`.
+
+Verificado el 5 de octubre de 2026: axe sin violaciones en las 8 páginas a 1440 y 375 px (salvo las 8 muestras de contraste que son ejemplos de lo que no se debe hacer), recorrido de teclado sin problemas con los mismos elementos enfocables que la v1.7, sin scroll horizontal y sin errores de consola. Pendiente: modo oscuro, mascota de marca, renombrar `hz-*` según el ADR y subir a los repositorios oficiales cuando el ADR se apruebe.
+
+Mientras tanto, la v1.7 (HTML único y `docs/ds/`) se conserva como referencia histórica.
+
+---
+
+## 17. Documentos relacionados
 
 | Documento | Qué es |
 |---|---|

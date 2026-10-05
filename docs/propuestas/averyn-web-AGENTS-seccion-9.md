@@ -49,7 +49,7 @@ Reglas de trabajo:
 
 * si falta un componente, se diseña primero en Horizonte y luego se implementa (coding-standard §72)
 * los componentes son tipados, con nombres en inglés (§75), y usan `'use client'` solo cuando tienen interacción
-* librerías de UI aprobadas en ADR-011: Tailwind v4 (estilos), shadcn/ui con Base UI (comportamiento), Aceternity UI y `motion` (solo efectos de marca, en `components/effects/`) y Lineicons (iconos); cualquier otra pasa por el checklist de §56 y un ADR (ver §8)
+* librerías de UI aprobadas en ADR-011: Tailwind v4 (estilos), shadcn/ui con Base UI (comportamiento), Aceternity UI y `motion` (solo efectos de marca, en `components/effects/`) y Bootstrap Icons con `react-bootstrap-icons` (iconos, desde `components/ui/icon`); cualquier otra pasa por el checklist de §56 y un ADR (ver §8)
 * las páginas no importan esas librerías directamente: se consumen desde `components/*`
 * la revisión de cada PR de frontend incluye la casilla «Consistencia con el Design System»
 * las plantillas marcadas «Futuro · fuera del MVP oficial» en la documentación de Horizonte no se implementan

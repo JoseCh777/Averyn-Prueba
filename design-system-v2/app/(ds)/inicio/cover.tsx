@@ -1,0 +1,33 @@
+/* Generado desde docs/ds/src por scripts/html-to-tsx.mjs (migración a React, v2.0).
+   A partir de aquí este archivo es la fuente: se edita a mano. */
+/* eslint-disable react/no-unescaped-entities */
+
+export default function InicioCover() {
+  return (
+    <>
+      <header className="ds-cover">
+        <div className="ds-wrap">
+          <img className="ds-cover__logo" src="/assets/images/averyn-logo-font-black.avif" alt="Averyn" />
+          <span className="mono" style={{ color: "#fff", opacity: ".85" }}>Design System</span>
+          <h1>Claridad que se oscurece en seguridad.</h1>
+          <p>
+            El sistema visual de Averyn: principios, tokens, componentes y reglas de uso para landing, acceso y panel. Nace de lo que construimos y decidimos, y extiende el mismo lenguaje a lo que aún no existe.
+          </p>
+          <div className="ds-cover__meta mono">
+            <span>{"Versión 2.0 · Horizonte"}</span>
+            <span>Octubre 2026</span>
+            <span>Fuente: DESIGN.md + tokens.css</span>
+          </div>
+        </div>
+        <svg viewBox="0 0 640 300" aria-hidden="true" focusable="false">
+          <path d="M0 290 H640" stroke="rgba(255,255,255,.22)" strokeWidth="1" fill="none" />
+          <path d="M30 290 C110 60 330 40 450 290" stroke="#fff" strokeWidth="1.5" fill="none" />
+          <path d="M90 290 C150 110 300 95 390 290" stroke="#00ACD2" strokeWidth="2" fill="none" />
+          <path d="M150 290 C190 170 270 160 330 290" stroke="#55D6FF" strokeWidth="1.5" fill="none" />
+          <path d="M300 8 L545 290" stroke="#3D86FF" strokeWidth="2" fill="none" />
+          <path d="M326 -32 L605 290" stroke="#3D86FF" strokeWidth="2" fill="none" />
+        </svg>
+      </header>
+    </>
+  );
+}

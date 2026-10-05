@@ -36,7 +36,7 @@ const camel = (s) => s.replace(/-([a-z])/g, (_, c) => c.toUpperCase());
 const text = (s) => s.replace(/&/g, "&amp;").replace(/\{/g, "{'{'}").replace(/\}/g, "{'}'}").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
 function href(v) {
-  let out = v.replace("{{VERSION}}", "2.0").replace(/\{\{FE\}\}\/assets\//g, "/assets/");
+  let out = v.replace("{{VERSION}}", "2.0").replace(/^\.\/assets\//, "/assets/").replace(/\{\{FE\}\}\/assets\//g, "/assets/");
   out = out.replace(/\{\{FE\}\}\/(403|404|500|offline|mantenimiento)\.html/g, "/errores/$1");
   out = out.replace(/\{\{DS\}\}\/inicio\.html/g, "/").replace(/\{\{DS\}\}\/(\w+)\.html/g, "/$1").replace(/\{\{DS\}\}/g, "").replace(/\{\{DOCS\}\}/g, "");
   return out;

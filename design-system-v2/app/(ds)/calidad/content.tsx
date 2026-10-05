@@ -683,6 +683,13 @@ export default function Content() {
             <table className="doc-table">
               <tbody>
                 <tr>
+                  <td><b>v2.0</b>{" "}· oct 2026</td>
+                  <td>
+                    <b>Todo en React.</b>
+                    {" "}Componentes, patrones biométricos y electorales, gráficos, plantillas y esta documentación pasan a React 19 + TypeScript sobre Next.js, con Tailwind v4 y los tokens <code>--av-*</code> como fuente de verdad. Iconos: Bootstrap Icons como componentes SVG (Lineicons queda como opción futura). Los efectos de Aceternity UI se adaptan antes de usarse y solo en superficies de marca. Se añaden las plantillas Login y Organización no encontrada, los errores de la API y los estados oficiales de biometría.
+                  </td>
+                </tr>
+                <tr>
                   <td><b>v1.7</b>{" "}· oct 2026</td>
                   <td>
                     <b>Aclaraciones y guía de migración.</b>
