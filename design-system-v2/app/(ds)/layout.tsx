@@ -1,11 +1,13 @@
 import { Sidebar } from "@/components/docs/sidebar";
 import { DocBehaviors } from "@/components/docs/doc-behaviors";
 import { ToastProvider } from "@/components/ui/overlay";
+import { ChartTipProvider } from "@/components/charts/inspector";
 import { VERSION } from "@/lib/docs-pages";
 
 export default function DocsLayout({ children }: { children: React.ReactNode }) {
   return (
     <ToastProvider>
+      <ChartTipProvider>
       <a className="skip" href="#contenido">Saltar al contenido</a>
       <div className="ds-shell">
         <Sidebar />
@@ -22,6 +24,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
         </div>
       </div>
       <DocBehaviors />
+      </ChartTipProvider>
     </ToastProvider>
   );
 }
