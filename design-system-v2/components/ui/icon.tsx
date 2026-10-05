@@ -1,25 +1,182 @@
-import type { ComponentProps } from "react";
-import { Lineicons } from "@lineiconshq/react-lineicons";
+import type { ComponentType, SVGProps } from "react";
+import {
+  ArrowDown,
+  ArrowDownShort,
+  ArrowDownUp,
+  ArrowRepeat,
+  ArrowUp,
+  ArrowUpShort,
+  ArrowsFullscreen,
+  BarChart,
+  Bell,
+  BoxArrowRight,
+  Calendar3,
+  Camera,
+  CameraVideo,
+  CameraVideoOff,
+  CardChecklist,
+  CheckCircle,
+  CheckCircleFill,
+  CheckLg,
+  Check2,
+  Check2Circle,
+  Check2Square,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  Circle,
+  Clipboard,
+  ClipboardData,
+  Clock,
+  CloudArrowUp,
+  Collection,
+  Dash,
+  DashCircle,
+  Display,
+  DoorOpen,
+  Dot,
+  Download,
+  ExclamationCircle,
+  ExclamationTriangle,
+  Eye,
+  FileEarmark,
+  FileEarmarkCheck,
+  FileEarmarkImage,
+  FileEarmarkPdf,
+  FileEarmarkText,
+  Files,
+  Fingerprint,
+  Grid1x2,
+  Grid3x3Gap,
+  HourglassSplit,
+  Inbox,
+  InfoCircle,
+  JournalCheck,
+  JournalText,
+  Lightbulb,
+  Lock,
+  Mortarboard,
+  Pencil,
+  People,
+  PersonFill,
+  PersonGear,
+  PersonPlus,
+  PersonVcard,
+  Plug,
+  QuestionCircle,
+  Search,
+  ShieldCheck,
+  ShieldLock,
+  Stars,
+  Table,
+  ThreeDots,
+  Trash3,
+  XCircle,
+  XCircleFill,
+  XLg,
+  XOctagon,
+} from "react-bootstrap-icons";
 import { cn } from "@/lib/utils";
 
-/* Único punto de entrada a los iconos: las páginas nunca importan Lineicons directamente.
-   Los iconos que el set gratuito no tiene (huella, información, advertencia…) viven en ./icons como SVG propios. */
-type LineiconsProps = ComponentProps<typeof Lineicons>;
+/* Bootstrap Icons (decisión del equipo, 5-oct-2026). Es el único punto de entrada a los iconos: se importan uno a uno
+   (tree-shaking) y se llaman por el mismo nombre que en la documentación (`bi-check-circle` → name="check-circle").
+   Lineicons queda como opción futura (ver ADR-011). */
+const ICONS = {
+  "arrow-down": ArrowDown,
+  "arrow-down-short": ArrowDownShort,
+  "arrow-down-up": ArrowDownUp,
+  "arrow-repeat": ArrowRepeat,
+  "arrow-up": ArrowUp,
+  "arrow-up-short": ArrowUpShort,
+  "arrows-fullscreen": ArrowsFullscreen,
+  "bar-chart": BarChart,
+  "bell": Bell,
+  "box-arrow-right": BoxArrowRight,
+  "calendar3": Calendar3,
+  "camera": Camera,
+  "camera-video": CameraVideo,
+  "camera-video-off": CameraVideoOff,
+  "card-checklist": CardChecklist,
+  "check-circle": CheckCircle,
+  "check-circle-fill": CheckCircleFill,
+  "check-lg": CheckLg,
+  "check2": Check2,
+  "check2-circle": Check2Circle,
+  "check2-square": Check2Square,
+  "chevron-down": ChevronDown,
+  "chevron-left": ChevronLeft,
+  "chevron-right": ChevronRight,
+  "circle": Circle,
+  "clipboard": Clipboard,
+  "clipboard-data": ClipboardData,
+  "clock": Clock,
+  "cloud-arrow-up": CloudArrowUp,
+  "collection": Collection,
+  "dash": Dash,
+  "dash-circle": DashCircle,
+  "display": Display,
+  "door-open": DoorOpen,
+  "dot": Dot,
+  "download": Download,
+  "exclamation-circle": ExclamationCircle,
+  "exclamation-triangle": ExclamationTriangle,
+  "eye": Eye,
+  "file-earmark": FileEarmark,
+  "file-earmark-check": FileEarmarkCheck,
+  "file-earmark-image": FileEarmarkImage,
+  "file-earmark-pdf": FileEarmarkPdf,
+  "file-earmark-text": FileEarmarkText,
+  "files": Files,
+  "fingerprint": Fingerprint,
+  "grid-1x2": Grid1x2,
+  "grid-3x3-gap": Grid3x3Gap,
+  "hourglass-split": HourglassSplit,
+  "inbox": Inbox,
+  "info-circle": InfoCircle,
+  "journal-check": JournalCheck,
+  "journal-text": JournalText,
+  "lightbulb": Lightbulb,
+  "lock": Lock,
+  "mortarboard": Mortarboard,
+  "pencil": Pencil,
+  "people": People,
+  "person-fill": PersonFill,
+  "person-gear": PersonGear,
+  "person-plus": PersonPlus,
+  "person-vcard": PersonVcard,
+  "plug": Plug,
+  "question-circle": QuestionCircle,
+  "search": Search,
+  "shield-check": ShieldCheck,
+  "shield-lock": ShieldLock,
+  "stars": Stars,
+  "table": Table,
+  "three-dots": ThreeDots,
+  "trash3": Trash3,
+  "x-circle": XCircle,
+  "x-circle-fill": XCircleFill,
+  "x-lg": XLg,
+  "x-octagon": XOctagon,
+} satisfies Record<string, ComponentType<SVGProps<SVGSVGElement>>>;
 
-export type IconProps = Omit<LineiconsProps, "size"> & {
+export type IconName = keyof typeof ICONS;
+
+export type IconProps = Omit<SVGProps<SVGSVGElement>, "name"> & {
+  name: IconName;
   /** Nombre accesible. Sin él, el icono es decorativo y se oculta a los lectores de pantalla. */
   label?: string;
-  size?: number;
+  size?: number | string;
 };
 
-export function Icon({ label, size = 20, className, ...props }: IconProps) {
+export function Icon({ name, label, size = "1em", className, ...props }: IconProps) {
+  const Svg = ICONS[name];
   return (
-    <Lineicons
-      {...props}
-      size={size}
-      strokeWidth={1.75}
-      className={cn("shrink-0", className)}
+    <Svg
+      width={size}
+      height={size}
+      className={cn("bi shrink-0", className)}
       {...(label ? { role: "img", "aria-label": label } : { "aria-hidden": true, focusable: "false" })}
+      {...props}
     />
   );
 }

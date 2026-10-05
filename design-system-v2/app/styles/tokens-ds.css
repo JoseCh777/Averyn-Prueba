@@ -1,0 +1,50 @@
+/* ---------- 1. TOKENS (idénticos a tokens.css) ---------- */
+:root {
+  /* Marca */
+  --av-blue: #145FEE; --av-blue-hover: #0F4BC7; --av-blue-active: #0C3B9E; --av-blue-tint: #EAF0FE;
+  --av-navy: #000C24; --av-cyan: #00ACD2;
+  /* Horizonte */
+  --av-sky: #DCECFF; --av-paper-blue: #F4F8FF; --av-navy-night: #071A36; --av-navy-horizon: #0A2A66;
+  --av-cyan-glow: #55D6FF; --av-night-text: #B9C9E4; --av-ink-faint: #9DB6E6;
+  --av-hairline: #DCE5F5; --av-hairline-strong: #CFDCF3;
+  /* Campos (nuevos en v1.0: cumplen 3:1 y 4.5:1) */
+  --av-field-border: #6E86B0; --av-placeholder: #667390;
+  /* Neutros */
+  --av-white: #FFFFFF;
+  --av-gray-50: #F4F6FA; --av-gray-100: #E7EBF3; --av-gray-200: #CBD3E1; --av-gray-300: #A9B4C7;
+  --av-gray-400: #7C89A3; --av-gray-500: #56637F; --av-gray-600: #3B4664; --av-gray-700: #26304A;
+  /* Semánticos: base para rellenos y puntos; "text" para texto */
+  --av-success: #12B76A; --av-success-bg: #E8F8F0; --av-success-text: #047857; --av-success-border: #A7F3D0;
+  --av-warning: #F79009; --av-warning-bg: #FEF3E2; --av-warning-text: #B45309; --av-warning-border: #FDE68A;
+  --av-error: #F04438;   --av-error-bg: #FDECEA;   --av-error-text: #B91C1C;   --av-error-border: #FECACA;
+  --av-info: #00ACD2;    --av-info-bg: #E3F6FA;    --av-info-text: #0369A1;    --av-info-border: #BAE6FD;
+  /* Estados (design system v1.4): una sola semántica Estado → color, en fondo claro y sobre navy.
+     Éxito = verde · Reintento = ámbar · Rechazo/Error = rojo · Pendiente = gris neutro · Info = azul.
+     El cian es solo resalte, nunca un estado. Los tonos "strong" garantizan texto ≥ 5:1 sobre el fondo suave. */
+  --av-success-strong: #065F46;
+  --av-warning-strong: #92400E;
+  --av-neutral-bg: #F4F6FA;
+  --av-neutral-text: #3B4664;
+  --av-neutral-border: #CBD3E1;
+  --av-success-on-navy: #6EE7B7;
+  --av-warning-on-navy: #FFC15A;
+  --av-error-on-navy: #FCA5A5;
+  --av-neutral-on-navy: #B9C9E4;
+  /* Tipografía */
+  --av-font-heading: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  --av-font-body: 'Inter', system-ui, sans-serif;
+  --av-font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
+  /* Espaciado (base 8) */
+  --av-space-1: 4px; --av-space-2: 8px; --av-space-3: 12px; --av-space-4: 16px; --av-space-6: 24px;
+  --av-space-8: 32px; --av-space-12: 48px; --av-space-16: 64px;
+  /* Radios */
+  --av-radius-sm: 4px; --av-radius-control: 8px; --av-radius-pill: 10px; --av-radius-tile: 16px;
+  --av-radius-frame: 24px; --av-radius-full: 9999px;
+  /* Elevación y movimiento */
+  --av-shadow-key: 0 3px 0 rgba(0, 12, 36, .3);
+  --av-shadow-sm: 0 1px 2px rgba(0, 12, 36, .06);
+  --av-shadow-md: 0 4px 12px rgba(0, 12, 36, .10);
+  --av-shadow-frame: 0 24px 60px rgba(0, 12, 36, .14);
+  --av-ease-out: cubic-bezier(.23, 1, .32, 1);
+}
+

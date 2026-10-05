@@ -1,6 +1,13 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "./tokens.css";
+@import "./styles/tokens-ds.css";
+@import "./styles/ds-chrome.css";
+@import "./styles/hz-core.css";
+@import "./styles/hz-advanced.css";
+@import "./styles/hz-patterns.css";
+@import "./styles/hz-charts.css";
+@import "./styles/base.css";
 
 /* Horizonte v2: los tokens --av-* (tokens.css) son la fuente de verdad.
    @theme los expone como utilidades de Tailwind sin duplicar valores. */
@@ -34,9 +41,9 @@
   --color-av-error: var(--av-error);
   --color-av-info: var(--av-info);
 
-  --font-heading: var(--font-heading);
-  --font-sans: var(--font-body);
-  --font-mono: var(--font-mono);
+  --font-heading: var(--av-font-heading);
+  --font-sans: var(--av-font-body);
+  --font-mono: var(--av-font-mono);
 
   --radius-control: var(--av-radius-control);
   --radius-frame: var(--av-radius-frame);
@@ -50,14 +57,6 @@
   --breakpoint-xl: 1280px;
   --breakpoint-2xl: 1536px;
 }
-
-html { color-scheme: light; }
-body {
-  background: var(--av-white);
-  color: var(--av-navy);
-  font-family: var(--font-body), system-ui, sans-serif;
-}
-h1, h2, h3, h4 { font-family: var(--font-heading), system-ui, sans-serif; }
 
 /* Foco visible único para todo el sistema (WCAG 2.4.7) */
 :focus-visible { outline: 2px solid var(--av-blue); outline-offset: 2px; }
