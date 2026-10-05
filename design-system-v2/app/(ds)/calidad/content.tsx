@@ -427,9 +427,9 @@ export default function Content() {
                 </tr>
                 <tr>
                   <td>Prefijo{" "}<code>av-</code></td>
-                  <td>Clases{" "}<code>av-*</code></td>
-                  <td>Decidir</td>
-                  <td>Renombrar al portar o declarar{" "}<code>av-</code>{" "}en el ADR.</td>
+                  <td>Clases{" "}<code>av-*</code>{" "}(antes{" "}<code>hz-*</code>)</td>
+                  <td>Cumple</td>
+                  <td>Renombradas en la v2.0 (5-oct-2026); los tokens siguen siendo{" "}<code>--av-*</code>.</td>
                 </tr>
                 <tr>
                   <td>Plus Jakarta Sans en títulos</td>
@@ -986,7 +986,7 @@ export default function Content() {
                   <td><code>lg-brand</code></td>
                   <td><code>av-navbar__brand</code>{" "}(acotado)</td>
                 </tr>
-                <tr><td><code>av-dock</code></td><td>—</td><td>—</td><td><code>av-dock</code>{" "}(acotado a{" "}<code>body.av-dash</code>)</td></tr>
+                <tr><td><code>av-dock</code></td><td>—</td><td>—</td><td>mismo nombre{" "}(acotado a{" "}<code>body.av-dash</code>)</td></tr>
                 <tr><td><code>av-line · av-media · av-person</code></td><td><code>mn-row · mn-media · mn-person</code></td><td>—</td><td>—</td></tr>
               </tbody>
             </table>
