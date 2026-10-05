@@ -110,7 +110,7 @@ export function ChartCard({ id, label, wide, range, meta, showValue, foot, rende
       </div>
       {foot && <footer className="cc__foot">{foot}</footer>}
       <div className="cc__pop" hidden={!open}>
-        <div className="hz-menu" id={menuId} role="menu" aria-label={`Opciones de ${label}`} onKeyDown={menuKey}>
+        <div className="av-menu" id={menuId} role="menu" aria-label={`Opciones de ${label}`} onKeyDown={menuKey}>
           <button ref={first} type="button" role="menuitem" onClick={() => { setTableMode((x) => !x); close(true); }}><Icon name="table" /><span>{tableMode ? "Ver gráfico" : "Ver como tabla"}</span></button>
           <button type="button" role="menuitem" onClick={() => { navigator.clipboard?.writeText(csvOf(t)); toast({ title: "Copiado", text: "Datos", kind: "ok" }); close(true); }}><Icon name="clipboard" /><span>Copiar datos (CSV)</span></button>
           <button type="button" role="menuitem" onClick={download}><Icon name="download" /><span>Descargar CSV</span></button>
@@ -149,11 +149,11 @@ export function ChartStateCard({ kind }: { kind: "loading" | "empty" | "error" }
         {kind === "loading" && <div className="sk" role="status" aria-label="Cargando gráfico"><i className="big" /><i style={{ width: "30%" }} /><i className="chart" /></div>}
         {kind === "empty" && (
           <div className="cc-state"><Icon name="bar-chart" /><h3>Sin verificaciones en este periodo</h3><p>Cuando haya actividad, la tendencia aparecerá aquí. Prueba con un periodo más amplio.</p>
-            <button className="hz-btn hz-btn--ghost" type="button" onClick={() => act("Ampliar a 90 días")}>Ampliar a 90 días</button></div>
+            <button className="av-btn av-btn--ghost" type="button" onClick={() => act("Ampliar a 90 días")}>Ampliar a 90 días</button></div>
         )}
         {kind === "error" && (
           <div className="cc-state" role="alert"><Icon name="exclamation-triangle" /><h3>No pudimos cargar este gráfico</h3><p>Hubo un problema al pedir los datos. Tus datos no se perdieron.</p>
-            <button className="hz-btn hz-btn--ghost" type="button" onClick={() => act("Reintentar")}>Reintentar</button></div>
+            <button className="av-btn av-btn--ghost" type="button" onClick={() => act("Reintentar")}>Reintentar</button></div>
         )}
       </div>
     </article>

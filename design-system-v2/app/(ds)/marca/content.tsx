@@ -57,22 +57,22 @@ export default function MarcaContent() {
             <figure className="fav">
               <img src="/assets/favicon-32.png" width="32" height="32" alt="Favicon 32 por 32" />
               <figcaption><b>favicon-32.png</b>Pestaña del navegador · 32 × 32, fondo transparente</figcaption>
-              <a className="hz-btn hz-btn--text" href="/assets/favicon-32.png" download="">Descargar</a>
+              <a className="av-btn av-btn--text" href="/assets/favicon-32.png" download="">Descargar</a>
             </figure>
             <figure className="fav">
               <img src="/assets/favicon-48.png" width="48" height="48" alt="Favicon 48 por 48" />
               <figcaption><b>favicon-48.png</b>Atajos y resultados de búsqueda · 48 × 48</figcaption>
-              <a className="hz-btn hz-btn--text" href="/assets/favicon-48.png" download="">Descargar</a>
+              <a className="av-btn av-btn--text" href="/assets/favicon-48.png" download="">Descargar</a>
             </figure>
             <figure className="fav">
               <img src="/assets/apple-touch-icon.png" width="90" height="90" alt="Ícono de pantalla de inicio" style={{ borderRadius: "20px" }} />
               <figcaption><b>apple-touch-icon.png</b>iOS · 180 × 180, fondo azul claro con margen</figcaption>
-              <a className="hz-btn hz-btn--text" href="/assets/apple-touch-icon.png" download="">Descargar</a>
+              <a className="av-btn av-btn--text" href="/assets/apple-touch-icon.png" download="">Descargar</a>
             </figure>
             <figure className="fav">
               <img src="/assets/icon-512.png" width="90" height="90" alt="Ícono grande" style={{ borderRadius: "20px" }} />
               <figcaption><b>icon-512.png</b>PWA y tiendas · 512 × 512</figcaption>
-              <a className="hz-btn hz-btn--text" href="/assets/icon-512.png" download="">Descargar</a>
+              <a className="av-btn av-btn--text" href="/assets/icon-512.png" download="">Descargar</a>
             </figure>
           </div>
           <h3 className="ds-sub">Imagen para compartir{" "}<small>Open Graph · 1200 × 630</small></h3>
@@ -201,39 +201,39 @@ export default function MarcaContent() {
                 <tr>
                   <td>Design system en un solo HTML</td>
                   <td>Archivo único, el{" "}<b>entregable</b></td>
-                  <td><span className="hz-chip hz-chip--success">Listo para compartir</span></td>
+                  <td><span className="av-chip av-chip--success">Listo para compartir</span></td>
                 </tr>
                 <tr>
                   <td>Documento maestro (.md)</td>
                   <td>Referencia escrita para el repositorio</td>
-                  <td><span className="hz-chip hz-chip--success">Listo</span></td>
+                  <td><span className="av-chip av-chip--success">Listo</span></td>
                 </tr>
                 <tr>
                   <td>Páginas de error (404, 403, 500, offline, mantenimiento)</td>
                   <td>Páginas y estilos de error del frontend</td>
-                  <td><span className="hz-chip hz-chip--success">En el frontend</span></td>
+                  <td><span className="av-chip av-chip--success">En el frontend</span></td>
                 </tr>
                 <tr>
                   <td>Favicons e imagen social</td>
                   <td>Carpeta de recursos del design system</td>
-                  <td><span className="hz-chip hz-chip--warning">Pendiente de copiar al frontend</span></td>
+                  <td><span className="av-chip av-chip--warning">Pendiente de copiar al frontend</span></td>
                 </tr>
                 <tr>
                   <td>Correos transaccionales</td>
                   <td>Carpeta de correos</td>
-                  <td><span className="hz-chip hz-chip--warning">Pendiente de integrar al servicio de correo</span></td>
+                  <td><span className="av-chip av-chip--warning">Pendiente de integrar al servicio de correo</span></td>
                 </tr>
                 <tr>
                   <td>Estilos de impresión</td>
                   <td>Hoja de impresión</td>
-                  <td><span className="hz-chip hz-chip--warning">Pendiente de usar en actas reales</span></td>
+                  <td><span className="av-chip av-chip--warning">Pendiente de usar en actas reales</span></td>
                 </tr>
-                <tr><td>Tokens W3C</td><td>Archivo de tokens generado</td><td><span className="hz-chip hz-chip--success">Generado</span></td></tr>
-                <tr><td>Modo nocturno</td><td>—</td><td><span className="hz-chip hz-chip--neutral">Fuera de alcance por ahora</span></td></tr>
+                <tr><td>Tokens W3C</td><td>Archivo de tokens generado</td><td><span className="av-chip av-chip--success">Generado</span></td></tr>
+                <tr><td>Modo nocturno</td><td>—</td><td><span className="av-chip av-chip--neutral">Fuera de alcance por ahora</span></td></tr>
                 <tr>
                   <td>Gráficos, patrones biométricos y plantillas en el frontend</td>
                   <td>—</td>
-                  <td><span className="hz-chip hz-chip--neutral">Solo documentados; se implementan con datos reales</span></td>
+                  <td><span className="av-chip av-chip--neutral">Solo documentados; se implementan con datos reales</span></td>
                 </tr>
               </tbody>
             </table>

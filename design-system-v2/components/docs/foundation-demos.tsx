@@ -119,11 +119,11 @@ const plural = (n: number, s: string, p: string) => `${n} ${n === 1 ? s : p}`;
 
 export function ActivityKpi() {
   return (
-    <div className="hz-kpi">
-      <span className="hz-kpi__label mono">Verificaciones</span>
-      <span className="hz-kpi__value">{EVENTS.length}</span>
-      <span className="hz-kpi__delta hz-kpi__delta--ok">{plural(count.ok, "exitosa", "exitosas")}</span>
-      <span className="hz-kpi__note">{plural(count.bad, "rechazada", "rechazadas")} · {plural(count.retry, "reintento", "reintentos")}</span>
+    <div className="av-kpi">
+      <span className="av-kpi__label mono">Verificaciones</span>
+      <span className="av-kpi__value">{EVENTS.length}</span>
+      <span className="av-kpi__delta av-kpi__delta--ok">{plural(count.ok, "exitosa", "exitosas")}</span>
+      <span className="av-kpi__note">{plural(count.bad, "rechazada", "rechazadas")} · {plural(count.retry, "reintento", "reintentos")}</span>
     </div>
   );
 }
@@ -131,21 +131,21 @@ export function ActivityKpi() {
 export function ActivityPanelDemo() {
   const total = EVENTS.length;
   const row = (cls: string, name: string, n: number) => (
-    <div className={cn("hz-bar", cls)}><span>{name}</span><span className="hz-bar__track" aria-hidden="true"><i style={{ ["--w" as string]: `${Math.round((n / total) * 100)}%` }} /></span><b>{n}</b></div>
+    <div className={cn("av-bar", cls)}><span>{name}</span><span className="av-bar__track" aria-hidden="true"><i style={{ ["--w" as string]: `${Math.round((n / total) * 100)}%` }} /></span><b>{n}</b></div>
   );
   return (
-    <div className="hz-panel on-night">
-      <h3>Actividad reciente</h3><p className="hz-panel__sub">Últimas acciones registradas</p>
-      <div className="hz-bars">
+    <div className="av-panel on-night">
+      <h3>Actividad reciente</h3><p className="av-panel__sub">Últimas acciones registradas</p>
+      <div className="av-bars">
         <span className="mono" style={{ color: "var(--av-night-text)" }}>Resultados del log · {total} eventos</span>
-        {row("", "Exitosas", count.ok)}{row("hz-bar--bad", "Rechazadas", count.bad)}{row("hz-bar--retry", "Reintentos", count.retry)}
+        {row("", "Exitosas", count.ok)}{row("av-bar--bad", "Rechazadas", count.bad)}{row("av-bar--retry", "Reintentos", count.retry)}
       </div>
-      <ul className="hz-feed" aria-label="Últimos eventos">
+      <ul className="av-feed" aria-label="Últimos eventos">
         {EVENTS.slice(0, 3).map((e) => (
           <li key={e.when} className={e.r === "ok" ? undefined : e.r}><b>Verificación biométrica</b><span>{e.who} · {e.what}</span><small>{e.when} · {e.dev}</small></li>
         ))}
       </ul>
-      <p className="hz-panel__sub" style={{ margin: ".2rem 0 0" }}>Últimos 3 de {total} eventos</p>
+      <p className="av-panel__sub" style={{ margin: ".2rem 0 0" }}>Últimos 3 de {total} eventos</p>
     </div>
   );
 }

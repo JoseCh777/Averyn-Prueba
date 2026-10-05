@@ -61,10 +61,10 @@ export function Combobox({ label, options, help = "Usa las flechas para recorrer
 
   return (
     <div className="cb" ref={root}>
-      <label className="hz-label" htmlFor={`${id}-in`}>{label}</label>
+      <label className="av-label" htmlFor={`${id}-in`}>{label}</label>
       <div className="cb__wrap">
         <input
-          className="hz-input"
+          className="av-input"
           id={`${id}-in`}
           role="combobox"
           aria-expanded={open}
@@ -90,7 +90,7 @@ export function Combobox({ label, options, help = "Usa las flechas para recorrer
           </li>
         )) : <li className="cb__none" role="presentation">Sin resultados para «{query}».</li>}
       </ul>
-      <span className="hz-help" id={`${id}-help`}>{help}</span>
+      <span className="av-help" id={`${id}-help`}>{help}</span>
       <div className="sr-only" aria-live="polite">{live}</div>
     </div>
   );

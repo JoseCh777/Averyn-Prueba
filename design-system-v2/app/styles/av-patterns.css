@@ -130,8 +130,8 @@
 .pt-doc[data-state="ok"] .pt-doc__corners i { border-color: var(--pt-ok); }
 .pt-fields { display: grid; gap: .85rem; }
 .pt-fld { display: grid; grid-template-columns: 1fr auto; gap: .25rem .8rem; align-items: end; }
-.pt-fld .hz-label { grid-column: 1 / -1; }
-.pt-fld .hz-input { min-width: 0; }
+.pt-fld .av-label { grid-column: 1 / -1; }
+.pt-fld .av-input { min-width: 0; }
 .pt-conf { display: inline-flex; align-items: center; gap: .35rem; min-height: 44px; font: 600 .8125rem var(--av-font-mono); font-variant-numeric: tabular-nums; color: var(--av-gray-600); }
 .pt-conf.low { color: var(--av-warning-text); }
 .pt-conf.fixed { color: var(--av-info-text); }

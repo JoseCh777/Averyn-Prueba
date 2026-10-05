@@ -48,13 +48,13 @@ export function VerificationResult() {
           ))}
         </ul>
         <div className="pt-actions">
-          <button className="hz-btn hz-btn--primary" type="button" onClick={() => toast({ title: main, text: "Aquí continuaría o reiniciaría la captura.", kind: "ok" })}>{main}</button>
-          <button className="hz-btn hz-btn--ghost" type="button" onClick={() => toast({ title: "Ver detalle", text: "Aquí se abriría el detalle de la verificación.", kind: "ok" })}>Ver detalle</button>
+          <button className="av-btn av-btn--primary" type="button" onClick={() => toast({ title: main, text: "Aquí continuaría o reiniciaría la captura.", kind: "ok" })}>{main}</button>
+          <button className="av-btn av-btn--ghost" type="button" onClick={() => toast({ title: "Ver detalle", text: "Aquí se abriría el detalle de la verificación.", kind: "ok" })}>Ver detalle</button>
         </div>
         <div className="pt-range">
-          <label className="hz-label" htmlFor={`${id}-r`}>Puntaje de ejemplo: <b>{s.toFixed(2)}</b></label>
+          <label className="av-label" htmlFor={`${id}-r`}>Puntaje de ejemplo: <b>{s.toFixed(2)}</b></label>
           <input type="range" id={`${id}-r`} min={0} max={100} value={n} step={1} aria-describedby={`${id}-h`} onChange={(e) => setN(Number(e.target.value))} />
-          <span className="hz-help" id={`${id}-h`}>Mueve el control para simular otro resultado. En producción el puntaje viene del servidor.</span>
+          <span className="av-help" id={`${id}-h`}>Mueve el control para simular otro resultado. En producción el puntaje viene del servidor.</span>
         </div>
     </div>
   );

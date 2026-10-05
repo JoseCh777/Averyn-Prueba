@@ -18,7 +18,7 @@ export default function PlantillasContent() {
             <b>"Ver a pantalla completa"</b>
             {" "}para revisarlas a tamaño real. Los datos son ficticios.
           </p>
-          <div className="hz-alert hz-alert--info" role="note" style={{ marginTop: "1.4rem" }}>
+          <div className="av-alert av-alert--info" role="note" style={{ marginTop: "1.4rem" }}>
             <strong>Son ejemplos de uso del sistema, no una copia fiel del producto final</strong>
             Muestran cómo se combinan los componentes: jerarquía, regiones y estados. Los módulos, el contenido, los textos y los datos del producto real pueden ser distintos.
           </div>
@@ -52,8 +52,8 @@ export default function PlantillasContent() {
           <h2 id="h-plantillas">Plantillas ya construidas</h2>
           <p className="ds-lead">Tres plantillas ya construidas y una guía para las que faltan. Todas parten del mismo horizonte.</p>
           <h3 className="ds-sub">A · Acceso (login)</h3>
-          <div className="hz-frame">
-            <div className="hz-frame__brand">
+          <div className="av-frame">
+            <div className="av-frame__brand">
               <img src="/assets/images/averyn-logo-font-black.avif" alt="Averyn" />
               <svg viewBox="0 0 640 300" aria-hidden="true">
                 <path d="M0 290 H640" stroke="rgba(255,255,255,.22)" fill="none" />
@@ -64,22 +64,22 @@ export default function PlantillasContent() {
               </svg>
               <div><h4>Todo listo para continuar.</h4></div>
             </div>
-            <div className="hz-frame__form">
+            <div className="av-frame__form">
               <span className="mono" style={{ color: "var(--av-gray-500)" }}>← Volver al inicio</span>
               <h4 style={{ fontSize: "1.9rem" }}>Bienvenido de nuevo.</h4>
-              <div className="hz-field">
-                <span className="hz-label">Correo electrónico</span>
-                <div className="hz-input" style={{ display: "flex", alignItems: "center", color: "var(--av-placeholder)" }}>
+              <div className="av-field">
+                <span className="av-label">Correo electrónico</span>
+                <div className="av-input" style={{ display: "flex", alignItems: "center", color: "var(--av-placeholder)" }}>
                   nombre@organizacion.com
                 </div>
               </div>
-              <div className="hz-field">
-                <span className="hz-label">Contraseña</span>
-                <div className="hz-input" style={{ display: "flex", alignItems: "center", color: "var(--av-placeholder)" }}>
+              <div className="av-field">
+                <span className="av-label">Contraseña</span>
+                <div className="av-input" style={{ display: "flex", alignItems: "center", color: "var(--av-placeholder)" }}>
                   Ingresa tu contraseña
                 </div>
               </div>
-              <span className="hz-btn hz-btn--primary hz-btn--block">Ingresar de forma segura →</span>
+              <span className="av-btn av-btn--primary av-btn--block">Ingresar de forma segura →</span>
             </div>
           </div>
           <p className="ds-note">
@@ -91,31 +91,31 @@ export default function PlantillasContent() {
           </p>
           <h3 className="ds-sub">B · Panel (dashboard)</h3>
           <div className="stage stage--sky" style={{ padding: "1.4rem" }}>
-            <div className="hz-nav" style={{ marginBottom: "1.6rem" }}>
-              <span className="hz-brandchip"><img src="/assets/images/averyn-logo-font-black.avif" alt="Averyn" /></span>
-              <span className="hz-dock" aria-hidden="true">
+            <div className="av-nav" style={{ marginBottom: "1.6rem" }}>
+              <span className="av-brandchip"><img src="/assets/images/averyn-logo-font-black.avif" alt="Averyn" /></span>
+              <span className="av-dock" aria-hidden="true">
                 <a href="#plantillas" aria-current="page" tabIndex={-1}>Dashboard</a>
                 <a href="#plantillas" tabIndex={-1}>Identidad</a>
                 <a href="#plantillas" tabIndex={-1}>Biometría</a>
               </span>
-              <span className="hz-avatar" aria-hidden="true"><span className="hz-avatar__c">UD</span></span>
+              <span className="av-avatar" aria-hidden="true"><span className="av-avatar__c">UD</span></span>
             </div>
             <p className="mono" style={{ color: "var(--av-blue)" }}>Bienvenido, admin</p>
             <h3 style={{ fontSize: "2.6rem", lineHeight: "1.04", margin: ".4rem 0 1.4rem" }}>Todo en un solo lugar</h3>
-            <div className="hz-kpis">
-              <div className="hz-kpi"><span className="hz-kpi__label mono">Personas</span><span className="hz-kpi__value">8</span></div>
-              <div className="hz-kpi"><span className="hz-kpi__label mono">Verificaciones</span><span className="hz-kpi__value">4</span></div>
-              <div className="hz-kpi"><span className="hz-kpi__label mono">Procesos</span><span className="hz-kpi__value">0</span></div>
-              <div className="hz-kpi"><span className="hz-kpi__label mono">Dispositivos</span><span className="hz-kpi__value">2</span></div>
+            <div className="av-kpis">
+              <div className="av-kpi"><span className="av-kpi__label mono">Personas</span><span className="av-kpi__value">8</span></div>
+              <div className="av-kpi"><span className="av-kpi__label mono">Verificaciones</span><span className="av-kpi__value">4</span></div>
+              <div className="av-kpi"><span className="av-kpi__label mono">Procesos</span><span className="av-kpi__value">0</span></div>
+              <div className="av-kpi"><span className="av-kpi__label mono">Dispositivos</span><span className="av-kpi__value">2</span></div>
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "7fr 5fr", gap: "1.2rem", marginTop: "1.4rem" }}>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: ".6rem" }}>
-                <div className="hz-tile hz-tile--signal" style={{ minHeight: "110px" }} />
-                <div className="hz-tile hz-tile--night" style={{ minHeight: "110px" }} />
-                <div className="hz-tile hz-tile--tint" style={{ minHeight: "70px" }} />
-                <div className="hz-tile hz-tile--tint" style={{ minHeight: "70px" }} />
+                <div className="av-tile av-tile--signal" style={{ minHeight: "110px" }} />
+                <div className="av-tile av-tile--night" style={{ minHeight: "110px" }} />
+                <div className="av-tile av-tile--tint" style={{ minHeight: "70px" }} />
+                <div className="av-tile av-tile--tint" style={{ minHeight: "70px" }} />
               </div>
-              <div className="hz-panel" style={{ minHeight: "190px" }}><h3 style={{ fontSize: "1.2rem" }}>Actividad reciente</h3></div>
+              <div className="av-panel" style={{ minHeight: "190px" }}><h3 style={{ fontSize: "1.2rem" }}>Actividad reciente</h3></div>
             </div>
           </div>
           <p className="ds-note">
@@ -258,7 +258,7 @@ export default function PlantillasContent() {
             </div>
             <div>
               <h3>Componentes y datos</h3>
-              <ul><li>Avatar, chips, filas clave/valor, línea de tiempo (<code>hz-feed</code>), botones.</li></ul>
+              <ul><li>Avatar, chips, filas clave/valor, línea de tiempo (<code>av-feed</code>), botones.</li></ul>
             </div>
           </div>
         </div>
@@ -302,7 +302,7 @@ export default function PlantillasContent() {
           <p className="ds-lead">
             Una lista cronológica agrupada por día, con lo no leído marcado y acciones por ítem. Sirve también para avisos del sistema que no necesitan bloquear la pantalla.
           </p>
-          <div className="hz-alert hz-alert--info" role="note" style={{ marginTop: "1rem" }}>
+          <div className="av-alert av-alert--info" role="note" style={{ marginTop: "1rem" }}>
             <strong>Futuro · fuera del MVP oficial</strong>
             No hay backend de notificaciones y el WebSocket solo se adopta con necesidad demostrada (arquitectura 04). Diseño de referencia, sin actividad asignada.
           </div>
@@ -436,7 +436,7 @@ export default function PlantillasContent() {
           <p className="ds-lead">
             Cuatro pasos con el mismo marco del login: pedir el enlace, avisar que se envió, elegir la nueva contraseña y manejar el enlace vencido. El mensaje nunca confirma si el correo existe.
           </p>
-          <div className="hz-alert hz-alert--info" role="note" style={{ marginTop: "1rem" }}>
+          <div className="av-alert av-alert--info" role="note" style={{ marginTop: "1rem" }}>
             <strong>Futuro · fuera del MVP oficial</strong>
             La recuperación por correo no está en el MVP (
             <code>06</code>
@@ -478,7 +478,7 @@ export default function PlantillasContent() {
           <p className="ds-lead">
             Tras la contraseña, un código de 6 dígitos enviado al correo o al teléfono. Reutiliza el componente de código de un solo uso, con el mismo tratamiento de error y bloqueo.
           </p>
-          <div className="hz-alert hz-alert--info" role="note" style={{ marginTop: "1rem" }}>
+          <div className="av-alert av-alert--info" role="note" style={{ marginTop: "1rem" }}>
             <strong>Futuro · fuera del MVP oficial</strong>
             La verificación en dos pasos (MFA) está fuera del MVP. No se implementa en las 3 semanas; el diseño queda disponible.
           </div>
@@ -517,7 +517,7 @@ export default function PlantillasContent() {
           <p className="ds-lead">
             Para cuentas que pertenecen a más de una institución. Una lista corta de radios; si hubiera más de 7, se cambia por un combobox con búsqueda.
           </p>
-          <div className="hz-alert hz-alert--info" role="note" style={{ marginTop: "1rem" }}>
+          <div className="av-alert av-alert--info" role="note" style={{ marginTop: "1rem" }}>
             <strong>Futuro · fuera del MVP oficial</strong>
             El tenant lo fija el subdominio (1 tenant = 1 organización) y el contrato de Auth no tiene selector. Solo aplicaría si una cuenta llegara a pertenecer a varias organizaciones.
           </div>
@@ -553,7 +553,7 @@ export default function PlantillasContent() {
           <p className="ds-lead">
             Lo primero que ve una persona invitada desde el correo. Dice quién la invita y a qué institución, y pide solo lo mínimo para crear la cuenta; el consentimiento biométrico llega después.
           </p>
-          <div className="hz-alert hz-alert--info" role="note" style={{ marginTop: "1rem" }}>
+          <div className="av-alert av-alert--info" role="note" style={{ marginTop: "1rem" }}>
             <strong>Futuro · fuera del MVP oficial</strong>
             El contrato de Auth v0.2 no tiene endpoint de invitaciones y las cuentas se crean desde la administración. Diseño para una fase posterior.
           </div>
@@ -592,12 +592,12 @@ export default function PlantillasContent() {
             Los resultados de una elección en una sola pantalla: participación frente a la meta, votos por lista y estado de cada mesa. Solo muestra{" "}
             <b>agregados</b>
             .{" "}
-            <span className="hz-chip hz-chip--info hz-chip--outline hz-chip--wrap">
+            <span className="av-chip av-chip--info av-chip--outline av-chip--wrap">
               <Icon name="lightbulb" />
               Propuesta de diseño, pendiente de validar con el equipo
             </span>
           </p>
-          <div className="hz-alert hz-alert--info" role="note" style={{ marginTop: "1rem" }}>
+          <div className="av-alert av-alert--info" role="note" style={{ marginTop: "1rem" }}>
             <strong>Futuro · fuera del MVP oficial</strong>
             El cierre y conteo de una elección no tiene actividad asignada en el plan de 3 semanas. Diseño de referencia.
           </div>
@@ -638,12 +638,12 @@ export default function PlantillasContent() {
           <h2 id="h-mesas">Mesas y padrón</h2>
           <p className="ds-lead">
             Dónde se vota y quién puede hacerlo: la lista de mesas con sus habilitados, su responsable y su estado, y la importación del padrón.{" "}
-            <span className="hz-chip hz-chip--info hz-chip--outline hz-chip--wrap">
+            <span className="av-chip av-chip--info av-chip--outline av-chip--wrap">
               <Icon name="lightbulb" />
               Propuesta de diseño, pendiente de validar con el equipo
             </span>
           </p>
-          <div className="hz-alert hz-alert--info" role="note" style={{ marginTop: "1rem" }}>
+          <div className="av-alert av-alert--info" role="note" style={{ marginTop: "1rem" }}>
             <strong>Futuro · fuera del MVP oficial</strong>
             Mesas y jurados están fuera del MVP; el padrón (elegibilidad por elección) sí existe. Construir solo la parte de padrón cuando haya actividad asignada.
           </div>
@@ -681,12 +681,12 @@ export default function PlantillasContent() {
           <h2 id="h-roles">Roles y permisos</h2>
           <p className="ds-lead">
             Una matriz de roles por acciones. Los cambios se guardan juntos y los que quitan poder a un administrador piden confirmación.{" "}
-            <span className="hz-chip hz-chip--info hz-chip--outline hz-chip--wrap">
+            <span className="av-chip av-chip--info av-chip--outline av-chip--wrap">
               <Icon name="lightbulb" />
               Propuesta de diseño, pendiente de validar con el equipo
             </span>
           </p>
-          <div className="hz-alert hz-alert--info" role="note" style={{ marginTop: "1rem" }}>
+          <div className="av-alert av-alert--info" role="note" style={{ marginTop: "1rem" }}>
             <strong>Futuro · fuera del MVP oficial</strong>
             El MVP usa RBAC simple con cinco roles sembrados (ADMIN, OPERATOR, ELECTION_MANAGER, AUDITOR, VOTER); no hay actividad para editar la matriz. La pantalla es de solo lectura hasta entonces.
           </div>
@@ -733,13 +733,13 @@ export default function PlantillasContent() {
               <span className="stage__label mono">Carga</span>
               <div className="row row--col" style={{ gap: ".9rem" }}>
                 <div className="row">
-                  <span className="hz-spin" style={{ borderColor: "rgba(20,95,238,.25)", borderTopColor: "var(--av-blue)" }} aria-hidden="true" />
+                  <span className="av-spin" style={{ borderColor: "rgba(20,95,238,.25)", borderTopColor: "var(--av-blue)" }} aria-hidden="true" />
                   <span>Verificando…</span>
                 </div>
-                <span className="hz-skel" style={{ width: "90%" }} />
-                <span className="hz-skel" style={{ width: "70%" }} />
-                <span className="hz-skel" style={{ width: "80%" }} />
-                <div className="hz-progress" role="progressbar" aria-valuenow={40} aria-valuemin={0} aria-valuemax={100} aria-label="Captura">
+                <span className="av-skel" style={{ width: "90%" }} />
+                <span className="av-skel" style={{ width: "70%" }} />
+                <span className="av-skel" style={{ width: "80%" }} />
+                <div className="av-progress" role="progressbar" aria-valuenow={40} aria-valuemin={0} aria-valuemax={100} aria-label="Captura">
                   <i style={{ ["--p" as string]: ".4" }} />
                 </div>
               </div>
@@ -751,11 +751,11 @@ export default function PlantillasContent() {
             </div>
             <div className="stage">
               <span className="stage__label mono">Vacío</span>
-              <div className="hz-empty">
-                <span className="hz-empty__icon"><Icon name="collection" /></span>
+              <div className="av-empty">
+                <span className="av-empty__icon"><Icon name="collection" /></span>
                 <h4>Sin actividad reciente</h4>
                 <p>Aún no hay eventos en el log biométrico. Registra o verifica una persona para empezar.</p>
-                <button className="hz-btn hz-btn--primary" type="button">Registrar persona</button>
+                <button className="av-btn av-btn--primary" type="button">Registrar persona</button>
               </div>
             </div>
             <div className="stage"><span className="stage__label mono">Subida de archivo</span><DropzoneDemo /></div>
@@ -763,18 +763,18 @@ export default function PlantillasContent() {
           <div className="ds-grid ds-grid--2 ds-gap-top">
             <div className="stage">
               <span className="stage__label mono">Error de sección</span>
-              <div className="hz-alert hz-alert--error" role="alert">
+              <div className="av-alert av-alert--error" role="alert">
                 <strong>No pudimos cargar el historial</strong>
                 Revisa tu conexión e inténtalo de nuevo.
               </div>
-              <div style={{ marginTop: ".8rem" }}><button className="hz-btn hz-btn--ghost" type="button">Reintentar</button></div>
+              <div style={{ marginTop: ".8rem" }}><button className="av-btn av-btn--ghost" type="button">Reintentar</button></div>
             </div>
             <div className="stage">
               <span className="stage__label mono">Módulo no disponible</span>
-              <div className="hz-tile hz-tile--soon" aria-disabled="true" style={{ minHeight: "130px" }}>
-                <span className="hz-tile__icon" aria-hidden="true"><Icon name="door-open" /></span>
-                <span><span className="hz-tile__title">Accesos</span><span className="hz-tile__desc">Zonas, puntos y políticas</span></span>
-                <span className="hz-tile__tag hz-tag">Próximamente</span>
+              <div className="av-tile av-tile--soon" aria-disabled="true" style={{ minHeight: "130px" }}>
+                <span className="av-tile__icon" aria-hidden="true"><Icon name="door-open" /></span>
+                <span><span className="av-tile__title">Accesos</span><span className="av-tile__desc">Zonas, puntos y políticas</span></span>
+                <span className="av-tile__tag av-tag">Próximamente</span>
               </div>
               <p className="ds-note">Regla R6: se muestra, se atenúa y no enlaza. Nunca un vínculo a un 404.</p>
             </div>
@@ -1246,17 +1246,17 @@ export default function PlantillasContent() {
           </p>
           <h3 className="ds-sub">Banner de sistema</h3>
           <div className="stage" style={{ padding: "0", overflow: "hidden" }}>
-            <DismissibleBanner className="hz-banner hz-banner--info" role="status">
+            <DismissibleBanner className="av-banner av-banner--info" role="status">
               <Icon name="info-circle" />
               <span><b>Mantenimiento programado.</b>{" "}El panel puede no estar disponible unos minutos esta noche.</span>
-              <button type="button" className="hz-banner__x" aria-label="Cerrar aviso">×</button>
+              <button type="button" className="av-banner__x" aria-label="Cerrar aviso">×</button>
             </DismissibleBanner>
-            <DismissibleBanner className="hz-banner hz-banner--warn" role="status">
+            <DismissibleBanner className="av-banner av-banner--warn" role="status">
               <Icon name="exclamation-triangle" />
               <span><b>Dispositivo desconectado.</b>{" "}El lector CAM-002 no responde. Revisa la conexión.</span>
-              <button type="button" className="hz-banner__x" aria-label="Cerrar aviso">×</button>
+              <button type="button" className="av-banner__x" aria-label="Cerrar aviso">×</button>
             </DismissibleBanner>
-            <DismissibleBanner className="hz-banner hz-banner--bad" role="alert">
+            <DismissibleBanner className="av-banner av-banner--bad" role="alert">
               <Icon name="x-octagon" />
               <span><b>Sin conexión con el servidor.</b>{" "}Tus cambios no se están guardando. Reintentando…</span>
             </DismissibleBanner>
@@ -1270,12 +1270,12 @@ export default function PlantillasContent() {
           <div className="stage"><SessionModalDemo /></div>
           <h3 className="ds-sub">Módulo "Próximamente"</h3>
           <div className="stage stage--tint">
-            <div className="hz-empty">
-              <span className="hz-empty__icon"><Icon name="door-open" /></span>
-              <span className="hz-tag">Próximamente</span>
+            <div className="av-empty">
+              <span className="av-empty__icon"><Icon name="door-open" /></span>
+              <span className="av-tag">Próximamente</span>
               <h4>Accesos</h4>
               <p>Zonas, puntos de acceso y políticas llegan en una próxima versión. Mientras tanto, gestiona personas y biometría desde el panel.</p>
-              <a className="hz-btn hz-btn--primary" href="#otros-estados">Volver al panel →</a>
+              <a className="av-btn av-btn--primary" href="#otros-estados">Volver al panel →</a>
             </div>
           </div>
         </div>

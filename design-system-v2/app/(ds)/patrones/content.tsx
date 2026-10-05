@@ -93,9 +93,9 @@ export default function PatronesContent() {
           </p>
           <h3 className="ds-sub">Espacio para media futura</h3>
           <div className="ds-grid ds-grid--3">
-            <div className="hz-media" style={{ ["--ratio" as string]: "4/5" }}><span className="hz-media__hint mono">Imagen · 4:5</span></div>
-            <div className="hz-media" style={{ ["--ratio" as string]: "16/9" }}><span className="hz-media__hint mono">Video · 16:9</span></div>
-            <div className="hz-media" style={{ ["--ratio" as string]: "21/9" }}><span className="hz-media__hint mono">Imagen · 21:9</span></div>
+            <div className="av-media" style={{ ["--ratio" as string]: "4/5" }}><span className="av-media__hint mono">Imagen · 4:5</span></div>
+            <div className="av-media" style={{ ["--ratio" as string]: "16/9" }}><span className="av-media__hint mono">Video · 16:9</span></div>
+            <div className="av-media" style={{ ["--ratio" as string]: "21/9" }}><span className="av-media__hint mono">Imagen · 21:9</span></div>
           </div>
           <p className="ds-note">
             Usa capturas reales del producto (registro, captura biométrica) en el mismo lenguaje de línea fina. Un hueco vacío resta más de lo que reserva: si no hay media, no pongas el marco.
@@ -305,7 +305,7 @@ export default function PatronesContent() {
             Cuando un puntaje cae cerca del umbral, una persona autorizada decide. Una cola de casos, el detalle con el puntaje frente al umbral y una decisión que{" "}
             <b>exige motivo</b>
             {" "}y queda en la bitácora.{" "}
-            <span className="hz-chip hz-chip--info hz-chip--outline hz-chip--wrap">
+            <span className="av-chip av-chip--info av-chip--outline av-chip--wrap">
               <Icon name="lightbulb" />
               Propuesta de diseño, pendiente de validar con el equipo
             </span>
@@ -427,7 +427,7 @@ export default function PatronesContent() {
               </div>
               <div>
                 <h3>Dos variantes del tarjetón</h3>
-                <div className="hz-alert hz-alert--warning" role="note" style={{ margin: "0 0 .8rem" }}>
+                <div className="av-alert av-alert--warning" role="note" style={{ margin: "0 0 .8rem" }}>
                   <strong>La «fórmula» no tiene respaldo en el modelo</strong>
                   Hoy un candidato es una persona por cargo y la selección es única. Foto, logo y partido tampoco tienen columnas en{" "}
                   <code>election_candidate</code>
@@ -525,12 +525,12 @@ export default function PatronesContent() {
                 <h3>Estados</h3>
                 <ul>
                   <li>
-                    <span className="hz-chip hz-chip--success"><Icon name="check-circle" />Conectado</span>
+                    <span className="av-chip av-chip--success"><Icon name="check-circle" />Conectado</span>
                     {" "}responde dentro del tiempo esperado.
                   </li>
-                  <li><span className="hz-chip hz-chip--warning"><Icon name="plug" />Desconectado</span>{" "}sin señal; se ofrece "Reconectar".</li>
+                  <li><span className="av-chip av-chip--warning"><Icon name="plug" />Desconectado</span>{" "}sin señal; se ofrece "Reconectar".</li>
                   <li>
-                    <span className="hz-chip hz-chip--error"><Icon name="x-circle" />Con error</span>
+                    <span className="av-chip av-chip--error"><Icon name="x-circle" />Con error</span>
                     {" "}responde mal; se ofrece "Probar" y el motivo.
                   </li>
                 </ul>

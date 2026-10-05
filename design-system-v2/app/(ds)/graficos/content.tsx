@@ -211,10 +211,10 @@ export default function GraficosContent() {
           </div>
           <h3 className="ds-sub">Estados{" "}<small>reservados</small></h3>
           <div className="row" style={{ gap: ".7rem", flexWrap: "wrap" }}>
-            <span className="hz-chip hz-chip--success">Correcto</span>
-            <span className="hz-chip hz-chip--warning">Atención</span>
-            <span className="hz-chip hz-chip--error">Error</span>
-            <span className="hz-chip hz-chip--info">Información</span>
+            <span className="av-chip av-chip--success">Correcto</span>
+            <span className="av-chip av-chip--warning">Atención</span>
+            <span className="av-chip av-chip--error">Error</span>
+            <span className="av-chip av-chip--info">Información</span>
           </div>
           <p className="ds-note">
             Verde, ámbar de aviso y rojo son{" "}

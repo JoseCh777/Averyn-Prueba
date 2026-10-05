@@ -67,9 +67,9 @@ export function DocumentCapture() {
           <div className="pt-fields">
             {FIELDS.map((f, i) => (
               <div className="pt-fld" key={f.label}>
-                <label className="hz-label" htmlFor={`${id}-${i}`}>{f.label}</label>
+                <label className="av-label" htmlFor={`${id}-${i}`}>{f.label}</label>
                 <input
-                  className="hz-input"
+                  className="av-input"
                   id={`${id}-${i}`}
                   autoComplete="off"
                   value={values[i]}
@@ -81,8 +81,8 @@ export function DocumentCapture() {
             ))}
           </div>
           <div className="pt-actions">
-            <button className="hz-btn hz-btn--primary" type="button" disabled={pending > 0} onClick={() => toast({ title: "Datos confirmados", text: "Aquí avanzaría al siguiente paso.", kind: "ok" })}>Confirmar datos →</button>
-            <button className="hz-btn hz-btn--ghost" type="button" onClick={() => { setDoc("searching"); timer.current = setTimeout(() => setDoc("ok"), 1200); }}>Volver a capturar</button>
+            <button className="av-btn av-btn--primary" type="button" disabled={pending > 0} onClick={() => toast({ title: "Datos confirmados", text: "Aquí avanzaría al siguiente paso.", kind: "ok" })}>Confirmar datos →</button>
+            <button className="av-btn av-btn--ghost" type="button" onClick={() => { setDoc("searching"); timer.current = setTimeout(() => setDoc("ok"), 1200); }}>Volver a capturar</button>
           </div>
         </div>
     </div>

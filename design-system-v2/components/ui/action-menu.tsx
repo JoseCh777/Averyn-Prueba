@@ -59,7 +59,7 @@ export function ActionMenu({ label, items }: { label: string; items: ActionItem[
       >
         <Icon name="three-dots" />
       </button>
-      <div className="hz-menu" id={id} role="menu" aria-label={label} ref={menu} hidden={!open} onKeyDown={onMenuKey}>
+      <div className="av-menu" id={id} role="menu" aria-label={label} ref={menu} hidden={!open} onKeyDown={onMenuKey}>
         {items.map((it, i) =>
           it === "separator" ? (
             <div key={`s${i}`} role="separator" />

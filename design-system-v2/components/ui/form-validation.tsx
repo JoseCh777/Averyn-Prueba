@@ -48,7 +48,7 @@ export function ValidatedForm({ label, fields, submitLabel = "Guardar", onValid,
   return (
     <form className="fv" noValidate aria-label={label} onSubmit={submit} ref={formRef}>
       {summary && (
-        <div className="hz-alert hz-alert--error fv__sum" role="alert" tabIndex={-1} ref={sumRef}>
+        <div className="av-alert av-alert--error fv__sum" role="alert" tabIndex={-1} ref={sumRef}>
           <strong>Corrige {summary.length} {summary.length === 1 ? "campo" : "campos"} para continuar</strong>
           <ul>
             {summary.map(([name, msg]) => (

@@ -5,11 +5,11 @@ import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { Modal, useToast } from "@/components/ui/overlay";
 
-/** Aviso del sistema que se puede cerrar con su botón «×» (hz-banner__x). */
+/** Aviso del sistema que se puede cerrar con su botón «×» (av-banner__x). */
 export function DismissibleBanner({ children, ...props }: HTMLAttributes<HTMLDivElement>) {
   const [gone, setGone] = useState(false);
   if (gone) return null;
-  return <div {...props} onClick={(e) => { if ((e.target as HTMLElement).closest(".hz-banner__x")) setGone(true); }}>{children}</div>;
+  return <div {...props} onClick={(e) => { if ((e.target as HTMLElement).closest(".av-banner__x")) setGone(true); }}>{children}</div>;
 }
 
 export function SessionModalDemo() {
@@ -30,7 +30,7 @@ export function DropzoneDemo() {
   const [over, setOver] = useState(false);
   const pick = () => toast({ title: "Elegir archivo", text: "Aquí se abriría el selector del sistema.", kind: "ok" });
   return (
-    <div className={`hz-drop${over ? " is-over" : ""}`} tabIndex={0} role="button" aria-label="Subir documento" onClick={pick}
+    <div className={`av-drop${over ? " is-over" : ""}`} tabIndex={0} role="button" aria-label="Subir documento" onClick={pick}
       onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(); } }}
       onDragEnter={(e) => { e.preventDefault(); setOver(true); }} onDragOver={(e) => { e.preventDefault(); setOver(true); }} onDragLeave={(e) => { e.preventDefault(); setOver(false); }}
       onDrop={(e) => { e.preventDefault(); setOver(false); toast({ title: "Documento recibido", text: "Procesando con OCR…", kind: "ok" }); }}>

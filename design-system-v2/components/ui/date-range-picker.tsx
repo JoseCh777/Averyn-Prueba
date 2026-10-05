@@ -151,8 +151,8 @@ export function DateRangePicker({ today, value, onChange }: { today: Date; value
           <div className="dp__foot">
             <span role="status">{summary}</span>
             <span style={{ display: "flex", gap: ".5rem" }}>
-              <button className="hz-btn hz-btn--ghost" type="button" style={{ minHeight: 44, padding: "0 .9rem" }} onClick={() => close(true)}>Cancelar</button>
-              <button className="hz-btn hz-btn--primary" type="button" style={{ minHeight: 44, padding: "0 .9rem" }} disabled={!(a && b) || picking} onClick={() => a && b && commit(a, b, rangeLabel(a, b))}>Aplicar</button>
+              <button className="av-btn av-btn--ghost" type="button" style={{ minHeight: 44, padding: "0 .9rem" }} onClick={() => close(true)}>Cancelar</button>
+              <button className="av-btn av-btn--primary" type="button" style={{ minHeight: 44, padding: "0 .9rem" }} disabled={!(a && b) || picking} onClick={() => a && b && commit(a, b, rangeLabel(a, b))}>Aplicar</button>
             </span>
           </div>
         </div>

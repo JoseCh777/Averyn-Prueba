@@ -131,23 +131,23 @@ export default function Content() {
           </p>
           <div className="ds-grid ds-grid--4">
             <div className="stage" style={{ textAlign: "center" }}>
-              <button className="hz-btn hz-btn--ghost" type="button" style={{ outline: "2px solid var(--av-blue)", outlineOffset: "3px" }}>
+              <button className="av-btn av-btn--ghost" type="button" style={{ outline: "2px solid var(--av-blue)", outlineOffset: "3px" }}>
                 Claro
               </button>
               <p className="ds-note"><b>Azul #145FEE</b><br />5.38:1 sobre blanco</p>
             </div>
             <div className="stage stage--blue" style={{ textAlign: "center" }}>
-              <button className="hz-btn hz-btn--light" type="button" style={{ outline: "2px solid #fff", outlineOffset: "3px" }}>Sobre azul</button>
+              <button className="av-btn av-btn--light" type="button" style={{ outline: "2px solid #fff", outlineOffset: "3px" }}>Sobre azul</button>
               <p className="ds-note" style={{ color: "#F0F5FF" }}><b>Blanco</b><br />5.38:1 sobre #145FEE</p>
             </div>
             <div className="stage stage--night" style={{ textAlign: "center" }}>
-              <button className="hz-btn hz-btn--ghost-inv" type="button" style={{ outline: "2px solid var(--av-cyan-glow)", outlineOffset: "3px" }}>
+              <button className="av-btn av-btn--ghost-inv" type="button" style={{ outline: "2px solid var(--av-cyan-glow)", outlineOffset: "3px" }}>
                 Sobre navy
               </button>
               <p className="ds-note" style={{ color: "var(--av-night-text)" }}><b>Cian-glow</b><br />10.29:1 sobre #071A36</p>
             </div>
             <div className="stage stage--tint" style={{ textAlign: "center" }}>
-              <span className="hz-tile hz-tile--signal" style={{ minHeight: "0", padding: ".7rem 1rem", outline: "3px solid var(--av-navy)", outlineOffset: "3px", display: "inline-block" }}>
+              <span className="av-tile av-tile--signal" style={{ minHeight: "0", padding: ".7rem 1rem", outline: "3px solid var(--av-navy)", outlineOffset: "3px", display: "inline-block" }}>
                 Tile azul
               </span>
               <p className="ds-note"><b>Navy 3 px</b><br />17:1 sobre la página</p>
@@ -265,7 +265,7 @@ export default function Content() {
                   <td>Accesibilidad automática (WCAG 2.2 AA)</td>
                   <td><code>axe-core</code>{" "}4.10 sobre las 8 páginas, en escritorio y móvil</td>
                   <td>
-                    <span className="hz-chip hz-chip--success"><Icon name="check-circle" />Corregido</span>
+                    <span className="av-chip av-chip--success"><Icon name="check-circle" />Corregido</span>
                     {" "}Se encontraron 5 tipos de incumplimiento (contraste en etiquetas y muestras, regiones desplazables sin teclado, tooltip sin nombre, lista con rol cambiado). Todos corregidos. Quedan 8 avisos de contraste en Fundamentos que son{" "}
                     <b>muestras demostrativas</b>
                     {" "}de pares que fallan a propósito (marcadas como decorativas, con su razón al lado).
@@ -275,7 +275,7 @@ export default function Content() {
                   <td>Teclado</td>
                   <td>Recorrido con{" "}<kbd>Tab</kbd>{" "}de cada página; se comprueba indicador de foco y nombre accesible en cada elemento</td>
                   <td>
-                    <span className="hz-chip hz-chip--success"><Icon name="check-circle" />Sin problemas</span>
+                    <span className="av-chip av-chip--success"><Icon name="check-circle" />Sin problemas</span>
                     {" "}657 elementos enfocables recorridos en 8 páginas; ninguno sin indicador de foco ni sin nombre.
                   </td>
                 </tr>
@@ -283,7 +283,7 @@ export default function Content() {
                   <td>Contraste sobre el píxel real</td>
                   <td>Medición de las píldoras (18 combinaciones), portadas y paneles navy</td>
                   <td>
-                    <span className="hz-chip hz-chip--success"><Icon name="check-circle" />Cumple</span>
+                    <span className="av-chip av-chip--success"><Icon name="check-circle" />Cumple</span>
                     {" "}Píldoras ≥ 5.02:1; panel navy ≥ 9:1. La portada de Inicio estaba en 2.4:1 (texto sobre la zona clara del degradado) y se oscureció a ≥ 7.2:1.
                   </td>
                 </tr>
@@ -291,7 +291,7 @@ export default function Content() {
                   <td>Impresión</td>
                   <td>PDF real de la constancia desde Edge</td>
                   <td>
-                    <span className="hz-chip hz-chip--success"><Icon name="check-circle" />Corregido</span>
+                    <span className="av-chip av-chip--success"><Icon name="check-circle" />Corregido</span>
                     {" "}Salía en tamaño Carta: el navegador descartaba la regla{" "}
                     <code>@page</code>
                     {" "}por los cuadros de pie anidados. Ahora A4 real (595 × 842 pt), 1 página, sin botones ni sombras.
@@ -301,7 +301,7 @@ export default function Content() {
                   <td>Revisión de diseño</td>
                   <td>Detector de Impeccable sobre las 8 páginas</td>
                   <td>
-                    <span className="hz-chip hz-chip--success"><Icon name="check-circle" />Corregido</span>
+                    <span className="av-chip av-chip--success"><Icon name="check-circle" />Corregido</span>
                     {" "}Saltos de encabezado (h2 → h4), etiquetas de 10 px en la barra lateral y barras de progreso animadas con{" "}
                     <code>width</code>
                     . El resto son decisiones de marca (mono en mayúsculas, borde inferior de las teclas) o ruido del documento.
@@ -311,7 +311,7 @@ export default function Content() {
                   <td>Demos y enlaces</td>
                   <td><code>build.py</code>{" "}valida ids únicos, enlaces, anclas y que cada página cargue el script de sus demos</td>
                   <td>
-                    <span className="hz-chip hz-chip--success"><Icon name="check-circle" />Automático</span>
+                    <span className="av-chip av-chip--success"><Icon name="check-circle" />Automático</span>
                     {" "}La validación de demos huérfanas nació de un fallo real: la demo del hero dejó de funcionar al reorganizar.
                   </td>
                 </tr>
@@ -319,7 +319,7 @@ export default function Content() {
                   <td>Archivo único para compartir</td>
                   <td>Abrir{" "}<code>averyn-design-system-horizonte.html</code>{" "}desde disco (<code>file://</code>) y navegar las 8 páginas</td>
                   <td>
-                    <span className="hz-chip hz-chip--success"><Icon name="check-circle" />Funciona</span>
+                    <span className="av-chip av-chip--success"><Icon name="check-circle" />Funciona</span>
                     {" "}Sin errores de consola, vistas en vivo de páginas de error incluidas. Necesita internet solo para fuentes e iconos.
                   </td>
                 </tr>
@@ -332,22 +332,22 @@ export default function Content() {
               <thead><tr><th>Pendiente</th><th>Por qué</th><th>Cómo cerrarlo</th></tr></thead>
               <tbody>
                 <tr>
-                  <td><span className="hz-chip hz-chip--warning"><Icon name="exclamation-circle" />Firefox y Safari</span></td>
+                  <td><span className="av-chip av-chip--warning"><Icon name="exclamation-circle" />Firefox y Safari</span></td>
                   <td>No están disponibles en el entorno de pruebas (la descarga de navegadores estaba bloqueada).</td>
                   <td>Abrir el HTML único en ambos y recorrer las 8 páginas. Ver los mínimos de abajo.</td>
                 </tr>
                 <tr>
-                  <td><span className="hz-chip hz-chip--warning"><Icon name="exclamation-circle" />Lector de pantalla real</span></td>
+                  <td><span className="av-chip av-chip--warning"><Icon name="exclamation-circle" />Lector de pantalla real</span></td>
                   <td>Necesita una persona escuchando NVDA, Narrador o VoiceOver;{" "}<code>axe-core</code>{" "}no sustituye eso.</td>
                   <td>Probar 5 flujos: tarjetón, captura facial, tabla avanzada, Ctrl + K y formulario con errores.</td>
                 </tr>
                 <tr>
-                  <td><span className="hz-chip hz-chip--warning"><Icon name="exclamation-circle" />Móvil físico</span></td>
+                  <td><span className="av-chip av-chip--warning"><Icon name="exclamation-circle" />Móvil físico</span></td>
                   <td>Solo se emuló el tamaño (390 y 820 px); no hay pruebas táctiles reales.</td>
                   <td>Abrir en un teléfono y probar los componentes con gesto (drawer, menús, código de 6 dígitos).</td>
                 </tr>
                 <tr>
-                  <td><span className="hz-chip hz-chip--warning"><Icon name="exclamation-circle" />Zoom 200 % y movimiento reducido</span></td>
+                  <td><span className="av-chip av-chip--warning"><Icon name="exclamation-circle" />Zoom 200 % y movimiento reducido</span></td>
                   <td>Se verificó por CSS (<code>prefers-reduced-motion</code>{" "}en cada animación) pero no con una sesión de usuario.</td>
                   <td>Activar la preferencia del sistema y ampliar al 200 % en cada página.</td>
                 </tr>
@@ -427,9 +427,9 @@ export default function Content() {
                 </tr>
                 <tr>
                   <td>Prefijo{" "}<code>av-</code></td>
-                  <td>Clases{" "}<code>hz-*</code></td>
+                  <td>Clases{" "}<code>av-*</code></td>
                   <td>Decidir</td>
-                  <td>Renombrar al portar o declarar{" "}<code>hz-</code>{" "}en el ADR.</td>
+                  <td>Renombrar al portar o declarar{" "}<code>av-</code>{" "}en el ADR.</td>
                 </tr>
                 <tr>
                   <td>Plus Jakarta Sans en títulos</td>
@@ -848,7 +848,7 @@ export default function Content() {
                     {" "}y{" "}
                     <code>dh-</code>
                     ; consolidar en{" "}
-                    <code>hz-</code>
+                    <code>av-</code>
                     {" "}o{" "}
                     <code>av-</code>
                     .
@@ -970,24 +970,24 @@ export default function Content() {
               <thead><tr><th>Componente (este documento)</th><th>Landing</th><th>Login</th><th>Dashboard</th></tr></thead>
               <tbody>
                 <tr>
-                  <td><code>hz-btn--primary / ghost</code></td>
+                  <td><code>av-btn--primary / ghost</code></td>
                   <td><code>mn-btn--blue / --ghost</code></td>
                   <td><code>lg-submit</code></td>
                   <td>—</td>
                 </tr>
-                <tr><td><code>hz-input · hz-field</code></td><td>—</td><td><code>lg-input · lg-field</code></td><td>—</td></tr>
-                <tr><td><code>hz-alert</code></td><td>—</td><td><code>lg-alert</code></td><td>—</td></tr>
-                <tr><td><code>hz-tile</code></td><td>—</td><td>—</td><td><code>dh-tile</code>{" "}/{" "}<code>dh-cell</code></td></tr>
-                <tr><td><code>hz-kpis</code></td><td>—</td><td>—</td><td><code>dh-kpis</code></td></tr>
-                <tr><td><code>hz-panel · hz-bars · hz-feed</code></td><td>—</td><td>—</td><td><code>dh-panel · dh-bars · dh-feed</code></td></tr>
+                <tr><td><code>av-input · av-field</code></td><td>—</td><td><code>lg-input · lg-field</code></td><td>—</td></tr>
+                <tr><td><code>av-alert</code></td><td>—</td><td><code>lg-alert</code></td><td>—</td></tr>
+                <tr><td><code>av-tile</code></td><td>—</td><td>—</td><td><code>dh-tile</code>{" "}/{" "}<code>dh-cell</code></td></tr>
+                <tr><td><code>av-kpis</code></td><td>—</td><td>—</td><td><code>dh-kpis</code></td></tr>
+                <tr><td><code>av-panel · av-bars · av-feed</code></td><td>—</td><td>—</td><td><code>dh-panel · dh-bars · dh-feed</code></td></tr>
                 <tr>
-                  <td><code>hz-pill · hz-brandchip</code></td>
+                  <td><code>av-pill · av-brandchip</code></td>
                   <td><code>mn-pill · mn-brand</code></td>
                   <td><code>lg-brand</code></td>
                   <td><code>av-navbar__brand</code>{" "}(acotado)</td>
                 </tr>
-                <tr><td><code>hz-dock</code></td><td>—</td><td>—</td><td><code>av-dock</code>{" "}(acotado a{" "}<code>body.av-dash</code>)</td></tr>
-                <tr><td><code>hz-line · hz-media · hz-person</code></td><td><code>mn-row · mn-media · mn-person</code></td><td>—</td><td>—</td></tr>
+                <tr><td><code>av-dock</code></td><td>—</td><td>—</td><td><code>av-dock</code>{" "}(acotado a{" "}<code>body.av-dash</code>)</td></tr>
+                <tr><td><code>av-line · av-media · av-person</code></td><td><code>mn-row · mn-media · mn-person</code></td><td>—</td><td>—</td></tr>
               </tbody>
             </table>
           </div>
@@ -1056,7 +1056,7 @@ export default function Content() {
                   </td>
                 </tr>
                 <tr>
-                  <td>Clases{" "}<code>hz-*</code>{" "}(botones, chips, alertas, tablas, tarjetas)</td>
+                  <td>Clases{" "}<code>av-*</code>{" "}(botones, chips, alertas, tablas, tarjetas)</td>
                   <td><b>Se reutilizan.</b>{" "}Como CSS global o Módulos CSS; los componentes React solo ponen las clases y las variantes.</td>
                 </tr>
                 <tr>
@@ -1143,7 +1143,7 @@ export default function Content() {
             <li>
               <b>Componentes base</b>
               {" "}(8–10): Button, Input, Select, Chip / Badge, Alert, Dialog, Tabs, Tooltip y Toast, con las clases{" "}
-              <code>hz-*</code>
+              <code>av-*</code>
               .
             </li>
             <li><b>Formularios y tabla avanzada.</b></li>
@@ -1305,103 +1305,103 @@ export default function Content() {
                   <td><code>react</code>,{" "}<code>react-dom</code></td>
                   <td>19.3.0</td>
                   <td>Base</td>
-                  <td><span className="hz-chip hz-chip--success"><Icon name="check-circle" />Necesario</span></td>
+                  <td><span className="av-chip av-chip--success"><Icon name="check-circle" />Necesario</span></td>
                 </tr>
                 <tr>
                   <td><code>next</code></td>
                   <td>16.3.8 · Node ≥ 20.9</td>
                   <td>Framework y enrutado por módulos</td>
-                  <td><span className="hz-chip hz-chip--success"><Icon name="check-circle" />Necesario</span></td>
+                  <td><span className="av-chip av-chip--success"><Icon name="check-circle" />Necesario</span></td>
                 </tr>
                 <tr>
                   <td><code>tailwindcss</code>,{" "}<code>@tailwindcss/postcss</code></td>
                   <td>4.3.3</td>
                   <td>Estilos. Los tokens{" "}<code>--av-*</code>{" "}pasan a{" "}<code>@theme</code></td>
-                  <td><span className="hz-chip hz-chip--success"><Icon name="check-circle" />Necesario</span></td>
+                  <td><span className="av-chip av-chip--success"><Icon name="check-circle" />Necesario</span></td>
                 </tr>
                 <tr>
                   <td><code>shadcn</code>{" "}(CLI)</td>
                   <td>4.21.1 · Node ≥ 20.18.1</td>
                   <td>Copia los componentes base al repositorio</td>
-                  <td><span className="hz-chip hz-chip--success"><Icon name="check-circle" />Necesario</span></td>
+                  <td><span className="av-chip av-chip--success"><Icon name="check-circle" />Necesario</span></td>
                 </tr>
                 <tr>
                   <td><code>class-variance-authority</code>,{" "}<code>clsx</code>,{" "}<code>tailwind-merge</code></td>
                   <td>0.7.1 · 2.1.1 · 3.7.0</td>
                   <td>Variantes de componentes (las 3 variantes de píldora, tamaños de botón) y unión de clases</td>
-                  <td><span className="hz-chip hz-chip--success"><Icon name="check-circle" />Necesario</span></td>
+                  <td><span className="av-chip av-chip--success"><Icon name="check-circle" />Necesario</span></td>
                 </tr>
                 <tr>
                   <td><code>tw-animate-css</code></td>
                   <td>1.4.0</td>
                   <td>Animaciones de entrada y salida de los componentes de shadcn</td>
-                  <td><span className="hz-chip hz-chip--success"><Icon name="check-circle" />Necesario</span></td>
+                  <td><span className="av-chip av-chip--success"><Icon name="check-circle" />Necesario</span></td>
                 </tr>
                 <tr>
                   <td><code>@base-ui/react</code></td>
                   <td>1.8.0</td>
                   <td>Primitivas accesibles (foco, teclado, ARIA). Alternativa:{" "}<code>radix-ui</code>{" "}1.6.7</td>
-                  <td><span className="hz-chip hz-chip--info"><Icon name="info-circle" />Una de las dos</span></td>
+                  <td><span className="av-chip av-chip--info"><Icon name="info-circle" />Una de las dos</span></td>
                 </tr>
                 <tr>
                   <td><code>react-aria-components</code></td>
                   <td>1.21.1</td>
                   <td>Fechas, combobox y tablas, donde la accesibilidad pesa más</td>
-                  <td><span className="hz-chip hz-chip--info"><Icon name="info-circle" />Recomendado</span></td>
+                  <td><span className="av-chip av-chip--info"><Icon name="info-circle" />Recomendado</span></td>
                 </tr>
                 <tr>
                   <td><code>sonner</code></td>
                   <td>2.0.8</td>
                   <td>Toasts apilados con{" "}<code>aria-live</code></td>
-                  <td><span className="hz-chip hz-chip--info"><Icon name="info-circle" />Recomendado</span></td>
+                  <td><span className="av-chip av-chip--info"><Icon name="info-circle" />Recomendado</span></td>
                 </tr>
                 <tr>
                   <td><code>@tanstack/react-table</code></td>
                   <td>9.2.4</td>
                   <td>Tabla avanzada: orden, filtro, selección, paginación</td>
-                  <td><span className="hz-chip hz-chip--info"><Icon name="info-circle" />Recomendado</span></td>
+                  <td><span className="av-chip av-chip--info"><Icon name="info-circle" />Recomendado</span></td>
                 </tr>
                 <tr>
                   <td><code>cmdk</code></td>
                   <td>1.1.1</td>
                   <td>Paleta de comandos Ctrl + K</td>
-                  <td><span className="hz-chip hz-chip--info"><Icon name="info-circle" />Recomendado</span></td>
+                  <td><span className="av-chip av-chip--info"><Icon name="info-circle" />Recomendado</span></td>
                 </tr>
                 <tr>
                   <td><code>input-otp</code></td>
                   <td>1.5.0</td>
                   <td>Código de un solo uso de 6 dígitos</td>
-                  <td><span className="hz-chip hz-chip--info"><Icon name="info-circle" />Recomendado</span></td>
+                  <td><span className="av-chip av-chip--info"><Icon name="info-circle" />Recomendado</span></td>
                 </tr>
                 <tr>
                   <td><code>react-day-picker</code></td>
                   <td>10.0.2 · requiere{" "}<code>date-fns</code>{" "}4</td>
                   <td>Selector de fechas (o el de React Aria)</td>
-                  <td><span className="hz-chip hz-chip--info"><Icon name="info-circle" />Una de las dos</span></td>
+                  <td><span className="av-chip av-chip--info"><Icon name="info-circle" />Una de las dos</span></td>
                 </tr>
                 <tr>
                   <td><code>react-hook-form</code>,{" "}<code>zod</code>,{" "}<code>@hookform/resolvers</code></td>
                   <td>7.89.0 · 4.6.5 · 5.9.1</td>
                   <td>Formularios, validación y resumen de errores</td>
-                  <td><span className="hz-chip hz-chip--info"><Icon name="info-circle" />Recomendado</span></td>
+                  <td><span className="av-chip av-chip--info"><Icon name="info-circle" />Recomendado</span></td>
                 </tr>
                 <tr>
                   <td><code>recharts</code></td>
                   <td>3.10.1</td>
                   <td>Gráficos con la paleta{" "}<code>--viz-*</code>. Alternativa:{" "}<code>@visx/visx</code>{" "}4.0.0</td>
-                  <td><span className="hz-chip hz-chip--neutral"><Icon name="dash-circle" />Opcional</span></td>
+                  <td><span className="av-chip av-chip--neutral"><Icon name="dash-circle" />Opcional</span></td>
                 </tr>
                 <tr>
                   <td><code>lucide-react</code></td>
                   <td>1.51.0</td>
                   <td>Iconos. Se puede conservar Bootstrap Icons por continuidad</td>
-                  <td><span className="hz-chip hz-chip--neutral"><Icon name="dash-circle" />Opcional</span></td>
+                  <td><span className="av-chip av-chip--neutral"><Icon name="dash-circle" />Opcional</span></td>
                 </tr>
                 <tr>
                   <td><code>storybook</code></td>
                   <td>10.6.1</td>
                   <td>Documentación viva de los componentes y pruebas visuales</td>
-                  <td><span className="hz-chip hz-chip--neutral"><Icon name="dash-circle" />Opcional</span></td>
+                  <td><span className="av-chip av-chip--neutral"><Icon name="dash-circle" />Opcional</span></td>
                 </tr>
               </tbody>
             </table>
@@ -1450,27 +1450,27 @@ export default function Content() {
                 <tr>
                   <td><b>Fuente de verdad de los valores</b>{" "}(tokens)</td>
                   <td><code>averyn-frontend/assets/css/tokens.css</code></td>
-                  <td><span className="hz-chip hz-chip--warning"><Icon name="exclamation-circle" />Por definir</span></td>
+                  <td><span className="av-chip av-chip--warning"><Icon name="exclamation-circle" />Por definir</span></td>
                 </tr>
                 <tr>
                   <td><b>Estilos de los componentes</b>{" "}en el frontend</td>
                   <td><code>averyn-frontend/assets/css/design-system.css</code></td>
-                  <td><span className="hz-chip hz-chip--warning"><Icon name="exclamation-circle" />Por definir</span></td>
+                  <td><span className="av-chip av-chip--warning"><Icon name="exclamation-circle" />Por definir</span></td>
                 </tr>
                 <tr>
                   <td><b>Principios y reglas</b></td>
                   <td><code>DESIGN.md</code>{" "}(raíz)</td>
-                  <td><span className="hz-chip hz-chip--warning"><Icon name="exclamation-circle" />Por definir</span></td>
+                  <td><span className="av-chip av-chip--warning"><Icon name="exclamation-circle" />Por definir</span></td>
                 </tr>
                 <tr>
                   <td><b>Documento maestro</b>{" "}(.md)</td>
                   <td><code>docs/averyn-design-system-horizonte.md</code></td>
-                  <td><span className="hz-chip hz-chip--warning"><Icon name="exclamation-circle" />Por definir</span></td>
+                  <td><span className="av-chip av-chip--warning"><Icon name="exclamation-circle" />Por definir</span></td>
                 </tr>
                 <tr>
                   <td><b>HTML único</b>{" "}(el entregable)</td>
                   <td><code>docs/averyn-design-system-horizonte.html</code></td>
-                  <td><span className="hz-chip hz-chip--warning"><Icon name="exclamation-circle" />Por definir</span></td>
+                  <td><span className="av-chip av-chip--warning"><Icon name="exclamation-circle" />Por definir</span></td>
                 </tr>
                 <tr>
                   <td><b>Fuentes de las páginas</b>{" "}y herramientas de construcción</td>
@@ -1488,32 +1488,32 @@ export default function Content() {
                     <code>tokens_export.py</code>
                     )
                   </td>
-                  <td><span className="hz-chip hz-chip--warning"><Icon name="exclamation-circle" />Por definir</span></td>
+                  <td><span className="av-chip av-chip--warning"><Icon name="exclamation-circle" />Por definir</span></td>
                 </tr>
                 <tr>
                   <td><b>Páginas generadas</b>{" "}(salida de la construcción; no se entregan)</td>
                   <td><code>docs/ds/*.html</code></td>
-                  <td><span className="hz-chip hz-chip--neutral">No se versionan o se regeneran</span></td>
+                  <td><span className="av-chip av-chip--neutral">No se versionan o se regeneran</span></td>
                 </tr>
                 <tr>
                   <td><b>Tokens en formato W3C</b>{" "}(generado)</td>
                   <td><code>docs/ds/tokens.json</code></td>
-                  <td><span className="hz-chip hz-chip--warning"><Icon name="exclamation-circle" />Por definir</span></td>
+                  <td><span className="av-chip av-chip--warning"><Icon name="exclamation-circle" />Por definir</span></td>
                 </tr>
                 <tr>
                   <td><b>Correos transaccionales</b></td>
                   <td><code>docs/ds/emails/</code></td>
-                  <td><span className="hz-chip hz-chip--warning"><Icon name="exclamation-circle" />Por definir</span></td>
+                  <td><span className="av-chip av-chip--warning"><Icon name="exclamation-circle" />Por definir</span></td>
                 </tr>
                 <tr>
                   <td><b>Favicons e imagen social</b></td>
                   <td><code>docs/ds/assets/</code></td>
-                  <td><span className="hz-chip hz-chip--warning"><Icon name="exclamation-circle" />Por definir</span></td>
+                  <td><span className="av-chip av-chip--warning"><Icon name="exclamation-circle" />Por definir</span></td>
                 </tr>
                 <tr>
                   <td><b>Estilos de impresión</b></td>
                   <td><code>docs/ds/print.css</code></td>
-                  <td><span className="hz-chip hz-chip--warning"><Icon name="exclamation-circle" />Por definir</span></td>
+                  <td><span className="av-chip av-chip--warning"><Icon name="exclamation-circle" />Por definir</span></td>
                 </tr>
                 <tr>
                   <td><b>Páginas de error</b>{" "}reales</td>
@@ -1532,12 +1532,12 @@ export default function Content() {
                     ) y{" "}
                     <code>assets/css/error.css</code>
                   </td>
-                  <td><span className="hz-chip hz-chip--warning"><Icon name="exclamation-circle" />Por definir</span></td>
+                  <td><span className="av-chip av-chip--warning"><Icon name="exclamation-circle" />Por definir</span></td>
                 </tr>
                 <tr>
                   <td><b>Logos</b></td>
                   <td><code>averyn-frontend/assets/images/</code></td>
-                  <td><span className="hz-chip hz-chip--warning"><Icon name="exclamation-circle" />Por definir</span></td>
+                  <td><span className="av-chip av-chip--warning"><Icon name="exclamation-circle" />Por definir</span></td>
                 </tr>
               </tbody>
             </table>

@@ -70,7 +70,7 @@ Cobertura de iconos: de los 76 de Bootstrap Icons que usa Horizonte, el set grat
 | # | Punto | Propuesta |
 |---|---|---|
 | 1 | Introducir Tailwind v4 | **Sí**, con los tokens `--av-*` como fuente de verdad |
-| 2 | Prefijo de clases | Con Tailwind desaparecen las clases `hz-*`; los tokens mantienen `--av-*` y los componentes React usan nombres en inglés. `AGENTS.md` §9 pasa a hablar de tokens, no de clases |
+| 2 | Prefijo de clases | **`av-`** (decidido el 5-oct-2026): las clases `hz-*` de la v1.7 pasaron a `av-*` en la v2.0, igual que `AGENTS.md` §9; los tokens siguen siendo `--av-*` |
 | 3 | Fuente de títulos | **Plus Jakarta Sans** (ya cargada con `next/font`), o Space Grotesk si se decide así, pero una sola; en el proyecto de prueba es una sola línea de `layout.tsx` |
 | 4 | Fuente monoespaciada | JetBrains Mono no está cargada en `averyn-web`; cargarla con `next/font` o usar la mono del sistema |
 | 5 | Breakpoints | **576 / 768 / 1024 / 1280** (ya en `@theme`) |

@@ -136,8 +136,8 @@ export function Stepper({ steps, label, onFinish, finishLabel = "Guardar" }: { s
       <div className="st__foot">
         <span className="st__count" role="status">Paso {cur + 1} de {steps.length}</span>
         <span style={{ display: "flex", gap: ".6rem" }}>
-          <button className="hz-btn hz-btn--ghost" type="button" disabled={cur === 0} onClick={() => { moved.current = true; setCur(cur - 1); }}>Atrás</button>
-          <button className={cn("hz-btn hz-btn--primary")} type="button" onClick={next}>{cur === steps.length - 1 ? finishLabel : "Siguiente →"}</button>
+          <button className="av-btn av-btn--ghost" type="button" disabled={cur === 0} onClick={() => { moved.current = true; setCur(cur - 1); }}>Atrás</button>
+          <button className={cn("av-btn av-btn--primary")} type="button" onClick={next}>{cur === steps.length - 1 ? finishLabel : "Siguiente →"}</button>
         </span>
       </div>
     </div>

@@ -31,12 +31,12 @@ export default {
     // El div .cp-demo del bloque de carga contiene #ld: lo reemplaza LoadingDemo (que trae su propio .cp-demo).
     (n) => (n.tagName && hasClass(n, "cp-demo") && contains(n, "ld-go") ? demo("LoadingDemo") : null),
     // Contraseña del campo de ejemplo
-    (n) => (n.tagName && hasClass(n, "hz-pass") && contains(n, "f-pass") ? demo("PasswordFieldDemo") : null),
+    (n) => (n.tagName && hasClass(n, "av-pass") && contains(n, "f-pass") ? demo("PasswordFieldDemo") : null),
     // Barra de usuario: la fila con el avatar y la fila del menú
     (n) => (n.tagName && hasClass(n, "row") && contains(n, "av-open") ? demo("AvatarMenuDemo") : null),
     (n) => (n.tagName && hasClass(n, "row") && contains(n, "av-menu") ? nul : null),
     // Pestañas: paginación estática la reemplaza TabsPagerDemo
-    (n) => (n.tagName === "div" && child(n, (c) => hasClass(c, "hz-pager")) ? nul : null),
+    (n) => (n.tagName === "div" && child(n, (c) => hasClass(c, "av-pager")) ? nul : null),
     // Toasts
     (n) => (n.tagName && hasClass(n, "row--col") && child(n, (c) => attr(c, "data-toast")) ? demo("ToastButtons") : null),
     // Contenedores .cp-demo que envuelven demos

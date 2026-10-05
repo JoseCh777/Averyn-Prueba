@@ -1,7 +1,7 @@
 /* ==========================================================================
    COMPONENTES QUE FALTABAN — selector de fechas, menú de acciones, combobox, acordeón,
    stepper, popover, drawer, paleta de comandos y tabla avanzada.
-   Prefijo cp-. Reutiliza tokens y los hz-* existentes. Foco azul en claro, cian en navy.
+   Prefijo cp-. Reutiliza tokens y los av-* existentes. Foco azul en claro, cian en navy.
    ========================================================================== */
 
 .cp-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 1.8rem; align-items: start; margin-top: 1.8rem; }
@@ -54,18 +54,18 @@ kbd.cp-k, .cp-side kbd { display: inline-block; min-width: 1.5em; padding: .08em
 .am__btn { display: inline-grid; place-items: center; width: 44px; height: 44px; border: 1px solid transparent; border-radius: var(--av-radius-control); background: transparent; color: var(--av-gray-600); font-size: 1.15rem; cursor: pointer; }
 .am__btn:hover, .am__btn[aria-expanded="true"] { background: var(--av-gray-50); color: var(--av-navy); }
 .am__btn:focus-visible { outline: 2px solid var(--av-blue); outline-offset: 1px; }
-.am .hz-menu { position: absolute; right: 0; top: calc(100% + 4px); z-index: 40; }
-.am .hz-menu[hidden] { display: none; }
-.am .hz-menu [role="separator"] { height: 1px; margin: 4px 6px; background: var(--av-hairline); }
-.am .hz-menu button:focus-visible { outline: 2px solid var(--av-blue); outline-offset: -2px; background: var(--av-gray-50); }
-.am .hz-menu .is-danger { color: var(--av-error-text); }
+.am .av-menu { position: absolute; right: 0; top: calc(100% + 4px); z-index: 40; }
+.am .av-menu[hidden] { display: none; }
+.am .av-menu [role="separator"] { height: 1px; margin: 4px 6px; background: var(--av-hairline); }
+.am .av-menu button:focus-visible { outline: 2px solid var(--av-blue); outline-offset: -2px; background: var(--av-gray-50); }
+.am .av-menu .is-danger { color: var(--av-error-text); }
 .am-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .4rem .4rem .4rem 1rem; border: 1px solid var(--av-hairline); border-radius: var(--av-radius-tile); }
 .am-row b { display: block; font-size: .9375rem; } .am-row small { color: var(--av-gray-600); }
 
 /* ---------- Combobox ---------- */
 .cb { position: relative; max-width: 26rem; }
 .cb__wrap { position: relative; }
-.cb__wrap .hz-input { padding-right: 2.6rem; }
+.cb__wrap .av-input { padding-right: 2.6rem; }
 .cb__ic { position: absolute; right: .9rem; top: 50%; transform: translateY(-50%); color: var(--av-gray-500); pointer-events: none; }
 .cb__list { position: absolute; left: 0; right: 0; z-index: 40; max-height: 15rem; margin: .35rem 0 0; padding: 6px; overflow: auto; list-style: none; border: 1px solid var(--av-hairline); border-radius: var(--av-radius-tile); background: #fff; box-shadow: var(--av-shadow-md); }
 .cb__list[hidden] { display: none; }
@@ -145,7 +145,7 @@ dialog.cmd::backdrop { background: rgba(0, 12, 36, .5); backdrop-filter: blur(3p
 .cmd__opt[aria-selected="true"] { background: var(--av-blue-tint); }
 .cmd__opt[aria-selected="true"] i { color: var(--av-blue); }
 .cmd__opt[aria-disabled="true"] { color: var(--av-gray-500); cursor: not-allowed; }
-.cmd__opt .hz-tag { margin-left: auto; }
+.cmd__opt .av-tag { margin-left: auto; }
 .cmd__opt kbd { margin-left: auto; }
 .cmd__none { padding: 1.4rem 1rem; text-align: center; font-size: .9375rem; color: var(--av-gray-600); }
 .cmd__foot { display: flex; gap: 1.2rem; padding: .7rem 1.1rem; border-top: 1px solid var(--av-hairline); background: var(--av-paper-blue); font-size: .75rem; color: var(--av-gray-600); }
@@ -153,7 +153,7 @@ dialog.cmd::backdrop { background: rgba(0, 12, 36, .5); backdrop-filter: blur(3p
 /* ---------- Tabla avanzada ---------- */
 .ta { min-width: 0; }
 .ta__bar { display: flex; align-items: center; gap: .8rem; flex-wrap: wrap; min-height: 56px; padding: .3rem 0 .8rem; }
-.ta__bar .hz-input { max-width: 16rem; min-height: 44px; }
+.ta__bar .av-input { max-width: 16rem; min-height: 44px; }
 .ta__bar--sel { padding: .5rem .9rem; margin: 0 0 .8rem; border-radius: var(--av-radius-control); background: var(--av-blue-tint); }
 .ta__bar[hidden] { display: none; }
 .ta__sp { flex: 1; }
@@ -202,7 +202,7 @@ dialog.cmd::backdrop { background: rgba(0, 12, 36, .5); backdrop-filter: blur(3p
 }
 
 /* ---------- B1 · Formularios: búsqueda, código de un solo uso, contraseña, multi-select, validación ---------- */
-.hz-err[hidden], .hz-btn[hidden], .sf__x[hidden], .fa [hidden] { display: none; }
+.av-err[hidden], .av-btn[hidden], .sf__x[hidden], .fa [hidden] { display: none; }
 .sf { position: relative; max-width: 26rem; }
 .sf .sf__ic { position: absolute; left: .95rem; top: 25px; transform: translateY(-50%); color: var(--av-gray-500); pointer-events: none; }
 .sf .sf__in { padding-left: 2.6rem; padding-right: 3.8rem; }
@@ -333,5 +333,5 @@ dialog.cmd::backdrop { background: rgba(0, 12, 36, .5); backdrop-filter: blur(3p
 .up__meta { display: flex; flex-wrap: wrap; align-items: center; gap: .15rem .6rem; margin-top: .2rem; }
 .up__meta small { display: inline; }
 .ld__err { padding: .8rem; list-style: none; }
-.ld__err .hz-alert { margin: 0; }
+.ld__err .av-alert { margin: 0; }
 .ld__err .up__btn { display: inline-flex; align-items: center; margin-left: .4rem; }

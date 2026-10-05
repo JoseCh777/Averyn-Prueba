@@ -15,12 +15,12 @@ export function Button({ variant = "primary", block, loading, className, childre
   return (
     <button
       type={type}
-      className={cn("hz-btn", `hz-btn--${variant}`, block && "hz-btn--block", className)}
+      className={cn("av-btn", `av-btn--${variant}`, block && "av-btn--block", className)}
       disabled={disabled || loading}
       aria-busy={loading || undefined}
       {...props}
     >
-      {loading && <span className="hz-spin" aria-hidden="true" />}
+      {loading && <span className="av-spin" aria-hidden="true" />}
       {children}
     </button>
   );
@@ -35,7 +35,7 @@ export type IconButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 
 export function IconButton({ badge, className, children, type = "button", ...props }: IconButtonProps) {
   return (
-    <button type={type} className={cn("hz-iconbtn", className)} {...props}>
+    <button type={type} className={cn("av-iconbtn", className)} {...props}>
       {children}
       {badge != null && <span className="badge" aria-hidden="true">{badge}</span>}
     </button>

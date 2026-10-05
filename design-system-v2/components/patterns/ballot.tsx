@@ -86,8 +86,8 @@ export function Ballot() {
           </div>
         </fieldset>
         <div className="pt-actions">
-          <button className="hz-btn hz-btn--primary" type="button" disabled={!vote} onClick={() => go(1, true)}>Revisar mi voto →</button>
-          <span className="hz-help" role="status">{chosen ? `Marcaste: ${chosen.who ? `${chosen.party} (número ${chosen.n})` : "voto en blanco"}.` : "Aún no has elegido una opción."}</span>
+          <button className="av-btn av-btn--primary" type="button" disabled={!vote} onClick={() => go(1, true)}>Revisar mi voto →</button>
+          <span className="av-help" role="status">{chosen ? `Marcaste: ${chosen.who ? `${chosen.party} (número ${chosen.n})` : "voto en blanco"}.` : "Aún no has elegido una opción."}</span>
         </div>
       </div>
       <div hidden={step !== 1}>
@@ -95,8 +95,8 @@ export function Ballot() {
         <p className="pt-card__s">Después de confirmar no podrás cambiar tu voto.</p>
         <div className="tj-rev">{chosen && step === 1 && <Box o={chosen} />}</div>
         <div className="pt-actions">
-          <button className="hz-btn hz-btn--primary" type="button" onClick={() => { setReceipt({ code: `AV-${rnd(4)}-${rnd(4)}`, time: new Intl.DateTimeFormat("es-PE", { dateStyle: "medium", timeStyle: "short" }).format(new Date()) }); go(2, true); }}>Confirmar voto</button>
-          <button className="hz-btn hz-btn--ghost" type="button" onClick={() => go(0)}>Volver</button>
+          <button className="av-btn av-btn--primary" type="button" onClick={() => { setReceipt({ code: `AV-${rnd(4)}-${rnd(4)}`, time: new Intl.DateTimeFormat("es-PE", { dateStyle: "medium", timeStyle: "short" }).format(new Date()) }); go(2, true); }}>Confirmar voto</button>
+          <button className="av-btn av-btn--ghost" type="button" onClick={() => go(0)}>Volver</button>
         </div>
       </div>
       <div hidden={step !== 2}>
@@ -109,8 +109,8 @@ export function Ballot() {
         </div>
         <p className="ds-note"><Icon name="shield-lock" /> Este comprobante no contiene tu elección ni tu identidad.</p>
         <div className="pt-actions">
-          <button className="hz-btn hz-btn--primary" type="button" onClick={() => { navigator.clipboard?.writeText(receipt?.code ?? ""); toast({ title: "Copiado", text: "Código de comprobante", kind: "ok" }); }}>Copiar código</button>
-          <button className="hz-btn hz-btn--ghost" type="button" onClick={() => { setVote(null); setReceipt(null); go(0); }}>Reiniciar demo</button>
+          <button className="av-btn av-btn--primary" type="button" onClick={() => { navigator.clipboard?.writeText(receipt?.code ?? ""); toast({ title: "Copiado", text: "Código de comprobante", kind: "ok" }); }}>Copiar código</button>
+          <button className="av-btn av-btn--ghost" type="button" onClick={() => { setVote(null); setReceipt(null); go(0); }}>Reiniciar demo</button>
         </div>
       </div>
     </div>

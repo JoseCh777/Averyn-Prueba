@@ -1,7 +1,7 @@
 /* Iconos Bootstrap como SVG (react-bootstrap-icons): misma alineación que la fuente de iconos original. */
 svg.bi { display: inline-block; vertical-align: -.125em; fill: currentColor; }
-.hz-chip > svg { font-size: .95em; flex: none; }
-.hz-err > svg { flex: none; margin-top: .15em; }
+.av-chip > svg { font-size: .95em; flex: none; }
+.av-err > svg { flex: none; margin-top: .15em; }
 
 /* Las fuentes llegan por next/font (variables --font-*); los tokens las usan primero y conservan la pila de respaldo. */
 :root {
@@ -14,7 +14,7 @@ svg.bi { display: inline-block; vertical-align: -.125em; fill: currentColor; }
 .ds-grid > *, .cp-grid > * { min-width: 0; }
 
 /* El tooltip puede romper línea: así nunca ensancha la página aunque esté oculto. */
-.hz-tip__bubble { width: max-content; max-width: min(16rem, calc(100vw - 2rem)); white-space: normal; text-align: center; }
+.av-tip__bubble { width: max-content; max-width: min(16rem, calc(100vw - 2rem)); white-space: normal; text-align: center; }
 /* Oculto con display:none para que no cuente en el desbordamiento de la página; sigue describiendo al disparador (aria-describedby). */
-.hz-tip__bubble { display: none; }
-.hz-tip:hover .hz-tip__bubble, .hz-tip:focus-within .hz-tip__bubble { display: block; }
+.av-tip__bubble { display: none; }
+.av-tip:hover .av-tip__bubble, .av-tip:focus-within .av-tip__bubble { display: block; }

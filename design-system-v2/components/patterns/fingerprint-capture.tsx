@@ -88,7 +88,7 @@ export function FingerprintCapture() {
         <Segmented<FingerprintState> label="Estado de la lectura de huella" value={state} onChange={set}
           options={[{ value: "wait", label: "Esperando" }, { value: "read", label: "Leyendo" }, { value: "low", label: "Calidad baja" }, { value: "ok", label: "Éxito" }, { value: "err", label: "Error" }]} />
       </div>
-      <div className="pt-actions"><button className="hz-btn hz-btn--primary" type="button" onClick={simulate}>Simular lectura</button></div>
+      <div className="pt-actions"><button className="av-btn av-btn--primary" type="button" onClick={simulate}>Simular lectura</button></div>
     </div>
   );
 }

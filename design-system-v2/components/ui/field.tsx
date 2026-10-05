@@ -21,17 +21,17 @@ export function Field({ label, help, error, id, className, aside, children }: Fi
   const fid = id ?? auto;
   const msg = error ? `${fid}-err` : help ? `${fid}-help` : undefined;
   return (
-    <div className={cn("hz-field", className)}>
+    <div className={cn("av-field", className)}>
       {aside ? (
-        <div className="hz-label__row"><label className="hz-label" htmlFor={fid}>{label}</label>{aside}</div>
+        <div className="av-label__row"><label className="av-label" htmlFor={fid}>{label}</label>{aside}</div>
       ) : (
-        <label className="hz-label" htmlFor={fid}>{label}</label>
+        <label className="av-label" htmlFor={fid}>{label}</label>
       )}
       {children({ id: fid, "aria-invalid": error ? true : undefined, "aria-describedby": msg })}
       {error ? (
-        <span className="hz-err" id={`${fid}-err`}><Icon name="exclamation-circle" />{error}</span>
+        <span className="av-err" id={`${fid}-err`}><Icon name="exclamation-circle" />{error}</span>
       ) : help ? (
-        <span className="hz-help" id={`${fid}-help`}>{help}</span>
+        <span className="av-help" id={`${fid}-help`}>{help}</span>
       ) : null}
     </div>
   );
@@ -39,20 +39,20 @@ export function Field({ label, help, error, id, className, aside, children }: Fi
 
 export type InputProps = InputHTMLAttributes<HTMLInputElement> & { ok?: boolean };
 export function Input({ ok, className, ...props }: InputProps) {
-  return <input className={cn("hz-input", ok && "hz-input--ok", className)} {...props} />;
+  return <input className={cn("av-input", ok && "av-input--ok", className)} {...props} />;
 }
 
 export function Textarea({ className, ...props }: TextareaHTMLAttributes<HTMLTextAreaElement>) {
-  return <textarea className={cn("hz-textarea", className)} {...props} />;
+  return <textarea className={cn("av-textarea", className)} {...props} />;
 }
 
 export function Select({ className, children, ...props }: SelectHTMLAttributes<HTMLSelectElement>) {
-  return <select className={cn("hz-select", className)} {...props}>{children}</select>;
+  return <select className={cn("av-select", className)} {...props}>{children}</select>;
 }
 
 export function Checkbox({ label, className, ...props }: { label: ReactNode } & Omit<InputHTMLAttributes<HTMLInputElement>, "type">) {
   return (
-    <label className={cn("hz-check", className)}>
+    <label className={cn("av-check", className)}>
       <input type="checkbox" {...props} />
       <span>{label}</span>
     </label>
@@ -65,7 +65,7 @@ export function Switch({ checked, onCheckedChange, label, ...props }: {
   label: string;
 } & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "onChange">) {
   return (
-    <button type="button" role="switch" aria-checked={checked} aria-label={label} className="hz-switch" onClick={() => onCheckedChange(!checked)} {...props} />
+    <button type="button" role="switch" aria-checked={checked} aria-label={label} className="av-switch" onClick={() => onCheckedChange(!checked)} {...props} />
   );
 }
 
@@ -73,9 +73,9 @@ export function Switch({ checked, onCheckedChange, label, ...props }: {
 export function PasswordInput({ className, ...props }: Omit<InputHTMLAttributes<HTMLInputElement>, "type">) {
   const [shown, setShown] = useState(false);
   return (
-    <div className="hz-pass">
-      <input className={cn("hz-input", className)} type={shown ? "text" : "password"} {...props} />
-      <button type="button" className="hz-pass__toggle" aria-label={shown ? "Ocultar contraseña" : "Mostrar contraseña"} aria-pressed={shown} onClick={() => setShown((s) => !s)}>
+    <div className="av-pass">
+      <input className={cn("av-input", className)} type={shown ? "text" : "password"} {...props} />
+      <button type="button" className="av-pass__toggle" aria-label={shown ? "Ocultar contraseña" : "Mostrar contraseña"} aria-pressed={shown} onClick={() => setShown((s) => !s)}>
         {shown ? "Ocultar" : "Mostrar"}
       </button>
     </div>

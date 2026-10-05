@@ -19,11 +19,11 @@ export default function ComponentesContent() {
           <div className="stage ds-gap-top">
             <span className="stage__label mono">Sobre claro · variantes</span>
             <div className="row">
-              <button className="hz-btn hz-btn--primary" type="button">Ingresar →</button>
-              <button className="hz-btn hz-btn--ghost" type="button">Conocer Averyn ↓</button>
-              <button className="hz-btn hz-btn--text" type="button">Ver historial completo →</button>
-              <button className="hz-btn hz-btn--danger" type="button">Eliminar persona</button>
-              <button className="hz-btn hz-btn--primary" type="button" disabled>Deshabilitado</button>
+              <button className="av-btn av-btn--primary" type="button">Ingresar →</button>
+              <button className="av-btn av-btn--ghost" type="button">Conocer Averyn ↓</button>
+              <button className="av-btn av-btn--text" type="button">Ver historial completo →</button>
+              <button className="av-btn av-btn--danger" type="button">Eliminar persona</button>
+              <button className="av-btn av-btn--primary" type="button" disabled>Deshabilitado</button>
               <ButtonLoadDemo />
             </div>
           </div>
@@ -31,38 +31,38 @@ export default function ComponentesContent() {
             <div className="stage stage--blue on-blue">
               <span className="stage__label mono">Sobre azul de señal</span>
               <div className="row">
-                <button className="hz-btn hz-btn--light" type="button">Ingresar al sistema →</button>
-                <button className="hz-btn hz-btn--ghost-inv" type="button">Saber más</button>
+                <button className="av-btn av-btn--light" type="button">Ingresar al sistema →</button>
+                <button className="av-btn av-btn--ghost-inv" type="button">Saber más</button>
               </div>
             </div>
             <div className="stage stage--night on-night">
               <span className="stage__label mono">Sobre navy</span>
               <div className="row">
-                <button className="hz-btn hz-btn--primary" type="button">Ingresar →</button>
-                <button className="hz-btn hz-btn--ghost-inv" type="button">Conocer Averyn ↓</button>
+                <button className="av-btn av-btn--primary" type="button">Ingresar →</button>
+                <button className="av-btn av-btn--ghost-inv" type="button">Conocer Averyn ↓</button>
               </div>
             </div>
           </div>
           <div className="stage ds-gap-top">
             <span className="stage__label mono">Icon-buttons · ancho completo</span>
             <div className="row">
-              <button className="hz-iconbtn" type="button" aria-label="Buscar"><Icon name="search" /></button>
-              <button className="hz-iconbtn" type="button" aria-label="Notificaciones, 3 sin leer">
+              <button className="av-iconbtn" type="button" aria-label="Buscar"><Icon name="search" /></button>
+              <button className="av-iconbtn" type="button" aria-label="Notificaciones, 3 sin leer">
                 <Icon name="bell" />
                 <span className="badge" aria-hidden="true">3</span>
               </button>
             </div>
             <div style={{ marginTop: "1rem", maxWidth: "360px" }}>
-              <button className="hz-btn hz-btn--primary hz-btn--block" type="button">Ingresar de forma segura →</button>
+              <button className="av-btn av-btn--primary av-btn--block" type="button">Ingresar de forma segura →</button>
             </div>
           </div>
           <div className="codeblock">
             <pre id="code-btn">
-              {"<button class=\"hz-btn hz-btn--primary\">Ingresar →</button>\n<button class=\"hz-btn hz-btn--ghost\">Conocer Averyn ↓</button>\n\n.hz-btn { min-height: 44px; padding: 11px 20px; border-radius: "}
+              {"<button class=\"av-btn av-btn--primary\">Ingresar →</button>\n<button class=\"av-btn av-btn--ghost\">Conocer Averyn ↓</button>\n\n.av-btn { min-height: 44px; padding: 11px 20px; border-radius: "}
               <b>{"8px"}</b>
-              {";\n  font: 700 .75rem var(--av-font-mono); letter-spacing: .06em; text-transform: uppercase;\n  transition: transform .15s var(--av-ease-out), background-color .15s var(--av-ease-out); }\n.hz-btn:active { transform: "}
+              {";\n  font: 700 .75rem var(--av-font-mono); letter-spacing: .06em; text-transform: uppercase;\n  transition: transform .15s var(--av-ease-out), background-color .15s var(--av-ease-out); }\n.av-btn:active { transform: "}
               <b>{"scale(.97)"}</b>
-              {"; }\n.hz-btn--primary { background: var(--av-blue); color: #fff; box-shadow: var(--av-shadow-key); }"}
+              {"; }\n.av-btn--primary { background: var(--av-blue); color: #fff; box-shadow: var(--av-shadow-key); }"}
             </pre>
             <button className="copy" type="button" data-copy="#code-btn">Copiar</button>
           </div>
@@ -98,15 +98,15 @@ export default function ComponentesContent() {
             <div className="stage">
               <span className="stage__label mono">Texto · ayuda · contraseña</span>
               <form className="row row--col" style={{ gap: "1.1rem" }} data-nosubmit="true" noValidate>
-                <div className="hz-field">
-                  <label className="hz-label" htmlFor="f-email">Correo electrónico</label>
-                  <input className="hz-input" id="f-email" type="email" placeholder="nombre@organizacion.com" autoComplete="email" />
-                  <span className="hz-help">Usa el correo que registró tu institución.</span>
+                <div className="av-field">
+                  <label className="av-label" htmlFor="f-email">Correo electrónico</label>
+                  <input className="av-input" id="f-email" type="email" placeholder="nombre@organizacion.com" autoComplete="email" />
+                  <span className="av-help">Usa el correo que registró tu institución.</span>
                 </div>
-                <div className="hz-field">
-                  <div className="hz-label__row">
-                    <label className="hz-label" htmlFor="f-pass">Contraseña</label>
-                    <button type="button" className="hz-btn hz-btn--text" style={{ minHeight: "24px", fontSize: ".8125rem", textTransform: "none", letterSpacing: "0", fontFamily: "var(--av-font-body)", fontWeight: "500" }}>
+                <div className="av-field">
+                  <div className="av-label__row">
+                    <label className="av-label" htmlFor="f-pass">Contraseña</label>
+                    <button type="button" className="av-btn av-btn--text" style={{ minHeight: "24px", fontSize: ".8125rem", textTransform: "none", letterSpacing: "0", fontFamily: "var(--av-font-body)", fontWeight: "500" }}>
                       ¿Olvidaste tu contraseña?
                     </button>
                   </div>
@@ -117,19 +117,19 @@ export default function ComponentesContent() {
             <div className="stage">
               <span className="stage__label mono">Estados</span>
               <div className="row row--col" style={{ gap: "1.1rem" }}>
-                <div className="hz-field">
-                  <label className="hz-label" htmlFor="f-err">Documento (error)</label>
-                  <input className="hz-input" id="f-err" defaultValue="12A" aria-invalid="true" aria-describedby="f-err-m" />
-                  <span className="hz-err" id="f-err-m"><Icon name="exclamation-circle" />El documento debe tener solo números.</span>
+                <div className="av-field">
+                  <label className="av-label" htmlFor="f-err">Documento (error)</label>
+                  <input className="av-input" id="f-err" defaultValue="12A" aria-invalid="true" aria-describedby="f-err-m" />
+                  <span className="av-err" id="f-err-m"><Icon name="exclamation-circle" />El documento debe tener solo números.</span>
                 </div>
-                <div className="hz-field">
-                  <label className="hz-label" htmlFor="f-ok">Documento (válido)</label>
-                  <input className="hz-input hz-input--ok" id="f-ok" defaultValue="10234567" />
-                  <span className="hz-help" style={{ color: "var(--av-success-text)" }}>Documento verificado.</span>
+                <div className="av-field">
+                  <label className="av-label" htmlFor="f-ok">Documento (válido)</label>
+                  <input className="av-input av-input--ok" id="f-ok" defaultValue="10234567" />
+                  <span className="av-help" style={{ color: "var(--av-success-text)" }}>Documento verificado.</span>
                 </div>
-                <div className="hz-field">
-                  <label className="hz-label" htmlFor="f-dis">Institución (deshabilitado)</label>
-                  <input className="hz-input" id="f-dis" defaultValue="Sede Central" disabled />
+                <div className="av-field">
+                  <label className="av-label" htmlFor="f-dis">Institución (deshabilitado)</label>
+                  <input className="av-input" id="f-dis" defaultValue="Sede Central" disabled />
                 </div>
               </div>
             </div>
@@ -138,33 +138,33 @@ export default function ComponentesContent() {
             <div className="stage">
               <span className="stage__label mono">Select · textarea</span>
               <div className="row row--col" style={{ gap: "1.1rem" }}>
-                <div className="hz-field">
-                  <label className="hz-label" htmlFor="f-sel">Afiliación</label>
-                  <select className="hz-select" id="f-sel"><option>Estudiante</option><option>Docente</option><option>Empleado</option></select>
+                <div className="av-field">
+                  <label className="av-label" htmlFor="f-sel">Afiliación</label>
+                  <select className="av-select" id="f-sel"><option>Estudiante</option><option>Docente</option><option>Empleado</option></select>
                 </div>
-                <div className="hz-field">
-                  <label className="hz-label" htmlFor="f-ta">Observaciones</label>
-                  <textarea className="hz-textarea" id="f-ta" placeholder="Notas sobre el registro" />
+                <div className="av-field">
+                  <label className="av-label" htmlFor="f-ta">Observaciones</label>
+                  <textarea className="av-textarea" id="f-ta" placeholder="Notas sobre el registro" />
                 </div>
               </div>
             </div>
             <div className="stage">
               <span className="stage__label mono">Casilla · opciones · interruptor</span>
               <div className="row row--col" style={{ gap: ".2rem" }}>
-                <label className="hz-check"><input type="checkbox" defaultChecked />Recordar mi institución</label>
-                <label className="hz-check"><input type="radio" name="mod" defaultChecked />Rostro</label>
-                <label className="hz-check"><input type="radio" name="mod" />Huella</label>
+                <label className="av-check"><input type="checkbox" defaultChecked />Recordar mi institución</label>
+                <label className="av-check"><input type="radio" name="mod" defaultChecked />Rostro</label>
+                <label className="av-check"><input type="radio" name="mod" />Huella</label>
                 <div className="row" style={{ marginTop: ".6rem" }}><SwitchDemo /><span>Notificaciones por correo</span></div>
               </div>
             </div>
           </div>
           <div className="codeblock">
             <pre id="code-field">
-              {"<div class=\"hz-field\">\n  <label class=\"hz-label\" for=\"doc\">Documento</label>\n  <input class=\"hz-input\" id=\"doc\" "}
+              {"<div class=\"av-field\">\n  <label class=\"av-label\" for=\"doc\">Documento</label>\n  <input class=\"av-input\" id=\"doc\" "}
               <b>{"aria-invalid=\"true\" aria-describedby=\"doc-m\""}</b>
-              {">\n  <span class=\"hz-err\" id=\"doc-m\">El documento debe tener solo números.</span>\n</div>\n.hz-input { min-height: 48px; border: 1px solid "}
+              {">\n  <span class=\"av-err\" id=\"doc-m\">El documento debe tener solo números.</span>\n</div>\n.av-input { min-height: 48px; border: 1px solid "}
               <b>{"var(--av-field-border)"}</b>
-              {"; border-radius: 8px; }\n.hz-input:focus { border-color: var(--av-blue); box-shadow: 0 0 0 3px rgba(20,95,238,.18); }"}
+              {"; border-radius: 8px; }\n.av-input:focus { border-color: var(--av-blue); box-shadow: 0 0 0 3px rgba(20,95,238,.18); }"}
             </pre>
             <button className="copy" type="button" data-copy="#code-field">Copiar</button>
           </div>
@@ -382,7 +382,7 @@ export default function ComponentesContent() {
                   <li>Roles ARIA 1.2:{" "}<code>combobox</code>{" "}+{" "}<code>listbox</code>{" "}+{" "}<code>option</code>.</li>
                   <li>Opciones de 44 px; el texto buscado en azul y negrita, no solo con fondo.</li>
                   <li>Sin resultados: "Sin resultados para «x»", nunca una lista vacía.</li>
-                  <li>Para menos de 7 opciones, usa un{" "}<code>{"<select>"}</code>{" "}(<code>hz-select</code>).</li>
+                  <li>Para menos de 7 opciones, usa un{" "}<code>{"<select>"}</code>{" "}(<code>av-select</code>).</li>
                 </ul>
               </div>
             </div>
@@ -588,7 +588,7 @@ export default function ComponentesContent() {
           </p>
           <div className="stage ds-gap-top">
             <div className="doc-wrap">
-              <table className="hz-table">
+              <table className="av-table">
                 <thead>
                   <tr>
                     <th scope="col">Persona</th>
@@ -603,28 +603,28 @@ export default function ComponentesContent() {
                     <td><span className="who"><i>AT</i>Ana Torres</span></td>
                     <td className="num">10234567</td>
                     <td>Estudiante</td>
-                    <td><span className="hz-chip hz-chip--success"><Icon name="check-circle" />Verificada</span></td>
+                    <td><span className="av-chip av-chip--success"><Icon name="check-circle" />Verificada</span></td>
                     <td className="num" style={{ textAlign: "right" }}>02/10/2026, 10:42</td>
                   </tr>
                   <tr>
                     <td><span className="who"><i>LP</i>Luis Pérez</span></td>
                     <td className="num">10345678</td>
                     <td>Docente</td>
-                    <td><span className="hz-chip hz-chip--neutral"><Icon name="clock" />Pendiente</span></td>
+                    <td><span className="av-chip av-chip--neutral"><Icon name="clock" />Pendiente</span></td>
                     <td style={{ textAlign: "right" }}>Sin verificar</td>
                   </tr>
                   <tr>
                     <td><span className="who"><i>LD</i>Laura Díaz</span></td>
                     <td className="num">10456789</td>
                     <td>Empleada</td>
-                    <td><span className="hz-chip hz-chip--error"><Icon name="x-circle" />Rechazada</span></td>
+                    <td><span className="av-chip av-chip--error"><Icon name="x-circle" />Rechazada</span></td>
                     <td className="num" style={{ textAlign: "right" }}>02/10/2026, 10:31</td>
                   </tr>
                   <tr>
                     <td><span className="who"><i>AM</i>Andrés Molina</span></td>
                     <td className="num">10567890</td>
                     <td>Estudiante</td>
-                    <td><span className="hz-chip hz-chip--warning"><Icon name="arrow-repeat" />Reintento</span></td>
+                    <td><span className="av-chip av-chip--warning"><Icon name="arrow-repeat" />Reintento</span></td>
                     <td className="num" style={{ textAlign: "right" }}>02/10/2026, 09:55</td>
                   </tr>
                 </tbody>
@@ -675,9 +675,9 @@ export default function ComponentesContent() {
           <div className="stage ds-gap-top">
             <span className="stage__label mono">Etiqueta mono</span>
             <div className="row">
-              <span className="hz-tag">Próximamente</span>
-              <span className="hz-tag">Beta</span>
-              <span className="hz-tag">CAM-001</span>
+              <span className="av-tag">Próximamente</span>
+              <span className="av-tag">Beta</span>
+              <span className="av-tag">CAM-001</span>
             </div>
             <p className="ds-note">Para metadatos y módulos pendientes. No es un estado de negocio.</p>
           </div>
@@ -690,49 +690,49 @@ export default function ComponentesContent() {
               <tbody>
                 <tr>
                   <td>Verificada · Aceptada · Éxito</td>
-                  <td><span className="hz-chip hz-chip--success"><Icon name="check-circle" />Verificada</span></td>
+                  <td><span className="av-chip av-chip--success"><Icon name="check-circle" />Verificada</span></td>
                   <td><code>bi-check-circle</code></td>
                   <td>Verde{" "}<code>#047857</code>{" "}sobre{" "}<code>#E8F8F0</code></td>
                   <td>Verde{" "}<code>#6EE7B7</code></td>
                 </tr>
                 <tr>
                   <td>Reintento · Reintento requerido</td>
-                  <td><span className="hz-chip hz-chip--warning"><Icon name="arrow-repeat" />Reintento</span></td>
+                  <td><span className="av-chip av-chip--warning"><Icon name="arrow-repeat" />Reintento</span></td>
                   <td><code>bi-arrow-repeat</code></td>
                   <td>Ámbar{" "}<code>#92400E</code>{" "}sobre{" "}<code>#FEF3E2</code></td>
                   <td>Ámbar{" "}<code>#FFC15A</code></td>
                 </tr>
                 <tr>
                   <td>Rechazada · Rechazo · Error</td>
-                  <td><span className="hz-chip hz-chip--error"><Icon name="x-circle" />Rechazada</span></td>
+                  <td><span className="av-chip av-chip--error"><Icon name="x-circle" />Rechazada</span></td>
                   <td><code>bi-x-circle</code></td>
                   <td>Rojo{" "}<code>#B91C1C</code>{" "}sobre{" "}<code>#FDECEA</code></td>
                   <td>Rojo suave{" "}<code>#FCA5A5</code></td>
                 </tr>
                 <tr>
                   <td>Pendiente · Sin verificar</td>
-                  <td><span className="hz-chip hz-chip--neutral"><Icon name="clock" />Pendiente</span></td>
+                  <td><span className="av-chip av-chip--neutral"><Icon name="clock" />Pendiente</span></td>
                   <td><code>bi-clock</code></td>
                   <td>Gris{" "}<code>#3B4664</code>{" "}sobre{" "}<code>#F4F6FA</code></td>
                   <td>Gris azulado{" "}<code>#B9C9E4</code></td>
                 </tr>
                 <tr>
                   <td>Desconectado</td>
-                  <td><span className="hz-chip hz-chip--warning"><Icon name="plug" />Desconectado</span></td>
+                  <td><span className="av-chip av-chip--warning"><Icon name="plug" />Desconectado</span></td>
                   <td><code>bi-plug</code></td>
                   <td>Ámbar (como Reintento: requiere acción)</td>
                   <td>Ámbar{" "}<code>#FFC15A</code></td>
                 </tr>
                 <tr>
                   <td>Sin dispositivo</td>
-                  <td><span className="hz-chip hz-chip--neutral hz-chip--outline">Sin dispositivo</span></td>
+                  <td><span className="av-chip av-chip--neutral av-chip--outline">Sin dispositivo</span></td>
                   <td>—</td>
                   <td>Gris, variante contorno</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>Información · En revisión</td>
-                  <td><span className="hz-chip hz-chip--info"><Icon name="info-circle" />En revisión</span></td>
+                  <td><span className="av-chip av-chip--info"><Icon name="info-circle" />En revisión</span></td>
                   <td><code>bi-info-circle</code></td>
                   <td>Azul{" "}<code>#0369A1</code>{" "}sobre{" "}<code>#E3F6FA</code></td>
                   <td>No se usa sobre navy</td>
@@ -807,49 +807,49 @@ export default function ComponentesContent() {
           <h3 className="ds-sub">Tiles de acceso{" "}<small>mosaico asimétrico · 6 columnas</small></h3>
           <div className="stage stage--tint">
             <div style={{ display: "grid", gridTemplateColumns: "repeat(6,minmax(0,1fr))", gap: "1rem" }}>
-              <a className="hz-tile hz-tile--signal" href="#superficies" style={{ gridColumn: "span 3", minHeight: "230px" }}>
-                <span className="hz-tile__icon" aria-hidden="true"><Icon name="person-vcard" /></span>
+              <a className="av-tile av-tile--signal" href="#superficies" style={{ gridColumn: "span 3", minHeight: "230px" }}>
+                <span className="av-tile__icon" aria-hidden="true"><Icon name="person-vcard" /></span>
                 <span>
-                  <span className="hz-tile__title" style={{ fontSize: "1.8rem" }}>Gestionar personas</span>
-                  <span className="hz-tile__desc">Listado y verificación de identidad</span>
+                  <span className="av-tile__title" style={{ fontSize: "1.8rem" }}>Gestionar personas</span>
+                  <span className="av-tile__desc">Listado y verificación de identidad</span>
                 </span>
-                <span className="hz-tile__arrow" aria-hidden="true">↗</span>
+                <span className="av-tile__arrow" aria-hidden="true">↗</span>
               </a>
-              <a className="hz-tile hz-tile--night" href="#superficies" style={{ gridColumn: "span 3", minHeight: "230px" }}>
-                <span className="hz-tile__icon" aria-hidden="true"><Icon name="fingerprint" /></span>
+              <a className="av-tile av-tile--night" href="#superficies" style={{ gridColumn: "span 3", minHeight: "230px" }}>
+                <span className="av-tile__icon" aria-hidden="true"><Icon name="fingerprint" /></span>
                 <span>
-                  <span className="hz-tile__title" style={{ fontSize: "1.8rem" }}>Biometría</span>
-                  <span className="hz-tile__desc">Registro y verificación de rostro y huella</span>
+                  <span className="av-tile__title" style={{ fontSize: "1.8rem" }}>Biometría</span>
+                  <span className="av-tile__desc">Registro y verificación de rostro y huella</span>
                 </span>
-                <span className="hz-tile__arrow" aria-hidden="true">↗</span>
+                <span className="av-tile__arrow" aria-hidden="true">↗</span>
               </a>
-              <a className="hz-tile hz-tile--tint" href="#superficies" style={{ gridColumn: "span 2" }}>
-                <span className="hz-tile__icon" aria-hidden="true"><Icon name="file-earmark-text" /></span>
-                <span><span className="hz-tile__title">Procesar documento</span><span className="hz-tile__desc">OCR · nuevo registro</span></span>
-                <span className="hz-tile__arrow" aria-hidden="true">↗</span>
+              <a className="av-tile av-tile--tint" href="#superficies" style={{ gridColumn: "span 2" }}>
+                <span className="av-tile__icon" aria-hidden="true"><Icon name="file-earmark-text" /></span>
+                <span><span className="av-tile__title">Procesar documento</span><span className="av-tile__desc">OCR · nuevo registro</span></span>
+                <span className="av-tile__arrow" aria-hidden="true">↗</span>
               </a>
-              <a className="hz-tile hz-tile--tint" href="#superficies" style={{ gridColumn: "span 2" }}>
-                <span className="hz-tile__icon" aria-hidden="true"><Icon name="card-checklist" /></span>
-                <span><span className="hz-tile__title">Procesos electorales</span><span className="hz-tile__desc">Convocatorias y mesas</span></span>
-                <span className="hz-tile__arrow" aria-hidden="true">↗</span>
+              <a className="av-tile av-tile--tint" href="#superficies" style={{ gridColumn: "span 2" }}>
+                <span className="av-tile__icon" aria-hidden="true"><Icon name="card-checklist" /></span>
+                <span><span className="av-tile__title">Procesos electorales</span><span className="av-tile__desc">Convocatorias y mesas</span></span>
+                <span className="av-tile__arrow" aria-hidden="true">↗</span>
               </a>
-              <a className="hz-tile hz-tile--tint" href="#superficies" style={{ gridColumn: "span 2" }}>
-                <span className="hz-tile__icon" aria-hidden="true"><Icon name="stars" /></span>
-                <span><span className="hz-tile__title">Consultas con IA</span><span className="hz-tile__desc">Sobre identidad y procesos</span></span>
-                <span className="hz-tile__arrow" aria-hidden="true">↗</span>
+              <a className="av-tile av-tile--tint" href="#superficies" style={{ gridColumn: "span 2" }}>
+                <span className="av-tile__icon" aria-hidden="true"><Icon name="stars" /></span>
+                <span><span className="av-tile__title">Consultas con IA</span><span className="av-tile__desc">Sobre identidad y procesos</span></span>
+                <span className="av-tile__arrow" aria-hidden="true">↗</span>
               </a>
-              <div className="hz-tile hz-tile--soon" aria-disabled="true" style={{ gridColumn: "span 3", minHeight: "140px" }}>
-                <span className="hz-tile__icon" aria-hidden="true"><Icon name="person-gear" /></span>
-                <span><span className="hz-tile__title">Gestionar usuarios</span><span className="hz-tile__desc">Cuentas y roles</span></span>
-                <span className="hz-tile__tag hz-tag">Próximamente</span>
+              <div className="av-tile av-tile--soon" aria-disabled="true" style={{ gridColumn: "span 3", minHeight: "140px" }}>
+                <span className="av-tile__icon" aria-hidden="true"><Icon name="person-gear" /></span>
+                <span><span className="av-tile__title">Gestionar usuarios</span><span className="av-tile__desc">Cuentas y roles</span></span>
+                <span className="av-tile__tag av-tag">Próximamente</span>
               </div>
-              <div className="hz-tile hz-tile--soon" aria-disabled="true" style={{ gridColumn: "span 3", minHeight: "140px" }}>
-                <span className="hz-tile__icon" aria-hidden="true"><Icon name="clipboard-data" /></span>
+              <div className="av-tile av-tile--soon" aria-disabled="true" style={{ gridColumn: "span 3", minHeight: "140px" }}>
+                <span className="av-tile__icon" aria-hidden="true"><Icon name="clipboard-data" /></span>
                 <span>
-                  <span className="hz-tile__title">Reportes y auditoría</span>
-                  <span className="hz-tile__desc">Trazabilidad y exportación</span>
+                  <span className="av-tile__title">Reportes y auditoría</span>
+                  <span className="av-tile__desc">Trazabilidad y exportación</span>
                 </span>
-                <span className="hz-tile__tag hz-tag">Próximamente</span>
+                <span className="av-tile__tag av-tag">Próximamente</span>
               </div>
             </div>
           </div>
@@ -863,25 +863,25 @@ export default function ComponentesContent() {
             {" "}atenuados con borde discontinuo y sin enlace. Hover (solo con puntero fino): sube 4 px y la flecha avanza. Foco: anillo navy de 3 px (visible también sobre el tile azul).
           </p>
           <h3 className="ds-sub">Franja de indicadores</h3>
-          <div className="hz-kpis">
-            <div className="hz-kpi">
-              <span className="hz-kpi__label mono">Personas registradas</span>
-              <span className="hz-kpi__value">8</span>
-              <span className="hz-kpi__delta hz-kpi__delta--ok">5 verificadas</span>
-              <span className="hz-kpi__note">3 pendientes de verificación</span>
+          <div className="av-kpis">
+            <div className="av-kpi">
+              <span className="av-kpi__label mono">Personas registradas</span>
+              <span className="av-kpi__value">8</span>
+              <span className="av-kpi__delta av-kpi__delta--ok">5 verificadas</span>
+              <span className="av-kpi__note">3 pendientes de verificación</span>
             </div>
             <ActivityKpi />
-            <div className="hz-kpi">
-              <span className="hz-kpi__label mono">Procesos electorales</span>
-              <span className="hz-kpi__value">0</span>
-              <span className="hz-kpi__delta">0 en total</span>
-              <span className="hz-kpi__note">Abiertos o en borrador</span>
+            <div className="av-kpi">
+              <span className="av-kpi__label mono">Procesos electorales</span>
+              <span className="av-kpi__value">0</span>
+              <span className="av-kpi__delta">0 en total</span>
+              <span className="av-kpi__note">Abiertos o en borrador</span>
             </div>
-            <div className="hz-kpi">
-              <span className="hz-kpi__label mono">Dispositivos</span>
-              <span className="hz-kpi__value">2</span>
-              <span className="hz-kpi__delta hz-kpi__delta--warn">1 desconectado</span>
-              <span className="hz-kpi__note">de 3 dispositivos</span>
+            <div className="av-kpi">
+              <span className="av-kpi__label mono">Dispositivos</span>
+              <span className="av-kpi__value">2</span>
+              <span className="av-kpi__delta av-kpi__delta--warn">1 desconectado</span>
+              <span className="av-kpi__note">de 3 dispositivos</span>
             </div>
           </div>
           <p className="ds-note">
@@ -916,18 +916,18 @@ export default function ComponentesContent() {
           <h3 className="ds-sub">Filas de línea, media y personas</h3>
           <div className="ds-grid ds-grid--3">
             <div>
-              <div className="hz-line">
+              <div className="av-line">
                 <span className="n mono">01</span>
                 <div><h3>Identidad</h3><p>Personas con identificadores propios de Averyn y afiliaciones por institución.</p></div>
               </div>
-              <div className="hz-line" style={{ borderBottom: "1px solid var(--av-hairline)" }}>
+              <div className="av-line" style={{ borderBottom: "1px solid var(--av-hairline)" }}>
                 <span className="n mono">02</span>
                 <div><h3>Biometría</h3><p>Enrolamiento y verificación por huella y rostro.</p></div>
               </div>
             </div>
             <div>
-              <div className="hz-media" style={{ ["--ratio" as string]: "4/5", maxWidth: "200px" }}>
-                <span className="hz-media__hint mono">Imagen · 4:5</span>
+              <div className="av-media" style={{ ["--ratio" as string]: "4/5", maxWidth: "200px" }}>
+                <span className="av-media__hint mono">Imagen · 4:5</span>
               </div>
               <p className="ds-note">
                 Espacio reservado: al insertar un{" "}
@@ -940,8 +940,8 @@ export default function ComponentesContent() {
               </p>
             </div>
             <div>
-              <a className="hz-person" href="#superficies">
-                <span className="hz-person__ini" aria-hidden="true">DD</span>
+              <a className="av-person" href="#superficies">
+                <span className="av-person__ini" aria-hidden="true">DD</span>
                 <strong>Daniel David Turizo Chacon</strong>
                 <small>Core, Arquitectura e Integraciones críticas</small>
                 <span className="mono" style={{ color: "var(--av-blue)", textTransform: "none" }}>@ddturizo-eng ↗</span>
@@ -959,16 +959,16 @@ export default function ComponentesContent() {
           </p>
           <h3 className="ds-sub">Navbar pública</h3>
           <div className="stage stage--sky">
-            <div className="hz-nav">
-              <span className="hz-brandchip"><img src="/assets/images/averyn-logo-font-black.avif" alt="Averyn" /></span>
-              <nav className="hz-pill mono" aria-label="Ejemplo de navegación pública">
+            <div className="av-nav">
+              <span className="av-brandchip"><img src="/assets/images/averyn-logo-font-black.avif" alt="Averyn" /></span>
+              <nav className="av-pill mono" aria-label="Ejemplo de navegación pública">
                 <a href="#navegacion">Qué es</a>
                 <a href="#navegacion">Capacidades</a>
                 <a href="#navegacion">Soluciones</a>
                 <a href="#navegacion">Seguridad</a>
                 <a href="#navegacion">Equipo</a>
               </nav>
-              <a className="hz-btn hz-btn--primary" href="#navegacion">Ingresar</a>
+              <a className="av-btn av-btn--primary" href="#navegacion">Ingresar</a>
             </div>
           </div>
           <p className="ds-note">
@@ -980,9 +980,9 @@ export default function ComponentesContent() {
           </p>
           <h3 className="ds-sub">Dock del panel</h3>
           <div className="stage stage--sky">
-            <div className="hz-nav">
-              <span className="hz-brandchip"><img src="/assets/images/averyn-logo-font-black.avif" alt="Averyn" /></span>
-              <nav className="hz-dock" aria-label="Ejemplo de dock">
+            <div className="av-nav">
+              <span className="av-brandchip"><img src="/assets/images/averyn-logo-font-black.avif" alt="Averyn" /></span>
+              <nav className="av-dock" aria-label="Ejemplo de dock">
                 <ul style={{ display: "contents", listStyle: "none", margin: "0", padding: "0" }}>
                   <li style={{ display: "contents" }}><a href="#navegacion" aria-current="page"><Icon name="grid-1x2" />Dashboard</a></li>
                   <li style={{ display: "contents" }}><a href="#navegacion"><Icon name="person-vcard" />Identidad</a></li>
@@ -1005,10 +1005,10 @@ export default function ComponentesContent() {
           </p>
           <h3 className="ds-sub">Encabezado de página, pestañas y paginación</h3>
           <div className="stage">
-            <p className="hz-crumb mono"><a href="#navegacion">Dashboard</a>{" "}/{" "}<b>Identidad</b></p>
+            <p className="av-crumb mono"><a href="#navegacion">Dashboard</a>{" "}/{" "}<b>Identidad</b></p>
             <div className="row" style={{ justifyContent: "space-between", margin: ".6rem 0 1.4rem" }}>
               <h3 style={{ fontSize: "2.4rem", lineHeight: "1.05" }}>Personas verificadas</h3>
-              <button className="hz-btn hz-btn--primary" type="button">+ Nueva persona</button>
+              <button className="av-btn av-btn--primary" type="button">+ Nueva persona</button>
             </div>
             <TabsPagerDemo />
             {null}
@@ -1096,16 +1096,16 @@ export default function ComponentesContent() {
             El feedback es sobrio y específico: dice qué pasó y qué hacer. Las alertas persisten hasta que se resuelven; los toasts confirman acciones y desaparecen.
           </p>
           <div className="ds-grid ds-grid--2 ds-gap-top">
-            <div className="hz-alert hz-alert--error" role="alert">
+            <div className="av-alert av-alert--error" role="alert">
               <strong>Credenciales inválidas</strong>
               Verifica tu correo y contraseña e inténtalo nuevamente.
             </div>
-            <div className="hz-alert hz-alert--success" role="status"><strong>Autenticación exitosa</strong>Redirigiendo al panel de control…</div>
-            <div className="hz-alert hz-alert--warning" role="status">
+            <div className="av-alert av-alert--success" role="status"><strong>Autenticación exitosa</strong>Redirigiendo al panel de control…</div>
+            <div className="av-alert av-alert--warning" role="status">
               <strong>Dispositivo desconectado</strong>
               El lector LEC-002 no responde. Revisa la conexión.
             </div>
-            <div className="hz-alert hz-alert--info" role="status">
+            <div className="av-alert av-alert--info" role="status">
               <strong>Recuperación no disponible</strong>
               Por ahora, pide a tu administrador que restablezca tu acceso.
             </div>
@@ -1123,7 +1123,7 @@ export default function ComponentesContent() {
             <div className="stage">
               <span className="stage__label mono">Toast</span>
               <ToastButtons />
-              <div className="hz-toast" role="presentation" style={{ marginTop: "1rem", animation: "none" }}>
+              <div className="av-toast" role="presentation" style={{ marginTop: "1rem", animation: "none" }}>
                 <div><b>Persona registrada</b><span>El registro se guardó correctamente.</span></div>
               </div>
               <p className="ds-note">Los botones disparan el toast real (abajo a la derecha). El bloque navy muestra su aspecto.</p>
@@ -1139,11 +1139,11 @@ export default function ComponentesContent() {
             </div>
             <div className="stage">
               <span className="stage__label mono">Tooltip</span>
-              <span className="hz-tip">
-                <button className="hz-iconbtn" type="button" aria-describedby="tip1" aria-label="¿Qué significa Verificada?">
+              <span className="av-tip">
+                <button className="av-iconbtn" type="button" aria-describedby="tip1" aria-label="¿Qué significa Verificada?">
                   <Icon name="question-circle" />
                 </button>
-                <span className="hz-tip__bubble" role="tooltip" id="tip1">Verificada: la identidad superó el umbral</span>
+                <span className="av-tip__bubble" role="tooltip" id="tip1">Verificada: la identidad superó el umbral</span>
               </span>
               <p className="ds-note">
                 Aparece con hover y con foco. Usa un icono de ayuda, nunca el de un estado. Solo complementa: nunca es el único portador de información.

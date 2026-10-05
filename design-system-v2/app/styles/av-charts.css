@@ -57,7 +57,7 @@
 /* Menú de la tarjeta */
 .cc__pop { position: absolute; top: 2.9rem; right: .6rem; z-index: 30; }
 .cc__pop[hidden] { display: none; }
-.cc__pop .hz-menu { box-shadow: var(--av-shadow-md); }
+.cc__pop .av-menu { box-shadow: var(--av-shadow-md); }
 
 /* Control segmentado para periodos */
 .vz-seg { display: inline-flex; padding: 3px; gap: 2px; border: 1px solid var(--av-hairline-strong); border-radius: var(--av-radius-control); background: var(--av-paper-blue); }

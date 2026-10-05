@@ -70,12 +70,12 @@ export function BiometricConsent() {
         <div><dt>Cuánto tiempo</dt><dd>Mientras tengas vínculo con tu institución. Después se eliminan.</dd></div>
         <div><dt>Cómo revocar</dt><dd>Desde tu perfil o escribiendo a tu administrador. Revocar no afecta a tus datos de cuenta.</dd></div>
       </dl>
-      <label className="hz-check"><input type="checkbox" checked={checked} onChange={(e) => { setChecked(e.target.checked); setMsg(""); }} /> Entiendo y acepto el tratamiento de mis datos biométricos.</label>
+      <label className="av-check"><input type="checkbox" checked={checked} onChange={(e) => { setChecked(e.target.checked); setMsg(""); }} /> Entiendo y acepto el tratamiento de mis datos biométricos.</label>
       <div className="pt-actions">
-        <button className="hz-btn hz-btn--primary" type="button" disabled={!checked} onClick={() => { setMsg("Gracias. Continuamos con la captura."); toast({ title: "Consentimiento registrado", text: "Se guardaría con la fecha y la versión del texto.", kind: "ok" }); }}>Aceptar y continuar →</button>
-        <button className="hz-btn hz-btn--ghost" type="button" onClick={() => setMsg("Entendido. Sin tu permiso no podemos usar cámara ni huella; puedes volver cuando quieras.")}>Ahora no</button>
+        <button className="av-btn av-btn--primary" type="button" disabled={!checked} onClick={() => { setMsg("Gracias. Continuamos con la captura."); toast({ title: "Consentimiento registrado", text: "Se guardaría con la fecha y la versión del texto.", kind: "ok" }); }}>Aceptar y continuar →</button>
+        <button className="av-btn av-btn--ghost" type="button" onClick={() => setMsg("Entendido. Sin tu permiso no podemos usar cámara ni huella; puedes volver cuando quieras.")}>Ahora no</button>
       </div>
-      <p className="hz-help" role="status" style={{ marginTop: ".8rem" }}>{msg}</p>
+      <p className="av-help" role="status" style={{ marginTop: ".8rem" }}>{msg}</p>
     </div>
   );
 }

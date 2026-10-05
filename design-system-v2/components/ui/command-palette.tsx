@@ -49,7 +49,7 @@ export function CommandPalette({ commands, openLabel = "Abrir paleta de comandos
   let last = "";
   return (
     <>
-      <button className="hz-btn hz-btn--ghost" type="button" onClick={open}>{openLabel} <kbd className="cp-k">Ctrl K</kbd></button>
+      <button className="av-btn av-btn--ghost" type="button" onClick={open}>{openLabel} <kbd className="cp-k">Ctrl K</kbd></button>
       <dialog ref={dlg} className="cmd" aria-label="Paleta de comandos" onClick={(e) => { if (e.target === dlg.current) dlg.current?.close(); }}>
         <div className="cmd__top">
           <Icon name="search" />

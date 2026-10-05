@@ -71,7 +71,7 @@ export function DataTable<T extends { id: number | string }>({ rows, columns, la
         <div className="ta__bar">
           <div style={{ flex: 1, minWidth: "12rem", maxWidth: "18rem" }}>
             <label className="sr-only" htmlFor={`${id}-q`}>{searchLabel}</label>
-            <input ref={searchRef} className="hz-input" id={`${id}-q`} type="search" placeholder={searchPlaceholder} autoComplete="off" value={q} onChange={(e) => { setQ(e.target.value.trim()); setPage(1); }} />
+            <input ref={searchRef} className="av-input" id={`${id}-q`} type="search" placeholder={searchPlaceholder} autoComplete="off" value={q} onChange={(e) => { setQ(e.target.value.trim()); setPage(1); }} />
           </div>
           <span className="ta__sp" />
           <div className="vz-seg" role="group" aria-label="Densidad de filas">
@@ -84,7 +84,7 @@ export function DataTable<T extends { id: number | string }>({ rows, columns, la
           <b role="status">{total} {total === 1 ? `${noun[0]} seleccionada` : `${noun[1]} seleccionadas`}</b>
           <span className="ta__sp" />
           {bulkActions?.([...sel])}
-          <button className="hz-btn hz-btn--text" type="button" style={{ minHeight: 44 }} onClick={() => { setSel(new Set()); searchRef.current?.focus(); }}>Limpiar selección</button>
+          <button className="av-btn av-btn--text" type="button" style={{ minHeight: 44 }} onClick={() => { setSel(new Set()); searchRef.current?.focus(); }}>Limpiar selección</button>
         </div>
       )}
       <div className="ta__wrap" tabIndex={0} role="region" aria-label={`${label} (desplazable)`}>
@@ -120,7 +120,7 @@ export function DataTable<T extends { id: number | string }>({ rows, columns, la
               );
             }) : (
               <tr><td colSpan={columns.length + 1} className="ta__empty">
-                Sin resultados para «{q}». Prueba con otro nombre o <button type="button" className="hz-btn hz-btn--text" style={{ minHeight: 44, display: "inline" }} onClick={() => { setQ(""); if (searchRef.current) searchRef.current.value = ""; setPage(1); }}>limpia la búsqueda</button>.
+                Sin resultados para «{q}». Prueba con otro nombre o <button type="button" className="av-btn av-btn--text" style={{ minHeight: 44, display: "inline" }} onClick={() => { setQ(""); if (searchRef.current) searchRef.current.value = ""; setPage(1); }}>limpia la búsqueda</button>.
               </td></tr>
             )}
           </tbody>

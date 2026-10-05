@@ -82,7 +82,7 @@ export function EmptyStateExamples() {
           <div key={t} className="es">
             <span style={{ display: "contents" }} dangerouslySetInnerHTML={{ __html: svg }} />
             <b>{t}</b><p>{p}</p>
-            {b && <button className="hz-btn hz-btn--ghost" type="button">{b}</button>}
+            {b && <button className="av-btn av-btn--ghost" type="button">{b}</button>}
           </div>
         );
       })}

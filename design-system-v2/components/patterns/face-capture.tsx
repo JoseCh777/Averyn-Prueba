@@ -72,8 +72,8 @@ export function FaceCapture({ onContinue }: { onContinue?: () => void }) {
         {LIVENESS.map((t, i) => <li key={t} data-s={d.st[i]}><span>{d.st[i] === "done" ? "✓" : i + 1}</span>{t}</li>)}
       </ol>
       <div className="pt-actions">
-        <button className="hz-btn hz-btn--primary" type="button" disabled={d.btn[1]} onClick={click}>{d.btn[0]}</button>
-        <button className="hz-btn hz-btn--ghost" type="button" onClick={play}>Reproducir flujo</button>
+        <button className="av-btn av-btn--primary" type="button" disabled={d.btn[1]} onClick={click}>{d.btn[0]}</button>
+        <button className="av-btn av-btn--ghost" type="button" onClick={play}>Reproducir flujo</button>
       </div>
     </div>
   );

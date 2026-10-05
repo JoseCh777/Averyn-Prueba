@@ -37,8 +37,8 @@ export function TokensExport() {
           </table>
         </div>
         <div className="pt-actions" style={{ display: "flex", flexWrap: "wrap", gap: ".6rem", marginTop: "1rem" }}>
-          <button className="hz-btn hz-btn--primary" type="button" onClick={download}>Descargar tokens.json</button>
-          <button className="hz-btn hz-btn--ghost" type="button" onClick={() => copy(RAW, "tokens.json")}>Copiar JSON</button>
+          <button className="av-btn av-btn--primary" type="button" onClick={download}>Descargar tokens.json</button>
+          <button className="av-btn av-btn--ghost" type="button" onClick={() => copy(RAW, "tokens.json")}>Copiar JSON</button>
         </div>
       </div>
       <div><div className="codeblock" style={{ marginTop: 0 }}><pre id="tk-sample">{sample}</pre><button className="copy" type="button" data-copy="#tk-sample">Copiar</button></div></div>

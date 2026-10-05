@@ -7,7 +7,7 @@ export type Tone = "success" | "warning" | "error" | "info";
 /** Alerta en línea. `error` se anuncia de inmediato (role="alert"); el resto, con calma (role="status"). */
 export function Alert({ tone = "info", title, children, className, ...props }: { tone?: Tone; title?: ReactNode } & HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={cn("hz-alert", `hz-alert--${tone}`, className)} role={tone === "error" ? "alert" : "status"} {...props}>
+    <div className={cn("av-alert", `av-alert--${tone}`, className)} role={tone === "error" ? "alert" : "status"} {...props}>
       {title && <strong>{title}</strong>}
       {children}
     </div>
@@ -35,7 +35,7 @@ export function Chip({ tone = "neutral", icon, variant, wrap, children, classNam
   className?: string;
 }) {
   return (
-    <span className={cn("hz-chip", `hz-chip--${tone}`, variant && `hz-chip--${variant}`, wrap && "hz-chip--wrap", className)}>
+    <span className={cn("av-chip", `av-chip--${tone}`, variant && `av-chip--${variant}`, wrap && "av-chip--wrap", className)}>
       <Icon name={icon ?? DEFAULT_ICON[tone]} />
       {children}
     </span>
@@ -43,11 +43,11 @@ export function Chip({ tone = "neutral", icon, variant, wrap, children, classNam
 }
 
 export function Tag({ children, className }: { children: ReactNode; className?: string }) {
-  return <span className={cn("hz-tag", className)}>{children}</span>;
+  return <span className={cn("av-tag", className)}>{children}</span>;
 }
 
 export function Skeleton({ width, className }: { width?: string | number; className?: string }) {
-  return <span className={cn("hz-skel", className)} style={{ width }} aria-hidden="true" />;
+  return <span className={cn("av-skel", className)} style={{ width }} aria-hidden="true" />;
 }
 
 /** Varias líneas de esqueleto con un único anuncio «Cargando». */
@@ -60,14 +60,14 @@ export function SkeletonLines({ lines = 4, label = "Cargando" }: { lines?: numbe
 }
 
 export function Spinner({ className }: { className?: string }) {
-  return <span className={cn("hz-spin", className)} aria-hidden="true" />;
+  return <span className={cn("av-spin", className)} aria-hidden="true" />;
 }
 
 /** Progreso determinado. `value` entre 0 y 1. */
 export function Progress({ value, label }: { value: number; label: string }) {
   const v = Math.min(1, Math.max(0, value));
   return (
-    <div className="hz-progress" role="progressbar" aria-label={label} aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(v * 100)}>
+    <div className="av-progress" role="progressbar" aria-label={label} aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(v * 100)}>
       <i style={{ ["--p" as string]: v }} />
     </div>
   );
@@ -75,8 +75,8 @@ export function Progress({ value, label }: { value: number; label: string }) {
 
 export function EmptyState({ icon = "inbox", title, children, action }: { icon?: IconName; title: ReactNode; children?: ReactNode; action?: ReactNode }) {
   return (
-    <div className="hz-empty">
-      <span className="hz-empty__icon"><Icon name={icon} /></span>
+    <div className="av-empty">
+      <span className="av-empty__icon"><Icon name={icon} /></span>
       <h4>{title}</h4>
       {children && <p>{children}</p>}
       {action}

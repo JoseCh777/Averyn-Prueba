@@ -3,12 +3,12 @@
 @import "./tokens.css";
 @import "./styles/tokens-ds.css";
 @import "./styles/ds-chrome.css";
-@import "./styles/hz-core.css";
-@import "./styles/hz-advanced.css";
-@import "./styles/hz-patterns.css";
-@import "./styles/hz-charts.css";
-@import "./styles/hz-templates.css";
-@import "./styles/hz-marca.css";
+@import "./styles/av-core.css";
+@import "./styles/av-advanced.css";
+@import "./styles/av-patterns.css";
+@import "./styles/av-charts.css";
+@import "./styles/av-templates.css";
+@import "./styles/av-marca.css";
 @import "./styles/print.css";
 @import "./styles/base.css";
 

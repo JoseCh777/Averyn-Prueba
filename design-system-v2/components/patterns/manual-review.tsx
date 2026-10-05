@@ -73,15 +73,15 @@ export function ManualReview() {
                 <label className="rv__opt"><input type="radio" name="rv-d" checked={decision === "ok"} onChange={() => setDecision("ok")} /><span>Aprobar<small>La identidad se confirma.</small></span></label>
                 <label className="rv__opt"><input type="radio" name="rv-d" checked={decision === "no"} onChange={() => setDecision("no")} /><span>Rechazar<small>La identidad no se confirma.</small></span></label>
               </fieldset>
-              <div className="hz-field">
-                <label className="hz-label" htmlFor={`${id}-m`}>Motivo (obligatorio)</label>
-                <select className="hz-select" id={`${id}-m`} aria-describedby={`${id}-mh`} value={reason} onChange={(e) => setReason(e.target.value)}>
+              <div className="av-field">
+                <label className="av-label" htmlFor={`${id}-m`}>Motivo (obligatorio)</label>
+                <select className="av-select" id={`${id}-m`} aria-describedby={`${id}-mh`} value={reason} onChange={(e) => setReason(e.target.value)}>
                   <option value="">Elige un motivo…</option>{REASONS.map((r) => <option key={r}>{r}</option>)}
                 </select>
-                <span className="hz-help" id={`${id}-mh`}>Queda en la bitácora junto con tu nombre y la hora.</span>
+                <span className="av-help" id={`${id}-mh`}>Queda en la bitácora junto con tu nombre y la hora.</span>
               </div>
-              <div className="hz-field"><label className="hz-label" htmlFor={`${id}-n`}>Nota (opcional)</label><textarea className="hz-textarea" id={`${id}-n`} rows={2} value={note} onChange={(e) => setNote(e.target.value)} /></div>
-              <div className="pt-actions"><button className="hz-btn hz-btn--primary" type="button" disabled={!decision || !reason} onClick={submit}>Registrar decisión</button></div>
+              <div className="av-field"><label className="av-label" htmlFor={`${id}-n`}>Nota (opcional)</label><textarea className="av-textarea" id={`${id}-n`} rows={2} value={note} onChange={(e) => setNote(e.target.value)} /></div>
+              <div className="pt-actions"><button className="av-btn av-btn--primary" type="button" disabled={!decision || !reason} onClick={submit}>Registrar decisión</button></div>
               <p className="rv__audit"><Icon name="journal-check" /> Esta decisión se registra con tu nombre, la fecha y el motivo.</p>
             </>
           )}

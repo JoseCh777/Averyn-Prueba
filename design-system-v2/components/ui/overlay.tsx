@@ -20,9 +20,9 @@ export function Modal({ open, onClose, title, children, actions }: {
     if (!open && d.open) d.close();
   }, [open]);
   return (
-    <dialog ref={ref} className="hz-modal" aria-labelledby={tid} onClose={onClose} onClick={(e) => { if (e.target === ref.current) onClose(); }}>
-      <div className="hz-modal__body"><h3 id={tid}>{title}</h3>{children}</div>
-      {actions && <div className="hz-modal__foot">{actions}</div>}
+    <dialog ref={ref} className="av-modal" aria-labelledby={tid} onClose={onClose} onClick={(e) => { if (e.target === ref.current) onClose(); }}>
+      <div className="av-modal__body"><h3 id={tid}>{title}</h3>{children}</div>
+      {actions && <div className="av-modal__foot">{actions}</div>}
     </dialog>
   );
 }
@@ -31,9 +31,9 @@ export function Modal({ open, onClose, title, children, actions }: {
 export function Tooltip({ text, children }: { text: ReactNode; children: (a: { "aria-describedby": string }) => ReactNode }) {
   const id = useId();
   return (
-    <span className="hz-tip">
+    <span className="av-tip">
       {children({ "aria-describedby": id })}
-      <span className="hz-tip__bubble" role="tooltip" id={id}>{text}</span>
+      <span className="av-tip__bubble" role="tooltip" id={id}>{text}</span>
     </span>
   );
 }
@@ -53,9 +53,9 @@ export function ToastProvider({ children }: { children: ReactNode }) {
   return (
     <ToastCtx.Provider value={push}>
       {children}
-      <div className="hz-toasts" role="status" aria-live="polite">
+      <div className="av-toasts" role="status" aria-live="polite">
         {items.map((t) => (
-          <div key={t.id} className={cn("hz-toast", t.kind !== "ok" && `hz-toast--${t.kind}`)}>
+          <div key={t.id} className={cn("av-toast", t.kind !== "ok" && `av-toast--${t.kind}`)}>
             <div><b>{t.title}</b>{t.text && <span>{t.text}</span>}</div>
           </div>
         ))}

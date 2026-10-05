@@ -5,7 +5,7 @@ import { Icon } from "./icon";
 
 export function BrandChip({ logoSrc, alt = "Averyn" }: { logoSrc: string; alt?: string }) {
   // eslint-disable-next-line @next/next/no-img-element
-  return <span className="hz-brandchip"><img src={logoSrc} alt={alt} /></span>;
+  return <span className="av-brandchip"><img src={logoSrc} alt={alt} /></span>;
 }
 
 export type DockItem = { label: string; href?: string; current?: boolean };
@@ -13,7 +13,7 @@ export type DockItem = { label: string; href?: string; current?: boolean };
 /** Dock de módulos. Sin `href`, el módulo aún no existe y se muestra atenuado («Próximamente»). */
 export function Dock({ items, label = "Módulos" }: { items: DockItem[]; label?: string }) {
   return (
-    <nav className="hz-dock" aria-label={label}>
+    <nav className="av-dock" aria-label={label}>
       {items.map((it) =>
         it.href ? (
           <a key={it.label} href={it.href} aria-current={it.current ? "page" : undefined}>{it.label}</a>
@@ -27,8 +27,8 @@ export function Dock({ items, label = "Módulos" }: { items: DockItem[]; label?:
 
 export function Avatar({ initials, name, role, ...props }: { initials: string; name: string; role?: string } & React.ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
-    <button type="button" className="hz-avatar" {...props}>
-      <span className="hz-avatar__c" aria-hidden="true">{initials}</span>
+    <button type="button" className="av-avatar" {...props}>
+      <span className="av-avatar__c" aria-hidden="true">{initials}</span>
       <span><b>{name}</b>{role && <small>{role}</small>}</span>
     </button>
   );
@@ -36,7 +36,7 @@ export function Avatar({ initials, name, role, ...props }: { initials: string; n
 
 export function Breadcrumb({ items }: { items: { label: string; href?: string }[] }) {
   return (
-    <nav className="hz-crumb mono" aria-label="Ruta de navegación">
+    <nav className="av-crumb mono" aria-label="Ruta de navegación">
       {items.map((it, i) => (
         <span key={it.label}>
           {i > 0 && " / "}
@@ -65,7 +65,7 @@ export function Tabs({ tabs, label, defaultIndex = 0 }: { tabs: { label: string;
   };
   return (
     <div>
-      <div className="hz-tabs" role="tablist" aria-label={label} onKeyDown={onKey}>
+      <div className="av-tabs" role="tablist" aria-label={label} onKeyDown={onKey}>
         {tabs.map((t, i) => (
           <button
             key={t.label}
@@ -73,7 +73,7 @@ export function Tabs({ tabs, label, defaultIndex = 0 }: { tabs: { label: string;
             id={`${base}-t${i}`}
             role="tab"
             type="button"
-            className="hz-tab"
+            className="av-tab"
             aria-selected={i === active}
             aria-controls={`${base}-p${i}`}
             tabIndex={i === active ? 0 : -1}
@@ -84,7 +84,7 @@ export function Tabs({ tabs, label, defaultIndex = 0 }: { tabs: { label: string;
         ))}
       </div>
       {tabs.map((t, i) => (
-        <div key={t.label} id={`${base}-p${i}`} role="tabpanel" className="hz-tabpanel" aria-labelledby={`${base}-t${i}`} hidden={i !== active} tabIndex={0}>
+        <div key={t.label} id={`${base}-p${i}`} role="tabpanel" className="av-tabpanel" aria-labelledby={`${base}-t${i}`} hidden={i !== active} tabIndex={0}>
           {t.content}
         </div>
       ))}
@@ -94,7 +94,7 @@ export function Tabs({ tabs, label, defaultIndex = 0 }: { tabs: { label: string;
 
 export function Pager({ page, pages, onPage }: { page: number; pages: number; onPage: (p: number) => void }) {
   return (
-    <div className="hz-pager" role="navigation" aria-label="Paginación">
+    <div className="av-pager" role="navigation" aria-label="Paginación">
       <button type="button" disabled={page <= 1} aria-label="Anterior" onClick={() => onPage(page - 1)}>←</button>
       {Array.from({ length: pages }, (_, i) => i + 1).map((p) => (
         <button key={p} type="button" aria-current={p === page ? "page" : undefined} onClick={() => onPage(p)}>{p}</button>
@@ -110,8 +110,8 @@ export function SimpleMenu({ label, items }: { label: ReactNode; items: { label:
   const id = useId();
   return (
     <div style={{ position: "relative", display: "inline-block" }}>
-      <button type="button" className="hz-btn hz-btn--ghost" aria-haspopup="menu" aria-expanded={open} aria-controls={id} onClick={() => setOpen((o) => !o)} onKeyDown={(e) => e.key === "Escape" && setOpen(false)}>{label}</button>
-      <div className={cn("hz-menu")} id={id} role="menu" hidden={!open}>
+      <button type="button" className="av-btn av-btn--ghost" aria-haspopup="menu" aria-expanded={open} aria-controls={id} onClick={() => setOpen((o) => !o)} onKeyDown={(e) => e.key === "Escape" && setOpen(false)}>{label}</button>
+      <div className={cn("av-menu")} id={id} role="menu" hidden={!open}>
         {items.map((it) => (
           <button key={it.label} type="button" role="menuitem" onClick={() => { setOpen(false); it.onSelect(); }}>
             {it.icon && <Icon name={it.icon} />}{it.label}

@@ -28,11 +28,11 @@ export function Bitacora({ state }: S) {
     );
   return (
     <AppShell active="p">
-      <PageHead crumb={<>Panel / <b>Bitácora</b></>} title="Bitácora de auditoría" sub="Quién hizo qué y cuándo. Solo lectura." actions={<button className="hz-btn hz-btn--ghost" type="button">Exportar CSV</button>} />
+      <PageHead crumb={<>Panel / <b>Bitácora</b></>} title="Bitácora de auditoría" sub="Quién hizo qué y cuándo. Solo lectura." actions={<button className="av-btn av-btn--ghost" type="button">Exportar CSV</button>} />
       <div className="tp-bar">
         <span className="tp-btn"><Icon name="calendar3" />Últimos 30 días<Icon name="chevron-down" /></span>
-        <select className="hz-select" aria-label="Tipo de evento"><option>Todos los eventos</option></select>
-        <input className="hz-input" type="search" placeholder="Buscar persona o dispositivo" aria-label="Buscar" />
+        <select className="av-select" aria-label="Tipo de evento"><option>Todos los eventos</option></select>
+        <input className="av-input" type="search" placeholder="Buscar persona o dispositivo" aria-label="Buscar" />
       </div>
       <div className="tp-card">{data}</div>
     </AppShell>
@@ -41,7 +41,7 @@ export function Bitacora({ state }: S) {
 
 /* ---------- Configuración ---------- */
 const Row = ({ on, label, desc }: { on: boolean; label: string; desc: string }) => (
-  <div className="tp-row"><div><b>{label}</b><small>{desc}</small></div><button className="hz-switch" role="switch" aria-checked={on} aria-label={label} type="button" /></div>
+  <div className="tp-row"><div><b>{label}</b><small>{desc}</small></div><button className="av-switch" role="switch" aria-checked={on} aria-label={label} type="button" /></div>
 );
 
 export function Configuracion(_: S) {
@@ -52,13 +52,13 @@ export function Configuracion(_: S) {
         <nav className="tp-sub-nav" aria-label="Secciones"><a href="#">General</a><a href="#">Seguridad</a><a href="#" aria-current="page">Biometría</a><a href="#">Notificaciones</a><a href="#">Dispositivos</a></nav>
         <div>
           <section className="tp-card"><h2>Umbral de verificación</h2><p>Puntaje mínimo para aceptar una verificación.</p>
-            <div className="hz-field" style={{ maxWidth: "14rem" }}><label className="hz-label" htmlFor="u">Umbral (0 a 1)</label><input className="hz-input" id="u" defaultValue="0.68" readOnly aria-describedby="uh" /><span className="hz-help" id="uh">Lo define el servidor. Cambiarlo requiere permiso de Administrador.</span></div></section>
+            <div className="av-field" style={{ maxWidth: "14rem" }}><label className="av-label" htmlFor="u">Umbral (0 a 1)</label><input className="av-input" id="u" defaultValue="0.68" readOnly aria-describedby="uh" /><span className="av-help" id="uh">Lo define el servidor. Cambiarlo requiere permiso de Administrador.</span></div></section>
           <section className="tp-card"><h2>Dispositivos</h2><p>Qué hacer cuando algo falla.</p>
             <Row on label="Avisar si un dispositivo se desconecta" desc="Notificación y banner en el panel." /><Row on label="Reintentar la lectura automáticamente" desc="Hasta 2 veces antes de pedir ayuda." /><Row on={false} label="Permitir verificación sin conexión" desc="Desactivado: requiere conexión con el servidor." /></section>
           <section className="tp-card"><h2>Retención de datos</h2><p>Cuánto tiempo se conservan las plantillas biométricas tras el fin del vínculo.</p>
-            <div className="hz-field" style={{ maxWidth: "20rem" }}><label className="hz-label" htmlFor="r">Eliminar a los</label><select className="hz-select" id="r"><option>30 días</option><option>90 días</option></select></div></section>
-          <div className="tp-save"><span><Icon name="dot" style={{ color: "var(--av-blue)" }} />Tienes cambios sin guardar.</span><span style={{ display: "flex", gap: ".6rem" }}><button className="hz-btn hz-btn--ghost" type="button">Descartar</button><button className="hz-btn hz-btn--primary" type="button">Guardar cambios</button></span></div>
-          <section className="tp-card tp-danger" style={{ marginTop: "1.4rem" }}><h2>Zona de peligro</h2><p>Estas acciones no se pueden deshacer.</p><button className="hz-btn hz-btn--danger" type="button">Revocar todos los consentimientos…</button></section>
+            <div className="av-field" style={{ maxWidth: "20rem" }}><label className="av-label" htmlFor="r">Eliminar a los</label><select className="av-select" id="r"><option>30 días</option><option>90 días</option></select></div></section>
+          <div className="tp-save"><span><Icon name="dot" style={{ color: "var(--av-blue)" }} />Tienes cambios sin guardar.</span><span style={{ display: "flex", gap: ".6rem" }}><button className="av-btn av-btn--ghost" type="button">Descartar</button><button className="av-btn av-btn--primary" type="button">Guardar cambios</button></span></div>
+          <section className="tp-card tp-danger" style={{ marginTop: "1.4rem" }}><h2>Zona de peligro</h2><p>Estas acciones no se pueden deshacer.</p><button className="av-btn av-btn--danger" type="button">Revocar todos los consentimientos…</button></section>
         </div>
       </div>
     </AppShell>
@@ -67,8 +67,8 @@ export function Configuracion(_: S) {
 
 /* ---------- Detalle de persona ---------- */
 export function Persona({ state }: S) {
-  const feed = state === "loading" ? <Skel n={5} /> : state === "error" ? <div className="hz-alert hz-alert--error" role="alert"><strong>No pudimos cargar la actividad</strong>Los datos de la persona sí se cargaron.</div> : (
-    <ul className="hz-feed">
+  const feed = state === "loading" ? <Skel n={5} /> : state === "error" ? <div className="av-alert av-alert--error" role="alert"><strong>No pudimos cargar la actividad</strong>Los datos de la persona sí se cargaron.</div> : (
+    <ul className="av-feed">
       <li><b>Verificación biométrica</b><span>Rostro verificado · 0.82</span><small>HOY, 10:42 · CAM-001</small></li>
       <li><b>Inicio de sesión</b><span>Correcto</span><small>AYER, 08:15 · WEB</small></li>
       <li className="retry"><b>Verificación biométrica</b><span>Huella con reintento</span><small>30 SEP, 12:20 · LEC-001</small></li>
@@ -77,10 +77,10 @@ export function Persona({ state }: S) {
   );
   return (
     <AppShell active="personas">
-      <p className="hz-crumb mono" style={{ marginBottom: "1.2rem" }}>Panel / Personas / <b>Ana Lucía Pérez</b></p>
+      <p className="av-crumb mono" style={{ marginBottom: "1.2rem" }}>Panel / Personas / <b>Ana Lucía Pérez</b></p>
       <div className="tp-head">
         <div className="tp-who"><span className="tp-ava" aria-hidden="true">AP</span><div><h1>Ana Lucía Pérez</h1><div className="tp-chips"><Chip tone="success">Activa</Chip><Chip tone="info" icon="fingerprint">Rostro y huella</Chip><Chip tone="neutral" icon="mortarboard">Estudiante</Chip></div></div></div>
-        <div style={{ display: "flex", gap: ".6rem" }}><button className="hz-btn hz-btn--primary" type="button">Editar datos</button><button className="tp-btn" type="button" aria-label="Más acciones"><Icon name="three-dots" /></button></div>
+        <div style={{ display: "flex", gap: ".6rem" }}><button className="av-btn av-btn--primary" type="button">Editar datos</button><button className="tp-btn" type="button" aria-label="Más acciones"><Icon name="three-dots" /></button></div>
       </div>
       <div className="tp-split">
         <div>
@@ -104,9 +104,9 @@ export function Asistente(_: S) {
           {steps.map((s, i) => { const k = i < 2 ? "done" : i === 2 ? "now" : "pending"; return <li key={s} className="st__li" data-s={k} aria-current={i === 2 ? "step" : undefined}><span className="st__n" aria-hidden="true">{k === "done" ? "✓" : i + 1}</span><span className="st__t">{s}</span></li>; })}
         </ol>
         <h2>Padrón electoral</h2><p>Sube el listado de personas habilitadas para votar. Aceptamos CSV o Excel.</p>
-        <div className="hz-drop" tabIndex={0} role="button" aria-label="Subir padrón"><span className="ic"><Icon name="cloud-arrow-up" /></span><b>Arrastra el archivo aquí</b><p>o haz clic para elegirlo · CSV o XLSX · máx. 10 MB</p></div>
-        <div style={{ marginTop: "1.1rem" }} className="hz-alert hz-alert--warning" role="status"><strong>1,240 personas leídas · 3 sin documento</strong>Puedes continuar: las 3 filas se pueden corregir luego en Personas.</div>
-        <div className="tp-foot-bar"><span className="st__count">Paso 3 de 4</span><span style={{ display: "flex", gap: ".6rem" }}><button className="hz-btn hz-btn--ghost" type="button">Atrás</button><button className="hz-btn hz-btn--primary" type="button">Siguiente →</button></span></div>
+        <div className="av-drop" tabIndex={0} role="button" aria-label="Subir padrón"><span className="ic"><Icon name="cloud-arrow-up" /></span><b>Arrastra el archivo aquí</b><p>o haz clic para elegirlo · CSV o XLSX · máx. 10 MB</p></div>
+        <div style={{ marginTop: "1.1rem" }} className="av-alert av-alert--warning" role="status"><strong>1,240 personas leídas · 3 sin documento</strong>Puedes continuar: las 3 filas se pueden corregir luego en Personas.</div>
+        <div className="tp-foot-bar"><span className="st__count">Paso 3 de 4</span><span style={{ display: "flex", gap: ".6rem" }}><button className="av-btn av-btn--ghost" type="button">Atrás</button><button className="av-btn av-btn--primary" type="button">Siguiente →</button></span></div>
       </div>
     </AppShell>
   );
@@ -118,7 +118,7 @@ function Notice({ icon, tone = "", title, desc, time, unread, action }: { icon: 
     <div className={`tp-n${unread ? " unread" : ""}`}>
       <span className={`tp-n__ic ${tone}`}><Icon name={icon} /></span>
       <div><b>{title}</b><small>{desc} · {time}</small></div>
-      <button className="hz-btn hz-btn--text" type="button" style={{ minHeight: 44 }}>{action}</button>
+      <button className="av-btn av-btn--text" type="button" style={{ minHeight: 44 }}>{action}</button>
     </div>
   );
 }
@@ -136,9 +136,9 @@ export function Notificaciones({ state }: S) {
   );
   return (
     <AppShell active="p">
-      <PageHead crumb={<>Panel / <b>Notificaciones</b></>} title="Notificaciones" sub="Lo que pasó mientras no mirabas." actions={<button className="hz-btn hz-btn--ghost" type="button">Marcar todas como leídas</button>} />
+      <PageHead crumb={<>Panel / <b>Notificaciones</b></>} title="Notificaciones" sub="Lo que pasó mientras no mirabas." actions={<button className="av-btn av-btn--ghost" type="button">Marcar todas como leídas</button>} />
       <div className="tp-card">
-        <div className="hz-tabs" role="tablist" aria-label="Filtro" style={{ marginBottom: "1rem" }}><button className="hz-tab" role="tab" aria-selected="true" type="button">Todas · 5</button><button className="hz-tab" role="tab" aria-selected="false" type="button">Sin leer · 3</button></div>
+        <div className="av-tabs" role="tablist" aria-label="Filtro" style={{ marginBottom: "1rem" }}><button className="av-tab" role="tab" aria-selected="true" type="button">Todas · 5</button><button className="av-tab" role="tab" aria-selected="false" type="button">Sin leer · 3</button></div>
         {data}
       </div>
     </AppShell>
@@ -156,18 +156,18 @@ export function Perfil(_: S) {
         <div>
           <section className="tp-card"><h2>Datos personales</h2><p>El correo no se puede cambiar desde aquí.</p>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
-              <div className="hz-field"><label className="hz-label" htmlFor="n">Nombre</label><input className="hz-input" id="n" defaultValue="Usuario Demo" /></div>
-              <div className="hz-field"><label className="hz-label" htmlFor="t">Teléfono</label><input className="hz-input" id="t" defaultValue="+51 999 000 111" /></div>
-              <div className="hz-field" style={{ gridColumn: "1/-1" }}><label className="hz-label" htmlFor="c">Correo</label><input className="hz-input" id="c" defaultValue="usuario@ejemplo.edu" readOnly /></div>
-            </div><div style={{ marginTop: "1rem" }}><button className="hz-btn hz-btn--primary" type="button">Guardar</button></div></section>
+              <div className="av-field"><label className="av-label" htmlFor="n">Nombre</label><input className="av-input" id="n" defaultValue="Usuario Demo" /></div>
+              <div className="av-field"><label className="av-label" htmlFor="t">Teléfono</label><input className="av-input" id="t" defaultValue="+51 999 000 111" /></div>
+              <div className="av-field" style={{ gridColumn: "1/-1" }}><label className="av-label" htmlFor="c">Correo</label><input className="av-input" id="c" defaultValue="usuario@ejemplo.edu" readOnly /></div>
+            </div><div style={{ marginTop: "1rem" }}><button className="av-btn av-btn--primary" type="button">Guardar</button></div></section>
           <section className="tp-card"><h2>Seguridad</h2><p>Contraseña y sesiones abiertas.</p>
-            <div className="tp-row"><div><b>Contraseña</b><small>Cambiada hace 3 meses</small></div><button className="hz-btn hz-btn--ghost" type="button">Cambiar</button></div>
+            <div className="tp-row"><div><b>Contraseña</b><small>Cambiada hace 3 meses</small></div><button className="av-btn av-btn--ghost" type="button">Cambiar</button></div>
             <div className="tp-row"><div><b>Este dispositivo · Windows, Edge</b><small>Lima · activa ahora</small></div><Chip tone="info">Sesión actual</Chip></div>
-            <div className="tp-row"><div><b>Móvil · Android, Chrome</b><small>Lima · hace 2 días</small></div><button className="hz-btn hz-btn--ghost" type="button">Cerrar sesión</button></div></section>
+            <div className="tp-row"><div><b>Móvil · Android, Chrome</b><small>Lima · hace 2 días</small></div><button className="av-btn av-btn--ghost" type="button">Cerrar sesión</button></div></section>
           <section className="tp-card"><h2>Biometría y privacidad</h2><p>Guardamos una plantilla matemática, nunca fotos.</p>
             <div className="tp-row"><div><b>Rostro</b><small>Registrado el 29 sep</small></div><Chip tone="success">Activo</Chip></div>
             <div className="tp-row"><div><b>Huella</b><small>2 dedos · 29 sep</small></div><Chip tone="success">Activo</Chip></div>
-            <div style={{ marginTop: ".6rem" }}><button className="hz-btn hz-btn--text" type="button" style={{ color: "var(--av-error-text)" }}>Retirar mi consentimiento…</button></div></section>
+            <div style={{ marginTop: ".6rem" }}><button className="av-btn av-btn--text" type="button" style={{ color: "var(--av-error-text)" }}>Retirar mi consentimiento…</button></div></section>
         </div>
       </div>
     </AppShell>
@@ -262,7 +262,7 @@ export function Invitacion({ state }: S) {
   else if (state === "usada") body = (<><h1 className="tp-h1">Esta invitación ya se usó</h1><p className="tp-p">Si ya creaste tu cuenta, ingresa con tu correo y tu contraseña.</p><Wide>Ingresar →</Wide></>);
   else body = (<><span className="mono" style={{ color: "var(--av-gray-500)" }}>Invitación de Carlos Mendoza</span><h1 className="tp-h1">Te invitaron a Averyn</h1><p className="tp-p"><b>Universidad Horizonte</b> te invitó a crear tu cuenta. Tardas unos minutos.</p>
     <AField id="inv-n" label="Nombre completo" value="Ana Torres" /><AField id="inv-p" label="Crea una contraseña" type="password" placeholder="Al menos 10 caracteres" />
-    <label className="hz-check"><input type="checkbox" /> Acepto los términos de uso</label>
+    <label className="av-check"><input type="checkbox" /> Acepto los términos de uso</label>
     <p className="tp-p" style={{ margin: 0 }}>El consentimiento para usar tu rostro y huella se pide más adelante, antes de la primera captura.</p><Wide>Crear mi cuenta →</Wide></>);
   return <AuthFrame claim="Bienvenido a tu panel.">{body}</AuthFrame>;
 }
@@ -288,7 +288,7 @@ export function Escrutinio({ state }: S) {
   return (
     <AppShell active="p">
       <PageHead crumb={<>Panel / Electoral / <b>Escrutinio</b></>} title="Escrutinio" sub="Elecciones de ejemplo · actualizado hace 2 min"
-        actions={<><Chip tone={fin ? "success" : "info"} icon={fin ? "check-circle" : "hourglass-split"}>{fin ? "Resultados finales" : "En conteo"}</Chip> <button className="hz-btn hz-btn--ghost" type="button">Exportar acta</button></>} />
+        actions={<><Chip tone={fin ? "success" : "info"} icon={fin ? "check-circle" : "hourglass-split"}>{fin ? "Resultados finales" : "En conteo"}</Chip> <button className="av-btn av-btn--ghost" type="button">Exportar acta</button></>} />
       <div className="kpi-grid" style={{ marginBottom: "1rem" }}>
         <Kpi l="Participación" v={`${part}%`} n={`Meta 80% · ${fin ? "cumplida" : "por debajo"}`} /><Kpi l="Mesas reportadas" v={fin ? "24 de 24" : "18 de 24"} n={fin ? "Todas las mesas" : "6 por reportar"} /><Kpi l="Votos emitidos" v={fmtN(tot)} n="de 2,712 habilitados" />
       </div>
@@ -320,8 +320,8 @@ export function Mesas({ state }: S) {
   );
   return (
     <AppShell active="p">
-      <PageHead crumb={<>Panel / Electoral / <b>Mesas y padrón</b></>} title="Mesas y padrón" sub="24 mesas · 2,712 personas habilitadas" actions={<><button className="hz-btn hz-btn--ghost" type="button">Importar padrón</button> <button className="hz-btn hz-btn--primary" type="button">Nueva mesa</button></>} />
-      <div className="tp-bar"><input className="hz-input" type="search" placeholder="Buscar mesa o responsable" aria-label="Buscar" /><select className="hz-select" aria-label="Estado"><option>Todos los estados</option></select></div>
+      <PageHead crumb={<>Panel / Electoral / <b>Mesas y padrón</b></>} title="Mesas y padrón" sub="24 mesas · 2,712 personas habilitadas" actions={<><button className="av-btn av-btn--ghost" type="button">Importar padrón</button> <button className="av-btn av-btn--primary" type="button">Nueva mesa</button></>} />
+      <div className="tp-bar"><input className="av-input" type="search" placeholder="Buscar mesa o responsable" aria-label="Buscar" /><select className="av-select" aria-label="Estado"><option>Todos los estados</option></select></div>
       <div className="tp-card">{data}</div>
     </AppShell>
   );
@@ -344,7 +344,7 @@ export function Roles({ state }: S) {
           })}</tr>)}</tbody></table>
       </div>
       {dirty
-        ? <div className="tp-save"><span><Icon name="dot" style={{ color: "var(--av-blue)" }} />Tienes 1 cambio sin guardar.</span><span style={{ display: "flex", gap: ".6rem" }}><button className="hz-btn hz-btn--ghost" type="button">Descartar</button><button className="hz-btn hz-btn--primary" type="button">Guardar cambios</button></span></div>
+        ? <div className="tp-save"><span><Icon name="dot" style={{ color: "var(--av-blue)" }} />Tienes 1 cambio sin guardar.</span><span style={{ display: "flex", gap: ".6rem" }}><button className="av-btn av-btn--ghost" type="button">Descartar</button><button className="av-btn av-btn--primary" type="button">Guardar cambios</button></span></div>
         : <p className="tp-p" style={{ marginTop: "1rem" }}>El rol Administrador siempre puede administrar usuarios: no se puede quitar para evitar que la institución se quede sin administración.</p>}
     </AppShell>
   );

@@ -57,7 +57,7 @@ export function HeroSlider() {
   const pct = `${Math.round(p * 100)} %`;
   return (
     <div className="stage ds-gap-top">
-      <label className="hz-label" htmlFor={id}>Progreso de scroll <span className="mono">{pct}</span></label>
+      <label className="av-label" htmlFor={id}>Progreso de scroll <span className="mono">{pct}</span></label>
       <input id={id} className="demo-slider" type="range" min={0} max={100} value={Math.round(p * 100)} aria-valuetext={pct} onChange={(e) => setProgress(Number(e.target.value) / 100)} />
     </div>
   );

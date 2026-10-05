@@ -32,7 +32,7 @@
 @media print {
   html, body { background: #fff !important; }
   body { margin: 0; color: #000; -webkit-print-color-adjust: economy; print-color-adjust: economy; }
-  .no-print, nav, .hz-nav, .hz-dock, .hz-banner, .hz-toasts, button, dialog { display: none !important; }
+  .no-print, nav, .av-nav, .av-dock, .av-banner, .av-toasts, button, dialog { display: none !important; }
   .pr-sheet { width: auto; min-height: 0; margin: 0; padding: 0; box-shadow: none; }
   .pr-doc { font-size: 10.5pt; }
   a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 8pt; color: #3B4664; word-break: break-all; }

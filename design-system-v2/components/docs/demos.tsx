@@ -16,8 +16,8 @@ export function ButtonLoadDemo() {
   const toast = useToast();
   const [busy, setBusy] = useState(false);
   return (
-    <button className="hz-btn hz-btn--primary" type="button" disabled={busy} onClick={() => { setBusy(true); setTimeout(() => { setBusy(false); toast({ title: "Verificación completada", text: "Ana Torres · Rostro verificado", kind: "ok" }); }, 1400); }}>
-      <span className="hz-spin" aria-hidden="true" hidden={!busy} /><span>{busy ? "Verificando..." : "Probar estado de carga"}</span>
+    <button className="av-btn av-btn--primary" type="button" disabled={busy} onClick={() => { setBusy(true); setTimeout(() => { setBusy(false); toast({ title: "Verificación completada", text: "Ana Torres · Rostro verificado", kind: "ok" }); }, 1400); }}>
+      <span className="av-spin" aria-hidden="true" hidden={!busy} /><span>{busy ? "Verificando..." : "Probar estado de carga"}</span>
     </button>
   );
 }
@@ -47,12 +47,12 @@ export function AvatarMenuDemo() {
       <div className="row" style={{ gap: 8 }}>
         <IconButton aria-label="Buscar"><Icon name="search" /></IconButton>
         <IconButton aria-label="Notificaciones, 3 sin leer" badge={3}><Icon name="bell" /></IconButton>
-        <button ref={btn} className="hz-avatar" type="button" aria-haspopup="menu" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
-          <span className="hz-avatar__c" aria-hidden="true">UD</span><span><b>Usuario Demo</b><small>Administrador</small></span>
+        <button ref={btn} className="av-avatar" type="button" aria-haspopup="menu" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
+          <span className="av-avatar__c" aria-hidden="true">UD</span><span><b>Usuario Demo</b><small>Administrador</small></span>
         </button>
       </div>
       <div className="row" style={{ justifyContent: "flex-end", marginTop: ".8rem" }}>
-        <div className="hz-menu" role="menu" hidden={!open}>
+        <div className="av-menu" role="menu" hidden={!open}>
           <button type="button" role="menuitem" onClick={() => setOpen(false)}><Icon name="box-arrow-right" />Cerrar sesión</button>
         </div>
       </div>
@@ -75,9 +75,9 @@ export function ToastButtons() {
   const toast = useToast();
   return (
     <div className="row row--col">
-      <button className="hz-btn hz-btn--ghost" type="button" onClick={() => toast({ title: "Persona registrada", text: "El registro se guardó correctamente.", kind: "ok" })}>Registrar persona</button>
-      <button className="hz-btn hz-btn--ghost" type="button" onClick={() => toast({ title: "Verificación rechazada", text: "La huella no coincidió. Puedes reintentar.", kind: "bad" })}>Rechazar verificación</button>
-      <button className="hz-btn hz-btn--ghost" type="button" onClick={() => toast({ title: "Reintento requerido", text: "La calidad de la captura es baja.", kind: "warn" })}>Pedir reintento</button>
+      <button className="av-btn av-btn--ghost" type="button" onClick={() => toast({ title: "Persona registrada", text: "El registro se guardó correctamente.", kind: "ok" })}>Registrar persona</button>
+      <button className="av-btn av-btn--ghost" type="button" onClick={() => toast({ title: "Verificación rechazada", text: "La huella no coincidió. Puedes reintentar.", kind: "bad" })}>Rechazar verificación</button>
+      <button className="av-btn av-btn--ghost" type="button" onClick={() => toast({ title: "Reintento requerido", text: "La calidad de la captura es baja.", kind: "warn" })}>Pedir reintento</button>
     </div>
   );
 }
@@ -87,7 +87,7 @@ export function ModalDemo() {
   const [open, setOpen] = useState(false);
   return (
     <>
-      <button className="hz-btn hz-btn--danger" type="button" onClick={() => setOpen(true)}>Eliminar persona</button>
+      <button className="av-btn av-btn--danger" type="button" onClick={() => setOpen(true)}>Eliminar persona</button>
       <Modal open={open} onClose={() => setOpen(false)} title="¿Eliminar a Ana Torres?"
         actions={<><Button variant="ghost" onClick={() => setOpen(false)}>Cancelar</Button><Button variant="danger" onClick={() => { setOpen(false); toast({ title: "Persona eliminada", text: "Ana Torres se eliminó del catálogo.", kind: "bad" }); }}>Eliminar</Button></>}>
         <p>Se borrarán su registro y sus datos biométricos. Esta acción no se puede deshacer.</p>
@@ -133,7 +133,7 @@ export function AccordionDemo() {
   const [multi, setMulti] = useState(false);
   return (
     <>
-      <label className="hz-switch" style={{ marginBottom: "1rem", display: "inline-flex", alignItems: "center", gap: ".7rem", minHeight: 44 }} htmlFor={id}>
+      <label className="av-switch" style={{ marginBottom: "1rem", display: "inline-flex", alignItems: "center", gap: ".7rem", minHeight: 44 }} htmlFor={id}>
         <input type="checkbox" id={id} checked={multi} onChange={(e) => setMulti(e.target.checked)} /> <span>Permitir abrir varios</span>
       </label>
       <Accordion multiple={multi} items={[
@@ -151,16 +151,16 @@ export function StepperDemo() {
   const [name, setName] = useState("");
   const [err, setErr] = useState(false);
   const input = useRef<HTMLInputElement>(null);
-  const info = (t: string) => <div className="hz-alert hz-alert--info"><strong>Vista de ejemplo</strong>{t}</div>;
+  const info = (t: string) => <div className="av-alert av-alert--info"><strong>Vista de ejemplo</strong>{t}</div>;
   return (
     <Stepper label="Pasos del registro" onFinish={() => { toast({ title: "Persona registrada", text: "Aquí se guardaría el registro.", kind: "ok" }); setName(""); }}
       steps={[
         { title: "Datos", heading: "Datos de la persona", validate: () => { const bad = !name.trim(); setErr(bad); if (bad) input.current?.focus(); return !bad; },
           content: (<>
             <p>Empieza por lo básico. Puedes corregirlo después.</p>
-            <div className="hz-field"><label className="hz-label" htmlFor="st-name">Nombre completo</label>
-              <input ref={input} className="hz-input" id="st-name" autoComplete="off" aria-describedby="st-err" aria-invalid={err || undefined} value={name} onChange={(e) => { setName(e.target.value); if (e.target.value.trim()) setErr(false); }} />
-              <span className="hz-err" id="st-err" hidden={!err}><Icon name="exclamation-circle" /> Escribe el nombre para continuar.</span></div>
+            <div className="av-field"><label className="av-label" htmlFor="st-name">Nombre completo</label>
+              <input ref={input} className="av-input" id="st-name" autoComplete="off" aria-describedby="st-err" aria-invalid={err || undefined} value={name} onChange={(e) => { setName(e.target.value); if (e.target.value.trim()) setErr(false); }} />
+              <span className="av-err" id="st-err" hidden={!err}><Icon name="exclamation-circle" /> Escribe el nombre para continuar.</span></div>
           </>) },
         { title: "Documento", content: (<><p>Captura el documento de identidad con la cámara.</p>{info("Aquí iría la captura de documento (ver Patrones de Averyn).")}</>) },
         { title: "Biometría", content: (<><p>Rostro y huella, con el consentimiento de la persona.</p>{info("Aquí irían la captura facial y de huella.")}</>) },
@@ -173,7 +173,7 @@ export function PopoverDemo() {
   return (
     <Popover trigger="¿Qué es el umbral?" title="Umbral de similitud">
       <p>Es el puntaje mínimo (de 0 a 1) para aceptar una verificación. Hoy es 0.68 y lo define el servidor.</p>
-      <Link href="/patrones#resultado" className="hz-btn hz-btn--text" style={{ minHeight: 44 }}>Ver el patrón de resultado →</Link>
+      <Link href="/patrones#resultado" className="av-btn av-btn--text" style={{ minHeight: 44 }}>Ver el patrón de resultado →</Link>
     </Popover>
   );
 }
@@ -183,7 +183,7 @@ export function DrawerDemo() {
   const [open, setOpen] = useState(false);
   return (
     <>
-      <button className="hz-btn hz-btn--ghost" type="button" onClick={() => setOpen(true)}>Ver detalle de Ana Lucía Pérez</button>
+      <button className="av-btn av-btn--ghost" type="button" onClick={() => setOpen(true)}>Ver detalle de Ana Lucía Pérez</button>
       <Drawer open={open} onClose={() => setOpen(false)} title="Ana Lucía Pérez" subtitle="Estudiante · Sede Central"
         footer={<><Button onClick={() => toast({ title: "Editar datos", text: "Aquí se abriría el formulario de edición.", kind: "ok" })}>Editar datos</Button><Button variant="ghost" onClick={() => setOpen(false)}>Cerrar</Button></>}>
         <KeyValue items={[{ term: "Documento", value: "12345678" }, { term: "Correo", value: "ana.perez@ejemplo.edu" }, { term: "Biometría", value: <Chip tone="success" icon="check-circle">Rostro y huella</Chip> }, { term: "Último acceso", value: "Hoy, 10:42 · CAM-001" }, { term: "Registrada", value: "29 sep 2026" }]} />
@@ -264,8 +264,8 @@ export function OtpDemo() {
       }}>
       {({ code, clear }) => (
         <div className="pt-actions" style={{ display: "flex", flexWrap: "wrap", gap: ".6rem", alignItems: "center", marginTop: ".8rem" }}>
-          <button className="hz-btn hz-btn--primary" type="button" disabled={code.length < 6 || locked || state.s === "ok"}>Verificar</button>
-          <button className="hz-btn hz-btn--text" type="button" style={{ minHeight: 44 }} disabled={wait > 0 || locked}
+          <button className="av-btn av-btn--primary" type="button" disabled={code.length < 6 || locked || state.s === "ok"}>Verificar</button>
+          <button className="av-btn av-btn--text" type="button" style={{ minHeight: 44 }} disabled={wait > 0 || locked}
             onClick={() => { toast({ title: "Código reenviado", text: "Revisa tu correo. El código anterior ya no sirve.", kind: "ok" }); setState({ s: "", m: "" }); clear(); setWait(10); }}>
             {wait > 0 ? `Reenviar en ${wait} s` : "Reenviar código"}
           </button>
@@ -332,8 +332,8 @@ export function LoadingDemo() {
   return (
     <div className="cp-demo">
       <div className="ld__bar">
-        <button className="hz-btn hz-btn--secondary" type="button" disabled={busy} onClick={load}>Recargar lista</button>
-        <button className="hz-btn hz-btn--ghost" type="button" disabled={busy} onClick={fail}>Simular error</button>
+        <button className="av-btn av-btn--secondary" type="button" disabled={busy} onClick={load}>Recargar lista</button>
+        <button className="av-btn av-btn--ghost" type="button" disabled={busy} onClick={fail}>Simular error</button>
         <span className="ld__hint mono">Tarda ~1,6 s</span>
       </div>
       <div className="ld" aria-live="polite" aria-busy={busy}>
@@ -346,7 +346,7 @@ export function LoadingDemo() {
         </ul>
       </div>
       <div className="ld__row2">
-        <button className="hz-btn hz-btn--primary ld__save" type="button" aria-busy={saving || undefined} aria-disabled={saving || undefined} onClick={save}>
+        <button className="av-btn av-btn--primary ld__save" type="button" aria-busy={saving || undefined} aria-disabled={saving || undefined} onClick={save}>
           <span className="ld__spin" aria-hidden="true" /><span className="ld__lbl">{saving ? "Guardando…" : "Guardar cambios"}</span>
         </button>
         <div className="ld__ind" aria-hidden="true"><i /></div><span className="ld__hint mono" aria-hidden="true">Barra indeterminada</span>

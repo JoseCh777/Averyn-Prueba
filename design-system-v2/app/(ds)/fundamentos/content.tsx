@@ -17,7 +17,7 @@ export default function FundamentosContent() {
             {" "}Averyn abre con un cielo claro y, a medida que se avanza, el fondo cae hacia un navy profundo: la claridad de la plataforma se convierte en seguridad. Sobre ese horizonte, un trazo fino de arcos —eco del arco de la A del logo— hace de firma. Sereno e institucional, con la precisión de un instrumento.
           </p>
           <div className="ds-gap-top">
-            <div className="hz-line">
+            <div className="av-line">
               <span className="n mono">R1</span>
               <div>
                 <h3>La regla de la señal única</h3>
@@ -26,7 +26,7 @@ export default function FundamentosContent() {
                 </p>
               </div>
             </div>
-            <div className="hz-line">
+            <div className="av-line">
               <span className="n mono">R2</span>
               <div>
                 <h3>La regla del horizonte</h3>
@@ -35,7 +35,7 @@ export default function FundamentosContent() {
                 </p>
               </div>
             </div>
-            <div className="hz-line">
+            <div className="av-line">
               <span className="n mono">R3</span>
               <div>
                 <h3>La regla de la acción en mono</h3>
@@ -44,7 +44,7 @@ export default function FundamentosContent() {
                 </p>
               </div>
             </div>
-            <div className="hz-line">
+            <div className="av-line">
               <span className="n mono">R4</span>
               <div>
                 <h3>Plano por defecto</h3>
@@ -53,7 +53,7 @@ export default function FundamentosContent() {
                 </p>
               </div>
             </div>
-            <div className="hz-line">
+            <div className="av-line">
               <span className="n mono">R5</span>
               <div>
                 <h3>Asimetría con intención</h3>
@@ -62,7 +62,7 @@ export default function FundamentosContent() {
                 </p>
               </div>
             </div>
-            <div className="hz-line">
+            <div className="av-line">
               <span className="n mono">R6</span>
               <div>
                 <h3>Honestidad del estado</h3>
@@ -71,14 +71,14 @@ export default function FundamentosContent() {
                 </p>
               </div>
             </div>
-            <div className="hz-line">
+            <div className="av-line">
               <span className="n mono">R7</span>
               <div>
                 <h3>Nunca ampliar el wordmark</h3>
                 <p>El logo mide 1144 px de ancho nativo: se maqueta grande y solo se reduce. Ampliarlo lo vuelve borroso.</p>
               </div>
             </div>
-            <div className="hz-line" style={{ borderBottom: "1px solid var(--av-hairline)" }}>
+            <div className="av-line" style={{ borderBottom: "1px solid var(--av-hairline)" }}>
               <span className="n mono">R8</span>
               <div>
                 <h3>El color nunca es el único canal</h3>
@@ -569,10 +569,10 @@ export default function FundamentosContent() {
             <div className="stage">
               <span className="stage__label mono">Sobre claro</span>
               <div className="row">
-                <span className="hz-tile__icon" style={{ background: "var(--av-blue-tint)", color: "var(--av-blue)" }}>
+                <span className="av-tile__icon" style={{ background: "var(--av-blue-tint)", color: "var(--av-blue)" }}>
                   <Icon name="fingerprint" />
                 </span>
-                <span className="hz-tile__icon" style={{ background: "#fff", border: "1px solid var(--av-hairline)", color: "var(--av-blue)" }}>
+                <span className="av-tile__icon" style={{ background: "#fff", border: "1px solid var(--av-hairline)", color: "var(--av-blue)" }}>
                   <Icon name="person-vcard" />
                 </span>
               </div>
@@ -581,7 +581,7 @@ export default function FundamentosContent() {
             <div className="stage stage--night">
               <span className="stage__label mono">Sobre navy</span>
               <div className="row">
-                <span className="hz-tile__icon" style={{ background: "rgba(85,214,255,.16)", color: "var(--av-cyan-glow)" }}>
+                <span className="av-tile__icon" style={{ background: "rgba(85,214,255,.16)", color: "var(--av-cyan-glow)" }}>
                   <Icon name="fingerprint" />
                 </span>
               </div>
@@ -590,7 +590,7 @@ export default function FundamentosContent() {
             <div className="stage stage--blue">
               <span className="stage__label mono">Sobre azul</span>
               <div className="row">
-                <span className="hz-tile__icon" style={{ background: "rgba(255,255,255,.18)", color: "#fff" }}><Icon name="person-vcard" /></span>
+                <span className="av-tile__icon" style={{ background: "rgba(255,255,255,.18)", color: "#fff" }}><Icon name="person-vcard" /></span>
               </div>
               <p className="ds-note" style={{ color: "#F0F5FF" }}>Blanco en círculo translúcido.</p>
             </div>

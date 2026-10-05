@@ -45,7 +45,7 @@ export function SearchField({ value, onChange, label, placeholder, countText }: 
         <Icon name="search" className="sf__ic" />
         <input
           ref={input}
-          className="hz-input sf__in"
+          className="av-input sf__in"
           id={id}
           type="search"
           placeholder={placeholder}
@@ -114,7 +114,7 @@ export function OtpInput({ length = 6, label = "Código de verificación", help,
 
   return (
     <fieldset className="otp" data-s={state || ""} aria-describedby={`${id}-help ${id}-msg`}>
-      <legend className="hz-label">{label}</legend>
+      <legend className="av-label">{label}</legend>
       <div className="otp__row">
         {digits.map((d, i) => (
           <input
@@ -141,7 +141,7 @@ export function OtpInput({ length = 6, label = "Código de verificación", help,
           />
         ))}
       </div>
-      {help && <span className="hz-help" id={`${id}-help`}>{help}</span>}
+      {help && <span className="av-help" id={`${id}-help`}>{help}</span>}
       <p className="otp__msg" id={`${id}-msg`} role="status">{message}</p>
       {children?.({ code, clear })}
     </fieldset>
@@ -177,15 +177,15 @@ export function PasswordWithStrength({ label = "Nueva contraseña", value, onCha
   }, [value, level, n]);
   return (
     <div className="pw" data-lv={level}>
-      <div className="hz-field">
-        <div className="hz-label__row">
-          <label className="hz-label" htmlFor={`${id}-in`}>{label}</label>
-          <button className="hz-btn hz-btn--text" type="button" aria-pressed={shown} onClick={() => setShown((s) => !s)}
+      <div className="av-field">
+        <div className="av-label__row">
+          <label className="av-label" htmlFor={`${id}-in`}>{label}</label>
+          <button className="av-btn av-btn--text" type="button" aria-pressed={shown} onClick={() => setShown((s) => !s)}
                   style={{ minHeight: 44, fontSize: ".8125rem", textTransform: "none", letterSpacing: 0, fontFamily: "var(--av-font-body)" }}>
             {shown ? "Ocultar" : "Mostrar"}
           </button>
         </div>
-        <input className="hz-input" id={`${id}-in`} type={shown ? "text" : "password"} autoComplete="new-password" aria-describedby={`${id}-req ${id}-st`} value={value} onChange={(e) => onChange(e.target.value)} />
+        <input className="av-input" id={`${id}-in`} type={shown ? "text" : "password"} autoComplete="new-password" aria-describedby={`${id}-req ${id}-st`} value={value} onChange={(e) => onChange(e.target.value)} />
       </div>
       <div className="pw__bar" aria-hidden="true"><i /><i /><i /><i /></div>
       <p className="pw__st" id={`${id}-st`} role="status" aria-live="polite">{announce}</p>
@@ -247,7 +247,7 @@ export function MultiSelect({ label, options, selected, onChange, describe, help
 
   return (
     <div className="ms" ref={root}>
-      <label className="hz-label" id={`${id}-lab`} htmlFor={`${id}-in`}>{label}</label>
+      <label className="av-label" id={`${id}-lab`} htmlFor={`${id}-in`}>{label}</label>
       <div className="ms__field" onClick={(e) => { if (!(e.target as HTMLElement).closest("button")) input.current?.focus(); }}>
         <span className="ms__chips">{selected.map((v) => <RemovableChip key={v} value={v} onRemove={remove} />)}</span>
         <input
@@ -277,7 +277,7 @@ export function MultiSelect({ label, options, selected, onChange, describe, help
           </li>
         )) : <li className="cb__none" role="presentation">Sin resultados para «{query}».</li>}
       </ul>
-      <span className="hz-help" id={`${id}-help`}>{help}</span>
+      <span className="av-help" id={`${id}-help`}>{help}</span>
     </div>
   );
 }
@@ -289,7 +289,7 @@ export function ActiveFilters({ values, onRemove, onClear, summary }: { values: 
       <div className="fa" aria-label="Filtros activos">
         <span className="fa__t mono">Filtros</span>
         <span className="fa__chips">{values.map((v) => <RemovableChip key={v} value={v} onRemove={onRemove} />)}</span>
-        <button className="hz-btn hz-btn--text" type="button" style={{ minHeight: 44 }} hidden={!values.length} onClick={onClear}>Limpiar filtros</button>
+        <button className="av-btn av-btn--text" type="button" style={{ minHeight: 44 }} hidden={!values.length} onClick={onClear}>Limpiar filtros</button>
       </div>
       <p className="fa__n" role="status">{summary}</p>
     </>
@@ -385,8 +385,8 @@ export function FileUpload({ simulate = true }: { simulate?: boolean }) {
       <p className="sr-only" role="status">{live}</p>
       {simulate && (
         <div className="up__acts">
-          <button ref={demoBtn} className="hz-btn hz-btn--ghost" type="button" onClick={() => { add("cedula-frente.jpg", 1.3 * 1048576); add("cedula-reverso.png", 2.1 * 1048576, { failAt: 0.55 }); add("constancia-matricula.docx", 380 * 1024); }}>Simular 3 archivos</button>
-          <button className="hz-btn hz-btn--ghost" type="button" onClick={() => { Object.values(timers.current).forEach(clearInterval); setRows([]); say("Lista vaciada."); }}>Vaciar lista</button>
+          <button ref={demoBtn} className="av-btn av-btn--ghost" type="button" onClick={() => { add("cedula-frente.jpg", 1.3 * 1048576); add("cedula-reverso.png", 2.1 * 1048576, { failAt: 0.55 }); add("constancia-matricula.docx", 380 * 1024); }}>Simular 3 archivos</button>
+          <button className="av-btn av-btn--ghost" type="button" onClick={() => { Object.values(timers.current).forEach(clearInterval); setRows([]); say("Lista vaciada."); }}>Vaciar lista</button>
         </div>
       )}
     </div>

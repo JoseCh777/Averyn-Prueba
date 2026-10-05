@@ -10,14 +10,14 @@ const DOCK: [string, string][] = [["Panel", "p"], ["Personas", "personas"], ["Do
 export function AppShell({ active, children }: { active: string; children: ReactNode }) {
   return (
     <>
-      <header className="hz-nav">
-        <span className="hz-brandchip">{/* eslint-disable-next-line @next/next/no-img-element */}<img src="/assets/images/averyn-logo-font-black.avif" alt="Averyn" /></span>
-        <nav className="hz-dock" aria-label="Módulos">
+      <header className="av-nav">
+        <span className="av-brandchip">{/* eslint-disable-next-line @next/next/no-img-element */}<img src="/assets/images/averyn-logo-font-black.avif" alt="Averyn" /></span>
+        <nav className="av-dock" aria-label="Módulos">
           {DOCK.map(([label, key]) => key === "soon"
             ? <span key={label} className="soon" title="Próximamente" aria-disabled="true">{label}</span>
             : <a key={label} href="#" aria-current={key === active ? "page" : undefined}>{label}</a>)}
         </nav>
-        <button className="hz-avatar" type="button"><span className="hz-avatar__c" aria-hidden="true">UD</span><span><b>Usuario Demo</b><small>Administrador</small></span></button>
+        <button className="av-avatar" type="button"><span className="av-avatar__c" aria-hidden="true">UD</span><span><b>Usuario Demo</b><small>Administrador</small></span></button>
       </header>
       <main className="tp-main">{children}</main>
     </>
@@ -27,7 +27,7 @@ export function AppShell({ active, children }: { active: string; children: React
 export function PageHead({ crumb, title, sub, actions }: { crumb: ReactNode; title: string; sub?: string; actions?: ReactNode }) {
   return (
     <div className="tp-head">
-      <div><p className="hz-crumb mono">{crumb}</p><h1>{title}</h1>{sub && <p className="tp-sub">{sub}</p>}</div>
+      <div><p className="av-crumb mono">{crumb}</p><h1>{title}</h1>{sub && <p className="tp-sub">{sub}</p>}</div>
       <div style={{ display: "flex", gap: ".6rem" }}>{actions}</div>
     </div>
   );
@@ -39,21 +39,21 @@ export const Skel = ({ n }: { n: number }) => (
 
 export function EmptyBlock({ icon, title, text, button }: { icon: IconName; title: string; text: string; button?: string }) {
   return (
-    <div className="tp-state"><Icon name={icon} /><b>{title}</b><p>{text}</p>{button && <button className="hz-btn hz-btn--ghost" type="button">{button}</button>}</div>
+    <div className="tp-state"><Icon name={icon} /><b>{title}</b><p>{text}</p>{button && <button className="av-btn av-btn--ghost" type="button">{button}</button>}</div>
   );
 }
 
 export function ErrorBlock() {
   return (
     <>
-      <div className="hz-alert hz-alert--error" role="alert"><strong>No pudimos cargar los datos</strong>Revisa tu conexión e inténtalo de nuevo.</div>
-      <div style={{ marginTop: ".8rem" }}><button className="hz-btn hz-btn--ghost" type="button">Reintentar</button></div>
+      <div className="av-alert av-alert--error" role="alert"><strong>No pudimos cargar los datos</strong>Revisa tu conexión e inténtalo de nuevo.</div>
+      <div style={{ marginTop: ".8rem" }}><button className="av-btn av-btn--ghost" type="button">Reintentar</button></div>
     </>
   );
 }
 
 export const StaticPager = () => (
-  <div className="hz-pager" role="navigation" aria-label="Paginación">
+  <div className="av-pager" role="navigation" aria-label="Paginación">
     <button type="button" disabled aria-label="Anterior">←</button><button type="button" aria-current="page">1</button><button type="button">2</button><button type="button">3</button><button type="button" aria-label="Siguiente">→</button>
   </div>
 );
@@ -62,8 +62,8 @@ export const StaticPager = () => (
 export function AuthFrame({ claim = "Todo listo para continuar.", children }: { claim?: string; children: ReactNode }) {
   return (
     <div className="tp-auth">
-      <div className="hz-frame">
-        <div className="hz-frame__brand">
+      <div className="av-frame">
+        <div className="av-frame__brand">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/assets/images/averyn-logo-font-black.avif" alt="Averyn" />
           <svg viewBox="0 0 640 300" aria-hidden="true">
@@ -73,7 +73,7 @@ export function AuthFrame({ claim = "Todo listo para continuar.", children }: { 
           </svg>
           <div><h4>{claim}</h4></div>
         </div>
-        <div className="hz-frame__form">{children}</div>
+        <div className="av-frame__form">{children}</div>
       </div>
     </div>
   );
@@ -86,9 +86,9 @@ export function Block({ tone, title, children, role }: { tone: "success" | "warn
 }
 
 export function AField({ id, label, value, ...props }: { id: string; label: string; value?: string } & React.InputHTMLAttributes<HTMLInputElement>) {
-  return <div className="hz-field"><label className="hz-label" htmlFor={id}>{label}</label><input className="hz-input" id={id} defaultValue={value ?? ""} {...props} /></div>;
+  return <div className="av-field"><label className="av-label" htmlFor={id}>{label}</label><input className="av-input" id={id} defaultValue={value ?? ""} {...props} /></div>;
 }
 
 export function Wide({ children, variant = "primary", disabled, busy }: { children: ReactNode; variant?: string; disabled?: boolean; busy?: boolean }) {
-  return <button className={`hz-btn hz-btn--${variant} hz-btn--block`} type="button" disabled={disabled} aria-busy={busy || undefined}>{children}</button>;
+  return <button className={`av-btn av-btn--${variant} av-btn--block`} type="button" disabled={disabled} aria-busy={busy || undefined}>{children}</button>;
 }
