@@ -1,7 +1,7 @@
 # Averyn — Design System "Horizonte" · Documento maestro
 
-> **Versión 1.7 · octubre 2026.** Este archivo reúne, en un solo lugar, todo lo que hay que saber del sistema de diseño de Averyn: qué es, dónde vive, cómo se usa, qué contiene, cómo se valida, qué librerías necesita y qué queda pendiente.
-> El catálogo visual y navegable está en `averyn-design-system-horizonte.html` (un solo archivo, se abre con doble clic). Este `.md` es la referencia escrita para los repositorios. **El entregable es el HTML único**; las 8 páginas por separado son solo salida de construcción.
+> **Versión 2.0 (React) · octubre 2026.** La v2.0 está en `design-system-v2/` (ver la sección 16); la v1.7 en HTML se conserva como referencia histórica y sus rutas aparecen marcadas como «v1.7». Este archivo reúne, en un solo lugar, todo lo que hay que saber del sistema de diseño de Averyn: qué es, dónde vive, cómo se usa, qué contiene, cómo se valida, qué librerías necesita y qué queda pendiente.
+> El catálogo visual y navegable de la v2.0 es el propio proyecto Next.js (`npm run dev`, ver «Ver el sistema»). Este `.md` es la referencia escrita para los repositorios. En la v1.7 el entregable era `averyn-design-system-horizonte.html` (un solo archivo).
 
 ## Índice
 
@@ -63,6 +63,11 @@ El sistema se describe por **roles**, no por rutas, porque va a mudarse al repos
 | Estilos de impresión | `docs/ds/print.css` | Por definir |
 | Páginas de error reales | `averyn-frontend/` (`404.html`, `403.html`, `500.html`, `offline.html`, `mantenimiento.html`) y `assets/css/error.css` | Por definir |
 | Logos | `averyn-frontend/assets/images/` | Por definir |
+| **Horizonte 2.0 (React): proyecto completo** | `design-system-v2/` | Por definir (espera al ADR-011) |
+| Tokens de la v2.0 (fuente de verdad) | `design-system-v2/app/tokens.css` | Por definir |
+| Estilos portados (clases `av-*`) | `design-system-v2/app/styles/` | Por definir |
+| Componentes React | `design-system-v2/components/` (`ui`, `patterns`, `charts`, `templates`, `effects`) | `components/ui` y `components/shared` de `averyn-web` |
+| Documentación de la v2.0 | `design-system-v2/app/(ds)/` | Por definir |
 
 La misma tabla está en el HTML único (Calidad y gobernanza → *Dónde vive cada archivo*). Las rutas del resto del documento son **nombres de rol o de archivo, nunca carpetas**.
 
@@ -73,6 +78,8 @@ La misma tabla está en el HTML único (Calidad y gobernanza → *Dónde vive ca
 ## 3. Cómo usarlo
 
 ### Ver el sistema
+- **Horizonte 2.0 (vigente):** con Node.js 20.9 o superior, desde `design-system-v2/`: `npm install` (solo la primera vez) y `npm run dev`; abrir http://localhost:3000. Para la versión de producción: `npm run build` y `npm run start`.
+- **v1.7 (histórica), lo siguiente:**
 - **Un solo archivo (el entregable):** abrir `averyn-design-system-horizonte.html` en el navegador. Funciona desde disco (`file://`); necesita internet solo para fuentes e iconos.
 - **Por páginas (solo para desarrollar):** `build.py` genera las 8 páginas; se sirven con cualquier servidor estático (`python -m http.server`) desde la carpeta que las contiene y se abre *Inicio*.
 
