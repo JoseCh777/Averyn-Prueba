@@ -367,6 +367,7 @@
       <div class="doc-wrap"><table class="doc-table"><thead><tr><th>Código o estado</th><th>Mensaje al usuario</th><th>Qué hace la interfaz</th></tr></thead><tbody>
         <tr><td><code>AUTH_INVALID_CREDENTIALS</code> · 401</td><td>Correo o contraseña incorrectos.</td><td>Aviso en el formulario; el mismo texto sea cual sea la causa.</td></tr>
         <tr><td><code>AUTH_UNAUTHENTICATED</code> · 401</td><td>Tu sesión caducó.</td><td>Un único refresh compartido y reintento de la petición; si falla, la pantalla de sesión caducada.</td></tr>
+        <tr><td><code>AUTH_REFRESH_INVALID</code> · 401</td><td>Tu sesión terminó. Ingresa de nuevo.</td><td>Sin más reintentos: va al login (el refresh ya no sirve o se detectó reutilización).</td></tr>
         <tr><td>429 · <code>Retry-After</code></td><td>Demasiados intentos. Podrás volver a intentarlo en 14:32.</td><td>Cuenta atrás y controles deshabilitados hasta que termine.</td></tr>
         <tr><td><code>TENANT_NOT_FOUND</code> · 404</td><td>No encontramos esta organización.</td><td>Pantalla «Organización no encontrada», sin más detalle.</td></tr>
         <tr><td>403 (sin permiso)</td><td>No tienes permiso para ver esto.</td><td>Página 403; ver el copy aprobado.</td></tr>
