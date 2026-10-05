@@ -74,7 +74,7 @@ function attrs(el, tag) {
       // se mantienen como cadenas ("true"/"false"), igual que en HTML
     }
     if (n === "href" && v.startsWith("/") && tag === "a") { usedLink = true; }
-    if (["colSpan", "rowSpan", "maxLength", "minLength", "tabIndex", "rows", "cols", "size", "span", "start"].includes(n) && /^-?\d+$/.test(v)) { out.push(`${n}={${v}}`); continue; }
+    if ((["colSpan", "rowSpan", "maxLength", "minLength", "tabIndex", "rows", "cols", "size", "span", "start", "aria-valuenow", "aria-valuemin", "aria-valuemax"].includes(n)) && /^-?\d+(\.\d+)?$/.test(v)) { out.push(`${n}={${v}}`); continue; }
     out.push(`${n}=${JSON.stringify(v)}`);
   }
   return out.join(" ");
@@ -85,11 +85,12 @@ function indent(depth) { return "  ".repeat(depth); }
 function nodeToJsx(node, depth, opts) {
   if (node.nodeName === "#comment") return "";
   if (node.nodeName === "#text") return textNode(node, opts);
-  const tag = node.tagName;
   for (const m of config.matchers ?? []) {
     const r = m(node);
+    if (r && r.tag) { for (const i of r.imports ?? []) imports.add(i); node = { ...node, tagName: r.tag }; break; }
     if (r) { for (const i of r.imports ?? []) imports.add(i); return indent(depth) + r.jsx; }
   }
+  const tag = node.tagName;
   const idAttr = node.attrs?.find((a) => a.name === "id")?.value;
   if (idAttr && replace[idAttr]) {
     for (const i of replace[idAttr].imports ?? []) imports.add(i);

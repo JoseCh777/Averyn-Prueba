@@ -7,6 +7,7 @@
 @import "./styles/hz-advanced.css";
 @import "./styles/hz-patterns.css";
 @import "./styles/hz-charts.css";
+@import "./styles/hz-templates.css";
 @import "./styles/base.css";
 
 /* Horizonte v2: los tokens --av-* (tokens.css) son la fuente de verdad.

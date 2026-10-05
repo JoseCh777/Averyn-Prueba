@@ -1,0 +1,65 @@
+/* ==========================================================================
+   PÁGINAS DE ERROR — 404, 403, 500, sin conexión y mantenimiento.
+   Concepto "arcos rotos sobre el horizonte" (ver Plantillas y estados en el design system).
+   Solo usa tokens de tokens.css. Un <h1> por página; el número gigante es decorativo.
+   ========================================================================== */
+
+.er { margin: 0; min-height: 100svh; background: var(--av-navy); color: #fff; font-family: var(--av-font-body); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+.er *, .er *::before, .er *::after { box-sizing: border-box; }
+.er :focus-visible { outline: 2px solid var(--av-blue); outline-offset: 3px; }
+.er-stage :focus-visible { outline-color: var(--av-cyan-glow); }
+
+/* El horizonte: cielo arriba (marca) y navy enseguida, donde vive todo el texto */
+.er-page { min-height: 100svh; display: flex; flex-direction: column; background: linear-gradient(180deg, var(--av-sky) 0%, var(--av-blue-tint) 5%, var(--av-navy-horizon) 20%, var(--av-navy) 48%); }
+
+.er-top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .9rem clamp(1.25rem, 4vw, 3rem); }
+.er-brand { display: inline-flex; align-items: center; min-height: 44px; padding: 0 1.1rem; border: 1px solid var(--av-hairline); border-radius: var(--av-radius-full); background: rgba(234, 240, 254, .9); box-shadow: var(--av-shadow-sm); }
+.er-brand img { display: block; height: 22px; width: auto; }
+.er-tag { font-family: var(--av-font-mono); font-size: .75rem; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--av-gray-700); }
+
+.er-stage { flex: 1; width: min(100%, 1240px); margin-inline: auto; padding: clamp(2.5rem, 9svh, 6rem) clamp(1.25rem, 4vw, 3rem) clamp(2rem, 6svh, 4rem); display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); align-items: center; gap: clamp(1.5rem, 4vw, 4rem); }
+
+.er-num { margin: 0; font-family: var(--av-font-heading); font-weight: 500; font-size: clamp(6.5rem, 22vw, 16rem); line-height: .82; letter-spacing: -.06em; color: #fff; user-select: none; }
+.er-eyebrow { margin: 1.4rem 0 .9rem; font-family: var(--av-font-mono); font-size: .75rem; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--av-cyan-glow); }
+.er-title { margin: 0; font-family: var(--av-font-heading); font-weight: 500; font-size: clamp(1.8rem, 3.6vw, 3rem); line-height: 1.06; letter-spacing: -.025em; color: #fff; text-wrap: balance; max-width: 18ch; }
+.er-lead { margin: 1rem 0 0; max-width: 46ch; font-size: 1.05rem; color: var(--av-night-text); }
+.er-path { display: inline-flex; align-items: baseline; flex-wrap: wrap; gap: .6rem; margin: 1.3rem 0 0; padding: .55rem .9rem; border: 1px solid rgba(255, 255, 255, .22); border-radius: var(--av-radius-control); font-size: .875rem; color: var(--av-night-text); }
+.er-path[hidden] { display: none; }
+.er-path code { font-family: var(--av-font-mono); font-size: .8125rem; color: #fff; overflow-wrap: anywhere; }
+.er-actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2rem; }
+.er-btn { display: inline-flex; align-items: center; justify-content: center; gap: .6rem; min-height: 44px; padding: 11px 20px; border: 1px solid transparent; border-radius: var(--av-radius-control); font-family: var(--av-font-mono); font-size: .75rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; text-decoration: none; cursor: pointer; transition: transform .15s var(--av-ease-out), background-color .15s var(--av-ease-out), border-color .15s var(--av-ease-out); }
+.er-btn:active { transform: scale(.97); }
+.er-btn--primary { background: var(--av-blue); color: #fff; box-shadow: var(--av-shadow-key); }
+.er-btn--primary:hover { background: var(--av-blue-hover); }
+.er-btn--ghost { background: transparent; color: #fff; border-color: rgba(255, 255, 255, .5); }
+.er-btn--ghost:hover { border-color: #fff; background: rgba(255, 255, 255, .08); }
+.er-status { margin-top: 1.2rem; font-size: .875rem; color: var(--av-night-text); }
+.er-status[hidden] { display: none; }
+
+/* Figura: arcos que se dibujan y luego se parten */
+.er-fig { width: 100%; max-width: 560px; justify-self: end; }
+.er-fig svg { display: block; width: 100%; height: auto; overflow: visible; }
+.er-fig path, .er-fig circle { fill: none; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.er-draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: er-draw 1.3s var(--av-ease-out) forwards; animation-delay: calc(var(--d, 0) * .12s + .15s); }
+@keyframes er-draw { to { stroke-dashoffset: 0; } }
+/* Las piezas se desplazan después de dibujarse: la figura "no encaja" */
+.er-crack { transform: translate(0, 0); animation: er-crack .7s var(--av-ease-out) 1.5s forwards; }
+@keyframes er-crack { to { transform: translate(var(--cx, 0), var(--cy, 0)); } }
+.er-ghost { opacity: 0; animation: er-fade .6s var(--av-ease-out) 1.9s forwards; }
+@keyframes er-fade { to { opacity: 1; } }
+
+@media (max-width: 860px) {
+  .er-stage { grid-template-columns: 1fr; gap: 1rem; padding-top: 2rem; }
+  .er-fig { order: -1; max-width: 360px; justify-self: start; }
+  .er-num { font-size: clamp(5.5rem, 30vw, 9rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .er-draw { animation: none; stroke-dashoffset: 0; }
+  .er-crack { animation: none; transform: translate(var(--cx, 0), var(--cy, 0)); }
+  .er-ghost { animation: none; opacity: 1; }
+  .er-btn { transition: none; }
+}
+
+/* Variantes con palabra en lugar de número (sin conexión, mantenimiento) */
+.er-num--word { font-size: clamp(3.4rem, 13vw, 9rem); line-height: .95; letter-spacing: -.05em; }

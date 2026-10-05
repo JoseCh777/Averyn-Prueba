@@ -1,0 +1,1285 @@
+/* Generado desde docs/ds/src por scripts/html-to-tsx.mjs (migración a React, v2.0).
+   A partir de aquí este archivo es la fuente: se edita a mano. */
+/* eslint-disable react/no-unescaped-entities */
+import Link from "next/link";
+import { PageFrame, TemplateFrame } from "@/components/templates/frames";
+import { DismissibleBanner, DropzoneDemo, SessionModalDemo } from "@/components/docs/template-demos";
+import { Icon } from "@/components/ui/icon";
+
+export default function PlantillasContent() {
+  return (
+    <>
+      <section className="ds-sec" id="intro-plantillas" aria-labelledby="h-ip" data-nav="Cómo leer las plantillas" data-grp="Plantillas de pantalla">
+        <div className="ds-wrap">
+          <span className="ds-eyebrow mono">Plantillas y estados · Plantillas de pantalla</span>
+          <h2 id="h-ip">Pantallas completas, no piezas sueltas</h2>
+          <p className="ds-lead">
+            Cada plantilla compone los componentes del sistema en una pantalla real, con navbar en píldora, ancho de 1200 px y la misma jerarquía. Se muestran escaladas dentro de un marco; pulsa{" "}
+            <b>"Ver a pantalla completa"</b>
+            {" "}para revisarlas a tamaño real. Los datos son ficticios.
+          </p>
+          <div className="hz-alert hz-alert--info" role="note" style={{ marginTop: "1.4rem" }}>
+            <strong>Son ejemplos de uso del sistema, no una copia fiel del producto final</strong>
+            Muestran cómo se combinan los componentes: jerarquía, regiones y estados. Los módulos, el contenido, los textos y los datos del producto real pueden ser distintos.
+          </div>
+          <div className="ds-grid ds-grid--2 ds-gap-top">
+            <div className="dd dd--do">
+              <strong>Todas las plantillas comparten</strong>
+              <ul>
+                <li>
+                  Navbar en píldora con marca, dock de módulos y avatar. Es el único navbar: el submenú lateral de 15 rem de Configuración es navegación contextual secundaria dentro de una sección, no un segundo navbar.
+                </li>
+                <li>Cabecera: migas en mono, titular en Space Grotesk y acciones a la derecha.</li>
+                <li>Contenido sobre fondo papel azul, en tarjetas de 1 px sin sombra.</li>
+                <li>Estados de cargando, vacío y error resueltos donde hay datos.</li>
+              </ul>
+            </div>
+            <div className="dd dd--dont">
+              <strong>No hacer</strong>
+              <ul>
+                <li>Inventar módulos que no existen: "Accesos" y "Reportes" aparecen como Próximamente.</li>
+                <li>Mezclar más de un bloque navy en la misma pantalla.</li>
+                <li>Poner la acción principal dentro de un menú ⋯.</li>
+                <li>Mostrar datos personales reales en maquetas o capturas.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="ds-sec ds-sec--tint" id="plantillas" aria-labelledby="h-plantillas" data-nav="Catálogo de plantillas" data-grp="Plantillas de pantalla">
+        <div className="ds-wrap">
+          <span className="ds-eyebrow mono">Plantillas y estados · Plantillas de pantalla</span>
+          <h2 id="h-plantillas">Plantillas ya construidas</h2>
+          <p className="ds-lead">Tres plantillas ya construidas y una guía para las que faltan. Todas parten del mismo horizonte.</p>
+          <h3 className="ds-sub">A · Acceso (login)</h3>
+          <div className="hz-frame">
+            <div className="hz-frame__brand">
+              <img src="/assets/images/averyn-logo-font-black.avif" alt="Averyn" />
+              <svg viewBox="0 0 640 300" aria-hidden="true">
+                <path d="M0 290 H640" stroke="rgba(255,255,255,.22)" fill="none" />
+                <path d="M30 290 C110 60 330 40 450 290" stroke="#fff" strokeWidth="1.5" fill="none" />
+                <path d="M90 290 C150 110 300 95 390 290" stroke="#00ACD2" strokeWidth="2" fill="none" />
+                <path d="M150 290 C190 170 270 160 330 290" stroke="#55D6FF" strokeWidth="1.5" fill="none" />
+                <path d="M300 8 L545 290" stroke="#3D86FF" strokeWidth="2" fill="none" />
+              </svg>
+              <div><h4>Todo listo para continuar.</h4></div>
+            </div>
+            <div className="hz-frame__form">
+              <span className="mono" style={{ color: "var(--av-gray-500)" }}>← Volver al inicio</span>
+              <h4 style={{ fontSize: "1.9rem" }}>Bienvenido de nuevo.</h4>
+              <div className="hz-field">
+                <span className="hz-label">Correo electrónico</span>
+                <div className="hz-input" style={{ display: "flex", alignItems: "center", color: "var(--av-placeholder)" }}>
+                  nombre@organizacion.com
+                </div>
+              </div>
+              <div className="hz-field">
+                <span className="hz-label">Contraseña</span>
+                <div className="hz-input" style={{ display: "flex", alignItems: "center", color: "var(--av-placeholder)" }}>
+                  Ingresa tu contraseña
+                </div>
+              </div>
+              <span className="hz-btn hz-btn--primary hz-btn--block">Ingresar de forma segura →</span>
+            </div>
+          </div>
+          <p className="ds-note">
+            Marco de hasta 1020 px, radio 24 px, sombra de marco, sobre un fondo azul claro con brillo cian. Panel de marca con el degradado compacto y la figura de arcos (se dibuja una vez al cargar); formulario a 5/11. Móvil: el panel pasa a franja superior. v1.1: el titular del panel de marca ("Ingresa a tu panel.") ya no es un encabezado; el único{" "}
+            <code>{"<h1>"}</code>
+            {" "}es "Bienvenido de nuevo.". Errores por campo, foco al primer campo inválido y espacio estable para que el formulario no salte. Las pantallas de recuperación, segundo factor, selección de institución e invitación están más abajo, en{" "}
+            <i>Acceso y cuenta</i>
+            .
+          </p>
+          <h3 className="ds-sub">B · Panel (dashboard)</h3>
+          <div className="stage stage--sky" style={{ padding: "1.4rem" }}>
+            <div className="hz-nav" style={{ marginBottom: "1.6rem" }}>
+              <span className="hz-brandchip"><img src="/assets/images/averyn-logo-font-black.avif" alt="Averyn" /></span>
+              <span className="hz-dock" aria-hidden="true">
+                <a href="#plantillas" aria-current="page" tabIndex={-1}>Dashboard</a>
+                <a href="#plantillas" tabIndex={-1}>Identidad</a>
+                <a href="#plantillas" tabIndex={-1}>Biometría</a>
+              </span>
+              <span className="hz-avatar" aria-hidden="true"><span className="hz-avatar__c">UD</span></span>
+            </div>
+            <p className="mono" style={{ color: "var(--av-blue)" }}>Bienvenido, admin</p>
+            <h3 style={{ fontSize: "2.6rem", lineHeight: "1.04", margin: ".4rem 0 1.4rem" }}>Todo en un solo lugar</h3>
+            <div className="hz-kpis">
+              <div className="hz-kpi"><span className="hz-kpi__label mono">Personas</span><span className="hz-kpi__value">8</span></div>
+              <div className="hz-kpi"><span className="hz-kpi__label mono">Verificaciones</span><span className="hz-kpi__value">4</span></div>
+              <div className="hz-kpi"><span className="hz-kpi__label mono">Procesos</span><span className="hz-kpi__value">0</span></div>
+              <div className="hz-kpi"><span className="hz-kpi__label mono">Dispositivos</span><span className="hz-kpi__value">2</span></div>
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "7fr 5fr", gap: "1.2rem", marginTop: "1.4rem" }}>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: ".6rem" }}>
+                <div className="hz-tile hz-tile--signal" style={{ minHeight: "110px" }} />
+                <div className="hz-tile hz-tile--night" style={{ minHeight: "110px" }} />
+                <div className="hz-tile hz-tile--tint" style={{ minHeight: "70px" }} />
+                <div className="hz-tile hz-tile--tint" style={{ minHeight: "70px" }} />
+              </div>
+              <div className="hz-panel" style={{ minHeight: "190px" }}><h3 style={{ fontSize: "1.2rem" }}>Actividad reciente</h3></div>
+            </div>
+          </div>
+          <p className="ds-note">
+            Orden de lectura: bienvenida (cielo a blanco) → franja de indicadores →{" "}
+            <b>accesos en mosaico</b>
+            {" "}(izquierda, 7/12) +{" "}
+            <b>panel de actividad</b>
+            {" "}navy (derecha, 5/12). Un solo cambio de fondo por pantalla.
+          </p>
+          <h3 className="ds-sub">C · Landing</h3>
+          <p className="ds-note">
+            Hero guiado por scroll → secciones asimétricas (blanco / papel azul / navy nocturno / azul de cierre) con espacios para media → equipo con roles → cierre azul con figura → footer navy. Navbar pública fija sobre el degradado.
+          </p>
+          <h3 className="ds-sub">D · Plantillas pendientes{" "}<small>mismo lenguaje</small></h3>
+          <div className="doc-wrap">
+            <table className="doc-table">
+              <thead><tr><th>Plantilla</th><th>Estructura propuesta</th><th>Componentes</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>Listado + filtros + tabla (Identidad)</td>
+                  <td>Encabezado de página (crumb + título + acción) → pestañas de estado → búsqueda y filtros → tabla en líneas → paginación.</td>
+                  <td>Header, tabs, campos, tabla, chips, paginación</td>
+                </tr>
+                <tr>
+                  <td>Captura en pasos (Biometría, OCR)</td>
+                  <td>
+                    Columna de pasos con numeración mono + escenario de cámara/documento en marco de 16 px + panel de resultado. Barra de progreso con{" "}
+                    <code>scaleX</code>
+                    .
+                  </td>
+                  <td>Media, progreso, alertas, botones</td>
+                </tr>
+                <tr>
+                  <td>Detalle de persona</td>
+                  <td>Titular + datos en filas de línea (clave/valor) a la izquierda; panel navy con historial a la derecha.</td>
+                  <td>Filas, chips, panel de actividad</td>
+                </tr>
+                <tr>
+                  <td>Asistente (Electoral)</td>
+                  <td>Pasos horizontales mono → formulario a una columna de 24rem → resumen lateral → confirmación en modal.</td>
+                  <td>Campos, tabs/pasos, modal</td>
+                </tr>
+                <tr><td>Módulo "Próximamente"</td><td>Título + mensaje + CTA de regreso; sin tabla ni formularios.</td><td>Estado vacío, tag</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+      <section className="ds-sec" id="bitacora" aria-labelledby="h-bitacora" data-nav="Bitácora de auditoría" data-grp="Plantillas de pantalla">
+        <div className="ds-wrap">
+          <span className="ds-eyebrow mono">Plantillas y estados · Plantillas de pantalla</span>
+          <h2 id="h-bitacora">Bitácora de auditoría</h2>
+          <p className="ds-lead">
+            Una tabla de solo lectura con filtros: quién hizo qué, cuándo y con qué resultado. Es la plantilla base de toda lista con filtros (personas, dispositivos, reportes).
+          </p>
+          <TemplateFrame template="bitacora" title="Bitácora de auditoría" states={[["normal","Normal"],["empty","Vacío"],["loading","Cargando"],["error","Error"]]} />
+          <div className="tpf__spec">
+            <div>
+              <h3>Regiones</h3>
+              <ul>
+                <li>Cabecera: migas, titular y la acción de exportar.</li>
+                <li>Barra de filtros: periodo, tipo de evento y búsqueda, siempre en una fila.</li>
+                <li>Tabla con evento en mono, persona, dispositivo y resultado como chip con texto.</li>
+                <li>Pie con "Mostrando…" y paginación.</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Estados</h3>
+              <ul>
+                <li>Normal, vacío (con salida: ampliar periodo), cargando (esqueleto de filas) y error (alerta con reintento).</li>
+                <li>Sin permiso: ver la página 403 en Páginas de error, más abajo.</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Componentes y datos</h3>
+              <ul>
+                <li>Selector de fechas, combobox/select, tabla avanzada, chips, paginación.</li>
+                <li>Eventos reales: LOGIN, PERSON_CREATED, DOCUMENT_REGISTERED, BIOMETRIC_ENROLLED, BIOMETRIC_VERIFIED, VOTE_CAST.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="ds-sec ds-sec--tint" id="configuracion" aria-labelledby="h-configuracion" data-nav="Configuración" data-grp="Plantillas de pantalla">
+        <div className="ds-wrap">
+          <span className="ds-eyebrow mono">Plantillas y estados · Plantillas de pantalla</span>
+          <h2 id="h-configuracion">Configuración</h2>
+          <p className="ds-lead">
+            Dos columnas: submenú a la izquierda y secciones en tarjetas a la derecha. Los cambios se guardan juntos desde una barra fija que aparece solo cuando hay algo por guardar.
+          </p>
+          <TemplateFrame template="configuracion" title="Configuración" states={[]} />
+          <div className="tpf__spec">
+            <div>
+              <h3>Regiones</h3>
+              <ul>
+                <li>Submenú lateral con la sección actual marcada.</li>
+                <li>Tarjetas por tema, cada una con un título y su explicación.</li>
+                <li>Barra de guardado fija al pie: "Tienes cambios sin guardar".</li>
+                <li>Zona de peligro al final, separada y con borde rojo claro.</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Estados</h3>
+              <ul>
+                <li>Los valores que define el servidor (umbral) se muestran de solo lectura con su motivo.</li>
+                <li>Guardado correcto con toast; error con alerta sobre la barra.</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Componentes y datos</h3>
+              <ul><li>Campos, interruptores (switch), select, botones y alertas.</li><li>Acciones destructivas con confirmación.</li></ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="ds-sec" id="persona" aria-labelledby="h-persona" data-nav="Detalle de persona" data-grp="Plantillas de pantalla">
+        <div className="ds-wrap">
+          <span className="ds-eyebrow mono">Plantillas y estados · Plantillas de pantalla</span>
+          <h2 id="h-persona">Detalle de persona</h2>
+          <p className="ds-lead">
+            Titular con identidad, datos en filas clave/valor a la izquierda y un panel navy con la actividad a la derecha: es el único bloque oscuro de la pantalla, igual que en el panel.
+          </p>
+          <TemplateFrame template="persona" title="Detalle de persona" states={[["normal","Normal"],["empty","Vacío"],["loading","Cargando"],["error","Error"]]} />
+          <div className="tpf__spec">
+            <div>
+              <h3>Regiones</h3>
+              <ul>
+                <li>Cabecera: iniciales, nombre, chips de estado y acciones (editar, más).</li>
+                <li>Datos en filas de línea, sin cajas por campo.</li>
+                <li>Biometría: estado por rostro y huella, con la acción de revocar.</li>
+                <li>Panel navy "Actividad reciente" con la línea de tiempo.</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Estados</h3>
+              <ul>
+                <li>Cargando y error afectan solo al panel de actividad; los datos se muestran en cuanto llegan.</li>
+                <li>Persona sin biometría: filas con "Sin registrar" y botón para iniciar la captura.</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Componentes y datos</h3>
+              <ul><li>Avatar, chips, filas clave/valor, línea de tiempo (<code>hz-feed</code>), botones.</li></ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="ds-sec ds-sec--tint" id="asistente" aria-labelledby="h-asistente" data-nav="Asistente electoral" data-grp="Plantillas de pantalla">
+        <div className="ds-wrap">
+          <span className="ds-eyebrow mono">Plantillas y estados · Plantillas de pantalla</span>
+          <h2 id="h-asistente">Asistente (Electoral)</h2>
+          <p className="ds-lead">
+            Un proceso largo dividido en pasos: aquí, crear una elección. Cada paso es una tarjeta; el avance y las acciones son siempre las mismas.
+          </p>
+          <TemplateFrame template="asistente" title="Asistente (Electoral)" states={[]} />
+          <div className="tpf__spec">
+            <div>
+              <h3>Regiones</h3>
+              <ul>
+                <li>Stepper con el paso actual y los completados.</li>
+                <li>Tarjeta del paso con su explicación y el contenido (carga de padrón).</li>
+                <li>Resumen de lo cargado y avisos de datos faltantes antes de seguir.</li>
+                <li>Pie con Atrás y Siguiente, siempre en el mismo lugar.</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Estados</h3>
+              <ul>
+                <li>Cada paso valida al avanzar; los avisos no bloquean si no son errores.</li>
+                <li>Archivo con errores: lista de filas con problema y opción de corregir o ignorar.</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Componentes y datos</h3>
+              <ul><li>Stepper, zona de carga de archivos, alertas, botones.</li><li>La papeleta y el comprobante se documentan en Patrones.</li></ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="ds-sec" id="notificaciones" aria-labelledby="h-notificaciones" data-nav="Notificaciones" data-grp="Plantillas de pantalla">
+        <div className="ds-wrap">
+          <span className="ds-eyebrow mono">Plantillas y estados · Plantillas de pantalla</span>
+          <h2 id="h-notificaciones">Centro de notificaciones</h2>
+          <p className="ds-lead">
+            Una lista cronológica agrupada por día, con lo no leído marcado y acciones por ítem. Sirve también para avisos del sistema que no necesitan bloquear la pantalla.
+          </p>
+          <div className="hz-alert hz-alert--info" role="note" style={{ marginTop: "1rem" }}>
+            <strong>Futuro · fuera del MVP oficial</strong>
+            No hay backend de notificaciones y el WebSocket solo se adopta con necesidad demostrada (arquitectura 04). Diseño de referencia, sin actividad asignada.
+          </div>
+          <TemplateFrame template="notificaciones" title="Centro de notificaciones" states={[["normal","Normal"],["empty","Vacío"],["loading","Cargando"],["error","Error"]]} />
+          <div className="tpf__spec">
+            <div>
+              <h3>Regiones</h3>
+              <ul>
+                <li>Pestañas Todas / Sin leer con su conteo.</li>
+                <li>Grupos por día ("Hoy", "Ayer") con rótulo mono.</li>
+                <li>Cada ítem: icono por tipo (con texto), título, detalle, hora y acción.</li>
+                <li>No leído = punto azul{" "}<b>y</b>{" "}título en negrita.</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Estados</h3>
+              <ul>
+                <li>Vacío ("No tienes notificaciones"), cargando.</li>
+                <li>Los avisos críticos (dispositivo caído) también salen como banner de sistema.</li>
+              </ul>
+            </div>
+            <div><h3>Componentes y datos</h3><ul><li>Pestañas, iconos, botones de texto, estados vacíos.</li></ul></div>
+          </div>
+        </div>
+      </section>
+      <section className="ds-sec ds-sec--tint" id="perfil" aria-labelledby="h-perfil" data-nav="Perfil" data-grp="Plantillas de pantalla">
+        <div className="ds-wrap">
+          <span className="ds-eyebrow mono">Plantillas y estados · Plantillas de pantalla</span>
+          <h2 id="h-perfil">Perfil</h2>
+          <p className="ds-lead">
+            La cuenta de quien usa el panel: datos personales, seguridad y privacidad biométrica. Lo sensible (retirar el consentimiento) está al final y pide confirmación.
+          </p>
+          <TemplateFrame template="perfil" title="Perfil" states={[]} />
+          <div className="tpf__spec">
+            <div>
+              <h3>Regiones</h3>
+              <ul>
+                <li>Tarjeta de identidad a la izquierda con el rol.</li>
+                <li>Datos personales editables; el correo es de solo lectura.</li>
+                <li>Seguridad: contraseña y sesiones activas, con "Cerrar sesión" en las otras.</li>
+                <li>Biometría y privacidad: qué hay registrado y cómo retirarlo.</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Estados</h3>
+              <ul>
+                <li>Guardado con toast; errores bajo cada campo (patrón de formulario del login).</li>
+                <li>Retirar el consentimiento abre un diálogo de confirmación con las consecuencias.</li>
+              </ul>
+            </div>
+            <div><h3>Componentes y datos</h3><ul><li>Campos, botones, filas con estado, alerta, modal de confirmación.</li></ul></div>
+          </div>
+        </div>
+      </section>
+      <section className="ds-sec" id="login" aria-labelledby="h-login" data-nav="Login" data-grp="Acceso y cuenta">
+        <div className="ds-wrap">
+          <span className="ds-eyebrow mono">Plantillas y estados · Acceso y cuenta</span>
+          <h2 id="h-login">Login</h2>
+          <p className="ds-lead">
+            La pantalla de entrada con el marco de Horizonte y los cinco estados que el contrato de Auth obliga a resolver: normal, enviando, credenciales inválidas, bloqueo temporal (429) y fallo inesperado. El mensaje se decide por el{" "}
+            <code>code</code>
+            {" "}de la respuesta, nunca por su texto.
+          </p>
+          <TemplateFrame template="login" title="Login" states={[["normal","Normal"],["cargando","Enviando"],["error","Credenciales inválidas"],["bloqueado","Bloqueado (429)"],["inesperado","Inesperado"]]} />
+          <div className="tpf__spec">
+            <div>
+              <h3>Regiones</h3>
+              <ul>
+                <li>Panel de marca + formulario; un único{" "}<code>{"<h1>"}</code>, dos campos y un botón.</li>
+                <li>El nombre de la organización sale del subdominio (<code>demo.localhost:3000</code>{" "}en local).</li>
+                <li>Aviso de error encima de los campos, con{" "}<code>role="alert"</code>.</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Estados</h3>
+              <ul>
+                <li><b>Inválidas</b>{" "}(<code>AUTH_INVALID_CREDENTIALS</code>): un solo mensaje, sin decir si falló el correo o la contraseña.</li>
+                <li>
+                  <b>Bloqueado</b>
+                  {" "}(
+                  <code>429</code>
+                  ): cuenta atrás con el{" "}
+                  <code>Retry-After</code>
+                  ; campos y botón deshabilitados hasta que termine.
+                </li>
+                <li><b>Inesperado</b>{" "}(5xx): código de soporte con el{" "}<code>X-Request-Id</code>{" "}de la respuesta.</li>
+                <li><b>Enviando:</b>{" "}botón con{" "}<code>aria-busy</code>; no se puede reenviar.</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Componentes y reglas</h3>
+              <ul>
+                <li>Campos, botón de bloque y alertas del sistema; contraseña con{" "}<code>autocomplete="current-password"</code>.</li>
+                <li>Tras entrar se pide{" "}<code>GET /auth/me</code>; los tokens viajan en cookies HttpOnly y el JavaScript nunca los ve.</li>
+                <li>Sin enlace de recuperación mientras no exista (ver{" "}<i>Recuperar contraseña</i>).</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="ds-sec ds-sec--tint" id="tenant" aria-labelledby="h-tenant" data-nav="Organización no encontrada" data-grp="Acceso y cuenta">
+        <div className="ds-wrap">
+          <span className="ds-eyebrow mono">Plantillas y estados · Acceso y cuenta</span>
+          <h2 id="h-tenant">Organización no encontrada</h2>
+          <p className="ds-lead">
+            Se muestra cuando el subdominio no resuelve a una organización (
+            <code>TENANT_NOT_FOUND</code>
+            , 404). La API usa el mismo cuerpo para los cuatro casos posibles, y la pantalla tampoco revela cuál ocurrió.
+          </p>
+          <TemplateFrame template="tenant" title="Organización no encontrada" states={[]} />
+          <div className="tpf__spec">
+            <div>
+              <h3>Regiones</h3>
+              <ul><li>Marco del login, sin formulario.</li><li>Etiqueta mono con el estado, titular, apoyo y código de soporte.</li></ul>
+            </div>
+            <div>
+              <h3>Reglas</h3>
+              <ul>
+                <li>Sin enlace «volver a ingresar»: sin organización no hay a dónde.</li>
+                <li>Sin sugerencias de otras organizaciones ni listado de las existentes.</li>
+                <li>El código de soporte lleva el{" "}<code>code</code>{" "}y el{" "}<code>X-Request-Id</code>.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="ds-sec" id="recuperar" aria-labelledby="h-recuperar" data-nav="Recuperar contraseña" data-grp="Acceso y cuenta">
+        <div className="ds-wrap">
+          <span className="ds-eyebrow mono">Plantillas y estados · Acceso y cuenta</span>
+          <h2 id="h-recuperar">Recuperar contraseña</h2>
+          <p className="ds-lead">
+            Cuatro pasos con el mismo marco del login: pedir el enlace, avisar que se envió, elegir la nueva contraseña y manejar el enlace vencido. El mensaje nunca confirma si el correo existe.
+          </p>
+          <div className="hz-alert hz-alert--info" role="note" style={{ marginTop: "1rem" }}>
+            <strong>Futuro · fuera del MVP oficial</strong>
+            La recuperación por correo no está en el MVP (
+            <code>06</code>
+            {" "}§46): hoy el login indica «contacta a tu administrador». Esta plantilla queda como diseño listo para cuando exista el endpoint.
+          </div>
+          <TemplateFrame template="recuperar" title="Recuperar contraseña" states={[["normal","Solicitud"],["enviado","Enviado"],["nueva","Nueva contraseña"],["vencido","Enlace vencido"]]} />
+          <div className="tpf__spec">
+            <div>
+              <h3>Regiones</h3>
+              <ul>
+                <li>Marco del login: panel de marca + formulario (el panel pasa a franja superior en móvil).</li>
+                <li>Un único{" "}<code>{"<h1>"}</code>, un campo y un botón por paso.</li>
+                <li>"Volver a ingresar" siempre visible.</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Estados</h3>
+              <ul>
+                <li><b>Enviado:</b>{" "}el mismo texto exista o no la cuenta, con la explicación de por qué.</li>
+                <li><b>Nueva contraseña:</b>{" "}indicador de fuerza y confirmación.</li>
+                <li><b>Enlace vencido:</b>{" "}dice por qué (30 min, un solo uso) y ofrece uno nuevo.</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Componentes y reglas</h3>
+              <ul>
+                <li>Campos, botón de bloque y alertas; contraseña con fuerza (<i>Componentes › Contraseña y fuerza</i>).</li>
+                <li>El enlace del correo de recuperación coincide: vence en 30 minutos.</li>
+                <li>Rate limit: tras varios envíos, "Espera unos minutos antes de pedir otro enlace", sin culpar.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="ds-sec ds-sec--tint" id="segundo-factor" aria-labelledby="h-segundo-factor" data-nav="Segundo factor" data-grp="Acceso y cuenta">
+        <div className="ds-wrap">
+          <span className="ds-eyebrow mono">Plantillas y estados · Acceso y cuenta</span>
+          <h2 id="h-segundo-factor">Segundo factor (código de verificación)</h2>
+          <p className="ds-lead">
+            Tras la contraseña, un código de 6 dígitos enviado al correo o al teléfono. Reutiliza el componente de código de un solo uso, con el mismo tratamiento de error y bloqueo.
+          </p>
+          <div className="hz-alert hz-alert--info" role="note" style={{ marginTop: "1rem" }}>
+            <strong>Futuro · fuera del MVP oficial</strong>
+            La verificación en dos pasos (MFA) está fuera del MVP. No se implementa en las 3 semanas; el diseño queda disponible.
+          </div>
+          <TemplateFrame template="segundo" title="Segundo factor (código de verificación)" states={[["normal","Normal"],["error","Código incorrecto"],["bloqueado","Bloqueado"],["ok","Confirmado"]]} />
+          <div className="tpf__spec">
+            <div>
+              <h3>Regiones</h3>
+              <ul>
+                <li>Titular que dice qué se pide y a dónde se envió (correo enmascarado: a•••@ejemplo.edu).</li>
+                <li>Casillas del código, botón Verificar y ayuda: reenviar o usar otro método.</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Estados</h3>
+              <ul>
+                <li><b>Código incorrecto:</b>{" "}"Te quedan 2 intentos."</li>
+                <li><b>Bloqueado:</b>{" "}motivo y cuándo reintentar (5 minutos); casillas y botón deshabilitados.</li>
+                <li><b>Confirmado:</b>{" "}mensaje en texto antes de continuar.</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Componentes y reglas</h3>
+              <ul>
+                <li>Código de un solo uso (<i>Componentes</i>): pegar, avance automático,{" "}<code>autocomplete="one-time-code"</code>.</li>
+                <li>Siempre hay una salida: "Usar otro método" o contactar al administrador.</li>
+                <li>El código vence en 10 minutos (igual que el correo de verificación).</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="ds-sec" id="institucion" aria-labelledby="h-institucion" data-nav="Selección de institución" data-grp="Acceso y cuenta">
+        <div className="ds-wrap">
+          <span className="ds-eyebrow mono">Plantillas y estados · Acceso y cuenta</span>
+          <h2 id="h-institucion">Selección de institución</h2>
+          <p className="ds-lead">
+            Para cuentas que pertenecen a más de una institución. Una lista corta de radios; si hubiera más de 7, se cambia por un combobox con búsqueda.
+          </p>
+          <div className="hz-alert hz-alert--info" role="note" style={{ marginTop: "1rem" }}>
+            <strong>Futuro · fuera del MVP oficial</strong>
+            El tenant lo fija el subdominio (1 tenant = 1 organización) y el contrato de Auth no tiene selector. Solo aplicaría si una cuenta llegara a pertenecer a varias organizaciones.
+          </div>
+          <TemplateFrame template="institucion" title="Selección de institución" states={[["normal","Varias instituciones"],["sin","Ninguna"]]} />
+          <div className="tpf__spec">
+            <div>
+              <h3>Regiones</h3>
+              <ul><li>Titular, texto de ayuda y lista de instituciones como radios de 60 px.</li><li>Botón Continuar.</li></ul>
+            </div>
+            <div>
+              <h3>Estados</h3>
+              <ul>
+                <li><b>Varias:</b>{" "}la última usada va seleccionada de antemano.</li>
+                <li><b>Una sola:</b>{" "}el paso se omite (no se muestra una elección de una opción).</li>
+                <li><b>Ninguna:</b>{" "}explica qué hacer y ofrece cerrar sesión.</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Componentes y reglas</h3>
+              <ul>
+                <li>Radios nativos con tarjeta (borde + relleno al elegir, nunca solo color).</li>
+                <li>Más de 7 opciones: combobox (<i>Componentes › Combobox</i>).</li>
+                <li>Cambiar de institución después desde el perfil, sin volver a ingresar.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="ds-sec ds-sec--tint" id="invitacion" aria-labelledby="h-invitacion" data-nav="Aceptar invitación" data-grp="Acceso y cuenta">
+        <div className="ds-wrap">
+          <span className="ds-eyebrow mono">Plantillas y estados · Acceso y cuenta</span>
+          <h2 id="h-invitacion">Aceptar invitación</h2>
+          <p className="ds-lead">
+            Lo primero que ve una persona invitada desde el correo. Dice quién la invita y a qué institución, y pide solo lo mínimo para crear la cuenta; el consentimiento biométrico llega después.
+          </p>
+          <div className="hz-alert hz-alert--info" role="note" style={{ marginTop: "1rem" }}>
+            <strong>Futuro · fuera del MVP oficial</strong>
+            El contrato de Auth v0.2 no tiene endpoint de invitaciones y las cuentas se crean desde la administración. Diseño para una fase posterior.
+          </div>
+          <TemplateFrame template="invitacion" title="Aceptar invitación" states={[["normal","Normal"],["vencida","Vencida"],["usada","Ya usada"]]} />
+          <div className="tpf__spec">
+            <div>
+              <h3>Regiones</h3>
+              <ul>
+                <li>Quién invita y de qué institución, en la primera línea.</li>
+                <li>Nombre (precargado), contraseña y aceptación de términos.</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Estados</h3>
+              <ul>
+                <li><b>Vencida:</b>{" "}a las 48 horas; explica y dice que se pida una nueva a quien invitó.</li>
+                <li><b>Ya usada:</b>{" "}lleva a ingresar.</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Componentes y reglas</h3>
+              <ul>
+                <li>Enlaza con el correo de invitación (vence en 48 horas).</li>
+                <li>El consentimiento para rostro y huella no se mezcla aquí: ver{" "}<i>Patrones › Consentimiento</i>.</li>
+                <li>Contraseña con indicador de fuerza.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="ds-sec" id="escrutinio" aria-labelledby="h-escrutinio" data-nav="Escrutinio" data-grp="Administración y escrutinio">
+        <div className="ds-wrap">
+          <span className="ds-eyebrow mono">Plantillas y estados · Administración y escrutinio</span>
+          <h2 id="h-escrutinio">Escrutinio (resultados electorales)</h2>
+          <p className="ds-lead">
+            Los resultados de una elección en una sola pantalla: participación frente a la meta, votos por lista y estado de cada mesa. Solo muestra{" "}
+            <b>agregados</b>
+            .{" "}
+            <span className="hz-chip hz-chip--info hz-chip--outline hz-chip--wrap">
+              <Icon name="lightbulb" />
+              Propuesta de diseño, pendiente de validar con el equipo
+            </span>
+          </p>
+          <div className="hz-alert hz-alert--info" role="note" style={{ marginTop: "1rem" }}>
+            <strong>Futuro · fuera del MVP oficial</strong>
+            El cierre y conteo de una elección no tiene actividad asignada en el plan de 3 semanas. Diseño de referencia.
+          </div>
+          <TemplateFrame template="escrutinio" title="Escrutinio (resultados electorales)" states={[["conteo","En conteo"],["final","Resultados finales"],["sin","Sin datos"]]} />
+          <div className="tpf__spec">
+            <div>
+              <h3>Regiones</h3>
+              <ul>
+                <li>Cabecera con el estado de la elección (En conteo / Resultados finales) y la acción de exportar el acta.</li>
+                <li>Tres indicadores: participación, mesas reportadas y votos emitidos.</li>
+                <li>Votos por lista (barras con el valor y el porcentaje en texto) y participación frente a la meta (bullet).</li>
+                <li>Tabla de mesas con su estado como píldora.</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Estados</h3>
+              <ul>
+                <li><b>En conteo:</b>{" "}mesas pendientes y participación "por debajo" de la meta, dicho en texto.</li>
+                <li><b>Resultados finales:</b>{" "}todas las mesas reportadas; el estado cambia a verde.</li>
+                <li><b>Sin datos:</b>{" "}explica qué aparecerá y cuándo.</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Componentes y reglas</h3>
+              <ul>
+                <li>Reutiliza las formas de{" "}<i>Gráficos</i>: fichas KPI, barras horizontales y bullet.</li>
+                <li>Privacidad: solo totales; nada permite vincular a una persona con su voto.</li>
+                <li>Orden de las listas y peso visual iguales para todas; el orden lo define la autoridad electoral.</li>
+                <li>Acta de resultados: ver{" "}<i>Marca y entregables › Impresión</i>.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="ds-sec ds-sec--tint" id="mesas" aria-labelledby="h-mesas" data-nav="Mesas y padrón" data-grp="Administración y escrutinio">
+        <div className="ds-wrap">
+          <span className="ds-eyebrow mono">Plantillas y estados · Administración y escrutinio</span>
+          <h2 id="h-mesas">Mesas y padrón</h2>
+          <p className="ds-lead">
+            Dónde se vota y quién puede hacerlo: la lista de mesas con sus habilitados, su responsable y su estado, y la importación del padrón.{" "}
+            <span className="hz-chip hz-chip--info hz-chip--outline hz-chip--wrap">
+              <Icon name="lightbulb" />
+              Propuesta de diseño, pendiente de validar con el equipo
+            </span>
+          </p>
+          <div className="hz-alert hz-alert--info" role="note" style={{ marginTop: "1rem" }}>
+            <strong>Futuro · fuera del MVP oficial</strong>
+            Mesas y jurados están fuera del MVP; el padrón (elegibilidad por elección) sí existe. Construir solo la parte de padrón cuando haya actividad asignada.
+          </div>
+          <TemplateFrame template="mesas" title="Mesas y padrón" states={[["normal","Normal"],["vacio","Vacío"]]} />
+          <div className="tpf__spec">
+            <div>
+              <h3>Regiones</h3>
+              <ul>
+                <li>Cabecera con "Importar padrón" y "Nueva mesa".</li>
+                <li>Búsqueda y filtro por estado.</li>
+                <li>Tabla de mesas con paginación.</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Estados</h3>
+              <ul>
+                <li><b>Sin responsable:</b>{" "}se avisa con píldora de aviso (requiere acción), no solo con una celda vacía.</li>
+                <li><b>Vacío:</b>{" "}ofrece importar el padrón o crear la primera mesa.</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Componentes y reglas</h3>
+              <ul>
+                <li>Tabla avanzada, píldoras de estado y paginación (<i>Componentes</i>).</li>
+                <li>El asistente electoral (<i>Asistente electoral</i>, más arriba) carga el padrón en su paso 3.</li>
+                <li>Los datos de las personas del padrón no se muestran en esta lista.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="ds-sec" id="roles" aria-labelledby="h-roles" data-nav="Roles y permisos" data-grp="Administración y escrutinio">
+        <div className="ds-wrap">
+          <span className="ds-eyebrow mono">Plantillas y estados · Administración y escrutinio</span>
+          <h2 id="h-roles">Roles y permisos</h2>
+          <p className="ds-lead">
+            Una matriz de roles por acciones. Los cambios se guardan juntos y los que quitan poder a un administrador piden confirmación.{" "}
+            <span className="hz-chip hz-chip--info hz-chip--outline hz-chip--wrap">
+              <Icon name="lightbulb" />
+              Propuesta de diseño, pendiente de validar con el equipo
+            </span>
+          </p>
+          <div className="hz-alert hz-alert--info" role="note" style={{ marginTop: "1rem" }}>
+            <strong>Futuro · fuera del MVP oficial</strong>
+            El MVP usa RBAC simple con cinco roles sembrados (ADMIN, OPERATOR, ELECTION_MANAGER, AUDITOR, VOTER); no hay actividad para editar la matriz. La pantalla es de solo lectura hasta entonces.
+          </div>
+          <TemplateFrame template="roles" title="Roles y permisos" states={[["normal","Normal"],["cambios","Con cambios"]]} />
+          <div className="tpf__spec">
+            <div>
+              <h3>Regiones</h3>
+              <ul>
+                <li>Matriz con permisos en filas y roles en columnas.</li>
+                <li>Barra de guardado fija cuando hay cambios.</li>
+                <li>Nota que explica lo que no se puede cambiar.</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Estados</h3>
+              <ul>
+                <li><b>Con cambios:</b>{" "}alerta de aviso, contador de cambios y barra de guardado.</li>
+                <li>
+                  <b>Bloqueado:</b>
+                  {" "}"Administrar usuarios" no se puede quitar al Administrador (se muestra "Siempre" con candado y en texto).
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3>Componentes y reglas</h3>
+              <ul>
+                <li>Casillas de 22 px con etiqueta para lector de pantalla ("Operador: Registrar personas").</li>
+                <li>Auditoría: cada cambio de permisos queda en la bitácora.</li>
+                <li>El módulo de usuarios aún figura como "Próximamente" en el dock; esta plantilla es una propuesta.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="ds-sec ds-sec--tint" id="estados" aria-labelledby="h-estados" data-nav="Carga, vacío y subida" data-grp="Estados de interfaz">
+        <div className="ds-wrap">
+          <span className="ds-eyebrow mono">Plantillas y estados · Estados de interfaz</span>
+          <h2 id="h-estados">Estados: carga, vacío y subida</h2>
+          <p className="ds-lead">
+            Cada pantalla define los tres estados antes de darse por terminada: cargando, vacía y con error. Un estado vacío siempre ofrece el siguiente paso.
+          </p>
+          <div className="ds-grid ds-grid--3 ds-gap-top">
+            <div className="stage">
+              <span className="stage__label mono">Carga</span>
+              <div className="row row--col" style={{ gap: ".9rem" }}>
+                <div className="row">
+                  <span className="hz-spin" style={{ borderColor: "rgba(20,95,238,.25)", borderTopColor: "var(--av-blue)" }} aria-hidden="true" />
+                  <span>Verificando…</span>
+                </div>
+                <span className="hz-skel" style={{ width: "90%" }} />
+                <span className="hz-skel" style={{ width: "70%" }} />
+                <span className="hz-skel" style={{ width: "80%" }} />
+                <div className="hz-progress" role="progressbar" aria-valuenow={40} aria-valuemin={0} aria-valuemax={100} aria-label="Captura">
+                  <i style={{ ["--p" as string]: ".4" }} />
+                </div>
+              </div>
+              <p className="ds-note">
+                Spinner en botones; esqueletos en listas; barra con{" "}
+                <code>scaleX</code>
+                {" "}en procesos con avance conocido.
+              </p>
+            </div>
+            <div className="stage">
+              <span className="stage__label mono">Vacío</span>
+              <div className="hz-empty">
+                <span className="hz-empty__icon"><Icon name="collection" /></span>
+                <h4>Sin actividad reciente</h4>
+                <p>Aún no hay eventos en el log biométrico. Registra o verifica una persona para empezar.</p>
+                <button className="hz-btn hz-btn--primary" type="button">Registrar persona</button>
+              </div>
+            </div>
+            <div className="stage"><span className="stage__label mono">Subida de archivo</span><DropzoneDemo /></div>
+          </div>
+          <div className="ds-grid ds-grid--2 ds-gap-top">
+            <div className="stage">
+              <span className="stage__label mono">Error de sección</span>
+              <div className="hz-alert hz-alert--error" role="alert">
+                <strong>No pudimos cargar el historial</strong>
+                Revisa tu conexión e inténtalo de nuevo.
+              </div>
+              <div style={{ marginTop: ".8rem" }}><button className="hz-btn hz-btn--ghost" type="button">Reintentar</button></div>
+            </div>
+            <div className="stage">
+              <span className="stage__label mono">Módulo no disponible</span>
+              <div className="hz-tile hz-tile--soon" aria-disabled="true" style={{ minHeight: "130px" }}>
+                <span className="hz-tile__icon" aria-hidden="true"><Icon name="door-open" /></span>
+                <span><span className="hz-tile__title">Accesos</span><span className="hz-tile__desc">Zonas, puntos y políticas</span></span>
+                <span className="hz-tile__tag hz-tag">Próximamente</span>
+              </div>
+              <p className="ds-note">Regla R6: se muestra, se atenúa y no enlaza. Nunca un vínculo a un 404.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="ds-sec" id="anatomia" aria-labelledby="h-anatomia" data-nav="Anatomía de un error" data-grp="Páginas de error">
+        <div className="ds-wrap">
+          <span className="ds-eyebrow mono">Plantillas y estados · Páginas de error</span>
+          <h2 id="h-anatomia">Una página de error que ayuda</h2>
+          <p className="ds-lead">
+            Cuando algo no sale como se espera, la pantalla no regaña ni se disculpa de más: dice qué pasó, qué hacer y deja salida. Es la misma firma de Averyn, el horizonte y los arcos, pero con los arcos{" "}
+            <b>rotos</b>
+            : la figura "no encaja", igual que la página que se buscaba.
+          </p>
+          <div className="ds-grid ds-split ds-gap-top">
+            <div className="dsframe-wrap"><PageFrame src="/errores/404" title="Vista de la página 404" /></div>
+            <ol className="ds-note" style={{ margin: "0", paddingLeft: "1.2rem", display: "grid", gap: ".7rem" }}>
+              <li>
+                <b>Número decorativo.</b>
+                {" "}Space Grotesk 500 enorme,{" "}
+                <code>aria-hidden</code>
+                : el encabezado real es el{" "}
+                <code>{"<h1>"}</code>
+                .
+              </li>
+              <li><b>Etiqueta de error.</b>{" "}Mono mayúsculas en cian-glow: "Error 404 · Página no encontrada".</li>
+              <li><b>Encabezado (<code>h1</code>).</b>{" "}Una frase corta y humana: "No encontramos esa página."</li>
+              <li><b>Apoyo.</b>{" "}Qué pasó y qué revisar, en ≤ 2 líneas de 46 caracteres.</li>
+              <li>
+                <b>Ruta pedida</b>
+                {" "}(404 y 403). Mono en un marco de línea fina; se inserta como texto, nunca como HTML. No aparece en la vista previa.
+              </li>
+              <li><b>Acciones.</b>{" "}Una primaria y como mucho dos secundarias. Siempre hay una salida.</li>
+              <li><b>Figura de arcos rotos.</b>{" "}Los arcos se dibujan y después se separan; un aro cian marca el hueco.</li>
+            </ol>
+          </div>
+          <div className="ds-grid ds-grid--2 ds-gap-top">
+            <div className="dd dd--do">
+              <strong>Hacer</strong>
+              <ul>
+                <li>Una frase de causa y una de salida; nunca más.</li>
+                <li>Dar siempre un botón primario (volver, reintentar o ingresar).</li>
+                <li>Mostrar la ruta pedida: ayuda a detectar un error de escritura.</li>
+                <li>Tratar los módulos pendientes como "Próximamente", no como un error.</li>
+              </ul>
+            </div>
+            <div className="dd dd--dont">
+              <strong>No hacer</strong>
+              <ul>
+                <li>Culpar al usuario ("hiciste algo mal") ni disculparse con exceso.</li>
+                <li>Mostrar códigos internos, trazas, IDs de servidor o rutas del sistema de archivos.</li>
+                <li>Humor o ilustraciones juguetonas: es una plataforma de identidad.</li>
+                <li>Inventar tiempos ("vuelve en 5 minutos") que no podemos garantizar.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="ds-sec ds-sec--tint" id="variantes" aria-labelledby="h-variantes" data-nav="Variantes" data-grp="Páginas de error">
+        <div className="ds-wrap">
+          <span className="ds-eyebrow mono">Plantillas y estados · Páginas de error</span>
+          <h2 id="h-variantes">Cinco variantes, una sola hoja de estilos</h2>
+          <p className="ds-lead">
+            Las páginas reales están en el frontend del producto y comparten{" "}
+            <code>error.css</code>
+            {" "}y{" "}
+            <code>error.js</code>
+            ; cambian el atributo{" "}
+            <code>data-error</code>
+            {" "}y el texto. Las vistas de abajo cargan las páginas verdaderas.
+          </p>
+          <div className="ds-grid ds-grid--2 ds-gap-top" id="variantes-grid">
+            <div>
+              <PageFrame src="/errores/404" title="Página 404" />
+              <p className="ds-note">
+                <b>404 · No encontrada.</b>
+                {" "}
+                <a href="/errores/404" target="_blank" rel="noreferrer">
+                  Abrir página{" "}
+                  <span className="sr-only">(se abre en una pestaña nueva)</span>
+                  ↗
+                </a>
+              </p>
+            </div>
+            <div>
+              <PageFrame src="/errores/403" title="Página 403" />
+              <p className="ds-note">
+                <b>403 · Sin permiso.</b>
+                {" "}
+                <a href="/errores/403" target="_blank" rel="noreferrer">
+                  Abrir página{" "}
+                  <span className="sr-only">(se abre en una pestaña nueva)</span>
+                  ↗
+                </a>
+              </p>
+            </div>
+            <div>
+              <PageFrame src="/errores/500" title="Página 500" />
+              <p className="ds-note">
+                <b>500 · Fallo del servidor.</b>
+                {" "}
+                <a href="/errores/500" target="_blank" rel="noreferrer">
+                  Abrir página{" "}
+                  <span className="sr-only">(se abre en una pestaña nueva)</span>
+                  ↗
+                </a>
+              </p>
+            </div>
+            <div>
+              <PageFrame src="/errores/offline" title="Página sin conexión" />
+              <p className="ds-note">
+                <b>Sin conexión.</b>
+                {" "}
+                <a href="/errores/offline" target="_blank" rel="noreferrer">
+                  Abrir página{" "}
+                  <span className="sr-only">(se abre en una pestaña nueva)</span>
+                  ↗
+                </a>
+              </p>
+            </div>
+            <div>
+              <PageFrame src="/errores/mantenimiento" title="Página de mantenimiento" />
+              <p className="ds-note">
+                <b>Mantenimiento.</b>
+                {" "}
+                <a href="/errores/mantenimiento" target="_blank" rel="noreferrer">
+                  Abrir página{" "}
+                  <span className="sr-only">(se abre en una pestaña nueva)</span>
+                  ↗
+                </a>
+              </p>
+            </div>
+          </div>
+          <div className="doc-wrap">
+            <table className="doc-table">
+              <thead><tr><th>Variante</th><th>Cuándo</th><th>Titular</th><th>Acciones</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><code>404</code></td>
+                  <td>La ruta no existe o se movió.</td>
+                  <td>No encontramos esa página.</td>
+                  <td>Volver al inicio · Ir al panel (con sesión) o Ingresar (sin sesión)</td>
+                </tr>
+                <tr>
+                  <td><code>403</code></td>
+                  <td>Hay sesión pero la cuenta no tiene permiso.</td>
+                  <td>No tienes permiso para ver esto.</td>
+                  <td>Volver · Ir al panel / Ingresar</td>
+                </tr>
+                <tr>
+                  <td><code>500</code></td>
+                  <td>El servidor falló al procesar la solicitud.</td>
+                  <td>Algo falló de nuestro lado.</td>
+                  <td>Reintentar · Volver al inicio</td>
+                </tr>
+                <tr>
+                  <td><code>offline</code></td>
+                  <td>El navegador no tiene red.</td>
+                  <td>No hay conexión.</td>
+                  <td>Reintentar (recarga sola al volver la red)</td>
+                </tr>
+                <tr>
+                  <td><code>mantenimiento</code></td>
+                  <td>La plataforma está en mejora temporal.</td>
+                  <td>Estamos haciendo mejoras.</td>
+                  <td>Reintentar</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p className="ds-note">
+            En sin conexión y mantenimiento el número se reemplaza por una palabra ("Offline", "Pronto") en la misma escala tipográfica. Ninguna variante promete una hora de regreso.
+          </p>
+        </div>
+      </section>
+      <section className="ds-sec" id="comportamiento" aria-labelledby="h-comp" data-nav="Comportamiento y robustez" data-grp="Páginas de error">
+        <div className="ds-wrap">
+          <span className="ds-eyebrow mono">Plantillas y estados · Páginas de error</span>
+          <h2 id="h-comp">Comportamiento y robustez</h2>
+          <div className="doc-wrap">
+            <table className="doc-table">
+              <thead><tr><th>Aspecto</th><th>Regla</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>Ruta anidada</td>
+                  <td>
+                    El servidor puede responder con la 404 en{" "}
+                    <code>/dashboard/algo/mal</code>
+                    : un script inline en el{" "}
+                    <code>{"<head>"}</code>
+                    {" "}escribe{" "}
+                    <code>{"<base href>"}</code>
+                    {" "}con la raíz de la app, para que los estilos y las imágenes carguen desde cualquier ruta.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Ruta pedida</td>
+                  <td>
+                    <code>location.pathname</code>
+                    {" "}decodificado, recortado a 90 caracteres y asignado con{" "}
+                    <code>textContent</code>
+                    . Probado con{" "}
+                    <code>{"<img onerror>"}</code>
+                    {" "}en la ruta: queda como texto.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Sesión</td>
+                  <td>Con{" "}<code>averyn.session</code>{" "}se muestra "Ir al panel"; sin ella, "Ingresar". Sin JS aparecen todas las acciones.</td>
+                </tr>
+                <tr>
+                  <td>Módulo pendiente</td>
+                  <td>
+                    Rutas{" "}
+                    <code>/modules/access/</code>
+                    {" "}y{" "}
+                    <code>/modules/admin/</code>
+                    {" "}cambian el mensaje a "Este módulo llega pronto." (honestidad del estado).
+                  </td>
+                </tr>
+                <tr>
+                  <td>Sin conexión</td>
+                  <td>
+                    Escucha{" "}
+                    <code>online</code>
+                    /
+                    <code>offline</code>
+                    ; al volver la red recarga a los 600 ms. Región{" "}
+                    <code>role="status"</code>
+                    {" "}con el estado.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Movimiento</td>
+                  <td>
+                    Los arcos se dibujan en 1,3 s y las piezas se separan a los 1,5 s. Con{" "}
+                    <code>prefers-reduced-motion</code>
+                    {" "}se muestra directamente el estado final.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Accesibilidad</td>
+                  <td>
+                    Un{" "}
+                    <code>{"<h1>"}</code>
+                    ; número y figura con{" "}
+                    <code>aria-hidden</code>
+                    ; foco cian-glow sobre navy (10,3:1) y azul sobre el cielo; objetivos de 44 px;{" "}
+                    <code>noindex</code>
+                    .
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h3 className="ds-sub">Servir la 404 en cada hosting</h3>
+          <div className="doc-wrap">
+            <table className="doc-table">
+              <thead><tr><th>Entorno</th><th>Configuración</th></tr></thead>
+              <tbody>
+                <tr><td>GitHub Pages / Netlify</td><td>Colocar{" "}<code>404.html</code>{" "}en la raíz publicada: se usa automáticamente.</td></tr>
+                <tr><td>nginx</td><td><code>error_page 404 /404.html; error_page 403 /403.html; error_page 500 502 503 504 /500.html;</code></td></tr>
+                <tr><td>Apache</td><td><code>ErrorDocument 404 /404.html</code>{" "}(y 403, 500)</td></tr>
+                <tr>
+                  <td>VS Code Live Server</td>
+                  <td>
+                    Sirve{" "}
+                    <code>404.html</code>
+                    {" "}para rutas inexistentes. Con{" "}
+                    <code>python -m http.server</code>
+                    {" "}verás la página por defecto de Python: abre{" "}
+                    <code>/404.html</code>
+                    {" "}para previsualizar.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Mantenimiento</td>
+                  <td>Redirigir (503) todo el tráfico a{" "}<code>/mantenimiento.html</code>{" "}mientras dure la ventana.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+      <section className="ds-sec ds-sec--tint" id="figura" aria-labelledby="h-figura" data-nav="La figura rota" data-grp="Páginas de error">
+        <div className="ds-wrap">
+          <span className="ds-eyebrow mono">Plantillas y estados · Páginas de error</span>
+          <h2 id="h-figura">Cómo se construye la figura rota</h2>
+          <p className="ds-lead">
+            Es la figura de arcos con tres piezas desplazadas. Para que antes de separarse encajen al píxel, las curvas se parten con el algoritmo de De Casteljau en lugar de dibujarse a ojo.
+          </p>
+          <div className="ds-grid ds-grid--2 ds-gap-top">
+            <div className="stage stage--night">
+              <span className="stage__label mono">Antes de separarse</span>
+              <svg viewBox="0 0 640 300" width="100%" aria-hidden="true">
+                <path d="M0 290 H640" stroke="rgba(255,255,255,.22)" fill="none" />
+                <path d="M30 290 C110 60 330 40 450 290" stroke="#fff" strokeWidth="1.5" fill="none" />
+                <path d="M90 290 C150 110 300 95 390 290" stroke="#00ACD2" strokeWidth="2" fill="none" />
+                <path d="M150 290 C190 170 270 160 330 290" stroke="#55D6FF" strokeWidth="1.5" fill="none" />
+                <path d="M300 8 L545 290" stroke="#3D86FF" strokeWidth="2" fill="none" />
+                <path d="M326 -32 L605 290" stroke="#3D86FF" strokeWidth="2" fill="none" />
+              </svg>
+            </div>
+            <div className="stage stage--night">
+              <span className="stage__label mono">Después (estado final)</span>
+              <svg viewBox="0 0 640 300" width="100%" aria-hidden="true">
+                <path d="M0 290 H640" stroke="rgba(255,255,255,.22)" fill="none" />
+                <path d="M30 290 C110 60 330 40 450 290" stroke="#fff" strokeWidth="1.5" fill="none" />
+                <path d="M90 290 C101 213 151 118 215 125" stroke="#00ACD2" strokeWidth="2" fill="none" />
+                <path transform="translate(18 14)" d="M215 125 C279 133 340 175 390 290" stroke="#00ACD2" strokeWidth="2" fill="none" />
+                <path transform="translate(22 -8)" d="M150 290 C190 170 270 160 330 290" stroke="#55D6FF" strokeWidth="1.5" fill="none" />
+                <path d="M300 8 L545 290" stroke="#3D86FF" strokeWidth="2" fill="none" />
+                <path d="M326 -32 L471 135" stroke="#3D86FF" strokeWidth="2" fill="none" />
+                <path transform="translate(-22 10)" d="M471 135 L605 290" stroke="#3D86FF" strokeWidth="2" fill="none" />
+                <circle cx="227" cy="115" r="15" stroke="#55D6FF" strokeWidth="1.5" fill="none" />
+              </svg>
+            </div>
+          </div>
+          <div className="codeblock">
+            <pre id="code-crack">
+              {"def split(P, t):  # De Casteljau: divide una cúbica en dos que encajan exactamente\n    lerp = lambda a, b: (a[0] + (b[0]-a[0])*t, a[1] + (b[1]-a[1])*t)\n    p01, p12, p23 = lerp(P[0], P[1]), lerp(P[1], P[2]), lerp(P[2], P[3])\n    p012, p123 = lerp(p01, p12), lerp(p12, p23)\n    s = lerp(p012, p123)\n    return (P[0], p01, p012, s), (s, p123, p23, P[3])\n\n/* Cada pieza que se separa va en un <g class=\"er-crack\"> con su desplazamiento */\n.er-crack { animation: er-crack .7s var(--av-ease-out) 1.5s forwards; }\n@keyframes er-crack { to { transform: translate(var(--cx), var(--cy)); } }"}
+            </pre>
+            <button className="copy" type="button" data-copy="#code-crack">Copiar</button>
+          </div>
+          <p className="ds-note">
+            La animación va en un{" "}
+            <code>{"<g>"}</code>
+            {" "}envolvente y no en el trazo: el trazo ya usa{" "}
+            <code>animation</code>
+            {" "}para dibujarse y dos clases con{" "}
+            <code>animation</code>
+            {" "}se pisarían. Desplazamientos: arco medio (+18, +14), arco interior (+22, −8), diagonal inferior (−22, +10).
+          </p>
+        </div>
+      </section>
+      <section className="ds-sec" id="copy-errores" aria-labelledby="h-copy" data-nav="Copy de errores" data-grp="Páginas de error">
+        <div className="ds-wrap">
+          <span className="ds-eyebrow mono">Plantillas y estados · Páginas de error</span>
+          <h2 id="h-copy">Copy aprobado</h2>
+          <div className="doc-wrap">
+            <table className="doc-table">
+              <thead><tr><th>Estado</th><th>Etiqueta</th><th>Titular</th><th>Apoyo</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>404</td>
+                  <td>Error 404 · Página no encontrada</td>
+                  <td>No encontramos esa página.</td>
+                  <td>La dirección que pediste no existe o se movió. Revisa que esté bien escrita o vuelve al inicio.</td>
+                </tr>
+                <tr>
+                  <td>404 de módulo</td>
+                  <td>Próximamente</td>
+                  <td>Este módulo llega pronto.</td>
+                  <td>Accesos y Administración todavía no tienen pantalla. Estamos trabajando en ellos.</td>
+                </tr>
+                <tr>
+                  <td>403</td>
+                  <td>Error 403 · Sin permiso</td>
+                  <td>No tienes permiso para ver esto.</td>
+                  <td>Tu cuenta no tiene acceso a esta sección. Pídelo a tu administrador o vuelve al panel.</td>
+                </tr>
+                <tr>
+                  <td>500</td>
+                  <td>Error 500 · Fallo del servidor</td>
+                  <td>Algo falló de nuestro lado.</td>
+                  <td>No pudimos completar tu solicitud. Inténtalo de nuevo en unos minutos; si sigue pasando, avisa a tu administrador.</td>
+                </tr>
+                <tr>
+                  <td>Sin conexión</td>
+                  <td>Sin conexión</td>
+                  <td>No hay conexión.</td>
+                  <td>Revisa tu red. No perdiste nada: esta página se recargará sola cuando vuelva la conexión.</td>
+                </tr>
+                <tr>
+                  <td>Mantenimiento</td>
+                  <td>Mantenimiento</td>
+                  <td>Estamos haciendo mejoras.</td>
+                  <td>Averyn vuelve en breve. Gracias por tu paciencia.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+      <section className="ds-sec ds-sec--tint" id="errores-api" aria-labelledby="h-errores-api" data-nav="Errores de la API" data-grp="Páginas de error">
+        <div className="ds-wrap">
+          <span className="ds-eyebrow mono">Plantillas y estados · Páginas de error</span>
+          <h2 id="h-errores-api">Errores de la API: del código al mensaje</h2>
+          <p className="ds-lead">
+            La API responde{" "}
+            <code>application/problem+json</code>
+            {" "}con un{" "}
+            <code>code</code>
+            {" "}estable y la cabecera{" "}
+            <code>X-Request-Id</code>
+            . El frontend traduce por{" "}
+            <code>code</code>
+            {" "}(los textos técnicos de la API están en inglés y nunca se muestran tal cual).
+          </p>
+          <div className="doc-wrap">
+            <table className="doc-table">
+              <thead><tr><th>Código o estado</th><th>Mensaje al usuario</th><th>Qué hace la interfaz</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><code>AUTH_INVALID_CREDENTIALS</code>{" "}· 401</td>
+                  <td>Correo o contraseña incorrectos.</td>
+                  <td>Aviso en el formulario; el mismo texto sea cual sea la causa.</td>
+                </tr>
+                <tr>
+                  <td><code>AUTH_UNAUTHENTICATED</code>{" "}· 401</td>
+                  <td>Tu sesión caducó.</td>
+                  <td>Un único refresh compartido y reintento de la petición; si falla, la pantalla de sesión caducada.</td>
+                </tr>
+                <tr>
+                  <td><code>AUTH_REFRESH_INVALID</code>{" "}· 401</td>
+                  <td>Tu sesión terminó. Ingresa de nuevo.</td>
+                  <td>Sin más reintentos: va al login (el refresh ya no sirve o se detectó reutilización).</td>
+                </tr>
+                <tr>
+                  <td>429 ·{" "}<code>Retry-After</code></td>
+                  <td>Demasiados intentos. Podrás volver a intentarlo en 14:32.</td>
+                  <td>Cuenta atrás y controles deshabilitados hasta que termine.</td>
+                </tr>
+                <tr>
+                  <td><code>TENANT_NOT_FOUND</code>{" "}· 404</td>
+                  <td>No encontramos esta organización.</td>
+                  <td>Pantalla «Organización no encontrada», sin más detalle.</td>
+                </tr>
+                <tr><td>403 (sin permiso)</td><td>No tienes permiso para ver esto.</td><td>Página 403; ver el copy aprobado.</td></tr>
+                <tr>
+                  <td><code>VALIDATION_ERROR</code>{" "}· 400</td>
+                  <td>Revisa los campos marcados.</td>
+                  <td>Mensaje junto a cada campo y foco en el primero con error.</td>
+                </tr>
+                <tr>
+                  <td><code>DOCUMENT_ALREADY_REGISTERED</code>{" "}· 409</td>
+                  <td>Ese documento ya está registrado.</td>
+                  <td>Aviso en el campo; sin mostrar a quién pertenece.</td>
+                </tr>
+                <tr>
+                  <td><code>PERSON_NOT_FOUND</code>{" "}· 404</td>
+                  <td>No encontramos a esa persona.</td>
+                  <td>Estado vacío con acción de volver al listado.</td>
+                </tr>
+                <tr>
+                  <td>5xx o sin{" "}<code>code</code></td>
+                  <td>Algo falló de nuestro lado.</td>
+                  <td>Aviso con el{" "}<code>X-Request-Id</code>{" "}para soporte, nunca el detalle técnico.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p className="ds-note">
+            La lista crece con el contrato: cada{" "}
+            <code>code</code>
+            {" "}nuevo entra aquí con su mensaje antes de usarse. El{" "}
+            <code>X-Request-Id</code>
+            {" "}es lo único técnico que el usuario puede ver, y solo en errores inesperados.
+          </p>
+        </div>
+      </section>
+      <section className="ds-sec" id="otros-estados" aria-labelledby="h-otros" data-nav="Banner, sesión caducada y módulos pendientes" data-grp="Avisos del sistema">
+        <div className="ds-wrap">
+          <span className="ds-eyebrow mono">Plantillas y estados · Avisos del sistema</span>
+          <h2 id="h-otros">Avisos del sistema dentro de la app</h2>
+          <p className="ds-lead">
+            No todo estado necesita una página: algunos viven dentro de la pantalla como un aviso persistente o una confirmación.
+          </p>
+          <h3 className="ds-sub">Banner de sistema</h3>
+          <div className="stage" style={{ padding: "0", overflow: "hidden" }}>
+            <DismissibleBanner className="hz-banner hz-banner--info" role="status">
+              <Icon name="info-circle" />
+              <span><b>Mantenimiento programado.</b>{" "}El panel puede no estar disponible unos minutos esta noche.</span>
+              <button type="button" className="hz-banner__x" aria-label="Cerrar aviso">×</button>
+            </DismissibleBanner>
+            <DismissibleBanner className="hz-banner hz-banner--warn" role="status">
+              <Icon name="exclamation-triangle" />
+              <span><b>Dispositivo desconectado.</b>{" "}El lector CAM-002 no responde. Revisa la conexión.</span>
+              <button type="button" className="hz-banner__x" aria-label="Cerrar aviso">×</button>
+            </DismissibleBanner>
+            <DismissibleBanner className="hz-banner hz-banner--bad" role="alert">
+              <Icon name="x-octagon" />
+              <span><b>Sin conexión con el servidor.</b>{" "}Tus cambios no se están guardando. Reintentando…</span>
+            </DismissibleBanner>
+          </div>
+          <p className="ds-note">
+            Franja a todo el ancho bajo el navbar, con borde inferior de 1 px y fondo claro de la familia; el error persistente usa{" "}
+            <code>role="alert"</code>
+            {" "}y no se puede cerrar. Máximo un banner visible a la vez en producción.
+          </p>
+          <h3 className="ds-sub">Sesión caducada{" "}<small>modal</small></h3>
+          <div className="stage"><SessionModalDemo /></div>
+          <h3 className="ds-sub">Módulo "Próximamente"</h3>
+          <div className="stage stage--tint">
+            <div className="hz-empty">
+              <span className="hz-empty__icon"><Icon name="door-open" /></span>
+              <span className="hz-tag">Próximamente</span>
+              <h4>Accesos</h4>
+              <p>Zonas, puntos de acceso y políticas llegan en una próxima versión. Mientras tanto, gestiona personas y biometría desde el panel.</p>
+              <a className="hz-btn hz-btn--primary" href="#otros-estados">Volver al panel →</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
