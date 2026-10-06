@@ -1,30 +1,6 @@
 /* Documentos y pre-registro (features/documents): carga, tabla con subtítulos, asistente por pasos y revisión OCR.
    Reutiliza av-page.css (superficies, tablas, filas de persona), los patrones .pt-doc y .pt-conf, y .up__drop. */
 
-/* Progreso vertical por pasos (components/ui/step-progress.tsx) */
-.av-steps { display: grid; gap: .25rem; margin: 0; padding: 0; list-style: none; }
-.av-steps__item { position: relative; display: flex; align-items: center; gap: .8rem; padding: .7rem .4rem; color: var(--av-gray-500); }
-.av-steps__item:not(:last-child)::after { content: ''; position: absolute; left: calc(.4rem + 15px); top: calc(.7rem + 32px); width: 2px; height: calc(100% - 32px); background: var(--av-hairline-strong); }
-.av-steps__marker { position: relative; z-index: 1; flex: none; display: grid; place-items: center; width: 32px; height: 32px; border: 2px solid var(--av-hairline-strong); border-radius: 50%; background: #fff; font: 700 .8125rem var(--av-font-mono); color: var(--av-gray-600); }
-.av-steps__text { display: grid; min-width: 0; }
-.av-steps__title { font: 600 .9375rem var(--av-font-body); }
-.av-steps__status { font: 500 .6875rem var(--av-font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--av-gray-600); }
-.av-steps__item[data-state="done"] { color: var(--av-navy); }
-.av-steps__item[data-state="done"] .av-steps__marker { border-color: var(--av-blue); background: var(--av-blue); color: #fff; }
-.av-steps__item[data-state="done"]::after { background: var(--av-blue); }
-.av-steps__item[data-state="current"] { color: var(--av-navy); }
-.av-steps__item[data-state="current"] .av-steps__marker { border-color: var(--av-blue); color: var(--av-blue); }
-.av-steps__item[data-state="current"] .av-steps__title { font-weight: 700; }
-
-/* Subtítulo bajo el dato principal de una celda */
-.av-cell-sub { display: block; margin-top: .15rem; font: 500 .8125rem var(--av-font-mono); color: var(--av-gray-600); }
-.av-cell-sub--wrap { max-width: 26ch; font: 400 .8125rem var(--av-font-body); }
-
-/* Encabezado de una superficie con lista: título a la izquierda y dato a la derecha */
-.av-toolbar--head { align-items: center; justify-content: space-between; }
-.av-toolbar__title { margin: 0; font: 500 1.15rem var(--av-font-heading); letter-spacing: -.01em; }
-.av-toolbar__info { font: 500 .8125rem var(--av-font-mono); color: var(--av-gray-600); }
-
 /* Carga de un documento */
 .upload { display: grid; grid-template-columns: minmax(12rem, 16rem) minmax(0, 1fr); gap: 1.25rem; align-items: start; }
 .upload .up__drop { min-height: 8.5rem; align-content: center; }
@@ -44,12 +20,7 @@
 dialog.av-modal:has(.ocr-form) { width: min(600px, calc(100vw - 2rem)); }
 .av-modal .ocr-form { margin-top: .8rem; }
 
-/* Asistente de pre-registro */
-.av-wizard { display: grid; grid-template-columns: 15rem minmax(0, 1fr); gap: 1.5rem; align-items: start; }
-.av-wizard > * { min-width: 0; }
-.av-wizard__side { position: sticky; top: 6.5rem; }
-.av-wizard__body, .av-wizard__fieldset { display: grid; gap: 1.5rem; min-width: 0; }
-.av-wizard__fieldset { margin: 0; padding: 0; border: 0; }
+/* Asistente de pre-registro (el contenedor .av-wizard es común: av-page.css) */
 .wiz-kind { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.4rem; }
 .wiz-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 1.6rem; align-items: start; }
 .wiz-grid > * { min-width: 0; }
@@ -64,17 +35,10 @@ dialog.av-modal:has(.ocr-form) { width: min(600px, calc(100vw - 2rem)); }
 .wiz-data { display: grid; gap: 1rem; }
 .wiz-data__title { margin: 0; font: 500 1.15rem var(--av-font-heading); letter-spacing: -.01em; }
 .wiz-data__title:not(:first-child) { margin-top: .6rem; }
-.wiz-footer { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
 
 /* Visor de documento: marco rojo cuando no se pudo leer */
 .pt-doc[data-state="bad"] .pt-doc__corners i { border-color: var(--pt-bad); }
 
-@media (max-width: 1024px) {
-  .av-wizard { grid-template-columns: minmax(0, 1fr); }
-  .av-wizard__side { position: static; }
-  .av-steps { grid-template-columns: repeat(auto-fit, minmax(10.5rem, 1fr)); }
-  .av-steps__item::after { display: none; }
-}
 @media (max-width: 768px) {
   .upload, .wiz-grid { grid-template-columns: minmax(0, 1fr); }
 }
