@@ -39,6 +39,8 @@ export type LoginFormState = {
   fieldErrors: LoginFieldErrors;
   /** Mensaje general (credenciales inválidas, demasiados intentos, fallo del servicio). */
   errorMessage?: string;
+  /** Mensaje de éxito: el formulario espera un momento con el botón bloqueado y luego navega. */
+  successMessage?: string;
 };
 
 /** Estado inicial del formulario. */

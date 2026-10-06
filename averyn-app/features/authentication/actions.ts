@@ -2,9 +2,9 @@
 
 import { redirect } from "next/navigation";
 
-import { describeLoginError } from "./messages";
+import { describeLoginError, LOGIN_SUCCESS_MESSAGE } from "./messages";
 import { authService } from "./services";
-import { AFTER_LOGIN_PATH, LOGIN_PATH } from "./routes";
+import { LOGIN_PATH } from "./routes";
 import { endMockSession, startMockSession } from "./services/mock-session";
 import type { LoginFormState } from "./types";
 import { hasFieldErrors, validateLoginFields } from "./validation";
@@ -26,12 +26,14 @@ function readText(formData: FormData, name: string): string {
 /**
  * Acción del formulario de inicio de sesión.
  *
- * Valida los campos, llama al servicio y, si salió bien, abre la sesión y lleva al
- * dashboard. Si no, devuelve el estado con el error para mostrarlo sin vaciar el formulario.
+ * Valida los campos, llama al servicio y, si salió bien, abre la sesión y devuelve el
+ * mensaje de éxito: el formulario muestra la alerta, mantiene el botón bloqueado un
+ * momento (como `login.js` del frontend original) y entonces navega al dashboard.
+ * Si algo falla, devuelve el estado con el error para mostrarlo sin vaciar el formulario.
  *
  * @param _previousState - Estado anterior del formulario (lo exige `useActionState`; no se usa).
  * @param formData - Datos enviados por el formulario.
- * @returns El nuevo estado del formulario cuando el inicio de sesión falla.
+ * @returns El nuevo estado del formulario.
  */
 export async function loginAction(_previousState: LoginFormState, formData: FormData): Promise<LoginFormState> {
   const credentials = { email: readText(formData, "email").trim(), password: readText(formData, "password") };
@@ -51,7 +53,7 @@ export async function loginAction(_previousState: LoginFormState, formData: Form
   }
 
   await startMockSession();
-  redirect(AFTER_LOGIN_PATH);
+  return { email: credentials.email, fieldErrors: {}, successMessage: LOGIN_SUCCESS_MESSAGE };
 }
 
 /**

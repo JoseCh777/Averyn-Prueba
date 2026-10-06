@@ -1,3 +1,7 @@
+import Link from "next/link";
+
+import { LANDING_PATH } from "../routes";
+
 /** Logo del panel de marca: wordmark negro sobre la zona clara del degradado. */
 const BRAND_LOGO_SRC = "/assets/images/averyn-logo-font-black.avif";
 
@@ -24,8 +28,10 @@ const ARCS = [
 export function LoginBrandPanel() {
   return (
     <aside className="av-login__side" aria-label="Información de Averyn">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className="av-login__brand" src={BRAND_LOGO_SRC} alt="Averyn" />
+      <Link className="av-login__brand-link" href={LANDING_PATH} aria-label="Averyn, volver al inicio">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img className="av-login__brand" src={BRAND_LOGO_SRC} alt="Averyn" />
+      </Link>
 
       <div className="av-login__figure" aria-hidden="true">
         <svg viewBox="0 0 640 300" focusable="false">
