@@ -160,6 +160,7 @@ export function ElectionWizard({ people, existingNames, today }: ElectionWizardP
             </Alert>
           ) : null}
 
+          <div key={step} className="wiz-step">
           {step === 1 ? (
             <GeneralStep
               values={general}
@@ -195,11 +196,16 @@ export function ElectionWizard({ people, existingNames, today }: ElectionWizardP
           {step === 4 && validatedGeneral.ok && validatedSettings.ok ? (
             <ReviewStep general={general} settings={validatedSettings.value} affiliation={affiliation} people={people} institution={validatedGeneral.value.institution} kind={validatedGeneral.value.kind} />
           ) : null}
+          </div>
 
           <div className="wiz-footer elec-footer">
-            <Button variant="ghost" onClick={() => go(step - 1)} disabled={step === 1 || saving}>
-              <Icon name="arrow-left" /> Atrás
-            </Button>
+            {step > 1 ? (
+              <Button variant="ghost" onClick={() => go(step - 1)} disabled={saving}>
+                <Icon name="arrow-left" /> Atrás
+              </Button>
+            ) : (
+              <span />
+            )}
             <Button onClick={() => void next()} loading={saving}>
               {step === 4 ? (saving ? "Creando…" : <>Crear proceso electoral <Icon name="check2-circle" /></>) : <>Continuar <Icon name="arrow-right" /></>}
             </Button>

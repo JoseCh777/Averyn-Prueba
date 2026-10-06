@@ -21,7 +21,7 @@ seguridad y equipo) y llevar al login. No tiene datos ni reglas de negocio.
 | `components/product-sections.tsx` | Qué es, Capacidades y Soluciones |
 | `components/platform-sections.tsx` | Tecnología, Proceso, Arquitectura y Seguridad |
 | `components/closing-sections.tsx` | Equipo, cierre y pie de página |
-| `components/landing-parts.tsx` | Piezas comunes: espacio para medios, rótulo y lista |
+| `components/landing-parts.tsx` | Piezas comunes: espacio para medios y lista |
 | `components/arcs-figure.tsx` | Figuras de arcos de la marca (decorativas) |
 | `components/reveal.tsx` | Revelado suave al entrar en pantalla |
 | `components/back-to-top.tsx` | Botón «Volver arriba» |

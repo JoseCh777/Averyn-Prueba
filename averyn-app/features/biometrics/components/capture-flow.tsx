@@ -96,9 +96,11 @@ export function CaptureFlow({ mode, people, devices, initialPersonId }: CaptureF
           </div>
 
           {step === 1 ? (
-            <PersonPicker people={people} selectedId={personId} onSelect={setPersonId} searchLabel={copy.searchLabel} />
+            <div className="wiz-step">
+              <PersonPicker people={people} selectedId={personId} onSelect={setPersonId} searchLabel={copy.searchLabel} />
+            </div>
           ) : person === undefined ? null : (
-            <div className="bio-step">
+            <div className="bio-step wiz-step">
               <p className="av-note">
                 Persona seleccionada: <strong>{person.name}</strong> · Cédula {person.document} · {person.affiliation}
               </p>

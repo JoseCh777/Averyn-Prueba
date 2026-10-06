@@ -20,7 +20,7 @@
 .on-night :focus-visible { outline-color: var(--av-cyan-glow); }
 .av-spin { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(255, 255, 255, .4); border-top-color: #fff; border-radius: 50%; animation: av-rot .7s linear infinite; }
 @keyframes av-rot { to { transform: rotate(360deg); } }
-.av-iconbtn { position: relative; width: 42px; height: 42px; display: inline-grid; place-items: center; border: 1px solid var(--av-hairline); border-radius: var(--av-radius-full); background: rgba(234, 240, 254, .9); color: var(--av-navy); cursor: pointer; font-size: 1.05rem; transition: background-color .15s var(--av-ease-out), color .15s var(--av-ease-out); }
+.av-iconbtn { position: relative; width: 44px; height: 44px; display: inline-grid; place-items: center; border: 1px solid var(--av-hairline); border-radius: var(--av-radius-full); background: rgba(234, 240, 254, .9); color: var(--av-navy); cursor: pointer; font-size: 1.05rem; transition: background-color .15s var(--av-ease-out), color .15s var(--av-ease-out); }
 .av-iconbtn:hover { background: #fff; color: var(--av-blue); }
 .av-iconbtn .badge { position: absolute; top: 2px; right: 2px; min-width: 16px; height: 16px; padding: 0 3px; border-radius: 99px; background: var(--av-error); color: #fff; font: 700 10px/16px var(--av-font-body); text-align: center; border: 2px solid #EAF0FE; }
 
@@ -78,7 +78,7 @@
 /* Tiles, KPI, panel, media, equipo */
 .av-tile { position: relative; display: flex; flex-direction: column; justify-content: space-between; gap: 1.2rem; min-height: 180px; padding: 1.4rem; border-radius: var(--av-radius-tile); text-decoration: none; color: inherit; transition: transform .2s var(--av-ease-out); }
 .av-tile__icon { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; font-size: 1.35rem; }
-.av-tile__title { display: block; font-family: var(--av-font-heading); font-weight: 500; font-size: 1.25rem; line-height: 1.15; letter-spacing: -.02em; }
+.av-tile__title { display: block; font-family: var(--av-font-heading); font-weight: 500; font-size: 1.25rem; line-height: 1.15; letter-spacing: -.015em; word-spacing: .06em; }
 .av-tile__desc { display: block; margin-top: .3rem; font-size: .9rem; line-height: 1.45; }
 .av-tile__arrow { position: absolute; top: 1.3rem; right: 1.4rem; font-family: var(--av-font-mono); font-size: 1.25rem; line-height: 1; transition: transform .2s var(--av-ease-out); }
 .av-tile__tag { position: absolute; top: 1.2rem; right: 1.2rem; }

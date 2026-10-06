@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter, JetBrains_Mono, Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
 
@@ -19,6 +19,15 @@ const monoFont = JetBrains_Mono({
   variable: '--font-mono',
   display: 'swap',
 });
+
+/** Barra del navegador al color de lo que hay arriba de la página; el teclado virtual redimensiona el contenido (no lo tapa). */
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#EAF0FE" },
+    { media: "(prefers-color-scheme: dark)", color: "#071A36" },
+  ],
+  interactiveWidget: "resizes-content",
+};
 
 export const metadata: Metadata = {
   title: 'Averyn',

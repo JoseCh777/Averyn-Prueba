@@ -22,9 +22,8 @@ export class InvalidBaseUrlError extends Error {
 /**
  * Interpreta los argumentos de la linea de comandos.
  *
- * Forma: `<baseUrl> [<ruta>...]`. Sin argumentos se audita el catalogo del
- * Design System en `DEFAULT_BASE_URL`; con solo la URL base se usan las rutas
- * por defecto.
+ * Forma: `<baseUrl> [<ruta>...]`. Sin argumentos se auditan todas las pantallas de la
+ * aplicacion en `DEFAULT_BASE_URL`; con solo la URL base se usan las mismas rutas.
  *
  * @param args - Argumentos sin `node` ni el nombre del script.
  * @returns Servidor y rutas a auditar.

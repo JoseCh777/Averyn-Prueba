@@ -8,11 +8,30 @@
 /** Servidor al que se apunta cuando no se indica otro. */
 export const DEFAULT_BASE_URL = 'http://localhost:3000';
 
-/** Rutas auditadas por defecto: todas las pantallas de la app. Las autenticadas necesitan `AUDIT_COOKIE`. */
+/**
+ * Rutas auditadas por defecto: todas las pantallas de la app. Las que exigen sesion necesitan
+ * `AUDIT_COOKIE`; sin ella redirigen al login y se audita el login varias veces.
+ * No incluye las paginas que responden 404 a proposito: la herramienta las toma como un problema.
+ */
 export const DEFAULT_ROUTES: readonly string[] = [
   '',
   'login',
+  'forbidden',
+  'offline',
+  'maintenance',
   'dashboard',
+  'identity',
+  'identity/per-0001',
+  'documents',
+  'documents/pre-registration',
+  'biometrics',
+  'biometrics/enrollment',
+  'biometrics/verification',
+  'biometrics/history',
+  'biometrics/capture?mode=enrollment&person=per-0001&method=face',
+  'elections',
+  'elections/new',
+  'ai',
 ];
 
 /** Anchos minimos que exige el estandar para probar el responsive (coding-standard 71). */
@@ -25,13 +44,10 @@ export const VIEWPORTS = [
 export const AXE_WCAG_TAGS: readonly string[] = ['wcag2a', 'wcag2aa', 'wcag22aa'];
 
 /**
- * Elementos que axe no debe evaluar.
- *
- * Las muestras de contraste de `/design-system/fundamentos` muestran a
- * proposito pares de colores que fallan; llevan `aria-hidden` y son contenido
- * de ejemplo, no interfaz.
+ * Elementos que axe no debe evaluar. Ninguno por ahora: la aplicacion no tiene muestras de ejemplo
+ * que fallen a proposito (las del catalogo del Design System viven en `design-system-v2`).
  */
-export const AXE_EXCLUDED_SELECTORS: readonly string[] = ['[data-demo="contraste"]'];
+export const AXE_EXCLUDED_SELECTORS: readonly string[] = [];
 
 /** Espera tras cargar la pagina para que terminen las animaciones de entrada. */
 export const SETTLE_TIME_MS = 1500;

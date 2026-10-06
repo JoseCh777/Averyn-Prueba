@@ -2,14 +2,16 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import { Alert } from "@/components/ui/feedback";
+import { Alert, Chip } from "@/components/ui/feedback";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 
 import { completeCaptureAction } from "../actions";
 import { captureFails } from "../biometric-rules";
 import { CAPTURE_TICK_MS, captureFailure, captureMessage, progressAtTick, qualityRows, type CapturePhase } from "../capture-state";
-import { METHOD_WITH_ARTICLE } from "../labels";
+import { PersonAvatar } from "@/features/identity/components/person-avatar";
+
+import { METHOD_ICON, METHOD_LABEL, METHOD_WITH_ARTICLE } from "../labels";
 import type { CaptureContext } from "../types";
 import { useCamera } from "../use-camera";
 import { FaceView } from "./face-view";
@@ -17,8 +19,10 @@ import { FingerprintView } from "./fingerprint-view";
 
 type CaptureStationProps = {
   context: CaptureContext;
-  /** Línea con la persona, por ejemplo «Ana Torres · Cédula 10234567 · Estudiante». */
-  personLine: string;
+  /** La persona a la que se captura: es el dato más importante de la pantalla. */
+  person: { id: string; name: string };
+  /** Detalle de la persona, por ejemplo «Cédula 10234567 · Estudiante». */
+  personDetail: string;
   /** Dispositivo que atiende la captura, por ejemplo «CAM-001». */
   deviceLabel: string;
 };
@@ -35,7 +39,7 @@ type CaptureStationProps = {
  * @param props - El contexto de la captura, la persona y el dispositivo.
  * @returns La estación de captura.
  */
-export function CaptureStation({ context, personLine, deviceLabel }: CaptureStationProps) {
+export function CaptureStation({ context, person, personDetail, deviceLabel }: CaptureStationProps) {
   const isFace = context.method === "face";
   const camera = useCamera(isFace);
   const [phase, setPhase] = useState<CapturePhase>("idle");
@@ -97,9 +101,21 @@ export function CaptureStation({ context, personLine, deviceLabel }: CaptureStat
 
   return (
     <section className="av-surface av-surface--pad bio-station" aria-label="Captura biométrica">
-      <p className="av-note">
-        {personLine} · Método: {isFace ? "Rostro" : "Huella"} · Dispositivo {deviceLabel}
-      </p>
+      <div className="bio-subject">
+        <PersonAvatar person={person} large />
+        <div className="bio-subject__text">
+          <h2>{person.name}</h2>
+          <p>{personDetail}</p>
+        </div>
+        <span className="av-chips">
+          <Chip tone="info" icon={METHOD_ICON[context.method]}>
+            {METHOD_LABEL[context.method]}
+          </Chip>
+          <Chip tone="neutral" icon="signal">
+            {deviceLabel}
+          </Chip>
+        </span>
+      </div>
 
       {isFace ? (
         <FaceView phase={phase} live={camera.state === "live"} still={still} message={captureMessage(phase, context.method)} videoRef={camera.videoRef} />
@@ -107,6 +123,7 @@ export function CaptureStation({ context, personLine, deviceLabel }: CaptureStat
         <FingerprintView phase={phase} progress={progress} />
       )}
 
+      {phase === "idle" ? null : (
       <ul className="pt-meter" aria-label="Calidad de la captura">
         {rows.map((item) => (
           <li key={item.key} data-lv={item.level}>
@@ -123,6 +140,7 @@ export function CaptureStation({ context, personLine, deviceLabel }: CaptureStat
           </li>
         ))}
       </ul>
+      )}
 
       {isFace && camera.state === "unavailable" ? (
         <Alert tone="warning" title="No pudimos usar la cámara">

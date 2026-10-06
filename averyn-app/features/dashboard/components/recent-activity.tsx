@@ -12,7 +12,7 @@ const OUTCOME_TONE: Record<BiometricOutcome, ActivityTone | undefined> = {
 
 const NO_ACTIVITY_EVENT: ActivityEvent = {
   title: "Sin actividad reciente",
-  detail: "Aún no hay eventos en el log biométrico. Registra o verifica una persona para empezar.",
+  detail: "Aún no hay eventos en el registro biométrico. Registra o verifica una persona para empezar.",
   time: "",
 };
 
@@ -44,7 +44,7 @@ export function RecentActivity({ summary }: { summary: DashboardSummary }) {
   return (
     <ActivityPanel
       title="Actividad reciente"
-      subtitle={`Últimas acciones registradas · ${formatCount(summary.totalEvents, "evento", "eventos")} en el log`}
+      subtitle={`Últimas acciones registradas · ${formatCount(summary.totalEvents, "evento", "eventos")} en el registro`}
       bars={summary.outcomes.map((outcome) => ({
         label: outcome.label,
         value: outcome.count,

@@ -70,7 +70,8 @@ export async function CaptureView({ params }: { params: CaptureSearchParams }) {
         <CaptureStation
           key={`${context.mode}-${context.personId}-${context.method}`}
           context={context}
-          personLine={`${person.name} · ${formatDocument(person.document)} · ${AFFILIATION_LABEL[person.affiliation]}`}
+          person={person}
+          personDetail={`${formatDocument(person.document)} · ${AFFILIATION_LABEL[person.affiliation]}`}
           deviceLabel={device.id}
         />
       ) : (

@@ -20,15 +20,6 @@ export function MediaSlot({ className, hint }: MediaSlotProps) {
   );
 }
 
-/**
- * Rótulo en mono que precede al título de una sección.
- *
- * @returns El rótulo.
- */
-export function SectionLabel({ children }: { children: string }) {
-  return <span className="mn-label mn-mono">{children}</span>;
-}
-
 interface ItemListProps {
   className: string;
   items: readonly LandingItem[];

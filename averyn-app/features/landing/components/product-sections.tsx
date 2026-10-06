@@ -1,5 +1,5 @@
 import { ABOUT_ITEMS, CAPABILITIES, SOLUTIONS, orderLabel } from "../content";
-import { ItemList, MediaSlot, SectionLabel } from "./landing-parts";
+import { ItemList, MediaSlot } from "./landing-parts";
 import { Reveal } from "./reveal";
 
 /**
@@ -35,7 +35,6 @@ export function CapabilitiesSection() {
     <section id="capacidades" className="mn-section mn-dark" aria-labelledby="capacidades-title">
       <Reveal className="mn-wrap mn-grid">
         <div className="mn-cap__side">
-          <SectionLabel>Capacidades</SectionLabel>
           <h2 className="mn-title" id="capacidades-title">
             Capacidades para operar con claridad.
           </h2>
@@ -70,7 +69,6 @@ export function SolutionsSection() {
     <section id="soluciones" className="mn-section" aria-labelledby="soluciones-title">
       <Reveal className="mn-wrap mn-grid">
         <div className="mn-sol__head">
-          <SectionLabel>Soluciones</SectionLabel>
           <h2 className="mn-title" id="soluciones-title">
             Soluciones para cada institución.
           </h2>

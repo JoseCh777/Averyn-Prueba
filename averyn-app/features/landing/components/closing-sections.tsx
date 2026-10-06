@@ -4,7 +4,6 @@ import { LOGIN_PATH } from "@/features/authentication/routes";
 
 import { TEAM, type TeamMember } from "../content";
 import { ArcsFigure } from "./arcs-figure";
-import { SectionLabel } from "./landing-parts";
 import { Reveal } from "./reveal";
 
 /**
@@ -17,7 +16,6 @@ export function TeamSection() {
     <section id="equipo" className="mn-section mn-soft" aria-labelledby="equipo-title">
       <Reveal className="mn-wrap mn-grid">
         <div className="mn-eq__head">
-          <SectionLabel>Equipo</SectionLabel>
           <h2 className="mn-title" id="equipo-title">
             Construido desde la ingeniería y la investigación.
           </h2>

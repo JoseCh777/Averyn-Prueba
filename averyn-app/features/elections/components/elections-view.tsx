@@ -27,9 +27,11 @@ export async function ElectionsView() {
         title="Procesos electorales"
         description="Convocatorias creadas y su estado dentro de la institución."
         actions={
-          <ButtonLink href={NEW_ELECTION_PATH} variant="primary">
-            <Icon name="plus-lg" /> Nuevo proceso electoral
-          </ButtonLink>
+          elections.length > 0 ? (
+            <ButtonLink href={NEW_ELECTION_PATH} variant="primary">
+              <Icon name="plus-lg" /> Nuevo proceso electoral
+            </ButtonLink>
+          ) : undefined
         }
       />
       <section className="av-surface" aria-label="Listado de procesos electorales">

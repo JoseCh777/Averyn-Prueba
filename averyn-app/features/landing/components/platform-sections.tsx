@@ -1,5 +1,5 @@
 import { ARCHITECTURE_FLOW, ARCHITECTURE_ITEMS, PROCESS_STEPS, SECURITY_ITEMS, TECHNOLOGIES, orderLabel } from "../content";
-import { ItemList, MediaSlot, SectionLabel } from "./landing-parts";
+import { ItemList, MediaSlot } from "./landing-parts";
 import { Reveal } from "./reveal";
 
 /**
@@ -12,7 +12,6 @@ export function TechnologySection() {
     <section id="tecnologia" className="mn-section mn-soft" aria-labelledby="tecnologia-title">
       <Reveal className="mn-wrap mn-grid">
         <div className="mn-tec__head">
-          <SectionLabel>Tecnología</SectionLabel>
           <h2 className="mn-title" id="tecnologia-title">
             Tecnología detrás de la plataforma.
           </h2>
@@ -40,7 +39,6 @@ export function ProcessSection() {
     <section id="proceso" className="mn-section" aria-labelledby="proceso-title">
       <Reveal className="mn-wrap mn-grid">
         <div className="mn-proc__head">
-          <SectionLabel>Proceso</SectionLabel>
           <h2 className="mn-title" id="proceso-title">
             Cómo funciona.
           </h2>
@@ -69,7 +67,6 @@ export function ArchitectureSection() {
     <section id="arquitectura" className="mn-section mn-soft" aria-labelledby="arquitectura-title">
       <Reveal className="mn-wrap mn-grid">
         <div className="mn-arq__head">
-          <SectionLabel>Arquitectura</SectionLabel>
           <h2 className="mn-title" id="arquitectura-title">
             Arquitectura orientada a dominio.
           </h2>
@@ -110,7 +107,6 @@ export function SecuritySection() {
     <section id="seguridad" className="mn-section" aria-labelledby="seguridad-title">
       <Reveal className="mn-wrap mn-grid">
         <div className="mn-seg__side">
-          <SectionLabel>Seguridad</SectionLabel>
           <h2 className="mn-title" id="seguridad-title">
             Seguridad por diseño.
           </h2>

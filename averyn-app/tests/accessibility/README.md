@@ -22,7 +22,7 @@ de otros navegadores, ni la de un movil fisico.
 ```bash
 npm run build && npm run start        # en otra terminal (npm run start -- -p 3200 si el 3000 esta ocupado)
 
-npm run test:a11y                                           # catalogo del Design System, en localhost:3000
+npm run test:a11y                                           # todas las pantallas, en localhost:3000
 npm run test:a11y -- http://localhost:3200                  # otro servidor
 npm run test:a11y -- http://localhost:3000 dashboard login  # rutas concretas
 ```
@@ -46,8 +46,8 @@ para CI.
 | Teclado | Tab recorre la pagina: cada elemento debe mostrar foco y tener nombre accesible | 1440 |
 | Respuesta HTTP | una pagina con codigo >= 400 es un problema | 1440 y 375 |
 
-Las muestras de contraste de `/design-system/fundamentos` (`[data-demo="contraste"]`)
-se excluyen de axe: son pares que fallan a proposito.
+No se excluye ningun elemento de axe (`AXE_EXCLUDED_SELECTORS` esta vacio): la aplicacion no tiene muestras
+de ejemplo que fallen a proposito.
 
 ## Estructura
 

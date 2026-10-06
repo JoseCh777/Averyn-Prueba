@@ -35,3 +35,53 @@ svg.bi { display: inline-block; vertical-align: -.125em; fill: currentColor; }
 .tp-state svg { font-size: 1.8rem; color: var(--av-gray-400); }
 .av-table .who svg { font-size: 1rem; }
 @media (prefers-reduced-motion: reduce) { .ac__btn svg { transition: none; } }
+
+/* ---------- Superficies del navegador y tipografía fina (pulido de diseño) ---------- */
+/* Lo que el navegador dibuja por su cuenta también lleva la marca: selección, cursor, casillas y barras de desplazamiento. */
+:root { accent-color: var(--av-blue); }
+::selection { background: rgba(20, 95, 238, .18); color: var(--av-navy); }
+input, textarea { caret-color: var(--av-blue); }
+.av-tablewrap, .av-dock { scrollbar-width: thin; scrollbar-color: var(--av-gray-300) transparent; }
+
+/* Títulos equilibrados y párrafos sin palabras huérfanas; cifras de ancho fijo para que las columnas no bailen. */
+h1, h2, h3 { text-wrap: balance; }
+p, dd, li { text-wrap: pretty; }
+.av-kpi__value, .pt-score b, .av-cell-mono, .av-who__sub, .ocr-form .pt-conf { font-variant-numeric: tabular-nums; }
+
+/* Respuesta al pulsar: los controles redondos y los mosaicos «se hunden» un poco, como las teclas de los botones. */
+.av-iconbtn:active, .av-tile:active { transform: scale(.97); }
+.av-iconbtn { transition: transform .15s var(--av-ease-out), background-color .15s var(--av-ease-out), color .15s var(--av-ease-out), box-shadow .15s var(--av-ease-out); }
+@media (prefers-reduced-motion: reduce) { .av-iconbtn:active, .av-tile:active { transform: none; } }
+
+/* Los diálogos no aparecen de golpe: entran con un leve escalado y opacidad (200 ms, ease-out fuerte) y el fondo se funde.
+   Es un diálogo modal, así que escala desde el centro. Un diálogo no se abre con el teclado cientos de veces al día. */
+dialog.av-modal[open] { opacity: 1; transform: none; transition: opacity .2s var(--av-ease-out), transform .2s var(--av-ease-out), overlay .2s allow-discrete, display .2s allow-discrete; }
+dialog.av-modal[open]::backdrop { opacity: 1; transition: opacity .2s var(--av-ease-out), overlay .2s allow-discrete, display .2s allow-discrete; }
+@starting-style {
+  dialog.av-modal[open] { opacity: 0; transform: scale(.96); }
+  dialog.av-modal[open]::backdrop { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  dialog.av-modal[open] { transition: opacity .15s linear; }
+  @starting-style { dialog.av-modal[open] { transform: none; } }
+}
+
+/* Entrada de los pasos de un asistente y de los mensajes de error de campo: el contenido nuevo no «salta».
+   Solo opacidad y transform, ease-out fuerte y menos de 250 ms; con movimiento reducido solo se funde. */
+@keyframes av-step-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes av-err-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+.wiz-step { animation: av-step-in .2s var(--av-ease-out) both; }
+.av-err { animation: av-err-in .18s var(--av-ease-out) both; }
+@media (prefers-reduced-motion: reduce) {
+  .wiz-step, .av-err { animation-name: av-fade-only; animation-duration: .12s; }
+  @keyframes av-fade-only { from { opacity: 0; } to { opacity: 1; } }
+}
+
+/* ---------- Web móvil ---------- */
+/* Sin resalte gris al tocar (cada control ya tiene su :active), sin esperar al doble toque y sin inflar el texto en horizontal. */
+html { -webkit-tap-highlight-color: transparent; -webkit-text-size-adjust: 100%; }
+button, a, [role="button"], [role="switch"], summary, label[for], select { touch-action: manipulation; }
+/* El texto de un control no se selecciona al mantener pulsado; el contenido sí (nunca en body). */
+button, [role="button"], [role="switch"], .av-dock a, .vz-seg button, .av-steps__item { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+/* iOS hace zoom si el campo enfocado tiene menos de 16 px: se corrige el tamaño, no se bloquea el zoom. */
+@media (pointer: coarse) { input, textarea, select, .av-shell__search input { font-size: 16px; } }

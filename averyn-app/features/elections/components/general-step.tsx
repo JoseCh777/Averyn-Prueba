@@ -24,7 +24,8 @@ type GeneralStepProps = {
 export function GeneralStep({ values, errors, onChange, today }: GeneralStepProps) {
   return (
     <div className="av-form-grid">
-      <Field id="election-name" label="Nombre del proceso" error={errors.name}>
+      <p className="av-note av-form-grid__span">Todos los campos son obligatorios. Podrás revisar todo antes de crear el proceso.</p>
+      <Field id="election-name" label="Nombre del proceso" error={errors.name} className="av-form-grid__span">
         {(a) => <Input {...a} autoComplete="off" value={values.name} onChange={(event) => onChange("name", event.target.value)} />}
       </Field>
       <Field id="election-institution" label="Institución" error={errors.institution}>
