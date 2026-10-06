@@ -1,0 +1,54 @@
+/* Login: marco centrado con el panel de marca (azul claro que cae a navy, con la figura de arcos)
+   y el panel del formulario. Los campos, alertas y botones son los del Design System. */
+
+.av-login {
+  min-height: 100svh; display: flex; align-items: center; justify-content: center; padding: clamp(1rem, 4vw, 2.5rem);
+  background: radial-gradient(circle at 12% 14%, rgba(0, 172, 210, .22), transparent 30%), radial-gradient(circle at 90% 90%, rgba(20, 95, 238, .14), transparent 34%), linear-gradient(135deg, #F4F8FF, #FFFFFF 58%, #EAF0FE);
+}
+.av-login__card {
+  width: min(100%, 1020px); min-height: min(780px, calc(100svh - 2rem)); display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+  background: #fff; border: 1px solid var(--av-hairline); border-radius: 24px; box-shadow: 0 24px 60px rgba(0, 12, 36, .14); overflow: hidden;
+}
+
+/* Panel de marca */
+.av-login__side {
+  position: relative; overflow: hidden; isolation: isolate; color: #fff; display: flex; flex-direction: column; justify-content: space-between; gap: 2rem;
+  padding: clamp(1.5rem, 3vw, 2.4rem); background: linear-gradient(180deg, #DCECFF 0%, #EAF0FE 12%, #0A2A66 40%, #000C24 68%);
+}
+.av-login__brand { align-self: flex-start; display: block; height: 34px; width: auto; }
+.av-login__figure { position: absolute; z-index: -1; left: 50%; top: 21%; width: min(82%, 520px); transform: translateX(-50%); pointer-events: none; }
+.av-login__figure svg { display: block; width: 100%; height: auto; overflow: visible; }
+.av-login__figure path { fill: none; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.av-login__arc { stroke-dasharray: 1; stroke-dashoffset: 1; animation: av-login-draw 1.4s var(--av-ease-out) forwards; }
+@keyframes av-login-draw { to { stroke-dashoffset: 0; } }
+.av-login__copy { max-width: 30rem; }
+.av-login__copy-title { margin: 0; font-family: var(--av-font-heading); font-weight: 500; letter-spacing: -.025em; font-size: clamp(1.9rem, 3vw, 2.7rem); line-height: 1.06; color: #fff; text-wrap: balance; }
+.av-login__copy p + p { margin-top: 1rem; color: #D7E0F3; }
+
+/* Panel del formulario: anclado arriba, para que al aparecer una alerta solo se mueva lo que va debajo del título */
+.av-login__panel { display: flex; flex-direction: column; padding: clamp(1.5rem, 3vw, 2.4rem); background: #fff; }
+.av-login__form { width: min(100%, 24rem); margin: clamp(.5rem, 5vh, 2.5rem) auto auto; padding-block: 1.2rem; }
+.av-login__form h1 { font-size: clamp(1.7rem, 2.3vw, 2.15rem); line-height: 1.1; }
+.av-login__lead { margin: .6rem 0 1.6rem; color: var(--av-gray-500); }
+.av-login__form .av-field { margin-bottom: 1.15rem; }
+.av-login__form .av-alert { margin-bottom: 1rem; }
+.av-login__form .av-btn { margin-top: .4rem; }
+.av-login__link { padding: .75rem 0; margin-block: -.75rem; background: none; border: 0; font: inherit; font-size: .8125rem; color: var(--av-blue); cursor: pointer; }
+.av-login__link:hover { text-decoration: underline; text-underline-offset: 3px; }
+.av-login__secure { display: flex; align-items: center; justify-content: center; gap: .55rem; margin-top: 1.6rem; font-size: .875rem; color: var(--av-gray-500); }
+.av-login__secure::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--av-success); box-shadow: 0 0 0 3px rgba(18, 183, 106, .18); }
+
+@media (max-width: 900px) {
+  .av-login { align-items: flex-start; }
+  .av-login__card { grid-template-columns: 1fr; min-height: 0; border-radius: 20px; }
+  .av-login__side { min-height: 210px; padding: 1.25rem; gap: 1.2rem; background: linear-gradient(180deg, #DCECFF 0%, #EAF0FE 28%, #0A2A66 70%, #000C24 100%); }
+  .av-login__figure, .av-login__copy p + p { display: none; }
+  .av-login__brand { height: 28px; }
+  .av-login__copy-title { font-size: 1.6rem; }
+  .av-login__form { margin-block: 0; padding-block: 1.2rem 1.6rem; }
+  .av-login__panel { padding: 1.25rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .av-login__arc { animation: none; stroke-dashoffset: 0; }
+}

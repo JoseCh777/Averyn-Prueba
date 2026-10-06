@@ -1,0 +1,46 @@
+/* Dashboard base: bienvenida, mosaico de accesos y reparto en dos columnas.
+   Los indicadores (av-kpis), mosaicos (av-tile) y el panel de actividad (av-panel) son del Design System. */
+
+/* El cielo de la bienvenida sube hasta detrás de la cabecera y se funde con el blanco. */
+body:has(.av-dashboard) { background: linear-gradient(180deg, var(--av-sky) 0, var(--av-blue-tint) 22rem, #fff 40rem) no-repeat; }
+
+.av-dashboard__hero { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 2rem; padding-block: clamp(1.5rem, 4vw, 3rem) clamp(2.5rem, 5vw, 4rem); }
+.av-dashboard__title { margin: 0; font-family: var(--av-font-heading); font-weight: 500; font-size: clamp(2.4rem, 5vw, 4.2rem); line-height: 1.04; letter-spacing: -.03em; color: var(--av-navy); text-wrap: balance; }
+.av-dashboard__lead { margin: 1.2rem 0 0; max-width: 52ch; font-size: 1.1rem; line-height: 1.6; color: var(--av-gray-600); }
+.av-dashboard__figure { width: min(30vw, 400px); height: auto; display: block; overflow: visible; }
+
+.av-dashboard__split { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(2.5rem, 6vw, 6rem); align-items: start; padding-block: clamp(3rem, 7vw, 6rem); }
+.av-dashboard__head { margin-bottom: 1.6rem; }
+.av-dashboard__head h2 { margin: 0; font-family: var(--av-font-heading); font-weight: 500; font-size: 1.75rem; letter-spacing: -.025em; color: var(--av-navy); }
+.av-dashboard__head p { margin: .3rem 0 0; font-size: .95rem; color: var(--av-gray-500); }
+
+.av-dashboard__mosaic { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 1rem; }
+.av-dashboard__cell { display: flex; }
+.av-dashboard__cell > .av-tile { flex: 1; }
+.av-dashboard__cell--large, .av-dashboard__cell--small { grid-column: span 3; }
+.av-dashboard__cell--medium { grid-column: span 2; }
+.av-dashboard__cell--large > .av-tile { min-height: 230px; padding: 1.7rem; }
+.av-dashboard__cell--medium > .av-tile { min-height: 180px; }
+.av-dashboard__cell--small > .av-tile { min-height: 150px; }
+
+@media (max-width: 1023px) {
+  .av-dashboard__split { grid-template-columns: 1fr; }
+}
+@media (max-width: 900px) {
+  .av-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .av-kpi:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .av-kpi:nth-child(n+3) { border-top: 1px solid var(--av-hairline); }
+}
+@media (max-width: 700px) {
+  .av-dashboard__hero { grid-template-columns: 1fr; }
+  .av-dashboard__figure { display: none; }
+  .av-dashboard__mosaic { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .av-dashboard__cell--large, .av-dashboard__cell--small { grid-column: span 2; }
+  .av-dashboard__cell--medium { grid-column: span 1; }
+  .av-dashboard__cell--medium:last-of-type { grid-column: span 2; }
+}
+@media (max-width: 560px) {
+  .av-kpis { grid-template-columns: 1fr; }
+  .av-kpi { border-left: 0; padding-left: 0; }
+  .av-kpi + .av-kpi { border-top: 1px solid var(--av-hairline); }
+}

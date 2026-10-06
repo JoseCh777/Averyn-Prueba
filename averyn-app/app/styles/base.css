@@ -1,0 +1,37 @@
+/* Iconos Bootstrap como SVG (react-bootstrap-icons): misma alineación que la fuente de iconos original. */
+svg.bi { display: inline-block; vertical-align: -.125em; fill: currentColor; }
+.av-chip > svg { font-size: .95em; flex: none; }
+.av-err > svg { flex: none; margin-top: .15em; }
+
+/* Las celdas de rejilla pueden encogerse por debajo de su contenido (evita desbordes a 375 px). */
+.ds-grid > *, .cp-grid > * { min-width: 0; }
+
+/* El tooltip puede romper línea: así nunca ensancha la página aunque esté oculto. */
+.av-tip__bubble { width: max-content; max-width: min(16rem, calc(100vw - 2rem)); white-space: normal; text-align: center; }
+/* Oculto con display:none para que no cuente en el desbordamiento de la página; sigue describiendo al disparador (aria-describedby). */
+.av-tip__bubble { display: none; }
+.av-tip:hover .av-tip__bubble, .av-tip:focus-within .av-tip__bubble { display: block; }
+
+/* Los estilos de la v1.7 dimensionaban los iconos con <i class="bi">; los iconos ahora son <svg class="bi">. Mismas reglas, para svg. */
+.pt-view__msg svg { font-size: 1.1rem; flex: none; }
+.pt-view__off svg { font-size: 2.2rem; color: var(--av-night-text); }
+.pt-dec svg { font-size: 1.25rem; line-height: 1; }
+.rv__done svg { font-size: 2rem; color: var(--av-success-text); }
+.cp-trig svg { color: var(--av-gray-500); }
+.ac__btn svg { flex: none; color: var(--av-gray-500); transition: transform .2s var(--av-ease-out); }
+.ac__btn[aria-expanded="true"] svg { transform: rotate(180deg); }
+.cmd__top svg { color: var(--av-gray-500); font-size: 1.1rem; }
+.cmd__opt svg { color: var(--av-gray-500); }
+.cmd__opt[aria-selected="true"] svg { color: var(--av-blue); }
+.ta__sort svg { font-size: .9rem; opacity: .35; }
+.ta th[aria-sort="ascending"] svg, .ta th[aria-sort="descending"] svg { opacity: 1; color: var(--av-blue); }
+.pw__req li svg { font-size: 1rem; line-height: 1; }
+.up__drop > svg { font-size: 1.6rem; color: var(--av-blue); }
+.icons svg { font-size: 1.6rem; color: var(--av-blue); }
+.cc__delta svg { font-size: 1.05rem; line-height: 1; }
+.vz-legend svg.bi { font-size: .95rem; line-height: 1; color: var(--c); }
+.bd__d svg { font-size: 1.05rem; line-height: 1; }
+.cc-state svg { font-size: 1.6rem; color: var(--av-gray-400); }
+.tp-state svg { font-size: 1.8rem; color: var(--av-gray-400); }
+.av-table .who svg { font-size: 1rem; }
+@media (prefers-reduced-motion: reduce) { .ac__btn svg { transition: none; } }

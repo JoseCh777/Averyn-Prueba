@@ -1,0 +1,56 @@
+/* ==========================================================================
+   MARCA Y ENTREGABLES — ilustración, favicons, correos, impresión y tokens (estilos de la página).
+   Las reglas del documento impreso viven en print.css (.pr-*).
+   ========================================================================== */
+
+/* Kit de ilustración */
+.ill-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1rem; margin-top: 1.8rem; }
+.ill { display: flex; flex-direction: column; border: 1px solid var(--av-hairline); border-radius: var(--av-radius-tile); background: #fff; overflow: hidden; }
+.ill__art { display: grid; place-items: center; padding: 1.4rem 1rem 1rem; background: var(--av-paper-blue); border-bottom: 1px solid var(--av-hairline); }
+.ill__art--night { background: linear-gradient(180deg, var(--av-navy-horizon), var(--av-navy)); }
+.ill__art svg { width: 100%; max-width: 260px; height: auto; display: block; }
+.ill__art path, .ill__art circle { fill: none; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.ill__txt { padding: 1rem 1.2rem .3rem; font-size: .875rem; color: var(--av-gray-600); }
+.ill__txt b { display: block; margin-bottom: .15rem; font: 500 1.05rem var(--av-font-heading); color: var(--av-navy); }
+.ill__act { display: flex; gap: .3rem; padding: .3rem .7rem .8rem; }
+.ill__act button { min-height: 44px; padding: 0 .8rem; border: 0; border-radius: var(--av-radius-control); background: transparent; font: 700 .75rem var(--av-font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--av-blue); cursor: pointer; }
+.ill__act button:hover { background: var(--av-blue-tint); }
+.ill__act button:focus-visible { outline: 2px solid var(--av-blue); outline-offset: 1px; }
+.ill-draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: ill-draw 1.4s var(--av-ease-out) forwards; }
+@keyframes ill-draw { to { stroke-dashoffset: 0; } }
+.es { display: grid; justify-items: center; gap: .5rem; padding: 1.6rem 1.2rem; border: 1px solid var(--av-hairline); border-radius: var(--av-radius-tile); background: #fff; text-align: center; }
+.es svg { width: 150px; height: 96px; }
+.es svg path, .es svg circle { fill: none; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.es b { font: 500 1.15rem var(--av-font-heading); letter-spacing: -.01em; }
+.es p { margin: 0; max-width: 28ch; font-size: .875rem; color: var(--av-gray-600); }
+
+/* Favicons */
+.fav-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1rem; margin-top: 1.8rem; }
+.fav { display: grid; justify-items: start; gap: .6rem; margin: 0; padding: 1.2rem; border: 1px solid var(--av-hairline); border-radius: var(--av-radius-tile); background: #fff; }
+.fav img { display: block; image-rendering: auto; }
+.fav figcaption { font-size: .8125rem; color: var(--av-gray-600); } .fav figcaption b { display: block; font: 600 .8125rem var(--av-font-mono); color: var(--av-navy); }
+.og-wrap { border: 1px solid var(--av-hairline-strong); border-radius: var(--av-radius-tile); overflow: hidden; background: #fff; }
+.og-wrap img { display: block; width: 100%; height: auto; }
+
+/* Correos */
+.mail { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: 1.6rem; align-items: start; margin: 1.8rem 0 1.6rem; }
+.mail__side { display: grid; gap: 1.1rem; }
+.mail__side .vz-seg { flex-wrap: wrap; }
+.mail__meta { display: grid; margin: 0; border-top: 1px solid var(--av-hairline); }
+.mail__meta > div { padding: .7rem 0; border-bottom: 1px solid var(--av-hairline); }
+.mail__meta dt { font: 500 .6875rem var(--av-font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--av-gray-600); }
+.mail__meta dd { margin: .15rem 0 0; font-size: .9375rem; }
+.mail__frame { border: 1px solid var(--av-hairline-strong); border-radius: var(--av-radius-tile); overflow: hidden; background: #F4F8FF; }
+.mail__frame iframe { display: block; width: 100%; height: 720px; border: 0; }
+
+/* Impresión */
+.pr-stage { margin-top: 1.8rem; }
+.pr-bar { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.pr-frame { position: relative; width: 100%; overflow: hidden; border: 1px solid var(--av-hairline-strong); border-radius: var(--av-radius-tile); background: #E7EBF3; }
+.pr-frame iframe { display: block; width: 794px; height: 1123px; border: 0; transform-origin: 0 0; background: #E7EBF3; }
+
+@media (max-width: 860px) {
+  .mail { grid-template-columns: minmax(0, 1fr); }
+  .mail__frame iframe { height: 640px; }
+}
+@media (prefers-reduced-motion: reduce) { .ill-draw { animation: none; stroke-dashoffset: 0; } }
