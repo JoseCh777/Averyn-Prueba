@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 
-import { MOCK_DASHBOARD_SOURCE } from '../../features/dashboard/mock-dashboard-data';
 import { buildDashboardSummary, formatCount, formatEventDate } from '../../features/dashboard/summary';
 import type { DashboardSource } from '../../features/dashboard/types';
+import { DEMO_SOURCE } from './fixtures';
 
 const EMPTY_SOURCE: DashboardSource = { people: [], devices: [], elections: [], events: [] };
 
@@ -22,7 +22,7 @@ describe('formatEventDate', () => {
 });
 
 describe('buildDashboardSummary with the demo data', () => {
-  const summary = buildDashboardSummary(MOCK_DASHBOARD_SOURCE);
+  const summary = buildDashboardSummary(DEMO_SOURCE);
   const kpi = (id: string) => summary.kpis.find((candidate) => candidate.id === id);
 
   it('counts people and how many are verified', () => {
@@ -68,15 +68,15 @@ describe('buildDashboardSummary edge cases', () => {
     assert.deepEqual(summary.recentEvents, []);
   });
 
-  it('counts draft and open elections as active but not closed ones', () => {
+  it('counts processes being prepared or in progress as active but not finished ones', () => {
     const summary = buildDashboardSummary({
       ...EMPTY_SOURCE,
-      elections: [{ status: 'DRAFT' }, { status: 'OPEN' }, { status: 'CLOSED' }],
+      elections: [{ status: 'draft' }, { status: 'configuration' }, { status: 'open' }, { status: 'closed' }, { status: 'finished' }, { status: 'cancelled' }],
     });
     const elections = summary.kpis.find((kpi) => kpi.id === 'elections');
 
-    assert.equal(elections?.value, 2);
-    assert.equal(elections?.delta, '3 en total');
+    assert.equal(elections?.value, 3);
+    assert.equal(elections?.delta, '6 en total');
   });
 
   it('does not warn when every device is connected', () => {
@@ -85,14 +85,14 @@ describe('buildDashboardSummary edge cases', () => {
     assert.equal(summary.kpis.find((kpi) => kpi.id === 'devices')?.tone, 'ok');
   });
 
-  it('names a person that is not in the catalog by id', () => {
+  it('shows deleted people as such: the event is kept for audit', () => {
     const summary = buildDashboardSummary({
       ...EMPTY_SOURCE,
       events: [
-        { id: 'ev-x', personId: 99, operation: 'verification', method: 'face', outcome: 'rejected', deviceId: 'CAM-001', occurredAt: '2026-09-14T01:42:00Z' },
+        { id: 'ev-x', personId: 'per-9999', operation: 'verification', method: 'face', outcome: 'rejected', deviceId: 'CAM-001', occurredAt: '2026-09-14T01:42:00Z' },
       ],
     });
 
-    assert.match(summary.recentEvents[0]?.detail ?? '', /Persona #99/);
+    assert.match(summary.recentEvents[0]?.detail ?? '', /Persona eliminada/);
   });
 });

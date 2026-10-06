@@ -3,8 +3,8 @@ import type { DashboardSummary } from "../types";
 /**
  * Frontera entre el dashboard y quien le entrega los datos.
  *
- * Hoy la implementa `MockDashboardService`; cuando el Core exponga el resumen, la
- * reemplaza un cliente HTTP y la pantalla no cambia (coding-standard 81).
+ * Hoy la implementa `ComposedDashboardService`, que junta los servicios de los módulos; cuando el
+ * Core exponga el resumen, la reemplaza un cliente HTTP y la pantalla no cambia (coding-standard 81).
  */
 export interface DashboardService {
   /**

@@ -1,3 +1,5 @@
+import type { ElectionStatus } from "@/features/elections/types";
+
 import type {
   BiometricMethod,
   BiometricOperation,
@@ -33,6 +35,9 @@ const OUTCOME_LABEL: Record<BiometricOutcome, string> = {
   retry: "reintento",
   "device-error": "error del dispositivo",
 };
+
+/** Estados en los que un proceso electoral cuenta como activo: en preparación o en curso. */
+const ACTIVE_ELECTION_STATUSES: readonly ElectionStatus[] = ["draft", "configuration", "open"];
 
 /** Resultados que muestra el gráfico de barras, en este orden. */
 const CHART_OUTCOMES: readonly OutcomeCount["outcome"][] = ["success", "rejected", "retry"];
@@ -88,7 +93,7 @@ function buildKpis(source: DashboardSource): readonly DashboardKpi[] {
   const successful = verifications.filter((event) => event.outcome === "success").length;
   const rejected = verifications.filter((event) => event.outcome === "rejected").length;
 
-  const activeElections = source.elections.filter((election) => election.status === "OPEN" || election.status === "DRAFT").length;
+  const activeElections = source.elections.filter((election) => ACTIVE_ELECTION_STATUSES.includes(election.status)).length;
 
   const connectedDevices = source.devices.filter((device) => device.status === "connected").length;
   const disconnectedDevices = source.devices.length - connectedDevices;
@@ -116,7 +121,7 @@ function buildKpis(source: DashboardSource): readonly DashboardKpi[] {
       value: activeElections,
       delta: `${source.elections.length} en total`,
       tone: "neutral",
-      note: "Abiertos o en borrador",
+      note: "En preparación o en curso",
     },
     {
       id: "devices",
@@ -148,7 +153,7 @@ function countOutcomes(events: readonly DashboardBiometricEvent[]): readonly Out
  */
 function toRecentEvent(event: DashboardBiometricEvent, source: DashboardSource): RecentEvent {
   const person = source.people.find((candidate) => candidate.id === event.personId);
-  const personName = person?.name ?? `Persona #${event.personId}`;
+  const personName = person?.name ?? "Persona eliminada";
   return {
     id: event.id,
     title: `${OPERATION_LABEL[event.operation]} biométrica`,

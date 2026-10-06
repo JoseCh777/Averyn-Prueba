@@ -1,8 +1,9 @@
-/* Datos de origen: lo que el Core entregará (hoy lo simula `mock-dashboard-data.ts`). */
+/* Datos de origen: lo que el Core entregará. Hoy se arman con los servicios de Identidad, Biometría y Electoral (`source-mapping.ts`). */
+
+import type { ElectionStatus } from "@/features/elections/types";
 
 export type PersonStatus = "verified" | "pending";
 export type DeviceStatus = "connected" | "disconnected";
-export type ElectionStatus = "DRAFT" | "OPEN" | "CLOSED";
 export type BiometricOperation = "enrollment" | "verification";
 export type BiometricMethod = "face" | "fingerprint";
 
@@ -12,13 +13,13 @@ export type BiometricMethod = "face" | "fingerprint";
  */
 export type BiometricOutcome = "success" | "rejected" | "retry" | "device-error";
 
-export type DashboardPerson = { id: number; name: string; status: PersonStatus };
+export type DashboardPerson = { id: string; name: string; status: PersonStatus };
 export type DashboardDevice = { id: string; status: DeviceStatus };
 export type DashboardElection = { status: ElectionStatus };
 
 export type DashboardBiometricEvent = {
   id: string;
-  personId: number;
+  personId: string;
   operation: BiometricOperation;
   method: BiometricMethod;
   outcome: BiometricOutcome;

@@ -15,10 +15,10 @@ conteos son presentacion y el Core sera la autoridad cuando entregue el resumen 
 |---|---|
 | `types.ts` | Datos de origen (personas, dispositivos, procesos, eventos) y resumen que muestra la pantalla |
 | `summary.ts` | `buildDashboardSummary`: arma indicadores, conteo por resultado y actividad reciente (funcion pura) |
-| `mock-dashboard-data.ts` | **[MOCK]** Datos de demostracion con personas ficticias |
+| `source-mapping.ts` | `toDashboardSource`: traduce lo que entregan Identidad, Biometria y Electoral a los datos de origen del panel (funcion pura) |
 | `quick-access.ts` | Accesos rapidos y su ruta, tomada del registro de modulos del shell |
 | `services/dashboard-service.ts` | Interfaz `DashboardService`: la frontera entre la pantalla y los datos |
-| `services/mock-dashboard-service.ts` | **[MOCK]** Implementacion que calcula el resumen sobre los datos de demostracion |
+| `services/composed-dashboard-service.ts` | Implementacion que junta los servicios de los modulos y calcula el resumen |
 | `services/index.ts` | Unico lugar que elige la implementacion |
 | `components/dashboard-view.tsx` | Server Component asincrono: pide el resumen y compone la pantalla |
 | `components/dashboard-hero.tsx` | Bienvenida con la figura de arcos |
@@ -35,7 +35,7 @@ La ruta es `app/(app)/dashboard/page.tsx`, con `loading.tsx` (esqueleto) y `erro
 |---|---|
 | Personas registradas | Cuantas personas hay; detalle: verificadas y pendientes |
 | Verificaciones | Eventos de tipo verificacion (los registros no cuentan); detalle: exitosas y rechazadas |
-| Procesos electorales | Los abiertos o en borrador; detalle: el total |
+| Procesos electorales | Los que estan en preparacion (borrador o configurando) o en curso; detalle: el total |
 | Dispositivos conectados | Los conectados; con alguno desconectado el detalle se marca como atencion |
 
 El grafico de barras cuenta **todos** los eventos del log; la linea de tiempo muestra los 4
@@ -44,8 +44,9 @@ Las fechas se muestran como `dd/mm/aaaa, hh:mm` en hora de Lima (coding-standard
 
 ## Estado actual
 
-- **[MOCK]** Los datos y el servicio son de demostracion (`TODO(AVY-006)`): se reemplazan por
-  el resumen real del Core cuando existan Identidad, Biometria y Electoral.
+- El panel lee los servicios de Identidad, Biometria y Electoral: lo que se registra en un modulo se
+  ve aqui (`TODO(AVY-006)`: se reemplaza por el resumen real del Core cuando lo entregue). Cada
+  servicio es hoy un mock en memoria del servidor.
 - Un acceso rapido sin pantalla se muestra con la etiqueta «Proximamente» y no enlaza. Cuando
   una funcionalidad agrega el `href` de su modulo en `components/layout/modules.ts`, su acceso
   se convierte en enlace sin tocar el dashboard.

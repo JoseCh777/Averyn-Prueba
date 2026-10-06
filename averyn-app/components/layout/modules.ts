@@ -11,15 +11,15 @@ export type AppModule = {
 /**
  * Módulos del dock, en el orden en que se muestran.
  *
- * Cada funcionalidad añade su `href` cuando su ruta existe: Identidad (Person),
- * Biometría, OCR y Electoral llegan con sus actividades.
+ * Cada funcionalidad añade su `href` cuando su ruta existe. Accesos y Administración todavía no tienen
+ * pantalla: se muestran como «Próximamente».
  */
 export const APP_MODULES: readonly AppModule[] = [
   { label: "Dashboard", href: "/dashboard", icon: "grid-1x2" },
   { label: "Identidad", href: "/identity", icon: "person-vcard" },
   { label: "Biometría", href: "/biometrics", icon: "fingerprint" },
   { label: "OCR", href: "/documents", icon: "camera" },
-  { label: "IA", icon: "cpu" },
+  { label: "IA", href: "/ai", icon: "cpu" },
   { label: "Electoral", href: "/elections", icon: "check2-square" },
   { label: "Accesos", icon: "door-open" },
   { label: "Administración", icon: "gear" },
