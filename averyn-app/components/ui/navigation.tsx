@@ -40,7 +40,7 @@ export function Breadcrumb({ items }: { items: { label: string; href?: string }[
       {items.map((it, i) => (
         <span key={it.label}>
           {i > 0 && " / "}
-          {it.href ? <a href={it.href}>{it.label}</a> : <b aria-current="page">{it.label}</b>}
+          {it.href ? <Link href={it.href}>{it.label}</Link> : <b aria-current="page">{it.label}</b>}
         </span>
       ))}
     </nav>

@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 
 import { AppShell } from "@/components/layout/app-shell";
+import { ToastProvider } from "@/components/ui/overlay";
 import { logoutAction } from "@/features/authentication/actions";
 import { LOGIN_PATH } from "@/features/authentication/routes";
 import { hasMockSession } from "@/features/authentication/services/mock-session";
@@ -33,7 +34,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   }
   return (
     <AppShell user={DEMO_USER} unread={DEMO_UNREAD} onLogout={logoutAction}>
-      {children}
+      <ToastProvider>{children}</ToastProvider>
     </AppShell>
   );
 }

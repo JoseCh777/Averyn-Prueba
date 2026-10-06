@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { ButtonHTMLAttributes, ComponentProps, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
@@ -24,6 +25,16 @@ export function Button({ variant = "primary", block, loading, className, childre
       {children}
     </button>
   );
+}
+
+export type ButtonLinkProps = Omit<ComponentProps<typeof Link>, "className"> & {
+  variant?: ButtonVariant;
+  className?: string;
+};
+
+/** Enlace de navegación interna con el aspecto de un botón (para ir a otra pantalla, no para ejecutar una acción). */
+export function ButtonLink({ variant = "ghost", className, ...props }: ButtonLinkProps) {
+  return <Link className={cn("av-btn", `av-btn--${variant}`, className)} {...props} />;
 }
 
 export type IconButtonProps = ComponentProps<"button"> & {
