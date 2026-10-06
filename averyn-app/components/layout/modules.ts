@@ -16,7 +16,7 @@ export type AppModule = {
  */
 export const APP_MODULES: readonly AppModule[] = [
   { label: "Dashboard", href: "/dashboard", icon: "grid-1x2" },
-  { label: "Identidad", icon: "person-vcard" },
+  { label: "Identidad", href: "/identity", icon: "person-vcard" },
   { label: "Biometría", icon: "fingerprint" },
   { label: "OCR", icon: "camera" },
   { label: "IA", icon: "cpu" },
