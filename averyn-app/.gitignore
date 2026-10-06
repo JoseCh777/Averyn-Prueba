@@ -1,0 +1,32 @@
+# dependencias
+/node_modules
+/.pnp
+.pnp.js
+
+# build de Next.js
+/.next/
+/out/
+next-env.d.ts
+*.tsbuildinfo
+
+# pruebas
+/coverage
+/playwright-report
+/test-results
+
+# entorno
+.env
+.env*.local
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# sistema operativo y editores
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
