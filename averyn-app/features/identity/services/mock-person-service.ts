@@ -47,6 +47,11 @@ export class MockPersonService implements PersonService {
     return person === undefined ? undefined : { ...person };
   }
 
+  async findByDocument(document: string): Promise<Person | undefined> {
+    const person = store().people.find((candidate) => candidate.document === document);
+    return person === undefined ? undefined : { ...person };
+  }
+
   async create(input: NewPersonInput): Promise<Person> {
     const current = store();
     if (current.people.some((person) => person.document === input.document)) {

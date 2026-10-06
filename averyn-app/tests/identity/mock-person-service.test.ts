@@ -24,6 +24,11 @@ describe("MockPersonService", () => {
     assert.deepEqual(await service.getById("per-0009"), person);
   });
 
+  it("busca a una persona por su documento", async () => {
+    assert.equal((await service.findByDocument("10345678"))?.name, "Luis Pérez");
+    assert.equal(await service.findByDocument("00000000"), undefined);
+  });
+
   it("no repite el documento", async () => {
     await assert.rejects(
       service.create({ name: "Otra Ana", document: "10234567", affiliation: "student" }),

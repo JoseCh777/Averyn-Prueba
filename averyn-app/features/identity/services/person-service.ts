@@ -19,6 +19,8 @@ export interface PersonService {
   list(): Promise<Person[]>;
   /** La persona con ese id, o `undefined` si no existe. */
   getById(id: string): Promise<Person | undefined>;
+  /** La persona con ese número de documento, o `undefined` si no hay ninguna. */
+  findByDocument(document: string): Promise<Person | undefined>;
   /**
    * Registra una persona con estado `pending`.
    *
