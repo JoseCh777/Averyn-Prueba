@@ -116,3 +116,9 @@ a.av-who__name:hover { color: var(--av-blue); text-decoration: underline; text-u
 .av-chips { display: inline-flex; flex-wrap: wrap; gap: .35rem; }
 .av-page--narrow { max-width: 56rem; width: 100%; margin-inline: auto; }
 .av-toolbar__count { margin: 0 0 0 auto; align-self: center; font: 500 .8125rem var(--av-font-mono); color: var(--av-gray-600); }
+
+/* Formulario en dos columnas (colapsa a una en pantallas angostas) */
+.av-form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 1.25rem; }
+.av-form-grid > * { min-width: 0; }
+.av-form-grid__span { grid-column: 1 / -1; }
+@media (max-width: 640px) { .av-form-grid { grid-template-columns: minmax(0, 1fr); } }

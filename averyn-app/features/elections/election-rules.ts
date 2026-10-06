@@ -1,4 +1,4 @@
-import { normalizeText } from "@/features/identity/person-rules";
+import { normalizeText, parseAffiliation } from "@/features/identity/person-rules";
 import type { Affiliation, Person } from "@/features/identity/types";
 
 import { INSTITUTION_KINDS, PROCESS_KINDS, VOTING_MODES, VOTING_TYPES } from "./labels";
@@ -170,4 +170,70 @@ export function electionInitials(name: string): string {
 export function formatDateRange(startDate: string, endDate: string): string {
   const format = (iso: string) => iso.split("-").reverse().join("/");
   return `${format(startDate)} – ${format(endDate)}`;
+}
+
+/** Lo que envía el asistente al crear el proceso, ya con su forma comprobada. */
+export interface ElectionPayload {
+  general: GeneralInfoInput;
+  settings: SettingsInput;
+  affiliation: Affiliation | "all";
+}
+
+function readText(source: object, key: string): string | undefined {
+  const value: unknown = Reflect.get(source, key);
+  return typeof value === "string" ? value : undefined;
+}
+
+function readFlag(source: object, key: string): boolean | undefined {
+  const value: unknown = Reflect.get(source, key);
+  return typeof value === "boolean" ? value : undefined;
+}
+
+function readObject(source: object, key: string): object | undefined {
+  const value: unknown = Reflect.get(source, key);
+  return typeof value === "object" && value !== null ? value : undefined;
+}
+
+/**
+ * Interpreta lo que llega del navegador al crear un proceso.
+ *
+ * Los argumentos de una acción de servidor no se asumen: deben tener la forma esperada (textos y
+ * casillas del tipo correcto). Que los valores sean válidos lo deciden `validateGeneralInfo` y
+ * `validateSettings`.
+ *
+ * @param input - Valor sin validar.
+ * @returns La carga con su forma comprobada, o `undefined` si algo no tiene la forma esperada.
+ */
+export function parseElectionPayload(input: unknown): ElectionPayload | undefined {
+  if (typeof input !== "object" || input === null) return undefined;
+  const general = readObject(input, "general");
+  const settings = readObject(input, "settings");
+  const affiliationText = readText(input, "affiliation");
+  if (general === undefined || settings === undefined || affiliationText === undefined) return undefined;
+
+  const affiliation = affiliationText === "all" ? "all" : parseAffiliation(affiliationText);
+  const name = readText(general, "name");
+  const description = readText(general, "description");
+  const institution = readText(general, "institution");
+  const kind = readText(general, "kind");
+  const startDate = readText(general, "startDate");
+  const endDate = readText(general, "endDate");
+  const votingType = readText(settings, "votingType");
+  const choicesPerVote = readText(settings, "choicesPerVote");
+  const mode = readText(settings, "mode");
+  const anonymous = readFlag(settings, "anonymous");
+  const blankVote = readFlag(settings, "blankVote");
+  const showResults = readFlag(settings, "showResults");
+  const allowVoteChange = readFlag(settings, "allowVoteChange");
+
+  if (affiliation === undefined) return undefined;
+  if (name === undefined || description === undefined || institution === undefined || kind === undefined || startDate === undefined || endDate === undefined) return undefined;
+  if (votingType === undefined || choicesPerVote === undefined || mode === undefined) return undefined;
+  if (anonymous === undefined || blankVote === undefined || showResults === undefined || allowVoteChange === undefined) return undefined;
+
+  return {
+    general: { name, description, institution, kind, startDate, endDate },
+    settings: { votingType, choicesPerVote, mode, anonymous, blankVote, showResults, allowVoteChange },
+    affiliation,
+  };
 }

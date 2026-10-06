@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
-import { countParticipants, electionInitials, eligibleVoters, formatDateRange, isIsoDate, validateGeneralInfo, validateSettings } from "../../features/elections/election-rules";
+import { countParticipants, electionInitials, eligibleVoters, formatDateRange, isIsoDate, parseElectionPayload, validateGeneralInfo, validateSettings } from "../../features/elections/election-rules";
 import { seedPeople } from "../../features/identity/mock-people";
 
 const context = { existingNames: ["Consejo Estudiantil 2026"], today: "2026-10-06" };
@@ -102,5 +102,32 @@ describe("textos", () => {
 
   it("formatDateRange pasa de aaaa-mm-dd a dd/mm/aaaa", () => {
     assert.equal(formatDateRange("2026-10-15", "2026-10-20"), "15/10/2026 – 20/10/2026");
+  });
+});
+
+describe("parseElectionPayload", () => {
+  const payload = {
+    general: { name: "Consejo", description: "Desc", institution: "university", kind: "council", startDate: "2026-10-10", endDate: "2026-10-12" },
+    settings: { votingType: "single", choicesPerVote: "1", mode: "online", anonymous: true, blankVote: false, showResults: true, allowVoteChange: false },
+    affiliation: "all",
+  };
+
+  it("acepta la forma esperada, con «todas» o una afiliación", () => {
+    assert.deepEqual(parseElectionPayload(payload), payload);
+    assert.equal(parseElectionPayload({ ...payload, affiliation: "teacher" })?.affiliation, "teacher");
+  });
+
+  it("rechaza lo que no tiene la forma esperada", () => {
+    const inputs = [
+      null,
+      "x",
+      {},
+      { ...payload, affiliation: "director" },
+      { ...payload, general: "texto" },
+      { ...payload, general: { ...payload.general, name: 5 } },
+      { ...payload, settings: { ...payload.settings, anonymous: "sí" } },
+      { ...payload, settings: { ...payload.settings, choicesPerVote: 1 } },
+    ];
+    for (const input of inputs) assert.equal(parseElectionPayload(input), undefined, JSON.stringify(input));
   });
 });

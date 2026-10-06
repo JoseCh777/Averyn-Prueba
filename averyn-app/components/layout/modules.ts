@@ -20,7 +20,7 @@ export const APP_MODULES: readonly AppModule[] = [
   { label: "Biometría", href: "/biometrics", icon: "fingerprint" },
   { label: "OCR", href: "/documents", icon: "camera" },
   { label: "IA", icon: "cpu" },
-  { label: "Electoral", icon: "check2-square" },
+  { label: "Electoral", href: "/elections", icon: "check2-square" },
   { label: "Accesos", icon: "door-open" },
   { label: "Administración", icon: "gear" },
 ];

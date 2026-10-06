@@ -1,0 +1,19 @@
+/* Procesos electorales (features/elections): asistente de creación. Reutiliza av-page.css (superficies, asistente,
+   formulario en dos columnas, tablas y fichas de detalle). */
+
+.elec-alert { margin-bottom: 1rem; }
+.elec-settings { display: grid; gap: 1.2rem; }
+.elec-subtitle { margin: 0; font: 500 1.15rem var(--av-font-heading); letter-spacing: -.01em; color: var(--av-navy); }
+.elec-switches { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .4rem 1.5rem; }
+.sw-row { display: flex; align-items: center; gap: .8rem; min-height: 44px; }
+.sw-row > span { cursor: pointer; }
+.elec-participants { display: grid; gap: 1.1rem; }
+.elec-participants__filters { display: flex; align-items: flex-start; gap: 1rem; flex-wrap: wrap; }
+.elec-participants__filters .av-toolbar__search { flex: 1 1 18rem; margin-top: 1.55rem; }
+.elec-review { display: grid; gap: 1.4rem; }
+.elec-review__block .elec-subtitle { margin-bottom: .4rem; }
+.elec-footer { margin-top: 1.4rem; padding-top: 1.1rem; border-top: 1px solid var(--av-hairline); }
+
+@media (max-width: 700px) {
+  .elec-switches { grid-template-columns: minmax(0, 1fr); }
+}
