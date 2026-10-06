@@ -18,7 +18,7 @@ export const APP_MODULES: readonly AppModule[] = [
   { label: "Dashboard", href: "/dashboard", icon: "grid-1x2" },
   { label: "Identidad", href: "/identity", icon: "person-vcard" },
   { label: "Biometría", icon: "fingerprint" },
-  { label: "OCR", icon: "camera" },
+  { label: "OCR", href: "/documents", icon: "camera" },
   { label: "IA", icon: "cpu" },
   { label: "Electoral", icon: "check2-square" },
   { label: "Accesos", icon: "door-open" },

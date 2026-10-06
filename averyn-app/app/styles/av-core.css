@@ -176,7 +176,7 @@ a.av-tile:focus-visible { outline: 3px solid var(--av-navy); outline-offset: 3px
 .av-toast--bad::before { background: var(--av-error-on-navy); } .av-toast--warn::before { background: var(--av-warning-on-navy); }
 .av-toast b { display: block; font-weight: 600; } .av-toast span { color: var(--av-night-text); }
 @keyframes av-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
-dialog.av-modal { width: min(480px, calc(100vw - 2rem)); margin: auto; padding: 0; border: 0; border-radius: var(--av-radius-frame); background: #fff; color: var(--av-navy); box-shadow: var(--av-shadow-frame); }
+dialog.av-modal { width: min(480px, calc(100vw - 2rem)); margin: auto; padding: 0; text-align: left; border: 0; border-radius: var(--av-radius-frame); background: #fff; color: var(--av-navy); box-shadow: var(--av-shadow-frame); }
 dialog.av-modal::backdrop { background: rgba(0, 12, 36, .62); backdrop-filter: blur(3px); }
 .av-modal__body { padding: 2rem 2rem 1.2rem; }
 .av-modal__body h3 { font-size: 1.6rem; margin-bottom: .6rem; }
