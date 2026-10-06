@@ -63,6 +63,11 @@ export class MockPersonService implements PersonService {
     return { ...person };
   }
 
+  async markVerified(id: string): Promise<void> {
+    const person = store().people.find((candidate) => candidate.id === id);
+    if (person !== undefined) person.status = "verified";
+  }
+
   async remove(id: string): Promise<void> {
     const { people } = store();
     const index = people.findIndex((person) => person.id === id);

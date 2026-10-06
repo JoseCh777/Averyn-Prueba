@@ -27,6 +27,8 @@ export interface PersonService {
    * @throws DuplicateDocumentError cuando el documento ya está registrado.
    */
   create(input: NewPersonInput): Promise<Person>;
+  /** Marca a la persona como verificada (la verificación biométrica salió bien); si no existe no hace nada. */
+  markVerified(id: string): Promise<void>;
   /** Elimina a la persona; si no existe no hace nada. */
   remove(id: string): Promise<void>;
 }

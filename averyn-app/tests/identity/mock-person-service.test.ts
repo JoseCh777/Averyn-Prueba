@@ -44,6 +44,13 @@ describe("MockPersonService", () => {
     assert.equal(created.id, "per-0009", "el id de la persona eliminada no se reutiliza");
   });
 
+  it("marca como verificada a una persona pendiente y no falla con ids que no existen", async () => {
+    assert.equal((await service.getById("per-0002"))?.status, "pending");
+    await service.markVerified("per-0002");
+    assert.equal((await service.getById("per-0002"))?.status, "verified");
+    await service.markVerified("per-9999");
+  });
+
   it("eliminar a alguien que no existe no falla", async () => {
     await service.remove("per-9999");
     assert.equal((await service.list()).length, 8);
