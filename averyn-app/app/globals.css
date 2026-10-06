@@ -240,7 +240,7 @@
 
 /* Tipografias: next/font (app/layout.tsx) entrega --font-heading, --font-body y --font-mono; los tokens las usan primero. */
 :root {
-  --av-font-heading: var(--font-heading), 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --av-font-heading: var(--font-heading), 'Space Grotesk', 'Inter', system-ui, sans-serif;
   --av-font-body: var(--font-body), 'Inter', system-ui, -apple-system, sans-serif;
   --av-font-mono: var(--font-mono), 'JetBrains Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
 

@@ -203,7 +203,7 @@ No crear estilos o componentes visuales paralelos que contradigan las decisiones
 Convenciones vigentes:
 
 * prefijo `av-` para clases y nombres de componentes
-* Plus Jakarta Sans para headings
+* Space Grotesk para headings (DESIGN.md y frontend original; decisión registrada en fix/paridad-frontend)
 * Inter para body
 * breakpoints: 576, 768, 1024 y 1280
 * los tokens globales viven en `app/globals.css`
