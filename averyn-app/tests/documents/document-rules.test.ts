@@ -7,7 +7,10 @@ import {
   fullNameOf,
   orderedFields,
   parseDocumentKind,
+  parseOcrValues,
+  parseUploadMetadata,
   summarizeDocuments,
+  validatePreRegistration,
   validateUpload,
   valuesOf,
 } from "../../features/documents/document-rules";
@@ -21,6 +24,18 @@ describe("parseDocumentKind", () => {
     assert.equal(parseDocumentKind("passport"), "passport");
     assert.equal(parseDocumentKind("licencia"), undefined);
     assert.equal(parseDocumentKind(undefined), undefined);
+  });
+});
+
+describe("parseUploadMetadata", () => {
+  it("acepta la forma esperada", () => {
+    assert.deepEqual(parseUploadMetadata(valid), valid);
+  });
+
+  it("rechaza lo que no tiene la forma esperada", () => {
+    for (const input of [null, undefined, "x", 5, {}, { ...valid, sizeBytes: "340" }, { ...valid, sizeBytes: Infinity }, { ...valid, fileName: 5 }, { ...valid, fileName: "a".repeat(256) }]) {
+      assert.equal(parseUploadMetadata(input), undefined, JSON.stringify(input));
+    }
   });
 });
 
@@ -90,5 +105,66 @@ describe("valuesOf, fullNameOf y orderedFields", () => {
     assert.deepEqual(ordered.map((field) => field.key), ["firstName", "middleName", "firstSurname", "secondSurname", "documentNumber", "birthDate"]);
     assert.equal(ordered[0]?.value, "");
     assert.equal(ordered[0]?.confidence, null);
+  });
+});
+
+describe("parseOcrValues", () => {
+  const complete = { firstName: "Ana", middleName: "", firstSurname: "Torres", secondSurname: "", documentNumber: "10234567", birthDate: "15/03/1999" };
+
+  it("acepta un objeto con los seis campos como texto", () => {
+    assert.deepEqual(parseOcrValues(complete), complete);
+  });
+
+  it("ignora campos de más y rechaza lo que no tiene la forma esperada", () => {
+    assert.deepEqual(parseOcrValues({ ...complete, extra: "x" }), complete);
+    for (const input of [null, undefined, "texto", 5, [], { ...complete, firstName: 5 }, { ...complete, firstName: "x".repeat(121) }, { firstName: "Ana" }]) {
+      assert.equal(parseOcrValues(input), undefined, JSON.stringify(input));
+    }
+  });
+});
+
+describe("validatePreRegistration", () => {
+  const today = new Date("2026-10-06T17:00:00.000Z");
+  const input = {
+    values: { firstName: "Ana", middleName: "", firstSurname: "Torres", secondSurname: "", documentNumber: "10234567", birthDate: "15/03/1999" },
+    email: "",
+    consent: true,
+  };
+
+  it("arma a la persona como visitante, con la fecha en aaaa-mm-dd y el correo solo si se escribió", () => {
+    assert.deepEqual(validatePreRegistration(input, today), {
+      ok: true,
+      person: { name: "Ana Torres", document: "10234567", affiliation: "visitor", birthDate: "1999-03-15" },
+    });
+    const withEmail = validatePreRegistration({ ...input, email: " ana@institucion.edu " }, today);
+    assert.ok(withEmail.ok);
+    assert.equal(withEmail.person.email, "ana@institucion.edu");
+  });
+
+  it("exige el consentimiento", () => {
+    const result = validatePreRegistration({ ...input, consent: false }, today);
+    assert.ok(!result.ok);
+    assert.ok(result.errors.consent);
+  });
+
+  it("pide el primer nombre y el primer apellido", () => {
+    const result = validatePreRegistration({ ...input, values: { ...input.values, firstName: " ", firstSurname: "" } }, today);
+    assert.ok(!result.ok);
+    assert.ok(result.errors.firstName);
+    assert.ok(result.errors.firstSurname);
+  });
+
+  it("valida el documento, la fecha de nacimiento y el correo", () => {
+    const result = validatePreRegistration({ ...input, values: { ...input.values, documentNumber: "12ab", birthDate: "31/02/2000" }, email: "no-es-correo" }, today);
+    assert.ok(!result.ok);
+    assert.ok(result.errors.documentNumber);
+    assert.ok(result.errors.birthDate);
+    assert.ok(result.errors.email);
+  });
+
+  it("un nombre con símbolos se reporta en el primer nombre", () => {
+    const result = validatePreRegistration({ ...input, values: { ...input.values, firstName: "A<n>a" } }, today);
+    assert.ok(!result.ok);
+    assert.ok(result.errors.firstName);
   });
 });

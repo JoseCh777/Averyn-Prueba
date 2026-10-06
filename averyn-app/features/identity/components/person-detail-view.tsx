@@ -4,6 +4,7 @@ import { PageHeader } from "@/components/layout/page-header";
 import { ButtonLink } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 
+import { formatIsoDate } from "../person-rules";
 import { personService } from "../services";
 import { PersonAvatar } from "./person-avatar";
 import { AffiliationTag, StatusChip } from "./person-badges";
@@ -54,6 +55,18 @@ export async function PersonDetailView({ personId }: { personId: string }) {
               <StatusChip status={person.status} />
             </dd>
           </div>
+          {person.birthDate === undefined ? null : (
+            <div>
+              <dt>Fecha de nacimiento</dt>
+              <dd>{formatIsoDate(person.birthDate)}</dd>
+            </div>
+          )}
+          {person.email === undefined ? null : (
+            <div>
+              <dt>Correo</dt>
+              <dd>{person.email}</dd>
+            </div>
+          )}
           <div>
             <dt>Identificador</dt>
             <dd className="av-who__sub">{person.id}</dd>

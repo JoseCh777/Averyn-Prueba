@@ -12,6 +12,10 @@ export interface Person {
   document: string;
   affiliation: Affiliation;
   status: PersonStatus;
+  /** Fecha de nacimiento (`aaaa-mm-dd`), si se registró. */
+  birthDate?: string;
+  /** Correo de contacto, si se registró. */
+  email?: string;
 }
 
 /** Datos del formulario «Nueva persona». */
@@ -19,6 +23,8 @@ export interface NewPersonInput {
   name: string;
   document: string;
   affiliation: Affiliation;
+  birthDate?: string;
+  email?: string;
 }
 
 /** Filtros del listado: texto libre (nombre o documento) y estado. */

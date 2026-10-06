@@ -143,3 +143,52 @@ export function validateNewPerson(raw: { name: string; document: string; affilia
   }
   return { ok: true, input: { name, document, affiliation } };
 }
+
+const EMAIL_MAX_LENGTH = 254;
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const BIRTH_DATE_PATTERN = /^(\d{2})\/(\d{2})\/(\d{4})$/;
+const MIN_BIRTH_YEAR = 1900;
+
+/**
+ * Valida un correo opcional.
+ *
+ * @param value - Lo escrito (puede estar vacío).
+ * @returns El mensaje del problema, o `undefined` si está vacío o es válido.
+ */
+export function validateEmail(value: string): string | undefined {
+  const email = value.trim();
+  if (email === "") return undefined;
+  if (email.length > EMAIL_MAX_LENGTH || !EMAIL_PATTERN.test(email)) return "Escribe un correo válido, por ejemplo nombre@institucion.edu.";
+  return undefined;
+}
+
+/**
+ * Interpreta una fecha de nacimiento escrita como `dd/mm/aaaa`.
+ *
+ * Rechaza fechas que no existen (31/02), anteriores a 1900 o posteriores a hoy.
+ *
+ * @param text - Lo escrito.
+ * @param today - Día de hoy en formato `aaaa-mm-dd` (hora de Lima); se inyecta en las pruebas.
+ * @returns La fecha en `aaaa-mm-dd`, o `undefined` si no es válida.
+ */
+export function parseBirthDate(text: string, today: string): string | undefined {
+  const match = BIRTH_DATE_PATTERN.exec(text.trim());
+  if (match === null) return undefined;
+  const [, day = "", month = "", year = ""] = match;
+  const date = new Date(Date.UTC(Number(year), Number(month) - 1, Number(day)));
+  const exists = date.getUTCFullYear() === Number(year) && date.getUTCMonth() === Number(month) - 1 && date.getUTCDate() === Number(day);
+  const iso = `${year}-${month}-${day}`;
+  if (!exists || Number(year) < MIN_BIRTH_YEAR || iso > today) return undefined;
+  return iso;
+}
+
+/**
+ * Fecha `aaaa-mm-dd` para mostrar como `dd/mm/aaaa`.
+ *
+ * @param iso - Fecha en `aaaa-mm-dd`.
+ * @returns La fecha para la interfaz.
+ */
+export function formatIsoDate(iso: string): string {
+  const [year = "", month = "", day = ""] = iso.split("-");
+  return `${day}/${month}/${year}`;
+}

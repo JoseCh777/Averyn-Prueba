@@ -10,7 +10,10 @@ import {
   normalizeText,
   parseAffiliation,
   parseStatusFilter,
+  formatIsoDate,
+  parseBirthDate,
   summarizePeople,
+  validateEmail,
   validateNewPerson,
 } from "../../features/identity/person-rules";
 
@@ -116,5 +119,42 @@ describe("validateNewPerson", () => {
 
   it("acepta nombres con tildes, apóstrofos y guiones", () => {
     assert.equal(validateNewPerson({ ...valid, name: "Mary-Ann O'Neil Núñez" }).ok, true);
+  });
+});
+
+describe("validateEmail", () => {
+  it("el correo es opcional", () => {
+    assert.equal(validateEmail(""), undefined);
+    assert.equal(validateEmail("   "), undefined);
+  });
+
+  it("acepta correos con forma válida y rechaza el resto", () => {
+    assert.equal(validateEmail("ana@institucion.edu"), undefined);
+    for (const email of ["ana", "ana@", "@x.com", "ana@x", "a b@x.com", `${"a".repeat(250)}@x.com`]) {
+      assert.ok(validateEmail(email), email);
+    }
+  });
+});
+
+describe("parseBirthDate y formatIsoDate", () => {
+  const today = "2026-10-06";
+
+  it("convierte dd/mm/aaaa a aaaa-mm-dd", () => {
+    assert.equal(parseBirthDate("15/03/1999", today), "1999-03-15");
+    assert.equal(parseBirthDate(" 01/01/1900 ", today), "1900-01-01");
+  });
+
+  it("rechaza fechas que no existen, de otro formato, anteriores a 1900 o futuras", () => {
+    for (const text of ["31/02/2000", "15-03-1999", "1999-03-15", "15/3/1999", "01/01/1899", "07/10/2026", ""]) {
+      assert.equal(parseBirthDate(text, today), undefined, text);
+    }
+  });
+
+  it("acepta el día de hoy", () => {
+    assert.equal(parseBirthDate("06/10/2026", today), "2026-10-06");
+  });
+
+  it("formatIsoDate vuelve al formato de pantalla", () => {
+    assert.equal(formatIsoDate("1999-03-15"), "15/03/1999");
   });
 });
