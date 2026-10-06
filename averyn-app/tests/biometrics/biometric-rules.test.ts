@@ -18,9 +18,11 @@ import {
   parseMode,
   simulatedScore,
   summarizeBiometrics,
+  toPickerPeople,
 } from "../../features/biometrics/biometric-rules";
 import { seedDevices, seedEvents, seedProfiles } from "../../features/biometrics/mock-biometrics";
 import { resultChip } from "../../features/biometrics/labels";
+import { seedPeople } from "../../features/identity/mock-people";
 
 const devices = seedDevices();
 const events = seedEvents();
@@ -151,5 +153,22 @@ describe("resultChip", () => {
     assert.equal(resultChip("success", "enrollment").label, "Registrado");
     assert.equal(resultChip("success", "verification").label, "Verificado");
     assert.equal(resultChip("rejected", "verification").tone, "error");
+  });
+});
+
+describe("toPickerPeople", () => {
+  const picker = toPickerPeople(seedPeople(), seedProfiles());
+
+  it("une a cada persona con sus modalidades, en el mismo orden", () => {
+    assert.equal(picker.length, 8);
+    assert.deepEqual(picker[0]?.profile, { face: true, fingerprint: false });
+    assert.deepEqual(picker[3]?.profile, { face: true, fingerprint: true });
+    assert.equal(picker[0]?.affiliation, "Estudiante");
+  });
+
+  it("una persona sin perfil no tiene nada registrado", () => {
+    const [ana] = seedPeople();
+    assert.ok(ana);
+    assert.deepEqual(toPickerPeople([ana], [])[0]?.profile, { face: false, fingerprint: false });
   });
 });

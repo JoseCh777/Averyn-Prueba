@@ -10,6 +10,7 @@ import {
   normalizeText,
   parseAffiliation,
   parseStatusFilter,
+  formatDocument,
   formatIsoDate,
   parseBirthDate,
   summarizePeople,
@@ -156,5 +157,11 @@ describe("parseBirthDate y formatIsoDate", () => {
 
   it("formatIsoDate vuelve al formato de pantalla", () => {
     assert.equal(formatIsoDate("1999-03-15"), "15/03/1999");
+  });
+});
+
+describe("formatDocument", () => {
+  it("antepone el tipo de documento", () => {
+    assert.equal(formatDocument("10234567"), "Cédula 10234567");
   });
 });

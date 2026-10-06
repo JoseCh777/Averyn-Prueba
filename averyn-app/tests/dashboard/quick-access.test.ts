@@ -10,7 +10,9 @@ describe('resolveQuickAccessHref', () => {
   });
 
   it('has no route for a module that does not have a screen yet', () => {
-    assert.equal(resolveQuickAccessHref('Biometría', APP_MODULES), undefined);
+    const pending: readonly AppModule[] = [{ label: 'Biometría', icon: 'fingerprint' }];
+
+    assert.equal(resolveQuickAccessHref('Biometría', pending), undefined);
   });
 
   it('has no route for an unknown module', () => {

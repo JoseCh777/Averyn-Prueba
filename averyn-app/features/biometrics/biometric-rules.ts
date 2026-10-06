@@ -1,3 +1,6 @@
+import { AFFILIATION_ICON, AFFILIATION_LABEL } from "@/features/identity/labels";
+import type { Person } from "@/features/identity/types";
+
 import { DEVICE_UNAVAILABLE, EVENT_RESULTS, METHODS } from "./labels";
 import type {
   BiometricDevice,
@@ -9,6 +12,7 @@ import type {
   CaptureMode,
   EventResult,
   HistoryFilter,
+  PickerPerson,
   VerificationOutcome,
 } from "./types";
 
@@ -211,4 +215,25 @@ export function formatScore(score: number): string {
  */
 export function captureFails(random: number): boolean {
   return random < CAPTURE_FAILURE_PROBABILITY;
+}
+
+/**
+ * Une cada persona con su perfil biométrico para el selector.
+ *
+ * @param people - Personas del catálogo.
+ * @param profiles - Perfiles biométricos (una persona sin perfil no tiene nada registrado).
+ * @returns Las personas, en el mismo orden, con las modalidades que tienen registradas.
+ */
+export function toPickerPeople(people: readonly Person[], profiles: readonly BiometricProfile[]): PickerPerson[] {
+  return people.map((person) => {
+    const profile = profiles.find((candidate) => candidate.personId === person.id);
+    return {
+      id: person.id,
+      name: person.name,
+      document: person.document,
+      affiliation: AFFILIATION_LABEL[person.affiliation],
+      affiliationIcon: AFFILIATION_ICON[person.affiliation],
+      profile: { face: profile?.face === true, fingerprint: profile?.fingerprint === true },
+    };
+  });
 }

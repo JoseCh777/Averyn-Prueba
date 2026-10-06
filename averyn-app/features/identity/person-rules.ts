@@ -192,3 +192,13 @@ export function formatIsoDate(iso: string): string {
   const [year = "", month = "", day = ""] = iso.split("-");
   return `${day}/${month}/${year}`;
 }
+
+/**
+ * Documento para mostrar en una ficha: lleva el tipo delante.
+ *
+ * @param document - Número de documento.
+ * @returns Por ejemplo `Cédula 10234567`.
+ */
+export function formatDocument(document: string): string {
+  return `Cédula ${document}`;
+}

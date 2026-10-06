@@ -7,7 +7,7 @@ export const METHODS: readonly BiometricMethod[] = ["face", "fingerprint"];
 
 export const METHOD_LABEL: Record<BiometricMethod, string> = { face: "Rostro", fingerprint: "Huella" };
 
-export const METHOD_ICON: Record<BiometricMethod, IconName> = { face: "person-badge", fingerprint: "fingerprint" };
+export const METHOD_ICON: Record<BiometricMethod, IconName> = { face: "person-bounding-box", fingerprint: "fingerprint" };
 
 /** Con artículo, para frases: «Captura el rostro…», «Captura la huella…». */
 export const METHOD_WITH_ARTICLE: Record<BiometricMethod, string> = { face: "el rostro", fingerprint: "la huella" };
