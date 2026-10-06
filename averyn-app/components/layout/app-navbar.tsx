@@ -32,10 +32,29 @@ export type AppNavbarProps = {
  */
 export function AppNavbar({ user, onLogout, unread = 0 }: AppNavbarProps) {
   const pathname = usePathname();
+  const header = useRef<HTMLElement>(null);
   const items = APP_MODULES.map((module) => ({ ...module, current: isModuleActive(pathname, module.href) }));
 
+  // Expone la altura real del navbar (crece al envolverse el dock en móvil) como
+  // --navbar-height en :root, para que el contenido compense el dock fijo con padding-top.
+  useEffect(() => {
+    const el = header.current;
+    if (!el || typeof ResizeObserver === "undefined") return;
+    const update = () => document.documentElement.style.setProperty("--navbar-height", `${el.offsetHeight}px`);
+    update();
+    const observer = new ResizeObserver(update);
+    observer.observe(el);
+    window.addEventListener("load", update);
+    window.addEventListener("resize", update);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("load", update);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
+
   return (
-    <header className="av-nav av-shell__nav">
+    <header className="av-nav av-shell__nav" ref={header}>
       <BrandChip logoSrc={BRAND_LOGO_SRC} />
       <Dock items={items} label="Navegación principal" />
       <div className="av-shell__actions">
@@ -83,8 +102,7 @@ function ExpandableSearch() {
         id={id}
         type="search"
         aria-label="Buscar en Averyn"
-        placeholder="Buscar…"
-        hidden={!open}
+        placeholder="Buscar..."
       />
     </div>
   );
@@ -111,8 +129,10 @@ function UserMenu({ user, onLogout }: Pick<AppNavbarProps, "user" | "onLogout">)
 
   return (
     <div className="av-shell__user" ref={root}>
-      <button ref={button} className="av-avatar" type="button" aria-label={`Menú de usuario, ${user.name}`} aria-haspopup="menu" aria-expanded={open} aria-controls={menu} onClick={() => setOpen((o) => !o)}>
-        <span className="av-avatar__c" aria-hidden="true">{user.initials}</span>
+      {/* Sin aria-label: el nombre accesible lo da el contenido visible (iniciales + nombre);
+          el círculo no está oculto para que el botón nunca quede sin nombre en pantallas estrechas. */}
+      <button ref={button} className="av-avatar" type="button" aria-haspopup="menu" aria-expanded={open} aria-controls={menu} onClick={() => setOpen((o) => !o)}>
+        <span className="av-avatar__c">{user.initials}</span>
         <span><b>{user.name}</b><small>{user.role}</small></span>
         <Icon name="chevron-down" className="av-shell__chevron" />
       </button>

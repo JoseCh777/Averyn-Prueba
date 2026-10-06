@@ -1,19 +1,27 @@
 /* App Shell: cabecera de navegación (marca, dock, búsqueda, notificaciones, usuario) y contenido principal.
-   Reutiliza av-nav, av-dock, av-avatar, av-menu y av-iconbtn de av-core.css; solo aporta la composición. */
+   Reutiliza av-nav, av-dock, av-avatar, av-menu y av-iconbtn de av-core.css; solo aporta la composición.
+   Modelo del frontend original (dashboard-shell.css): navbar fixed a sangre + --navbar-height dinámica. */
+
+/* Altura real del navbar (ResizeObserver en AppNavbar la mantiene al día); el contenido la compensa. */
+:root { --navbar-height: 72px; }
 
 .av-skip { position: absolute; left: -999px; top: 0; z-index: 300; padding: .6rem 1rem; background: var(--av-navy); color: #fff; }
 .av-skip:focus { left: 0; }
 
-/* La cabecera flota sobre el contenido; solo sus piezas reciben el puntero. */
-.av-shell__nav { position: sticky; top: 12px; z-index: 100; width: calc(100% - 48px); max-width: 1500px; margin: 12px auto 0; pointer-events: none; }
+/* Navbar fijo en tres columnas: marca · dock · acciones. Solo sus piezas reciben el puntero. */
+.av-shell__nav { position: fixed; inset: 0 0 auto; z-index: 100; display: grid; grid-template-columns: minmax(150px, .6fr) auto minmax(300px, 1.2fr); align-items: center; gap: var(--av-space-4); min-height: 72px; padding-inline: var(--av-space-4); pointer-events: none; }
 .av-shell__nav > * { pointer-events: auto; }
+.av-shell__nav .av-brandchip { justify-self: start; }
 
-.av-shell__actions { display: flex; align-items: center; gap: .4rem; }
+.av-shell__actions { display: flex; align-items: center; gap: .5rem; flex-shrink: 0; justify-self: end; padding: var(--av-space-1) var(--av-space-2); }
 
-.av-shell__search { display: flex; align-items: center; gap: .3rem; }
-.av-shell__search input { width: 190px; height: 42px; padding: 0 1rem; border: 1px solid var(--av-hairline); border-radius: var(--av-radius-full); background: #fff; font: 500 .875rem var(--av-font-body); color: var(--av-navy); }
-.av-shell__search input[hidden] { display: none; }
-.av-shell__search.is-open .av-iconbtn { background: var(--av-blue-tint); color: var(--av-blue); }
+/* Buscador: el campo transparente crece desde cero al abrirse; cerrado queda fuera del
+   orden de tabulación y del arbol de accesibilidad (visibility: hidden). */
+.av-shell__search { display: flex; align-items: center; }
+.av-shell__search input { width: 0; height: 36px; padding: 0; border: none; background: transparent; font-family: var(--av-font-body); font-size: var(--av-text-sm); color: var(--av-navy); opacity: 0; visibility: hidden; transition: width var(--av-transition-fast), opacity var(--av-transition-fast), padding var(--av-transition-fast); }
+.av-shell__search input::placeholder { color: var(--av-gray-400); }
+.av-shell__search.is-open input { width: 180px; padding: 0 var(--av-space-2); opacity: 1; visibility: visible; }
+.av-shell__search.is-open .av-iconbtn { background: #fff; color: var(--av-blue); }
 
 .av-shell__user { position: relative; }
 .av-shell__user .av-menu { position: absolute; right: 0; top: calc(100% + 8px); z-index: 120; }
@@ -22,28 +30,33 @@
 .av-shell__user .av-avatar[aria-expanded="true"] .av-shell__chevron { transform: rotate(180deg); }
 .av-shell__menu-empty { margin: 0; padding: .6rem .8rem; font-size: .875rem; color: var(--av-gray-500); }
 
-.av-shell__main { width: min(1200px, calc(100% - 48px)); margin: 34px auto 56px; }
+/* Lienzo de contenido: compensa el navbar fijo con la variable dinámica (start debajo del dock). */
+.av-shell__main { width: min(1200px, calc(100% - 48px)); margin: 0 auto 56px; min-height: calc(100vh - var(--navbar-height)); padding-top: calc(var(--navbar-height) + var(--av-space-4)); }
 
-/* Portátiles: el nombre y el rol salen del botón de usuario para que la cabecera no se desborde. */
+/* Portátiles y salidas medianas (hasta ~1400px): columnas más estrechas y el nombre/rol
+   salen del botón de usuario para que la cabecera no se desborde ni corte texto. */
 @media (max-width: 1400px) {
+  .av-shell__nav { grid-template-columns: minmax(120px, auto) auto minmax(180px, auto); gap: var(--av-space-3); }
   .av-shell__user .av-avatar > span:not(.av-avatar__c), .av-shell__chevron { display: none; }
   .av-shell__user .av-avatar { padding: .25rem; }
 }
 
-/* Por debajo de 1280 px el dock pasa a su propia fila y se desplaza en horizontal. */
+/* Escritorios estrechos: el dock se reduce a iconos (el activo conserva su nombre para
+   orientar); las etiquetas salen del flujo sin perderse del DOM. */
 @media (max-width: 1280px) {
-  .av-shell__nav .av-dock { order: 3; flex-basis: 100%; }
+  .av-shell__nav .av-dock a:not([aria-current="page"]), .av-shell__nav .av-dock span.soon { padding: 0; width: 40px; justify-content: center; }
+  .av-shell__nav .av-dock a:not([aria-current="page"]) > span, .av-shell__nav .av-dock span.soon > span {
+    position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+  }
 }
 
-/* Por debajo de 900 px el dock se desplaza: el borde se desvanece para que se note. */
-@media (max-width: 900px) {
-  .av-shell__nav .av-dock { scroll-snap-type: x proximity; -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent); mask-image: linear-gradient(90deg, #000 88%, transparent); }
-  .av-shell__nav .av-dock > * { scroll-snap-align: start; }
-}
-
-@media (prefers-reduced-motion: reduce) { .av-shell__chevron { transition: none; } }
-
+/* Móvil: la cabecera se envuelve y el dock pasa a su propia fila, desplazable en horizontal. */
 @media (max-width: 768px) {
-  .av-shell__nav { width: calc(100% - 24px); top: 8px; }
-  .av-shell__search input { width: 120px; }
+  .av-shell__nav { display: flex; flex-wrap: wrap; padding-inline: var(--av-space-3); gap: var(--av-space-2); }
+  .av-shell__nav .av-dock { order: 3; flex-basis: 100%; max-width: 100%; }
+  .av-shell__search.is-open input { width: 120px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .av-shell__search input, .av-shell__chevron { transition: none; }
 }

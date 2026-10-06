@@ -11,7 +11,7 @@ export function Tile({ tone = "tint", icon, title, description, href, tag }: {
   title: string;
   description?: string;
   href?: string;
-  tag?: ReactNode;
+  tag?: string;
 }) {
   const inner = (
     <>
@@ -20,7 +20,7 @@ export function Tile({ tone = "tint", icon, title, description, href, tag }: {
         <span className="av-tile__title">{title}</span>
         {description && <span className="av-tile__desc">{description}</span>}
       </span>
-      {tag ? <span className="av-tile__tag">{tag}</span> : href && tone !== "soon" ? <span className="av-tile__arrow" aria-hidden="true">→</span> : null}
+      {tag ? <span className="av-tile__tag">{tag}</span> : href && tone !== "soon" ? <span className="av-tile__arrow" aria-hidden="true">↗</span> : null}
     </>
   );
   const cls = cn("av-tile", `av-tile--${tone}`);
@@ -42,36 +42,50 @@ export function Kpi({ label, value, delta, tone, note }: { label: string; value:
   );
 }
 
-export type ActivityTone = "ok" | "bad" | "retry";
+export type ActivityTone = "ok" | "bad" | "retry" | "other";
 export type ActivityEvent = { title: string; detail: string; time: string; tone?: ActivityTone };
 
-/** Panel navy de actividad: barras de resultado + línea de eventos. */
-export function ActivityPanel({ title, subtitle, bars, events }: {
+/**
+ * Panel navy de actividad: barras de resultado + línea de eventos.
+ *
+ * `titleId` enlaza el encabezado con la sección (`aria-labelledby`) para que el panel
+ * tenga nombre accesible; sin barras que mostrar no se pinta el bloque de resultados.
+ */
+export function ActivityPanel({ titleId, title, subtitle, barsTitle, bars, events, more }: {
+  titleId: string;
   title: string;
   subtitle?: string;
+  barsTitle?: string;
   bars: { label: string; value: number; max: number; tone?: ActivityTone }[];
   events: ActivityEvent[];
+  more?: { href: string; label: string };
 }) {
   return (
-    <section className="av-panel on-night">
-      <h3>{title}</h3>
-      {subtitle && <p className="av-panel__sub">{subtitle}</p>}
-      <div className="av-bars">
-        {bars.map((b) => (
-          <div key={b.label} className={cn("av-bar", b.tone && b.tone !== "ok" && `av-bar--${b.tone}`)}>
-            <span>{b.label}</span>
-            <span className="av-bar__track"><i style={{ ["--w" as string]: `${(b.value / b.max) * 100}%` }} /></span>
-            <b>{b.value}</b>
-          </div>
-        ))}
-      </div>
+    <section className="av-panel on-night" aria-labelledby={titleId}>
+      <header className="av-panel__head">
+        <h2 id={titleId}>{title}</h2>
+        {subtitle && <p className="av-panel__sub">{subtitle}</p>}
+      </header>
+      {bars.length > 0 && (
+        <div className="av-bars">
+          {barsTitle && <p className="av-bars__title mono">{barsTitle}</p>}
+          {bars.map((b) => (
+            <div key={b.label} className={cn("av-bar", b.tone && b.tone !== "ok" && `av-bar--${b.tone}`)}>
+              <span>{b.label}</span>
+              <span className="av-bar__track"><i style={{ ["--w" as string]: `${(b.value / b.max) * 100}%` }} /></span>
+              <b>{b.value}</b>
+            </div>
+          ))}
+        </div>
+      )}
       <ul className="av-feed">
         {events.map((e, i) => (
           <li key={i} className={e.tone && e.tone !== "ok" ? e.tone : undefined}>
-            <b>{e.title}</b><span>{e.detail}</span><small>{e.time}</small>
+            <b>{e.title}</b><span>{e.detail}</span>{e.time && <small>{e.time}</small>}
           </li>
         ))}
       </ul>
+      {more && <a className="av-more mono" href={more.href}>{more.label} →</a>}
     </section>
   );
 }
