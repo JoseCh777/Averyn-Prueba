@@ -133,12 +133,14 @@ section[aria-label^="Ficha de"] .av-initials {
 }
 section[aria-label="Listado de personas"] .av-initials[data-tone="violet"],
 section[aria-label^="Ficha de"] .av-initials[data-tone="violet"] { background: var(--av-avatar-violet); }
+/* Tono oscuro conserva texto blanco; teal/amber/rose son claros y el blanco no llega a 4.5:1
+   (axe color-contrast): en esos tres el texto pasa a navy. Los fondos son los del original. */
 section[aria-label="Listado de personas"] .av-initials[data-tone="teal"],
-section[aria-label^="Ficha de"] .av-initials[data-tone="teal"] { background: var(--av-avatar-teal); }
+section[aria-label^="Ficha de"] .av-initials[data-tone="teal"] { background: var(--av-avatar-teal); color: var(--av-navy); }
 section[aria-label="Listado de personas"] .av-initials[data-tone="amber"],
-section[aria-label^="Ficha de"] .av-initials[data-tone="amber"] { background: var(--av-avatar-amber); }
+section[aria-label^="Ficha de"] .av-initials[data-tone="amber"] { background: var(--av-avatar-amber); color: var(--av-navy); }
 section[aria-label="Listado de personas"] .av-initials[data-tone="rose"],
-section[aria-label^="Ficha de"] .av-initials[data-tone="rose"] { background: var(--av-avatar-rose); }
+section[aria-label^="Ficha de"] .av-initials[data-tone="rose"] { background: var(--av-avatar-rose); color: var(--av-navy); }
 section[aria-label="Listado de personas"] .av-initials[data-tone="slate"],
 section[aria-label^="Ficha de"] .av-initials[data-tone="slate"] { background: var(--av-avatar-slate); }
 

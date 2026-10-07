@@ -29,7 +29,8 @@
 
 /* ---------- Dispositivos (mismo .av-quick-grid de index.html:140) ---------- */
 .bio-devices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--av-space-4); margin: 0; padding: 0; list-style: none; }
-.bio-device__head { display: flex; align-items: center; justify-content: space-between; gap: var(--av-space-3); margin-bottom: var(--av-space-4); }
+/* flex-wrap: a ≤375 el chip de estado baja bajo el título en vez de desbordar la tarjeta. */
+.bio-device__head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--av-space-3); margin-bottom: var(--av-space-4); }
 /* .av-card__section-title (modules.css:298-303): 1rem, 600 y -0.01em. */
 .bio-device__head h3 { margin: 0; font-family: var(--av-font-heading); font-size: var(--av-text-body); font-weight: 600; letter-spacing: -.01em; }
 /* .av-table__sub (modules.css:240): xs, --av-gray-500, tipografía de cuerpo. */
@@ -171,4 +172,9 @@ section[aria-label="Historial de eventos"] .av-toolbar__count {
 @media (min-width: 1024px) {
   .bio-actions { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .bio-devices { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+/* ≤374px el chip de estado no cabe en una tarjeta de 2 columnas (23ra regla: sin scroll
+   horizontal); a 375 px en adelante se conserva la rejilla original de 2. */
+@media (max-width: 374px) {
+  .bio-devices { grid-template-columns: minmax(0, 1fr); }
 }

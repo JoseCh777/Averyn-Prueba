@@ -102,14 +102,17 @@ body:has(.av-page--docs) .av-empty h4 {
 /* ---------- Banner de confirmación: hz-banner (ds.css:425-429) con los tokens de éxito ----------
    Horizonte no define variante «success»; se siguen los tokens de .hz-banner--info/--bad con
    --av-chip-success-* (modules.css:384-387). */
-.av-page--docs .av-banner { display: flex; align-items: flex-start; gap: .75rem; padding: .8rem 1.1rem; border-bottom: 1px solid; font-size: .875rem; line-height: 1.5; }
+/* flex-wrap: a ≤320 el badge «Datos extraídos» baja de línea en vez de forzar 306px de ancho. */
+.av-page--docs .av-banner { display: flex; flex-wrap: wrap; align-items: flex-start; gap: .75rem; padding: .8rem 1.1rem; border-bottom: 1px solid; font-size: .875rem; line-height: 1.5; }
 .av-page--docs .av-banner--success { background: var(--av-chip-success-bg); border-color: var(--av-chip-success-border); color: var(--av-chip-success-text); }
 .av-page--docs .av-banner__icon { flex: none; margin-top: .15rem; font-size: 1.1rem; }
 .av-page--docs .av-banner__text { flex: 1; font-weight: 500; }
 .av-page--docs .av-banner__badge { flex: none; margin-left: auto; }
 
 /* ---------- Selector segmentado (.av-seg: modules.css:390-409) ---------- */
-.av-page--docs .vz-seg { border-color: var(--av-gray-200); background: var(--av-gray-50); border-radius: var(--av-radius-md); }
+/* flex-wrap: a ≤320 los tres botones no caben y el control pasa a dos filas en vez de desbordar
+   (mismo criterio que .pt-ctrl/.tpf__ctrl .vz-seg; en anchos normales no llega a envolver). */
+.av-page--docs .vz-seg { border-color: var(--av-gray-200); background: var(--av-gray-50); border-radius: var(--av-radius-md); flex-wrap: wrap; }
 .av-page--docs .vz-seg button { padding: 6px 12px; border-radius: 7px; background: transparent; color: var(--av-gray-600); font-family: var(--av-font-body); font-size: var(--av-text-sm); font-weight: 600; letter-spacing: normal; text-transform: none; }
 .av-page--docs .vz-seg button:hover { color: var(--av-navy); }
 .av-page--docs .vz-seg button[aria-pressed="true"] { background: var(--av-white); color: var(--av-blue); box-shadow: var(--av-shadow-sm); }
@@ -162,7 +165,8 @@ body:has(.av-page--docs) .av-empty h4 {
 }
 
 @media (max-width: 480px) {
-  .wiz-capture__actions { display: grid; grid-template-columns: repeat(3, 1fr); }
+  /* minmax(0,…) a ≤480: los mínimos de los tres botones suman 285px y empujan la página. */
+  .wiz-capture__actions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .wiz-capture__actions .av-btn { padding-inline: var(--av-space-2); font-size: var(--av-text-xs); }
   /* .wiz-footer lo comparten Biometría y Electoral: el ajuste queda anclado a Documentos. */
   .av-page--docs .wiz-footer { flex-direction: column; align-items: stretch; }
