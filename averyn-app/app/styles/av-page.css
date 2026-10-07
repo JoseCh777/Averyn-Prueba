@@ -7,10 +7,10 @@
    (averyn-frontend base.css:4-9); las superficies blancas descansan sobre él. */
 body:has(.av-page) { background: var(--av-gray-50); }
 
-/* Cabecera (paridad con .av-page-header del frontend original: espina + ícono + título 1.75rem) */
+/* Cabecera (paridad con .av-page-header del frontend original: ícono + título 1.75rem;
+   la espina vertical se retiró de la app a petición explícita) */
 .av-page-head { display: flex; align-items: center; justify-content: space-between; gap: var(--av-space-6); flex-wrap: wrap; padding-block: var(--av-space-6) var(--av-space-8); }
 .av-page-head__lead { display: flex; align-items: center; gap: var(--av-space-4); min-width: 0; }
-.av-page-head__spine { flex: 0 0 4px; align-self: stretch; min-height: 60px; border-radius: 4px; background: linear-gradient(180deg, var(--av-blue), var(--av-cyan)); }
 .av-page-head__icon { flex: 0 0 auto; width: 52px; height: 52px; display: grid; place-items: center; border-radius: 14px; background: var(--av-blue); color: #fff; font-size: 1.5rem; box-shadow: var(--av-shadow-sm); }
 .av-page-head__text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .av-page-head__title { margin: 0; font-family: var(--av-font-heading); font-size: var(--av-text-page-title); font-weight: 700; letter-spacing: -.02em; line-height: 1.1; color: var(--av-navy); text-wrap: balance; }

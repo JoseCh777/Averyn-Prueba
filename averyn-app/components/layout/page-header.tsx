@@ -11,7 +11,7 @@ type PageHeaderProps = {
   crumbs: readonly Crumb[];
   /** Título de la página: es el único `h1`. */
   title: string;
-  /** Ícono del contenedor junto a la espina (paridad con `av-page-header__icon`). */
+  /** Ícono del contenedor junto a las migas (paridad con `av-page-header__icon`). */
   icon: IconName;
   description?: string;
   /** Botones principales de la página, a la derecha del título. */
@@ -21,8 +21,9 @@ type PageHeaderProps = {
 /**
  * Cabecera común de las pantallas de módulo: migas, título, descripción y acciones.
  *
- * Estructura paridad con `averyn-frontend`: `__lead` (espina + ícono contenedor) y
+ * Estructura paridad con `averyn-frontend`: `__lead` (ícono contenedor) y
  * `__text` (migas + h1 + descripción). Los estilos son `av-page-head*` (`app/styles/av-page.css`).
+ * La espina vertical del original se retiró de la app a petición explícita (el prototipo se mantiene).
  *
  * @param props - Las migas, el título, el ícono, la descripción y las acciones.
  * @returns La cabecera de la página.
@@ -31,7 +32,6 @@ export function PageHeader({ crumbs, title, icon, description, actions }: PageHe
   return (
     <header className="av-page-head">
       <div className="av-page-head__lead">
-        <span className="av-page-head__spine" aria-hidden="true" />
         <span className="av-page-head__icon" aria-hidden="true"><Icon name={icon} /></span>
         <div className="av-page-head__text">
           <Breadcrumb items={[...crumbs]} />
