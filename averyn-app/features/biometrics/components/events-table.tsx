@@ -1,19 +1,25 @@
 import type { ReactNode } from "react";
 
+import Link from "next/link";
+
 import { Table } from "@/components/ui/display";
 import { Chip } from "@/components/ui/feedback";
 import type { Person } from "@/features/identity/types";
 import { formatDateTime } from "@/lib/date-format";
 
 import { METHOD_LABEL, OPERATION_LABEL, resultChip } from "../labels";
+import { verificationResultPath } from "../routes";
 import type { BiometricEvent } from "../types";
 
 type EventsTableProps = {
   events: readonly BiometricEvent[];
   /** Personas por id, para mostrar su nombre; una persona eliminada sale como «Persona eliminada». */
   people: ReadonlyMap<string, Person>;
-  /** `full` agrega el dispositivo y el operador (historial); `compact` es el resumen del módulo. */
-  variant: "compact" | "full";
+  /**
+   * `full` agrega el dispositivo y el operador (historial); `compact` es el resumen del módulo;
+   * `person` omite la columna Persona (la ficha ya sabe de quién es la actividad).
+   */
+  variant: "compact" | "full" | "person";
   label: string;
   /** Estado vacío: va dentro de la tabla, en una fila que cruza todas las columnas. */
   empty?: ReactNode;
@@ -22,21 +28,23 @@ type EventsTableProps = {
 /**
  * Tabla de eventos biométricos: quién, qué operación, con qué método y cómo salió.
  *
- * Es un Server Component. El nombre de la persona se busca por id; si la persona se eliminó el
- * evento se conserva (es auditoría) y se marca como «Persona eliminada».
+ * Es un Server Component. El nombre de la persona se busca por id y enlaza a su ficha; si la
+ * persona se eliminó el evento se conserva (es auditoría) y se marca como «Persona eliminada».
+ * El chip de resultado de una verificación enlaza a su pantalla de resultado.
  *
  * @param props - Los eventos, las personas y la variante.
  * @returns La tabla.
  */
 export function EventsTable({ events, people, variant, label, empty }: EventsTableProps) {
   const full = variant === "full";
-  const columns = full ? 7 : 5;
+  const showPerson = variant !== "person";
+  const columns = (full ? 7 : 5) - (showPerson ? 0 : 1);
   return (
     <div className="av-tablewrap" tabIndex={0} role="region" aria-label={`${label} (desplazable)`}>
       <Table>
         <thead>
           <tr>
-            <th scope="col">Persona</th>
+            {showPerson ? <th scope="col">Persona</th> : null}
             <th scope="col">Operación</th>
             <th scope="col">Método</th>
             <th scope="col">Resultado</th>
@@ -54,21 +62,41 @@ export function EventsTable({ events, people, variant, label, empty }: EventsTab
             events.map((event) => {
               const person = people.get(event.personId);
               const chip = resultChip(event.result, event.operation);
-              return (
-                <tr key={event.id}>
-                  <td>
-                    <div className="av-who__text">
-                      {person ? <span className="av-who__name">{person.name}</span> : <span className="av-cell-sub">Persona eliminada</span>}
-                      {full && person ? <span className="av-who__sub">Cédula {person.document}</span> : null}
-                    </div>
-                  </td>
-                  <td>{OPERATION_LABEL[event.operation]}</td>
-                  <td>{METHOD_LABEL[event.method]}</td>
-                  <td>
+              const result =
+                event.operation === "verification" ? (
+                  <Link
+                    className="ev-result"
+                    href={verificationResultPath(event.id)}
+                    aria-label={`Ver resultado de la verificación de ${person?.name ?? "persona eliminada"} del ${formatDateTime(event.at)}`}
+                  >
                     <Chip tone={chip.tone} icon={chip.icon}>
                       {chip.label}
                     </Chip>
-                  </td>
+                  </Link>
+                ) : (
+                  <Chip tone={chip.tone} icon={chip.icon}>
+                    {chip.label}
+                  </Chip>
+                );
+              return (
+                <tr key={event.id}>
+                  {showPerson ? (
+                    <td>
+                      <div className="av-who__text">
+                        {person ? (
+                          <Link className="av-who__name" href={`/identity/${person.id}`}>
+                            {person.name}
+                          </Link>
+                        ) : (
+                          <span className="av-cell-sub">Persona eliminada</span>
+                        )}
+                        {full && person ? <span className="av-who__sub">Cédula {person.document}</span> : null}
+                      </div>
+                    </td>
+                  ) : null}
+                  <td>{OPERATION_LABEL[event.operation]}</td>
+                  <td>{METHOD_LABEL[event.method]}</td>
+                  <td>{result}</td>
                   {full ? <td className="av-cell-mono">{event.deviceId}</td> : null}
                   <td className="av-cell-mono">{formatDateTime(event.at)}</td>
                   {full ? <td>{event.operator}</td> : null}

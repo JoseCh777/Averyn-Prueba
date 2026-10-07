@@ -68,24 +68,31 @@ export function parseCaptureContext(params: { mode?: unknown; person?: unknown; 
  * Interpreta los filtros del historial recibidos de la URL (cualquier valor desconocido equivale a «todos»).
  *
  * @param params - Parámetros sin validar.
- * @returns Los filtros.
+ * @returns Los filtros; `person` solo se añade cuando la URL lo trae (para no alterar el resto).
  */
-export function parseHistoryFilter(params: { method?: unknown; result?: unknown }): HistoryFilter {
-  return {
+export function parseHistoryFilter(params: { method?: unknown; result?: unknown; person?: unknown }): HistoryFilter {
+  const filter: HistoryFilter = {
     method: parseMethod(params.method) ?? "all",
     result: EVENT_RESULTS.find((result): result is EventResult => result === params.result) ?? "all",
   };
+  if (typeof params.person === "string" && params.person !== "") filter.person = params.person;
+  return filter;
 }
 
 /**
- * Filtra eventos por método y resultado.
+ * Filtra eventos por método, resultado y (si se indica) persona.
  *
  * @param events - Eventos de origen.
- * @param filter - Filtros; `all` acepta cualquier valor.
- * @returns Los eventos que cumplen ambos criterios, en el mismo orden.
+ * @param filter - Filtros; `all` acepta cualquier valor y sin `person` se muestran todos.
+ * @returns Los eventos que cumplen los criterios, en el mismo orden.
  */
 export function filterEvents(events: readonly BiometricEvent[], filter: HistoryFilter): BiometricEvent[] {
-  return events.filter((event) => (filter.method === "all" || event.method === filter.method) && (filter.result === "all" || event.result === filter.result));
+  return events.filter(
+    (event) =>
+      (filter.method === "all" || event.method === filter.method) &&
+      (filter.result === "all" || event.result === filter.result) &&
+      (filter.person === undefined || event.personId === filter.person),
+  );
 }
 
 /**

@@ -38,7 +38,7 @@ export async function HistoryView({ filter }: { filter: HistoryFilter }) {
         }
       />
       <section className="av-surface" aria-label="Historial de eventos">
-        <HistoryFilters initial={filter} shown={visible.length} total={events.length} />
+        <HistoryFilters initial={filter} personLabel={filter.person === undefined ? undefined : (peopleById.get(filter.person)?.name ?? "Persona eliminada")} shown={visible.length} total={events.length} />
         <EventsTable
           events={visible}
           people={peopleById}

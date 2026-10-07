@@ -28,6 +28,8 @@ export interface DocumentRecord {
   fields: OcrField[];
   /** La persona ya revisó y confirmó los datos. */
   confirmed: boolean;
+  /** Persona a la que pertenece el documento, si se conoce (los documentos genéricos del módulo no llevan ninguna). */
+  personId?: string;
 }
 
 /** Datos del archivo que viajan al servidor (el contenido lo recibirá el Core; ver README). */

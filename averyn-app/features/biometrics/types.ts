@@ -85,6 +85,8 @@ export interface BiometricsSummary {
 export interface HistoryFilter {
   method: BiometricMethod | "all";
   result: EventResult | "all";
+  /** Persona concreta (id) cuyos eventos se muestran; ausente = todas. */
+  person?: string;
 }
 
 /** Contexto de una captura, tal como llega por la URL. */

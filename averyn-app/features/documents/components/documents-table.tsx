@@ -19,12 +19,13 @@ import { OcrResultButton } from "./ocr-result-button";
  * igual que en el original (dashboard-documents.js:181-190), en vez de fuera de ella.
  *
  * @param props - Los documentos, en orden de registro (del más antiguo al más reciente, como
- * los pinta el original), y el contenido de la fila vacía cuando no hay ninguno.
+ * los pinta el original), el nombre accesible de la región desplazable y el contenido de la
+ * fila vacía cuando no hay ninguno.
  * @returns La tabla.
  */
-export function DocumentsTable({ documents, now = new Date(), empty }: { documents: readonly DocumentRecord[]; now?: Date; empty?: ReactNode }) {
+export function DocumentsTable({ documents, now = new Date(), label = "Historial de documentos", empty }: { documents: readonly DocumentRecord[]; now?: Date; label?: string; empty?: ReactNode }) {
   return (
-    <div className="av-tablewrap" tabIndex={0} role="region" aria-label="Historial de documentos (desplazable)">
+    <div className="av-tablewrap" tabIndex={0} role="region" aria-label={`${label} (desplazable)`}>
       <Table>
         <thead>
           <tr>
