@@ -52,7 +52,7 @@ export async function ElectionDetailView({ electionId }: { electionId: string })
         }
       />
 
-      <div className="elec-ficha">
+      <div className="av-ficha">
         <section className="av-surface av-surface--pad" aria-label={`Proceso ${election.name}`}>
           <div className="av-profile">
             <span className="av-initials av-initials--lg" aria-hidden="true">

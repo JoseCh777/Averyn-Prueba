@@ -92,15 +92,6 @@
 .av-techbar__item--end { margin-left: auto; }
 .av-techbar__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--av-success); }
 
-/* Ficha de detalle del proceso: identidad y configuración en par cuando hay sitio
-   (una columna en móvil), mismo patrón que la ficha de persona. */
-.elec-ficha { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.75rem; }
-.elec-ficha .av-profile h2 { margin: 0; font-size: 1.4rem; font-weight: 700; line-height: 1.1; }
-.elec-ficha .av-profile p { margin: 0; font-size: var(--av-text-xs); color: var(--av-gray-600); }
-@media (min-width: 1024px) {
-  .elec-ficha { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-
 @media (max-width: 768px) {
   .elec-switches { grid-template-columns: minmax(0, 1fr); }
 }

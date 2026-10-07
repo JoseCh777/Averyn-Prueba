@@ -71,7 +71,7 @@ export async function PersonDetailView({ personId }: { personId: string }) {
         }
       />
 
-      <div className="id-ficha">
+      <div className="av-ficha">
         <section className="av-surface av-surface--pad" aria-label={`Ficha de ${person.name}`}>
           <div className="av-profile">
             <PersonAvatar person={person} large />

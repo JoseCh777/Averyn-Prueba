@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 
+import Link from "next/link";
+
 import { Table } from "@/components/ui/display";
 import { Chip } from "@/components/ui/feedback";
 import { Icon } from "@/components/ui/icon";
@@ -14,6 +16,7 @@ import { OcrResultButton } from "./ocr-result-button";
  *
  * Es un Server Component; solo el botón de resultado corre en el navegador. Un documento en
  * proceso o con error explica qué pasa debajo del chip; solo los procesados tienen resultado.
+ * El tipo enlaza al detalle del documento (`/documents/[id]`).
  *
  * El estado vacío se pinta **dentro** de la tabla (`tr.av-table__empty` con `colspan`),
  * igual que en el original (dashboard-documents.js:181-190), en vez de fuera de ella.
@@ -50,7 +53,9 @@ export function DocumentsTable({ documents, now = new Date(), label = "Historial
                       <Icon name={DOCUMENT_KIND_ICON[document.kind]} />
                     </span>
                     <div className="av-who__text">
-                      <span className="av-who__name">{DOCUMENT_KIND_LABEL[document.kind]}</span>
+                      <Link className="av-who__name" href={`/documents/${document.id}`}>
+                        {DOCUMENT_KIND_LABEL[document.kind]}
+                      </Link>
                       <span className="av-who__sub">{document.fileName}</span>
                     </div>
                   </div>

@@ -3,6 +3,12 @@
 
 .av-page { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.75rem; }
 .av-page > * { min-width: 0; }
+/* Ficha de detalle a dos tarjetas en par (identidad/biometría, proceso/configuración…);
+   una sola columna por debajo del breakpoint de escritorio. */
+.av-ficha { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.75rem; }
+@media (min-width: 1024px) {
+  .av-ficha { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 /* Lienzo plano de las pantallas de módulo: el original pinta body con --av-gray-50
    (averyn-frontend base.css:4-9); las superficies blancas descansan sobre él. */
 body:has(.av-page) { background: var(--av-gray-50); }

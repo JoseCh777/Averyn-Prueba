@@ -161,13 +161,8 @@ section[aria-label^="Ficha de"] .av-profile p {
   text-transform: none;
   color: var(--av-gray-500);
 }
-/* Ficha completa: identidad y biometría en par cuando hay sitio (una columna en móvil). */
-.id-ficha { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.75rem; }
 /* Acciones de la tarjeta de biometría: registrar o verificar por modalidad. */
 .id-ficha__actions { display: flex; flex-wrap: wrap; gap: var(--av-space-3); margin-top: var(--av-space-4); }
-@media (min-width: 1024px) {
-  .id-ficha { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
 
 /* ---------- Pie de paginación (index.html:147-154; components.css:471-484) ----------
    Solo lo usa esta pantalla. */
