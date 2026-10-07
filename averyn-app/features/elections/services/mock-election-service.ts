@@ -33,6 +33,11 @@ export class MockElectionService implements ElectionService {
     return store().elections.map(copyOf);
   }
 
+  async getById(id: string): Promise<Election | undefined> {
+    const found = store().elections.find((election) => election.id === id);
+    return found === undefined ? undefined : copyOf(found);
+  }
+
   async create(input: NewElectionInput): Promise<Election> {
     const current = store();
     const name = normalizeText(input.name.trim());
