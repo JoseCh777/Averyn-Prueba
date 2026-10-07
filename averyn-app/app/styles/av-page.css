@@ -6,6 +6,20 @@
 /* Lienzo plano de las pantallas de módulo: el original pinta body con --av-gray-50
    (averyn-frontend base.css:4-9); las superficies blancas descansan sobre él. */
 body:has(.av-page) { background: var(--av-gray-50); }
+/* Cielo de cabecera: el mismo degradado del hero del dashboard (--av-sky → --av-blue-tint → gris),
+   detrás de la cabecera de cada vista de módulo y subido hasta la navbar, a petición del usuario
+   al retirar la espina (pintura decorativa: z-index -1, sin eventos). */
+body:has(.av-page)::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: clamp(420px, 55vh, 560px);
+  background: linear-gradient(180deg, var(--av-sky) 0%, var(--av-blue-tint) 55%, var(--av-gray-50) 100%);
+  z-index: -1;
+  pointer-events: none;
+}
 
 /* Cabecera (paridad con .av-page-header del frontend original: ícono + título 1.75rem;
    la espina vertical se retiró de la app a petición explícita) */
