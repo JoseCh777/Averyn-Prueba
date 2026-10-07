@@ -19,6 +19,7 @@ funcionalidad viven en `features/` y se montan dentro del shell desde
 |---|---|
 | `app-shell.tsx` | Server Component: skip link, cabecera y contenido principal |
 | `app-navbar.tsx` | Client Component: dock con el modulo actual, buscador y menu de usuario |
+| `notifications-menu.tsx` | Client Component: campana con los avisos recientes (`NotificationItem`) |
 | `modules.ts` | Modulos del dock (`APP_MODULES`) y `isModuleActive` |
 | `use-dismiss.ts` | Hook que cierra un desplegable con un clic fuera o con Escape |
 
@@ -29,20 +30,19 @@ Los estilos estan en `app/styles/av-shell.css` y reutilizan `av-nav`, `av-dock`,
 
 ```tsx
 // app/(app)/layout.tsx
-<AppShell user={user} onLogout={logout} unread={unread}>{children}</AppShell>
+<AppShell user={user} onLogout={logout} notifications={avisos}>{children}</AppShell>
 ```
 
 ## Estado actual
 
-- Solo el modulo **Dashboard** tiene ruta. Los demas se muestran como
-  "Proximamente", sin enlace: cada funcionalidad agrega su `href` en `modules.ts`
-  cuando existe su pantalla.
-- **[MOCK]** El usuario y las notificaciones de `app/(app)/layout.tsx` son de
-  demostracion (`TODO(AVY-005)` y `TODO(AVY-006)`).
-- El menu de usuario muestra "Cerrar sesion" solo si recibe `onLogout`; esa accion
-  llega con el Login (AVY-003).
-- El buscador abre y cierra el campo pero **todavia no busca**, y la campana no abre
-  nada: no existen los modulos que las respondan.
+- El usuario de `app/(app)/layout.tsx` es de demostracion (`TODO(AVY-005)`).
+- **[MOCK]** Los avisos de la campana son los ultimos eventos biometricos que el
+  layout de servidor arma con `biometricService.listEvents()`; las verificaciones
+  enlazan a su resultado y los registros al historial filtrado por persona.
+  `TODO(AVY-006)`: reemplazar por `GET /notifications` cuando exista el modulo.
+- El menu de usuario muestra "Cerrar sesion" solo si recibe `onLogout`.
+- El buscador navega con Enter al listado de Identidad con el texto como filtro
+  (`/identity?q=...`), que es el unico modulo con busqueda hoy.
 
 ## Pruebas
 
@@ -52,5 +52,4 @@ Los estilos estan en `app/styles/av-shell.css` y reutilizan `av-nav`, `av-dock`,
 
 ## Decisiones pendientes
 
-- **⚑ Buscador y notificaciones:** mantenerlos visibles sin funcion (como en el prototipo) u ocultarlos hasta que existan.
 - **⚑ Sesion:** el usuario real y el cierre de sesion dependen del contrato de Auth (#05) y de AVY-005.

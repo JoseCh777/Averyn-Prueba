@@ -18,6 +18,8 @@
 /* Buscador: el campo transparente crece desde cero al abrirse; cerrado queda fuera del
    orden de tabulación y del arbol de accesibilidad (visibility: hidden). */
 .av-shell__search { display: flex; align-items: center; }
+/* El campo vive dentro de un <form role="search">; contents lo deja como pieza directa del flex. */
+.av-shell__search-form { display: contents; }
 .av-shell__search input { width: 0; height: 36px; padding: 0; border: none; background: transparent; font-family: var(--av-font-body); font-size: var(--av-text-sm); color: var(--av-navy); opacity: 0; visibility: hidden; transition: width var(--av-transition-fast), opacity var(--av-transition-fast), padding var(--av-transition-fast); }
 .av-shell__search input::placeholder { color: var(--av-gray-400); }
 .av-shell__search.is-open input { width: 180px; padding: 0 var(--av-space-2); opacity: 1; visibility: visible; }

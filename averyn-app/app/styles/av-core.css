@@ -164,6 +164,10 @@ a.av-tile:focus-visible { outline: 3px solid var(--av-navy); outline-offset: 3px
 .av-menu { min-width: 200px; padding: 4px; border: 1px solid var(--av-hairline); border-radius: var(--av-radius-tile); background: #fff; box-shadow: var(--av-shadow-md); }
 .av-menu button { display: flex; align-items: center; gap: .6rem; width: 100%; min-height: 44px; padding: var(--av-space-3); border: 0; border-radius: 10px; background: transparent; font: 600 .875rem var(--av-font-body); color: var(--av-navy); cursor: pointer; text-align: left; }
 .av-menu button:hover { background: var(--av-gray-50); color: var(--av-blue); }
+/* Los avisos de la campana son enlaces (role="menuitem"): mismo trato visual que los botones. */
+.av-menu a { display: flex; flex-direction: column; justify-content: center; gap: 2px; width: 100%; min-height: 44px; padding: var(--av-space-3); border-radius: 10px; font: 600 .875rem var(--av-font-body); color: var(--av-navy); text-decoration: none; text-align: left; overflow-wrap: anywhere; }
+.av-menu a:hover { background: var(--av-gray-50); color: var(--av-blue); }
+.av-menu a small { font-weight: 400; font-size: .75rem; color: var(--av-gray-500); }
 .av-crumb { color: var(--av-gray-500); } .av-crumb a { color: var(--av-gray-500); text-decoration: none; } .av-crumb a:hover { color: var(--av-blue); } .av-crumb b { color: var(--av-navy); font-weight: 500; }
 .av-tabs { display: flex; gap: 1.6rem; border-bottom: 1px solid var(--av-hairline-strong); }
 .av-tab { position: relative; min-height: 44px; padding: 0 2px; border: 0; background: none; font: 600 .95rem var(--av-font-heading); color: var(--av-gray-500); cursor: pointer; }
