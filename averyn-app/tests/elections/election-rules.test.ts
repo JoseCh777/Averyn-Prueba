@@ -47,7 +47,7 @@ describe("validateGeneralInfo", () => {
   it("la fecha de fin no puede ser anterior a la de inicio, pero el mismo día vale", () => {
     const before = validateGeneralInfo({ ...valid, endDate: "2026-10-09" }, context);
     assert.ok(!before.ok);
-    assert.match(before.errors.endDate ?? "", /anterior a la de inicio/);
+    assert.match(before.errors.endDate ?? "", /debe ser posterior a la fecha de inicio/);
     assert.ok(validateGeneralInfo({ ...valid, endDate: "2026-10-10" }, context).ok);
   });
 

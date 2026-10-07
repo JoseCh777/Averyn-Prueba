@@ -52,6 +52,9 @@
 
 /* Móvil: la cabecera se envuelve y el dock pasa a su propia fila, desplazable en horizontal. */
 @media (max-width: 768px) {
+  /* El original baja el padding lateral de .av-page a space-4 a ≤768 (modules.css:553);
+     en React el gutter horizontal vive en .av-shell__main. */
+  .av-shell__main:has(.av-page) { width: min(1200px, calc(100% - 32px)); }
   .av-shell__nav { display: flex; flex-wrap: wrap; padding-inline: var(--av-space-3); gap: var(--av-space-2); }
   .av-shell__nav .av-dock { order: 3; flex-basis: 100%; max-width: 100%; }
   .av-shell__search.is-open input { width: 120px; }

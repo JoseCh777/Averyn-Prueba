@@ -37,7 +37,7 @@ export function Kpi({ label, value, delta, tone, note }: { label: string; value:
       <span className="av-kpi__label mono">{label}</span>
       <span className="av-kpi__value">{value}</span>
       {delta && <span className={cn("av-kpi__delta", tone && `av-kpi__delta--${tone}`)}>{delta}</span>}
-      {note && <span className="av-kpi__note">{note}</span>}
+      {note && <span className={cn("av-kpi__note", tone && `av-kpi__note--${tone}`)}>{note}</span>}
     </div>
   );
 }

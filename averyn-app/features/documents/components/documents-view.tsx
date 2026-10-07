@@ -23,11 +23,11 @@ export const PRE_REGISTRATION_PATH = "/documents/pre-registration";
 export async function DocumentsView() {
   const documents = await documentService.list();
   const summary = summarizeDocuments(documents);
-  const newestFirst = [...documents].reverse();
 
   return (
-    <div className="av-page">
+    <div className="av-page av-page--docs">
       <PageHeader
+        icon="camera"
         crumbs={[{ label: "Dashboard", href: "/dashboard" }, { label: "Documentos" }]}
         title="Documentos"
         description="Captura y lectura OCR de documentos de identidad para extraer y validar sus datos."
@@ -55,21 +55,26 @@ export async function DocumentsView() {
       <UploadDocumentCard />
 
       <section className="av-surface" aria-labelledby="history-title">
-        <div className="av-toolbar av-toolbar--head">
-          <h2 className="av-toolbar__title" id="history-title">
-            Historial de documentos
-          </h2>
-          <span className="av-toolbar__info">
+        <div className="av-toolbar">
+          <div className="av-toolbar__group">
+            <h2 className="av-kpi__label" id="history-title">
+              <Icon name="clock-history" />
+              Historial de documentos
+            </h2>
+          </div>
+          <div className="av-toolbar__spacer" />
+          <span className="av-pagination__info">
             {summary.total} {summary.total === 1 ? "documento" : "documentos"}
           </span>
         </div>
-        {newestFirst.length > 0 ? (
-          <DocumentsTable documents={newestFirst} />
-        ) : (
-          <EmptyState icon="file-earmark-text" title="Aún no hay documentos">
-            Los documentos que proceses con OCR aparecerán en este historial.
-          </EmptyState>
-        )}
+        <DocumentsTable
+          documents={documents}
+          empty={
+            <EmptyState icon="file-earmark-text" title="Aún no hay documentos">
+              Los documentos que proceses con OCR aparecerán en este historial.
+            </EmptyState>
+          }
+        />
       </section>
     </div>
   );

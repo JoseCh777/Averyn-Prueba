@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { NotFoundPage } from "@/components/errors/not-found-page";
 
-export const metadata: Metadata = { title: "Página no encontrada · Averyn" };
+export const metadata: Metadata = { title: "Página no encontrada · Averyn", robots: "noindex" };
 
 /**
  * Página 404 de toda la aplicación (la usa `notFound()` y cualquier ruta que no existe).

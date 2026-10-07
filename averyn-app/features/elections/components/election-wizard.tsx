@@ -7,13 +7,13 @@ import { Alert } from "@/components/ui/feedback";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { useToast } from "@/components/ui/overlay";
-import { StepProgress, type ProgressStep } from "@/components/ui/step-progress";
 import { parseAffiliation } from "@/features/identity/person-rules";
 import type { Person } from "@/features/identity/types";
 
 import { createElectionAction } from "../actions";
 import { countParticipants, validateGeneralInfo, validateSettings } from "../election-rules";
 import type { GeneralInfoField, GeneralInfoInput, SettingsField, SettingsInput } from "../types";
+import { ElectionStepper } from "./election-stepper";
 import { GeneralStep } from "./general-step";
 import { ParticipantsStep } from "./participants-step";
 import { ReviewStep } from "./review-step";
@@ -23,11 +23,6 @@ const STEPS = ["Información general", "Configuración", "Participantes", "Revis
 
 const EMPTY_GENERAL: GeneralInfoInput = { name: "", description: "", institution: "", kind: "", startDate: "", endDate: "" };
 const DEFAULT_SETTINGS: SettingsInput = { votingType: "", choicesPerVote: "1", mode: "online", anonymous: true, blankVote: false, showResults: true, allowVoteChange: false };
-
-/** Pasos con el estado de cada uno: los anteriores completados, el actual en curso y los siguientes bloqueados. */
-function stepsAt(current: number): ProgressStep[] {
-  return STEPS.map((title, index) => ({ title, state: index + 1 < current ? "done" : index + 1 === current ? "current" : "locked" }));
-}
 
 type ElectionWizardProps = {
   /** El padrón: las personas del catálogo de Identidad. */
@@ -56,6 +51,7 @@ export function ElectionWizard({ people, existingNames, today }: ElectionWizardP
   const [general, setGeneral] = useState(EMPTY_GENERAL);
   const [settings, setSettings] = useState(DEFAULT_SETTINGS);
   const [affiliation, setAffiliation] = useState("all");
+  const [query, setQuery] = useState("");
   const [generalErrors, setGeneralErrors] = useState<Partial<Record<GeneralInfoField, string>>>({});
   const [settingsErrors, setSettingsErrors] = useState<Partial<Record<SettingsField, string>>>({});
   const [participantsError, setParticipantsError] = useState<string | undefined>(undefined);
@@ -138,9 +134,9 @@ export function ElectionWizard({ people, existingNames, today }: ElectionWizardP
   const title = STEPS[step - 1] ?? STEPS[0];
 
   return (
-    <div className="av-wizard">
+    <div className="av-wizard elec-wizard">
       <aside className="av-wizard__side av-surface av-surface--pad">
-        <StepProgress steps={stepsAt(step)} label="Progreso del proceso electoral" />
+        <ElectionStepper steps={STEPS} current={step} label="Progreso del proceso electoral" />
       </aside>
 
       <div className="av-wizard__body">
@@ -186,7 +182,9 @@ export function ElectionWizard({ people, existingNames, today }: ElectionWizardP
             <ParticipantsStep
               people={people}
               affiliation={affiliation}
+              query={query}
               error={participantsError}
+              onQuery={setQuery}
               onAffiliation={(value) => {
                 setAffiliation(value);
                 setParticipantsError(undefined);
@@ -194,23 +192,28 @@ export function ElectionWizard({ people, existingNames, today }: ElectionWizardP
             />
           ) : null}
           {step === 4 && validatedGeneral.ok && validatedSettings.ok ? (
-            <ReviewStep general={general} settings={validatedSettings.value} affiliation={affiliation} people={people} institution={validatedGeneral.value.institution} kind={validatedGeneral.value.kind} />
+            <ReviewStep general={general} settings={validatedSettings.value} affiliation={affiliation} query={query} people={people} institution={validatedGeneral.value.institution} kind={validatedGeneral.value.kind} />
           ) : null}
           </div>
-
-          <div className="wiz-footer elec-footer">
-            {step > 1 ? (
-              <Button variant="ghost" onClick={() => go(step - 1)} disabled={saving}>
-                <Icon name="arrow-left" /> Atrás
-              </Button>
-            ) : (
-              <span />
-            )}
-            <Button onClick={() => void next()} loading={saving}>
-              {step === 4 ? (saving ? "Creando…" : <>Crear proceso electoral <Icon name="check2-circle" /></>) : <>Continuar <Icon name="arrow-right" /></>}
-            </Button>
-          </div>
         </section>
+
+        <div className="wiz-footer elec-footer">
+          <Button variant="ghost" onClick={() => go(step - 1)} disabled={step === 1 || saving}>
+            <Icon name="arrow-left" /> Atrás
+          </Button>
+          <Button onClick={() => void next()} loading={saving}>
+            {step === 4 ? (saving ? "Creando…" : <>Crear proceso electoral <Icon name="check2-circle" /></>) : <>Continuar <Icon name="arrow-right" /></>}
+          </Button>
+        </div>
+
+        {/* Footer técnico del original: proceso, estado y versión de la aplicación. */}
+        <div className="av-techbar">
+          <span className="av-techbar__item">Proceso: <strong>Nuevo</strong></span>
+          <span className="av-techbar__item">
+            <span className="av-techbar__dot" aria-hidden="true" /> Estado: Borrador
+          </span>
+          <span className="av-techbar__item av-techbar__item--end">v0.1.0</span>
+        </div>
       </div>
     </div>
   );

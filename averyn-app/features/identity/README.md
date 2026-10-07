@@ -32,14 +32,20 @@ autoridad cuando exista el módulo de identidad (AGENTS §6).
 | `components/person-avatar.tsx`, `person-badges.tsx` | Avatar con iniciales, etiqueta de afiliación y chip de estado |
 
 Las rutas están en `app/(app)/identity/` con `loading.tsx`, `error.tsx` y, en la ficha,
-`not-found.tsx`. Los estilos propios son `app/styles/av-page.css` (compartido con el resto de
-pantallas de módulo).
+`not-found.tsx`. Los estilos propios son `app/styles/av-identity.css` (paridad con la v1
+`averyn-frontend`, anclado a las etiquetas aria de estas dos pantallas) sobre
+`app/styles/av-page.css` (compartido con el resto de pantallas de módulo).
 
 ## Decisiones
 
 - **Filtros en la URL:** el servidor devuelve el listado ya filtrado; se puede compartir el
   enlace y funcionan atrás y adelante. La búsqueda espera 250 ms tras la última tecla.
 - **Los indicadores cuentan todas las personas;** los filtros solo afectan a la tabla.
+- **Estado vacío dentro de la tabla:** cuando no hay resultados, la fila `tr.av-table__empty`
+  ocupa las cuatro columnas (paridad con `dashboard-identity.js`), y el pie sigue informando
+  «Mostrando X de Y» con una sola página (los botones de página vienen deshabilitados).
+- **La ficha enseña lo mismo que la v1:** perfil (avatar, nombre y documento), `Afiliación` y
+  `Estado`, y el enlace «Volver al listado» dentro de la tarjeta.
 - **Id de persona eliminada no se reutiliza:** si lo hiciera, un evento antiguo apuntaría a otra
   persona. El mock lleva un contador que no retrocede.
 - **Búsqueda sin tildes:** «perez» encuentra a «Pérez».

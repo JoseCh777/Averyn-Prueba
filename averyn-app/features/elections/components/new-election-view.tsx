@@ -21,6 +21,7 @@ export async function NewElectionView() {
   return (
     <div className="av-page">
       <PageHeader
+        icon="check2-square"
         crumbs={[{ label: "Dashboard", href: "/dashboard" }, { label: "Procesos electorales", href: "/elections" }, { label: "Nuevo proceso" }]}
         title="Nuevo proceso electoral"
         description="Crea y configura una convocatoria electoral."

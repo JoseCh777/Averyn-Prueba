@@ -10,5 +10,11 @@ import { ErrorPage } from "@/components/errors/error-page";
  * @returns La página de error 500.
  */
 export default function RootError({ reset }: { error: Error; reset: () => void }) {
-  return <ErrorPage variant="500" onRetry={reset} homeHref="/" />;
+  return (
+    <>
+      {/* Igual que las páginas de error originales: ninguna se indexa. React 19 lo sube al <head>. */}
+      <meta name="robots" content="noindex" />
+      <ErrorPage variant="500" onRetry={reset} homeHref="/" />
+    </>
+  );
 }

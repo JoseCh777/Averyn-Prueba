@@ -28,8 +28,9 @@ export async function EnrollmentDoneView({ eventId }: { eventId: string }) {
   const completed = event.result === "success";
 
   return (
-    <div className="av-page">
+    <div className="av-page bio-page bio-page--flow" role="region" aria-label="Contenido del acta de registro">
       <PageHeader
+        icon="person-plus"
         crumbs={[{ label: "Dashboard", href: "/dashboard" }, { label: "Biometría", href: BIOMETRICS_PATH }, { label: "Registrar biometría", href: ENROLLMENT_PATH }, { label: "Acta" }]}
         title="Registro biométrico"
         description="Resultado del registro de la modalidad biométrica."
@@ -58,7 +59,7 @@ export async function EnrollmentDoneView({ eventId }: { eventId: string }) {
             </div>
           ) : null}
           <div>
-            <dt>Biometría</dt>
+            <dt>Biometría registrada</dt>
             <dd>
               <Chip tone="info" icon={METHOD_ICON[event.method]}>
                 {METHOD_LABEL[event.method]}
@@ -67,7 +68,7 @@ export async function EnrollmentDoneView({ eventId }: { eventId: string }) {
           </div>
           {completed ? (
             <div>
-              <dt>Estado del perfil</dt>
+              <dt>Estado</dt>
               <dd>
                 <Chip tone="success" icon="check-circle">
                   Activa

@@ -12,6 +12,7 @@
 @import "./styles/av-login.css";
 @import "./styles/av-dashboard.css";
 @import "./styles/av-page.css";
+@import "./styles/av-identity.css";
 @import "./styles/av-documents.css";
 @import "./styles/av-biometrics.css";
 @import "./styles/av-elections.css";
@@ -324,10 +325,6 @@
   display: flex;
   flex-direction: column;
   gap: var(--av-space-3);
-}
-
-.av-section-title {
-  font-size: 1.25rem;
 }
 
 .av-text {

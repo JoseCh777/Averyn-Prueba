@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { ErrorPage } from "@/components/errors/error-page";
 
-export const metadata: Metadata = { title: "Mantenimiento · Averyn" };
+export const metadata: Metadata = { title: "Mantenimiento · Averyn", robots: "noindex" };
 
 /**
  * Página de mantenimiento: se muestra mientras la plataforma está en mejoras.

@@ -38,6 +38,11 @@
 .av-input[aria-invalid="true"] { border-color: var(--av-error-text); }
 .av-input[aria-invalid="true"]:focus { box-shadow: 0 0 0 3px rgba(240, 68, 56, .2); }
 .av-input--ok { border-color: var(--av-success-text); }
+/* Input con lectura OCR: envoltorio con check de confianza (literal modules.css:412-430). */
+.av-input-wrap--ocr { position: relative; }
+.av-input-wrap--ocr .av-input { padding-right: 34px; background: var(--av-ocr-bg); border-color: var(--av-ocr-border); }
+.av-input-wrap--ocr .av-input:focus { background: var(--av-white); border-color: var(--av-blue); box-shadow: 0 0 0 3px var(--av-blue-tint); }
+.av-input-wrap__check { position: absolute; right: 11px; top: 50%; transform: translateY(-50%); color: var(--av-ocr-text); font-size: .95rem; pointer-events: none; }
 .av-input:disabled, .av-select:disabled { background: var(--av-gray-50); color: var(--av-gray-500); cursor: not-allowed; border-color: var(--av-gray-200); }
 .av-help { font-size: .8125rem; color: var(--av-gray-500); }
 .av-err { display: flex; gap: .4rem; font-size: .8125rem; font-weight: 500; color: var(--av-error-text); }
@@ -99,6 +104,10 @@ a.av-tile:focus-visible { outline: 3px solid var(--av-navy); outline-offset: 3px
 .av-kpi__delta::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--av-gray-300); flex: none; }
 .av-kpi__delta--ok::before { background: var(--av-success); } .av-kpi__delta--warn::before { background: var(--av-warning); }
 .av-kpi__note { font-size: .875rem; color: var(--av-gray-500); }
+/* Nota con estado: mismo punto de 8 px que el delta (ds.css:258-259); solo se pinta cuando la nota lleva tono. */
+.av-kpi__note--ok::before, .av-kpi__note--warn::before { content: ''; display: inline-block; width: 8px; height: 8px; margin-right: .5rem; border-radius: 50%; vertical-align: middle; }
+.av-kpi__note--ok::before { background: var(--av-success); }
+.av-kpi__note--warn::before { background: var(--av-warning); }
 .av-panel { padding: clamp(1.5rem, 3vw, 2.5rem); border-radius: var(--av-radius-frame); background: var(--av-navy-night); color: #fff; }
 .av-panel__head { margin-bottom: 1.6rem; }
 .av-panel h2 { margin: 0; font-family: var(--av-font-heading); font-weight: 500; font-size: 1.75rem; letter-spacing: -.025em; color: #fff; }
@@ -190,7 +199,7 @@ a.av-tile:focus-visible { outline: 3px solid var(--av-navy); outline-offset: 3px
 dialog.av-modal { width: min(480px, calc(100vw - 2rem)); margin: auto; padding: 0; text-align: left; border: 0; border-radius: var(--av-radius-frame); background: #fff; color: var(--av-navy); box-shadow: var(--av-shadow-frame); }
 dialog.av-modal::backdrop { background: rgba(0, 12, 36, .62); backdrop-filter: blur(3px); }
 .av-modal__body { padding: 2rem 2rem 1.2rem; }
-.av-modal__body h3 { font-size: 1.6rem; margin-bottom: .6rem; }
+.av-modal__body h3 { font-family: var(--av-font-heading); font-weight: 500; letter-spacing: -.025em; font-size: 1.6rem; margin-bottom: .6rem; }
 .av-modal__body p { color: var(--av-gray-600); }
 .av-modal__foot { display: flex; justify-content: flex-end; gap: .6rem; padding: 1rem 2rem 1.6rem; }
 .av-skel { display: block; height: 14px; border-radius: 6px; background: linear-gradient(90deg, var(--av-gray-100) 25%, var(--av-gray-50) 50%, var(--av-gray-100) 75%); background-size: 200% 100%; animation: av-sh 1.4s linear infinite; }
@@ -199,7 +208,7 @@ dialog.av-modal::backdrop { background: rgba(0, 12, 36, .62); backdrop-filter: b
 .av-progress i { display: block; height: 100%; width: 100%; background: var(--av-blue); transform-origin: left; transform: scaleX(var(--p, .4)); transition: transform .4s var(--av-ease-out); }
 .av-empty { display: flex; flex-direction: column; align-items: center; gap: .7rem; padding: 2.4rem 1.4rem; text-align: center; }
 .av-empty__icon { display: grid; place-items: center; width: 60px; height: 60px; border-radius: 50%; background: var(--av-blue-tint); color: var(--av-blue); font-size: 1.6rem; }
-.av-empty h4 { font-size: 1.3rem; } .av-empty p { max-width: 38ch; color: var(--av-gray-500); }
+.av-empty h4 { font-family: var(--av-font-heading); font-weight: 500; letter-spacing: -.025em; font-size: 1.3rem; } .av-empty p { max-width: 38ch; color: var(--av-gray-500); }
 .av-drop { display: flex; flex-direction: column; align-items: center; gap: .6rem; padding: 2rem 1.4rem; border: 1.5px dashed var(--av-field-border); border-radius: var(--av-radius-tile); background: var(--av-paper-blue); text-align: center; cursor: pointer; transition: border-color .15s var(--av-ease-out), background-color .15s var(--av-ease-out); }
 .av-drop:hover, .av-drop.is-over { border-color: var(--av-blue); background: var(--av-blue-tint); }
 .av-drop .ic { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: #fff; color: var(--av-blue); font-size: 1.4rem; }

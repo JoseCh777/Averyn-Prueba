@@ -1,6 +1,7 @@
+import { Building } from "react-bootstrap-icons";
+
 import { Table } from "@/components/ui/display";
-import { Chip, Tag } from "@/components/ui/feedback";
-import { Icon } from "@/components/ui/icon";
+import { Tag } from "@/components/ui/feedback";
 
 import { electionInitials, formatDateRange } from "../election-rules";
 import { ELECTION_STATUS_CHIP, INSTITUTION_LABEL, PROCESS_KIND_LABEL } from "../labels";
@@ -27,6 +28,7 @@ export function ElectionsTable({ elections }: { elections: readonly Election[] }
         <tbody>
           {elections.map((election) => {
             const status = ELECTION_STATUS_CHIP[election.status];
+            const StatusIcon = status.icon;
             return (
               <tr key={election.id}>
                 <td>
@@ -42,14 +44,16 @@ export function ElectionsTable({ elections }: { elections: readonly Election[] }
                 </td>
                 <td>
                   <Tag>
-                    <Icon name="people" /> {INSTITUTION_LABEL[election.institution]}
+                    <Building aria-hidden="true" focusable="false" /> {INSTITUTION_LABEL[election.institution]}
                   </Tag>
                 </td>
                 <td className="av-cell-mono">{formatDateRange(election.startDate, election.endDate)}</td>
                 <td>
-                  <Chip tone={status.tone} icon={status.icon}>
+                  {/* Mismo chip que el original (av-chip + icono de estado), con el icono importado a mano. */}
+                  <span className={`av-chip av-chip--${status.tone}`}>
+                    <StatusIcon aria-hidden="true" focusable="false" />
                     {status.label}
-                  </Chip>
+                  </span>
                 </td>
               </tr>
             );

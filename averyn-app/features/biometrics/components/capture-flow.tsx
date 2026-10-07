@@ -12,7 +12,7 @@ import { StepProgress, type ProgressStep } from "@/components/ui/step-progress";
 import { cn } from "@/lib/utils";
 
 import { connectedDeviceFor, methodAvailability } from "../biometric-rules";
-import { METHOD_ICON, METHOD_LABEL, METHODS } from "../labels";
+import { METHOD_LABEL, METHODS } from "../labels";
 import { capturePath, flowPath } from "../routes";
 import type { BiometricDevice, BiometricMethod, CaptureMode, PickerPerson } from "../types";
 import { PersonPicker } from "./person-picker";
@@ -114,9 +114,6 @@ export function CaptureFlow({ mode, people, devices, initialPersonId }: CaptureF
                   return (
                     <label key={option} className={cn("bio-method", !available && "is-disabled")}>
                       <input type="radio" name="method" value={option} disabled={!available} checked={chosen === option} onChange={() => setMethod(option)} />
-                      <span className="bio-method__icon" aria-hidden="true">
-                        <Icon name={METHOD_ICON[option]} />
-                      </span>
                       <span className="bio-method__text">
                         <b>{METHOD_LABEL[option]}</b>
                         <small>

@@ -73,8 +73,9 @@ export async function VerificationResultView({ eventId }: { eventId: string }) {
   const compared = event.score !== undefined && (event.result === "success" || event.result === "rejected");
 
   return (
-    <div className="av-page">
+    <div className="av-page bio-page bio-page--flow" role="region" aria-label="Contenido del resultado de verificación">
       <PageHeader
+        icon="shield-check"
         crumbs={[{ label: "Dashboard", href: "/dashboard" }, { label: "Biometría", href: BIOMETRICS_PATH }, { label: "Verificar identidad", href: VERIFICATION_PATH }, { label: "Resultado" }]}
         title="Resultado de verificación"
         description="Desenlace de la comparación biométrica de la persona."
@@ -113,28 +114,29 @@ export async function VerificationResultView({ eventId }: { eventId: string }) {
           </div>
         ) : null}
 
-        <dl className="av-detail">
-          <div>
-            <dt>Nombre</dt>
-            <dd>{person?.name ?? "Persona eliminada"}</dd>
-          </div>
-          {person ? (
-            <>
-              <div>
-                <dt>Documento</dt>
-                <dd>{formatDocument(person.document)}</dd>
-              </div>
-              <div>
-                <dt>Afiliación</dt>
-                <dd>{AFFILIATION_LABEL[person.affiliation]}</dd>
-              </div>
-            </>
-          ) : null}
-          <div>
-            <dt>Hora de verificación</dt>
-            <dd>{formatDateTime(event.at)}</dd>
-          </div>
-          {accepted ? (
+        {/* Solo la verificación aceptada abre el detalle de persona (biometrics-verification.js:84-95). */}
+        {accepted ? (
+          <dl className="av-detail">
+            <div>
+              <dt>Nombre</dt>
+              <dd>{person?.name ?? "Persona eliminada"}</dd>
+            </div>
+            {person ? (
+              <>
+                <div>
+                  <dt>Documento</dt>
+                  <dd>{formatDocument(person.document)}</dd>
+                </div>
+                <div>
+                  <dt>Afiliación</dt>
+                  <dd>{AFFILIATION_LABEL[person.affiliation]}</dd>
+                </div>
+              </>
+            ) : null}
+            <div>
+              <dt>Hora de verificación</dt>
+              <dd>{formatDateTime(event.at)}</dd>
+            </div>
             <div>
               <dt>Estado</dt>
               <dd>
@@ -143,8 +145,8 @@ export async function VerificationResultView({ eventId }: { eventId: string }) {
                 </Chip>
               </dd>
             </div>
-          ) : null}
-        </dl>
+          </dl>
+        ) : null}
 
         <div className="bio-acta__actions">
           <ButtonLink href={BIOMETRICS_PATH}>Volver a Biometría</ButtonLink>

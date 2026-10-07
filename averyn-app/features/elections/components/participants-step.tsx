@@ -1,9 +1,7 @@
 "use client";
 
-import { useState } from "react";
-
 import { Table } from "@/components/ui/display";
-import { Alert, EmptyState } from "@/components/ui/feedback";
+import { Alert } from "@/components/ui/feedback";
 import { Field, Select } from "@/components/ui/field";
 import { SearchField } from "@/components/ui/inputs";
 import { AffiliationTag, StatusChip } from "@/features/identity/components/person-badges";
@@ -18,6 +16,9 @@ type ParticipantsStepProps = {
   people: readonly Person[];
   /** `all` o una afiliación. */
   affiliation: string;
+  /** Texto del buscador: vive en el asistente para que la revisión lo muestre igual que el original. */
+  query: string;
+  onQuery: (value: string) => void;
   onAffiliation: (value: string) => void;
   /** Mensaje del servidor cuando no hay a quién convocar. */
   error?: string;
@@ -27,56 +28,56 @@ type ParticipantsStepProps = {
  * Paso 3 del asistente: a quién se convoca.
  *
  * El padrón es el catálogo de Identidad. Se elige una afiliación (o todas) y se ve la lista de
- * convocados, con una búsqueda para encontrar a alguien. Solo las personas verificadas podrán votar:
- * el resumen lo dice y avisa si hay pendientes.
+ * convocados, con una búsqueda para encontrar a alguien; la tabla y el resumen son del original
+ * (barra de filtros, fila vacía dentro de la tabla y las dos cifras del padrón).
  *
- * @param props - El padrón, la afiliación elegida y quién avisa del cambio.
+ * @param props - El padrón, la afiliación, la búsqueda y quién avisa de los cambios.
  * @returns El filtro, la tabla y el resumen.
  */
-export function ParticipantsStep({ people, affiliation, onAffiliation, error }: ParticipantsStepProps) {
-  const [query, setQuery] = useState("");
+export function ParticipantsStep({ people, affiliation, query, onQuery, onAffiliation, error }: ParticipantsStepProps) {
   const chosen = parseAffiliation(affiliation) ?? "all";
   const counts = countParticipants(people, chosen);
   const normalized = normalizeText(query.trim());
   const visible = eligibleVoters(people, chosen).filter((person) => normalized === "" || normalizeText(`${person.name} ${person.document}`).includes(normalized));
-  const pending = counts.eligible - counts.verified;
 
   return (
     <div className="elec-participants">
-      <div className="elec-participants__filters">
-        <Field id="election-affiliation" label="Afiliación convocada" className="av-toolbar__field">
-          {(a) => (
-            <Select {...a} value={affiliation} onChange={(event) => onAffiliation(event.target.value)}>
-              <option value="all">Todas las afiliaciones</option>
-              {AFFILIATIONS.map((option) => (
-                <option key={option} value={option}>
-                  {AFFILIATION_LABEL[option]}
-                </option>
-              ))}
-            </Select>
-          )}
-        </Field>
-        <div className="av-toolbar__search">
-          <SearchField value={query} onChange={setQuery} label="Buscar participantes" placeholder="Nombre o documento" countText={`${visible.length} de ${counts.eligible} convocados`} />
+      <div className="av-toolbar">
+        <div className="av-toolbar__group">
+          <div className="av-toolbar__search">
+            <SearchField value={query} onChange={onQuery} label="Buscar" placeholder="Nombre o documento" countText={`${visible.length} de ${counts.eligible} convocados`} />
+          </div>
+          <Field id="election-affiliation" label="Afiliación" className="av-toolbar__field">
+            {(a) => (
+              <Select {...a} value={affiliation} onChange={(event) => onAffiliation(event.target.value)}>
+                <option value="all">Todas las afiliaciones</option>
+                {AFFILIATIONS.map((option) => (
+                  <option key={option} value={option}>
+                    {AFFILIATION_LABEL[option]}
+                  </option>
+                ))}
+              </Select>
+            )}
+          </Field>
         </div>
       </div>
 
-      {visible.length === 0 ? (
-        <EmptyState icon="person-x" title="No se encontraron participantes">
-          {counts.eligible === 0 ? "No hay personas con esa afiliación en el padrón." : "Prueba con otro nombre o documento."}
-        </EmptyState>
-      ) : (
-        <div className="av-tablewrap" tabIndex={0} role="region" aria-label="Participantes convocados (desplazable)">
-          <Table>
-            <thead>
-              <tr>
-                <th scope="col">Participante</th>
-                <th scope="col">Afiliación</th>
-                <th scope="col">Estado</th>
+      <div className="av-tablewrap" tabIndex={0} role="region" aria-label="Participantes convocados (desplazable)">
+        <Table>
+          <thead>
+            <tr>
+              <th scope="col">Participante</th>
+              <th scope="col">Afiliación</th>
+              <th scope="col">Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            {visible.length === 0 ? (
+              <tr className="av-table__empty">
+                <td colSpan={3}>No se encontraron participantes con ese criterio de búsqueda.</td>
               </tr>
-            </thead>
-            <tbody>
-              {visible.map((person) => (
+            ) : (
+              visible.map((person) => (
                 <tr key={person.id}>
                   <td>
                     <div className="av-who">
@@ -94,11 +95,11 @@ export function ParticipantsStep({ people, affiliation, onAffiliation, error }: 
                     <StatusChip status={person.status} />
                   </td>
                 </tr>
-              ))}
-            </tbody>
-          </Table>
-        </div>
-      )}
+              ))
+            )}
+          </tbody>
+        </Table>
+      </div>
 
       <dl className="av-detail" aria-live="polite">
         <div>
@@ -108,24 +109,13 @@ export function ParticipantsStep({ people, affiliation, onAffiliation, error }: 
           </dd>
         </div>
         <div>
-          <dt>Convocados</dt>
+          <dt>Coincidencias con el filtro actual</dt>
           <dd>
-            <strong>{counts.eligible}</strong>
-          </dd>
-        </div>
-        <div>
-          <dt>Podrán votar (verificados)</dt>
-          <dd>
-            <strong>{counts.verified}</strong>
+            <strong>{visible.length}</strong>
           </dd>
         </div>
       </dl>
 
-      {pending > 0 ? (
-        <Alert tone="warning" title={`${pending} ${pending === 1 ? "persona está pendiente" : "personas están pendientes"} de verificar`}>
-          Solo las personas con identidad verificada podrán votar. Verifícalas en Biometría antes de abrir el proceso.
-        </Alert>
-      ) : null}
       {error ? <Alert tone="error">{error}</Alert> : null}
     </div>
   );

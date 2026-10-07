@@ -54,28 +54,19 @@ export function PersonPicker({ people, selectedId, onSelect, searchLabel }: Pers
           <Table>
             <thead>
               <tr>
-                <th scope="col">
-                  <span className="sr-only">Elegir</span>
-                </th>
                 <th scope="col">Persona</th>
                 <th scope="col">Afiliación</th>
                 <th scope="col">Biometría registrada</th>
+                <th scope="col" className="av-table__actions">
+                  Seleccionar
+                </th>
               </tr>
             </thead>
             <tbody>
               {visible.map((person) => {
                 const selected = person.id === selectedId;
                 return (
-                  <tr key={person.id} className={selected ? "is-selected" : undefined} onClick={() => onSelect(person.id)}>
-                    <td className="picker__radio">
-                      <input
-                        type="radio"
-                        name="picker-person"
-                        checked={selected}
-                        aria-label={`Elegir a ${person.name}`}
-                        onChange={() => onSelect(person.id)}
-                      />
-                    </td>
+                  <tr key={person.id} className={selected ? "is-active" : undefined} onClick={() => onSelect(person.id)}>
                     <td>
                       <div className="av-who">
                         <PersonAvatar person={person} />
@@ -92,6 +83,15 @@ export function PersonPicker({ people, selectedId, onSelect, searchLabel }: Pers
                     </td>
                     <td>
                       <ProfileChips profile={person.profile} />
+                    </td>
+                    <td className="av-table__actions picker__radio">
+                      <input
+                        type="radio"
+                        name="picker-person"
+                        checked={selected}
+                        aria-label={`Elegir a ${person.name}`}
+                        onChange={() => onSelect(person.id)}
+                      />
                     </td>
                   </tr>
                 );
