@@ -1,9 +1,48 @@
 /* Documentos y pre-registro (features/documents): carga, tabla con subtítulos, asistente por pasos y revisión OCR.
-   Reutiliza av-page.css (superficies, tablas, filas de persona), los patrones .pt-doc y .pt-conf, y .up__drop. */
+   Reutiliza av-page.css (superficies, tablas, filas de persona) y los patrones .pt-doc/.pt-conf.
 
-/* Carga de un documento */
+   Ancla de paridad: `.av-page--docs`, la clase de la raíz de las dos pantallas (mismo criterio que
+   av-identity.css). Los componentes del Design System Horizonte (hz-btn, hz-chip, hz-table, hz-empty,
+   hz-iconbtn, hz-modal, hz-drop, hz-banner, hz-kpis) conservan su estilo; solo se ajusta aquí lo que es
+   propio de estas pantallas, con los literales de averyn-frontend. */
+
+/* ---------- Documento ----------
+   El original pinta el body con --av-gray-50 (averyn-frontend base.css:4-9); el degradado de
+   av-page.css:6 es un rasgo del resto de pantallas de módulo. */
+body:has(.av-page--docs) { background: var(--av-gray-50); }
+
+/* ---------- Encabezados ----------
+   Horizonte exige Space Grotesk 500 con -0.025em en h1-h4 (docs/ds/ds.css), como en av-identity. */
+body:has(.av-page--docs) .av-modal__body h3,
+body:has(.av-page--docs) .av-empty h4 {
+  font-family: var(--av-font-heading);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+}
+
+/* ---------- Superficies: paridad con .av-card (components.css:91-98) ---------- */
+.av-page--docs .av-surface { border-color: var(--av-gray-200); box-shadow: var(--av-shadow-sm); }
+.av-page--docs .av-surface--pad { padding: var(--av-space-6); }
+/* Cabecera interna .av-card__header (modules.css:289-295): título 1.15rem y rótulos xs */
+.av-page--docs .av-surface__head { gap: 0; margin-bottom: var(--av-space-4); }
+.av-page--docs .av-surface__head h2 { font-size: 1.15rem; }
+.av-page--docs .av-surface__head p { margin-top: 2px; font-size: var(--av-text-xs); color: var(--av-gray-500); }
+/* .av-card--flush (modules.css:231-233): historial sin padding y con esquinas recortadas */
+.av-page--docs section[aria-labelledby="history-title"] { overflow: hidden; }
+
+/* ---------- Barra del historial (.av-toolbar: modules.css:116-125) ---------- */
+.av-page--docs .av-toolbar { gap: var(--av-space-4); padding: var(--av-space-4) var(--av-space-6); border-bottom-color: var(--av-gray-100); }
+.av-page--docs .av-toolbar__group { display: flex; align-items: flex-end; gap: var(--av-space-3); flex: 1 1 auto; min-width: 0; flex-wrap: wrap; }
+.av-page--docs .av-toolbar__spacer { margin-left: auto; }
+.av-page--docs .av-toolbar .av-kpi__label { display: flex; align-items: center; gap: var(--av-space-2); margin: 0; font-family: var(--av-font-body); font-size: var(--av-text-xs); font-weight: 600; color: var(--av-gray-500); }
+.av-page--docs .av-toolbar .av-kpi__label svg { font-size: 1rem; color: var(--av-gray-400); }
+.av-page--docs .av-pagination__info { font-size: var(--av-text-sm); color: var(--av-gray-500); }
+
+/* ---------- Carga de un documento ----------
+   La caja de soltar es .av-drop (hz-drop, ds.css:353-356); aquí solo su altura dentro de la tarjeta. */
 .upload { display: grid; grid-template-columns: minmax(12rem, 16rem) minmax(0, 1fr); gap: 1.25rem; align-items: start; }
-.upload .up__drop { min-height: 8.5rem; align-content: center; }
+.upload .av-drop { min-height: 8.5rem; }
+.av-page--docs .av-drop:has(+ input:focus-visible) { outline: 2px solid var(--av-blue); outline-offset: 2px; }
 .upload__msg { margin-top: 1rem; }
 .upload__file { display: flex; align-items: center; gap: .9rem; flex-wrap: wrap; margin-top: 1rem; padding: .8rem 1rem; border: 1px solid var(--av-hairline-strong); border-radius: var(--av-radius-control); background: var(--av-paper-blue); }
 .upload__file > svg { font-size: 1.4rem; color: var(--av-blue); }
@@ -11,37 +50,125 @@
 .upload__name b { overflow-wrap: anywhere; }
 .upload__name small { font: 500 .8125rem var(--av-font-mono); color: var(--av-gray-600); }
 
-/* Revisión de los campos leídos por el OCR */
-.ocr-form { display: grid; gap: .9rem; }
+/* ---------- Revisión de los campos leídos por el OCR ---------- */
+.ocr-form { display: grid; gap: var(--av-space-4); }
 .ocr-form__status { margin: 0; font-size: .9375rem; color: var(--av-gray-600); }
-.ocr-form__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .9rem 1rem; }
+/* .av-form-grid del original: dos columnas con 16 px de separación (modules.css:520-532) */
+.ocr-form__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--av-space-4); }
 .ocr-form__grid .av-label__row { min-height: 1.6rem; flex-wrap: wrap; }
 .ocr-form__grid .pt-conf { min-height: 0; font-size: .75rem; }
-dialog.av-modal:has(.ocr-form) { width: min(600px, calc(100vw - 2rem)); }
-.av-modal .ocr-form { margin-top: .8rem; }
+/* Input con lectura OCR: el envoltorio `.av-input-wrap--ocr` y el check viven en av-core.css
+   (literal modules.css:412-430) y solo se envuelven los campos con valor, como el original;
+   aquí se aclara el fondo cuando el campo está deshabilitado. */
+.av-page--docs .ocr-form .av-input-wrap--ocr .av-input:disabled { background: var(--av-gray-50); color: var(--av-gray-500); border-color: var(--av-gray-200); cursor: not-allowed; }
 
-/* Asistente de pre-registro (el contenedor .av-wizard es común: av-page.css) */
-.wiz-kind { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.4rem; }
-.wiz-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 1.6rem; align-items: start; }
+/* ---------- Modal de resultado OCR ----------
+   dialog.av-modal es hz-modal (ds.css:340-345): se conserva su ancho base de 480 px y su retícula.
+   Solo se añade el cierre del original (.av-modal__close: components.css:154-155) y una columna para
+   que los seis campos quepan en el diálogo, como el cuerpo del modal original. */
+.av-page--docs .av-modal .ocr-form { margin-top: .8rem; }
+.av-page--docs .av-modal .ocr-form__grid { grid-template-columns: minmax(0, 1fr); }
+.av-page--docs .av-modal__close { position: absolute; top: 2.4rem; right: 1.5rem; padding: 0; border: 0; background: none; font-size: 1.25rem; line-height: 1; color: var(--av-gray-500); cursor: pointer; }
+.av-page--docs .av-modal__close:hover { color: var(--av-navy); }
+/* El diálogo con los seis campos en una columna puede superar la ventana: se limita a ella. */
+.av-page--docs dialog.av-modal { max-height: calc(100dvh - 3rem); overflow-y: auto; }
+
+/* ---------- Asistente de pre-registro (el contenedor .av-wizard es común: av-page.css) ---------- */
+/* El panel lateral lleva el mismo padding del original (pre-registro.html:87): space-4. */
+.av-page--docs .av-wizard__side.av-surface--pad { padding: var(--av-space-4); }
+/* Etiqueta sobre el control segmentado (.av-field--inline: pre-registro.html:136-137) */
+.wiz-kind { display: flex; flex-direction: column; align-items: flex-start; gap: var(--av-space-1); margin-bottom: var(--av-space-4); }
+/* .av-wizard__grid (modules.css:346): 1fr 1fr con 24 px */
+.wiz-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--av-space-6); align-items: start; }
 .wiz-grid > * { min-width: 0; }
-.wiz-capture { display: grid; gap: .9rem; }
-.wiz-capture__actions { display: flex; flex-wrap: wrap; gap: .5rem; }
-.wiz-capture__note { margin: 0; font-size: .8125rem; color: var(--av-gray-600); }
-.wiz-qr { display: flex; align-items: center; gap: .8rem; padding: .8rem 1rem; border: 1px dashed var(--av-field-border); border-radius: var(--av-radius-control); color: var(--av-gray-600); }
-.wiz-qr > svg { font-size: 1.6rem; flex: none; }
-.wiz-qr span { display: grid; }
-.wiz-qr b { color: var(--av-navy); font-size: .875rem; }
-.wiz-qr small { font-size: .8125rem; }
-.wiz-data { display: grid; gap: 1rem; }
-.wiz-data__title { margin: 0; font: 500 1.15rem var(--av-font-heading); letter-spacing: -.01em; }
-.wiz-data__title:not(:first-child) { margin-top: .6rem; }
+/* .av-capture (modules.css:433) */
+.wiz-capture { display: grid; gap: var(--av-space-4); }
+.wiz-capture__actions { display: flex; flex-wrap: wrap; gap: var(--av-space-2); }
+.wiz-capture__note { margin: 0; font-size: var(--av-text-xs); color: var(--av-gray-500); }
+/* .av-capture__qr (modules.css:501-509) */
+.wiz-qr { display: flex; align-items: center; gap: var(--av-space-3); padding: var(--av-space-3) var(--av-space-4); border: 1px solid var(--av-gray-200); border-radius: var(--av-radius-md); background: var(--av-white); color: var(--av-gray-600); }
+.wiz-qr > svg { font-size: 1.5rem; flex: none; color: var(--av-gray-400); }
+.wiz-qr span { display: grid; line-height: 1.35; }
+.wiz-qr b { color: var(--av-navy); font-size: var(--av-text-sm); font-weight: 600; }
+.wiz-qr small { font-size: var(--av-text-xs); color: var(--av-gray-500); }
+/* Títulos de sección (.av-card__section-title: modules.css:298-303) y el margen de .av-field
+   (components.css:59): sin «gap» automático, los márgenes del original hacen la separación. */
+.wiz-data { display: grid; }
+.wiz-data > .ocr-form { margin-bottom: var(--av-space-4); }
+.wiz-data > :last-child { margin-bottom: var(--av-space-4); }
+.wiz-data__title { margin: 0 0 var(--av-space-4); font-family: var(--av-font-heading); font-size: var(--av-text-body); font-weight: 600; letter-spacing: -0.01em; color: var(--av-navy); }
+.wiz-data__title:not(:first-child) { margin-top: var(--av-space-6); }
 
-/* Visor de documento: marco rojo cuando no se pudo leer */
-.pt-doc[data-state="bad"] .pt-doc__corners i { border-color: var(--pt-bad); }
+/* ---------- Banner de confirmación: hz-banner (ds.css:425-429) con los tokens de éxito ----------
+   Horizonte no define variante «success»; se siguen los tokens de .hz-banner--info/--bad con
+   --av-chip-success-* (modules.css:384-387). */
+/* flex-wrap: a ≤320 el badge «Datos extraídos» baja de línea en vez de forzar 306px de ancho. */
+.av-page--docs .av-banner { display: flex; flex-wrap: wrap; align-items: flex-start; gap: .75rem; padding: .8rem 1.1rem; border-bottom: 1px solid; font-size: .875rem; line-height: 1.5; }
+.av-page--docs .av-banner--success { background: var(--av-chip-success-bg); border-color: var(--av-chip-success-border); color: var(--av-chip-success-text); }
+.av-page--docs .av-banner__icon { flex: none; margin-top: .15rem; font-size: 1.1rem; }
+.av-page--docs .av-banner__text { flex: 1; font-weight: 500; }
+.av-page--docs .av-banner__badge { flex: none; margin-left: auto; }
+
+/* ---------- Selector segmentado (.av-seg: modules.css:390-409) ---------- */
+/* flex-wrap: a ≤320 los tres botones no caben y el control pasa a dos filas en vez de desbordar
+   (mismo criterio que .pt-ctrl/.tpf__ctrl .vz-seg; en anchos normales no llega a envolver). */
+.av-page--docs .vz-seg { border-color: var(--av-gray-200); background: var(--av-gray-50); border-radius: var(--av-radius-md); flex-wrap: wrap; }
+.av-page--docs .vz-seg button { padding: 6px 12px; border-radius: 7px; background: transparent; color: var(--av-gray-600); font-family: var(--av-font-body); font-size: var(--av-text-sm); font-weight: 600; letter-spacing: normal; text-transform: none; }
+.av-page--docs .vz-seg button:hover { color: var(--av-navy); }
+.av-page--docs .vz-seg button[aria-pressed="true"] { background: var(--av-white); color: var(--av-blue); box-shadow: var(--av-shadow-sm); }
+
+/* ---------- Progreso vertical (.av-stepper: modules.css:349-375) ----------
+   Verde en «Completado», anillo azul en «En curso» y candado en gris; el original no lleva
+   mayúsculas monoespaciadas en los estados. Los iconos por paso y la etiqueta «Bloqueado»
+   dependen de components/ui/step-progress.tsx (ver informe SHARED). */
+.av-page--docs .av-steps { display: flex; flex-direction: column; gap: 0; }
+.av-page--docs .av-steps__item { display: flex; align-items: flex-start; gap: var(--av-space-3); padding: 0 0 var(--av-space-6); color: var(--av-gray-500); }
+.av-page--docs .av-steps__item:last-child { padding-bottom: 0; }
+.av-page--docs .av-steps__item:not(:last-child)::after { left: 15px; top: 32px; bottom: 0; height: auto; background: var(--av-gray-200); }
+.av-page--docs .av-steps__item[data-state="done"]:not(:last-child)::after { background: var(--av-chip-success-border); }
+.av-page--docs .av-steps__marker { border: 0; background: var(--av-gray-100); color: var(--av-gray-400); font-family: var(--av-font-body); font-size: 14px; font-weight: 600; }
+.av-page--docs .av-steps__item[data-state="done"] .av-steps__marker { background: var(--av-chip-success-bg); color: var(--av-chip-success-text); border: 1px solid var(--av-chip-success-border); }
+.av-page--docs .av-steps__item[data-state="current"] .av-steps__marker { background: var(--av-blue); color: var(--av-white); border: 0; box-shadow: 0 0 0 4px var(--av-blue-tint); }
+.av-page--docs .av-steps__text { display: flex; flex-direction: column; line-height: 1.35; padding-top: 4px; }
+.av-page--docs .av-steps__title { font-family: var(--av-font-body); font-size: var(--av-text-sm); font-weight: 600; color: var(--av-navy); }
+.av-page--docs .av-steps__status { font-family: var(--av-font-body); font-size: var(--av-text-xs); font-weight: 400; letter-spacing: normal; text-transform: none; color: var(--av-gray-500); }
+.av-page--docs .av-steps__item[data-state="current"] .av-steps__title,
+.av-page--docs .av-steps__item[data-state="current"] .av-steps__status { color: var(--av-blue); }
+
+/* ---------- Visor del documento: marco del original (.av-capture__stage: modules.css:434-454) ---------- */
+.av-page--docs .pt-doc { background: var(--av-gray-50); border: 1px dashed var(--av-gray-200); border-radius: var(--av-radius-lg); max-height: 360px; padding: var(--av-space-6); text-align: center; }
+.av-page--docs .pt-doc__card { box-shadow: 0 0 0 1px rgba(0, 12, 36, .06); }
+/* Sobre el fondo claro las esquinas blancas/cian de av-patterns.css no se distinguen. */
+.av-page--docs .pt-doc[data-state="searching"] .pt-doc__corners i { border-color: var(--av-blue); }
+.av-page--docs .pt-doc[data-state="ok"] .pt-doc__corners i { border-color: var(--av-success); }
+.av-page--docs .pt-doc[data-state="bad"] .pt-doc__corners i { border-color: var(--av-error); }
+.av-page--docs .pt-doc .pt-view__tag { color: var(--av-gray-600); }
+.av-page--docs .av-capture__ready { position: absolute; top: 12px; right: 12px; z-index: 2; display: inline-flex; align-items: center; gap: 6px; padding: 2px 8px; border-radius: var(--av-radius-full); background: var(--av-chip-success-bg); color: var(--av-chip-success-text); font-size: 11px; font-weight: 600; }
+
+/* ---------- Footer técnico (.av-techbar: modules.css:536-544) ---------- */
+.av-page--docs .av-techbar { display: flex; align-items: center; gap: var(--av-space-4); flex-wrap: wrap; padding-top: var(--av-space-3); border-top: 1px solid var(--av-gray-100); font-size: var(--av-text-xs); color: var(--av-gray-500); }
+.av-page--docs .av-techbar__item { display: inline-flex; align-items: center; gap: 6px; }
+.av-page--docs .av-techbar__item strong { color: var(--av-gray-600); font-weight: 600; }
+.av-page--docs .av-techbar__item:last-child { margin-left: auto; }
+.av-page--docs .av-techbar__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--av-success); }
+
+/* ---------- Responsive (modules.css:546-565) ---------- */
+@media (max-width: 1024px) {
+  .wiz-grid { grid-template-columns: minmax(0, 1fr); }
+  /* El original mantiene el stepper vertical con sus conectores (modules.css:546-550). */
+  .av-page--docs .av-steps__item:not(:last-child)::after { display: block; }
+}
 
 @media (max-width: 768px) {
-  .upload, .wiz-grid { grid-template-columns: minmax(0, 1fr); }
-}
-@media (max-width: 560px) {
+  .upload { grid-template-columns: minmax(0, 1fr); }
   .ocr-form__grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 480px) {
+  /* minmax(0,…) a ≤480: los mínimos de los tres botones suman 285px y empujan la página. */
+  .wiz-capture__actions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .wiz-capture__actions .av-btn { padding-inline: var(--av-space-2); font-size: var(--av-text-xs); }
+  /* .wiz-footer lo comparten Biometría y Electoral: el ajuste queda anclado a Documentos. */
+  .av-page--docs .wiz-footer { flex-direction: column; align-items: stretch; }
+  .av-page--docs .wiz-footer .av-btn { width: 100%; }
 }

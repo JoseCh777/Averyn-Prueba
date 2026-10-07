@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter, JetBrains_Mono, Plus_Jakarta_Sans } from 'next/font/google';
+import { Inter, JetBrains_Mono, Space_Grotesk } from 'next/font/google';
 import './globals.css';
 
 const bodyFont = Inter({
@@ -8,8 +8,10 @@ const bodyFont = Inter({
   display: 'swap',
 });
 
-const headingFont = Plus_Jakarta_Sans({
+/* Titulares: Space Grotesk ( DESIGN.md y frontend original averyn-frontend ). */
+const headingFont = Space_Grotesk({
   subsets: ['latin'],
+  weight: ['500', '600', '700'],
   variable: '--font-heading',
   display: 'swap',
 });

@@ -3,6 +3,12 @@ import type { AuthErrorCode } from "./types";
 const SECONDS_PER_MINUTE = 60;
 
 /**
+ * Aviso de éxito, idéntico al del frontend original (`login.js`): la persona ve que la
+ * autenticación funcionó y que viene la redirección, mientras el botón sigue bloqueado.
+ */
+export const LOGIN_SUCCESS_MESSAGE = "Autenticación exitosa. Redirigiendo al panel de control...";
+
+/**
  * Texto que ve la persona para un error de inicio de sesión.
  *
  * `AUTH_INVALID_CREDENTIALS` lleva siempre el mismo mensaje, sin decir si falló el

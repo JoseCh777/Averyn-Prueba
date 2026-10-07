@@ -8,6 +8,7 @@ import { personService } from "@/features/identity/services";
 
 import { connectedDeviceFor, methodAvailability, parseCaptureContext } from "../biometric-rules";
 import { captureHeading } from "../capture-state";
+import { METHOD_LABEL } from "../labels";
 import { BIOMETRICS_PATH, flowPath } from "../routes";
 import { biometricService } from "../services";
 import { CaptureStation } from "./capture-station";
@@ -39,13 +40,17 @@ export async function CaptureView({ params }: { params: CaptureSearchParams }) {
 
   if (context === undefined || person === undefined) {
     return (
-      <EmptyState
-        icon="camera-video"
-        title="No hay una captura en curso"
-        action={<ButtonLink href={BIOMETRICS_PATH}>Ir a Biometría</ButtonLink>}
-      >
-        Inicia un registro o una verificación desde el módulo de Biometría.
-      </EmptyState>
+      <div className="av-page av-page--narrow bio-page bio-page--capture" role="region" aria-label="Contenido de la captura biométrica">
+        <section className="av-surface av-surface--pad" aria-label="Sin captura en curso">
+          <EmptyState
+            icon="camera-video"
+            title="No hay una captura en curso"
+            action={<ButtonLink href={BIOMETRICS_PATH}>Ir a Biometría</ButtonLink>}
+          >
+            Inicia un registro o una verificación desde el módulo de Biometría.
+          </EmptyState>
+        </section>
+      </div>
     );
   }
 
@@ -55,8 +60,9 @@ export async function CaptureView({ params }: { params: CaptureSearchParams }) {
   const back = flowPath(context.mode, person.id);
 
   return (
-    <div className="av-page av-page--narrow">
+    <div className="av-page av-page--narrow bio-page bio-page--capture" role="region" aria-label="Contenido de la captura biométrica">
       <PageHeader
+        icon="person-bounding-box"
         crumbs={[{ label: "Dashboard", href: "/dashboard" }, { label: "Biometría", href: BIOMETRICS_PATH }, { label: heading.crumb }]}
         title={heading.title}
         description={heading.description}
@@ -71,8 +77,7 @@ export async function CaptureView({ params }: { params: CaptureSearchParams }) {
           key={`${context.mode}-${context.personId}-${context.method}`}
           context={context}
           person={person}
-          personDetail={`${formatDocument(person.document)} · ${AFFILIATION_LABEL[person.affiliation]}`}
-          deviceLabel={device.id}
+          personDetail={`${formatDocument(person.document)} · ${AFFILIATION_LABEL[person.affiliation]} · Método: ${METHOD_LABEL[context.method]}`}
         />
       ) : (
         <Alert tone="warning" title="No se puede capturar con este método">

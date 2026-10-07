@@ -4,9 +4,10 @@ import { useId, useRef, useState, type KeyboardEvent, type ReactNode } from "rea
 import { cn } from "@/lib/utils";
 import { Icon, type IconName } from "./icon";
 
-export function BrandChip({ logoSrc, alt = "Averyn" }: { logoSrc: string; alt?: string }) {
+/** Marca: enlaza al panel principal; el isotipo es decorativo, el enlace lleva la etiqueta accesible. */
+export function BrandChip({ logoSrc }: { logoSrc: string }) {
   // eslint-disable-next-line @next/next/no-img-element
-  return <span className="av-brandchip"><img src={logoSrc} alt={alt} /></span>;
+  return <Link href="/dashboard" className="av-brandchip" aria-label="Averyn — Inicio"><img src={logoSrc} alt="" /></Link>;
 }
 
 export type DockItem = { label: string; href?: string; current?: boolean; icon?: IconName };
@@ -16,10 +17,11 @@ export function Dock({ items, label = "Módulos" }: { items: DockItem[]; label?:
   return (
     <nav className="av-dock" aria-label={label}>
       {items.map((it) => {
-        const content = <>{it.icon && <Icon name={it.icon} />}{it.label}</>;
-        if (!it.href) return <span key={it.label} className="soon" title="Próximamente" aria-disabled="true">{content}</span>;
+        // El nombre va en un <span> para poder recortarlo (solo iconos) en pantallas estrechas sin perderlo del DOM.
+        const content = <>{it.icon && <Icon name={it.icon} />}<span>{it.label}</span></>;
+        if (!it.href) return <span key={it.label} className="soon" title={`${it.label} · Próximamente`} aria-disabled="true">{content}</span>;
         const Anchor = it.href.startsWith("/") ? Link : "a";
-        return <Anchor key={it.label} href={it.href} aria-current={it.current ? "page" : undefined}>{content}</Anchor>;
+        return <Anchor key={it.label} href={it.href} title={it.label} aria-current={it.current ? "page" : undefined}>{content}</Anchor>;
       })}
     </nav>
   );

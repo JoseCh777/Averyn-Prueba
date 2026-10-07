@@ -4,7 +4,6 @@ import { PageHeader } from "@/components/layout/page-header";
 import { ButtonLink } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 
-import { formatIsoDate } from "../person-rules";
 import { personService } from "../services";
 import { PersonAvatar } from "./person-avatar";
 import { AffiliationTag, StatusChip } from "./person-badges";
@@ -13,6 +12,8 @@ import { AffiliationTag, StatusChip } from "./person-badges";
  * Ficha de una persona: nombre, documento, afiliación y estado de verificación.
  *
  * Si la persona no existe (o se eliminó) muestra la pantalla «no encontrado» de la ruta.
+ * La tarjeta enseña lo mismo que la ficha original (dashboard-identity.js:247-260): perfil,
+ * las filas `Afiliación` y `Estado`, y el enlace «Volver al listado» dentro de la tarjeta.
  *
  * @param props - El id de la persona, tomado de la URL.
  * @returns La pantalla de detalle.
@@ -22,9 +23,10 @@ export async function PersonDetailView({ personId }: { personId: string }) {
   if (person === undefined) notFound();
 
   return (
-    <div className="av-page">
+    <div className="av-page" role="region" aria-label="Detalle de persona">
       <PageHeader
-        crumbs={[{ label: "Dashboard", href: "/dashboard" }, { label: "Identidad", href: "/identity" }, { label: person.name }]}
+        icon="person-vcard"
+        crumbs={[{ label: "Dashboard", href: "/dashboard" }, { label: "Identidad", href: "/identity" }, { label: "Detalle" }]}
         title="Detalle de persona"
         description="Información de la persona y su estado de verificación."
         actions={
@@ -55,23 +57,10 @@ export async function PersonDetailView({ personId }: { personId: string }) {
               <StatusChip status={person.status} />
             </dd>
           </div>
-          {person.birthDate === undefined ? null : (
-            <div>
-              <dt>Fecha de nacimiento</dt>
-              <dd>{formatIsoDate(person.birthDate)}</dd>
-            </div>
-          )}
-          {person.email === undefined ? null : (
-            <div>
-              <dt>Correo</dt>
-              <dd>{person.email}</dd>
-            </div>
-          )}
-          <div>
-            <dt>Identificador</dt>
-            <dd className="av-who__sub">{person.id}</dd>
-          </div>
         </dl>
+        <ButtonLink href="/identity" className="av-detail-back">
+          <Icon name="arrow-left" /> Volver al listado
+        </ButtonLink>
       </section>
     </div>
   );

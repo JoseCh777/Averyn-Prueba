@@ -2,7 +2,7 @@ import { AFFILIATION_LABEL } from "@/features/identity/labels";
 import { parseAffiliation } from "@/features/identity/person-rules";
 import type { Person } from "@/features/identity/types";
 
-import { countParticipants, formatDateRange } from "../election-rules";
+import { formatDate } from "../election-rules";
 import { INSTITUTION_LABEL, PROCESS_KIND_LABEL, SETTING_SWITCHES, VOTING_MODE_LABEL, VOTING_TYPE_LABEL } from "../labels";
 import type { ElectionSettings, GeneralInfoInput, InstitutionKind, ProcessKind } from "../types";
 
@@ -11,6 +11,8 @@ type ReviewStepProps = {
   /** Configuración ya validada. */
   settings: ElectionSettings;
   affiliation: string;
+  /** Búsqueda aplicada en el paso anterior: la revisión la muestra tal cual la pide el original. */
+  query: string;
   people: readonly Person[];
   institution: InstitutionKind;
   kind: ProcessKind;
@@ -27,19 +29,19 @@ function Row({ term, children }: { term: string; children: React.ReactNode }) {
 }
 
 /**
- * Paso 4 del asistente: el resumen de lo que se va a crear, en tres bloques.
+ * Paso 4 del asistente: el resumen de lo que se va a crear, en tres bloques con las filas del original.
  *
  * Es solo lectura: para cambiar algo se vuelve a un paso anterior (los datos no se pierden).
  *
  * @param props - Los datos ya validados de los tres pasos anteriores.
  * @returns El resumen.
  */
-export function ReviewStep({ general, settings, affiliation, people, institution, kind }: ReviewStepProps) {
+export function ReviewStep({ general, settings, affiliation, query, people, institution, kind }: ReviewStepProps) {
   const chosen = parseAffiliation(affiliation) ?? "all";
-  const counts = countParticipants(people, chosen);
+  const search = query.trim() === "" ? "Ninguna" : query.trim();
   return (
     <div className="elec-review">
-      <section className="elec-review__block" aria-labelledby="review-general">
+      <section className="elec-review__block av-surface av-surface--pad" aria-labelledby="review-general">
         <h3 id="review-general" className="elec-subtitle">
           Información general
         </h3>
@@ -48,11 +50,12 @@ export function ReviewStep({ general, settings, affiliation, people, institution
           <Row term="Descripción">{general.description.trim()}</Row>
           <Row term="Institución">{INSTITUTION_LABEL[institution]}</Row>
           <Row term="Tipo de proceso">{PROCESS_KIND_LABEL[kind]}</Row>
-          <Row term="Fechas">{formatDateRange(general.startDate, general.endDate)}</Row>
+          <Row term="Fecha de inicio">{formatDate(general.startDate)}</Row>
+          <Row term="Fecha de finalización">{formatDate(general.endDate)}</Row>
         </dl>
       </section>
 
-      <section className="elec-review__block" aria-labelledby="review-settings">
+      <section className="elec-review__block av-surface av-surface--pad" aria-labelledby="review-settings">
         <h3 id="review-settings" className="elec-subtitle">
           Configuración
         </h3>
@@ -68,14 +71,15 @@ export function ReviewStep({ general, settings, affiliation, people, institution
         </dl>
       </section>
 
-      <section className="elec-review__block" aria-labelledby="review-participants">
+      <section className="elec-review__block av-surface av-surface--pad" aria-labelledby="review-participants">
         <h3 id="review-participants" className="elec-subtitle">
           Participantes
         </h3>
         <dl className="av-detail">
-          <Row term="Afiliación convocada">{chosen === "all" ? "Todas" : AFFILIATION_LABEL[chosen]}</Row>
-          <Row term="Convocados">{counts.eligible}</Row>
-          <Row term="Podrán votar (verificados)">{counts.verified}</Row>
+          <Row term="Tipo de participante">Padrón de participantes</Row>
+          <Row term="Búsqueda aplicada">{search}</Row>
+          <Row term="Filtro de afiliación">{chosen === "all" ? "Todas" : AFFILIATION_LABEL[chosen]}</Row>
+          <Row term="Cantidad estimada">{people.length}</Row>
         </dl>
       </section>
     </div>

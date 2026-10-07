@@ -50,7 +50,7 @@ export function OcrResultButton({ documentId, kindLabel, fields, confirmed }: Oc
 
   return (
     <>
-      <IconButton aria-label={`Ver resultado OCR de ${kindLabel}`} onClick={openDialog}>
+      <IconButton aria-label={`Ver resultado OCR de ${kindLabel}`} title="Ver resultado" onClick={openDialog}>
         <Icon name="eye" />
       </IconButton>
       <Modal
@@ -68,6 +68,9 @@ export function OcrResultButton({ documentId, kindLabel, fields, confirmed }: Oc
           </>
         }
       >
+        <button type="button" className="av-modal__close" aria-label="Cerrar" onClick={() => setOpen(false)}>
+          <Icon name="x-lg" />
+        </button>
         <OcrFieldsForm review={review} idPrefix={`ocr-${documentId}`} />
       </Modal>
     </>

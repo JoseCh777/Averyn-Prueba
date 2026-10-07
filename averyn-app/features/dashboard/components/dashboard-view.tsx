@@ -28,16 +28,18 @@ export async function DashboardView() {
   return (
     <div className="av-dashboard">
       <DashboardHero />
-      <section aria-label="Indicadores principales">
-        <KpiRow>
-          {summary.kpis.map((kpi) => (
-            <Kpi key={kpi.id} label={kpi.label} value={kpi.value} delta={kpi.delta} tone={toKpiTone(kpi)} note={kpi.note} />
-          ))}
-        </KpiRow>
-      </section>
-      <div className="av-dashboard__split">
-        <QuickAccessGrid />
-        <RecentActivity summary={summary} />
+      <div className="av-dashboard__wrap">
+        <section aria-label="Indicadores principales">
+          <KpiRow>
+            {summary.kpis.map((kpi) => (
+              <Kpi key={kpi.id} label={kpi.label} value={kpi.value} delta={kpi.delta} tone={toKpiTone(kpi)} note={kpi.note} />
+            ))}
+          </KpiRow>
+        </section>
+        <div className="av-dashboard__split">
+          <QuickAccessGrid />
+          <RecentActivity summary={summary} />
+        </div>
       </div>
     </div>
   );

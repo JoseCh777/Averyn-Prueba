@@ -38,7 +38,8 @@ function BrokenArcs() {
  */
 export function ErrorPage({ variant, path, onRetry, homeHref = "/", panelHref }: { variant: ErrorVariant; path?: string; onRetry?: () => void; homeHref?: string; panelHref?: string }) {
   const c = COPY[variant];
-  const [online, setOnline] = useState(true);
+  // null = aún no se conoce el estado real (evita que el primer pintado del SSR mienta).
+  const [online, setOnline] = useState<boolean | null>(null);
   const retry = onRetry ?? (() => window.location.reload());
 
   useEffect(() => {
@@ -76,7 +77,12 @@ export function ErrorPage({ variant, path, onRetry, homeHref = "/", panelHref }:
                   {panelHref && <Link className="er-btn er-btn--ghost" href={panelHref}>Ir al panel →</Link>}
                 </>
               )}
-              {variant === "403" && <Link className="er-btn er-btn--primary" href={homeHref} onClick={(e) => { if (window.history.length > 1) { e.preventDefault(); window.history.back(); } }}>Volver</Link>}
+              {variant === "403" && (
+                <>
+                  <Link className="er-btn er-btn--primary" href={homeHref} onClick={(e) => { if (window.history.length > 1) { e.preventDefault(); window.history.back(); } }}>Volver</Link>
+                  {panelHref && <Link className="er-btn er-btn--ghost" href={panelHref}>Ir al panel →</Link>}
+                </>
+              )}
               {(variant === "500" || variant === "offline") && (
                 <>
                   <button type="button" className="er-btn er-btn--primary" onClick={retry}>Reintentar</button>
@@ -85,7 +91,11 @@ export function ErrorPage({ variant, path, onRetry, homeHref = "/", panelHref }:
               )}
               {variant === "mantenimiento" && <button type="button" className="er-btn er-btn--primary" onClick={retry}>Reintentar</button>}
             </div>
-            {variant === "offline" && <p className="er-status" role="status">{online ? "Parece que la conexión volvió. Pulsa Reintentar." : "Esperando conexión…"}</p>}
+            {variant === "offline" && (
+              <p className="er-status" role="status" hidden={online === null}>
+                {online === null ? "" : online ? "Parece que la conexión volvió. Pulsa Reintentar." : "Esperando conexión…"}
+              </p>
+            )}
           </div>
           <div className="er-fig"><BrokenArcs /></div>
         </main>

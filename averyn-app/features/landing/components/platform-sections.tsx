@@ -12,6 +12,7 @@ export function TechnologySection() {
     <section id="tecnologia" className="mn-section mn-soft" aria-labelledby="tecnologia-title">
       <Reveal className="mn-wrap mn-grid">
         <div className="mn-tec__head">
+          <span className="mn-label mn-mono">Tecnología</span>
           <h2 className="mn-title" id="tecnologia-title">
             Tecnología detrás de la plataforma.
           </h2>
@@ -39,6 +40,7 @@ export function ProcessSection() {
     <section id="proceso" className="mn-section" aria-labelledby="proceso-title">
       <Reveal className="mn-wrap mn-grid">
         <div className="mn-proc__head">
+          <span className="mn-label mn-mono">Proceso</span>
           <h2 className="mn-title" id="proceso-title">
             Cómo funciona.
           </h2>
@@ -67,6 +69,7 @@ export function ArchitectureSection() {
     <section id="arquitectura" className="mn-section mn-soft" aria-labelledby="arquitectura-title">
       <Reveal className="mn-wrap mn-grid">
         <div className="mn-arq__head">
+          <span className="mn-label mn-mono">Arquitectura</span>
           <h2 className="mn-title" id="arquitectura-title">
             Arquitectura orientada a dominio.
           </h2>
@@ -107,6 +110,7 @@ export function SecuritySection() {
     <section id="seguridad" className="mn-section" aria-labelledby="seguridad-title">
       <Reveal className="mn-wrap mn-grid">
         <div className="mn-seg__side">
+          <span className="mn-label mn-mono">Seguridad</span>
           <h2 className="mn-title" id="seguridad-title">
             Seguridad por diseño.
           </h2>

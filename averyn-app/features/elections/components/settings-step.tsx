@@ -66,10 +66,8 @@ export function SettingsStep({ values, errors, onChange }: SettingsStepProps) {
       <div className="elec-switches">
         {SETTING_SWITCHES.map((option) => (
           <div key={option.key} className="sw-row">
-            <Switch label={option.label} checked={values[option.key]} onCheckedChange={(checked) => onChange({ [option.key]: checked })} />
-            <span aria-hidden="true" onClick={() => onChange({ [option.key]: !values[option.key] })}>
-              {option.label}
-            </span>
+            <Switch id={`election-switch-${option.key}`} label={option.label} checked={values[option.key]} onCheckedChange={(checked) => onChange({ [option.key]: checked })} />
+            <label htmlFor={`election-switch-${option.key}`}>{option.label}</label>
           </div>
         ))}
       </div>

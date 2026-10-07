@@ -60,9 +60,17 @@ export function useHeroScroll() {
       );
     };
 
+    /* La escala final del logo se calcula siempre: también con movimiento reducido
+       (igual que home.js del original, donde fitLogo corre antes de cualquier rama). */
+    const fitLogo = () => {
+      lockup.style.setProperty("--sf", finalLogoScale(lockup.offsetWidth, window.innerWidth).toFixed(4));
+    };
+    fitLogo();
+    window.addEventListener("resize", fitLogo);
+
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       apply(HERO_FINAL_PHASES);
-      return;
+      return () => window.removeEventListener("resize", fitLogo);
     }
 
     let frame = 0;
@@ -74,18 +82,14 @@ export function useHeroScroll() {
     const requestUpdate = () => {
       if (frame === 0) frame = requestAnimationFrame(update);
     };
-    const fitLogo = () => {
-      lockup.style.setProperty("--sf", finalLogoScale(lockup.offsetWidth, window.innerWidth).toFixed(4));
-      requestUpdate();
-    };
 
-    fitLogo();
     update();
     window.addEventListener("scroll", requestUpdate, { passive: true });
-    window.addEventListener("resize", fitLogo);
+    window.addEventListener("resize", requestUpdate);
     return () => {
       window.removeEventListener("scroll", requestUpdate);
       window.removeEventListener("resize", fitLogo);
+      window.removeEventListener("resize", requestUpdate);
       if (frame !== 0) cancelAnimationFrame(frame);
     };
   }, []);

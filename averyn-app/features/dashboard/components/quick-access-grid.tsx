@@ -1,6 +1,5 @@
 import { APP_MODULES } from "@/components/layout/modules";
 import { Tile } from "@/components/ui/display";
-import { Chip } from "@/components/ui/feedback";
 
 import { QUICK_ACCESS, resolveQuickAccessHref } from "../quick-access";
 
@@ -30,7 +29,7 @@ export function QuickAccessGrid() {
                 title={access.title}
                 description={access.description}
                 href={href}
-                tag={href === undefined ? <Chip tone="neutral">Próximamente</Chip> : undefined}
+                tag={href === undefined ? "Próximamente" : undefined}
               />
             </li>
           );

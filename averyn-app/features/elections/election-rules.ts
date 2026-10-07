@@ -62,27 +62,27 @@ export function validateGeneralInfo(raw: GeneralInfoInput, context: { existingNa
   const institution = INSTITUTION_KINDS.find((option) => option === raw.institution);
   const kind = PROCESS_KINDS.find((option) => option === raw.kind);
 
-  if (name === "") errors.name = "Escribe el nombre del proceso.";
+  if (name === "") errors.name = "Completa este campo para continuar.";
   else if (name.length > NAME_MAX_LENGTH) errors.name = `El nombre no puede pasar de ${NAME_MAX_LENGTH} caracteres.`;
   else if (context.existingNames.some((existing) => normalizeText(existing.trim()) === normalizeText(name))) {
     errors.name = "Ya existe un proceso electoral con este nombre.";
   }
 
-  if (description === "") errors.description = "Escribe una descripción.";
+  if (description === "") errors.description = "Completa este campo para continuar.";
   else if (description.length > DESCRIPTION_MAX_LENGTH) errors.description = `La descripción no puede pasar de ${DESCRIPTION_MAX_LENGTH} caracteres.`;
 
-  if (institution === undefined) errors.institution = "Selecciona una institución.";
-  if (kind === undefined) errors.kind = "Selecciona un tipo de proceso.";
+  if (institution === undefined) errors.institution = "Completa este campo para continuar.";
+  if (kind === undefined) errors.kind = "Completa este campo para continuar.";
 
   const startOk = isIsoDate(raw.startDate);
   const endOk = isIsoDate(raw.endDate);
-  if (raw.startDate === "") errors.startDate = "Elige la fecha de inicio.";
+  if (raw.startDate === "") errors.startDate = "Completa este campo para continuar.";
   else if (!startOk) errors.startDate = "La fecha de inicio no es válida.";
   else if (raw.startDate < context.today) errors.startDate = "La fecha de inicio no puede ser anterior a hoy.";
 
-  if (raw.endDate === "") errors.endDate = "Elige la fecha de finalización.";
+  if (raw.endDate === "") errors.endDate = "Completa este campo para continuar.";
   else if (!endOk) errors.endDate = "La fecha de finalización no es válida.";
-  else if (startOk && raw.endDate < raw.startDate) errors.endDate = "La fecha de finalización no puede ser anterior a la de inicio.";
+  else if (startOk && raw.endDate < raw.startDate) errors.endDate = "La fecha de finalización debe ser posterior a la fecha de inicio.";
 
   if (Object.keys(errors).length > 0 || institution === undefined || kind === undefined) return { ok: false, errors };
   return { ok: true, value: { name, description, institution, kind, startDate: raw.startDate, endDate: raw.endDate } };
@@ -105,10 +105,10 @@ export function validateSettings(raw: SettingsInput): SettingsValidation {
   const mode: VotingMode | undefined = VOTING_MODES.find((option) => option === raw.mode);
   const choices = Number(raw.choicesPerVote);
 
-  if (votingType === undefined) errors.votingType = "Selecciona un tipo de votación.";
+  if (votingType === undefined) errors.votingType = "Completa este campo para continuar.";
   if (mode === undefined) errors.mode = "Selecciona una modalidad.";
   if (votingType !== "single" && (!Number.isInteger(choices) || choices < 1 || choices > MAX_CHOICES)) {
-    errors.choicesPerVote = `Elige entre 1 y ${MAX_CHOICES} opciones.`;
+    errors.choicesPerVote = "Selecciona al menos una opción.";
   }
 
   if (Object.keys(errors).length > 0 || votingType === undefined || mode === undefined) return { ok: false, errors };
@@ -161,6 +161,17 @@ export function electionInitials(name: string): string {
 }
 
 /**
+ * Fecha en formato de la interfaz de Averyn (`aaaa-mm-dd` → `dd/mm/aaaa`).
+ *
+ * @param iso - Fecha en formato del campo de fecha; vacía, como lo pinta el original.
+ * @returns La fecha legible.
+ */
+export function formatDate(iso: string): string {
+  if (iso === "") return "-";
+  return iso.split("-").reverse().join("/");
+}
+
+/**
  * Rango de fechas para el listado.
  *
  * @param startDate - `aaaa-mm-dd`.
@@ -168,8 +179,7 @@ export function electionInitials(name: string): string {
  * @returns Por ejemplo `15/10/2026 – 20/10/2026`.
  */
 export function formatDateRange(startDate: string, endDate: string): string {
-  const format = (iso: string) => iso.split("-").reverse().join("/");
-  return `${format(startDate)} – ${format(endDate)}`;
+  return `${formatDate(startDate)} – ${formatDate(endDate)}`;
 }
 
 /** Lo que envía el asistente al crear el proceso, ya con su forma comprobada. */

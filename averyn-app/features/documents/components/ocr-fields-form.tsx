@@ -69,27 +69,34 @@ export function OcrFieldsForm({ review, errors = {}, idPrefix }: OcrFieldsFormPr
         {hasReading ? describePendingReviews(review.pending) : "Aún no hay datos leídos. Puedes escribirlos a mano."}
       </p>
       <div className="ocr-form__grid">
-        {review.fields.map((field) => (
-          <Field
-            key={field.key}
-            id={`${idPrefix}-${field.key}`}
-            label={OCR_FIELD_LABEL[field.key]}
-            error={errors[field.key]}
-            aside={<ConfidenceBadge field={field} state={review.stateOf(field)} />}
-          >
-            {(a) => (
-              <Input
-                {...a}
-                autoComplete="off"
-                value={review.values[field.key]}
-                inputMode={field.key === "documentNumber" ? "numeric" : undefined}
-                placeholder={field.key === "birthDate" ? "dd/mm/aaaa" : undefined}
-                onChange={(event) => review.setValue(field.key, event.target.value)}
-                onBlur={() => review.markSeen(field.key)}
-              />
-            )}
-          </Field>
-        ))}
+        {review.fields.map((field) => {
+          const value = review.values[field.key];
+          const filled = value.trim().length > 0;
+          return (
+            <Field
+              key={field.key}
+              id={`${idPrefix}-${field.key}`}
+              label={OCR_FIELD_LABEL[field.key]}
+              error={errors[field.key]}
+              aside={<ConfidenceBadge field={field} state={review.stateOf(field)} />}
+            >
+              {(a) => (
+                <span className={filled ? "av-input-wrap--ocr" : undefined}>
+                  <Input
+                    {...a}
+                    autoComplete="off"
+                    value={value}
+                    inputMode={field.key === "documentNumber" ? "numeric" : undefined}
+                    placeholder={field.key === "birthDate" ? "dd/mm/aaaa" : undefined}
+                    onChange={(event) => review.setValue(field.key, event.target.value)}
+                    onBlur={() => review.markSeen(field.key)}
+                  />
+                  {filled && <Icon name="check-circle-fill" className="av-input-wrap__check" />}
+                </span>
+              )}
+            </Field>
+          );
+        })}
       </div>
     </div>
   );

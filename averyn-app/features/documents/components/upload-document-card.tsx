@@ -78,7 +78,7 @@ export function UploadDocumentCard() {
 
         <div>
           <label
-            className={cn("up__drop", dragging && "is-over")}
+            className={cn("av-drop", dragging && "is-over")}
             htmlFor={inputId}
             onDragEnter={(event) => { event.preventDefault(); setDragging(true); }}
             onDragOver={(event) => { event.preventDefault(); setDragging(true); }}
@@ -89,12 +89,14 @@ export function UploadDocumentCard() {
               choose(event.dataTransfer.files[0], kind);
             }}
           >
-            <Icon name="cloud-arrow-up" />
+            <span className="ic" aria-hidden="true">
+              <Icon name="cloud-arrow-up" />
+            </span>
             <span className="up__t">
               <b>Sube la foto de tu documento</b> arrastrándola o eligiéndola desde tu equipo
             </span>
             <span className="up__h" id={hintId}>
-              JPG, PNG o PDF · máx. 10 MB
+              JPG, PNG o PDF — máx. 10MB
             </span>
           </label>
           <input

@@ -1,15 +1,23 @@
 /* Dashboard base: bienvenida, mosaico de accesos y reparto en dos columnas.
    Los indicadores (av-kpis), mosaicos (av-tile) y el panel de actividad (av-panel) son del Design System. */
 
-/* El cielo de la bienvenida sube hasta detrás de la cabecera y se funde con el blanco. */
-body:has(.av-dashboard) { background: linear-gradient(180deg, var(--av-sky) 0, var(--av-blue-tint) 22rem, #fff 40rem) no-repeat; }
+/* Cuerpo del panel: blanco sólido con la tipografía del sistema (el cielo vive en el hero). */
+body:has(.av-dashboard) { background: #fff; color: var(--av-navy); font-family: var(--av-font-body); -webkit-font-smoothing: antialiased; }
+body:has(.av-dashboard) :focus-visible { outline: 2px solid var(--av-blue); outline-offset: 3px; }
+/* El hero aporta el respiro superior: el lienzo no necesita su propio padding ni límite de ancho. */
+body:has(.av-dashboard) .av-shell__main { width: 100%; max-width: none; margin: 0; padding-top: 0; min-height: 0; }
 
-.av-dashboard__hero { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 2rem; padding-block: clamp(1rem, 2.5vw, 2rem) clamp(1.5rem, 3.5vw, 2.75rem); }
-.av-dashboard__title { margin: 0; font-family: var(--av-font-heading); font-weight: 500; font-size: clamp(2.2rem, 4.4vw, 3.6rem); line-height: 1.04; letter-spacing: -.02em; word-spacing: .06em; color: var(--av-navy); text-wrap: balance; }
+/* Contenedor compartido (dh-wrap): 1240px con aire a los lados. */
+.av-dashboard__wrap { width: min(100%, 1240px); margin-inline: auto; padding-inline: clamp(1.25rem, 4vw, 3rem); }
+
+/* El cielo de la bienvenida sube hasta detrás de la cabecera y se funde con el blanco. */
+.av-dashboard__hero { padding: calc(var(--navbar-height) + clamp(3rem, 6vw, 5rem)) 0 clamp(3rem, 6vw, 5rem); background: linear-gradient(180deg, var(--av-sky) 0%, var(--av-blue-tint) 55%, #fff 100%); }
+.av-dashboard__hero-inner { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 2rem; }
+.av-dashboard__title { margin: 0; font-family: var(--av-font-heading); font-weight: 500; font-size: clamp(2.4rem, 5vw, 4.2rem); line-height: 1.04; letter-spacing: -.03em; color: var(--av-navy); text-wrap: balance; }
 .av-dashboard__lead { margin: 1.2rem 0 0; max-width: 52ch; font-size: 1.1rem; line-height: 1.6; color: var(--av-gray-600); }
 .av-dashboard__figure { width: min(30vw, 400px); height: auto; display: block; overflow: visible; }
 
-.av-dashboard__split { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(2.5rem, 6vw, 6rem); align-items: start; padding-block: clamp(3rem, 7vw, 6rem); }
+.av-dashboard__split { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(2.5rem, 6vw, 6rem); align-items: start; padding-block: clamp(4rem, 8vw, 7rem); }
 .av-dashboard__head { margin-bottom: 1.6rem; }
 .av-dashboard__head h2 { margin: 0; font-family: var(--av-font-heading); font-weight: 500; font-size: 1.75rem; letter-spacing: -.025em; color: var(--av-navy); }
 .av-dashboard__head p { margin: .3rem 0 0; font-size: .95rem; color: var(--av-gray-500); }
@@ -20,6 +28,9 @@ body:has(.av-dashboard) { background: linear-gradient(180deg, var(--av-sky) 0, v
 .av-dashboard__cell--large, .av-dashboard__cell--small { grid-column: span 3; }
 .av-dashboard__cell--medium { grid-column: span 2; }
 .av-dashboard__cell--large > .av-tile { min-height: 230px; padding: 1.7rem; }
+.av-dashboard__cell--large > .av-tile .av-tile__icon { width: 60px; height: 60px; font-size: 1.7rem; }
+.av-dashboard__cell--large > .av-tile .av-tile__title { font-size: 1.8rem; }
+.av-dashboard__cell--large > .av-tile .av-tile__desc { font-size: 1rem; max-width: 30ch; }
 .av-dashboard__cell--medium > .av-tile { min-height: 180px; }
 .av-dashboard__cell--small > .av-tile { min-height: 150px; }
 
@@ -32,16 +43,25 @@ body:has(.av-dashboard) { background: linear-gradient(180deg, var(--av-sky) 0, v
   .av-kpi:nth-child(n+3) { border-top: 1px solid var(--av-hairline); }
 }
 @media (max-width: 700px) {
-  .av-dashboard__hero { grid-template-columns: 1fr; }
+  .av-dashboard__hero-inner { grid-template-columns: 1fr; }
   .av-dashboard__figure { display: none; }
   .av-dashboard__mosaic { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .av-dashboard__cell--large, .av-dashboard__cell--small { grid-column: span 2; }
   .av-dashboard__cell--medium { grid-column: span 1; }
   /* Tres accesos medianos en dos columnas: el último ocupa la fila completa para no quedar solo. */
   .av-dashboard__cell--medium:nth-child(5) { grid-column: span 2; }
+  .av-dashboard__cell--medium > .av-tile { min-height: 160px; padding: 1.1rem; }
 }
 @media (max-width: 560px) {
-  .av-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .av-kpi { padding: 1.1rem .9rem; }
-  .av-kpi__value { font-size: 2.2rem; }
+  .av-kpis { grid-template-columns: 1fr; }
+  .av-kpi { border-left: 0; padding-left: 0; padding-block: 1.3rem; }
+  .av-kpi + .av-kpi { border-top: 1px solid var(--av-hairline); }
+  .av-dashboard__cell--large > .av-tile { min-height: 190px; }
+  .av-bar { grid-template-columns: 5rem minmax(0, 1fr) 1.4rem; }
+}
+
+/* El original silencia transiciones y barras con prefers-reduced-motion (a11y). */
+@media (prefers-reduced-motion: reduce) {
+  body:has(.av-dashboard) *, body:has(.av-dashboard) *::before, body:has(.av-dashboard) *::after { transition-duration: .01ms !important; }
+  .av-bar__track i { animation: none; }
 }

@@ -16,6 +16,7 @@ export function TeamSection() {
     <section id="equipo" className="mn-section mn-soft" aria-labelledby="equipo-title">
       <Reveal className="mn-wrap mn-grid">
         <div className="mn-eq__head">
+          <span className="mn-label mn-mono">Equipo</span>
           <h2 className="mn-title" id="equipo-title">
             Construido desde la ingeniería y la investigación.
           </h2>

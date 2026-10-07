@@ -31,10 +31,11 @@ export async function FlowView({ mode, personId }: { mode: CaptureMode; personId
   const copy = COPY[mode];
 
   return (
-    <div className="av-page">
+    <div className="av-page bio-page bio-page--flow" role="region" aria-label={`Contenido de ${copy.title}`}>
       <PageHeader
         crumbs={[{ label: "Dashboard", href: "/dashboard" }, { label: "Biometría", href: BIOMETRICS_PATH }, { label: copy.title }]}
         title={copy.title}
+        icon={mode === "enrollment" ? "person-plus" : "shield-check"}
         description={copy.description}
         actions={
           <ButtonLink href={BIOMETRICS_PATH}>

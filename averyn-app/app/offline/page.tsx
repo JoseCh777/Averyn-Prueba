@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { ErrorPage } from "@/components/errors/error-page";
 
-export const metadata: Metadata = { title: "Sin conexión · Averyn" };
+export const metadata: Metadata = { title: "Sin conexión · Averyn", robots: "noindex" };
 
 /**
  * Página sin conexión: avisa y se recarga sola cuando vuelve la red.

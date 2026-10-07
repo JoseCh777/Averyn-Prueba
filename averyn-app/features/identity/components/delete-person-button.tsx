@@ -29,8 +29,8 @@ export function DeletePersonButton({ personId, personName }: { personId: string;
 
   return (
     <>
-      <IconButton aria-label={`Eliminar a ${personName}`} onClick={() => setOpen(true)}>
-        <Icon name="trash3" />
+      <IconButton aria-label={`Eliminar a ${personName}`} title="Eliminar" onClick={() => setOpen(true)}>
+        <Icon name="trash" />
       </IconButton>
       <Modal
         open={open}

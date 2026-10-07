@@ -35,6 +35,7 @@ export function CapabilitiesSection() {
     <section id="capacidades" className="mn-section mn-dark" aria-labelledby="capacidades-title">
       <Reveal className="mn-wrap mn-grid">
         <div className="mn-cap__side">
+          <span className="mn-label mn-mono">Capacidades</span>
           <h2 className="mn-title" id="capacidades-title">
             Capacidades para operar con claridad.
           </h2>
@@ -69,6 +70,7 @@ export function SolutionsSection() {
     <section id="soluciones" className="mn-section" aria-labelledby="soluciones-title">
       <Reveal className="mn-wrap mn-grid">
         <div className="mn-sol__head">
+          <span className="mn-label mn-mono">Soluciones</span>
           <h2 className="mn-title" id="soluciones-title">
             Soluciones para cada institución.
           </h2>

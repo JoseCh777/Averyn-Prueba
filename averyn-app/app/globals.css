@@ -12,6 +12,7 @@
 @import "./styles/av-login.css";
 @import "./styles/av-dashboard.css";
 @import "./styles/av-page.css";
+@import "./styles/av-identity.css";
 @import "./styles/av-documents.css";
 @import "./styles/av-biometrics.css";
 @import "./styles/av-elections.css";
@@ -240,7 +241,7 @@
 
 /* Tipografias: next/font (app/layout.tsx) entrega --font-heading, --font-body y --font-mono; los tokens las usan primero. */
 :root {
-  --av-font-heading: var(--font-heading), 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --av-font-heading: var(--font-heading), 'Space Grotesk', 'Inter', system-ui, sans-serif;
   --av-font-body: var(--font-body), 'Inter', system-ui, -apple-system, sans-serif;
   --av-font-mono: var(--font-mono), 'JetBrains Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
 
@@ -324,10 +325,6 @@
   display: flex;
   flex-direction: column;
   gap: var(--av-space-3);
-}
-
-.av-section-title {
-  font-size: 1.25rem;
 }
 
 .av-text {

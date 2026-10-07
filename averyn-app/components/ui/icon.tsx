@@ -1,5 +1,6 @@
 import type { ComponentType, SVGProps } from "react";
 import {
+  Activity,
   ArrowDown,
   ArrowDownShort,
   ArrowDownUp,
@@ -56,6 +57,7 @@ import {
   FileEarmarkText,
   Files,
   Fingerprint,
+  Funnel,
   Gear,
   GraphUpArrow,
   Grid,
@@ -98,6 +100,7 @@ import {
   Stars,
   Table,
   ThreeDots,
+  Trash,
   Trash3,
   Type,
   Upload,
@@ -112,6 +115,7 @@ import { cn } from "@/lib/utils";
    (tree-shaking) y se llaman por el mismo nombre que en la documentación (`bi-check-circle` → name="check-circle").
    Registro de iconos Bootstrap Icons (SVG). Lineicons queda como opción futura (ver ADR-011). */
 const ICONS = {
+  "activity": Activity,
   "arrow-down": ArrowDown,
   "arrow-down-short": ArrowDownShort,
   "arrow-down-up": ArrowDownUp,
@@ -168,6 +172,7 @@ const ICONS = {
   "file-earmark-text": FileEarmarkText,
   "files": Files,
   "fingerprint": Fingerprint,
+  "funnel": Funnel,
   "gear": Gear,
   "graph-up-arrow": GraphUpArrow,
   "grid": Grid,
@@ -210,6 +215,7 @@ const ICONS = {
   "stars": Stars,
   "table": Table,
   "three-dots": ThreeDots,
+  "trash": Trash,
   "trash3": Trash3,
   "type": Type,
   "upload": Upload,

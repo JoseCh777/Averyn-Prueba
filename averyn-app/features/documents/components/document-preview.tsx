@@ -28,6 +28,10 @@ export function DocumentPreview({ state, source }: { state: ScanState; source?: 
   const message = MESSAGES[state];
   return (
     <div className="pt-doc" data-state={VIEWER_STATE[state]}>
+      <span className="av-capture__ready">
+        <Icon name="signal" />
+        Scanner ready
+      </span>
       <div className="pt-doc__card" aria-hidden="true">
         <div className="pt-doc__ph" />
         {([["20%", "46%"], ["38%", "38%"], ["56%", "44%"], ["74%", "30%"]] as const).map(([top, width]) => (

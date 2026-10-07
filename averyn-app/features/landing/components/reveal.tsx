@@ -1,11 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 
 /** Fracción visible del bloque que dispara el revelado. */
 const REVEAL_THRESHOLD = 0.06;
-
-type RevealState = "idle" | "hidden" | "visible";
 
 interface RevealProps {
   className: string;
@@ -15,27 +13,32 @@ interface RevealProps {
 /**
  * Bloque que aparece suave al entrar en pantalla.
  *
- * Se renderiza visible en el servidor (sin JavaScript el contenido se ve). Al montar, solo se
- * oculta si está por debajo del viewport; así lo que ya está a la vista no parpadea.
+ * Se renderiza sin `is-visible`; quien lo oculta es la hoja de estilos con la clase
+ * `.js` de `<html>` (la añade el guion de la landing antes del primer pintado), así que
+ * sin JavaScript el contenido siempre se ve. Al montar, un `IntersectionObserver` añade
+ * `is-visible` al entrar un 6 % en pantalla y ya no se vuelve a ocultar: es el mismo
+ * contrato que `home.js` del frontend original (`threshold: 0.06`, una sola observación).
  * Con `prefers-reduced-motion` la hoja de estilos anula el movimiento.
  *
  * @returns Un `div` con la clase `mn-reveal`.
  */
 export function Reveal({ className, children }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const [state, setState] = useState<RevealState>("idle");
 
   useEffect(() => {
     const element = ref.current;
-    if (element === null || !("IntersectionObserver" in window)) return;
-    if (element.getBoundingClientRect().top < window.innerHeight) return;
-
-    setState("hidden");
+    if (element === null) return;
+    if (!("IntersectionObserver" in window)) {
+      element.classList.add("is-visible");
+      return;
+    }
     const observer = new IntersectionObserver(
       (entries) => {
-        if (!entries.some((entry) => entry.isIntersecting)) return;
-        setState("visible");
-        observer.disconnect();
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
       },
       { threshold: REVEAL_THRESHOLD },
     );
@@ -44,7 +47,7 @@ export function Reveal({ className, children }: RevealProps) {
   }, []);
 
   return (
-    <div ref={ref} className={`${className} mn-reveal`} data-reveal={state}>
+    <div ref={ref} className={`${className} mn-reveal`}>
       {children}
     </div>
   );

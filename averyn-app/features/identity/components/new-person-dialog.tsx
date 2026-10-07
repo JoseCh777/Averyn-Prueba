@@ -52,7 +52,13 @@ export function NewPersonDialog() {
               Cancelar
             </Button>
             <Button type="submit" form={formId} loading={pending}>
-              {pending ? "Creando…" : "Crear persona"}
+              {pending ? (
+                "Creando…"
+              ) : (
+                <>
+                  <Icon name="check-lg" /> Crear persona
+                </>
+              )}
             </Button>
           </>
         }

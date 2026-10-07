@@ -15,21 +15,20 @@ const SEARCH_DEBOUNCE_MS = 250;
 type PeopleFiltersProps = {
   /** Filtros que vienen de la URL. */
   initial: PeopleFilter;
-  /** Cuántas personas se muestran y cuántas hay, para el aviso de conteo. */
-  shown: number;
-  total: number;
 };
 
 /**
  * Barra de filtros del listado: búsqueda por nombre o documento y filtro por estado.
  *
  * El estado vive en la URL (`?q=…&status=…`): se puede compartir y funciona con atrás/adelante.
- * Cada cambio reemplaza la URL y el servidor devuelve el listado ya filtrado.
+ * Cada cambio reemplaza la URL y el servidor devuelve el listado ya filtrado. El recuento de
+ * resultados no va aquí: se muestra en el pie `.av-pagination` de la superficie, como en el
+ * original (index.html:147-154).
  *
- * @param props - Los filtros actuales y los conteos.
+ * @param props - Los filtros actuales.
  * @returns La barra de filtros.
  */
-export function PeopleFilters({ initial, shown, total }: PeopleFiltersProps) {
+export function PeopleFilters({ initial }: PeopleFiltersProps) {
   const router = useRouter();
   const pathname = usePathname();
   const [, startTransition] = useTransition();
@@ -78,9 +77,8 @@ export function PeopleFilters({ initial, shown, total }: PeopleFiltersProps) {
         <SearchField
           value={query}
           onChange={changeQuery}
-          label="Buscar personas"
+          label="Buscar"
           placeholder="Nombre o documento"
-          countText={`Mostrando ${shown} de ${total}`}
         />
       </div>
       <Field label="Estado" className="av-toolbar__field">

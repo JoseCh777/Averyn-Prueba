@@ -1,69 +1,180 @@
 /* Biometría (features/biometrics): accesos, dispositivos, selector de persona, tarjetas de modalidad,
-   estación de captura, acta y resultado. Reutiliza av-page.css y los patrones .pt-view, .pt-fp, .pt-meter y .pt-vr. */
+   estación de captura, acta y resultado. Reutiliza av-page.css y los patrones .pt-view, .pt-fp y .pt-vr.
+   Paridad con averyn-frontend: cada regla se ancla a una clase .bio-* o a una aria-label propia de estas
+   pantallas (mismo criterio que av-identity.css), para que Identidad, Documentos y Electoral no cambien.
+   Los componentes del Design System Horizonte (av-btn, av-chip, av-tag, av-table, av-empty, av-tile,
+   av-kpi, av-field…) conservan su estilo actual. */
 
-/* Accesos principales del módulo */
-.bio-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+/* ---------- Superficie ----------
+   Paridad con .av-card (components.css:91-98): borde --av-gray-200 y sombra --av-shadow-sm. */
+.bio-page .av-surface { border-color: var(--av-gray-200); box-shadow: var(--av-shadow-sm); }
+/* .av-card lleva siempre 24 px por dentro (components.css:91-98). */
+.bio-page .av-surface--pad { padding: var(--av-space-6); }
+/* Ritmo del lienzo: en el original cada sección abre con margin-top: space-4
+   (index.html:102,106,132; history/index.html:104; capture/index.html) y la cabecera ya
+   paga 32 px por abajo, así que el hueco entre bloques es de 16 px. */
+.bio-page { gap: var(--av-space-4); }
+
+/* ---------- Anchos de página ----------
+   .av-page mide 900 px en registro/verificación (enrollment/index.html:68, verification/index.html:68)
+   y 760 px en la captura (capture/index.html:68). */
+.av-page.bio-page--flow { max-width: 900px; margin-inline: auto; }
+.av-page.bio-page--capture { max-width: 760px; margin-inline: auto; }
+/* El acta y el resultado son .av-card a todo el ancho de esa página, no una tarjeta angosta. */
+.bio-page--flow .av-surface--narrow { max-width: none; }
+
+/* ---------- Accesos principales (.av-quick-grid: dashboard.css:108-112 y 172-177) ---------- */
+.bio-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--av-space-4); }
 .bio-actions .av-tile { min-height: 160px; }
 
-/* Dispositivos */
-.bio-devices { display: grid; grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr)); gap: 1rem; margin: 0; padding: 0; list-style: none; }
-.bio-device__head { display: flex; align-items: flex-start; justify-content: space-between; gap: .8rem; margin-bottom: .8rem; }
-.bio-device__head h3 { margin: 0; font: 500 1.15rem var(--av-font-heading); letter-spacing: -.01em; }
-.bio-device__head p { margin: .15rem 0 0; font: 500 .8125rem var(--av-font-mono); color: var(--av-gray-600); }
-.bio-device .av-detail > div { grid-template-columns: minmax(5rem, 7rem) minmax(0, 1fr); padding-block: .6rem; }
+/* ---------- Dispositivos (mismo .av-quick-grid de index.html:140) ---------- */
+.bio-devices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--av-space-4); margin: 0; padding: 0; list-style: none; }
+/* flex-wrap: a ≤375 el chip de estado baja bajo el título en vez de desbordar la tarjeta. */
+.bio-device__head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--av-space-3); margin-bottom: var(--av-space-4); }
+/* .av-card__section-title (modules.css:298-303): 1rem, 600 y -0.01em. */
+.bio-device__head h3 { margin: 0; font-family: var(--av-font-heading); font-size: var(--av-text-body); font-weight: 600; letter-spacing: -.01em; }
+/* .av-table__sub (modules.css:240): xs, --av-gray-500, tipografía de cuerpo. */
+.bio-device__head p { margin: 2px 0 0; font-family: var(--av-font-body); font-size: var(--av-text-xs); font-weight: 400; color: var(--av-gray-500); }
 
-/* Selector de persona */
-.picker { display: grid; gap: 1rem; }
-.picker__search { max-width: 26rem; }
+/* Cabecera de la tarjeta de dispositivos (.av-card__header + .av-card__section-title, modules.css:296-305). */
+.bio-section-head { margin-bottom: var(--av-space-4); }
+.bio-section-head h2 { margin: 0; font-family: var(--av-font-heading); font-size: var(--av-text-body); font-weight: 600; letter-spacing: -.01em; color: var(--av-navy); }
+.bio-section-head p { margin: 2px 0 0; font-size: var(--av-text-xs); color: var(--av-gray-500); }
+
+/* Cabecera de «Actividad reciente» (.av-toolbar de index.html:108-114 y .av-kpi__label de modules.css:96-104). */
+.bio-activity .av-toolbar { gap: var(--av-space-4); padding: var(--av-space-4) var(--av-space-6); border-bottom-color: var(--av-gray-100); }
+.bio-activity .av-toolbar__title { font-family: var(--av-font-body); font-size: var(--av-text-xs); font-weight: 600; letter-spacing: normal; text-transform: none; color: var(--av-gray-500); }
+
+/* ---------- Estado vacío dentro de la tabla ----------
+   biometrics-dashboard.js:58-66 (td colspan 5) y biometrics-history.js:36-45 (td colspan 7). */
+.bio-page tr.av-table__empty:hover td { background: transparent; }
+/* El estado vacío del original no fuerza una altura (components.css:450). */
+.bio-page .av-empty { min-height: 0; }
+
+/* ---------- Selector de persona ---------- */
+.picker { display: grid; gap: var(--av-space-4); }
+/* Buscador a la izquierda y recuento a la derecha, como .av-toolbar__spacer + .av-pagination__info
+   (biometric-person-picker.js:96-140). El ancho es el de .av-search-field .av-input (modules.css:136). */
+.picker__search { display: flex; align-items: flex-end; gap: var(--av-space-4); max-width: none; flex-wrap: wrap; }
+.picker__search .sf { flex: 0 1 280px; max-width: 280px; margin-top: 22px; }
+/* .av-filter-label (modules.css:320-326): se desoculta la etiqueta que SearchField asocia al input. */
+.picker__search .sf > .sr-only {
+  top: -22px;
+  left: 0;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  clip-path: none;
+  white-space: normal;
+  font-family: var(--av-font-body);
+  font-size: var(--av-text-xs);
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--av-gray-600);
+}
+.picker__search .sf__count { margin: 0 0 0 auto; font-family: var(--av-font-body); font-size: var(--av-text-sm); color: var(--av-gray-500); }
 .picker .av-tablewrap .av-table { min-width: 34rem; }
 .picker tbody tr { cursor: pointer; }
-.picker tbody tr.is-selected td { background: var(--av-blue-tint); }
-.picker__radio { width: 3rem; }
+/* Fila elegida (biometric-person-picker.js:134: av-table__row-clicable is-active). */
+.picker tbody tr.is-active td { background: var(--av-blue-tint); }
+/* Columna de acciones a la mínima anchura (modules.css:261). */
+.picker .av-table .av-table__actions { width: 1%; }
 .picker__radio input { width: 20px; height: 20px; accent-color: var(--av-blue); cursor: pointer; }
 
-/* Pasos del flujo y tarjetas de modalidad */
+/* ---------- Filtros del historial ----------
+   .av-toolbar (modules.css:116-123), .av-filter-label (modules.css:320-326) y
+   .av-pagination__info (components.css:472). */
+section[aria-label="Historial de eventos"] .av-toolbar {
+  gap: var(--av-space-4);
+  padding: var(--av-space-4) var(--av-space-6);
+  border-bottom-color: var(--av-gray-100);
+}
+section[aria-label="Historial de eventos"] .av-toolbar__field { gap: 0; }
+section[aria-label="Historial de eventos"] .av-toolbar__field .av-label {
+  display: block;
+  margin-bottom: var(--av-space-1);
+  font-family: var(--av-font-body);
+  font-size: var(--av-text-xs);
+  font-weight: 600;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--av-gray-600);
+}
+section[aria-label="Historial de eventos"] .av-toolbar__count {
+  font-family: var(--av-font-body);
+  font-size: var(--av-text-sm);
+  font-weight: 400;
+  color: var(--av-gray-500);
+}
+
+/* ---------- Pasos del flujo y tarjetas de modalidad ----------
+   fieldset y tarjetas calcan enrollment/index.html:129-151: legend .av-filter-label,
+   tarjeta .av-card de 24 px y radio .av-radio de 18 px (components.css:354-360). */
 .bio-step { display: grid; gap: 1.1rem; }
-.bio-methods { display: grid; gap: .8rem; margin: 0; padding: 0; border: 0; min-width: 0; }
-.bio-methods legend { padding: 0; margin-bottom: .6rem; font: 500 .75rem var(--av-font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--av-gray-600); }
-.bio-method { position: relative; display: flex; align-items: center; gap: 1rem; padding: 1rem 1.2rem; border: 1.5px solid var(--av-hairline-strong); border-radius: var(--av-radius-tile); background: #fff; cursor: pointer; transition: border-color .15s var(--av-ease-out), background-color .15s var(--av-ease-out); }
+.bio-methods { display: grid; gap: var(--av-space-3); margin: 0; padding: 0; border: 0; min-width: 0; }
+.bio-methods legend { padding: 0; margin: 0 0 var(--av-space-3); font-family: var(--av-font-body); font-size: var(--av-text-xs); font-weight: 600; letter-spacing: normal; text-transform: none; color: var(--av-gray-600); }
+.bio-method { position: relative; display: flex; align-items: center; gap: var(--av-space-2); padding: var(--av-space-6); border: 1px solid var(--av-gray-200); border-radius: var(--av-radius-lg); background: #fff; cursor: pointer; transition: border-color .15s var(--av-ease-out), background-color .15s var(--av-ease-out); }
 .bio-method:hover:not(.is-disabled) { border-color: var(--av-blue); }
 .bio-method:has(input:checked) { border-color: var(--av-blue); background: var(--av-blue-tint); }
 .bio-method:has(input:focus-visible) { outline: 2px solid var(--av-blue); outline-offset: 3px; }
-.bio-method input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
-.bio-method.is-disabled { cursor: not-allowed; background: var(--av-gray-50); }
+.bio-method input { width: 18px; height: 18px; flex: none; margin: 0; accent-color: var(--av-blue); cursor: pointer; }
+.bio-method.is-disabled { cursor: not-allowed; opacity: .65; }
 .bio-method.is-disabled input { cursor: not-allowed; }
-.bio-method__icon { flex: none; display: grid; place-items: center; width: 2.8rem; height: 2.8rem; border-radius: 50%; background: var(--av-blue-tint); color: var(--av-blue); font-size: 1.3rem; }
-.bio-method.is-disabled .bio-method__icon { background: var(--av-gray-100); color: var(--av-gray-500); }
 .bio-method__text { display: grid; min-width: 0; }
-.bio-method__text b { font: 500 1.1rem var(--av-font-heading); letter-spacing: -.01em; color: var(--av-navy); }
-.bio-method__text small { font-size: .875rem; color: var(--av-gray-600); }
-.bio-footer { margin-top: 1.4rem; padding-top: 1.1rem; border-top: 1px solid var(--av-hairline); }
+.bio-method__text b { font-family: var(--av-font-body); font-size: var(--av-text-body); font-weight: 600; letter-spacing: -.01em; color: var(--av-navy); }
+.bio-method__text small { display: inline-flex; align-items: center; gap: .3rem; font-size: var(--av-text-xs); font-weight: 400; color: var(--av-gray-500); }
+/* Pie del flujo: .av-modal__footer (components.css:156), a la derecha y sin línea superior. */
+.bio-footer { justify-content: flex-end; margin-top: var(--av-space-6); padding-top: 0; border-top: 0; }
 
-/* Estación de captura */
-.bio-subject { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; padding-bottom: 1.1rem; border-bottom: 1px solid var(--av-hairline); }
-.bio-subject__text { display: grid; flex: 1 1 12rem; min-width: 0; }
-.bio-subject__text h2 { margin: 0; font: 500 1.5rem/1.15 var(--av-font-heading); letter-spacing: -.02em; overflow-wrap: anywhere; }
-.bio-subject__text p { margin: .15rem 0 0; font: 500 .875rem var(--av-font-mono); color: var(--av-gray-600); }
-.bio-station { display: grid; gap: 1.1rem; }
-.bio-station .pt-meter { margin: 0; }
-.bio-station__actions { display: flex; flex-wrap: wrap; gap: .7rem; }
-.bio-view { max-width: 22rem; margin-inline: auto; }
+/* ---------- Estación de captura ---------- */
+/* Persona en una sola línea atenuada (capture/index.html:98 y biometrics-capture.js:85). */
+.bio-subject { margin: 0 0 var(--av-space-4); padding-bottom: 0; border-bottom: 0; font-size: var(--av-text-sm); color: var(--av-gray-500); }
+.bio-station { display: grid; gap: var(--av-space-4); }
+/* Checklist de calidad: es el .av-detail del original (capture/index.html:122-127), siempre visible;
+   el color de cada dd lo marca el estado, igual que en biometrics-capture.js:169-172. */
+.bio-checklist dd[data-lv="3"] { color: var(--av-success-text); }
+.bio-checklist dd[data-lv="2"] { color: var(--av-warning-text); }
+.bio-checklist dd[data-lv="1"] { color: var(--av-error-text); }
+.bio-checklist dd[data-lv="0"] { color: var(--av-gray-500); }
+/* .av-capture__actions (modules.css:480). */
+.bio-station__actions { display: flex; flex-wrap: wrap; gap: var(--av-space-2); }
+/* Visor: el marco del original mide 4:3 y nunca pasa de 360 px de alto
+   (capture/index.html:101 y .av-capture__stage de modules.css:434-444). */
+.bio-view { max-width: none; margin-inline: 0; aspect-ratio: 4 / 3; max-height: 360px; }
 .bio-view__video, .bio-view__still { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .bio-view__video { transform: scaleX(-1); }
 .bio-view__video[hidden] { display: none; }
 .bio-view .pt-view__msg { width: max-content; }
 .bio-fp { padding-block: .4rem; }
 
-/* Acta y resultado */
-.bio-acta, .bio-result .av-detail { margin-top: 1.2rem; }
-.bio-acta__actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .7rem; margin-top: 1.4rem; }
-.bio-result { display: grid; gap: 1.2rem; }
+/* ---------- Acta y resultado ---------- */
+/* dl del acta (biometrics-enrollment.js:171) y del resultado (biometrics-verification.js). */
+.bio-acta, .bio-result .av-detail { margin-top: var(--av-space-4); }
+/* .av-modal__footer (components.css:156): a la derecha, 12 px de separación y 24 px arriba. */
+.bio-acta__actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: var(--av-space-3); margin-top: var(--av-space-6); }
+/* Los huecos del resultado los dan las propias filas: alerta → dl 16 px, dl → pie 24 px. */
+.bio-result { display: grid; gap: 0; }
 .bio-result__title { margin: 0; font: 500 1.35rem var(--av-font-heading); letter-spacing: -.02em; }
-.bio-result .bio-acta__actions { margin-top: .2rem; }
+.bio-result > .pt-vr { margin-top: var(--av-space-4); }
 
 @media (max-width: 700px) {
-  .bio-actions { grid-template-columns: minmax(0, 1fr); }
   .bio-acta__actions { justify-content: stretch; }
   .bio-acta__actions .av-btn { flex: 1 1 100%; }
 }
 @media (prefers-reduced-motion: reduce) { .bio-method { transition: none; } }
+
+/* ---------- Responsive de los mosaicos (dashboard.css:172-177) ---------- */
+@media (min-width: 576px) {
+  .bio-actions { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .bio-devices { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (min-width: 1024px) {
+  .bio-actions { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .bio-devices { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+/* ≤374px el chip de estado no cabe en una tarjeta de 2 columnas (23ra regla: sin scroll
+   horizontal); a 375 px en adelante se conserva la rejilla original de 2. */
+@media (max-width: 374px) {
+  .bio-devices { grid-template-columns: minmax(0, 1fr); }
+}

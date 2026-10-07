@@ -1,5 +1,7 @@
+import type { ComponentType, SVGProps } from "react";
+import { BarChart, CheckCircle, FileEarmarkText, Lock, Sliders, Unlock, XCircle } from "react-bootstrap-icons";
+
 import type { ChipTone } from "@/components/ui/feedback";
-import type { IconName } from "@/components/ui/icon";
 
 import type { ElectionStatus, InstitutionKind, ProcessKind, VotingMode, VotingType } from "./types";
 
@@ -29,15 +31,16 @@ export const VOTING_TYPE_LABEL: Record<VotingType, string> = {
 export const VOTING_MODES: readonly VotingMode[] = ["online", "in-person"];
 export const VOTING_MODE_LABEL: Record<VotingMode, string> = { online: "En línea", "in-person": "Presencial" };
 
-/** Chip de cada estado del proceso: el color siempre va con icono y palabra. */
-export const ELECTION_STATUS_CHIP: Record<ElectionStatus, { tone: ChipTone; icon: IconName; label: string }> = {
-  draft: { tone: "neutral", icon: "file-earmark-text", label: "Borrador" },
-  configuration: { tone: "warning", icon: "gear", label: "Configurando" },
-  open: { tone: "success", icon: "signal", label: "En curso" },
-  closed: { tone: "info", icon: "lock", label: "Cerrado" },
-  counting: { tone: "warning", icon: "bar-chart", label: "Conteo" },
-  finished: { tone: "success", icon: "check-circle", label: "Finalizado" },
-  cancelled: { tone: "error", icon: "x-circle", label: "Cancelado" },
+/* Iconos Bootstrap Icons importados directamente porque `components/ui/icon.tsx` es un archivo compartido:
+   «Configurando» (bi-sliders) y «En curso» (bi-unlock) llevan el icono literal del original y no está en el registro. */
+export const ELECTION_STATUS_CHIP: Record<ElectionStatus, { tone: ChipTone; icon: ComponentType<SVGProps<SVGSVGElement>>; label: string }> = {
+  draft: { tone: "neutral", icon: FileEarmarkText, label: "Borrador" },
+  configuration: { tone: "warning", icon: Sliders, label: "Configurando" },
+  open: { tone: "success", icon: Unlock, label: "En curso" },
+  closed: { tone: "info", icon: Lock, label: "Cerrado" },
+  counting: { tone: "warning", icon: BarChart, label: "Conteo" },
+  finished: { tone: "success", icon: CheckCircle, label: "Finalizado" },
+  cancelled: { tone: "error", icon: XCircle, label: "Cancelado" },
 };
 
 /** Las cuatro opciones de votación que se activan o apagan, con su texto. */

@@ -37,8 +37,9 @@ export async function BiometricsView() {
   const recent = newestFirst(events).slice(0, RECENT_EVENTS);
 
   return (
-    <div className="av-page">
+    <div className="av-page bio-page" role="region" aria-label="Contenido de Biometría">
       <PageHeader
+        icon="fingerprint"
         crumbs={[{ label: "Dashboard", href: "/dashboard" }, { label: "Biometría" }]}
         title="Biometría"
         description="Registro y verificación de información biométrica asociada a las personas de la institución."
@@ -68,29 +69,31 @@ export async function BiometricsView() {
         </KpiRow>
       </section>
 
-      <section className="av-surface" aria-labelledby="recent-title">
+      <section className="av-surface bio-activity" aria-labelledby="recent-title">
         <div className="av-toolbar av-toolbar--head">
           <h2 className="av-toolbar__title" id="recent-title">
-            Actividad reciente
+            <Icon name="activity" /> Actividad reciente
           </h2>
           <Link className="av-link" href={HISTORY_PATH}>
             Ver historial <Icon name="arrow-right" />
           </Link>
         </div>
-        {recent.length > 0 ? (
-          <EventsTable events={recent} people={peopleById} variant="compact" label="Actividad biométrica reciente" />
-        ) : (
-          <EmptyState icon="signal" title="Aún no hay actividad biométrica">
-            Registra o verifica una identidad para ver eventos aquí.
-          </EmptyState>
-        )}
+        <EventsTable
+          events={recent}
+          people={peopleById}
+          variant="compact"
+          label="Actividad biométrica reciente"
+          empty={
+            <EmptyState icon="signal" title="Aún no hay actividad biométrica">
+              Registra o verifica una identidad para ver eventos aquí.
+            </EmptyState>
+          }
+        />
       </section>
 
-      <section aria-labelledby="devices-title">
-        <div className="av-surface__head">
-          <h2 className="av-section-title" id="devices-title">
-            Dispositivos biométricos
-          </h2>
+      <section className="av-surface av-surface--pad" aria-labelledby="devices-title">
+        <div className="bio-section-head">
+          <h2 id="devices-title">Dispositivos biométricos</h2>
           <p>Hardware disponible para captura.</p>
         </div>
         <DevicesGrid devices={devices} />

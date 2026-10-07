@@ -2,7 +2,7 @@
 
 import { useId, useRef, useState } from "react";
 
-import { Alert } from "@/components/ui/feedback";
+import { Alert, Chip } from "@/components/ui/feedback";
 import { Button } from "@/components/ui/button";
 import { Checkbox, Field, Input } from "@/components/ui/field";
 import { Icon } from "@/components/ui/icon";
@@ -21,10 +21,10 @@ import { OcrFieldsForm } from "./ocr-fields-form";
 function stepsFor(consent: boolean): ProgressStep[] {
   return [
     { title: "Consentimiento", state: consent ? "done" : "current" },
-    { title: "Pre-registro", state: consent ? "current" : "locked" },
-    { title: "Captura de rostro", state: "locked" },
-    { title: "Huella dactilar", state: "locked" },
-    { title: "Verificación", state: "locked" },
+    { title: "Pre-Registro", state: consent ? "current" : "locked", icon: "file-earmark-text" },
+    { title: "Captura de rostro", state: "locked", icon: "lock" },
+    { title: "Huella dactilar", state: "locked", icon: "lock" },
+    { title: "Verificación", state: "locked", icon: "lock" },
   ];
 }
 
@@ -110,6 +110,14 @@ export function PreRegistrationWizard() {
       </aside>
 
       <div className="av-wizard__body">
+        <div className="av-banner av-banner--success">
+          <Icon name="check-circle-fill" className="av-banner__icon" />
+          <span className="av-banner__text">Datos extraídos correctamente</span>
+          <span className="av-banner__badge">
+            <Chip tone="success">Datos extraídos</Chip>
+          </span>
+        </div>
+
         <section className="av-surface av-surface--pad" aria-labelledby="consent-title">
           <div className="av-surface__head">
             <h2 id="consent-title">Consentimiento informado</h2>
@@ -167,7 +175,7 @@ export function PreRegistrationWizard() {
                   onChange={(event) => chooseFile(event.target.files?.[0])}
                 />
                 {uploadError ? <Alert tone="error">{uploadError}</Alert> : null}
-                <p className="wiz-capture__note">Formatos: JPG, PNG o PDF — máx. 10 MB.</p>
+                <p className="wiz-capture__note">Formatos: JPG, PNG o PDF — máx. 10MB.</p>
                 <div className="wiz-qr">
                   <Icon name="qr-code" />
                   <span>
@@ -206,6 +214,12 @@ export function PreRegistrationWizard() {
             </Button>
           </div>
         </fieldset>
+
+        <div className="av-techbar">
+          <span className="av-techbar__item">Integridad: <strong>—</strong></span>
+          <span className="av-techbar__item"><span className="av-techbar__dot" aria-hidden="true" />Estado: Listo</span>
+          <span className="av-techbar__item">v0.1.0</span>
+        </div>
       </div>
     </div>
   );

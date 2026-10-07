@@ -23,15 +23,14 @@ export async function ElectionsView() {
   return (
     <div className="av-page">
       <PageHeader
+        icon="check2-square"
         crumbs={[{ label: "Dashboard", href: "/dashboard" }, { label: "Procesos electorales" }]}
         title="Procesos electorales"
         description="Convocatorias creadas y su estado dentro de la institución."
         actions={
-          elections.length > 0 ? (
-            <ButtonLink href={NEW_ELECTION_PATH} variant="primary">
-              <Icon name="plus-lg" /> Nuevo proceso electoral
-            </ButtonLink>
-          ) : undefined
+          <ButtonLink href={NEW_ELECTION_PATH} variant="primary">
+            <Icon name="plus-lg" /> Nuevo proceso electoral
+          </ButtonLink>
         }
       />
       <section className="av-surface" aria-label="Listado de procesos electorales">

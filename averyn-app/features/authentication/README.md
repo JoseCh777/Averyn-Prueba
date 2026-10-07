@@ -37,13 +37,16 @@ autenticadas esta en `app/(app)/layout.tsx`.
 LoginForm -> loginAction -> validateLoginFields
                          -> authService.login   (hoy MockAuthService)
                          -> startMockSession    (cookie HttpOnly)
-                         -> redirect /dashboard
+                         -> mensaje de exito    -> el formulario espera 900 ms
+                                                  y navega a /dashboard
 ```
 
 Estados del formulario (coding-standard 21): inicial, enviando («Verificando…», boton
-bloqueado), error (junto al campo o alerta general; el foco va al campo a corregir) y exito
-(redirige). `AUTH_INVALID_CREDENTIALS` lleva siempre el mismo mensaje, sin decir si fallo el
-correo o la contrasena (auth-contract 2.1 y 4).
+bloqueado), error (junto al campo o alerta general; el foco va al campo a corregir; al
+escribir en un campo se limpia su error) y exito (alerta «Autenticacion exitosa…», boton
+bloqueado un momento y navegacion al dashboard, igual que `login.js` del frontend original).
+`AUTH_INVALID_CREDENTIALS` lleva siempre el mismo mensaje, sin decir si fallo el correo o
+la contrasena (auth-contract 2.1 y 4).
 
 ## Estado actual
 
@@ -54,7 +57,7 @@ correo o la contrasena (auth-contract 2.1 y 4).
   (auth-contract 1.3). No lleva `Secure` porque en desarrollo se sirve por HTTP; la cookie real
   la fijara el Core.
 - «¿Olvidaste tu contrasena?» solo muestra un aviso: la recuperacion no existe todavia.
-- No hay enlace «Volver al inicio»: la landing aun no se ha migrado.
+- El enlace «← Volver al inicio» y el logo enlazado llevan a `/` (la landing migrada).
 - Los codigos `AUTH_TOO_MANY_ATTEMPTS`, `SERVICE_UNAVAILABLE` e `INTERNAL_ERROR` ya tienen
   mensaje, pero el mock no los produce todavia.
 

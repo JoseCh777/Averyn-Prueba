@@ -1,13 +1,15 @@
-import { Icon } from "./icon";
+import { Icon, type IconName } from "./icon";
 
 /** Un paso de un proceso que ocupa varias pantallas. */
 export type ProgressStep = {
   title: string;
-  /** `done` ya se hizo, `current` es el actual y `locked` espera a los anteriores (se muestra como «Pendiente»). */
+  /** `done` ya se hizo, `current` es el actual y `locked` espera a los anteriores (se muestra como «Bloqueado»). */
   state: "done" | "current" | "locked";
+  /** Icono propio del paso (el stepper original de Documentos/Electoral pinta uno por paso). */
+  icon?: IconName;
 };
 
-const STATE_LABEL: Record<ProgressStep["state"], string> = { done: "Completado", current: "En curso", locked: "Pendiente" };
+const STATE_LABEL: Record<ProgressStep["state"], string> = { done: "Completado", current: "En curso", locked: "Bloqueado" };
 
 /**
  * Progreso vertical de un proceso por pasos (por ejemplo, el registro de una persona).
@@ -24,7 +26,7 @@ export function StepProgress({ steps, label }: { steps: readonly ProgressStep[];
       {steps.map((step, index) => (
         <li key={step.title} className="av-steps__item" data-state={step.state} aria-current={step.state === "current" ? "step" : undefined}>
           <span className="av-steps__marker" aria-hidden="true">
-            {step.state === "done" ? <Icon name="check-lg" /> : index + 1}
+            {step.state === "done" ? <Icon name="check-lg" /> : step.icon ? <Icon name={step.icon} /> : index + 1}
           </span>
           <span className="av-steps__text">
             <span className="av-steps__title">{step.title}</span>

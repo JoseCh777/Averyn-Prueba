@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 import { Table } from "@/components/ui/display";
 import { Chip } from "@/components/ui/feedback";
 import { Icon } from "@/components/ui/icon";
@@ -13,10 +15,14 @@ import { OcrResultButton } from "./ocr-result-button";
  * Es un Server Component; solo el botón de resultado corre en el navegador. Un documento en
  * proceso o con error explica qué pasa debajo del chip; solo los procesados tienen resultado.
  *
- * @param props - Los documentos, del más reciente al más antiguo.
+ * El estado vacío se pinta **dentro** de la tabla (`tr.av-table__empty` con `colspan`),
+ * igual que en el original (dashboard-documents.js:181-190), en vez de fuera de ella.
+ *
+ * @param props - Los documentos, en orden de registro (del más antiguo al más reciente, como
+ * los pinta el original), y el contenido de la fila vacía cuando no hay ninguno.
  * @returns La tabla.
  */
-export function DocumentsTable({ documents, now = new Date() }: { documents: readonly DocumentRecord[]; now?: Date }) {
+export function DocumentsTable({ documents, now = new Date(), empty }: { documents: readonly DocumentRecord[]; now?: Date; empty?: ReactNode }) {
   return (
     <div className="av-tablewrap" tabIndex={0} role="region" aria-label="Historial de documentos (desplazable)">
       <Table>
@@ -25,13 +31,15 @@ export function DocumentsTable({ documents, now = new Date() }: { documents: rea
             <th scope="col">Documento</th>
             <th scope="col">Fecha</th>
             <th scope="col">Estado</th>
-            <th scope="col" className="av-table__actions">
-              <span className="sr-only">Acciones</span>
-            </th>
+            <th scope="col" className="av-table__actions">Acciones</th>
           </tr>
         </thead>
         <tbody>
-          {documents.map((document) => {
+          {documents.length === 0 ? (
+            <tr className="av-table__empty">
+              <td colSpan={4}>{empty}</td>
+            </tr>
+          ) : documents.map((document) => {
             const status = DOCUMENT_STATUS_CHIP[document.status];
             return (
               <tr key={document.id}>
@@ -66,8 +74,8 @@ export function DocumentsTable({ documents, now = new Date() }: { documents: rea
                       confirmed={document.confirmed}
                     />
                   ) : (
-                    <span className="av-cell-sub" aria-label="Sin acciones disponibles">
-                      —
+                    <span className="av-cell-sub">
+                      <span className="sr-only">Sin acciones disponibles</span>—
                     </span>
                   )}
                 </td>

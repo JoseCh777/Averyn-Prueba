@@ -310,7 +310,7 @@ Horizonte es la única guía visual de Averyn. Esta matriz compara el sistema co
 | Estados de UI y biometría (§21–23) | Carga, vacío, error, éxito, deshabilitado; mapa de estados oficiales | Cumple | Ver Patrones › Estados oficiales |
 | Tokens `--av-*` e Inter | Mismos nombres y fuente de cuerpo | Cumple | Portar a `app/globals.css` |
 | Prefijo `av-` | Clases `av-*` (antes `hz-*`) | Cumple | Renombradas en la v2.0 (5-oct-2026); los tokens siguen siendo `--av-*` |
-| Plus Jakarta Sans en títulos | Space Grotesk (y JetBrains Mono, que `layout.tsx` no carga) | Decidir | El ADR fija la fuente de títulos y la mono |
+| Plus Jakarta Sans en títulos | Space Grotesk (cargada con `next/font`) + JetBrains Mono cargada | **Decidido (6-oct-2026): Space Grotesk** | Paridad con `averyn-frontend` y DESIGN.md; `layout.tsx` y `AGENTS.md` §9 ya lo fijan |
 | Breakpoints 576 · 768 · 1024 · 1280 | Documentados; el sitio usa valores sueltos | Alineado en la guía | Solo los oficiales en el código portado |
 | Responsive a 375 y 1440 (§71) | Páginas del DS sin scroll horizontal a 375 (v1.7) | Cumple en la guía | Repetir la prueba en cada pantalla portada |
 | React 19 + TypeScript estricto | HTML, CSS y JS sin framework | Portar | `components/ui` tipados; `'use client'` solo con interacción |

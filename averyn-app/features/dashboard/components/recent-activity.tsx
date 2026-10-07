@@ -3,16 +3,16 @@ import { ActivityPanel, type ActivityEvent, type ActivityTone } from "@/componen
 import { formatCount } from "../summary";
 import type { BiometricOutcome, DashboardSummary } from "../types";
 
-const OUTCOME_TONE: Record<BiometricOutcome, ActivityTone | undefined> = {
+const OUTCOME_TONE: Record<BiometricOutcome, ActivityTone> = {
   success: "ok",
   rejected: "bad",
   retry: "retry",
-  "device-error": undefined,
+  "device-error": "other",
 };
 
 const NO_ACTIVITY_EVENT: ActivityEvent = {
   title: "Sin actividad reciente",
-  detail: "Aún no hay eventos en el registro biométrico. Registra o verifica una persona para empezar.",
+  detail: "Aún no hay eventos en el log biométrico. Registra o verifica una persona para empezar.",
   time: "",
 };
 
@@ -25,7 +25,8 @@ const OUTCOME_BAR_TONE: Record<"success" | "rejected" | "retry", ActivityTone> =
 /**
  * Panel de actividad reciente: barras por resultado y línea de tiempo de los últimos eventos.
  *
- * Sin eventos muestra el estado vacío (coding-standard 22) en lugar de un panel en blanco.
+ * Sin eventos muestra el estado vacío (coding-standard 22) en lugar de un panel en blanco,
+ * y omite el bloque de resultados (como el original, que lo deja `hidden`).
  *
  * @param props - El resumen del que se toman los resultados y los eventos.
  * @returns El panel oscuro de actividad.
@@ -41,17 +42,26 @@ export function RecentActivity({ summary }: { summary: DashboardSummary }) {
           tone: OUTCOME_TONE[event.outcome],
         }));
 
+  const hasBars = summary.totalEvents > 0;
+
   return (
     <ActivityPanel
+      titleId="titulo-actividad"
       title="Actividad reciente"
-      subtitle={`Últimas acciones registradas · ${formatCount(summary.totalEvents, "evento", "eventos")} en el registro`}
-      bars={summary.outcomes.map((outcome) => ({
-        label: outcome.label,
-        value: outcome.count,
-        max: Math.max(summary.totalEvents, 1),
-        tone: OUTCOME_BAR_TONE[outcome.outcome],
-      }))}
+      subtitle="Últimas acciones registradas"
+      barsTitle={hasBars ? `Resultados del log · ${formatCount(summary.totalEvents, "evento", "eventos")}` : undefined}
+      bars={
+        hasBars
+          ? summary.outcomes.map((outcome) => ({
+              label: outcome.label,
+              value: outcome.count,
+              max: Math.max(summary.totalEvents, 1),
+              tone: OUTCOME_BAR_TONE[outcome.outcome],
+            }))
+          : []
+      }
       events={events}
+      more={{ href: "/biometrics/history", label: "Ver historial completo" }}
     />
   );
 }

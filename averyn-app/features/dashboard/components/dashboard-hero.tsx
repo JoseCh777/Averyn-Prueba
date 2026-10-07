@@ -17,19 +17,21 @@ const HERO_ARCS = [
 export function DashboardHero() {
   return (
     <section className="av-dashboard__hero" aria-labelledby="dashboard-title">
-      <div>
-        <h1 id="dashboard-title" className="av-dashboard__title">Todo en un solo lugar</h1>
-        <p className="av-dashboard__lead">
-          Gestiona identidad, documentos, biometría e inteligencia artificial desde un mismo panel, con visibilidad completa de la
-          operación institucional.
-        </p>
+      <div className="av-dashboard__wrap av-dashboard__hero-inner">
+        <div>
+          <h1 id="dashboard-title" className="av-dashboard__title">Todo en un solo lugar</h1>
+          <p className="av-dashboard__lead">
+            Gestiona identidad, documentos, biometría e inteligencia artificial desde un mismo panel, con visibilidad completa de la
+            operación institucional.
+          </p>
+        </div>
+        <svg className="av-dashboard__figure" viewBox="0 0 320 170" aria-hidden="true" focusable="false">
+          <path d="M0 165 H320" stroke="rgba(20,95,238,.25)" strokeWidth={1} fill="none" />
+          {HERO_ARCS.map((arc) => (
+            <path key={arc.path} d={arc.path} stroke={arc.stroke} strokeWidth={arc.width} fill="none" />
+          ))}
+        </svg>
       </div>
-      <svg className="av-dashboard__figure" viewBox="0 0 320 170" aria-hidden="true" focusable="false">
-        <path d="M0 165 H320" stroke="rgba(20,95,238,.25)" strokeWidth={1} fill="none" />
-        {HERO_ARCS.map((arc) => (
-          <path key={arc.path} d={arc.path} stroke={arc.stroke} strokeWidth={arc.width} fill="none" />
-        ))}
-      </svg>
     </section>
   );
 }

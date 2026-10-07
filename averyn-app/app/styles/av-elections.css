@@ -1,19 +1,97 @@
-/* Procesos electorales (features/elections): asistente de creación. Reutiliza av-page.css (superficies, asistente,
-   formulario en dos columnas, tablas y fichas de detalle). */
+/* Procesos electorales (features/elections): listado y asistente de creación. Reutiliza av-page.css (superficies,
+   asistente, formulario en dos columnas, tablas y fichas de detalle). Los valores de este archivo son los literales
+   del original (averyn-frontend/modules/electoral + assets/css/modules.css). */
 
 .elec-alert { margin-bottom: 1rem; }
-.elec-settings { display: grid; gap: 1.2rem; }
-.elec-subtitle { margin: 0; font: 500 1.15rem var(--av-font-heading); letter-spacing: -.01em; color: var(--av-navy); }
-.elec-switches { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .4rem 1.5rem; }
-.sw-row { display: flex; align-items: center; gap: .8rem; min-height: 44px; }
-.sw-row > span { cursor: pointer; }
-.elec-participants { display: grid; gap: 1.1rem; }
-.elec-participants__filters { display: flex; align-items: flex-start; gap: 1rem; flex-wrap: wrap; }
-.elec-participants__filters .av-toolbar__search { flex: 1 1 18rem; margin-top: 1.55rem; }
-.elec-review { display: grid; gap: 1.4rem; }
-.elec-review__block .elec-subtitle { margin-bottom: .4rem; }
-.elec-footer { margin-top: 1.4rem; padding-top: 1.1rem; border-top: 1px solid var(--av-hairline); }
 
-@media (max-width: 700px) {
+/* Clase propia del asistente: ajusta el padding de las tarjetas a los del original (.av-card = space-6 y la
+   tarjeta lateral del stepper, space-4) sin tocar a los demás flujos que usan av-surface. */
+.elec-wizard .av-surface--pad { padding: var(--av-space-6); }
+.elec-wizard .av-wizard__side.av-surface--pad { padding: var(--av-space-4); }
+
+/* Stepper vertical (original .av-stepper, modules.css:349-375) */
+.av-stepper { display: flex; flex-direction: column; list-style: none; margin: 0; padding: 0; }
+.av-stepper__step { position: relative; display: flex; gap: var(--av-space-3); padding-bottom: var(--av-space-6); }
+.av-stepper__step:last-child { padding-bottom: 0; }
+.av-stepper__step:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: 15px; top: 32px; bottom: 0;
+  width: 2px;
+  background: var(--av-gray-200);
+}
+.av-stepper__step--done:not(:last-child)::before { background: var(--av-chip-success-border); }
+.av-stepper__marker {
+  flex: 0 0 auto;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  font-size: 14px;
+  z-index: 1;
+}
+.av-stepper__step--done .av-stepper__marker { background: var(--av-chip-success-bg); color: var(--av-chip-success-text); border: 1px solid var(--av-chip-success-border); }
+.av-stepper__step--current .av-stepper__marker { background: var(--av-blue); color: var(--av-white); box-shadow: 0 0 0 4px var(--av-blue-tint); }
+.av-stepper__step--locked .av-stepper__marker { background: var(--av-gray-100); color: var(--av-gray-400); }
+.av-stepper__info { display: flex; flex-direction: column; line-height: 1.35; min-width: 0; padding-top: 4px; }
+.av-stepper__title { font-size: var(--av-text-sm); font-weight: 600; color: var(--av-navy); }
+.av-stepper__status { font-size: var(--av-text-xs); color: var(--av-gray-500); }
+.av-stepper__step--current .av-stepper__title { color: var(--av-blue); }
+.av-stepper__step--current .av-stepper__status { color: var(--av-blue); }
+
+/* Título de sección dentro de una tarjeta (original .av-card__section-title, modules.css:298-303) con la
+   tipografía que el original da a los h3 (base.css: h1,h2,h3 → tipografía de título, color navy, lh 1.3). */
+.elec-subtitle {
+  margin: 0 0 var(--av-space-4);
+  font-family: var(--av-font-heading);
+  font-size: var(--av-text-body);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -.01em;
+  color: var(--av-navy);
+}
+
+/* Paso 2: bloques seguidos con la separación del .av-field del original (space-4) */
+.elec-settings { display: grid; gap: var(--av-space-4); }
+/* Modalidad: el hueco literal del original (style="gap: var(--av-space-6)") */
+.elec-settings .vz-seg { gap: var(--av-space-6); }
+
+/* Opciones de votación: el .av-form-grid del original con row-gap space-4 */
+.elec-switches { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--av-space-4); }
+.sw-row { display: flex; align-items: center; gap: var(--av-space-2); min-height: 44px; }
+.sw-row > label { cursor: pointer; }
+
+/* Paso 3: la barra del original (.av-toolbar > grupo) envuelve búsqueda y filtro */
+.av-toolbar__group { display: flex; gap: var(--av-space-3); align-items: flex-end; flex: 1 1 auto; min-width: 0; flex-wrap: wrap; }
+.elec-participants { display: flex; flex-direction: column; }
+.elec-participants .av-select { width: 200px; }
+.elec-participants .av-detail { margin-top: var(--av-space-4); }
+.elec-participants .av-alert { margin-top: var(--av-space-4); }
+
+/* Estado vacío dentro de la tabla (original .av-table__empty): centrado con el aire del original.
+   Se limita a este paso para no tocar la fila vacía de otras pantallas (av-page.css la deja sin padding). */
+.elec-participants tr.av-table__empty td { padding: var(--av-space-8); text-align: center; color: var(--av-gray-500); }
+
+/* El paso de revisión no lleva aire entre sus tres tarjetas (original #paso-4, sin regla propia).
+   El footer del asistente tampoco lleva borde ni margen: lo separa el hueco del .av-wizard__body.
+   A 480 px el original apila los botones a lo ancho (modules.css:560-565). */
+@media (max-width: 480px) {
+  .elec-footer { flex-direction: column; align-items: stretch; }
+  .elec-footer .av-btn { width: 100%; }
+}
+
+/* Footer técnico del original (proceso / estado / versión) */
+.av-techbar {
+  display: flex; align-items: center; gap: var(--av-space-4); flex-wrap: wrap;
+  padding-top: var(--av-space-3);
+  border-top: 1px solid var(--av-gray-100);
+  font-size: var(--av-text-xs);
+  color: var(--av-gray-500);
+}
+.av-techbar__item { display: inline-flex; align-items: center; gap: 6px; }
+.av-techbar__item strong { color: var(--av-gray-600); font-weight: 600; }
+.av-techbar__item--end { margin-left: auto; }
+.av-techbar__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--av-success); }
+
+@media (max-width: 768px) {
   .elec-switches { grid-template-columns: minmax(0, 1fr); }
 }
