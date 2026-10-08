@@ -24,9 +24,9 @@ Cuenta de demostracion del login: `admin@averyn.test` / `Averyn2026`.
 | `/login` | Inicio de sesion | [`features/authentication`](features/authentication/README.md) |
 | `/dashboard` | Panel: indicadores, accesos y actividad (lee los demas modulos) | [`features/dashboard`](features/dashboard/README.md) |
 | `/identity`, `/identity/[personId]` | Personas: listado con filtros, alta, baja y ficha | [`features/identity`](features/identity/README.md) |
-| `/documents`, `/documents/pre-registration` | Documentos con OCR y pre-registro de una persona | [`features/documents`](features/documents/README.md) |
+| `/documents`, `/documents/[id]`, `/documents/pre-registration` | Documentos con OCR, detalle de cada documento y pre-registro de una persona | [`features/documents`](features/documents/README.md) |
 | `/biometrics`, `/biometrics/enrollment`, `/biometrics/verification`, `/biometrics/capture`, `/biometrics/history` | Registro, verificacion, captura (camara real), resultado e historial | [`features/biometrics`](features/biometrics/README.md) |
-| `/elections`, `/elections/new` | Procesos electorales y asistente de creacion | [`features/elections`](features/elections/README.md) |
+| `/elections`, `/elections/[id]`, `/elections/new` | Procesos electorales, su detalle y asistente de creacion | [`features/elections`](features/elections/README.md) |
 | `/ai` | Marcador del modulo de IA | [`features/ai`](features/ai/README.md) |
 | `/forbidden`, `/offline`, `/maintenance`, 404, 500 | Paginas de sistema | `components/errors` |
 

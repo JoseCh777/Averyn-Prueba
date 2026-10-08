@@ -1,7 +1,7 @@
 # elections
 
-Módulo Electoral: la lista de procesos y el asistente para crear uno (rutas `/elections` y
-`/elections/new`).
+Módulo Electoral: la lista de procesos, el detalle de cada uno y el asistente para crear uno (rutas
+`/elections`, `/elections/[id]` y `/elections/new`).
 
 ## Responsabilidad
 
@@ -25,7 +25,8 @@ Las reglas son de validación y de conteo. El Core será la autoridad sobre un p
 | `services/mock-election-service.ts` | **[MOCK]** Implementación en memoria del servidor (empieza vacía) |
 | `services/index.ts` | Único lugar que elige la implementación |
 | `actions.ts` | `createElectionAction`: valida de nuevo todo y crea el proceso |
-| `components/elections-view.tsx`, `elections-table.tsx` | Listado (Server Components) |
+| `components/elections-view.tsx`, `elections-table.tsx` | Listado (Server Components); el nombre de cada fila enlaza al detalle |
+| `components/election-detail-view.tsx` | Detalle del proceso: convocatoria, configuración y padrón (Server Component asíncrono) |
 | `components/new-election-view.tsx` | Pantalla del asistente (Server Component) |
 | `components/election-wizard.tsx` | El asistente (estado y navegación) |
 | `components/general-step.tsx`, `settings-step.tsx`, `participants-step.tsx`, `review-step.tsx` | Los cuatro pasos |
@@ -62,7 +63,9 @@ Las rutas están en `app/(app)/elections/` con `loading.tsx` y `error.tsx`. Los 
 - **[MOCK]** El servicio es de demostración (`TODO(AVY-010)`): los procesos viven en la memoria del
   servidor y empiezan vacíos, como el prototipo. Los demás estados (en curso, cerrado, conteo…) existen
   para pintar el chip, pero ninguna pantalla cambia el estado todavía.
-- El listado no tiene detalle, edición ni cancelación de un proceso.
+- El detalle reúne lo que existe hoy (convocatoria, configuración y padrón); no hay edición ni
+  cancelación de un proceso. Al arrancar vacío, la ruta solo se puede auditar sobre un servidor en el
+  que ya se haya creado un proceso.
 - «Rol del votante» y «Puesto de votación» (que el prototipo pedía en el pre-registro) se capturarán aquí
   cuando exista el padrón electoral propio.
 

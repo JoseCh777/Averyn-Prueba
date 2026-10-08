@@ -1,7 +1,8 @@
 # documents
 
-Módulo de Documentos y OCR: carga de documentos de identidad, lectura de sus datos con OCR y el
-pre-registro de una persona (rutas `/documents` y `/documents/pre-registration`).
+Módulo de Documentos y OCR: carga de documentos de identidad, lectura de sus datos con OCR, el
+detalle de cada documento y el pre-registro de una persona (rutas `/documents`, `/documents/[id]`
+y `/documents/pre-registration`).
 
 ## Responsabilidad
 
@@ -30,6 +31,7 @@ Las reglas son de presentación y de validación. La lectura real la hará el se
 | `actions.ts` | Acciones de servidor: subir, leer, confirmar y registrar (comprueban la sesión y validan lo recibido) |
 | `use-ocr-review.ts` | Hook con lo que la persona escribe y qué campos ya vio |
 | `components/documents-view.tsx` | Pantalla del historial (Server Component asíncrono) |
+| `components/document-detail-view.tsx` | Detalle de un documento: visor, ficha y datos OCR (Server Component asíncrono) |
 | `components/upload-document-card.tsx` | Tipo de documento, zona de carga y «Procesar» |
 | `components/documents-table.tsx` | Tabla del historial |
 | `components/ocr-result-button.tsx` | Botón y diálogo «Resultado OCR» |
@@ -72,5 +74,5 @@ confianza y el servicio mock. `tests/lib/` cubre el formato de fechas. Accesibil
 demostración:
 
 ```bash
-AUDIT_COOKIE="averyn_mock_session=1" npm run test:a11y -- http://localhost:3300 documents documents/pre-registration
+AUDIT_COOKIE="averyn_mock_session=1" npm run test:a11y -- http://localhost:3300 documents documents/doc-0001 documents/pre-registration
 ```
