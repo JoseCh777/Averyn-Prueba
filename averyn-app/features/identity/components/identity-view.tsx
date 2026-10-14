@@ -6,10 +6,10 @@ import { Icon } from "@/components/ui/icon";
 
 import { AFFILIATION_LABEL, STATUS_LABEL } from "../labels";
 import { filterPeople, summarizePeople } from "../person-rules";
+import { NEW_PERSON_PATH } from "../routes";
 import { personService } from "../services";
 import type { PeopleFilter } from "../types";
 import { ExportPeopleButton } from "./export-people-button";
-import { NewPersonDialog } from "./new-person-dialog";
 import { PeopleFilters } from "./people-filters";
 import { PeopleTable } from "./people-table";
 
@@ -45,7 +45,9 @@ export async function IdentityView({ filter }: { filter: PeopleFilter }) {
                 status: STATUS_LABEL[person.status],
               }))}
             />
-            <NewPersonDialog />
+            <ButtonLink href={NEW_PERSON_PATH} variant="primary">
+              <Icon name="plus-lg" /> Nueva persona
+            </ButtonLink>
           </>
         }
       />
@@ -73,7 +75,9 @@ export async function IdentityView({ filter }: { filter: PeopleFilter }) {
                     Quitar filtros
                   </ButtonLink>
                 ) : (
-                  <NewPersonDialog />
+                  <ButtonLink href={NEW_PERSON_PATH} variant="primary">
+              <Icon name="plus-lg" /> Nueva persona
+            </ButtonLink>
                 )
               }
             >

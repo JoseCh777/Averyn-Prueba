@@ -25,6 +25,7 @@ export const DEFAULT_ROUTES: readonly string[] = [
   'dashboard',
   'identity',
   'identity/per-0001',
+  'identity/new',
   'documents',
   'documents/doc-0001',
   'documents/pre-registration',
