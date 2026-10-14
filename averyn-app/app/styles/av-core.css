@@ -24,6 +24,8 @@
 @keyframes av-rot { to { transform: rotate(360deg); } }
 .av-iconbtn { position: relative; width: 42px; height: 42px; display: inline-grid; place-items: center; border: 1px solid var(--av-hairline); border-radius: var(--av-radius-full); background: rgba(234, 240, 254, .9); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: var(--av-shadow-sm); color: var(--av-navy); cursor: pointer; font-size: 1.05rem; transition: background-color .15s var(--av-ease-out), color .15s var(--av-ease-out); }
 .av-iconbtn:hover { background: #fff; color: var(--av-blue); }
+/* Acción destructiva: el rojo aparece al pasar el cursor o al enfocar con el teclado (el icono lleva nombre accesible). */
+.av-iconbtn--danger:hover, .av-iconbtn--danger:focus-visible { background: var(--av-error-bg); border-color: var(--av-error-border); color: var(--av-error-text); }
 .av-iconbtn .badge { position: absolute; top: 4px; right: 4px; min-width: 16px; height: 16px; padding: 0 3px; border-radius: 99px; background: var(--av-error); color: #fff; font: 700 10px/16px var(--av-font-body); text-align: center; border: 2px solid #EAF0FE; }
 
 /* Campos */
