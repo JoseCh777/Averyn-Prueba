@@ -27,10 +27,11 @@ Cuenta de demostracion del login: `admin@averyn.test` / `Averyn2026`.
 | `/documents`, `/documents/[id]`, `/documents/pre-registration` | Documentos con OCR, detalle de cada documento y pre-registro de una persona | [`features/documents`](features/documents/README.md) |
 | `/biometrics`, `/biometrics/enrollment`, `/biometrics/verification`, `/biometrics/capture`, `/biometrics/history` | Registro, verificacion, captura (camara real), resultado e historial | [`features/biometrics`](features/biometrics/README.md) |
 | `/elections`, `/elections/[id]`, `/elections/new` | Procesos electorales, su detalle y asistente de creacion | [`features/elections`](features/elections/README.md) |
+| `/access` | Consola del operador de puerta: punto de control, verificacion QR/rostro/huella, resultado y aforo | [`features/access`](features/access/README.md) |
 | `/ai` | Marcador del modulo de IA | [`features/ai`](features/ai/README.md) |
 | `/forbidden`, `/offline`, `/maintenance`, 404, 500 | Paginas de sistema | `components/errors` |
 
-Accesos y Administracion aun no tienen pantalla: el dock los muestra como «Proximamente».
+Administracion aun no tiene pantalla: el dock la muestra como «Proximamente».
 
 ## Como se conectan los modulos
 
@@ -48,7 +49,7 @@ npm run build && npm run start -- -p 3300
 AUDIT_COOKIE="averyn_mock_session=1" npm run test:a11y -- http://localhost:3300
 ```
 
-`test:a11y` sin rutas audita las 18 pantallas (axe WCAG 2.2 AA, teclado, desborde y consola, a 1440 y
+`test:a11y` sin rutas audita las pantallas (axe WCAG 2.2 AA, teclado, desborde y consola, a 1440 y
 375 px). Detalle en [`tests/accessibility`](tests/accessibility/README.md).
 
 ## Estructura

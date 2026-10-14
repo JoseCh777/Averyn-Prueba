@@ -11,8 +11,8 @@ export type AppModule = {
 /**
  * Módulos del dock, en el orden en que se muestran.
  *
- * Cada funcionalidad añade su `href` cuando su ruta existe. Accesos y Administración todavía no tienen
- * pantalla: se muestran como «Próximamente».
+ * Cada funcionalidad añade su `href` cuando su ruta existe. Administración todavía no tiene pantalla:
+ * se muestra como «Próximamente».
  */
 export const APP_MODULES: readonly AppModule[] = [
   { label: "Dashboard", href: "/dashboard", icon: "grid-1x2" },
@@ -21,7 +21,7 @@ export const APP_MODULES: readonly AppModule[] = [
   { label: "OCR", href: "/documents", icon: "camera" },
   { label: "IA", href: "/ai", icon: "cpu" },
   { label: "Electoral", href: "/elections", icon: "check2-square" },
-  { label: "Accesos", icon: "door-open" },
+  { label: "Accesos", href: "/access", icon: "door-open" },
   { label: "Administración", icon: "gear" },
 ];
 

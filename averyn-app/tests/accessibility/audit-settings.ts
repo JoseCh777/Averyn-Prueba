@@ -36,6 +36,7 @@ export const DEFAULT_ROUTES: readonly string[] = [
   'biometrics/capture?mode=enrollment&person=per-0001&method=face',
   'elections',
   'elections/new',
+  'access',
   'ai',
 ];
 
