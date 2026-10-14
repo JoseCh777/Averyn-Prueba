@@ -305,10 +305,10 @@ body:has(section[aria-label="Listado de personas"]) .av-empty h4 {
   font-family: var(--av-font-heading); font-size: 1.25rem; font-weight: 600; letter-spacing: -.01em;
   color: var(--av-navy); overflow-wrap: anywhere;
 }
-.idn-preview__name--empty { color: var(--av-gray-400); font-weight: 500; }
+.idn-preview__name--empty { color: var(--av-gray-500); font-weight: 500; }
 .idn-preview__chips { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--av-space-2); }
 .idn-preview__list { display: grid; gap: var(--av-space-2); width: 100%; margin: var(--av-space-2) 0 0; text-align: left; }
 .idn-preview__list div { display: flex; justify-content: space-between; gap: var(--av-space-3); padding-top: var(--av-space-2); border-top: 1px solid var(--av-hairline); }
 .idn-preview__list dt { font-size: var(--av-text-sm); color: var(--av-gray-500); }
 .idn-preview__list dd { margin: 0; font-size: var(--av-text-sm); font-weight: 500; color: var(--av-navy); text-align: right; overflow-wrap: anywhere; }
-.idn-preview__empty { color: var(--av-gray-400); font-weight: 400; }
+.idn-preview__empty { color: var(--av-gray-500); font-weight: 400; }
