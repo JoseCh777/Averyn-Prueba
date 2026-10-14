@@ -1,43 +1,35 @@
 import type { ReactNode } from "react";
 
-import { Breadcrumb } from "@/components/ui/navigation";
-import { Icon, type IconName } from "@/components/ui/icon";
-
-/** Un tramo de la ruta de navegación; sin `href` es la página actual. */
-export type Crumb = { label: string; href?: string };
-
 type PageHeaderProps = {
-  /** Ruta de navegación, de la raíz a la página actual (la última no lleva `href`). */
-  crumbs: readonly Crumb[];
   /** Título de la página: es el único `h1`. */
   title: string;
-  /** Ícono del contenedor junto a la espina (paridad con `av-page-header__icon`). */
-  icon: IconName;
   description?: string;
   /** Botones principales de la página, a la derecha del título. */
   actions?: ReactNode;
 };
 
 /**
- * Cabecera común de las pantallas de módulo: migas, título, descripción y acciones.
+ * Cabecera común de las pantallas de módulo: título, descripción y acciones.
  *
- * Estructura paridad con `averyn-frontend`: `__lead` (espina + ícono contenedor) y
- * `__text` (migas + h1 + descripción). Los estilos son `av-page-head*` (`app/styles/av-page.css`).
+ * No lleva migas ni ícono: el dock ya dice en qué módulo se está. La presencia viene de la
+ * tipografía (Space Grotesk 500 a escala de título), de una línea de 1 px que cierra la cabecera
+ * con un tramo corto en azul de señal, y de la firma de arcos del sistema (trazo fino, decorativa).
+ * Los estilos son `av-page-head*` (`app/styles/av-page.css`).
  *
- * @param props - Las migas, el título, el ícono, la descripción y las acciones.
+ * @param props - El título, la descripción y las acciones.
  * @returns La cabecera de la página.
  */
-export function PageHeader({ crumbs, title, icon, description, actions }: PageHeaderProps) {
+export function PageHeader({ title, description, actions }: PageHeaderProps) {
   return (
     <header className="av-page-head">
-      <div className="av-page-head__lead">
-        <span className="av-page-head__spine" aria-hidden="true" />
-        <span className="av-page-head__icon" aria-hidden="true"><Icon name={icon} /></span>
-        <div className="av-page-head__text">
-          <Breadcrumb items={[...crumbs]} />
-          <h1 className="av-page-head__title">{title}</h1>
-          {description ? <p className="av-page-head__desc">{description}</p> : null}
-        </div>
+      <svg className="av-page-head__arcs" viewBox="0 0 320 120" aria-hidden="true" focusable="false" preserveAspectRatio="xMaxYMax meet">
+        <path d="M24 119 C64 6 232 6 272 119" />
+        <path d="M70 119 C98 38 198 38 226 119" />
+        <path d="M116 119 C130 74 168 74 182 119" />
+      </svg>
+      <div className="av-page-head__text">
+        <h1 className="av-page-head__title">{title}</h1>
+        {description ? <p className="av-page-head__desc">{description}</p> : null}
       </div>
       {actions ? <div className="av-page-head__actions">{actions}</div> : null}
     </header>

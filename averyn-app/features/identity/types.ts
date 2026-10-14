@@ -7,7 +7,13 @@ export type PersonStatus = "verified" | "pending";
 /** Una persona registrada en el catálogo de identidad. */
 export interface Person {
   id: string;
+  /** Nombre completo para mostrar: nombres y apellidos en ese orden. */
   name: string;
+  /** Partes del nombre, si se registraron por separado (person-contract 2.1). */
+  firstName?: string;
+  middleName?: string;
+  lastName?: string;
+  secondLastName?: string;
   /** Número de documento: solo dígitos. */
   document: string;
   affiliation: Affiliation;
@@ -20,7 +26,12 @@ export interface Person {
 
 /** Datos del formulario «Nueva persona». */
 export interface NewPersonInput {
+  /** Nombre completo para mostrar; se arma con las partes. */
   name: string;
+  firstName?: string;
+  middleName?: string;
+  lastName?: string;
+  secondLastName?: string;
   document: string;
   affiliation: Affiliation;
   birthDate?: string;
@@ -44,17 +55,6 @@ export interface PeopleSummary {
 
 /** Campos del formulario que pueden traer un error. */
 export type NewPersonField = "name" | "document" | "affiliation";
-
-/** Estado del formulario «Nueva persona» entre envíos (`useActionState`). */
-export interface NewPersonFormState {
-  status: "idle" | "error" | "created";
-  /** Mensaje por campo; vacío si no hay errores. */
-  errors: Partial<Record<NewPersonField, string>>;
-  /** Lo último que escribió la persona, para no borrarlo si hay un error. */
-  values: { name: string; document: string; affiliation: string };
-  /** Nombre de la persona creada, para el aviso de éxito. */
-  createdName?: string;
-}
 
 /** Resultado de eliminar a una persona. */
 export interface DeletePersonResult {

@@ -42,11 +42,13 @@ export type IconButtonProps = ComponentProps<"button"> & {
   "aria-label": string;
   /** Cifra de la insignia (p. ej. notificaciones sin leer). Va dentro del nombre accesible. */
   badge?: ReactNode;
+  /** Acción destructiva (eliminar): al pasar el cursor o enfocar, el botón se tiñe de rojo. */
+  danger?: boolean;
 };
 
-export function IconButton({ badge, className, children, type = "button", ...props }: IconButtonProps) {
+export function IconButton({ badge, danger, className, children, type = "button", ...props }: IconButtonProps) {
   return (
-    <button type={type} className={cn("av-iconbtn", className)} {...props}>
+    <button type={type} className={cn("av-iconbtn", danger && "av-iconbtn--danger", className)} {...props}>
       {children}
       {badge != null && <span className="badge" aria-hidden="true">{badge}</span>}
     </button>

@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 
+import Link from "next/link";
+
 import { Table } from "@/components/ui/display";
 import { Chip } from "@/components/ui/feedback";
 import { Icon } from "@/components/ui/icon";
@@ -14,17 +16,19 @@ import { OcrResultButton } from "./ocr-result-button";
  *
  * Es un Server Component; solo el botón de resultado corre en el navegador. Un documento en
  * proceso o con error explica qué pasa debajo del chip; solo los procesados tienen resultado.
+ * El tipo enlaza al detalle del documento (`/documents/[id]`).
  *
  * El estado vacío se pinta **dentro** de la tabla (`tr.av-table__empty` con `colspan`),
  * igual que en el original (dashboard-documents.js:181-190), en vez de fuera de ella.
  *
  * @param props - Los documentos, en orden de registro (del más antiguo al más reciente, como
- * los pinta el original), y el contenido de la fila vacía cuando no hay ninguno.
+ * los pinta el original), el nombre accesible de la región desplazable y el contenido de la
+ * fila vacía cuando no hay ninguno.
  * @returns La tabla.
  */
-export function DocumentsTable({ documents, now = new Date(), empty }: { documents: readonly DocumentRecord[]; now?: Date; empty?: ReactNode }) {
+export function DocumentsTable({ documents, now = new Date(), label = "Historial de documentos", empty }: { documents: readonly DocumentRecord[]; now?: Date; label?: string; empty?: ReactNode }) {
   return (
-    <div className="av-tablewrap" tabIndex={0} role="region" aria-label="Historial de documentos (desplazable)">
+    <div className="av-tablewrap" tabIndex={0} role="region" aria-label={`${label} (desplazable)`}>
       <Table>
         <thead>
           <tr>
@@ -49,7 +53,9 @@ export function DocumentsTable({ documents, now = new Date(), empty }: { documen
                       <Icon name={DOCUMENT_KIND_ICON[document.kind]} />
                     </span>
                     <div className="av-who__text">
-                      <span className="av-who__name">{DOCUMENT_KIND_LABEL[document.kind]}</span>
+                      <Link className="av-who__name" href={`/documents/${document.id}`}>
+                        {DOCUMENT_KIND_LABEL[document.kind]}
+                      </Link>
                       <span className="av-who__sub">{document.fileName}</span>
                     </div>
                   </div>

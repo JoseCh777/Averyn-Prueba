@@ -24,6 +24,7 @@ export function seedDocuments(): DocumentRecord[] {
       uploadedAt: "2026-09-10T15:00:00.000Z",
       status: "processed",
       confirmed: true,
+      personId: "per-0001",
       fields: fieldsOf([["Ana", 99.4], ["", null], ["Torres", 98.9], ["", null], ["10234567", 99.1], ["15/03/1999", 96.2]]),
     },
     {
@@ -51,6 +52,7 @@ export function seedDocuments(): DocumentRecord[] {
       uploadedAt: "2026-09-12T18:45:00.000Z",
       status: "processed",
       confirmed: false,
+      personId: "per-0002",
       fields: fieldsOf([["Luis", 98.2], ["Alberto", 97.5], ["Pérez", 96.8], ["Gómez", 99.0], ["10345678", 98.4], ["02/07/2000", 86.3]]),
     },
   ];

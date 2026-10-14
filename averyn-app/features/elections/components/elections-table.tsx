@@ -1,4 +1,5 @@
 import { Building } from "react-bootstrap-icons";
+import Link from "next/link";
 
 import { Table } from "@/components/ui/display";
 import { Tag } from "@/components/ui/feedback";
@@ -9,6 +10,8 @@ import type { Election } from "../types";
 
 /**
  * Tabla de procesos electorales: nombre y tipo, institución, fechas y estado.
+ *
+ * El nombre enlaza al detalle del proceso (`/elections/[id]`).
  *
  * @param props - Los procesos a mostrar.
  * @returns La tabla.
@@ -37,7 +40,9 @@ export function ElectionsTable({ elections }: { elections: readonly Election[] }
                       {electionInitials(election.name)}
                     </span>
                     <div className="av-who__text">
-                      <span className="av-who__name">{election.name}</span>
+                      <Link className="av-who__name" href={`/elections/${election.id}`}>
+                        {election.name}
+                      </Link>
                       <span className="av-who__sub">{PROCESS_KIND_LABEL[election.kind]}</span>
                     </div>
                   </div>

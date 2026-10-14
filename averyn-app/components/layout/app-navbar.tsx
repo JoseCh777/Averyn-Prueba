@@ -1,10 +1,11 @@
 "use client";
-import { useEffect, useId, useRef, useState } from "react";
-import { usePathname } from "next/navigation";
+import { useEffect, useId, useRef, useState, type FormEvent } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { BrandChip, Dock } from "@/components/ui/navigation";
 import { IconButton } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { APP_MODULES, isModuleActive } from "./modules";
+import { NotificationsMenu, type NotificationItem } from "./notifications-menu";
 import { useDismiss } from "./use-dismiss";
 
 /** Logo de la cabecera: wordmark negro, pensado para la zona clara del Design System. */
@@ -17,8 +18,8 @@ export type AppNavbarProps = {
   user: AppUser;
   /** Si se entrega, el menú de usuario muestra «Cerrar sesión» y la llama. */
   onLogout?: () => void | Promise<void>;
-  /** Notificaciones sin leer; con 0 no se muestra la insignia. */
-  unread?: number;
+  /** Avisos de la campana; el badge cuenta los que se muestran (0 = sin badge). */
+  notifications?: readonly NotificationItem[];
 };
 
 /**
@@ -27,10 +28,10 @@ export type AppNavbarProps = {
  * Es un Client Component porque marca el módulo actual con `usePathname` y porque el
  * buscador y el menú de usuario guardan su estado abierto/cerrado.
  *
- * @param props - Usuario a mostrar, acción de cierre de sesión y notificaciones sin leer.
+ * @param props - Usuario a mostrar, acción de cierre de sesión y avisos de la campana.
  * @returns El `<header>` de navegación.
  */
-export function AppNavbar({ user, onLogout, unread = 0 }: AppNavbarProps) {
+export function AppNavbar({ user, onLogout, notifications = [] }: AppNavbarProps) {
   const pathname = usePathname();
   const header = useRef<HTMLElement>(null);
   const items = APP_MODULES.map((module) => ({ ...module, current: isModuleActive(pathname, module.href) }));
@@ -59,9 +60,7 @@ export function AppNavbar({ user, onLogout, unread = 0 }: AppNavbarProps) {
       <Dock items={items} label="Navegación principal" />
       <div className="av-shell__actions">
         <ExpandableSearch />
-        <IconButton aria-label={unread > 0 ? `Notificaciones, ${unread} sin leer` : "Notificaciones"} badge={unread > 0 ? unread : undefined}>
-          <Icon name="bell" />
-        </IconButton>
+        <NotificationsMenu items={notifications} />
         <UserMenu user={user} onLogout={onLogout} />
       </div>
     </header>
@@ -72,12 +71,14 @@ export function AppNavbar({ user, onLogout, unread = 0 }: AppNavbarProps) {
  * Buscador compacto: el botón abre el campo y le da el foco.
  *
  * Escape o un clic fuera lo cierran (`useDismiss`); con Escape el foco vuelve al botón.
- * Todavía no ejecuta ninguna búsqueda: no existe el módulo que la respondería.
+ * Enter navega al listado de Identidad con el texto como filtro (`/identity?q=…`), que es el
+ * único módulo con búsqueda hoy.
  *
  * @returns El botón de búsqueda y su campo.
  */
 function ExpandableSearch() {
   const [open, setOpen] = useState(false);
+  const router = useRouter();
   const root = useRef<HTMLDivElement>(null);
   const button = useRef<HTMLButtonElement>(null);
   const input = useRef<HTMLInputElement>(null);
@@ -92,18 +93,28 @@ function ExpandableSearch() {
     if (reason === "escape") button.current?.focus();
   });
 
+  const submit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const query = input.current?.value.trim() ?? "";
+    if (query === "") return;
+    router.push(`/identity?q=${encodeURIComponent(query)}`);
+    setOpen(false);
+  };
+
   return (
     <div className={`av-shell__search${open ? " is-open" : ""}`} ref={root}>
       <IconButton ref={button} aria-label="Buscar" aria-expanded={open} aria-controls={id} onClick={() => setOpen((o) => !o)}>
         <Icon name="search" />
       </IconButton>
-      <input
-        ref={input}
-        id={id}
-        type="search"
-        aria-label="Buscar en Averyn"
-        placeholder="Buscar..."
-      />
+      <form className="av-shell__search-form" role="search" onSubmit={submit}>
+        <input
+          ref={input}
+          id={id}
+          type="search"
+          aria-label="Buscar personas"
+          placeholder="Buscar persona…"
+        />
+      </form>
     </div>
   );
 }

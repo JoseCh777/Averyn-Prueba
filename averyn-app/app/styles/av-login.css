@@ -6,7 +6,7 @@
   background: radial-gradient(circle at 12% 14%, rgba(0, 172, 210, .22), transparent 30%), radial-gradient(circle at 90% 90%, rgba(20, 95, 238, .14), transparent 34%), linear-gradient(135deg, #F4F8FF, #FFFFFF 58%, #EAF0FE);
 }
 .av-login__card {
-  width: min(100%, 1020px); min-height: min(780px, calc(100svh - 2rem)); display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+  width: min(100%, 1020px); min-height: min(780px, calc(100svh - 5rem)); display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
   background: #fff; border: 1px solid var(--av-hairline); border-radius: 24px; box-shadow: 0 24px 60px rgba(0, 12, 36, .14); overflow: hidden;
 }
 
@@ -57,6 +57,19 @@
   .av-login__copy-title { font-size: 1.6rem; }
   .av-login__form { margin-block: 0; padding-block: 1.2rem 1.6rem; }
   .av-login__panel { padding: 1.25rem; }
+}
+
+/* Ventana baja (portátiles con poca altura): se comprime el aire interior para que la tarjeta
+   quepa sin scroll — el objetivo es que siempre quede centrada con margen arriba y abajo. */
+@media (min-width: 901px) and (max-height: 700px) {
+  .av-login { padding: 1rem; }
+  .av-login__side { padding: 1.25rem; }
+  .av-login__panel { padding: 1.25rem; }
+  .av-login__back { padding: .5rem 0; }
+  .av-login__form { margin-top: .5rem; padding-block: .5rem; }
+  .av-login__lead { margin: .4rem 0 1rem; }
+  .av-login__form .av-field { margin-bottom: .85rem; }
+  .av-login__secure { margin-top: 1rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

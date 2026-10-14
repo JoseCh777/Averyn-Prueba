@@ -12,6 +12,9 @@ export const DEFAULT_BASE_URL = 'http://localhost:3000';
  * Rutas auditadas por defecto: todas las pantallas de la app. Las que exigen sesion necesitan
  * `AUDIT_COOKIE`; sin ella redirigen al login y se audita el login varias veces.
  * No incluye las paginas que responden 404 a proposito: la herramienta las toma como un problema.
+ *
+ * Tampoco incluye `elections/[id]`: el mock electoral arranca vacio (paridad con el prototipo)
+ * y solo existe tras crear un proceso, asi que se audita ad-hoc sobre un servidor con datos.
  */
 export const DEFAULT_ROUTES: readonly string[] = [
   '',
@@ -22,15 +25,19 @@ export const DEFAULT_ROUTES: readonly string[] = [
   'dashboard',
   'identity',
   'identity/per-0001',
+  'identity/new',
   'documents',
+  'documents/doc-0001',
   'documents/pre-registration',
   'biometrics',
   'biometrics/enrollment',
   'biometrics/verification',
   'biometrics/history',
+  'biometrics/history?person=per-0001',
   'biometrics/capture?mode=enrollment&person=per-0001&method=face',
   'elections',
   'elections/new',
+  'access',
   'ai',
 ];
 

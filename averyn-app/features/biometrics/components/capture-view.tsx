@@ -62,8 +62,6 @@ export async function CaptureView({ params }: { params: CaptureSearchParams }) {
   return (
     <div className="av-page av-page--narrow bio-page bio-page--capture" role="region" aria-label="Contenido de la captura biométrica">
       <PageHeader
-        icon="person-bounding-box"
-        crumbs={[{ label: "Dashboard", href: "/dashboard" }, { label: "Biometría", href: BIOMETRICS_PATH }, { label: heading.crumb }]}
         title={heading.title}
         description={heading.description}
         actions={

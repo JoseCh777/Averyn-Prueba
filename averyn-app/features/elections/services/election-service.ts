@@ -17,6 +17,8 @@ export class DuplicateElectionNameError extends Error {
 export interface ElectionService {
   /** Todos los procesos, en el orden en que se crearon. */
   list(): Promise<Election[]>;
+  /** El proceso con ese id, o `undefined` si no existe. */
+  getById(id: string): Promise<Election | undefined>;
   /**
    * Crea un proceso. Siempre empieza como borrador.
    *

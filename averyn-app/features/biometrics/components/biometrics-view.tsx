@@ -39,8 +39,6 @@ export async function BiometricsView() {
   return (
     <div className="av-page bio-page" role="region" aria-label="Contenido de Biometría">
       <PageHeader
-        icon="fingerprint"
-        crumbs={[{ label: "Dashboard", href: "/dashboard" }, { label: "Biometría" }]}
         title="Biometría"
         description="Registro y verificación de información biométrica asociada a las personas de la institución."
         actions={

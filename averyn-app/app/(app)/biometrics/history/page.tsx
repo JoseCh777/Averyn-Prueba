@@ -22,5 +22,5 @@ function firstValue(value: string | string[] | undefined): string | undefined {
  */
 export default async function HistoryPage({ searchParams }: HistoryPageProps) {
   const params = await searchParams;
-  return <HistoryView filter={parseHistoryFilter({ method: firstValue(params.method), result: firstValue(params.result) })} />;
+  return <HistoryView filter={parseHistoryFilter({ method: firstValue(params.method), result: firstValue(params.result), person: firstValue(params.person) })} />;
 }

@@ -1,13 +1,15 @@
 import { PageHeader } from "@/components/layout/page-header";
-import { Button, ButtonLink } from "@/components/ui/button";
+import { ButtonLink } from "@/components/ui/button";
 import { Kpi, KpiRow } from "@/components/ui/display";
 import { EmptyState } from "@/components/ui/feedback";
 import { Icon } from "@/components/ui/icon";
 
+import { AFFILIATION_LABEL, STATUS_LABEL } from "../labels";
 import { filterPeople, summarizePeople } from "../person-rules";
+import { NEW_PERSON_PATH } from "../routes";
 import { personService } from "../services";
 import type { PeopleFilter } from "../types";
-import { NewPersonDialog } from "./new-person-dialog";
+import { ExportPeopleButton } from "./export-people-button";
 import { PeopleFilters } from "./people-filters";
 import { PeopleTable } from "./people-table";
 
@@ -31,16 +33,21 @@ export async function IdentityView({ filter }: { filter: PeopleFilter }) {
   return (
     <div className="av-page" role="region" aria-label="Contenido de Identidad">
       <PageHeader
-        icon="person-vcard"
-        crumbs={[{ label: "Dashboard", href: "/dashboard" }, { label: "Identidad" }]}
         title="Personas verificadas"
         description="Registro de personas con identidad confirmada y su estado de verificación."
         actions={
           <>
-            <Button variant="ghost" disabled title="Próximamente">
-              <Icon name="download" /> Exportar
-            </Button>
-            <NewPersonDialog />
+            <ExportPeopleButton
+              rows={visible.map((person) => ({
+                name: person.name,
+                document: person.document,
+                affiliation: AFFILIATION_LABEL[person.affiliation],
+                status: STATUS_LABEL[person.status],
+              }))}
+            />
+            <ButtonLink href={NEW_PERSON_PATH} variant="primary">
+              <Icon name="plus-lg" /> Nueva persona
+            </ButtonLink>
           </>
         }
       />
@@ -68,7 +75,9 @@ export async function IdentityView({ filter }: { filter: PeopleFilter }) {
                     Quitar filtros
                   </ButtonLink>
                 ) : (
-                  <NewPersonDialog />
+                  <ButtonLink href={NEW_PERSON_PATH} variant="primary">
+              <Icon name="plus-lg" /> Nueva persona
+            </ButtonLink>
                 )
               }
             >

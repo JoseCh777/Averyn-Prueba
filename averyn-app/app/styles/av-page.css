@@ -3,20 +3,57 @@
 
 .av-page { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.75rem; }
 .av-page > * { min-width: 0; }
+/* Ficha de detalle a dos tarjetas en par (identidad/biometría, proceso/configuración…);
+   una sola columna por debajo del breakpoint de escritorio. */
+.av-ficha { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.75rem; }
+@media (min-width: 1024px) {
+  .av-ficha { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 /* Lienzo plano de las pantallas de módulo: el original pinta body con --av-gray-50
    (averyn-frontend base.css:4-9); las superficies blancas descansan sobre él. */
 body:has(.av-page) { background: var(--av-gray-50); }
+/* Cielo de cabecera: el mismo degradado del hero del dashboard (--av-sky → --av-blue-tint → gris),
+   detrás de la cabecera de cada vista de módulo y subido hasta la navbar, a petición del usuario
+   al retirar la espina (pintura decorativa: z-index -1, sin eventos). */
+body:has(.av-page)::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: clamp(420px, 55vh, 560px);
+  background: linear-gradient(180deg, var(--av-sky) 0%, var(--av-blue-tint) 55%, var(--av-gray-50) 100%);
+  z-index: -1;
+  pointer-events: none;
+}
 
-/* Cabecera (paridad con .av-page-header del frontend original: espina + ícono + título 1.75rem) */
-.av-page-head { display: flex; align-items: center; justify-content: space-between; gap: var(--av-space-6); flex-wrap: wrap; padding-block: var(--av-space-6) var(--av-space-8); }
-.av-page-head__lead { display: flex; align-items: center; gap: var(--av-space-4); min-width: 0; }
-.av-page-head__spine { flex: 0 0 4px; align-self: stretch; min-height: 60px; border-radius: 4px; background: linear-gradient(180deg, var(--av-blue), var(--av-cyan)); }
-.av-page-head__icon { flex: 0 0 auto; width: 52px; height: 52px; display: grid; place-items: center; border-radius: 14px; background: var(--av-blue); color: #fff; font-size: 1.5rem; box-shadow: var(--av-shadow-sm); }
-.av-page-head__text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
-.av-page-head__title { margin: 0; font-family: var(--av-font-heading); font-size: var(--av-text-page-title); font-weight: 700; letter-spacing: -.02em; line-height: 1.1; color: var(--av-navy); text-wrap: balance; }
-.av-page-head .av-crumb { margin-bottom: 4px; }
-.av-page-head__desc { margin: 0; max-width: 56ch; color: var(--av-gray-500); font-size: var(--av-text-sm); line-height: 1.55; }
-.av-page-head__actions { display: flex; gap: var(--av-space-3); flex-shrink: 0; flex-wrap: wrap; }
+/* Cabecera de módulo. Sin ícono ni migas (el dock ya dice dónde se está). La presencia viene de la
+   tipografía a escala de título, de una línea de 1 px que cierra la cabecera con un tramo corto en azul de
+   señal (acento de énfasis de 1 px del sistema) y de la firma de arcos, en trazo fino y decorativa. */
+.av-page-head {
+  position: relative;
+  display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap;
+  gap: var(--av-space-4) var(--av-space-6);
+  padding-block: var(--av-space-6) var(--av-space-6);
+  border-bottom: 1px solid var(--av-hairline-strong);
+}
+.av-page-head::after { content: ""; position: absolute; left: 0; bottom: -1px; width: 72px; height: 1px; background: var(--av-blue); }
+.av-page-head__text { position: relative; display: flex; flex-direction: column; gap: var(--av-space-2); min-width: 0; }
+.av-page-head__title { margin: 0; font-family: var(--av-font-heading); font-size: 2rem; font-weight: 500; letter-spacing: -.025em; line-height: 1.1; color: var(--av-navy); text-wrap: balance; }
+.av-page-head__desc { margin: 0; max-width: 56ch; color: var(--av-gray-500); font-size: var(--av-text-body); line-height: 1.55; }
+.av-page-head__actions { position: relative; display: flex; gap: var(--av-space-3); flex-shrink: 0; flex-wrap: wrap; }
+/* Firma de arcos: detrás de las acciones, apoyada en la línea inferior; solo en pantallas anchas */
+.av-page-head__arcs { display: none; }
+@media (min-width: 1024px) {
+  .av-page-head__arcs {
+    display: block; position: absolute; right: 0; bottom: 0;
+    width: 320px; height: 120px; pointer-events: none;
+    fill: none; stroke: var(--av-hairline-strong); stroke-width: 1; stroke-linecap: round;
+  }
+}
+@media (max-width: 575px) {
+  .av-page-head__title { font-size: 1.625rem; }
+}
 
 /* Superficie: caja de 1 px que agrupa una lista o un formulario */
 .av-surface { border: 1px solid var(--av-hairline-strong); border-radius: var(--av-radius-lg); background: #fff; }

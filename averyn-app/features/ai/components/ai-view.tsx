@@ -15,8 +15,6 @@ export function AiView() {
   return (
     <div className="av-page">
       <PageHeader
-        icon="cpu"
-        crumbs={[{ label: "Dashboard", href: "/dashboard" }, { label: "IA" }]}
         title="Módulo de IA"
         description="Inteligencia artificial aplicada a los procesos institucionales."
         actions={

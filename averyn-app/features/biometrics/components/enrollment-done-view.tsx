@@ -9,7 +9,7 @@ import { personService } from "@/features/identity/services";
 import { formatDateTime } from "@/lib/date-format";
 
 import { METHOD_ICON, METHOD_LABEL } from "../labels";
-import { BIOMETRICS_PATH, ENROLLMENT_PATH, flowPath } from "../routes";
+import { flowPath } from "../routes";
 import { biometricService } from "../services";
 
 /**
@@ -30,8 +30,6 @@ export async function EnrollmentDoneView({ eventId }: { eventId: string }) {
   return (
     <div className="av-page bio-page bio-page--flow" role="region" aria-label="Contenido del acta de registro">
       <PageHeader
-        icon="person-plus"
-        crumbs={[{ label: "Dashboard", href: "/dashboard" }, { label: "Biometría", href: BIOMETRICS_PATH }, { label: "Registrar biometría", href: ENROLLMENT_PATH }, { label: "Acta" }]}
         title="Registro biométrico"
         description="Resultado del registro de la modalidad biométrica."
       />

@@ -41,6 +41,15 @@ body:has(.av-page--docs) .av-empty h4 {
 /* ---------- Carga de un documento ----------
    La caja de soltar es .av-drop (hz-drop, ds.css:353-356); aquí solo su altura dentro de la tarjeta. */
 .upload { display: grid; grid-template-columns: minmax(12rem, 16rem) minmax(0, 1fr); gap: 1.25rem; align-items: start; }
+
+/* Detalle del documento: visor estrecho a la izquierda y ficha a la derecha (mismo reparto que .upload);
+   el bloque de campos OCR hereda el aire lateral de la tarjeta. */
+.doc-detail { display: grid; grid-template-columns: minmax(12rem, 16rem) minmax(0, 1fr); gap: 1.25rem; align-items: start; }
+.doc-fields { padding: var(--av-space-2) var(--av-space-6) var(--av-space-6); }
+/* El detalle ya cuenta el estado en su ficha: el distintivo «Scanner ready» del visor sobra y,
+   en una columna estrecha, el nombre del archivo se recorta en vez de chocar con él. */
+.doc-detail .pt-doc .av-capture__ready { display: none; }
+.doc-detail .pt-doc .pt-view__tag { max-width: calc(100% - 1.8rem); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .upload .av-drop { min-height: 8.5rem; }
 .av-page--docs .av-drop:has(+ input:focus-visible) { outline: 2px solid var(--av-blue); outline-offset: 2px; }
 .upload__msg { margin-top: 1rem; }
@@ -161,6 +170,7 @@ body:has(.av-page--docs) .av-empty h4 {
 
 @media (max-width: 768px) {
   .upload { grid-template-columns: minmax(0, 1fr); }
+  .doc-detail { grid-template-columns: minmax(0, 1fr); }
   .ocr-form__grid { grid-template-columns: minmax(0, 1fr); }
 }
 

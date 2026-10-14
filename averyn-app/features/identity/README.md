@@ -1,6 +1,6 @@
 # identity
 
-Módulo de Identidad: el catálogo de personas (rutas `/identity` y `/identity/[personId]`).
+Módulo de Identidad: el catálogo de personas (rutas `/identity`, `/identity/new` y `/identity/[personId]`).
 
 ## Responsabilidad
 
@@ -17,17 +17,23 @@ autoridad cuando exista el módulo de identidad (AGENTS §6).
 |---|---|
 | `types.ts` | Persona, afiliación, estado, filtros, resumen y estados del formulario |
 | `labels.ts` | Textos, iconos y tonos de cada afiliación y estado |
-| `person-rules.ts` | Funciones puras: filtrar, resumir, iniciales, tono de avatar y validar el formulario |
+| `person-rules.ts` | Funciones puras: filtrar, resumir, iniciales, tono de avatar y validar (usado también por Documentos) |
+| `person-form.ts` | Funciones puras del alta: campos, validación por campo, nombre completo y petición normalizada |
+| `routes.ts` | `IDENTITY_PATH`, `NEW_PERSON_PATH` e `identityPath(id)` |
+| `use-new-person-form.ts` | Estado y envío del formulario de alta (cliente) |
 | `mock-people.ts` | **[MOCK]** Las ocho personas de demostración |
 | `services/person-service.ts` | Interfaz `PersonService` (la frontera con los datos) y `DuplicateDocumentError` |
 | `services/mock-person-service.ts` | **[MOCK]** Implementación en memoria del servidor |
 | `services/index.ts` | Único lugar que elige la implementación |
-| `actions.ts` | Acciones de servidor: crear y eliminar (comprueban la sesión) |
+| `actions.ts` | Acciones de servidor: crear (vuelve a validar) y eliminar; comprueban la sesión |
 | `components/identity-view.tsx` | Pantalla del listado (Server Component asíncrono) |
 | `components/person-detail-view.tsx` | Pantalla de la ficha |
 | `components/people-filters.tsx` | Búsqueda y filtro; el estado vive en la URL (`?q=` y `?status=`) |
 | `components/people-table.tsx` | Tabla de personas |
-| `components/new-person-dialog.tsx` | Botón y diálogo «Nueva persona» |
+| `components/new-person-view.tsx` | Pantalla «Nueva persona» (Server Component) |
+| `components/new-person-workspace.tsx` | Formulario y vista previa, que comparten lo que se escribe (cliente) |
+| `components/new-person-form.tsx` | El formulario en tres secciones, con errores por campo y resumen |
+| `components/person-preview.tsx` | Vista previa de la persona mientras se escribe |
 | `components/delete-person-button.tsx` | Botón de eliminar con diálogo de confirmación |
 | `components/person-avatar.tsx`, `person-badges.tsx` | Avatar con iniciales, etiqueta de afiliación y chip de estado |
 
@@ -35,6 +41,25 @@ Las rutas están en `app/(app)/identity/` con `loading.tsx`, `error.tsx` y, en l
 `not-found.tsx`. Los estilos propios son `app/styles/av-identity.css` (paridad con la v1
 `averyn-frontend`, anclado a las etiquetas aria de estas dos pantallas) sobre
 `app/styles/av-page.css` (compartido con el resto de pantallas de módulo).
+
+## Alta de persona (`/identity/new`)
+
+Pantalla propia en lugar de un diálogo: el formulario tiene tres secciones (datos personales,
+identificación, pertenencia y contacto) y una vista previa de la persona a su lado.
+
+- **Campos del contrato:** primer y segundo nombre, primer y segundo apellido (hasta 80 caracteres,
+  sin caracteres de control, espacios normalizados) y fecha de nacimiento (real, desde 1900, no
+  futura). Documento (6 a 12 dígitos; acepta puntos y guiones), afiliación y correo opcional.
+- **Validación sin sobresaltos:** un campo se valida al salir de él solo si tiene texto; lo vacío se
+  reporta al enviar. Con un error visible, se revalida mientras se corrige y desaparece al arreglarlo.
+- **Envío:** valida todo, lleva el foco al primer campo con error y muestra un resumen con enlaces a
+  cada campo. La acción de servidor vuelve a validar. Un documento repetido se marca en su campo.
+- **Éxito:** aviso y paso al detalle; con «Crear y agregar otra» el formulario queda limpio, con la
+  afiliación conservada y el foco en el primer nombre, para altas seguidas.
+- **Accesibilidad:** asterisco visual más «obligatorio» para lectores de pantalla, errores asociados
+  a su campo y aviso de la persona creada en una región `status`. Los autocompletados van en `off`.
+- **Pendiente de contrato:** el catálogo de tipos de pertenencia y los documentos adicionales
+  (`person-contract`) se añadirán cuando el Core los exponga; hoy la afiliación es un catálogo local.
 
 ## Decisiones
 

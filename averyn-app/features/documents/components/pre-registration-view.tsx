@@ -13,8 +13,6 @@ export function PreRegistrationView() {
   return (
     <div className="av-page av-page--docs">
       <PageHeader
-        icon="person-plus"
-        crumbs={[{ label: "Dashboard", href: "/dashboard" }, { label: "Documentos", href: "/documents" }, { label: "Nuevo registro" }]}
         title="Nuevo registro"
         description="Captura del documento y verificación de los datos extraídos por OCR."
         actions={

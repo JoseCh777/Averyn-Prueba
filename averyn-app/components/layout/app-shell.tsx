@@ -11,11 +11,11 @@ type AppShellProps = AppNavbarProps & { children: ReactNode };
  * @param props - Los datos de la cabecera (`AppNavbarProps`) y la pantalla a mostrar (`children`).
  * @returns El marco de la pantalla.
  */
-export function AppShell({ user, onLogout, unread, children }: AppShellProps) {
+export function AppShell({ user, onLogout, notifications, children }: AppShellProps) {
   return (
     <>
       <a className="av-skip" href="#contenido">Saltar al contenido</a>
-      <AppNavbar user={user} onLogout={onLogout} unread={unread} />
+      <AppNavbar user={user} onLogout={onLogout} notifications={notifications} />
       <main className="av-shell__main" id="contenido">{children}</main>
     </>
   );

@@ -16,3 +16,5 @@ Thumbs.db
 # Entorno local
 .env
 .env.local
+# Configuracion y skills locales de herramientas de IA (no se versionan)
+.claude/
