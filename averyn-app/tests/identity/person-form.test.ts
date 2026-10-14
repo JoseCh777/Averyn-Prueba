@@ -8,6 +8,7 @@ import {
   normalizeDocument,
   normalizeName,
   parsePersonFormFields,
+  sectionStatus,
   toNewPersonInput,
   validatePersonField,
   validatePersonForm,
@@ -129,5 +130,26 @@ describe("parsePersonFormFields", () => {
 
   it("recorta los textos gigantes", () => {
     assert.equal(parsePersonFormFields({ firstName: "A".repeat(5000) }).firstName.length, 200);
+  });
+});
+
+describe("sectionStatus", () => {
+  it("cuenta los obligatorios que faltan en cada sección", () => {
+    assert.deepEqual(sectionStatus("personal", EMPTY_PERSON_FORM, {}), { missing: 2, hasErrors: false, complete: false });
+    assert.equal(sectionStatus("personal", { ...EMPTY_PERSON_FORM, firstName: "Ana" }, {}).missing, 1);
+    assert.equal(sectionStatus("identification", EMPTY_PERSON_FORM, {}).missing, 1);
+  });
+
+  it("la pertenencia ya viene completa porque la afiliación tiene valor por defecto", () => {
+    assert.equal(sectionStatus("membership", EMPTY_PERSON_FORM, {}).complete, true);
+  });
+
+  it("una sección con un error visible no está completa aunque no le falte nada", () => {
+    const status = sectionStatus("personal", VALID, { birthDate: "Escriba una fecha válida." });
+    assert.deepEqual(status, { missing: 0, hasErrors: true, complete: false });
+  });
+
+  it("los espacios solos no cuentan como escrito", () => {
+    assert.equal(sectionStatus("personal", { ...EMPTY_PERSON_FORM, firstName: "   ", lastName: "Torres" }, {}).missing, 1);
   });
 });

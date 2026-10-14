@@ -1,12 +1,22 @@
 "use client";
 
-import { Alert } from "@/components/ui/feedback";
+import { Alert, Chip } from "@/components/ui/feedback";
 import { Button, ButtonLink } from "@/components/ui/button";
 import { Field, Input, Select } from "@/components/ui/field";
-import { Icon } from "@/components/ui/icon";
+import { Icon, type IconName } from "@/components/ui/icon";
 
 import { AFFILIATIONS, AFFILIATION_LABEL } from "../labels";
-import { DOCUMENT_MAX_LENGTH, DOCUMENT_MIN_LENGTH, MIN_BIRTH_DATE, PERSON_FORM_FIELDS, type PersonFormField } from "../person-form";
+import {
+  DOCUMENT_MAX_LENGTH,
+  DOCUMENT_MIN_LENGTH,
+  MIN_BIRTH_DATE,
+  PERSON_FORM_FIELDS,
+  sectionStatus,
+  type PersonFormErrors,
+  type PersonFormField,
+  type PersonFormFields,
+  type PersonFormSection,
+} from "../person-form";
 import { IDENTITY_PATH } from "../routes";
 import { personFieldId, type NewPersonFormController } from "../use-new-person-form";
 
@@ -38,6 +48,51 @@ function Required() {
 /** Marca de campo opcional: texto atenuado junto a la etiqueta, para no repetir «Opcional» como ayuda. */
 function Optional() {
   return <span className="idn-opt"> (opcional)</span>;
+}
+
+type SectionHeadProps = {
+  id: string;
+  icon: IconName;
+  title: string;
+  description: string;
+  section: PersonFormSection;
+  fields: PersonFormFields;
+  errors: PersonFormErrors;
+};
+
+/**
+ * Cabecera de una sección: icono en recuadro de tinte de señal, título, descripción y, a la derecha,
+ * el avance de la sección («Faltan 2», «Revise» o «Completo»). El estado se dice con icono y palabra.
+ *
+ * @param props - La sección y lo escrito, para calcular su avance.
+ * @returns La cabecera.
+ */
+function SectionHead({ id, icon, title, description, section, fields, errors }: SectionHeadProps) {
+  const status = sectionStatus(section, fields, errors);
+  return (
+    <header className="idn-section__head">
+      <span className="idn-section__icon" aria-hidden="true">
+        <Icon name={icon} />
+      </span>
+      <div className="idn-section__text">
+        <h2 id={id}>{title}</h2>
+        <p>{description}</p>
+      </div>
+      {status.hasErrors ? (
+        <Chip tone="error" icon="exclamation-circle">
+          Revise
+        </Chip>
+      ) : status.missing > 0 ? (
+        <Chip tone="neutral" icon="clock">
+          {status.missing === 1 ? "Falta 1" : `Faltan ${status.missing}`}
+        </Chip>
+      ) : (
+        <Chip tone="success" icon="check-circle">
+          Completo
+        </Chip>
+      )}
+    </header>
+  );
 }
 
 /**
@@ -94,10 +149,7 @@ export function NewPersonForm({ controller }: { controller: NewPersonFormControl
       ) : null}
 
       <section className="idn-section" aria-labelledby="idn-personal">
-        <header className="idn-section__head">
-          <h2 id="idn-personal">Datos personales</h2>
-          <p>Como figuran en su documento de identidad.</p>
-        </header>
+        <SectionHead id="idn-personal" icon="person" title="Datos personales" description="Como figuran en su documento de identidad." section="personal" fields={fields} errors={errors} />
         <div className="idn-grid">
           <Field id={personFieldId("firstName")} label={<>Primer nombre<Required /></>} error={errors.firstName}>
             {(aria) => <Input {...aria} {...bind("firstName")} aria-required="true" autoFocus />}
@@ -118,10 +170,15 @@ export function NewPersonForm({ controller }: { controller: NewPersonFormControl
       </section>
 
       <section className="idn-section" aria-labelledby="idn-document">
-        <header className="idn-section__head">
-          <h2 id="idn-document">Identificación</h2>
-          <p>Con este número se reconoce a la persona en todo el sistema.</p>
-        </header>
+        <SectionHead
+          id="idn-document"
+          icon="person-vcard"
+          title="Identificación"
+          description="Con este número se reconoce a la persona en todo el sistema."
+          section="identification"
+          fields={fields}
+          errors={errors}
+        />
         <div className="idn-grid">
           <Field
             id={personFieldId("document")}
@@ -135,10 +192,15 @@ export function NewPersonForm({ controller }: { controller: NewPersonFormControl
       </section>
 
       <section className="idn-section" aria-labelledby="idn-membership">
-        <header className="idn-section__head">
-          <h2 id="idn-membership">Pertenencia y contacto</h2>
-          <p>Su relación con la institución y cómo contactarla.</p>
-        </header>
+        <SectionHead
+          id="idn-membership"
+          icon="briefcase"
+          title="Pertenencia y contacto"
+          description="Su relación con la institución y cómo contactarla."
+          section="membership"
+          fields={fields}
+          errors={errors}
+        />
         <div className="idn-grid">
           <Field id={personFieldId("affiliation")} label={<>Afiliación<Required /></>} error={errors.affiliation}>
             {(aria) => (

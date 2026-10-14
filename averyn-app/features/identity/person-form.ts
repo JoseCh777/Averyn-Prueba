@@ -69,6 +69,38 @@ export const DOCUMENT_MAX_LENGTH = 12;
 const CONTROL_CHARACTERS = /[\u0000-\u001F\u007F]/u;
 const ISO_DATE = /^(\d{4})-(\d{2})-(\d{2})$/;
 
+/** Secciones del formulario, en el orden en que aparecen. */
+export type PersonFormSection = "personal" | "identification" | "membership";
+
+/** Campos de cada sección y cuáles de ellos son obligatorios. */
+export const SECTION_FIELDS: Record<PersonFormSection, { all: readonly PersonFormField[]; required: readonly PersonFormField[] }> = {
+  personal: { all: ["firstName", "middleName", "lastName", "secondLastName", "birthDate"], required: ["firstName", "lastName"] },
+  identification: { all: ["document"], required: ["document"] },
+  membership: { all: ["affiliation", "email"], required: ["affiliation"] },
+};
+
+/** Avance de una sección: cuántos obligatorios faltan y si algún campo tiene un error visible. */
+export interface SectionStatus {
+  missing: number;
+  hasErrors: boolean;
+  complete: boolean;
+}
+
+/**
+ * Estado de una sección del formulario, para el rótulo de su cabecera.
+ *
+ * @param section - Sección a evaluar.
+ * @param fields - Lo escrito hasta ahora.
+ * @param errors - Errores visibles.
+ * @returns Obligatorios que faltan, si hay errores y si la sección está completa.
+ */
+export function sectionStatus(section: PersonFormSection, fields: PersonFormFields, errors: PersonFormErrors): SectionStatus {
+  const { all, required } = SECTION_FIELDS[section];
+  const missing = required.filter((field) => fields[field].trim() === "").length;
+  const hasErrors = all.some((field) => errors[field] !== undefined);
+  return { missing, hasErrors, complete: missing === 0 && !hasErrors };
+}
+
 /**
  * Normaliza un texto como lo hace el dominio: sin espacios en los extremos y con los espacios
  * internos (tabuladores y saltos de línea incluidos) reducidos a uno.
