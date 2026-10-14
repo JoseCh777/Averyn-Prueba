@@ -43,7 +43,7 @@ export function QrStep({ busy, onSubmit }: QrStepProps) {
         submit(value);
       }}
     >
-      <Field label="Código QR" help="Escanee el código con el lector o escríbalo y pulse Enter.">
+      <Field label="Código de la invitación" help="Escanee el código con el lector o escríbalo y pulse Enter.">
         {(aria) => (
           <Input
             {...aria}
