@@ -132,9 +132,9 @@ export function captureFailure(method: BiometricMethod): { title: string; descri
 }
 
 /** Frase corta de la persona y la operación, para el encabezado de la captura. */
-export function captureHeading(mode: CaptureMode, method: BiometricMethod): { title: string; description: string; crumb: string } {
+export function captureHeading(mode: CaptureMode, method: BiometricMethod): { title: string; description: string } {
   const subject = method === "fingerprint" ? "la huella" : "el rostro";
   return mode === "enrollment"
-    ? { title: "Registro biométrico", crumb: "Registrar biometría", description: `Captura ${subject} para asociar el perfil biométrico a la persona.` }
-    : { title: "Verificación de identidad", crumb: "Verificar identidad", description: `Captura ${subject} para compararla con el registro biométrico de la persona.` };
+    ? { title: "Registro biométrico", description: `Captura ${subject} para asociar el perfil biométrico a la persona.` }
+    : { title: "Verificación de identidad", description: `Captura ${subject} para compararla con el registro biométrico de la persona.` };
 }

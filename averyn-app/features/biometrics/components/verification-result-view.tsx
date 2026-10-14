@@ -11,7 +11,7 @@ import { formatDateTime } from "@/lib/date-format";
 
 import { VERIFICATION_THRESHOLD, formatScore } from "../biometric-rules";
 import { captureFailure } from "../capture-state";
-import { BIOMETRICS_PATH, VERIFICATION_PATH, capturePath, flowPath } from "../routes";
+import { BIOMETRICS_PATH, capturePath, flowPath } from "../routes";
 import { biometricService } from "../services";
 import type { BiometricEvent } from "../types";
 import { ScoreScale } from "./score-scale";
@@ -75,8 +75,6 @@ export async function VerificationResultView({ eventId }: { eventId: string }) {
   return (
     <div className="av-page bio-page bio-page--flow" role="region" aria-label="Contenido del resultado de verificación">
       <PageHeader
-        icon="shield-check"
-        crumbs={[{ label: "Dashboard", href: "/dashboard" }, { label: "Biometría", href: BIOMETRICS_PATH }, { label: "Verificar identidad", href: VERIFICATION_PATH }, { label: "Resultado" }]}
         title="Resultado de verificación"
         description="Desenlace de la comparación biométrica de la persona."
       />

@@ -27,8 +27,6 @@ export async function HistoryView({ filter }: { filter: HistoryFilter }) {
   return (
     <div className="av-page bio-page" role="region" aria-label="Contenido del historial biométrico">
       <PageHeader
-        icon="clock-history"
-        crumbs={[{ label: "Dashboard", href: "/dashboard" }, { label: "Biometría", href: BIOMETRICS_PATH }, { label: "Historial" }]}
         title="Historial biométrico"
         description="Trazabilidad de los registros y verificaciones realizados en la institución."
         actions={

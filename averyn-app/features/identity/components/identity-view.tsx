@@ -33,8 +33,6 @@ export async function IdentityView({ filter }: { filter: PeopleFilter }) {
   return (
     <div className="av-page" role="region" aria-label="Contenido de Identidad">
       <PageHeader
-        icon="person-vcard"
-        crumbs={[{ label: "Dashboard", href: "/dashboard" }, { label: "Identidad" }]}
         title="Personas verificadas"
         description="Registro de personas con identidad confirmada y su estado de verificación."
         actions={

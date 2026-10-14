@@ -27,8 +27,6 @@ export async function DocumentsView() {
   return (
     <div className="av-page av-page--docs">
       <PageHeader
-        icon="camera"
-        crumbs={[{ label: "Dashboard", href: "/dashboard" }, { label: "Documentos" }]}
         title="Documentos"
         description="Captura y lectura OCR de documentos de identidad para extraer y validar sus datos."
         actions={

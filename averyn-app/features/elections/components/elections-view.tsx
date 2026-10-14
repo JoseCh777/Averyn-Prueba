@@ -23,8 +23,6 @@ export async function ElectionsView() {
   return (
     <div className="av-page">
       <PageHeader
-        icon="check2-square"
-        crumbs={[{ label: "Dashboard", href: "/dashboard" }, { label: "Procesos electorales" }]}
         title="Procesos electorales"
         description="Convocatorias creadas y su estado dentro de la institución."
         actions={

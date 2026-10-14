@@ -14,7 +14,6 @@ import { DocumentsTable } from "@/features/documents/components/documents-table"
 import { documentService } from "@/features/documents/services";
 import { formatDate, formatDateTime } from "@/lib/date-format";
 
-import { AFFILIATION_LABEL } from "../labels";
 import { personService } from "../services";
 import { AffiliationTag, StatusChip } from "./person-badges";
 import { EventsTable } from "@/features/biometrics/components/events-table";
@@ -55,8 +54,6 @@ export async function PersonDetailView({ personId }: { personId: string }) {
   return (
     <div className="av-page" role="region" aria-label="Detalle de persona">
       <PageHeader
-        icon="person-vcard"
-        crumbs={[{ label: "Dashboard", href: "/dashboard" }, { label: "Identidad", href: "/identity" }, { label: "Detalle" }]}
         title="Detalle de persona"
         description="Información de la persona, su biometría y su actividad en la plataforma."
         actions={

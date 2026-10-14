@@ -49,8 +49,6 @@ export async function DocumentDetailView({ documentId }: { documentId: string })
   return (
     <div className="av-page av-page--docs" role="region" aria-label="Detalle del documento">
       <PageHeader
-        icon="camera"
-        crumbs={[{ label: "Dashboard", href: "/dashboard" }, { label: "Documentos", href: "/documents" }, { label: "Detalle" }]}
         title="Detalle del documento"
         description="Lectura OCR, estado y persona a la que pertenece el documento."
         actions={

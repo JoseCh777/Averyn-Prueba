@@ -41,8 +41,6 @@ export async function ElectionDetailView({ electionId }: { electionId: string })
   return (
     <div className="av-page" role="region" aria-label="Detalle del proceso electoral">
       <PageHeader
-        icon="check2-square"
-        crumbs={[{ label: "Dashboard", href: "/dashboard" }, { label: "Procesos electorales", href: "/elections" }, { label: "Detalle" }]}
         title="Detalle del proceso"
         description="Convocatoria, configuración de votación y padrón del proceso."
         actions={

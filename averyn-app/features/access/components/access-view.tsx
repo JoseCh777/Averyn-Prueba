@@ -32,8 +32,6 @@ export async function AccessView() {
   return (
     <div className="av-page acc-page" role="region" aria-label="Control de acceso en puerta">
       <PageHeader
-        icon="door-open"
-        crumbs={[{ label: "Dashboard", href: "/dashboard" }, { label: "Accesos" }]}
         title="Control de acceso"
         description={`${event.name} · Verifique la identidad de cada persona y registre su ingreso o salida.`}
         actions={
