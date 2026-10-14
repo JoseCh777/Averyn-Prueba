@@ -3,16 +3,11 @@
 import { revalidatePath } from "next/cache";
 
 import { requireSession } from "@/features/authentication/require-session";
+import { limaDay } from "@/lib/date-format";
 
-import { validateNewPerson } from "./person-rules";
+import { firstInvalidField, parsePersonFormFields, toNewPersonInput, validatePersonForm, type CreatePersonResult } from "./person-form";
 import { DuplicateDocumentError, personService } from "./services";
-import type { DeletePersonResult, NewPersonFormState } from "./types";
-
-/** Lee un campo de texto del formulario; los datos de un formulario son externos y no se asume que sean texto. */
-function readText(formData: FormData, name: string): string {
-  const value = formData.get(name);
-  return typeof value === "string" ? value : "";
-}
+import type { DeletePersonResult } from "./types";
 
 /** Pantallas que muestran personas y deben recalcularse tras un cambio. */
 function revalidatePeople(): void {
@@ -21,37 +16,29 @@ function revalidatePeople(): void {
 }
 
 /**
- * Acción del formulario «Nueva persona».
+ * Crea a una persona desde el formulario «Nueva persona».
  *
- * Valida los campos, registra a la persona como `pending` y devuelve el nuevo estado del
- * formulario: con los errores por campo (sin vaciar lo escrito) o con `created`.
+ * La acción es un endpoint público: exige sesión y **vuelve a validar** todo lo que recibe aunque el
+ * navegador ya lo haya validado. La persona nace `pending` hasta que se verifique su identidad.
  *
- * @param _previousState - Estado anterior (lo exige `useActionState`; no se usa).
- * @param formData - Datos enviados por el formulario.
- * @returns El estado del formulario tras el envío.
+ * @param raw - Campos del formulario, sin tipar.
+ * @returns La persona creada, o los errores por campo (un documento repetido se marca en su campo).
  */
-export async function createPersonAction(_previousState: NewPersonFormState, formData: FormData): Promise<NewPersonFormState> {
+export async function createPersonAction(raw: unknown): Promise<CreatePersonResult> {
   await requireSession();
-  const values = {
-    name: readText(formData, "name"),
-    document: readText(formData, "document"),
-    affiliation: readText(formData, "affiliation"),
-  };
-
-  const validation = validateNewPerson(values);
-  if (!validation.ok) {
-    return { status: "error", errors: validation.errors, values };
-  }
+  const fields = parsePersonFormFields(raw);
+  const errors = validatePersonForm(fields, limaDay(new Date()));
+  if (firstInvalidField(errors) !== undefined) return { ok: false, errors };
 
   try {
-    const person = await personService.create(validation.input);
+    const person = await personService.create(toNewPersonInput(fields));
     revalidatePeople();
-    return { status: "created", errors: {}, values: { name: "", document: "", affiliation: "student" }, createdName: person.name };
+    return { ok: true, personId: person.id, name: person.name };
   } catch (error) {
     if (error instanceof DuplicateDocumentError) {
-      return { status: "error", errors: { document: "Ya hay una persona registrada con ese documento." }, values };
+      return { ok: false, errors: { document: "Ya hay una persona registrada con ese documento." } };
     }
-    throw error;
+    return { ok: false, errors: {}, message: "No pudimos crear a la persona. Intente de nuevo." };
   }
 }
 
