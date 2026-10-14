@@ -135,7 +135,13 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
-function parseFactor(value: unknown): AccessFactor | undefined {
+/**
+ * Lee un factor que llegó del navegador (una acción de servidor es un endpoint público).
+ *
+ * @param value - Dato sin tipar.
+ * @returns El factor válido, o `undefined`.
+ */
+export function parseAccessFactor(value: unknown): AccessFactor | undefined {
   if (!isRecord(value) || typeof value.method !== "string") return undefined;
   const method = METHODS.find((candidate) => candidate === value.method);
   if (method === undefined) return undefined;
@@ -163,7 +169,7 @@ export function parseAccessRequest(value: unknown): AccessRequest | undefined {
   if (typeof checkpointId !== "string" || typeof personId !== "string" || checkpointId === "" || personId === "") return undefined;
   if (direction !== "ENTRY" && direction !== "EXIT") return undefined;
   if (!Array.isArray(factors) || factors.length > MAX_FACTORS) return undefined;
-  const parsed = factors.map(parseFactor);
+  const parsed = factors.map(parseAccessFactor);
   if (parsed.some((factor) => factor === undefined)) return undefined;
   return { checkpointId, personId, direction, factors: parsed.filter((factor): factor is AccessFactor => factor !== undefined) };
 }

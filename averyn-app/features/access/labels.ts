@@ -44,3 +44,35 @@ export const OUTCOME_LABEL: Record<SimulatedOutcome, string> = {
   liveness_failed: "Falla la vivacidad",
   unavailable: "Servicio no disponible",
 };
+
+/**
+ * Resumen legible de una política: los grupos se unen con «y» y los métodos de un grupo con «o»
+ * (`Código QR y (Rostro o Huella)`).
+ *
+ * @param policy - Grupos de la política del punto de control.
+ * @returns El texto, o «Sin verificación» si no hay grupos.
+ */
+export function policyLabel(policy: readonly (readonly AccessMethod[])[]): string {
+  if (policy.length === 0) return "Sin verificación";
+  return policy
+    .map((group) => {
+      const text = group.map((method) => METHOD_LABEL[method]).join(" o ");
+      return policy.length > 1 && group.length > 1 ? `(${text})` : text;
+    })
+    .join(" y ");
+}
+
+/**
+ * Iniciales para el avatar de una persona (máximo dos letras).
+ *
+ * @param name - Nombre completo.
+ * @returns Las iniciales en mayúscula, o «?» si no hay nombre.
+ */
+export function initialsOf(name: string): string {
+  const letters = name
+    .split(/\s+/)
+    .filter((part) => part !== "")
+    .slice(0, 2)
+    .map((part) => part.charAt(0).toUpperCase());
+  return letters.join("") || "?";
+}
